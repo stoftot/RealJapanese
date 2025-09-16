@@ -8,7 +8,7 @@ public class NumbersData
     private string FolderPath => "../Data";
     private string FileName => "Numbers.csv";
     
-    public List<QuestionAnswerDto> QuestionAnswers = [];
+    public readonly List<QuestionAnswerDto> QuestionAnswers = [];
     
     public NumbersData()
     {
