@@ -1,4 +1,6 @@
+using DataLoaders;
 using RealJapanese.Components;
+using Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+//Data
+builder.Services.AddSingleton<NumbersData>();
+
 var app = builder.Build();
+
+// var Numbers = new NumbersData();
+//
+// foreach (var s in Numbers.QuestionAnswers)
+// {
+//     Console.WriteLine($"{s.Question} => {s.Answer}");
+// }
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
