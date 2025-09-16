@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealJapanese", "RealJapanes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLoaders", "DataLoaders\DataLoaders.csproj", "{EBD6CFF7-A258-4C4D-AEBC-DC40F93454CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{93739C21-5794-4262-B26E-8CF3DDF527C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{EBD6CFF7-A258-4C4D-AEBC-DC40F93454CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBD6CFF7-A258-4C4D-AEBC-DC40F93454CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBD6CFF7-A258-4C4D-AEBC-DC40F93454CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93739C21-5794-4262-B26E-8CF3DDF527C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93739C21-5794-4262-B26E-8CF3DDF527C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93739C21-5794-4262-B26E-8CF3DDF527C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93739C21-5794-4262-B26E-8CF3DDF527C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

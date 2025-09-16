@@ -8,7 +8,7 @@ public abstract class Loader<T>
 {
     protected abstract string FileName { get; }
 
-    protected List<T> Elements { get; private set; }
+    public List<T> Elements { get; private set; }
 
     private string FolderPath { get; }
     private string FilePath => $"{FolderPath}/{FileName}";
