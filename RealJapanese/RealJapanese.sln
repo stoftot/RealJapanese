@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealJapanese", "RealJapanese\RealJapanese.csproj", "{57568139-3614-4436-8210-14236512A68B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLoaders", "DataLoaders\DataLoaders.csproj", "{EBD6CFF7-A258-4C4D-AEBC-DC40F93454CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{57568139-3614-4436-8210-14236512A68B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57568139-3614-4436-8210-14236512A68B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57568139-3614-4436-8210-14236512A68B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBD6CFF7-A258-4C4D-AEBC-DC40F93454CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBD6CFF7-A258-4C4D-AEBC-DC40F93454CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBD6CFF7-A258-4C4D-AEBC-DC40F93454CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBD6CFF7-A258-4C4D-AEBC-DC40F93454CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
