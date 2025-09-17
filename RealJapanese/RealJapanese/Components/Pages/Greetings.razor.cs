@@ -12,13 +12,16 @@ public class GreetingsBase : ComponentBase
     public List<QuestionAnswerDto> Questions = [];
     public int currentQuestionIndex = 0;
 
+    protected double UiScale { get; set; } = 1.0;
+    
     // --- UI state ---
     private string _userInput = string.Empty;
 
     protected string UserInput
     {
         get => _userInput;
-        set => _userInput = value ?? string.Empty;
+        set => _userInput = value;
+
         // var v = value ?? string.Empty;
         //
         // if (v.EndsWith(" "))
@@ -30,6 +33,7 @@ public class GreetingsBase : ComponentBase
         // _userInput = v;
         // CheckAnswerAndAdvanceIfMatch();
     }
+    private string OldUserInput { get; set; } = string.Empty;
     protected bool showAnswer = false;
     protected ElementReference answerInputRef;
 
@@ -40,18 +44,25 @@ public class GreetingsBase : ComponentBase
 
     // Convenience getters
     protected string CurrentQuestion =>
-        Questions.Count == 0 ? string.Empty : (Questions[currentQuestionIndex].Question ?? string.Empty);
+        Questions.Count == 0 ? string.Empty : Questions[currentQuestionIndex].Question;
 
     protected string CurrentAnswer =>
-        Questions.Count == 0 ? string.Empty : (Questions[currentQuestionIndex].Answer ?? string.Empty);
+        Questions.Count == 0 ? string.Empty : Questions[currentQuestionIndex].Answer;
 
     // Optional: allow Enter to advance if already correct
     protected void HandleKeyDown(KeyboardEventArgs e)
     {
         if (e.Key == "Enter")
         {
+            if (showAnswer && OldUserInput == UserInput)
+            {
+                GoToNextQuestion();
+                return;
+            }
+            
             if(!CheckAnswerAndAdvanceIfMatch())
                 RevealAnswer();
+            OldUserInput = _userInput;
         }
     }
 

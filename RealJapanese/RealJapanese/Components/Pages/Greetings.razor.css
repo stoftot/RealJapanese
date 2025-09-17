@@ -1,0 +1,26 @@
+﻿/* Base: if not provided inline it defaults to 1 */
+.scaled { --ui-scale: 1; }
+
+/* Typography */
+.scaled .card-title { font-size: calc(1.25rem * var(--ui-scale)); }
+.scaled .lead       { font-size: calc(1.25rem * var(--ui-scale)); }
+.scaled small, .scaled .text-muted { font-size: calc(0.875rem * var(--ui-scale)); }
+
+/* Form controls */
+.scaled .form-control,
+.scaled .form-control.form-control-lg {
+    font-size: calc(1rem * var(--ui-scale));
+    padding: calc(0.5rem * var(--ui-scale)) calc(1rem * var(--ui-scale));
+}
+
+/* Buttons */
+.scaled .btn {
+    font-size: calc(1rem * var(--ui-scale));
+    padding: calc(0.5rem * var(--ui-scale)) calc(1rem * var(--ui-scale));
+}
+
+/* Alert */
+.scaled .alert { font-size: calc(1rem * var(--ui-scale)); }
+
+/* Range slider width on small screens */
+.form-range { width: 100%; }
