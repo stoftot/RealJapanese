@@ -5,14 +5,16 @@ namespace Repositories;
 
 public class NumbersData
 {
-    private string FolderPath => "../Data";
-    private string FileName => "Numbers.csv";
+    private static string FolderPath => "../Data";
+    private static string FileName => "Numbers.csv";
+
+    private readonly List<QuestionAnswerDto> _questionAnswers;
     
-    public readonly List<QuestionAnswerDto> QuestionAnswers = [];
-    
+    public List<QuestionAnswerDto> QuestionAnswers => _questionAnswers.ToList();
+
     public NumbersData()
     {
         var loader = new QuestionAnswerLoader(FolderPath, FileName);
-        QuestionAnswers = loader.Elements.Select(QuestionAnswerDto.FromModel).ToList();
+        _questionAnswers = loader.Elements.Select(QuestionAnswerDto.FromModel).ToList();
     }
 }
