@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents()
 
 //Data
 builder.Services.AddSingleton<NumbersData>();
+builder.Services.AddSingleton<GreetingsData>();
 
 var app = builder.Build();
 
