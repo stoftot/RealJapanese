@@ -30,14 +30,14 @@ public class NumbersGenerator
 
         Time = new Dictionary<string, string>(Counting)
         {
-            { "4", "yo" },
-            { "7", "shichi" },
-            { "9", "ku" }
+            ["4"] = "yo",
+            ["7"] = "shichi",
+            ["9"] = "kyuu"
         };
 
         Age = new Dictionary<string, string>(Counting)
         {
-            { "4", "yo" }
+            ["9"] = "kyuu"
         };
     }
 
@@ -202,6 +202,7 @@ public class NumbersGenerator
             case '0':
                 return numbers[u.ToString()];
         }
+        if(t == '1') return numbers["10"] + numbers[u.ToString()];
 
         var tens = numbers[t.ToString()] + numbers["10"];
         if (u == '0') return tens;
