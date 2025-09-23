@@ -1,4 +1,6 @@
-﻿namespace Repositories;
+﻿using System.Text;
+
+namespace Repositories;
 
 public class NumbersGenerator
 {
@@ -38,12 +40,25 @@ public class NumbersGenerator
         };
     }
 
-    public string GenerateOneCounting(int loverRange, int upperRange)
+    public string GenerateOneCounting(int lowerRange, int upperRange)
     {
-        var number = new Random().Next(loverRange, upperRange).ToString();
+        var number = new Random().Next(lowerRange, upperRange+1).ToString();
 
         return GenerateNumber(number, Counting);
     }
+
+    public List<string> GenerateAllCounting(int lowerRange, int upperRange)
+    {
+        var output = new List<string>();
+        
+        for (int i = lowerRange; i <= upperRange; i++)
+        {
+            output.Add(GenerateNumber(i.ToString(), Counting));    
+        }
+
+        return output;
+    }
+
     
     private string GenerateNumber(string number, Dictionary<string, string> numbers)
     {
