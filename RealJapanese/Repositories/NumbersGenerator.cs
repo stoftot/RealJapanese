@@ -59,6 +59,52 @@ public class NumbersGenerator
         return output;
     }
 
+    public string GenerateOneTime(int lowerRange, int upperRange)
+    {
+        if (lowerRange < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(lowerRange), $"lower range must be >= 0");
+        }
+
+        if (upperRange > 12)
+        {
+            throw new ArgumentOutOfRangeException(nameof(upperRange), $"upper range must be <= 12");
+        }
+        
+        var number = new Random().Next(lowerRange, upperRange+1).ToString();
+
+        return GenerateTime(number);
+    }
+
+    public List<string> GenerateAllTime(int lowerRange, int upperRange)
+    {
+        var output = new List<string>();
+
+        for (int i = lowerRange; i <= upperRange; i++)
+        {
+            output.Add(GenerateTime(i.ToString()));
+        }
+        
+        return output;
+    }
+
+    private string GenerateTime(string number)
+    {
+        var generatedTime = new StringBuilder();
+    
+        //am or pm
+        generatedTime.Append(new Random().Next(2) == 1 ? "gozen" : "gogo");
+        
+        generatedTime.Append(GenerateNumber(number, Time));
+        
+        generatedTime.Append("ji");
+        
+        //half past
+        if (new Random().Next(2) == 1) generatedTime.Append("han");
+        
+        
+        return generatedTime.ToString();
+    }
     
     private string GenerateNumber(string number, Dictionary<string, string> numbers)
     {
