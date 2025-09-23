@@ -78,6 +78,16 @@ public class NumbersGenerator
 
     public List<string> GenerateAllTime(int lowerRange, int upperRange)
     {
+        if (lowerRange < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(lowerRange), $"lower range must be >= 0");
+        }
+
+        if (upperRange > 12)
+        {
+            throw new ArgumentOutOfRangeException(nameof(upperRange), $"upper range must be <= 12");
+        }
+        
         var output = new List<string>();
 
         for (int i = lowerRange; i <= upperRange; i++)
@@ -86,6 +96,31 @@ public class NumbersGenerator
         }
         
         return output;
+    }
+
+    public string GenerateOneAge(int lowerRange, int upperRange)
+    {
+        var number = new Random().Next(lowerRange, upperRange+1).ToString();
+        return GenerateAge(number);
+    }
+
+    public List<string> GenerateAllAge(int lowerRange, int upperRange)
+    {
+        var output = new List<string>();
+
+        for (int i = lowerRange; i <= upperRange; i++)
+        {
+            output.Add(GenerateAge(i.ToString()));
+        }
+        
+        return output;
+    }
+
+    private string GenerateAge(string number)
+    {
+        var generatedAge = new StringBuilder(GenerateNumber(number, Age));
+        generatedAge.Append("sai");
+        return generatedAge.ToString();
     }
 
     private string GenerateTime(string number)
