@@ -37,11 +37,16 @@ public class NumbersGenerator
             { "4", "yo" }
         };
     }
-    
-    public string? GenerateCounting(int loverRange, int upperRange) // kept your param name
+
+    public string GenerateOneCounting(int loverRange, int upperRange)
     {
         var number = new Random().Next(loverRange, upperRange).ToString();
 
+        return GenerateNumber(number, Counting);
+    }
+    
+    private string GenerateNumber(string number, Dictionary<string, string> numbers)
+    {
         if (Counting.TryGetValue(number, out var value))
         {
             return value;
@@ -49,16 +54,16 @@ public class NumbersGenerator
 
         return number.Length switch
         {
-            2 => GenerateTens(number),
-            3 => GenerateHundreds(number),
-            4 => GenerateThousands(number),
-            _ => null
+            2 => GenerateTens(number, numbers),
+            3 => GenerateHundreds(number, numbers),
+            4 => GenerateThousands(number, numbers),
+            _ => throw new ArgumentOutOfRangeException($"{number}, is not a valid number")
         };
     }
 
-    #region Counting helpers
+    #region Generate number helpers
 
-    private string GenerateTens(string twoDigits)
+    private string GenerateTens(string twoDigits, Dictionary<string, string> numbers)
     {
         var t = twoDigits[0];
         var u = twoDigits[1];
@@ -68,40 +73,40 @@ public class NumbersGenerator
             case '0' when u == '0':
                 return "";
             case '0':
-                return Counting[u.ToString()];
+                return numbers[u.ToString()];
         }
 
-        var tens = Counting[t.ToString()] + Counting["10"];
+        var tens = numbers[t.ToString()] + numbers["10"];
         if (u == '0') return tens;
 
-        return tens + Counting[u.ToString()];
+        return tens + numbers[u.ToString()];
     }
 
-    private string GenerateHundreds(string threeDigits)
+    private string GenerateHundreds(string threeDigits,  Dictionary<string, string> numbers)
     {
         var h = threeDigits[0];
         var lastTwo = threeDigits[1..];
 
-        if (h == '0') return GenerateTens(lastTwo);
+        if (h == '0') return GenerateTens(lastTwo,  numbers);
 
         var hundreds = (h == '1')
-            ? Counting["100"]
-            : Counting[h.ToString()] + Counting["100"];
+            ? numbers["100"]
+            : numbers[h.ToString()] + numbers["100"];
 
-        var tail = GenerateTens(lastTwo);
+        var tail = GenerateTens(lastTwo, numbers);
         return hundreds + tail;
     }
 
-    private string GenerateThousands(string fourDigits)
+    private string GenerateThousands(string fourDigits, Dictionary<string, string> numbers)
     {
         var th = fourDigits[0];
         var lastThree = fourDigits[1..];
 
         var thousands = (th == '1')
-            ? Counting["1000"]
-            : Counting[th.ToString()] + Counting["1000"];
+            ? numbers["1000"]
+            : numbers[th.ToString()] + numbers["1000"];
 
-        var tail = GenerateHundreds(lastThree);
+        var tail = GenerateHundreds(lastThree, numbers);
         return string.IsNullOrEmpty(tail) ? thousands : thousands + tail;
     }
 
