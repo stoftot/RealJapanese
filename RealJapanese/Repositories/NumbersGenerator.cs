@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Repositories.DTOs;
 
 namespace Repositories;
 
@@ -40,26 +41,34 @@ public class NumbersGenerator
         };
     }
 
-    public string GenerateOneCounting(int lowerRange, int upperRange)
+    public QuestionAnswerDto GenerateOneCounting(int lowerRange, int upperRange)
     {
         var number = new Random().Next(lowerRange, upperRange+1).ToString();
 
-        return GenerateNumber(number, Counting);
+        return new QuestionAnswerDto()
+        {
+            Answer = GenerateNumber(number, Counting),
+            Question = number
+        };
     }
 
-    public List<string> GenerateAllCounting(int lowerRange, int upperRange)
+    public List<QuestionAnswerDto> GenerateAllCounting(int lowerRange, int upperRange)
     {
-        var output = new List<string>();
+        var output = new List<QuestionAnswerDto>();
         
         for (int i = lowerRange; i <= upperRange; i++)
         {
-            output.Add(GenerateNumber(i.ToString(), Counting));    
+            output.Add(new QuestionAnswerDto()
+            {
+                Answer = GenerateNumber(i.ToString(), Counting),
+                Question = i.ToString()
+            });    
         }
 
         return output;
     }
 
-    public string GenerateOneTime(int lowerRange, int upperRange)
+    public QuestionAnswerDto GenerateOneTime(int lowerRange, int upperRange)
     {
         if (lowerRange < 0)
         {
@@ -76,7 +85,7 @@ public class NumbersGenerator
         return GenerateTime(number);
     }
 
-    public List<string> GenerateAllTime(int lowerRange, int upperRange)
+    public List<QuestionAnswerDto> GenerateAllTime(int lowerRange, int upperRange)
     {
         if (lowerRange < 0)
         {
@@ -88,7 +97,7 @@ public class NumbersGenerator
             throw new ArgumentOutOfRangeException(nameof(upperRange), $"upper range must be <= 12");
         }
         
-        var output = new List<string>();
+        var output = new List<QuestionAnswerDto>();
 
         for (int i = lowerRange; i <= upperRange; i++)
         {
@@ -98,15 +107,15 @@ public class NumbersGenerator
         return output;
     }
 
-    public string GenerateOneAge(int lowerRange, int upperRange)
+    public QuestionAnswerDto GenerateOneAge(int lowerRange, int upperRange)
     {
         var number = new Random().Next(lowerRange, upperRange+1).ToString();
         return GenerateAge(number);
     }
 
-    public List<string> GenerateAllAge(int lowerRange, int upperRange)
+    public List<QuestionAnswerDto> GenerateAllAge(int lowerRange, int upperRange)
     {
-        var output = new List<string>();
+        var output = new List<QuestionAnswerDto>();
 
         for (int i = lowerRange; i <= upperRange; i++)
         {
@@ -116,29 +125,51 @@ public class NumbersGenerator
         return output;
     }
 
-    private string GenerateAge(string number)
+    private QuestionAnswerDto GenerateAge(string number)
     {
-        var generatedAge = new StringBuilder(GenerateNumber(number, Age));
-        generatedAge.Append("sai");
-        return generatedAge.ToString();
+        return new QuestionAnswerDto()
+        {
+
+            Answer = GenerateNumber(number, Age) + "sai",
+            Question = number + " years old" 
+        };
     }
 
-    private string GenerateTime(string number)
+    private QuestionAnswerDto GenerateTime(string number)
     {
-        var generatedTime = new StringBuilder();
-    
-        //am or pm
-        generatedTime.Append(new Random().Next(2) == 1 ? "gozen" : "gogo");
+        var generatedNumber = GenerateNumber(number, Time);
         
-        generatedTime.Append(GenerateNumber(number, Time));
+        var generatedTime = new StringBuilder();
+        var question = new StringBuilder(generatedNumber);
+        //am or pm
+        if (new Random().Next(2) == 1)
+        {
+            generatedTime.Append("gozen");
+            question.Append(" am");
+        }
+        else
+        {
+            generatedTime.Append("gogo");
+            question.Append(" pm");
+        }
+        
+        generatedTime.Append(generatedNumber);
         
         generatedTime.Append("ji");
         
         //half past
-        if (new Random().Next(2) == 1) generatedTime.Append("han");
+        if (new Random().Next(2) == 1)
+        {
+            generatedTime.Append("han");
+            question.Insert(question.Length-3, ":30");
+        }
         
         
-        return generatedTime.ToString();
+        return new QuestionAnswerDto()
+        {
+            Answer = generatedTime.ToString(),
+            Question = question.ToString()
+        };
     }
     
     private string GenerateNumber(string number, Dictionary<string, string> numbers)
