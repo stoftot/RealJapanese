@@ -202,15 +202,18 @@ public class NumbersGenerator
 
     #region Generate number helpers
 
-    private string GenerateNumber(string number, FlexibleDictionary numbers)
+    private static string GenerateNumber(string number, FlexibleDictionary numbers)
     {
-        if (Counting.TryGetValue(number, out var value))
+        if (number.Length > 1) number = number.TrimStart('0');
+        
+        if (numbers.TryGetValue(number, out var value))
         {
             return value;
         }
 
         return number.Length switch
         {
+            0 => "",
             2 => GenerateTens(number, numbers),
             3 => GenerateHundreds(number, numbers),
             4 => GenerateThousands(number, numbers),
@@ -218,35 +221,27 @@ public class NumbersGenerator
             _ => throw new ArgumentOutOfRangeException($"{number}, is not a supported number")
         };
     }
-    private static string GenerateTens(string twoDigits, FlexibleDictionary numbers)
+    
+    private static string GenerateTens(string number, FlexibleDictionary numbers)
     {
-        var firstDigit = twoDigits[0];
-        var lastDigit = twoDigits[1];
+        var firstDigit = number[0];
+        var lastDigit = number[1];
 
-        switch (firstDigit)
-        {
-            case '0' when lastDigit == '0':
-                return "";
-            case '0':
-                return numbers[lastDigit];
-        }
-
-        if (firstDigit == '1') return numbers["10"] + numbers[lastDigit];
-
-        var tens = numbers[firstDigit] + numbers["10"];
-        if (lastDigit == '0') return tens;
-
-        return tens + numbers[lastDigit];
+       var head= 
+           firstDigit == '1' ? 
+           numbers[10] : 
+           numbers[firstDigit] + numbers[10];
+       return head + numbers[lastDigit];
     }
 
     private static string GenerateHundreds(string number, FlexibleDictionary numbers)
     {
-        return GenerateTemplate(number, numbers, "100", GenerateTens);
+        return GenerateTemplate(number, numbers, 100);
     }
 
     private static string GenerateThousands(string number, FlexibleDictionary numbers)
     {
-        return GenerateTemplate(number, numbers, "1000", GenerateHundreds);
+        return GenerateTemplate(number, numbers, 1_000);
     }
 
     private static string GenerateTenThousands(string number, FlexibleDictionary numbers)
@@ -254,26 +249,27 @@ public class NumbersGenerator
         var firstDigit = number[0];
         var lastDigits = number[1..];
 
-        var tenThousands = numbers[firstDigit] + numbers[10_000];
+        var tenThousands = numbers[firstDigit] + "man";
 
-        var tail = GenerateThousands(lastDigits, numbers);
+        var tail = GenerateNumber(lastDigits, numbers);
         return string.IsNullOrEmpty(tail) ? tenThousands : tenThousands + tail;
     }
 
-    private static string GenerateTemplate(string number,
+    private static string GenerateTemplate(
+        string number,
         FlexibleDictionary numbers,
-        string baseNumber, Func<string, FlexibleDictionary, string> restOfNumbers)
+        int baseNumber)
     {
         var firstDigit = number[0];
         var lastDigits = number[1..];
 
-        var firstNumber =
-            firstDigit == '1'
-                ? numbers[baseNumber]
-                : numbers[firstDigit] + numbers[baseNumber];
+        var head = 
+            firstDigit == '1' ? 
+            numbers[baseNumber] : 
+            numbers[firstDigit] + numbers[baseNumber];
 
-        var tail = restOfNumbers(lastDigits, numbers);
-        return string.IsNullOrEmpty(tail) ? firstNumber : firstNumber + tail;
+        var tail = GenerateNumber(lastDigits, numbers);
+        return string.IsNullOrEmpty(tail) ? head : head + tail;
     }
 
     #endregion

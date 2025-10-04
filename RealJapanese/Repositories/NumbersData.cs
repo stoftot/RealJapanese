@@ -28,7 +28,7 @@ public class NumbersData
         // _questionAnswers.AddRange(ageLoader.Elements.Select(QuestionAnswerDto.FromModel));
         // _questionAnswers.AddRange(NumbersGenerator.GenerateRangeCounting(0,100));
         // _questionAnswers.AddRange(FlippedCounting(0,100));
-        _questionAnswers.AddRange(NumbersGenerator.GenerateRangeCounting(101,101));
+        _questionAnswers.Add(NumbersGenerator.GenerateOneCounting(18));
     }
 
     private List<QuestionAnswerDto> FlippedCounting(int lowerRange, int upperRange)
