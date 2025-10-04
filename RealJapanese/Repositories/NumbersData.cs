@@ -26,13 +26,14 @@ public class NumbersData
         // _questionAnswers.AddRange(numbersLoader.Elements.Select(QuestionAnswerDto.FromModel));
         // _questionAnswers.AddRange(timeLoader.Elements.Select(QuestionAnswerDto.FromModel));
         // _questionAnswers.AddRange(ageLoader.Elements.Select(QuestionAnswerDto.FromModel));
-        // _questionAnswers.AddRange(NumbersGenerator.GenerateAllCounting(0,100));
-        _questionAnswers.AddRange(FlippedCounting(0,100));
+        // _questionAnswers.AddRange(NumbersGenerator.GenerateRangeCounting(0,100));
+        // _questionAnswers.AddRange(FlippedCounting(0,100));
+        _questionAnswers.AddRange(NumbersGenerator.GenerateRangeCounting(101,101));
     }
 
     private List<QuestionAnswerDto> FlippedCounting(int lowerRange, int upperRange)
     {
-        return NumbersGenerator.GenerateAllCounting(lowerRange,upperRange)
+        return NumbersGenerator.GenerateRangeCounting(lowerRange,upperRange)
             .Select(qa => new QuestionAnswerDto()
             {
                 Question = qa.Answer,
