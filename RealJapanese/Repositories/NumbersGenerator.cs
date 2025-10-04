@@ -1,11 +1,13 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using Repositories.DTOs;
 
 namespace Repositories;
 
 public class NumbersGenerator
 {
-    private FlexibleDictionary Counting { get; } = new (new Dictionary<string, string>()
+    private readonly FlexibleDictionary counting = new(new Dictionary<string, string>()
     {
         { "0", "zero" },
         { "1", "ichi" },
@@ -27,92 +29,88 @@ public class NumbersGenerator
         { "8000", "hassen" }
     });
 
-    private FlexibleDictionary Time { get; } = new(new Dictionary<string, string>
+    private readonly FlexibleDictionary time = new(new Dictionary<string, string>
     {
-        ["4"] = "yo",
-        ["7"] = "shichi",
-        ["9"] = "kyuu"
+        { "4", "yo" },
+        { "7", "shichi" },
+        { "9", "kyuu" }
     });
 
-    private FlexibleDictionary Age { get; } = new(new Dictionary<string, string>
+    private readonly FlexibleDictionary age = new(new Dictionary<string, string>
     {
-        ["9"] = "kyuu"
+        { "9", "kyuu" }
     });
 
     #region Counting generators
 
-    public QuestionAnswerDto GenerateOneCounting(int number)
+    public QuestionAnswerDto GenerateCounting(int number)
     {
         return new QuestionAnswerDto
         {
-            Answer = GenerateNumber(number.ToString(), Counting),
+            Answer = GenerateNumber(number.ToString(), counting),
             Question = number.ToString()
         };
     }
-    public QuestionAnswerDto GenerateOneFromRangeCounting(int lowerRange, int upperRange)
-    {
-        var number = new Random().Next(lowerRange, upperRange + 1);
 
-        return GenerateOneCounting(number);
+    public QuestionAnswerDto GenerateRandomCounting(int lowerRange, int upperRange)
+    {
+        var number = Random.Shared.Next(lowerRange, upperRange + 1);
+
+        return GenerateCounting(number);
     }
-    public List<QuestionAnswerDto> GenerateRangeCounting(int lowerRange, int upperRange)
-    {
-        var output = new List<QuestionAnswerDto>();
 
+    public IEnumerable<QuestionAnswerDto> GenerateCountingRange(int lowerRange, int upperRange)
+    {
         for (int i = lowerRange; i <= upperRange; i++)
         {
-            output.Add(new QuestionAnswerDto()
+            yield return new QuestionAnswerDto
             {
-                Answer = GenerateNumber(i.ToString(), Counting),
+                Answer = GenerateNumber(i.ToString(), counting),
                 Question = i.ToString()
-            });
+            };
         }
-
-        return output;
     }
 
     #endregion
 
     #region Time generators
 
-    public QuestionAnswerDto GenerateOneTime(int number)
+    public QuestionAnswerDto GenerateTime(int number)
     {
         ValidateTime(number);
-        
-        return GenerateTime(number.ToString());
-    }
-    public QuestionAnswerDto GenerateOneFromRangeTime(int lowerRange, int upperRange)
-    {
-        ValidateTimeRange(lowerRange, upperRange);
-        
-        var number = new Random().Next(lowerRange, upperRange + 1);
 
         return GenerateTime(number.ToString());
     }
-    public List<QuestionAnswerDto> GenerateRangeTime(int lowerRange, int upperRange)
+
+    public QuestionAnswerDto GenerateRandomTime(int lowerRange, int upperRange)
     {
         ValidateTimeRange(lowerRange, upperRange);
-        
-        var output = new List<QuestionAnswerDto>();
+
+        var number = Random.Shared.Next(lowerRange, upperRange + 1);
+
+        return GenerateTime(number.ToString());
+    }
+
+    public IEnumerable<QuestionAnswerDto> GenerateTimeRange(int lowerRange, int upperRange)
+    {
+        ValidateTimeRange(lowerRange, upperRange);
 
         for (int i = lowerRange; i <= upperRange; i++)
         {
-            output.Add(GenerateTime(i.ToString()));
+            yield return (GenerateTime(i.ToString()));
         }
-
-        return output;
     }
+
     private QuestionAnswerDto GenerateTime(string number)
     {
-        var numbers = new FlexibleDictionary(Counting);
-        foreach (var (key, value) in Time) numbers[key] = value;
+        var numbers = counting.WithOverrides(time);
 
         var generatedNumber = GenerateNumber(number, numbers);
 
         var generatedTime = new StringBuilder();
         var question = new StringBuilder(generatedNumber);
         //am or pm
-        if (new Random().Next(2) == 1)
+        if (Random.Shared.Next(2) == 1)
         {
             generatedTime.Append("gozen");
             question.Append(" am");
@@ -128,7 +126,7 @@ public class NumbersGenerator
         generatedTime.Append("ji");
 
         //half past
-        if (new Random().Next(2) == 1)
+        if (Random.Shared.Next(2) == 1)
         {
             generatedTime.Append("han");
             question.Insert(question.Length - 3, ":30");
@@ -141,54 +139,51 @@ public class NumbersGenerator
             Question = question.ToString()
         };
     }
+
     private static void ValidateTime(int number)
     {
-        if (number is < 0 or > 12)
+        if (number is < 1 or > 12)
         {
             throw new ArgumentOutOfRangeException(nameof(number), $"{number} is not a valid time");
         }
     }
+
     private static void ValidateTimeRange(int lowerRange, int upperRange)
     {
-        if (lowerRange < 0)
-        {
-            throw new ArgumentOutOfRangeException(nameof(lowerRange), $"lower range must be >= 0");
-        }
-
+        if (lowerRange < 1)
+            throw new ArgumentOutOfRangeException(nameof(lowerRange), $"lower range must be >= 1");
         if (upperRange > 12)
-        {
             throw new ArgumentOutOfRangeException(nameof(upperRange), $"upper range must be <= 12");
-        }
+        if (lowerRange > upperRange)
+            throw new ArgumentException("lowerRange cannot be greater than upperRange");
     }
-    
+
     #endregion
 
     #region Age generators
-    
-    public QuestionAnswerDto GenerateOneAge(int number)
+
+    public QuestionAnswerDto GenerateAge(int number)
     {
         return GenerateAge(number.ToString());
     }
-    public QuestionAnswerDto GenerateOneFromRangeAge(int lowerRange, int upperRange)
+
+    public QuestionAnswerDto GenerateRandomAge(int lowerRange, int upperRange)
     {
-        var number = new Random().Next(lowerRange, upperRange + 1).ToString();
+        var number = Random.Shared.Next(lowerRange, upperRange + 1).ToString();
         return GenerateAge(number);
     }
-    public List<QuestionAnswerDto> GenerateRangeAge(int lowerRange, int upperRange)
-    {
-        var output = new List<QuestionAnswerDto>();
 
+    public IEnumerable<QuestionAnswerDto> GenerateAgeRange(int lowerRange, int upperRange)
+    {
         for (int i = lowerRange; i <= upperRange; i++)
         {
-            output.Add(GenerateAge(i.ToString()));
+            yield return GenerateAge(i.ToString());
         }
-
-        return output;
     }
+
     private QuestionAnswerDto GenerateAge(string number)
     {
-        var numbers = new FlexibleDictionary(Counting);
-        foreach (var (key, value) in Age) numbers[key] = value;
+        var numbers = counting.WithOverrides(age);
 
         return new QuestionAnswerDto
         {
@@ -198,14 +193,14 @@ public class NumbersGenerator
     }
 
     #endregion
-    
+
 
     #region Generate number helpers
 
     private static string GenerateNumber(string number, FlexibleDictionary numbers)
     {
         if (number.Length > 1) number = number.TrimStart('0');
-        
+
         if (numbers.TryGetValue(number, out var value))
         {
             return value;
@@ -218,20 +213,19 @@ public class NumbersGenerator
             3 => GenerateHundreds(number, numbers),
             4 => GenerateThousands(number, numbers),
             5 => GenerateTenThousands(number, numbers),
-            _ => throw new ArgumentOutOfRangeException($"{number}, is not a supported number")
+            _ => throw new ArgumentOutOfRangeException(nameof(number), number,
+                $"Number length \"{number.Length}\" not supported.")
         };
     }
-    
+
     private static string GenerateTens(string number, FlexibleDictionary numbers)
     {
         var firstDigit = number[0];
         var lastDigit = number[1];
 
-       var head= 
-           firstDigit == '1' ? 
-           numbers[10] : 
-           numbers[firstDigit] + numbers[10];
-       return head + numbers[lastDigit];
+        var head =
+            firstDigit == '1' ? numbers[10] : numbers[firstDigit] + numbers[10];
+        return lastDigit == '0' ? head : head + numbers[lastDigit];
     }
 
     private static string GenerateHundreds(string number, FlexibleDictionary numbers)
@@ -263,21 +257,37 @@ public class NumbersGenerator
         var firstDigit = number[0];
         var lastDigits = number[1..];
 
-        var head = 
-            firstDigit == '1' ? 
-            numbers[baseNumber] : 
-            numbers[firstDigit] + numbers[baseNumber];
+        var head =
+            firstDigit == '1' ? numbers[baseNumber] : numbers[firstDigit] + numbers[baseNumber];
 
         var tail = GenerateNumber(lastDigits, numbers);
         return string.IsNullOrEmpty(tail) ? head : head + tail;
     }
 
     #endregion
-    
-    private sealed class FlexibleDictionary(Dictionary<string, string> dict) : Dictionary<string, string>(dict)
-    {
-        public string this[int key] => this[key.ToString()];
 
-        public string this[char key] => this[key.ToString()];
+    private sealed class FlexibleDictionary(IDictionary<string, string> dict) : IReadOnlyDictionary<string, string>
+    {
+        private readonly IDictionary<string, string> dict = dict;
+        public string this[int key] => dict[key.ToString()];
+        public string this[char key] => dict[key.ToString()];
+        public string this[string key] => dict[key];
+
+        public IEnumerable<string> Keys => dict.Keys;
+        public IEnumerable<string> Values => dict.Values;
+        public int Count => dict.Count;
+        
+        public bool ContainsKey(string key) => dict.ContainsKey(key);
+        public bool TryGetValue(string key, [MaybeNullWhen(false)] out string value) => dict.TryGetValue(key, out value);
+        
+        public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => dict.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        
+        public FlexibleDictionary WithOverrides(IEnumerable<KeyValuePair<string,string>> overrides)
+        {
+            var newDict = new Dictionary<string, string>(dict);
+            foreach (var (key, value) in overrides) newDict[key] = value;
+            return new FlexibleDictionary(newDict);
+        }
     }
 }
