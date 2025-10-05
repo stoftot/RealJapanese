@@ -6,13 +6,13 @@ namespace RealJapanese.Components.Pages;
 
 public partial class NumbersBase : PracticeBase
 {
-    [Inject] public NumbersData NumbersData { get; set; } = null!;
+    [Inject] public NumbersQuestionGenerator NumbersQuestionGenerator { get; set; } = null!;
 
     protected PracticeCard? cardRef;
 
     protected override void OnInitialized()
     {
-        Questions = NumbersData.QuestionAnswers.OrderBy(_ => Guid.NewGuid()).ToList();
+        Questions = NumbersQuestionGenerator.QuestionAnswers.OrderBy(_ => Guid.NewGuid()).ToList();
     }
 
     protected override Task FocusAnswerInputAsync()

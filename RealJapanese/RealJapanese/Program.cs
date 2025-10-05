@@ -9,12 +9,12 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 //Data
-builder.Services.AddSingleton<NumbersData>();
+builder.Services.AddSingleton<NumbersQuestionGenerator>();
 builder.Services.AddSingleton<GreetingsData>();
 
 var app = builder.Build();
 
-// var Numbers = new NumbersData();
+// var Numbers = new NumbersQuestionGenerator();
 //
 // foreach (var s in Numbers.QuestionAnswers)
 // {
