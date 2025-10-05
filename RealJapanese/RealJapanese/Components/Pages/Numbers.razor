@@ -1,51 +1,23 @@
-﻿@page "/Numbers"
-@inherits NumbersBase
+﻿@page "/numbers"
+@inherits RealJapanese.Components.Pages.NumbersBase
+@using RealJapanese.Components.Shared
 @rendermode InteractiveServer
 
-<div class="container py-4">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-lg-6">
-            <div class="card shadow-sm">
-                <div class="card-body">
 
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h5 class="card-title mb-0">Practice</h5>
-                        <small class="text-muted">
-                            @(Questions.Count == 0 ? "0/0" : $"{currentQuestionIndex + 1}/{Questions.Count}")
-                        </small>
-                    </div>
-
-                    <p class="lead mb-3">@CurrentQuestion</p>
-
-                    <div class="mb-2">
-                        <input class="form-control form-control-lg"
-                               placeholder="Type your answer…"
-                               @bind-value="UserInput"
-                               @bind-value:event="oninput"
-                               @onkeydown="HandleKeyDown"
-                               @ref="answerInputRef" />
-                    </div>
-
-                    @if (showAnswer)
-                    {
-                        <div class="alert alert-info mt-3" role="alert">
-                            <strong>Answer:</strong> @CurrentAnswer
-                        </div>
-                    }
-
-                    <div class="d-flex gap-2 mt-3">
-                        <button type="button" class="btn btn-outline-secondary" @onclick="RevealAnswer">
-                            Show answer (Space)
-                        </button>
-                        <button type="button" class="btn btn-primary ms-auto"
-                                @onclick="ForceNextIfCorrect"
-                                disabled="@(Normalize(UserInput) != Normalize(CurrentAnswer))">
-                            Next
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<PracticeShell @bind-UiScale="UiScale">
+    <PracticeCard
+        Title="Practice"
+        ProgressText="@(Questions.Count == 0 ? "0/0" : $"{currentQuestionIndex + 1}/{Questions.Count}")"
+        Question="@CurrentQuestion"
+        Answer="@CurrentAnswer"
+        UserInput="@UserInput"
+        UserInputChanged="@(v => UserInput = v!)"
+        ShowAnswer="@showAnswer"
+        RevealRequested="RevealAnswer"
+        NextRequested="OnEnterPressed"
+        RevealLabel="Show answer (Space)"
+        NextLabel="Next"
+        NextDisabled="@(Normalize(UserInput) != Normalize(CurrentAnswer))"
+        OnKeyDown="HandleKeyDown"
+        @ref="cardRef"/>
+</PracticeShell>

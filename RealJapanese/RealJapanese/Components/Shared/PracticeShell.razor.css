@@ -1,0 +1,33 @@
+﻿/* PracticeShell.razor.css (isolated) */
+.scaled { --ui-scale: 1; }
+
+/* typography */
+.scaled ::deep .card-title { font-size: calc(1.25rem * var(--ui-scale)); }
+.scaled ::deep .lead       { font-size: calc(1.25rem * var(--ui-scale)); }
+.scaled ::deep small,
+.scaled ::deep .text-muted { font-size: calc(0.875rem * var(--ui-scale)); }
+
+/* form controls */
+.scaled ::deep .form-control,
+.scaled ::deep .form-control.form-control-lg {
+    font-size: calc(1rem * var(--ui-scale));
+    padding: calc(0.5rem * var(--ui-scale)) calc(1rem * var(--ui-scale));
+}
+
+.scaled ::deep .practice-wrap {
+    font-size: calc(1rem * var(--ui-scale));
+    max-width: clamp(36ch, 60ch, 92vw);
+    margin-inline: auto;
+}
+
+/* buttons */
+.scaled ::deep .btn {
+    font-size: calc(1rem * var(--ui-scale));
+    padding: calc(0.5rem * var(--ui-scale)) calc(1rem * var(--ui-scale));
+}
+
+/* alerts */
+.scaled ::deep .alert { font-size: calc(1rem * var(--ui-scale)); }
+
+/* the slider itself lives in PracticeShell so no ::deep needed */
+.form-range { width: 100%; }
