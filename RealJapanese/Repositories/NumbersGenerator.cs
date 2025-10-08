@@ -7,7 +7,7 @@ namespace Repositories;
 
 public class NumbersGenerator
 {
-    private readonly FlexibleDictionary counting = new(new Dictionary<string, string>()
+    private readonly FlexibleDictionary counting = new(new Dictionary<string, string>
     {
         { "0", "zero" },
         { "1", "ichi" },
@@ -43,14 +43,12 @@ public class NumbersGenerator
 
     #region Counting generators
 
-    public QuestionAnswerDto GenerateCounting(int number)
-    {
-        return new QuestionAnswerDto
+    public QuestionAnswerDto GenerateCounting(int number) =>
+        new ()
         {
             Answer = GenerateNumber(number.ToString(), counting),
             Question = number.ToString()
         };
-    }
 
     public QuestionAnswerDto GenerateRandomCounting(int lowerRange, int upperRange)
     {
@@ -97,7 +95,7 @@ public class NumbersGenerator
 
         for (int i = lowerRange; i <= upperRange; i++)
         {
-            yield return (GenerateTime(i.ToString()));
+            yield return GenerateTime(i.ToString());
         }
     }
 
@@ -162,16 +160,11 @@ public class NumbersGenerator
 
     #region Age generators
 
-    public QuestionAnswerDto GenerateAge(int number)
-    {
-        return GenerateAge(number.ToString());
-    }
+    public QuestionAnswerDto GenerateAge(int number) => 
+        GenerateAge(number.ToString());
 
-    public QuestionAnswerDto GenerateRandomAge(int lowerRange, int upperRange)
-    {
-        var number = Random.Shared.Next(lowerRange, upperRange + 1).ToString();
-        return GenerateAge(number);
-    }
+    public QuestionAnswerDto GenerateRandomAge(int lowerRange, int upperRange) =>
+        GenerateAge(Random.Shared.Next(lowerRange, upperRange + 1).ToString());
 
     public IEnumerable<QuestionAnswerDto> GenerateAgeRange(int lowerRange, int upperRange)
     {
@@ -228,37 +221,27 @@ public class NumbersGenerator
         return lastDigit == '0' ? head : head + numbers[lastDigit];
     }
 
-    private static string GenerateHundreds(string number, FlexibleDictionary numbers)
-    {
-        return GenerateTemplate(number, numbers, 100);
-    }
+    private static string GenerateHundreds(string number, FlexibleDictionary numbers) => 
+        GenerateTemplate(number, numbers, 
+            firstDigit => firstDigit == '1' ? numbers[100] : numbers[firstDigit] + numbers[100]);
 
-    private static string GenerateThousands(string number, FlexibleDictionary numbers)
-    {
-        return GenerateTemplate(number, numbers, 1_000);
-    }
+    private static string GenerateThousands(string number, FlexibleDictionary numbers) => 
+        GenerateTemplate(number, numbers, 
+            firstDigit => firstDigit == '1' ? numbers[1_000] : numbers[firstDigit] + numbers[1_000]);
 
-    private static string GenerateTenThousands(string number, FlexibleDictionary numbers)
-    {
-        var firstDigit = number[0];
-        var lastDigits = number[1..];
-
-        var tenThousands = numbers[firstDigit] + "man";
-
-        var tail = GenerateNumber(lastDigits, numbers);
-        return string.IsNullOrEmpty(tail) ? tenThousands : tenThousands + tail;
-    }
+    private static string GenerateTenThousands(string number, FlexibleDictionary numbers) => 
+        GenerateTemplate(number, numbers, 
+            firstDigit => numbers[firstDigit] + "man");
 
     private static string GenerateTemplate(
         string number,
         FlexibleDictionary numbers,
-        int baseNumber)
+        Func<char, string> headGeneration)
     {
         var firstDigit = number[0];
         var lastDigits = number[1..];
 
-        var head =
-            firstDigit == '1' ? numbers[baseNumber] : numbers[firstDigit] + numbers[baseNumber];
+        var head = headGeneration(firstDigit);
 
         var tail = GenerateNumber(lastDigits, numbers);
         return string.IsNullOrEmpty(tail) ? head : head + tail;

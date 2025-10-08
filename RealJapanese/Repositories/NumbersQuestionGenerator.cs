@@ -21,15 +21,4 @@ public class NumbersQuestionGenerator
     {
         return NumbersGenerator.GenerateRandomTime(lowerRange, upperRange);
     }
-    
-    private List<QuestionAnswerDto> FlippedCounting(int lowerRange, int upperRange)
-    {
-        return NumbersGenerator.GenerateCountingRange(lowerRange,upperRange)
-            .Select(qa => new QuestionAnswerDto()
-            {
-                Question = qa.Answer,
-                Answer = qa.Question
-            })
-            .ToList();
-    }
 }

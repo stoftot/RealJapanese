@@ -13,4 +13,13 @@ public class QuestionAnswerDto
             Answer = model.Answer
         };
     }
+    
+    public QuestionAnswerDto Flip()
+    {
+        return new QuestionAnswerDto
+        {
+            Question = Answer,
+            Answer = Question
+        };
+    }
 }
