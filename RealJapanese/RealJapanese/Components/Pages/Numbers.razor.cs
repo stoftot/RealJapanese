@@ -12,7 +12,7 @@ public partial class NumbersBase : PracticeBase
 
     protected override void OnInitialized()
     {
-        Questions = NumbersQuestionGenerator.QuestionAnswers.OrderBy(_ => Guid.NewGuid()).ToList();
+        Questions = NumbersQuestionGenerator.GenerateAllUniq().OrderBy(_ => Guid.NewGuid()).ToList();
     }
 
     protected override Task FocusAnswerInputAsync()
@@ -20,7 +20,7 @@ public partial class NumbersBase : PracticeBase
 
     protected override void OnUserInputChanged(string value)
     {
-        var v = value ?? string.Empty;
+        var v = value;
 
         if (v.EndsWith(" "))
         {
