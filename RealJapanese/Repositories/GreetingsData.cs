@@ -12,6 +12,8 @@ public class GreetingsData
     private static string FileNameSchool => "School.csv";
     private static string FileNameOther => "Other.csv";
     
+    private static string FileNameThings => "Things.csv";
+    
     private readonly List<QuestionAnswerDto> _questionAnswers;
         
     public List<QuestionAnswerDto> QuestionAnswers => _questionAnswers.ToList();
@@ -23,11 +25,13 @@ public class GreetingsData
         var personLoader = new QuestionAnswerLoader(FolderPath, FileNamePerson);
         var schoolLoader = new QuestionAnswerLoader(FolderPath, FileNameSchool);
         var otherLoader = new QuestionAnswerLoader(FolderPath, FileNameOther);
+        var thingsLoader = new QuestionAnswerLoader(FolderPath, FileNameThings);
         _questionAnswers = [];
-        _questionAnswers.AddRange(greetingsLoader.Elements.Select(QuestionAnswerDto.FromModel));
-        _questionAnswers.AddRange(expressionsLoader.Elements.Select(QuestionAnswerDto.FromModel));
-        _questionAnswers.AddRange(personLoader.Elements.Select(QuestionAnswerDto.FromModel));
-        _questionAnswers.AddRange(schoolLoader.Elements.Select(QuestionAnswerDto.FromModel));
-        _questionAnswers.AddRange(otherLoader.Elements.Select(QuestionAnswerDto.FromModel));
+        // _questionAnswers.AddRange(greetingsLoader.Elements.Select(QuestionAnswerDto.FromModel));
+        // _questionAnswers.AddRange(expressionsLoader.Elements.Select(QuestionAnswerDto.FromModel));
+        // _questionAnswers.AddRange(personLoader.Elements.Select(QuestionAnswerDto.FromModel));
+        // _questionAnswers.AddRange(schoolLoader.Elements.Select(QuestionAnswerDto.FromModel));
+        // _questionAnswers.AddRange(otherLoader.Elements.Select(QuestionAnswerDto.FromModel));
+        _questionAnswers.AddRange(thingsLoader.Elements.Select(QuestionAnswerDto.FromModel));
     }
 }

@@ -33,14 +33,32 @@ public class NumbersGenerator
     {
         { "4", "yo" },
         { "7", "shichi" },
-        { "9", "kyuu" }
+        { "9", "ku" }
     });
 
     private readonly FlexibleDictionary age = new(new Dictionary<string, string>
     {
-        { "9", "kyuu" }
+        { "9", "ku" }
     });
 
+    public IEnumerable<QuestionAnswerDto> GenerateAllSpecialCases()
+    {
+        foreach (var (key,_) in counting)
+        {
+            yield return GenerateCounting(int.Parse(key));
+        }
+
+        foreach (var (key,_) in age)
+        {
+            yield return GenerateAge(int.Parse(key));
+        }
+        
+        foreach (var (key,_) in time)
+        {
+            yield return GenerateTime(int.Parse(key));
+        }
+    }
+    
     #region Counting generators
 
     public QuestionAnswerDto GenerateCounting(int number) =>
@@ -106,7 +124,7 @@ public class NumbersGenerator
         var generatedNumber = GenerateNumber(number, numbers);
 
         var generatedTime = new StringBuilder();
-        var question = new StringBuilder(generatedNumber);
+        var question = new StringBuilder(number);
         //am or pm
         if (Random.Shared.Next(2) == 1)
         {

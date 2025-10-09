@@ -35,6 +35,11 @@ public class NumbersQuestionGenerator
         return NumbersGenerator.GenerateRandomTime(lowerRange, upperRange);
     }
 
+    public IEnumerable<QuestionAnswerDto> GenerateAllSpecialCases()
+    {
+        return NumbersGenerator.GenerateAllSpecialCases();
+    }
+    
     public IEnumerable<QuestionAnswerDto> GenerateAllUniq()
     {
         return GenerateALlUniqCounting()
@@ -61,7 +66,7 @@ public class NumbersQuestionGenerator
         {
             for (int i = 1; i <= 9; i++)
             {
-                yield return NumbersGenerator.GenerateCounting(i * multiplier);
+                yield return NumbersGenerator.GenerateAge(i * multiplier);
             }
         }
         

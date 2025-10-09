@@ -21,7 +21,12 @@ public partial class GreetingsBase : PracticeBase
         => cardRef.FocusInput();
 
     protected override void OnUserInputChanged(string value)
-        => base.OnUserInputChanged(value);
+    {
+        base.OnUserInputChanged(value);
+
+        if (IsCorrect())
+            _ = GoToNextQuestionAsync();
+    }
 
     protected override void OnEnterPressed()
     {
