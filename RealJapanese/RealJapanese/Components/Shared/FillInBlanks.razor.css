@@ -1,0 +1,4 @@
+﻿.fib-line { line-height: 2.2; }
+.fib-chunk { white-space: pre-wrap; }
+.fib-blank { display: inline-block; margin: 0 0.25rem; vertical-align: bottom; }
+.fib-input { min-width: 4.5ch; }

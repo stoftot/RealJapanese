@@ -17,7 +17,8 @@ var app = builder.Build();
 
 // var sentence = new SentenceLoader("jp_kana_reading_dataset_v3.jsonl").Load();
 // var sentence = new SentenceLoader("Real sentences.json").Load();
-// Console.WriteLine(sentence.Count);
+// var particals = new ParticalsLoader("Particals.json").Load();
+// Console.WriteLine(particals.Count(p => p.MissingParticles.Length == 3));
 // var Numbers = new NumbersQuestionGenerator();
 //
 // foreach (var s in Numbers.QuestionAnswers)
