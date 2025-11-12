@@ -3518,5 +3518,485 @@
     "english": "Please open the window.",
     "category": "Requests & Permission",
     "level": "beginner"
+  },
+  {
+    "japanese": "わたし は いま にほんご を べんきょう して います。",
+    "kanji": "私は今日本語を勉強しています。",
+    "romaji": "watashi wa ima nihongo o benkyou shite imasu",
+    "english": "I am studying Japanese now.",
+    "category": "Basics & Particles",
+    "level": "beginner"
+  },
+  {
+    "japanese": "きのう の よる レストラン で ピザ を たべました。",
+    "kanji": "昨日の夜レストランでピザを食べました。",
+    "romaji": "kinou no yoru resutoran de piza o tabemashita",
+    "english": "I ate pizza at a restaurant last night.",
+    "category": "Katakana in Context",
+    "level": "beginner"
+  },
+  {
+    "japanese": "まいにち ごぜん はちじ に おきて しごと に いきます。",
+    "kanji": "毎日午前八時に起きて仕事に行きます。",
+    "romaji": "mainichi gozen hachiji ni okite shigoto ni ikimasu",
+    "english": "I wake up at eight every morning and go to work.",
+    "category": "Time & Frequency",
+    "level": "intermediate"
+  },
+  {
+    "japanese": "えき の まえ に バスてい が あります。",
+    "kanji": "駅の前にバス停があります。",
+    "romaji": "eki no mae ni basutei ga arimasu",
+    "english": "There is a bus stop in front of the station.",
+    "category": "Locations & Movement",
+    "level": "beginner"
+  },
+  {
+    "japanese": "にほん の うた が すき です。",
+    "kanji": "日本の歌が好きです。",
+    "romaji": "nihon no uta ga suki desu",
+    "english": "I like Japanese songs.",
+    "category": "Preferences & Desires",
+    "level": "beginner"
+  },
+  {
+    "japanese": "この ペン を かして もらえます か。",
+    "kanji": "このペンを貸してもらえますか。",
+    "romaji": "kono pen o kashite moraemasu ka",
+    "english": "Could you lend me this pen?",
+    "category": "Requests & Permission",
+    "level": "intermediate"
+  },
+  {
+    "japanese": "ごはん を たべて から さんぽ に いきました。",
+    "kanji": "ご飯を食べてから散歩に行きました。",
+    "romaji": "gohan o tabete kara sanpo ni ikimashita",
+    "english": "I went for a walk after eating a meal.",
+    "category": "Multi-clause Practice",
+    "level": "beginner"
+  },
+  {
+    "japanese": "にほん の なつ は あつい です ね。",
+    "kanji": "日本の夏は暑いですね。",
+    "romaji": "nihon no natsu wa atsui desu ne",
+    "english": "Summer in Japan is hot, isn’t it?",
+    "category": "Basics & Particles",
+    "level": "beginner"
+  },
+  {
+    "japanese": "スーパー で ミルク と パン を かいました。",
+    "kanji": "スーパーでミルクとパンを買いました。",
+    "romaji": "suupaa de miruku to pan o kaimashita",
+    "english": "I bought milk and bread at the supermarket.",
+    "category": "Katakana in Context",
+    "level": "beginner"
+  },
+  {
+    "japanese": "まいしゅう どようび に えいが を みます。",
+    "kanji": "毎週土曜日に映画を見ます。",
+    "romaji": "maishuu doyoubi ni eiga o mimasu",
+    "english": "I watch movies every Saturday.",
+    "category": "Time & Frequency",
+    "level": "beginner"
+  },
+  {
+    "japanese": "ともだち と こうえん で あそびました。",
+    "kanji": "友だちと公園で遊びました。",
+    "romaji": "tomodachi to kouen de asobimashita",
+    "english": "I played with my friend at the park.",
+    "category": "Locations & Movement",
+    "level": "beginner"
+  },
+  {
+    "japanese": "アイスクリーム が たべたい です。",
+    "kanji": "アイスクリームが食べたいです。",
+    "romaji": "aisukuriimu ga tabetai desu",
+    "english": "I want to eat ice cream.",
+    "category": "Preferences & Desires",
+    "level": "beginner"
+  },
+  {
+    "japanese": "まど を あけて ください。",
+    "kanji": "窓を開けてください。",
+    "romaji": "mado o akete kudasai",
+    "english": "Please open the window.",
+    "category": "Requests & Permission",
+    "level": "beginner"
+  },
+  {
+    "japanese": "きのう は あめ が ふって いました が きょう は はれ です。",
+    "kanji": "昨日は雨が降っていましたが今日は晴れです。",
+    "romaji": "kinou wa ame ga futte imashita ga kyou wa hare desu",
+    "english": "It was raining yesterday, but today it’s sunny.",
+    "category": "Multi-clause Practice",
+    "level": "intermediate"
+  },
+  {
+    "japanese": "せんせい は とても しんせつ です。",
+    "kanji": "先生はとてもしんせつです。",
+    "romaji": "sensei wa totemo shinsetsu desu",
+    "english": "The teacher is very kind.",
+    "category": "Basics & Particles",
+    "level": "beginner"
+  },
+  {
+    "japanese": "テレビ で ニュース を みました。",
+    "kanji": "テレビでニュースを見ました。",
+    "romaji": "terebi de nyuusu o mimashita",
+    "english": "I watched the news on TV.",
+    "category": "Katakana in Context",
+    "level": "beginner"
+  },
+  {
+    "japanese": "まいにち ごご さんじ に コーヒー を のみます。",
+    "kanji": "毎日午後三時にコーヒーを飲みます。",
+    "romaji": "mainichi gogo sanji ni koohii o nomimasu",
+    "english": "I drink coffee every day at 3 p.m.",
+    "category": "Time & Frequency",
+    "level": "beginner"
+  },
+  {
+    "japanese": "えき まで じてんしゃ で いきました。",
+    "kanji": "駅まで自転車で行きました。",
+    "romaji": "eki made jitensha de ikimashita",
+    "english": "I went to the station by bicycle.",
+    "category": "Locations & Movement",
+    "level": "beginner"
+  },
+  {
+    "japanese": "ケーキ を たべたい けど おなか が いっぱい です。",
+    "kanji": "ケーキを食べたいけどお腹がいっぱいです。",
+    "romaji": "keeki o tabetai kedo onaka ga ippai desu",
+    "english": "I want to eat cake, but I’m full.",
+    "category": "Multi-clause Practice",
+    "level": "intermediate"
+  },
+  {
+    "japanese": "でんき を けして ください。",
+    "kanji": "電気を消してください。",
+    "romaji": "denki o keshite kudasai",
+    "english": "Please turn off the light.",
+    "category": "Requests & Permission",
+    "level": "beginner"
+  },
+  {
+    "japanese": "わたし は まいにち ジョギング を します。",
+    "kanji": "私は毎日ジョギングをします。",
+    "romaji": "watashi wa mainichi jogingu o shimasu",
+    "english": "I jog every day.",
+    "category": "Basics & Particles",
+    "level": "beginner"
+  },
+  {
+    "japanese": "きのう の よる カフェ で パンケーキ を たべました。",
+    "kanji": "昨日の夜カフェでパンケーキを食べました。",
+    "romaji": "kinou no yoru kafe de pankeeki o tabemashita",
+    "english": "I ate pancakes at a café last night.",
+    "category": "Katakana in Context",
+    "level": "beginner"
+  },
+  {
+    "japanese": "まいしゅう すいようび に スポーツクラブ に いきます。",
+    "kanji": "毎週水曜日にスポーツクラブに行きます。",
+    "romaji": "maishuu suiyoubi ni supootsu kurabu ni ikimasu",
+    "english": "I go to the sports club every Wednesday.",
+    "category": "Time & Frequency",
+    "level": "intermediate"
+  },
+  {
+    "japanese": "がっこう の まえ に バスてい が あります。",
+    "kanji": "学校の前にバス停があります。",
+    "romaji": "gakkou no mae ni basutei ga arimasu",
+    "english": "There is a bus stop in front of the school.",
+    "category": "Locations & Movement",
+    "level": "beginner"
+  },
+  {
+    "japanese": "すし が いちばん すき です。",
+    "kanji": "寿司が一番好きです。",
+    "romaji": "sushi ga ichiban suki desu",
+    "english": "I like sushi the most.",
+    "category": "Preferences & Desires",
+    "level": "beginner"
+  },
+  {
+    "japanese": "この いす を つかっても いい です か。",
+    "kanji": "この椅子を使ってもいいですか。",
+    "romaji": "kono isu o tsukattemo ii desu ka",
+    "english": "May I use this chair?",
+    "category": "Requests & Permission",
+    "level": "beginner"
+  },
+  {
+    "japanese": "ばんごはん を たべて から ほん を よみました。",
+    "kanji": "晩ごはんを食べてから本を読みました。",
+    "romaji": "bangohan o tabete kara hon o yomimashita",
+    "english": "I read a book after eating dinner.",
+    "category": "Multi-clause Practice",
+    "level": "beginner"
+  },
+  {
+    "japanese": "かれ は せ が たかい です。",
+    "kanji": "彼は背が高いです。",
+    "romaji": "kare wa se ga takai desu",
+    "english": "He is tall.",
+    "category": "Basics & Particles",
+    "level": "beginner"
+  },
+  {
+    "japanese": "デパート で シャツ と パンツ を かいました。",
+    "kanji": "デパートでシャツとパンツを買いました。",
+    "romaji": "depaato de shatsu to pantsu o kaimashita",
+    "english": "I bought a shirt and pants at the department store.",
+    "category": "Katakana in Context",
+    "level": "beginner"
+  },
+  {
+    "japanese": "まいにち ごぜん ななじ に おきます。",
+    "kanji": "毎日午前七時に起きます。",
+    "romaji": "mainichi gozen shichiji ni okimasu",
+    "english": "I get up at seven every morning.",
+    "category": "Time & Frequency",
+    "level": "beginner"
+  },
+  {
+    "japanese": "ともだち と こうえん に いきました。",
+    "kanji": "友だちと公園に行きました。",
+    "romaji": "tomodachi to kouen ni ikimashita",
+    "english": "I went to the park with my friend.",
+    "category": "Locations & Movement",
+    "level": "beginner"
+  },
+  {
+    "japanese": "カレー が たべたい です。",
+    "kanji": "カレーが食べたいです。",
+    "romaji": "karee ga tabetai desu",
+    "english": "I want to eat curry.",
+    "category": "Preferences & Desires",
+    "level": "beginner"
+  },
+  {
+    "japanese": "この ドア を しめて ください。",
+    "kanji": "このドアを閉めてください。",
+    "romaji": "kono doa o shimete kudasai",
+    "english": "Please close this door.",
+    "category": "Requests & Permission",
+    "level": "beginner"
+  },
+  {
+    "japanese": "にほんご は むずかしい けど たのしい です。",
+    "kanji": "日本語は難しいけど楽しいです。",
+    "romaji": "nihongo wa muzukashii kedo tanoshii desu",
+    "english": "Japanese is difficult but fun.",
+    "category": "Multi-clause Practice",
+    "level": "intermediate"
+  },
+  {
+    "japanese": "きょう は あたたかい です ね。",
+    "kanji": "今日は暖かいですね。",
+    "romaji": "kyou wa atatakai desu ne",
+    "english": "It’s warm today, isn’t it?",
+    "category": "Basics & Particles",
+    "level": "beginner"
+  },
+  {
+    "japanese": "スーパー で ミルク と パン を かいました。",
+    "kanji": "スーパーでミルクとパンを買いました。",
+    "romaji": "suupaa de miruku to pan o kaimashita",
+    "english": "I bought milk and bread at the supermarket.",
+    "category": "Katakana in Context",
+    "level": "beginner"
+  },
+  {
+    "japanese": "まいにち ごご さんじ に コーヒー を のみます。",
+    "kanji": "毎日午後三時にコーヒーを飲みます。",
+    "romaji": "mainichi gogo sanji ni koohii o nomimasu",
+    "english": "I drink coffee every day at 3 p.m.",
+    "category": "Time & Frequency",
+    "level": "beginner"
+  },
+  {
+    "japanese": "えき まで じてんしゃ で いきました。",
+    "kanji": "駅まで自転車で行きました。",
+    "romaji": "eki made jitensha de ikimashita",
+    "english": "I went to the station by bicycle.",
+    "category": "Locations & Movement",
+    "level": "beginner"
+  },
+  {
+    "japanese": "ケーキ を たべたい けど ねむい です。",
+    "kanji": "ケーキを食べたいけど眠いです。",
+    "romaji": "keeki o tabetai kedo nemui desu",
+    "english": "I want to eat cake, but I’m sleepy.",
+    "category": "Multi-clause Practice",
+    "level": "intermediate"
+  },
+  {
+    "japanese": "でんき を つけて ください。",
+    "kanji": "電気をつけてください。",
+    "romaji": "denki o tsukete kudasai",
+    "english": "Please turn on the light.",
+    "category": "Requests & Permission",
+    "level": "beginner"
+  },
+  {
+    "japanese": "わたし は まいにち ほん を よみます。",
+    "kanji": "私は毎日本を読みます。",
+    "romaji": "watashi wa mainichi hon o yomimasu",
+    "english": "I read books every day.",
+    "category": "Basics & Particles",
+    "level": "beginner"
+  },
+  {
+    "japanese": "きのう の よる コンビニ で アイスクリーム を かいました。",
+    "kanji": "昨日の夜コンビニでアイスクリームを買いました。",
+    "romaji": "kinou no yoru konbini de aisukuriimu o kaimashita",
+    "english": "I bought ice cream at the convenience store last night.",
+    "category": "Katakana in Context",
+    "level": "beginner"
+  },
+  {
+    "japanese": "まいあさ はちじ に おきて コーヒー を のみます。",
+    "kanji": "毎朝八時に起きてコーヒーを飲みます。",
+    "romaji": "maiasa hachiji ni okite koohii o nomimasu",
+    "english": "I wake up at eight every morning and drink coffee.",
+    "category": "Time & Frequency",
+    "level": "beginner"
+  },
+  {
+    "japanese": "がっこう の ちかく に こうえん が あります。",
+    "kanji": "学校の近くに公園があります。",
+    "romaji": "gakkou no chikaku ni kouen ga arimasu",
+    "english": "There is a park near the school.",
+    "category": "Locations & Movement",
+    "level": "beginner"
+  },
+  {
+    "japanese": "にほん の ドラマ が すき です。",
+    "kanji": "日本のドラマが好きです。",
+    "romaji": "nihon no dorama ga suki desu",
+    "english": "I like Japanese dramas.",
+    "category": "Preferences & Desires",
+    "level": "beginner"
+  },
+  {
+    "japanese": "この ペン を かして ください。",
+    "kanji": "このペンを貸してください。",
+    "romaji": "kono pen o kashite kudasai",
+    "english": "Please lend me this pen.",
+    "category": "Requests & Permission",
+    "level": "beginner"
+  },
+  {
+    "japanese": "ばんごはん を たべて から えいが を みました。",
+    "kanji": "晩ごはんを食べてから映画を見ました。",
+    "romaji": "bangohan o tabete kara eiga o mimashita",
+    "english": "I watched a movie after eating dinner.",
+    "category": "Multi-clause Practice",
+    "level": "beginner"
+  },
+  {
+    "japanese": "せんせい は しんせつ です。",
+    "kanji": "先生は親切です。",
+    "romaji": "sensei wa shinsetsu desu",
+    "english": "The teacher is kind.",
+    "category": "Basics & Particles",
+    "level": "beginner"
+  },
+  {
+    "japanese": "スーパー で バナナ と パン を かいました。",
+    "kanji": "スーパーでバナナとパンを買いました。",
+    "romaji": "suupaa de banana to pan o kaimashita",
+    "english": "I bought bananas and bread at the supermarket.",
+    "category": "Katakana in Context",
+    "level": "beginner"
+  },
+  {
+    "japanese": "まいしゅう げつようび に かいしゃ に いきます。",
+    "kanji": "毎週月曜日に会社に行きます。",
+    "romaji": "maishuu getsuyoubi ni kaisha ni ikimasu",
+    "english": "I go to the office every Monday.",
+    "category": "Time & Frequency",
+    "level": "beginner"
+  },
+  {
+    "japanese": "えき の まえ に タクシー が あります。",
+    "kanji": "駅の前にタクシーがあります。",
+    "romaji": "eki no mae ni takushii ga arimasu",
+    "english": "There is a taxi in front of the station.",
+    "category": "Locations & Movement",
+    "level": "beginner"
+  },
+  {
+    "japanese": "にほん の りょうり が だいすき です。",
+    "kanji": "日本の料理が大好きです。",
+    "romaji": "nihon no ryouri ga daisuki desu",
+    "english": "I love Japanese food.",
+    "category": "Preferences & Desires",
+    "level": "beginner"
+  },
+  {
+    "japanese": "ここ に すわっても いい です か。",
+    "kanji": "ここに座ってもいいですか。",
+    "romaji": "koko ni suwatte mo ii desu ka",
+    "english": "May I sit here?",
+    "category": "Requests & Permission",
+    "level": "beginner"
+  },
+  {
+    "japanese": "にほんご の べんきょう は むずかしい けど たのしい です。",
+    "kanji": "日本語の勉強は難しいけど楽しいです。",
+    "romaji": "nihongo no benkyou wa muzukashii kedo tanoshii desu",
+    "english": "Studying Japanese is difficult but fun.",
+    "category": "Multi-clause Practice",
+    "level": "intermediate"
+  },
+  {
+    "japanese": "きょう は あめ が ふって います。",
+    "kanji": "今日は雨が降っています。",
+    "romaji": "kyou wa ame ga futte imasu",
+    "english": "It’s raining today.",
+    "category": "Basics & Particles",
+    "level": "beginner"
+  },
+  {
+    "japanese": "レストラン で サラダ と スープ を たべました。",
+    "kanji": "レストランでサラダとスープを食べました。",
+    "romaji": "resutoran de sarada to suupu o tabemashita",
+    "english": "I ate salad and soup at the restaurant.",
+    "category": "Katakana in Context",
+    "level": "beginner"
+  },
+  {
+    "japanese": "まいにち ごぜん はちじ に おきます。",
+    "kanji": "毎日午前八時に起きます。",
+    "romaji": "mainichi gozen hachiji ni okimasu",
+    "english": "I wake up at eight every morning.",
+    "category": "Time & Frequency",
+    "level": "beginner"
+  },
+  {
+    "japanese": "ともだち と えいが を みました。",
+    "kanji": "友だちと映画を見ました。",
+    "romaji": "tomodachi to eiga o mimashita",
+    "english": "I watched a movie with my friend.",
+    "category": "Locations & Movement",
+    "level": "beginner"
+  },
+  {
+    "japanese": "ピザ を たべたい けど おかね が ありません。",
+    "kanji": "ピザを食べたいけどお金がありません。",
+    "romaji": "piza o tabetai kedo okane ga arimasen",
+    "english": "I want to eat pizza, but I don’t have money.",
+    "category": "Multi-clause Practice",
+    "level": "intermediate"
+  },
+  {
+    "japanese": "でんき を けして ください。",
+    "kanji": "電気を消してください。",
+    "romaji": "denki o keshite kudasai",
+    "english": "Please turn off the light.",
+    "category": "Requests & Permission",
+    "level": "beginner"
   }
 ]
