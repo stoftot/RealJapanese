@@ -1,0 +1,21 @@
+﻿@page "/sentence"
+@inherits SentenceBase
+@using RealJapanese.Components.Shared
+@rendermode InteractiveServer
+
+<PracticeShell @bind-UiScale="UiScale">
+    <PracticeCard
+        Title="Practice"
+        ProgressText="@(Questions.Count == 0 ? "0/0" : $"{currentQuestionIndex + 1}/{Questions.Count}")"
+        Question="@CurrentQuestion"
+        Answer="@CurrentAnswer"
+        UserInput="@UserInput"
+        UserInputChanged="@(v => UserInput = v!)"
+        ShowAnswer="@showAnswer"
+        RevealRequested="RevealAnswer"
+        NextRequested="GoToNextQuestionAsync"
+        RevealLabel="Show answer (Enter)"
+        NextLabel="Next"
+        OnKeyDown="HandleKeyDown"
+        @ref="cardRef"/>
+</PracticeShell>
