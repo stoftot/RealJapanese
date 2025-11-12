@@ -16,7 +16,8 @@
 
 .scaled ::deep .practice-wrap {
     font-size: calc(1rem * var(--ui-scale));
-    max-width: clamp(36ch, 60ch, 92vw);
+    /*max-width: clamp(36ch, 60ch, 92vw);*/
+    max-width: clamp(36ch, 80ch, 98vw);
     margin-inline: auto;
 }
 

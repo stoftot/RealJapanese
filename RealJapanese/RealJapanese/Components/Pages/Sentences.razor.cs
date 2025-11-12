@@ -30,8 +30,8 @@ public partial class SentenceBase : PracticeBase
     {
         base.OnUserInputChanged(value);
 
-        if (IsCorrect())
-            _ = GoToNextQuestionAsync();
+        // if (IsCorrect())
+        //     _ = GoToNextQuestionAsync();
     }
 
     protected override void OnEnterPressed()
