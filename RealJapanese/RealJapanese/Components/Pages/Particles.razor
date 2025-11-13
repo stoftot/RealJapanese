@@ -1,0 +1,14 @@
+@page "/particals"
+@using RealJapanese.Components.Shared
+@inherits ParticlesBase
+@rendermode InteractiveServer
+
+<PracticeShell UiScale="@UiScale" UiScaleChanged="v => UiScale = v">
+    <FillInBlanksCard
+        Header="@CurrentItem.Header"
+        ProgressText="@ProgressText"
+        Template="@CurrentItem.Template"
+        Answers="@CurrentItem.Answers"
+        BlankToken="__"
+        NextRequested="GoToNextQuestionAsync" />
+</PracticeShell>
