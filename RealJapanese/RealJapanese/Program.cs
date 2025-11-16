@@ -12,6 +12,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSingleton<NumbersQuestionGenerator>();
 builder.Services.AddSingleton<GreetingsData>();
 builder.Services.AddSingleton<SentencesData>();
+builder.Services.AddSingleton<ParticlesData>();
 
 var app = builder.Build();
 

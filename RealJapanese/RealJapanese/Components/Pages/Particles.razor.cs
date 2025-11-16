@@ -1,14 +1,13 @@
 using Microsoft.AspNetCore.Components;
 using RealJapanese.Components.Shared;
+using Repositories;
 using Repositories.DTOs;
 
 namespace RealJapanese.Components.Pages;
 
 public partial class ParticlesBase : ComponentBase
 {
-    // You can inject your data service here instead
-    // [Inject] public ParticleData ParticleData { get; set; } = null!;
-
+    [Inject] private ParticlesData ParticlesData { get; set; } = null!;
     protected List<FillInBlanksDto> Questions { get; set; } = new();
     protected int currentIndex = 0;
 
@@ -24,22 +23,7 @@ public partial class ParticlesBase : ComponentBase
 
     protected override void OnInitialized()
     {
-        // TODO: replace with real data, e.g. from a repository
-        Questions = new List<FillInBlanksDto>
-        {
-            new()
-            {
-                Header = "Particles - basics",
-                Template = "私はきのう学校__行きました。", // "__" replaced by input
-                Answers = new List<string> { "に" }
-            },
-            new()
-            {
-                Header = "Particles - two blanks",
-                Template = "猫__テーブル__寝ています。",
-                Answers = new List<string> { "は", "の上で" } // or just "の上に" etc.
-            }
-        }.OrderBy(_ => Guid.NewGuid()).ToList();
+        Questions = ParticlesData.FillInBlanksQuestions().OrderBy(_ => Guid.NewGuid()).ToList();
     }
 
     protected Task GoToNextQuestionAsync()
