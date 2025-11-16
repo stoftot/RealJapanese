@@ -1,0 +1,1869 @@
+﻿[
+  {
+    "japanese": "私は朝__公園__散歩しました__。",
+    "english": "I took a walk in the park this morning, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__部屋__本__読んでいました。",
+    "english": "My younger brother was reading a book in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "友だち__駅__待ち合わせ__します__。",
+    "english": "I'm meeting my friend at the station, okay?",
+    "missing_particles": [
+      "と",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "私は日本語__勉強__毎日一時間します。",
+    "english": "I study Japanese for an hour every day.",
+    "missing_particles": [
+      "を",
+      "を"
+    ]
+  },
+  {
+    "japanese": "母__料理__手伝い__しました__。",
+    "english": "I helped my mom with the cooking, you know.",
+    "missing_particles": [
+      "の",
+      "を",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "明日__図書館__勉強__行きます。",
+    "english": "Tomorrow I will go study at the library.",
+    "missing_particles": [
+      "は",
+      "で",
+      "へ"
+    ]
+  },
+  {
+    "japanese": "私__猫__部屋__寝ています__。",
+    "english": "My cat is sleeping in my room, right?",
+    "missing_particles": [
+      "の",
+      "は",
+      "で",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "夜__友だち__電話__しました。",
+    "english": "I called my friend at night.",
+    "missing_particles": [
+      "に",
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "弟__学校__宿題__忘れました__。",
+    "english": "My little brother forgot his homework at school, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "私__朝ごはん__パン__食べました。",
+    "english": "I ate bread for breakfast.",
+    "missing_particles": [
+      "は",
+      "の",
+      "を"
+    ]
+  },
+  {
+    "japanese": "今日は天気__よくて散歩__行きたい__。",
+    "english": "The weather is nice today, so I want to go for a walk.",
+    "missing_particles": [
+      "が",
+      "へ",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "父__会社__会議__参加しました。",
+    "english": "My dad attended a meeting at his company.",
+    "missing_particles": [
+      "は",
+      "で",
+      "に"
+    ]
+  },
+  {
+    "japanese": "私__映画館__映画__見たい__。",
+    "english": "I want to watch a movie at the theater, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "姉__友だち__手紙__書いています。",
+    "english": "My older sister is writing a letter to her friend.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "明日__駅__友だち__会います__。",
+    "english": "Tomorrow I'll meet my friend at the station, okay?",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "私は家__音楽__聞くの__好きです。",
+    "english": "I like listening to music at home.",
+    "missing_particles": [
+      "で",
+      "を",
+      "が"
+    ]
+  },
+  {
+    "japanese": "兄__大学__友だち__話していました。",
+    "english": "My older brother was talking with a friend at university.",
+    "missing_particles": [
+      "は",
+      "で",
+      "と"
+    ]
+  },
+  {
+    "japanese": "私__昨日__本屋__漫画__買いました。",
+    "english": "Yesterday I bought a manga at the bookstore.",
+    "missing_particles": [
+      "は",
+      "の",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "子ども__公園__走って__遊びました。",
+    "english": "The children ran and played in the park.",
+    "missing_particles": [
+      "は",
+      "で"
+    ]
+  },
+  {
+    "japanese": "私は来週__友だち__旅行__行く予定です__。",
+    "english": "Next week I'm planning to go on a trip with a friend, you know.",
+    "missing_particles": [
+      "の",
+      "と",
+      "へ",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "私は午後__図書館__勉強しました__。",
+    "english": "I studied at the library this afternoon, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__部屋__音楽__聞いていました。",
+    "english": "My older brother was listening to music in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私__来週__大阪__行きます__。",
+    "english": "I'm going to Osaka next week, right?",
+    "missing_particles": [
+      "は",
+      "の",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__朝ごはん__パン__焼きました。",
+    "english": "My mom toasted bread for breakfast.",
+    "missing_particles": [
+      "は",
+      "の",
+      "を"
+    ]
+  },
+  {
+    "japanese": "友だち__家__ゲーム__しました__。",
+    "english": "I played games at my friend's house, you know.",
+    "missing_particles": [
+      "の",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "私は公園__犬__散歩しました。",
+    "english": "I walked my dog at the park.",
+    "missing_particles": [
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "父__駅__車__迎えに行きます__。",
+    "english": "My dad will go pick someone up by car at the station, okay?",
+    "missing_particles": [
+      "は",
+      "で",
+      "で",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "私__昼ごはん__ラーメン__食べました。",
+    "english": "I ate ramen for lunch.",
+    "missing_particles": [
+      "は",
+      "の",
+      "を"
+    ]
+  },
+  {
+    "japanese": "姉__友だち__買い物__行きました__。",
+    "english": "My sister went shopping with a friend, you know.",
+    "missing_particles": [
+      "は",
+      "の",
+      "へ",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "昨日__家__映画__見ました。",
+    "english": "Yesterday I watched a movie at home.",
+    "missing_particles": [
+      "の",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私__駅__友だち__会う予定です__。",
+    "english": "I plan to meet my friend at the station, right?",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "子ども__外__ボール__遊んでいます。",
+    "english": "The children are playing ball outside.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は来月__東京__旅行__行きます__。",
+    "english": "Next month I will travel to Tokyo, you know.",
+    "missing_particles": [
+      "の",
+      "へ",
+      "へ",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "母__夜ごはん__カレー__作りました。",
+    "english": "My mom made curry for dinner.",
+    "missing_particles": [
+      "は",
+      "の",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私__学校__友だち__話しました__。",
+    "english": "I talked with a friend at school, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__部屋__ゲーム__しています。",
+    "english": "My little brother is playing games in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は朝__駅__バス__乗りました__。",
+    "english": "This morning I took the bus at the station, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "友だち__家__夕食__食べました。",
+    "english": "I ate dinner at my friend's house.",
+    "missing_particles": [
+      "の",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は週末__海__散歩__行きました__。",
+    "english": "I went for a walk by the sea this weekend, you know.",
+    "missing_particles": [
+      "の",
+      "へ",
+      "へ",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__部屋__本__読んでいます。",
+    "english": "My older brother is reading a book in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は朝__駅__友だち__会いました。",
+    "english": "I met my friend at the station this morning.",
+    "missing_particles": [
+      "は",
+      "で"
+    ]
+  },
+  {
+    "japanese": "弟__部屋__ゲーム__しています__。",
+    "english": "My younger brother is playing games in his room, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "私__昼ごはん__パン__食べました。",
+    "english": "I ate bread for lunch.",
+    "missing_particles": [
+      "は",
+      "に"
+    ]
+  },
+  {
+    "japanese": "友だち__家__映画__見ました__。",
+    "english": "I watched a movie at my friend’s house, right?",
+    "missing_particles": [
+      "の",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__台所__料理__作っています。",
+    "english": "My mom is cooking in the kitchen.",
+    "missing_particles": [
+      "は",
+      "で"
+    ]
+  },
+  {
+    "japanese": "私は来週__京都__旅行__行きます__。",
+    "english": "Next week I'm going on a trip to Kyoto, you know.",
+    "missing_particles": [
+      "の",
+      "へ",
+      "へ",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__毎日__音楽__聞きます。",
+    "english": "My older brother listens to music every day.",
+    "missing_particles": [
+      "は",
+      "に"
+    ]
+  },
+  {
+    "japanese": "私は駅__バス__乗りました__。",
+    "english": "I got on the bus at the station, right?",
+    "missing_particles": [
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "友だち__手紙__書きました。",
+    "english": "I wrote a letter to my friend.",
+    "missing_particles": [
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "父__会社__会議__参加しました__。",
+    "english": "My dad joined a meeting at his company, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "私は昨日__本屋__本__買いました。",
+    "english": "Yesterday I bought a book at the bookstore.",
+    "missing_particles": [
+      "の",
+      "で"
+    ]
+  },
+  {
+    "japanese": "姉__駅__友だち__話していました__。",
+    "english": "My sister was talking with her friend at the station, right?",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "子ども__公園__走って遊びました。",
+    "english": "The children ran and played in the park.",
+    "missing_particles": [
+      "は",
+      "で"
+    ]
+  },
+  {
+    "japanese": "私は来月__友だち__旅行__行きます__。",
+    "english": "Next month I’ll go on a trip with my friend, you know.",
+    "missing_particles": [
+      "の",
+      "と",
+      "へ",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__朝__パン__食べませんでした。",
+    "english": "My younger brother didn’t eat bread this morning.",
+    "missing_particles": [
+      "は",
+      "に"
+    ]
+  },
+  {
+    "japanese": "私は夜__家__映画__見ています__。",
+    "english": "At night I'm watching a movie at home, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__犬__散歩__しました。",
+    "english": "My mom walked the dog.",
+    "missing_particles": [
+      "は",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__図書館__勉強__します__。",
+    "english": "Today I'm studying at the library, you know.",
+    "missing_particles": [
+      "の",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__部屋__本__読んでいます。",
+    "english": "My older brother is reading a book in his room.",
+    "missing_particles": [
+      "は",
+      "で"
+    ]
+  },
+  {
+    "japanese": "私は午後__駅__友だち__会います__。",
+    "english": "This afternoon I will meet my friend at the station, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "私は昨日__友だち__会いました__。",
+    "english": "I met my friend yesterday, you know.",
+    "missing_particles": [
+      "は",
+      "に",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__部屋__音楽__聞いています。",
+    "english": "My older brother is listening to music in his room.",
+    "missing_particles": [
+      "は",
+      "で"
+    ]
+  },
+  {
+    "japanese": "私は朝__駅__バス__待ちました__。",
+    "english": "I waited for the bus at the station this morning, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__夜ごはん__カレー__作りました。",
+    "english": "My mom made curry for dinner.",
+    "missing_particles": [
+      "は",
+      "の"
+    ]
+  },
+  {
+    "japanese": "私は週末__家__映画__見ました__。",
+    "english": "I watched a movie at home this weekend, you know.",
+    "missing_particles": [
+      "の",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__学校__宿題__しました。",
+    "english": "My younger brother did his homework at school.",
+    "missing_particles": [
+      "は",
+      "で"
+    ]
+  },
+  {
+    "japanese": "私は来週__友だち__旅行__行きます__。",
+    "english": "Next week I will go on a trip with a friend, right?",
+    "missing_particles": [
+      "の",
+      "と",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "私__朝ごはん__パン__食べます。",
+    "english": "I eat bread for breakfast.",
+    "missing_particles": [
+      "は",
+      "に"
+    ]
+  },
+  {
+    "japanese": "今日は午後__図書館__勉強__します__。",
+    "english": "This afternoon I will study at the library, you know.",
+    "missing_particles": [
+      "の",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__家__テレビ__見ています。",
+    "english": "My older brother is watching TV at home.",
+    "missing_particles": [
+      "は",
+      "で"
+    ]
+  },
+  {
+    "japanese": "私は来月__東京__旅行__行く予定です__。",
+    "english": "Next month I'm planning a trip to Tokyo, right?",
+    "missing_particles": [
+      "の",
+      "へ",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__犬__散歩__しました。",
+    "english": "My mom walked the dog.",
+    "missing_particles": [
+      "は",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は昨日__本屋__本__買いました__。",
+    "english": "Yesterday I bought a book at the bookstore, you know.",
+    "missing_particles": [
+      "の",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__部屋__ゲーム__しています。",
+    "english": "My younger brother is playing games in his room.",
+    "missing_particles": [
+      "は",
+      "で"
+    ]
+  },
+  {
+    "japanese": "私は夜__家__映画__見ています__。",
+    "english": "At night I watch movies at home, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "友だち__家__夕食__食べました。",
+    "english": "I ate dinner at my friend’s house.",
+    "missing_particles": [
+      "の",
+      "で"
+    ]
+  },
+  {
+    "japanese": "私は午後__駅__友だち__会います__。",
+    "english": "This afternoon I will meet my friend at the station, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "に",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "父__家__新聞__読んでいます。",
+    "english": "My dad is reading the newspaper at home.",
+    "missing_particles": [
+      "は",
+      "で"
+    ]
+  },
+  {
+    "japanese": "私は明日__友だち__買い物__行きます__。",
+    "english": "Tomorrow I will go shopping with a friend, right?",
+    "missing_particles": [
+      "の",
+      "と",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "姉__部屋__音楽__聞いています。",
+    "english": "My older sister is listening to music in her room.",
+    "missing_particles": [
+      "は",
+      "で"
+    ]
+  },
+  {
+    "japanese": "私は明日__東京__行きます__。",
+    "english": "Tomorrow I'm going to Tokyo, you know.",
+    "missing_particles": [
+      "は",
+      "へ",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__部屋__本__読んでいます。",
+    "english": "My older brother is reading a book in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__友だち__会います__。",
+    "english": "Today I will meet my friend, right?",
+    "missing_particles": [
+      "は",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__朝ごはん__パン__焼きました。",
+    "english": "My mom toasted bread for breakfast.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は夜__家__映画__見ました__。",
+    "english": "At night I watched a movie at home, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__学校__宿題__しました。",
+    "english": "My younger brother did his homework at school.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は週末__友だち__買い物__行きます__。",
+    "english": "This weekend I'm going shopping with a friend, right?",
+    "missing_particles": [
+      "に",
+      "と",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "兄__家__音楽__聞いています。",
+    "english": "My older brother is listening to music at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は昨日__駅__友だち__会いました__。",
+    "english": "Yesterday I met my friend at the station, you know.",
+    "missing_particles": [
+      "の",
+      "で",
+      "に",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "母__犬__散歩__します。",
+    "english": "My mom walks the dog.",
+    "missing_particles": [
+      "は",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は来月__大阪__旅行__行きます__。",
+    "english": "Next month I will travel to Osaka, right?",
+    "missing_particles": [
+      "に",
+      "へ",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "弟__部屋__ゲーム__しています。",
+    "english": "My younger brother is playing games in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は午後__図書館__勉強__します__。",
+    "english": "This afternoon I will study at the library, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__台所__水__飲みました。",
+    "english": "My older brother drank water in the kitchen.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は朝__駅__バス__待ちました__。",
+    "english": "In the morning I waited for the bus at the station, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__家__新聞__読んでいます。",
+    "english": "My mom is reading the newspaper at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__友だち__電話__します__。",
+    "english": "Today I will call my friend, you know.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "姉__部屋__音楽__聞いています。",
+    "english": "My older sister is listening to music in her room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は夜__家__勉強__しました__。",
+    "english": "At night I studied at home, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "父__家__テレビ__見ています。",
+    "english": "My dad is watching TV at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は朝__駅__バス__乗りました__。",
+    "english": "In the morning I got on the bus at the station, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "に",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__部屋__本__読んでいます。",
+    "english": "My older brother is reading a book in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は来週__友だち__買い物__行きます__。",
+    "english": "Next week I will go shopping with my friend, right?",
+    "missing_particles": [
+      "の",
+      "と",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__朝ごはん__パン__焼きました。",
+    "english": "My mom toasted bread for breakfast.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は夜__家__映画__見ました__。",
+    "english": "At night I watched a movie at home, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__学校__宿題__しました。",
+    "english": "My younger brother did his homework at school.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は週末__海__散歩__行きました__。",
+    "english": "This weekend I went for a walk by the sea, right?",
+    "missing_particles": [
+      "に",
+      "へ",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "姉__家__音楽__聞いています。",
+    "english": "My older sister is listening to music at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__図書館__勉強__します__。",
+    "english": "Today I will study at the library, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "父__部屋__新聞__読んでいます。",
+    "english": "My father is reading the newspaper in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は昨日__駅__友だち__会いました__。",
+    "english": "Yesterday I met my friend at the station, right?",
+    "missing_particles": [
+      "の",
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "兄__朝__パン__食べました。",
+    "english": "My older brother ate bread this morning.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は午後__家__映画__見ています__。",
+    "english": "This afternoon I'm watching a movie at home, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "母__犬__散歩__します。",
+    "english": "My mother walks the dog.",
+    "missing_particles": [
+      "は",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は来月__大阪__旅行__行きます__。",
+    "english": "Next month I will travel to Osaka, right?",
+    "missing_particles": [
+      "に",
+      "へ",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "弟__部屋__ゲーム__しています。",
+    "english": "My younger brother is playing games in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__友だち__電話__します__。",
+    "english": "Today I will call my friend, you know.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "姉__家__テレビ__見ています。",
+    "english": "My older sister is watching TV at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は夜__駅__バス__待ちました__。",
+    "english": "At night I waited for the bus at the station, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "父__台所__水__飲みました。",
+    "english": "My dad drank water in the kitchen.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は昨日__友だち__映画__見ました__。",
+    "english": "Yesterday I watched a movie with my friend, you know.",
+    "missing_particles": [
+      "は",
+      "と",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__部屋__音楽__聞いていました。",
+    "english": "My older brother was listening to music in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は明日__大阪__旅行__行きます__。",
+    "english": "Tomorrow I’m going on a trip to Osaka, right?",
+    "missing_particles": [
+      "の",
+      "へ",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__台所__朝ごはん__作りました。",
+    "english": "My mom made breakfast in the kitchen.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は夜__家__本__読んでいました__。",
+    "english": "At night I was reading a book at home, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__学校__友だち__話しました。",
+    "english": "My younger brother talked with his friend at school.",
+    "missing_particles": [
+      "は",
+      "で",
+      "に"
+    ]
+  },
+  {
+    "japanese": "私は午後__図書館__勉強__します__。",
+    "english": "This afternoon I will study at the library, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "姉__家__テレビ__見ています。",
+    "english": "My older sister is watching TV at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__駅__友だち__会います__。",
+    "english": "Today I will meet my friend at the station, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "父__部屋__新聞__読んでいます。",
+    "english": "My dad is reading the newspaper in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は来週__友だち__買い物__行きます__。",
+    "english": "Next week I'm going shopping with a friend, right?",
+    "missing_particles": [
+      "の",
+      "と",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__犬__散歩__しています。",
+    "english": "My mom is walking the dog.",
+    "missing_particles": [
+      "は",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は昨日__本屋__本__買いました__。",
+    "english": "Yesterday I bought a book at the bookstore, you know.",
+    "missing_particles": [
+      "の",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__部屋__ゲーム__しています。",
+    "english": "My younger brother is playing games in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は夜__家__音楽__聞きました__。",
+    "english": "At night I listened to music at home, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "友だち__家__夕ごはん__食べました。",
+    "english": "I ate dinner at my friend’s house.",
+    "missing_particles": [
+      "の",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__図書館__本__読みます__。",
+    "english": "Today I will read a book at the library, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__台所__水__飲んでいます。",
+    "english": "My older brother is drinking water in the kitchen.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は午後__駅__バス__待ちました__。",
+    "english": "In the afternoon I waited for the bus at the station, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "父__家__テレビ__見ています。",
+    "english": "My dad is watching TV at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今朝__家__コーヒー__飲みました__。",
+    "english": "This morning I drank coffee at home, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__部屋__ゲーム__しています。",
+    "english": "My younger brother is playing games in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__図書館__友だち__会います__。",
+    "english": "Today I will meet my friend at the library, right?",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__朝ごはん__卵__焼きました。",
+    "english": "My mom fried eggs for breakfast.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は夜__家__映画__見ました__。",
+    "english": "At night I watched a movie at home, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__学校__宿題__しました。",
+    "english": "My older brother did his homework at school.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は来週__大阪__旅行__行きます__。",
+    "english": "Next week I will travel to Osaka, right?",
+    "missing_particles": [
+      "の",
+      "へ",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "姉__家__音楽__聞いています。",
+    "english": "My older sister is listening to music at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は昨日__駅__友だち__会いました__。",
+    "english": "Yesterday I met my friend at the station, you know.",
+    "missing_particles": [
+      "の",
+      "で",
+      "に",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "父__台所__水__飲みました。",
+    "english": "My dad drank water in the kitchen.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は午後__図書館__勉強__します__。",
+    "english": "This afternoon I will study at the library, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "弟__朝__パン__食べました。",
+    "english": "My younger brother ate bread this morning.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__家__本__読みます__。",
+    "english": "Today I will read a book at home, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "母__部屋__新聞__読んでいます。",
+    "english": "My mother is reading the newspaper in her room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は明日__駅__友だち__会います__。",
+    "english": "Tomorrow I will meet my friend at the station, right?",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "姉__家__テレビ__見ています。",
+    "english": "My older sister is watching TV at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は夜__家__音楽__聞きます__。",
+    "english": "At night I listen to music at home, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__台所__水__飲んでいます。",
+    "english": "My older brother is drinking water in the kitchen.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は午後__駅__バス__待ちました__。",
+    "english": "This afternoon I waited for the bus at the station, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "父__家__テレビ__見ています。",
+    "english": "My father is watching TV at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は昨日__家__音楽__聞きました__。",
+    "english": "Yesterday I listened to music at home, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__部屋__本__読んでいます。",
+    "english": "My younger brother is reading a book in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は明日__駅__バス__乗ります__。",
+    "english": "Tomorrow I will get on the bus at the station, right?",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__朝ごはん__ご飯__作りました。",
+    "english": "My mom made rice for breakfast.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は夜__家__本__読みました__。",
+    "english": "At night I read a book at home, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__学校__宿題__しています。",
+    "english": "My older brother is doing homework at school.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は週末__海__散歩__行きました__。",
+    "english": "This weekend I went for a walk by the sea, right?",
+    "missing_particles": [
+      "に",
+      "へ",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "姉__家__音楽__聞いています。",
+    "english": "My older sister is listening to music at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__図書館__友だち__会います__。",
+    "english": "Today I will meet my friend at the library, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "父__部屋__新聞__読んでいます。",
+    "english": "My father is reading the newspaper in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は昨日__駅__友だち__話しました__。",
+    "english": "Yesterday I talked with my friend at the station, right?",
+    "missing_particles": [
+      "の",
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "弟__朝__パン__食べました。",
+    "english": "My little brother ate bread this morning.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は昼__家__映画__見ました__。",
+    "english": "At noon I watched a movie at home, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "母__台所__水__飲んでいます。",
+    "english": "My mom is drinking water in the kitchen.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は来週__公園__散歩__行きます__。",
+    "english": "Next week I will go for a walk in the park, right?",
+    "missing_particles": [
+      "は",
+      "へ",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "兄__家__テレビ__見ています。",
+    "english": "My older brother is watching TV at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__家__宿題__します__。",
+    "english": "Today I will do my homework at home, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "姉__部屋__水__飲みました。",
+    "english": "My older sister drank water in her room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は午後__駅__バス__待ちました__。",
+    "english": "In the afternoon I waited for the bus at the station, right?",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "父__家__音楽__聞いています。",
+    "english": "My father is listening to music at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__家__宿題__終わりました__。",
+    "english": "Today I finished my homework at home, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "弟__部屋__漫画__読んでいます。",
+    "english": "My younger brother is reading manga in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は明日__図書館__勉強__します__。",
+    "english": "Tomorrow I will study at the library, right?",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "母__朝ごはん__パン__焼きました。",
+    "english": "My mom toasted bread for breakfast.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は夜__家__映画__見ました__。",
+    "english": "At night I watched a movie at home, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__学校__宿題__しています。",
+    "english": "My older brother is doing homework at school.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は来週__友だち__買い物__行きます__。",
+    "english": "Next week I will go shopping with my friend, right?",
+    "missing_particles": [
+      "は",
+      "と",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "姉__家__音楽__聞いています。",
+    "english": "My older sister is listening to music at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は昨日__駅__友だち__会いました__。",
+    "english": "Yesterday I met my friend at the station, you know.",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "父__台所__コーヒー__飲みました。",
+    "english": "My dad drank coffee in the kitchen.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__家__本__読みます__。",
+    "english": "Today I will read a book at home, right?",
+    "missing_particles": [
+      "は",
+      "で",
+      "を",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "弟__朝__牛乳__飲みました。",
+    "english": "My younger brother drank milk this morning.",
+    "missing_particles": [
+      "は",
+      "に",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は夜__部屋__音楽__聞きました__。",
+    "english": "At night I listened to music in my room, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "母__家__新聞__読んでいます。",
+    "english": "My mother is reading the newspaper at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は来月__大阪__旅行__行きます__。",
+    "english": "Next month I will travel to Osaka, right?",
+    "missing_particles": [
+      "は",
+      "へ",
+      "へ",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "姉__部屋__テレビ__見ています。",
+    "english": "My older sister is watching TV in her room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は午後__駅__バス__待ちました__。",
+    "english": "In the afternoon I waited for the bus at the station, you know.",
+    "missing_particles": [
+      "に",
+      "で",
+      "を",
+      "よ"
+    ]
+  },
+  {
+    "japanese": "兄__家__パン__食べています。",
+    "english": "My older brother is eating bread at home.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  },
+  {
+    "japanese": "私は今日__図書館__友だち__話しました__。",
+    "english": "Today I talked with my friend at the library, right?",
+    "missing_particles": [
+      "は",
+      "で",
+      "に",
+      "ね"
+    ]
+  },
+  {
+    "japanese": "父__部屋__音楽__聞いています。",
+    "english": "My father is listening to music in his room.",
+    "missing_particles": [
+      "は",
+      "で",
+      "を"
+    ]
+  }
+]
