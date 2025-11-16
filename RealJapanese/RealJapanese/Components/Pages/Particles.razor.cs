@@ -10,11 +10,13 @@ public partial class ParticlesBase : ComponentBase
     [Inject] private ParticlesData ParticlesData { get; set; } = null!;
     protected List<FillInBlanksDto> Questions { get; set; } = new();
     protected int currentIndex = 0;
-
+    
+    public List<ParticlesData.Particle> Particles { get; set; } = [];
+    
     protected double UiScale { get; set; } = 1.0;
 
     protected FillInBlanksDto CurrentItem =>
-        Questions.Count == 0 ? new FillInBlanksDto { Header = "", Template = "", Answers = new() }
+        Questions.Count == 0 ? new FillInBlanksDto { Header = "", Template = "", Answers = [] }
             : Questions[currentIndex];
 
     protected string ProgressText =>
@@ -24,6 +26,7 @@ public partial class ParticlesBase : ComponentBase
     protected override void OnInitialized()
     {
         Questions = ParticlesData.FillInBlanksQuestions().OrderBy(_ => Guid.NewGuid()).ToList();
+        Particles = ParticlesData.ParticalsPresentRomaji(Questions).ToList();
     }
 
     protected Task GoToNextQuestionAsync()
