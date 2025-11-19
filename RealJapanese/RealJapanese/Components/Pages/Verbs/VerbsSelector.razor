@@ -1,0 +1,30 @@
+﻿@page "/verbs"
+@using RealJapanese.Components.Shared
+@rendermode InteractiveServer
+
+<PraticeSelector
+    MainUrl="verbs"
+    Pages="@(new List<PraticeSelectorBase.PageDescreption>
+           {
+               new()
+               {
+                   Title = "Learn the verbs",
+                   Description = "Practice the spelling of the verbs",
+                   Url = "spelling"
+               },
+
+               new()
+               {
+                   Title = "Verb Conjugation",
+                   Description = "Practice verb conjugations",
+                   Url = "conjugation"
+               },
+
+               new()
+               {
+                   Title = "Fill in the verb",
+                   Description = "Practice filling in the correct verbs",
+                   Url = "fillIn"
+               }
+           })"
+/>
