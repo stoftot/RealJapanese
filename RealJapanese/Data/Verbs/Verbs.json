@@ -1,0 +1,470 @@
+[
+  {
+    "verbType": "u-verb",
+    "japanese": "行く",
+    "kana": "いく",
+    "english": "to go",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "行きます",
+        "kana": "いきます",
+        "english": "go"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "行きません",
+        "kana": "いきません",
+        "english": "do not go"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "行く",
+        "kana": "いく",
+        "english": "go"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "行かない",
+        "kana": "いかない",
+        "english": "do not go"
+      }
+    ]
+  },
+  {
+    "verbType": "u-verb",
+    "japanese": "帰る",
+    "kana": "かえる",
+    "english": "to go back; to return",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "帰ります",
+        "kana": "かえります",
+        "english": "go back; return"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "帰りません",
+        "kana": "かえりません",
+        "english": "do not go back; do not return"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "帰る",
+        "kana": "かえる",
+        "english": "go back; return"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "帰らない",
+        "kana": "かえらない",
+        "english": "do not go back; do not return"
+      }
+    ]
+  },
+  {
+    "verbType": "u-verb",
+    "japanese": "聞く",
+    "kana": "きく",
+    "english": "to listen; to hear",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "聞きます",
+        "kana": "ききます",
+        "english": "listen; hear"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "聞きません",
+        "kana": "ききません",
+        "english": "do not listen; do not hear"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "聞く",
+        "kana": "きく",
+        "english": "listen; hear"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "聞かない",
+        "kana": "きかない",
+        "english": "do not listen; do not hear"
+      }
+    ]
+  },
+  {
+    "verbType": "u-verb",
+    "japanese": "飲む",
+    "kana": "のむ",
+    "english": "to drink",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "飲みます",
+        "kana": "のみます",
+        "english": "drink"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "飲みません",
+        "kana": "のみません",
+        "english": "do not drink"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "飲む",
+        "kana": "のむ",
+        "english": "drink"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "飲まない",
+        "kana": "のまない",
+        "english": "do not drink"
+      }
+    ]
+  },
+  {
+    "verbType": "u-verb",
+    "japanese": "話す",
+    "kana": "はなす",
+    "english": "to speak; to talk",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "話します",
+        "kana": "はなします",
+        "english": "speak; talk"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "話しません",
+        "kana": "はなしません",
+        "english": "do not speak; do not talk"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "話す",
+        "kana": "はなす",
+        "english": "speak; talk"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "話さない",
+        "kana": "はなさない",
+        "english": "do not speak; do not talk"
+      }
+    ]
+  },
+  {
+    "verbType": "u-verb",
+    "japanese": "読む",
+    "kana": "よむ",
+    "english": "to read",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "読みます",
+        "kana": "よみます",
+        "english": "read"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "読みません",
+        "kana": "よみません",
+        "english": "do not read"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "読む",
+        "kana": "よむ",
+        "english": "read"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "読まない",
+        "kana": "よまない",
+        "english": "do not read"
+      }
+    ]
+  },
+  {
+    "verbType": "ru-verb",
+    "japanese": "起きる",
+    "kana": "おきる",
+    "english": "to get up",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "起きます",
+        "kana": "おきます",
+        "english": "get up"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "起きません",
+        "kana": "おきません",
+        "english": "do not get up"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "起きる",
+        "kana": "おきる",
+        "english": "get up"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "起きない",
+        "kana": "おきない",
+        "english": "do not get up"
+      }
+    ]
+  },
+  {
+    "verbType": "ru-verb",
+    "japanese": "食べる",
+    "kana": "たべる",
+    "english": "to eat",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "食べます",
+        "kana": "たべます",
+        "english": "eat"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "食べません",
+        "kana": "たべません",
+        "english": "do not eat"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "食べる",
+        "kana": "たべる",
+        "english": "eat"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "食べない",
+        "kana": "たべない",
+        "english": "do not eat"
+      }
+    ]
+  },
+  {
+    "verbType": "ru-verb",
+    "japanese": "寝る",
+    "kana": "ねる",
+    "english": "to sleep; to go to sleep",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "寝ます",
+        "kana": "ねます",
+        "english": "sleep; go to sleep"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "寝ません",
+        "kana": "ねません",
+        "english": "do not sleep; do not go to sleep"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "寝る",
+        "kana": "ねる",
+        "english": "sleep; go to sleep"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "寝ない",
+        "kana": "ねない",
+        "english": "do not sleep; do not go to sleep"
+      }
+    ]
+  },
+  {
+    "verbType": "ru-verb",
+    "japanese": "見る",
+    "kana": "みる",
+    "english": "to see; to look at; to watch",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "見ます",
+        "kana": "みます",
+        "english": "see; look at; watch"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "見ません",
+        "kana": "みません",
+        "english": "do not see; do not look at; do not watch"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "見る",
+        "kana": "みる",
+        "english": "see; look at; watch"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "見ない",
+        "kana": "みない",
+        "english": "do not see; do not look at; do not watch"
+      }
+    ]
+  },
+  {
+    "verbType": "irregular",
+    "japanese": "来る",
+    "kana": "くる",
+    "english": "to come",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "来ます",
+        "kana": "きます",
+        "english": "come"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "来ません",
+        "kana": "きません",
+        "english": "do not come"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "来る",
+        "kana": "くる",
+        "english": "come"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "来ない",
+        "kana": "こない",
+        "english": "do not come"
+      }
+    ]
+  },
+  {
+    "verbType": "irregular",
+    "japanese": "する",
+    "kana": "する",
+    "english": "to do",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "します",
+        "kana": "します",
+        "english": "do"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "しません",
+        "kana": "しません",
+        "english": "do not do"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "する",
+        "kana": "する",
+        "english": "do"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "しない",
+        "kana": "しない",
+        "english": "do not do"
+      }
+    ]
+  },
+  {
+    "verbType": "irregular",
+    "japanese": "勉強する",
+    "kana": "べんきょうする",
+    "english": "to study",
+    "conjugations": [
+      {
+        "mainType": "present",
+        "secondaryType": "polite affirmative",
+        "japanese": "勉強します",
+        "kana": "べんきょうします",
+        "english": "study"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "polite negative",
+        "japanese": "勉強しません",
+        "kana": "べんきょうしません",
+        "english": "do not study"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain affirmative",
+        "japanese": "勉強する",
+        "kana": "べんきょうする",
+        "english": "study"
+      },
+      {
+        "mainType": "present",
+        "secondaryType": "plain negative",
+        "japanese": "勉強しない",
+        "kana": "べんきょうしない",
+        "english": "do not study"
+      }
+    ]
+  }
+]
