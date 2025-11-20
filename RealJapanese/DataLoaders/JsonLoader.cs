@@ -8,7 +8,7 @@ public abstract class JsonLoader<T>
     protected abstract string FolderPath { get; }
     private string FilePath => $"{FolderPath}/{FileName}";
     
-    public List<T> Load()
+    public IEnumerable<T> Load()
     {
         var fileType = FileName.Split('.').Last();
 
@@ -20,16 +20,15 @@ public abstract class JsonLoader<T>
         };
     }
 
-    private List<T> LoadJsonl()
+    private IEnumerable<T> LoadJsonl()
     {
-        return (from line
+        return from line
                     in File.ReadLines(FilePath)
                 where !string.IsNullOrWhiteSpace(line)
-                select JsonSerializer.Deserialize<T>(line))
-            .ToList();
+                select JsonSerializer.Deserialize<T>(line);
     }
 
-    private List<T> LoadJson()
+    private IEnumerable<T> LoadJson()
     {
         var json = File.ReadAllText(FilePath);
         return JsonSerializer.Deserialize<List<T>>(json) ?? [];
