@@ -10,4 +10,8 @@
       <ProjectReference Include="..\DataLoaders\DataLoaders.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="WanaKanaSharp" Version="0.2.0" />
+    </ItemGroup>
+
 </Project>
