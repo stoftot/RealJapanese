@@ -13,6 +13,7 @@ builder.Services.AddSingleton<NumbersQuestionGenerator>();
 builder.Services.AddSingleton<GreetingsData>();
 builder.Services.AddSingleton<SentencesData>();
 builder.Services.AddSingleton<ParticlesData>();
+builder.Services.AddSingleton<VerbData>();
 
 var app = builder.Build();
 
