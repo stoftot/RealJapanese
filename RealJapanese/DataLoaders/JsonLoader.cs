@@ -4,8 +4,8 @@ namespace DataLoaders;
 
 public class JsonLoader<T>(string folderPath, string fileName)
 {
-    private string FileName { get; } = folderPath;
-    private string FolderPath { get; } = fileName;
+    private string FileName { get; } = fileName;
+    private string FolderPath { get; } = folderPath;
     private string FilePath => $"{FolderPath}/{FileName}";
     
     public IEnumerable<T> Load()
