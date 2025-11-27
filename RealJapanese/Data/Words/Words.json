@@ -1,0 +1,1262 @@
+﻿[
+  {
+    "id": "",
+    "Japanese": "おはよう。",
+    "Kana": "おはよう。",
+    "English": "Good morning.",
+    "Category": "Greeting"
+  },
+  {
+    "id": "",
+    "Japanese": "おはようございます。",
+    "Kana": "おはようございます。",
+    "English": "Good morning (polite).",
+    "Category": "Greeting"
+  },
+  {
+    "id": "",
+    "Japanese": "こんにちは。",
+    "Kana": "こんにちは。",
+    "English": "Good afternoon.",
+    "Category": "Greeting"
+  },
+  {
+    "id": "",
+    "Japanese": "こんばんは。",
+    "Kana": "こんばんは。",
+    "English": "Good evening.",
+    "Category": "Greeting"
+  },
+  {
+    "id": "",
+    "Japanese": "さようなら。",
+    "Kana": "さようなら。",
+    "English": "Good-bye.",
+    "Category": "Farewell"
+  },
+  {
+    "id": "",
+    "Japanese": "お休みなさい。",
+    "Kana": "おやすみなさい。",
+    "English": "Good night.",
+    "Category": "Farewell"
+  },
+  {
+    "id": "",
+    "Japanese": "ありがとう。",
+    "Kana": "ありがとう。",
+    "English": "Thank you.",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "ありがとうございます。",
+    "Kana": "ありがとうございます。",
+    "English": "Thank you (polite).",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "すみません。",
+    "Kana": "すみません。",
+    "English": "Excuse me; I'm sorry.",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "いいえ。",
+    "Kana": "いいえ。",
+    "English": "No; not at all.",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "行ってきます。",
+    "Kana": "いってきます。",
+    "English": "I’ll go and come back.",
+    "Category": "Daily phrase"
+  },
+  {
+    "id": "",
+    "Japanese": "行ってらっしゃい。",
+    "Kana": "いってらっしゃい。",
+    "English": "Please go and come back.",
+    "Category": "Daily phrase"
+  },
+  {
+    "id": "",
+    "Japanese": "ただいま。",
+    "Kana": "ただいま。",
+    "English": "I’m home.",
+    "Category": "Daily phrase"
+  },
+  {
+    "id": "",
+    "Japanese": "お帰りなさい。",
+    "Kana": "おかえりなさい。",
+    "English": "Welcome home.",
+    "Category": "Daily phrase"
+  },
+  {
+    "id": "",
+    "Japanese": "いただきます。",
+    "Kana": "いただきます。",
+    "English": "Thank you for the meal (before eating).",
+    "Category": "Meal phrase"
+  },
+  {
+    "id": "",
+    "Japanese": "ごちそうさまでした。",
+    "Kana": "ごちそうさまでした。",
+    "English": "Thank you for the meal (after eating).",
+    "Category": "Meal phrase"
+  },
+  {
+    "id": "",
+    "Japanese": "はじめまして。",
+    "Kana": "はじめまして。",
+    "English": "How do you do?",
+    "Category": "Introduction"
+  },
+  {
+    "id": "",
+    "Japanese": "〜です。",
+    "Kana": "〜です。",
+    "English": "I am …",
+    "Category": "Introduction"
+  },
+  {
+    "id": "",
+    "Japanese": "よろしくお願いします。",
+    "Kana": "よろしくおねがいします。",
+    "English": "Nice to meet you.",
+    "Category": "Introduction"
+  },
+  {
+    "id": "",
+    "Japanese": "大学",
+    "Kana": "だいがく",
+    "English": "college; university",
+    "Category": "School"
+  },
+  {
+    "id": "",
+    "Japanese": "高校",
+    "Kana": "こうこう",
+    "English": "high school",
+    "Category": "School"
+  },
+  {
+    "id": "",
+    "Japanese": "学生",
+    "Kana": "がくせい",
+    "English": "student",
+    "Category": "School"
+  },
+  {
+    "id": "",
+    "Japanese": "大学生",
+    "Kana": "だいがくせい",
+    "English": "college student",
+    "Category": "School"
+  },
+  {
+    "id": "",
+    "Japanese": "留学生",
+    "Kana": "りゅうがくせい",
+    "English": "international student",
+    "Category": "School"
+  },
+  {
+    "id": "",
+    "Japanese": "先生",
+    "Kana": "せんせい",
+    "English": "teacher; professor",
+    "Category": "School"
+  },
+  {
+    "id": "",
+    "Japanese": "〜年生",
+    "Kana": "〜ねんせい",
+    "English": "… year student",
+    "Category": "School"
+  },
+  {
+    "id": "",
+    "Japanese": "一年生",
+    "Kana": "いちねんせい",
+    "English": "first-year student",
+    "Category": "School"
+  },
+  {
+    "id": "",
+    "Japanese": "専攻",
+    "Kana": "せんこう",
+    "English": "major",
+    "Category": "School"
+  },
+  {
+    "id": "",
+    "Japanese": "私",
+    "Kana": "わたし",
+    "English": "I",
+    "Category": "Person"
+  },
+  {
+    "id": "",
+    "Japanese": "友だち",
+    "Kana": "ともだち",
+    "English": "friend",
+    "Category": "Person"
+  },
+  {
+    "id": "",
+    "Japanese": "〜さん",
+    "Kana": "〜さん",
+    "English": "Mr./Ms.",
+    "Category": "Person"
+  },
+  {
+    "id": "",
+    "Japanese": "〜人",
+    "Kana": "〜じん",
+    "English": "… people (nationality)",
+    "Category": "Person"
+  },
+  {
+    "id": "",
+    "Japanese": "日本人",
+    "Kana": "にほんじん",
+    "English": "Japanese person",
+    "Category": "Person"
+  },
+  {
+    "id": "",
+    "Japanese": "今",
+    "Kana": "いま",
+    "English": "now",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "午前",
+    "Kana": "ごぜん",
+    "English": "A.M.",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "午後",
+    "Kana": "ごご",
+    "English": "P.M.",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "〜時",
+    "Kana": "〜じ",
+    "English": "o’clock",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "日本",
+    "Kana": "にほん",
+    "English": "Japan",
+    "Category": "Others"
+  },
+  {
+    "id": "",
+    "Japanese": "アメリカ",
+    "Kana": "アメリカ",
+    "English": "U.S.A.",
+    "Category": "Others"
+  },
+  {
+    "id": "",
+    "Japanese": "〜語",
+    "Kana": "〜ご",
+    "English": "… language",
+    "Category": "Others"
+  },
+  {
+    "id": "",
+    "Japanese": "日本語",
+    "Kana": "にほんご",
+    "English": "Japanese language",
+    "Category": "Others"
+  },
+  {
+    "id": "",
+    "Japanese": "〜歳",
+    "Kana": "〜さい",
+    "English": "… years old",
+    "Category": "Others"
+  },
+  {
+    "id": "",
+    "Japanese": "電話",
+    "Kana": "でんわ",
+    "English": "telephone",
+    "Category": "Others"
+  },
+  {
+    "id": "",
+    "Japanese": "〜番",
+    "Kana": "〜ばん",
+    "English": "number …",
+    "Category": "Others"
+  },
+  {
+    "id": "",
+    "Japanese": "番号",
+    "Kana": "ばんごう",
+    "English": "number",
+    "Category": "Others"
+  },
+  {
+    "id": "",
+    "Japanese": "名前",
+    "Kana": "なまえ",
+    "English": "name",
+    "Category": "Others"
+  },
+  {
+    "id": "",
+    "Japanese": "何／何に",
+    "Kana": "なん／なに",
+    "English": "what",
+    "Category": "Others"
+  },
+  {
+    "id": "",
+    "Japanese": "あのう",
+    "Kana": "あのう",
+    "English": "um…",
+    "Category": "Expressions"
+  },
+  {
+    "id": "",
+    "Japanese": "はい",
+    "Kana": "はい",
+    "English": "yes",
+    "Category": "Expressions"
+  },
+  {
+    "id": "",
+    "Japanese": "そうです",
+    "Kana": "そうです",
+    "English": "That's right.",
+    "Category": "Expressions"
+  },
+  {
+    "id": "",
+    "Japanese": "そうですか",
+    "Kana": "そうですか",
+    "English": "I see.; Is that so?",
+    "Category": "Expressions"
+  },
+  {
+    "id": "",
+    "Japanese": "イギリス",
+    "Kana": "イギリス",
+    "English": "Britain",
+    "Category": "Country"
+  },
+  {
+    "id": "",
+    "Japanese": "オーストラリア",
+    "Kana": "オーストラリア",
+    "English": "Australia",
+    "Category": "Country"
+  },
+  {
+    "id": "",
+    "Japanese": "韓国",
+    "Kana": "かんこく",
+    "English": "Korea",
+    "Category": "Country"
+  },
+  {
+    "id": "",
+    "Japanese": "カナダ",
+    "Kana": "カナダ",
+    "English": "Canada",
+    "Category": "Country"
+  },
+  {
+    "id": "",
+    "Japanese": "中国",
+    "Kana": "ちゅうごく",
+    "English": "China",
+    "Category": "Country"
+  },
+  {
+    "id": "",
+    "Japanese": "インド",
+    "Kana": "インド",
+    "English": "India",
+    "Category": "Country"
+  },
+  {
+    "id": "",
+    "Japanese": "エジプト",
+    "Kana": "エジプト",
+    "English": "Egypt",
+    "Category": "Country"
+  },
+  {
+    "id": "",
+    "Japanese": "フィリピン",
+    "Kana": "フィリピン",
+    "English": "Philippines",
+    "Category": "Country"
+  },
+  {
+    "id": "",
+    "Japanese": "アジア研究",
+    "Kana": "アジアけんきゅう",
+    "English": "Asian studies",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "経済",
+    "Kana": "けいざい",
+    "English": "economics",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "工学",
+    "Kana": "こうがく",
+    "English": "engineering",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "国際関係",
+    "Kana": "こくさいかんけい",
+    "English": "international relations",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "コンピューター",
+    "Kana": "コンピューター",
+    "English": "computer",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "政治",
+    "Kana": "せいじ",
+    "English": "politics",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "生物学",
+    "Kana": "せいぶつがく",
+    "English": "biology",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "ビジネス",
+    "Kana": "ビジネス",
+    "English": "business",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "文学",
+    "Kana": "ぶんがく",
+    "English": "literature",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "歴史",
+    "Kana": "れきし",
+    "English": "history",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "医者",
+    "Kana": "いしゃ",
+    "English": "doctor",
+    "Category": "Occupation"
+  },
+  {
+    "id": "",
+    "Japanese": "会社員",
+    "Kana": "かいしゃいん",
+    "English": "office worker",
+    "Category": "Occupation"
+  },
+  {
+    "id": "",
+    "Japanese": "看護師",
+    "Kana": "かんごし",
+    "English": "nurse",
+    "Category": "Occupation"
+  },
+  {
+    "id": "",
+    "Japanese": "高校生",
+    "Kana": "こうこうせい",
+    "English": "high school student",
+    "Category": "Occupation"
+  },
+  {
+    "id": "",
+    "Japanese": "主婦",
+    "Kana": "しゅふ",
+    "English": "housewife",
+    "Category": "Occupation"
+  },
+  {
+    "id": "",
+    "Japanese": "大学院生",
+    "Kana": "だいがくいんせい",
+    "English": "graduate student",
+    "Category": "Occupation"
+  },
+  {
+    "id": "",
+    "Japanese": "弁護士",
+    "Kana": "べんごし",
+    "English": "lawyer",
+    "Category": "Occupation"
+  },
+  {
+    "id": "",
+    "Japanese": "お母さん",
+    "Kana": "おかあさん",
+    "English": "mother",
+    "Category": "Family"
+  },
+  {
+    "id": "",
+    "Japanese": "お父さん",
+    "Kana": "おとうさん",
+    "English": "father",
+    "Category": "Family"
+  },
+  {
+    "id": "",
+    "Japanese": "お姉さん",
+    "Kana": "おねえさん",
+    "English": "older sister",
+    "Category": "Family"
+  },
+  {
+    "id": "",
+    "Japanese": "お兄さん",
+    "Kana": "おにいさん",
+    "English": "older brother",
+    "Category": "Family"
+  },
+  {
+    "id": "",
+    "Japanese": "妹",
+    "Kana": "いもうと",
+    "English": "younger sister",
+    "Category": "Family"
+  },
+  {
+    "id": "",
+    "Japanese": "弟",
+    "Kana": "おとうと",
+    "English": "younger brother",
+    "Category": "Family"
+  },
+  {
+    "id": "",
+    "Japanese": "これ",
+    "Kana": "これ",
+    "English": "this one",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "それ",
+    "Kana": "それ",
+    "English": "that one",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "あれ",
+    "Kana": "あれ",
+    "English": "that one (over there)",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "どれ",
+    "Kana": "どれ",
+    "English": "which one",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "この",
+    "Kana": "この",
+    "English": "this …",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "その",
+    "Kana": "その",
+    "English": "that …",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "あの",
+    "Kana": "あの",
+    "English": "that … (over there)",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "どの",
+    "Kana": "どの",
+    "English": "which …",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "ここ",
+    "Kana": "ここ",
+    "English": "here",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "そこ",
+    "Kana": "そこ",
+    "English": "there",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "あそこ",
+    "Kana": "あそこ",
+    "English": "over there",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "どこ",
+    "Kana": "どこ",
+    "English": "where",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "だれ",
+    "Kana": "だれ",
+    "English": "who",
+    "Category": "Pointer"
+  },
+  {
+    "id": "",
+    "Japanese": "おいしい",
+    "Kana": "おいしい",
+    "English": "delicious",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "魚",
+    "Kana": "さかな",
+    "English": "fish",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "とんかつ",
+    "Kana": "とんかつ",
+    "English": "pork cutlet",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "肉",
+    "Kana": "にく",
+    "English": "meat",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "メニュー",
+    "Kana": "メニュー",
+    "English": "menu",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "野菜",
+    "Kana": "やさい",
+    "English": "vegetable",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "傘",
+    "Kana": "かさ",
+    "English": "umbrella",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "鞄",
+    "Kana": "かばん",
+    "English": "bag",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "靴",
+    "Kana": "くつ",
+    "English": "shoes",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "財布",
+    "Kana": "さいふ",
+    "English": "wallet",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "ジーンズ",
+    "Kana": "ジーンズ",
+    "English": "jeans",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "自転車",
+    "Kana": "じてんしゃ",
+    "English": "bicycle",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "新聞",
+    "Kana": "しんぶん",
+    "English": "newspaper",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "スマホ",
+    "Kana": "スマホ",
+    "English": "smartphone; mobile",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "Tシャツ",
+    "Kana": "ティーシャツ",
+    "English": "T-shirt",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "時計",
+    "Kana": "とけい",
+    "English": "watch; clock",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "ノート",
+    "Kana": "ノート",
+    "English": "notebook",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "ペン",
+    "Kana": "ぺん",
+    "English": "pen",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "帽子",
+    "Kana": "ぼうし",
+    "English": "hat; cap",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "本",
+    "Kana": "ほん",
+    "English": "book",
+    "Category": "Thing"
+  },
+  {
+    "id": "",
+    "Japanese": "銀行",
+    "Kana": "ぎんこう",
+    "English": "bank",
+    "Category": "Place"
+  },
+  {
+    "id": "",
+    "Japanese": "コンビニ",
+    "Kana": "コンビニ",
+    "English": "convenience store",
+    "Category": "Place"
+  },
+  {
+    "id": "",
+    "Japanese": "トイレ",
+    "Kana": "トイレ",
+    "English": "toilet; restroom",
+    "Category": "Place"
+  },
+  {
+    "id": "",
+    "Japanese": "図書館",
+    "Kana": "としょかん",
+    "English": "library",
+    "Category": "Place"
+  },
+  {
+    "id": "",
+    "Japanese": "郵便局",
+    "Kana": "ゆうびんきょく",
+    "English": "post office",
+    "Category": "Place"
+  },
+  {
+    "id": "",
+    "Japanese": "イギリス",
+    "Kana": "イギリス",
+    "English": "Britain",
+    "Category": "Country"
+  },
+  {
+    "id": "",
+    "Japanese": "韓国",
+    "Kana": "かんこく",
+    "English": "Korea",
+    "Category": "Country"
+  },
+  {
+    "id": "",
+    "Japanese": "中国",
+    "Kana": "ちゅうごく",
+    "English": "China",
+    "Category": "Country"
+  },
+  {
+    "id": "",
+    "Japanese": "英語",
+    "Kana": "えいご",
+    "English": "English (language)",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "経済",
+    "Kana": "けいざい",
+    "English": "economics",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "コンピューター",
+    "Kana": "コンピューター",
+    "English": "computer",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "ビジネス",
+    "Kana": "ビジネス",
+    "English": "business",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "歴史",
+    "Kana": "れきし",
+    "English": "history",
+    "Category": "Major"
+  },
+  {
+    "id": "",
+    "Japanese": "いくら",
+    "Kana": "いくら",
+    "English": "how much",
+    "Category": "Money"
+  },
+  {
+    "id": "",
+    "Japanese": "〜円",
+    "Kana": "〜えん",
+    "English": "… yen",
+    "Category": "Money"
+  },
+  {
+    "id": "",
+    "Japanese": "高い",
+    "Kana": "たかい",
+    "English": "expensive; high",
+    "Category": "Money"
+  },
+  {
+    "id": "",
+    "Japanese": "いらっしゃいませ",
+    "Kana": "いらっしゃいませ",
+    "English": "Welcome (to our store).",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "（〜を）お願いします",
+    "Kana": "（〜を）おねがいします",
+    "English": ". . . , please.",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "（〜を）ください",
+    "Kana": "（〜を）ください",
+    "English": "Please give me . . .",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "じゃあ",
+    "Kana": "じゃあ",
+    "English": "then . . .; if that is the case . . .",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "どうぞ",
+    "Kana": "どうぞ",
+    "English": "Please.; Here it is.",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "どうも",
+    "Kana": "どうも",
+    "English": "Thank you.",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "映画",
+    "Kana": "えいが",
+    "English": "movie",
+    "Category": "Entertainment"
+  },
+  {
+    "id": "",
+    "Japanese": "音楽",
+    "Kana": "おんがく",
+    "English": "music",
+    "Category": "Entertainment"
+  },
+  {
+    "id": "",
+    "Japanese": "雑誌",
+    "Kana": "ざっし",
+    "English": "magazine",
+    "Category": "Entertainment"
+  },
+  {
+    "id": "",
+    "Japanese": "スポーツ",
+    "Kana": "スポーツ",
+    "English": "sports",
+    "Category": "Entertainment"
+  },
+  {
+    "id": "",
+    "Japanese": "デート",
+    "Kana": "デート",
+    "English": "date (romantic)",
+    "Category": "Entertainment"
+  },
+  {
+    "id": "",
+    "Japanese": "テニス",
+    "Kana": "テニス",
+    "English": "tennis",
+    "Category": "Entertainment"
+  },
+  {
+    "id": "",
+    "Japanese": "テレビ",
+    "Kana": "テレビ",
+    "English": "TV",
+    "Category": "Entertainment"
+  },
+  {
+    "id": "",
+    "Japanese": "アイスクリーム",
+    "Kana": "アイスクリーム",
+    "English": "ice cream",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "ハンバーガー",
+    "Kana": "ハンバーガー",
+    "English": "hamburger",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "お酒",
+    "Kana": "おさけ",
+    "English": "sake; alcoholic drink",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "お茶",
+    "Kana": "おちゃ",
+    "English": "green tea",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "コーヒー",
+    "Kana": "コーヒー",
+    "English": "coffee",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "水",
+    "Kana": "みず",
+    "English": "water",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "朝ご飯",
+    "Kana": "あさごはん",
+    "English": "breakfast",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "昼ご飯",
+    "Kana": "ひるごはん",
+    "English": "lunch",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "晩ご飯",
+    "Kana": "ばんごはん",
+    "English": "dinner",
+    "Category": "Food"
+  },
+  {
+    "id": "",
+    "Japanese": "家",
+    "Kana": "いえ",
+    "English": "home; house",
+    "Category": "Place"
+  },
+  {
+    "id": "",
+    "Japanese": "うち",
+    "Kana": "うち",
+    "English": "home; house; my place",
+    "Category": "Place"
+  },
+  {
+    "id": "",
+    "Japanese": "学校",
+    "Kana": "がっこう",
+    "English": "school",
+    "Category": "Place"
+  },
+  {
+    "id": "",
+    "Japanese": "カフェ",
+    "Kana": "カフェ",
+    "English": "cafe",
+    "Category": "Place"
+  },
+  {
+    "id": "",
+    "Japanese": "明日",
+    "Kana": "あした",
+    "English": "tomorrow",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "今日",
+    "Kana": "きょう",
+    "English": "today",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "朝",
+    "Kana": "あさ",
+    "English": "morning",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "今晩",
+    "Kana": "こんばん",
+    "English": "tonight",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "毎日",
+    "Kana": "まいにち",
+    "English": "every day",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "毎晩",
+    "Kana": "まいばん",
+    "English": "every night",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "週末",
+    "Kana": "しゅうまつ",
+    "English": "weekend",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "土曜日",
+    "Kana": "どようび",
+    "English": "Saturday",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "日曜日",
+    "Kana": "にちようび",
+    "English": "Sunday",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "いつ",
+    "Kana": "いつ",
+    "English": "when",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "〜ごろ",
+    "Kana": "〜ごろ",
+    "English": "at about…",
+    "Category": "Time"
+  },
+  {
+    "id": "",
+    "Japanese": "いい",
+    "Kana": "いい",
+    "English": "good",
+    "Category": "Adjective"
+  },
+  {
+    "id": "",
+    "Japanese": "早い",
+    "Kana": "はやい",
+    "English": "early",
+    "Category": "Adjective"
+  },
+  {
+    "id": "",
+    "Japanese": "あまり（＋ negative）",
+    "Kana": "あまり（＋ negative）",
+    "English": "not much",
+    "Category": "Adverb"
+  },
+  {
+    "id": "",
+    "Japanese": "全然（＋ negative）",
+    "Kana": "ぜんぜん（＋ negative）",
+    "English": "not at all",
+    "Category": "Adverb"
+  },
+  {
+    "id": "",
+    "Japanese": "たいてい",
+    "Kana": "たいてい",
+    "English": "usually",
+    "Category": "Adverb"
+  },
+  {
+    "id": "",
+    "Japanese": "ちょっと",
+    "Kana": "ちょっと",
+    "English": "a little",
+    "Category": "Adverb"
+  },
+  {
+    "id": "",
+    "Japanese": "時々",
+    "Kana": "ときどき",
+    "English": "sometimes",
+    "Category": "Adverb"
+  },
+  {
+    "id": "",
+    "Japanese": "よく",
+    "Kana": "よく",
+    "English": "often; much",
+    "Category": "Adverb"
+  },
+  {
+    "id": "",
+    "Japanese": "そうですね",
+    "Kana": "そうですね",
+    "English": "That's right.; Let me see.",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "でも",
+    "Kana": "でも",
+    "English": "but",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "どうですか",
+    "Kana": "どうですか",
+    "English": "How about . . . ?; How is . . . ?",
+    "Category": "Expression"
+  },
+  {
+    "id": "",
+    "Japanese": "ええ",
+    "Kana": "ええ",
+    "English": "yes",
+    "Category": "Expression"
+  }
+]
