@@ -2,10 +2,10 @@
 
 namespace DataLoaders;
 
-public abstract class JsonLoader<T>
+public class JsonLoader<T>(string folderPath, string fileName)
 {
-    protected abstract string FileName { get; }
-    protected abstract string FolderPath { get; }
+    private string FileName { get; } = folderPath;
+    private string FolderPath { get; } = fileName;
     private string FilePath => $"{FolderPath}/{FileName}";
     
     public IEnumerable<T> Load()

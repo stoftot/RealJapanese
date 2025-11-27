@@ -3,8 +3,8 @@ using DataLoaders.Models;
 
 namespace DataLoaders;
 
-public class SentenceLoader(string filename) : JsonLoader<Sentence>
+public class SentenceLoader(string filename) : JsonLoader<Sentence>("../Data/Sentences", filename)
 {
-    protected override string FolderPath => "../Data/Sentences";
-    protected override string FileName { get; } = filename;
+    // protected string FolderPath => "../Data/Sentences";
+    // protected string FileName { get; } = filename;
 }

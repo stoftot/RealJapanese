@@ -2,8 +2,8 @@
 
 namespace DataLoaders;
 
-public class VerbLoader(string filename) : JsonLoader<Verb>
+public class VerbLoader(string filename) : JsonLoader<Verb>("../Data/Verbs", filename)
 {
-    protected override string FolderPath => "../Data/Verbs";
-    protected override string FileName { get; } = filename;
+    // protected string FolderPath => "../Data/Verbs";
+    // protected string FileName { get; } = filename;
 }
