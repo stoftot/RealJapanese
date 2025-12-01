@@ -1,135 +1,135 @@
 [
   {
     "id": "0",
-    "japanese": "おはよう。",
-    "kana": "おはよう。",
-    "english": "Good morning.",
+    "japanese": "おはよう",
+    "kana": "おはよう",
+    "english": "Good morning",
     "category": "Greeting"
   },
   {
     "id": "1",
-    "japanese": "おはようございます。",
-    "kana": "おはようございます。",
-    "english": "Good morning (polite).",
+    "japanese": "おはようございます",
+    "kana": "おはようございます",
+    "english": "Good morning",
     "category": "Greeting"
   },
   {
     "id": "2",
-    "japanese": "こんにちは。",
-    "kana": "こんにちは。",
-    "english": "Good afternoon.",
+    "japanese": "こんにちは",
+    "kana": "こんにちは",
+    "english": "Good afternoon",
     "category": "Greeting"
   },
   {
     "id": "3",
-    "japanese": "こんばんは。",
-    "kana": "こんばんは。",
-    "english": "Good evening.",
+    "japanese": "こんばんは",
+    "kana": "こんばんは",
+    "english": "Good evening",
     "category": "Greeting"
   },
   {
     "id": "4",
-    "japanese": "さようなら。",
-    "kana": "さようなら。",
-    "english": "Good-bye.",
+    "japanese": "さようなら",
+    "kana": "さようなら",
+    "english": "Good-bye",
     "category": "Farewell"
   },
   {
     "id": "5",
-    "japanese": "お休みなさい。",
-    "kana": "おやすみなさい。",
-    "english": "Good night.",
+    "japanese": "お休みなさい",
+    "kana": "おやすみなさい",
+    "english": "Good night",
     "category": "Farewell"
   },
   {
     "id": "6",
-    "japanese": "ありがとう。",
-    "kana": "ありがとう。",
-    "english": "Thank you.",
+    "japanese": "ありがとう",
+    "kana": "ありがとう",
+    "english": "Thank you",
     "category": "Expression"
   },
   {
     "id": "7",
-    "japanese": "ありがとうございます。",
-    "kana": "ありがとうございます。",
-    "english": "Thank you (polite).",
+    "japanese": "ありがとうございます",
+    "kana": "ありがとうございます",
+    "english": "Thank you ",
     "category": "Expression"
   },
   {
     "id": "8",
-    "japanese": "すみません。",
-    "kana": "すみません。",
-    "english": "Excuse me; I'm sorry.",
+    "japanese": "すみません",
+    "kana": "すみません",
+    "english": "Excuse me; I'm sorry",
     "category": "Expression"
   },
   {
     "id": "9",
-    "japanese": "いいえ。",
-    "kana": "いいえ。",
-    "english": "No; not at all.",
+    "japanese": "いいえ",
+    "kana": "いいえ",
+    "english": "No; not at all",
     "category": "Expression"
   },
   {
     "id": "10",
-    "japanese": "行ってきます。",
-    "kana": "いってきます。",
-    "english": "I’ll go and come back.",
+    "japanese": "行ってきます",
+    "kana": "いってきます",
+    "english": "I’ll go and come back",
     "category": "Daily phrase"
   },
   {
     "id": "11",
-    "japanese": "行ってらっしゃい。",
-    "kana": "いってらっしゃい。",
-    "english": "Please go and come back.",
+    "japanese": "行ってらっしゃい",
+    "kana": "いってらっしゃい",
+    "english": "Please go and come back",
     "category": "Daily phrase"
   },
   {
     "id": "12",
-    "japanese": "ただいま。",
-    "kana": "ただいま。",
-    "english": "I’m home.",
+    "japanese": "ただいま",
+    "kana": "ただいま",
+    "english": "I’m home",
     "category": "Daily phrase"
   },
   {
     "id": "13",
-    "japanese": "お帰りなさい。",
-    "kana": "おかえりなさい。",
-    "english": "Welcome home.",
+    "japanese": "お帰りなさい",
+    "kana": "おかえりなさい",
+    "english": "Welcome home",
     "category": "Daily phrase"
   },
   {
     "id": "14",
-    "japanese": "いただきます。",
-    "kana": "いただきます。",
-    "english": "Thank you for the meal (before eating).",
+    "japanese": "いただきます",
+    "kana": "いただきます",
+    "english": "Thank you for the meal (before eating)",
     "category": "Meal phrase"
   },
   {
     "id": "15",
-    "japanese": "ごちそうさまでした。",
-    "kana": "ごちそうさまでした。",
-    "english": "Thank you for the meal (after eating).",
+    "japanese": "ごちそうさまでした",
+    "kana": "ごちそうさまでした",
+    "english": "Thank you for the meal (after eating)",
     "category": "Meal phrase"
   },
   {
     "id": "16",
-    "japanese": "はじめまして。",
-    "kana": "はじめまして。",
+    "japanese": "はじめまして",
+    "kana": "はじめまして",
     "english": "How do you do?",
     "category": "Introduction"
   },
   {
     "id": "17",
-    "japanese": "〜です。",
-    "kana": "〜です。",
+    "japanese": "〜です",
+    "kana": "〜です",
     "english": "I am …",
     "category": "Introduction"
   },
   {
     "id": "18",
-    "japanese": "よろしくお願いします。",
-    "kana": "よろしくおねがいします。",
-    "english": "Nice to meet you.",
+    "japanese": "よろしくお願いします",
+    "kana": "よろしくおねがいします",
+    "english": "Nice to meet you",
     "category": "Introduction"
   },
   {
@@ -227,7 +227,7 @@
     "id": "32",
     "japanese": "日本人",
     "kana": "にほんじん",
-    "english": "Japanese person",
+    "english": "japanese person",
     "category": "Person"
   },
   {
@@ -283,7 +283,7 @@
     "id": "40",
     "japanese": "日本語",
     "kana": "にほんご",
-    "english": "Japanese language",
+    "english": "japanese language",
     "category": "Others"
   },
   {
@@ -346,14 +346,14 @@
     "id": "49",
     "japanese": "そうです",
     "kana": "そうです",
-    "english": "That's right.",
+    "english": "That's right",
     "category": "Expressions"
   },
   {
     "id": "50",
     "japanese": "そうですか",
     "kana": "そうですか",
-    "english": "I see.; Is that so?",
+    "english": "I see; Is that so?",
     "category": "Expressions"
   },
   {
@@ -864,7 +864,7 @@
     "id": "123",
     "japanese": "英語",
     "kana": "えいご",
-    "english": "English (language)",
+    "english": "english (language)",
     "category": "Major"
   },
   {
@@ -920,7 +920,7 @@
     "id": "131",
     "japanese": "いらっしゃいませ",
     "kana": "いらっしゃいませ",
-    "english": "Welcome (to our store).",
+    "english": "Welcome (to our store)",
     "category": "Expression"
   },
   {
@@ -948,14 +948,14 @@
     "id": "135",
     "japanese": "どうぞ",
     "kana": "どうぞ",
-    "english": "Please.; Here it is.",
+    "english": "Please; Here it is",
     "category": "Expression"
   },
   {
     "id": "136",
     "japanese": "どうも",
     "kana": "どうも",
-    "english": "Thank you.",
+    "english": "Thank you",
     "category": "Expression"
   },
   {
@@ -1191,15 +1191,15 @@
   },
   {
     "id": "170",
-    "japanese": "あまり（＋ negative）",
-    "kana": "あまり（＋ negative）",
+    "japanese": "あまり",
+    "kana": "あまり",
     "english": "not much",
     "category": "Adverb"
   },
   {
     "id": "171",
-    "japanese": "全然（＋ negative）",
-    "kana": "ぜんぜん（＋ negative）",
+    "japanese": "全然",
+    "kana": "ぜんぜん",
     "english": "not at all",
     "category": "Adverb"
   },
@@ -1235,7 +1235,7 @@
     "id": "176",
     "japanese": "そうですね",
     "kana": "そうですね",
-    "english": "That's right.; Let me see.",
+    "english": "That's right; Let me see",
     "category": "Expression"
   },
   {
@@ -1258,5 +1258,383 @@
     "kana": "ええ",
     "english": "yes",
     "category": "Expression"
+  },
+  {
+    "id": "180",
+    "japanese": "ゲーム",
+    "kana": "ゲーム",
+    "english": "game",
+    "category": "Activity"
+  },
+  {
+    "id": "181",
+    "japanese": "アルバイト",
+    "kana": "アルバイト",
+    "english": "part-time job",
+    "category": "Activity"
+  },
+  {
+    "id": "182",
+    "japanese": "買い物",
+    "kana": "かいもの",
+    "english": "shopping",
+    "category": "Activity"
+  },
+  {
+    "id": "183",
+    "japanese": "クラス",
+    "kana": "クラス",
+    "english": "class",
+    "category": "Activity"
+  },
+  {
+    "id": "184",
+    "japanese": "犬",
+    "kana": "いぬ",
+    "english": "dog",
+    "category": "People/Thing"
+  },
+  {
+    "id": "185",
+    "japanese": "猫",
+    "kana": "ねこ",
+    "english": "cat",
+    "category": "People/Thing"
+  },
+  {
+    "id": "186",
+    "japanese": "人",
+    "kana": "ひと",
+    "english": "person",
+    "category": "People/Thing"
+  },
+  {
+    "id": "187",
+    "japanese": "子供",
+    "kana": "こども",
+    "english": "child",
+    "category": "People/Thing"
+  },
+  {
+    "id": "188",
+    "japanese": "あなた",
+    "kana": "あなた",
+    "english": "you",
+    "category": "People/Thing"
+  },
+  {
+    "id": "189",
+    "japanese": "椅子",
+    "kana": "いす",
+    "english": "chair",
+    "category": "People/Thing"
+  },
+  {
+    "id": "190",
+    "japanese": "机",
+    "kana": "つくえ",
+    "english": "desk",
+    "category": "People/Thing"
+  },
+  {
+    "id": "191",
+    "japanese": "写真",
+    "kana": "しゃしん",
+    "english": "picture; photograph",
+    "category": "People/Thing"
+  },
+  {
+    "id": "192",
+    "japanese": "花",
+    "kana": "はな",
+    "english": "flower",
+    "category": "People/Thing"
+  },
+  {
+    "id": "193",
+    "japanese": "レポート",
+    "kana": "レポート",
+    "english": "(term) paper",
+    "category": "People/Thing"
+  },
+  {
+    "id": "194",
+    "japanese": "ご飯",
+    "kana": "ごはん",
+    "english": "rice; meal",
+    "category": "People/Thing"
+  },
+  {
+    "id": "195",
+    "japanese": "パン",
+    "kana": "パン",
+    "english": "bread",
+    "category": "People/Thing"
+  },
+  {
+    "id": "196",
+    "japanese": "お寺",
+    "kana": "おてら",
+    "english": "temple",
+    "category": "Place"
+  },
+  {
+    "id": "197",
+    "japanese": "公園",
+    "kana": "こうえん",
+    "english": "park",
+    "category": "Place"
+  },
+  {
+    "id": "198",
+    "japanese": "スーパー",
+    "kana": "スーパー",
+    "english": "supermarket",
+    "category": "Place"
+  },
+  {
+    "id": "199",
+    "japanese": "バス停",
+    "kana": "バスてい",
+    "english": "bus stop",
+    "category": "Place"
+  },
+  {
+    "id": "200",
+    "japanese": "病院",
+    "kana": "びょういん",
+    "english": "hospital",
+    "category": "Place"
+  },
+  {
+    "id": "201",
+    "japanese": "ホテル",
+    "kana": "ホテル",
+    "english": "hotel",
+    "category": "Place"
+  },
+  {
+    "id": "202",
+    "japanese": "本屋",
+    "kana": "ほんや",
+    "english": "bookstore",
+    "category": "Place"
+  },
+  {
+    "id": "203",
+    "japanese": "町",
+    "kana": "まち",
+    "english": "town; city",
+    "category": "Place"
+  },
+  {
+    "id": "204",
+    "japanese": "レストラン",
+    "kana": "レストラン",
+    "english": "restaurant",
+    "category": "Place"
+  },
+  {
+    "id": "205",
+    "japanese": "昨日",
+    "kana": "きのう",
+    "english": "yesterday",
+    "category": "Time"
+  },
+  {
+    "id": "206",
+    "japanese": "〜時間",
+    "kana": "〜じかん",
+    "english": "… hours",
+    "category": "Time"
+  },
+  {
+    "id": "207",
+    "japanese": "一時間",
+    "kana": "いちじかん",
+    "english": "one hour",
+    "category": "Time"
+  },
+  {
+    "id": "208",
+    "japanese": "先週",
+    "kana": "せんしゅう",
+    "english": "last week",
+    "category": "Time"
+  },
+  {
+    "id": "209",
+    "japanese": "時",
+    "kana": "とき",
+    "english": "when…; at the time of… ",
+    "category": "Time"
+  },
+  {
+    "id": "210",
+    "japanese": "月曜日",
+    "kana": "げつようび",
+    "english": "Monday",
+    "category": "Time"
+  },
+  {
+    "id": "211",
+    "japanese": "火曜日",
+    "kana": "かようび",
+    "english": "Tuesday",
+    "category": "Time"
+  },
+  {
+    "id": "212",
+    "japanese": "水曜日",
+    "kana": "すいようび",
+    "english": "Wednesday",
+    "category": "Time"
+  },
+  {
+    "id": "213",
+    "japanese": "木曜日",
+    "kana": "もくようび",
+    "english": "Thursday",
+    "category": "Time"
+  },
+  {
+    "id": "214",
+    "japanese": "金曜日",
+    "kana": "きんようび",
+    "english": "Friday",
+    "category": "Time"
+  },
+  {
+    "id": "215",
+    "japanese": "〜ぐらい",
+    "kana": "〜ぐらい",
+    "english": "about (approximate measurement)",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "216",
+    "japanese": "ごめんなさい",
+    "kana": "ごめんなさい",
+    "english": "I'm sorry",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "217",
+    "japanese": "それから",
+    "kana": "それから",
+    "english": "and then",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "218",
+    "japanese": "だから",
+    "kana": "だから",
+    "english": "so; therefore",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "219",
+    "japanese": "たくさん",
+    "kana": "たくさん",
+    "english": "many; a lot",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "220",
+    "japanese": "〜と",
+    "kana": "〜と",
+    "english": "together with (a person); and",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "221",
+    "japanese": "どうして",
+    "kana": "どうして",
+    "english": "why",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "222",
+    "japanese": "一人で",
+    "kana": "ひとりで",
+    "english": "alone",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "223",
+    "japanese": "もしもし",
+    "kana": "もしもし",
+    "english": "Hello? (used on the phone)",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "224",
+    "japanese": "右",
+    "kana": "みぎ",
+    "english": "right ",
+    "category": "Location"
+  },
+  {
+    "id": "225",
+    "japanese": "左",
+    "kana": "ひだり",
+    "english": "left ",
+    "category": "Location"
+  },
+  {
+    "id": "226",
+    "japanese": "前",
+    "kana": "まえ",
+    "english": "front",
+    "category": "Location"
+  },
+  {
+    "id": "227",
+    "japanese": "後ろ",
+    "kana": "うしろ",
+    "english": "back",
+    "category": "Location"
+  },
+  {
+    "id": "228",
+    "japanese": "中",
+    "kana": "なか",
+    "english": "inside",
+    "category": "Location"
+  },
+  {
+    "id": "229",
+    "japanese": "上",
+    "kana": "うえ",
+    "english": "on",
+    "category": "Location"
+  },
+  {
+    "id": "230",
+    "japanese": "下",
+    "kana": "した",
+    "english": "under",
+    "category": "Location"
+  },
+  {
+    "id": "231",
+    "japanese": "近く",
+    "kana": "ちかく",
+    "english": "near; nearby",
+    "category": "Location"
+  },
+  {
+    "id": "232",
+    "japanese": "隣",
+    "kana": "となり",
+    "english": "next",
+    "category": "Location"
+  },
+  {
+    "id": "233",
+    "japanese": "間",
+    "kana": "あいだ",
+    "english": "between",
+    "category": "Location"
   }
 ]
