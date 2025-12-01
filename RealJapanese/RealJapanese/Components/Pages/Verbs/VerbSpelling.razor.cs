@@ -4,7 +4,7 @@ using Repositories;
 
 namespace RealJapanese.Components.Pages.Verbs;
 
-public partial class VerbSpellingBase : PracticeBase
+public class VerbSpellingBase : PracticeBase
 {
     [Inject] public VerbData VerbData { get; set; } = null!;
     private string _oldUserInput = string.Empty;
