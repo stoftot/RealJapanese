@@ -1,4 +1,4 @@
-﻿@page "/Words"
+﻿@page "/words"
 @using RealJapanese.Components.Shared
 @inherits WordsSelectorBase
 @rendermode InteractiveServer
@@ -26,3 +26,21 @@
         </div>
     </div>
 </div>
+
+<ToggleSlider LeftText="Practice vocab"
+              RightText="Train new words"
+              @bind-Value="Training"
+/>
+
+<PraticeSelector
+    MainUrl="words"
+    Pages="@(new List<PraticeSelectorBase.PageDescreption>
+           {
+               new()
+               {
+                   Title = "Learn the words",
+                   Description = "Practice the spelling of the words",
+                   Url = $"spelling?training={Training}",
+               }
+           })"
+/>

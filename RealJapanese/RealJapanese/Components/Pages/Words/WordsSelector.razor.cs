@@ -7,10 +7,11 @@ namespace RealJapanese.Components.Pages.Words;
 public class WordsSelectorBase : ComponentBase
 {
     [Inject] private WordData WordData { get; set; } = null!;
-    
+
     protected List<int> KnownIds { get; set; } = [];
     protected List<int> TrainingIds { get; set; } = [];
     protected List<Word> AllWords { get; set; } = [];
+    protected bool Training { get; set; } = false;
 
     protected override void OnInitialized()
     {
@@ -21,6 +22,10 @@ public class WordsSelectorBase : ComponentBase
         StateHasChanged();
     }
 
+    protected List<Word> SelectedWords() => Training
+        ? AllWords.Where(w => TrainingIds.Contains(w.Id)).ToList()
+        : AllWords.Where(w => KnownIds.Contains(w.Id)).ToList();
+
     // Handle clicks in “Known” list (optional logic)
     protected Task OnKnownWordSelected(Word word)
     {
@@ -28,7 +33,7 @@ public class WordsSelectorBase : ComponentBase
         StateHasChanged();
         return Task.CompletedTask;
     }
-    
+
     protected Task OnKnownWordDeSelected(Word word)
     {
         WordData.RemoveFromVocab(word);
@@ -43,7 +48,7 @@ public class WordsSelectorBase : ComponentBase
         StateHasChanged();
         return Task.CompletedTask;
     }
-    
+
     protected Task OnTrainingWordDeSelected(Word word)
     {
         WordData.RemoveFromTraining(word);
