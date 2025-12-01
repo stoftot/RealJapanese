@@ -1,0 +1,65 @@
+﻿/* Toggle slider – Blazor + Bootstrap */
+.toggle-slider {
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    display: inline-block;
+    font: inherit;
+}
+
+/* For keyboard focus */
+.toggle-slider:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 2px;
+}
+
+.toggle-slider-track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 180px;            /* adjust width if you like */
+    padding: 2px;
+    border-radius: 999px;
+    background-color: var(--bs-secondary-bg, #f1f3f5);
+    border: 1px solid var(--bs-border-color, #ced4da);
+    user-select: none;
+    font-size: 0.875rem;
+}
+
+.toggle-slider-option {
+    flex: 1;
+    text-align: center;
+    padding: 0.25rem 0.75rem;
+    z-index: 2;
+    color: var(--bs-secondary-color, #6c757d);
+    white-space: nowrap;
+    transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+.toggle-slider-option.active {
+    color: var(--bs-body-bg, #fff);
+    font-weight: 500;
+}
+
+/* The highlight / thumb that slides */
+.toggle-slider-thumb {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    width: 50%;
+    border-radius: 999px;
+    background-color: var(--bs-primary, #0d6efd);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+}
+
+/* Start on the left */
+.toggle-slider-thumb.left {
+    transform: translateX(0%);
+}
+
+/* Slide to the right when Value == true */
+.toggle-slider-thumb.right {
+    transform: translateX(100%);
+}

@@ -1,0 +1,18 @@
+﻿@inherits ToggleSliderBase
+
+<button type="button"
+        class="toggle-slider @CssClass"
+        role="switch"
+        aria-checked="@Value"
+        @onclick="Toggle">
+    <div class="toggle-slider-track">
+        <div class="toggle-slider-option left @(Value ? "" : "active")">
+            @LeftText
+        </div>
+        <div class="toggle-slider-option right @(Value ? "active" : "")">
+            @RightText
+        </div>
+
+        <div class="toggle-slider-thumb @(Value ? "right" : "left")"></div>
+    </div>
+</button>
