@@ -31,6 +31,29 @@ public class JsonSaver<T>(string folderPath, string fileName)
                 throw new NotImplementedException();
         }
     }
+    
+    public void Save(T data)
+    {
+        var fileType = FileName.Split('.').Last();
+
+        switch (fileType)
+        {
+            case "json":
+                SaveJson(data);
+                break;
+            default:
+                throw new NotImplementedException();
+        }
+    }
+
+    private void SaveJson(T data)
+    {
+        Directory.CreateDirectory(FolderPath);
+
+        var json = JsonSerializer.Serialize(data, Options);
+
+        File.WriteAllText(FilePath, json);
+    }
 
     private void SaveJsonl(IEnumerable<T> data)
     {
