@@ -1,4 +1,5 @@
-﻿using DataLoaders.Models;
+﻿using DataLoaders.Exstensions;
+using DataLoaders.Models;
 using Repositories.DTOs;
 using WanaKanaSharp;
 
@@ -13,11 +14,12 @@ public class VerbData
         
         RawVerbs = loader.Load();
     }
-    
+
     public IEnumerable<QuestionAnswerDto> DictionaryVerbs =>
-        RawVerbs.Select(v => new QuestionAnswerDto
-        {
-            Answer = WanaKana.ToRomaji(v.Kana),
-            Question = v.English
-        });
+        RawVerbs.Skip(0).Take(15).EnglishToRomajiQuestions();
+    //     Select(v => new QuestionAnswerDto
+    // {
+    //     Answer = v.Kana.ToRomaji(),
+    //     Question = v.English
+    // });
 }

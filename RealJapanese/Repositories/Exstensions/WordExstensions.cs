@@ -9,7 +9,7 @@ public static class WordExstensions
     public static IEnumerable<QuestionAnswerDto> EnglishToRomajiQuestions(this IEnumerable<Word> words) =>
         words.Select(v => new QuestionAnswerDto
         {
-            Answer = WanaKana.ToRomaji(v.Kana),
+            Answer = v.Kana.ToRomaji(),
             Question = v.English
         });
 }
