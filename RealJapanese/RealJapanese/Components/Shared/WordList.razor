@@ -1,0 +1,35 @@
+﻿@namespace RealJapanese.Components.Shared
+@inherits WordListBase
+
+<div class="card h-100">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>@Title</span>
+        <small class="text-muted">
+            @($"{SelectedIds?.Count ?? 0} selected / {AllWords?.Count ?? 0} total")
+        </small>
+    </div>
+
+    <div class="list-group list-group-flush word-list-scroll">
+        @if (AllWords is { Count: > 0 })
+        {
+            foreach (var item in OrderedItems)
+            {
+                var isSelected = SelectedIds?.Contains(item.Id) == true;
+
+                <button type="button"
+                        class="list-group-item list-group-item-action @(isSelected ? "active" : "")"
+                        @onclick="() => OnItemClicked(item)">
+                    <div class="fw-bold">@item.English</div>
+                    <div class="small">@item.Japanese</div>
+                    <div class="small text-muted">@item.Kana</div>
+                </button>
+            }
+        }
+        else
+        {
+            <div class="list-group-item text-muted small">
+                No words loaded.
+            </div>
+        }
+    </div>
+</div>
