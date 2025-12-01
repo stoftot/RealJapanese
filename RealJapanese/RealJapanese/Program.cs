@@ -14,6 +14,7 @@ builder.Services.AddSingleton<GreetingsData>();
 builder.Services.AddSingleton<SentencesData>();
 builder.Services.AddSingleton<ParticlesData>();
 builder.Services.AddSingleton<VerbData>();
+builder.Services.AddSingleton<WordData>();
 
 var app = builder.Build();
 
