@@ -31,7 +31,7 @@ public class WordData
     }
     
     public IEnumerable<Word> VocabWords =>
-        Words.Where(w => VocabSaveFile.KnownIds.Contains(w.Id) || VocabSaveFile.TrainingIds.Contains(w.Id));
+        Words.Where(w => VocabSaveFile.KnownIds.Contains(w.Id));
     
     public IEnumerable<Word> TrainingWords =>
         Words.Where(w => VocabSaveFile.TrainingIds.Contains(w.Id));
@@ -64,7 +64,6 @@ public class WordData
         VocabSaveFile.TrainingIds.Remove(word.Id);
         SaveProgress();
     }
-    
     
     private void UpdateIDs()
     {
