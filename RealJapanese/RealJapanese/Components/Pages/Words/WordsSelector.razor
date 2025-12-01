@@ -1,0 +1,28 @@
+﻿@page "/Words"
+@using RealJapanese.Components.Shared
+@inherits WordsSelectorBase
+@rendermode InteractiveServer
+
+<div class="container my-3">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <WordList
+                Title="Known vocabulary"
+                AllWords="@AllWords"
+                SelectedIds="@KnownIds"
+                WordSelected="@OnKnownWordSelected"
+                WordDeselected="@OnKnownWordDeSelected"
+            />
+        </div>
+
+        <div class="col-md-6">
+            <WordList
+                Title="Currently training"
+                AllWords="@AllWords"
+                SelectedIds="@TrainingIds"
+                WordSelected="@OnTrainingWordSelected"
+                WordDeselected="@OnTrainingWordDeSelected"
+            />
+        </div>
+    </div>
+</div>
