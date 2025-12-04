@@ -3,6 +3,6 @@
 public static class RomajiExstension
 {
     public static string ToRomaji(this string kana) => 
-        WanaKanaSharp.WanaKana.ToRomaji(kana).Replace("'", "");
+        WanaKanaSharp.WanaKana.ToRomaji(kana).Replace("'", "").Replace("~", "");
 
 }
