@@ -22,10 +22,6 @@ public class WordsSelectorBase : ComponentBase
         StateHasChanged();
     }
 
-    protected List<Word> SelectedWords() => Training
-        ? AllWords.Where(w => TrainingIds.Contains(w.Id)).ToList()
-        : AllWords.Where(w => KnownIds.Contains(w.Id)).ToList();
-
     // Handle clicks in “Known” list (optional logic)
     protected Task OnKnownWordSelected(Word word)
     {
