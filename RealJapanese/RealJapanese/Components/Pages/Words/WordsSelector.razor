@@ -18,7 +18,7 @@
         <div class="col-md-6">
             <WordList
                 Title="Currently training"
-                AllWords="@AllWords"
+                AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id)).ToList()"
                 SelectedIds="@TrainingIds"
                 WordSelected="@OnTrainingWordSelected"
                 WordDeselected="@OnTrainingWordDeSelected"
