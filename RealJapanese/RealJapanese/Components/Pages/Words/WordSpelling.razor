@@ -1,9 +1,30 @@
 ﻿@page "/words/spelling"
-@inherits VerbSpellingBase
+@inherits WordSpellingBase
 @using RealJapanese.Components.Shared
 @rendermode InteractiveServer
 
 <PracticeShell @bind-UiScale="UiScale">
+    <div class="container" style="max-width: 400px;">
+        <div class="row g-3">
+            <div class="col-12 col-md-6">
+                <NumberStepper
+                    Value="@splitDataInto"
+                    ValueChanged="OnSplitDataIntoChanged"
+                    Min="1"
+                    Max="10"
+                />
+            </div>
+
+            <div class="col-12 col-md-6">
+                <NumberStepper
+                    Value="@selectedDataChunkIndex"
+                    ValueChanged="OnSelectedDataChunkIndexChanged"
+                    Min="1"
+                    Max="10"
+                />
+            </div>
+        </div>
+    </div>
     <PracticeCard
         Title="Practice"
         ProgressText="@(Questions.Count == 0 ? "0/0" : $"{currentQuestionIndex + 1}/{Questions.Count}")"

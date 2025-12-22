@@ -6,19 +6,21 @@ using Repositories.DTOs;
 
 namespace RealJapanese.Components.Pages.Words;
 
-public class VerbSpellingBase : PracticeBase
+public class WordSpellingBase : PracticeBase
 {
     [SupplyParameterFromQuery(Name = "training")]
     public bool Training { get; set; } = false;
     
     [Inject]
     public WordData WordData { get; set; } = null!;
+
+    protected int splitDataInto = 3;
+    protected int selectedDataChunkIndex = 0;
     
     private string _oldUserInput = string.Empty;
 
     // ref to the shared UI so we can focus the input
     protected PracticeCard? cardRef;
-
     protected override void OnInitialized()
     {
         Questions = (Training ? WordData.TrainingWords : WordData.VocabWords)
@@ -52,5 +54,18 @@ public class VerbSpellingBase : PracticeBase
 
             _oldUserInput = UserInput;
         }
+    }
+    
+    public void OnSplitDataIntoChanged(int newValue)
+    {
+        Console.WriteLine($"OnSplitDataIntoChanged: {newValue}");
+        splitDataInto = newValue;
+        // Any additional logic here
+    }
+    public void OnSelectedDataChunkIndexChanged(int newValue)
+    {
+        Console.WriteLine($"OnSelectedDataChunkIndexChanged: {newValue}");
+        selectedDataChunkIndex = newValue;
+        // Any additional logic here
     }
 }
