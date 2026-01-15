@@ -5,6 +5,8 @@ namespace RealJapanese.Components.Shared;
 
 public partial class NumberStepper : ComponentBase
 {
+    [Parameter] public string Label { get; set; } = string.Empty;
+    
     [Parameter] public int Value { get; set; } = 0;
     [Parameter] public EventCallback<int> ValueChanged { get; set; }
 

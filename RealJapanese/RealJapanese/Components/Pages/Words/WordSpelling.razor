@@ -8,6 +8,7 @@
         <div class="row g-3">
             <div class="col-12 col-md-6">
                 <NumberStepper
+                    Label="Number of chunks"
                     Value="@splitDataInto"
                     ValueChanged="OnSplitDataIntoChanged"
                     Min="1"
@@ -17,6 +18,7 @@
 
             <div class="col-12 col-md-6">
                 <NumberStepper
+                    Label="Selected chunk"
                     Value="@selectedDataChunkIndex"
                     ValueChanged="OnSelectedDataChunkIndexChanged"
                     Min="1"
