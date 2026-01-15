@@ -7,7 +7,8 @@ namespace RealJapanese.Components.Shared;
 public abstract class PracticeBase : ComponentBase
 {
     // Data each derived class sets in OnInitialized
-    protected List<QuestionAnswerDto> Questions { get; set; } = new();
+    protected IEnumerable<QuestionAnswerDto> OrginalQuestions { get; set; }
+    protected List<QuestionAnswerDto> Questions { get; set; } = [];
     protected int currentQuestionIndex = 0;
 
     // UI

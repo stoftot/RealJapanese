@@ -14,18 +14,36 @@ public class WordSpellingBase : PracticeBase
     [Inject]
     public WordData WordData { get; set; } = null!;
 
-    protected int splitDataInto = 3;
-    protected int selectedDataChunkIndex = 0;
-    
+    protected int splitDataInto = 1;
+
+    private int selectedDataChunkIndex => selectedDataChunk-1;
+    protected int selectedDataChunk = 1;
+
+    protected int DataChunkSize => OrginalQuestions.Count() / splitDataInto;
+
     private string _oldUserInput = string.Empty;
 
     // ref to the shared UI so we can focus the input
     protected PracticeCard? cardRef;
     protected override void OnInitialized()
     {
-        Questions = (Training ? WordData.TrainingWords : WordData.VocabWords)
-            .EnglishToRomajiQuestions()
-            .OrderBy(_ => Guid.NewGuid()).ToList();
+        OrginalQuestions = (Training ? WordData.TrainingWords : WordData.VocabWords)
+            .EnglishToRomajiQuestions();
+        
+        UpdateQuestions();
+    }
+    
+    private void UpdateQuestions()
+    {
+        Questions = OrginalQuestions
+            .Skip(selectedDataChunkIndex * DataChunkSize)
+            .Take(selectedDataChunk == splitDataInto ? int.MaxValue : DataChunkSize)
+            .OrderBy(_ => Guid.NewGuid())
+            .ToList();
+        
+        currentQuestionIndex = 0;
+        UserInput = string.Empty;
+        showAnswer = false;
     }
 
     protected override Task FocusAnswerInputAsync()
@@ -58,14 +76,13 @@ public class WordSpellingBase : PracticeBase
     
     public void OnSplitDataIntoChanged(int newValue)
     {
-        Console.WriteLine($"OnSplitDataIntoChanged: {newValue}");
         splitDataInto = newValue;
-        // Any additional logic here
+        selectedDataChunk = 1;
+        UpdateQuestions();
     }
     public void OnSelectedDataChunkIndexChanged(int newValue)
     {
-        Console.WriteLine($"OnSelectedDataChunkIndexChanged: {newValue}");
-        selectedDataChunkIndex = newValue;
-        // Any additional logic here
+        selectedDataChunk = newValue;
+        UpdateQuestions();
     }
 }

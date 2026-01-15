@@ -19,10 +19,10 @@
             <div class="col-12 col-md-6">
                 <NumberStepper
                     Label="Selected chunk"
-                    Value="@selectedDataChunkIndex"
+                    Value="@selectedDataChunk"
                     ValueChanged="OnSelectedDataChunkIndexChanged"
                     Min="1"
-                    Max="10"
+                    Max="@splitDataInto"
                 />
             </div>
         </div>
