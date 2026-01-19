@@ -1,6 +1,6 @@
 [
   {
-    "verbType": "u-verb",
+    "verbType": "u",
     "japanese": "行く",
     "kana": "いく",
     "english": "to go",
@@ -36,7 +36,7 @@
     ]
   },
   {
-    "verbType": "u-verb",
+    "verbType": "u",
     "japanese": "帰る",
     "kana": "かえる",
     "english": "to go back; to return",
@@ -72,7 +72,7 @@
     ]
   },
   {
-    "verbType": "u-verb",
+    "verbType": "u",
     "japanese": "聞く",
     "kana": "きく",
     "english": "to listen; to hear",
@@ -108,7 +108,7 @@
     ]
   },
   {
-    "verbType": "u-verb",
+    "verbType": "u",
     "japanese": "飲む",
     "kana": "のむ",
     "english": "to drink",
@@ -144,7 +144,7 @@
     ]
   },
   {
-    "verbType": "u-verb",
+    "verbType": "u",
     "japanese": "話す",
     "kana": "はなす",
     "english": "to speak; to talk",
@@ -180,7 +180,7 @@
     ]
   },
   {
-    "verbType": "u-verb",
+    "verbType": "u",
     "japanese": "読む",
     "kana": "よむ",
     "english": "to read",
@@ -216,7 +216,7 @@
     ]
   },
   {
-    "verbType": "ru-verb",
+    "verbType": "ru",
     "japanese": "起きる",
     "kana": "おきる",
     "english": "to get up",
@@ -252,7 +252,7 @@
     ]
   },
   {
-    "verbType": "ru-verb",
+    "verbType": "ru",
     "japanese": "食べる",
     "kana": "たべる",
     "english": "to eat",
@@ -288,7 +288,7 @@
     ]
   },
   {
-    "verbType": "ru-verb",
+    "verbType": "ru",
     "japanese": "寝る",
     "kana": "ねる",
     "english": "to sleep; to go to sleep",
@@ -324,7 +324,7 @@
     ]
   },
   {
-    "verbType": "ru-verb",
+    "verbType": "ru",
     "japanese": "見る",
     "kana": "みる",
     "english": "to see; to look at; to watch",
