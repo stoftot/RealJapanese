@@ -11,15 +11,12 @@ public record Verb : Word
 {
     [JsonPropertyName("verbType")] public required string VerbType { get; set; }
 
-    [JsonPropertyName("conjugations")] public List<VerbConjugation> Conjugations { get; set; } = [];
-
-    public record VerbConjugation : Word
+    public enum Conjugate
     {
-        [JsonPropertyName("mainType")] public required string MainType { get; set; }
-
-        [JsonPropertyName("secondaryType")] public required string SecondaryType { get; set; }
+        Japanese,
+        Kana
     }
-
+    
     private const string PresentAffirmativeEnding = "ます";
     private const string PresentNegativeEnding = "ません";
     private const string PastAffirmativeEnding = "ました";
@@ -51,37 +48,43 @@ public record Verb : Word
             { "する", "し" },
             { "くる", "き" }
         }.ToFrozenDictionary();
-    
-    private string StemU()
+
+    private string StemU(string str)
     {
-        var (firstPart, lastChar) = Japanese.LastChar();
+        var (firstPart, lastChar) = str.LastChar();
         return firstPart + uConjugations[lastChar];
     }
 
-    private string StemRu()
+    private string StemRu(string str)
     {
-        var (firstPart, lastChar) = Japanese.LastChar();
+        var (firstPart, lastChar) = str.LastChar();
         return firstPart + ruConjugations[lastChar];
     }
 
-    private string StemIrregular()
+    private string StemIrregular(string str)
     {
-        var (firstPart, lastTwoChars) = Japanese.LastTwoChars();
+        var (firstPart, lastTwoChars) = str.LastTwoChars();
         return firstPart + irregularConjugations[lastTwoChars];
     }
 
-    private string Stem()
+    private string Stem(Conjugate conjugate)
     {
+        var str = conjugate switch
+        {
+            Conjugate.Japanese => Japanese,
+            Conjugate.Kana => Kana
+        };
+        
         return VerbType switch
         {
-            "u" => StemU(),
-            "ru" => StemRu(),
-            "irregular" => StemIrregular()
+            "u" => StemU(str),
+            "ru" => StemRu(str),
+            "irregular" => StemIrregular(str)
         };
     }
 
-    public string PresentAffirmative() => Stem() + PresentAffirmativeEnding;
-    public string PresentNegative() => Stem() + PresentNegativeEnding;
-    public string PastAffirmative() => Stem() + PastAffirmativeEnding;
-    public string PastNegative() => Stem() + PastNegativeEnding;
+    public string PresentAffirmative(Conjugate conjugate) => Stem(conjugate) + PresentAffirmativeEnding;
+    public string PresentNegative(Conjugate conjugate) => Stem(conjugate) + PresentNegativeEnding;
+    public string PastAffirmative(Conjugate conjugate) => Stem(conjugate) + PastAffirmativeEnding;
+    public string PastNegative(Conjugate conjugate) => Stem(conjugate) + PastNegativeEnding;
 }
