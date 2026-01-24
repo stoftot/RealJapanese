@@ -1,54 +1,13 @@
 ﻿using DataLoaders.Models;
 using Microsoft.AspNetCore.Components;
+using RealJapanese.Components.Shared;
 using Repositories;
+using Repositories.Bases;
 
 namespace RealJapanese.Components.Pages.Words;
 
-public class WordsSelectorBase : ComponentBase
+public class WordsSelectorBase : WordComponentBase<Word>
 {
-    [Inject] private WordData WordData { get; set; } = null!;
-
-    protected List<int> KnownIds { get; set; } = [];
-    protected List<int> TrainingIds { get; set; } = [];
-    protected List<Word> AllWords { get; set; } = [];
-    protected bool Training { get; set; } = false;
-
-    protected override void OnInitialized()
-    {
-        // For demo: first 3 known, last 2 in training
-        AllWords = WordData.Words.ToList();
-        KnownIds = WordData.VocabWordIds.ToList();
-        TrainingIds = WordData.TrainingWordIds.ToList();
-        StateHasChanged();
-    }
-
-    // Handle clicks in “Known” list (optional logic)
-    protected Task OnKnownWordSelected(Word word)
-    {
-        WordData.AddToVocab(word);
-        StateHasChanged();
-        return Task.CompletedTask;
-    }
-
-    protected Task OnKnownWordDeSelected(Word word)
-    {
-        WordData.RemoveFromVocab(word);
-        StateHasChanged();
-        return Task.CompletedTask;
-    }
-
-    // Handle clicks in “Training” list (optional logic)
-    protected Task OnTrainingWordSelected(Word word)
-    {
-        WordData.AddToTraining(word);
-        StateHasChanged();
-        return Task.CompletedTask;
-    }
-
-    protected Task OnTrainingWordDeSelected(Word word)
-    {
-        WordData.RemoveFromTraining(word);
-        StateHasChanged();
-        return Task.CompletedTask;
-    }
+    [Inject] private WordData WordDataInjected { get; set; } = null!;
+    protected override WordDataBase<Word> WordData  => WordDataInjected;
 }

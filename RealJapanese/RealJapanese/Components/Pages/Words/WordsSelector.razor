@@ -1,4 +1,5 @@
 ﻿@page "/words"
+@using DataLoaders.Models
 @using RealJapanese.Components.Shared
 @inherits WordsSelectorBase
 @rendermode InteractiveServer
@@ -7,6 +8,7 @@
     <div class="row g-3">
         <div class="col-md-6">
             <WordList
+                TItem="Word"
                 Title="Known vocabulary"
                 AllWords="@AllWords"
                 SelectedIds="@KnownIds"
@@ -17,6 +19,7 @@
 
         <div class="col-md-6">
             <WordList
+                TItem="Word"
                 Title="Currently training"
                 AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id)).ToList()"
                 SelectedIds="@TrainingIds"
