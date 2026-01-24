@@ -1,80 +1,106 @@
 [
   {
     "verbType": "u",
+    "id": "0",
     "japanese": "行く",
     "kana": "いく",
-    "english": "to go"
+    "english": "to go",
+    "category": ""
   },
   {
     "verbType": "u",
+    "id": "1",
     "japanese": "帰る",
     "kana": "かえる",
-    "english": "to go back; to return"
+    "english": "to go back; to return",
+    "category": ""
   },
   {
     "verbType": "u",
+    "id": "2",
     "japanese": "聞く",
     "kana": "きく",
-    "english": "to listen; to hear"
+    "english": "to listen; to hear",
+    "category": ""
   },
   {
     "verbType": "u",
+    "id": "3",
     "japanese": "飲む",
     "kana": "のむ",
-    "english": "to drink"
+    "english": "to drink",
+    "category": ""
   },
   {
     "verbType": "u",
+    "id": "4",
     "japanese": "話す",
     "kana": "はなす",
-    "english": "to speak; to talk"
+    "english": "to speak; to talk",
+    "category": ""
   },
   {
     "verbType": "u",
+    "id": "5",
     "japanese": "読む",
     "kana": "よむ",
-    "english": "to read"
+    "english": "to read",
+    "category": ""
   },
   {
     "verbType": "ru",
+    "id": "6",
     "japanese": "起きる",
     "kana": "おきる",
-    "english": "to get up"
+    "english": "to get up",
+    "category": ""
   },
   {
     "verbType": "ru",
+    "id": "7",
     "japanese": "食べる",
     "kana": "たべる",
-    "english": "to eat"
+    "english": "to eat",
+    "category": ""
   },
   {
     "verbType": "ru",
+    "id": "8",
     "japanese": "寝る",
     "kana": "ねる",
-    "english": "to sleep; to go to sleep"
+    "english": "to sleep; to go to sleep",
+    "category": ""
   },
   {
     "verbType": "ru",
+    "id": "9",
     "japanese": "見る",
     "kana": "みる",
-    "english": "to see; to look at; to watch"
+    "english": "to see; to look at; to watch",
+    "category": ""
   },
   {
     "verbType": "irregular",
+    "id": "10",
     "japanese": "来る",
     "kana": "くる",
-    "english": "to come"
+    "english": "to come",
+    "category": ""
   },
   {
     "verbType": "irregular",
+    "id": "11",
     "japanese": "する",
     "kana": "する",
-    "english": "to do"
+    "english": "to do",
+    "category": ""
   },
   {
     "verbType": "irregular",
+    "id": "12",
     "japanese": "勉強する",
     "kana": "べんきょうする",
-    "english": "to study"
+    "english": "to study",
+    "category": ""
   }
 ]
