@@ -11,10 +11,18 @@ public record Verb : Word
 {
     [JsonPropertyName("verbType")] public required string VerbType { get; set; }
 
-    public enum Conjugate
+    public enum ToConjugate
     {
         Japanese,
         Kana
+    }
+    
+    public enum ConjugationType
+    {
+        PresentAffirmative,
+        PresentNegative,
+        PastAffirmative,
+        PastNegative
     }
     
     private const string PresentAffirmativeEnding = "ます";
@@ -67,12 +75,12 @@ public record Verb : Word
         return firstPart + irregularConjugations[lastTwoChars];
     }
 
-    private string Stem(Conjugate conjugate)
+    private string Stem(ToConjugate conjugate)
     {
         var str = conjugate switch
         {
-            Conjugate.Japanese => Japanese,
-            Conjugate.Kana => Kana
+            ToConjugate.Japanese => Japanese,
+            ToConjugate.Kana => Kana
         };
         
         return VerbType switch
@@ -82,9 +90,13 @@ public record Verb : Word
             "irregular" => StemIrregular(str)
         };
     }
-
-    public string PresentAffirmative(Conjugate conjugate) => Stem(conjugate) + PresentAffirmativeEnding;
-    public string PresentNegative(Conjugate conjugate) => Stem(conjugate) + PresentNegativeEnding;
-    public string PastAffirmative(Conjugate conjugate) => Stem(conjugate) + PastAffirmativeEnding;
-    public string PastNegative(Conjugate conjugate) => Stem(conjugate) + PastNegativeEnding;
+    
+    public string Conjugate(ToConjugate toConjugate, ConjugationType conjugationType)=>
+        conjugationType switch
+        {
+            ConjugationType.PresentAffirmative => Stem(toConjugate) + PresentAffirmativeEnding,
+            ConjugationType.PresentNegative => Stem(toConjugate) + PresentNegativeEnding,
+            ConjugationType.PastAffirmative => Stem(toConjugate) + PastAffirmativeEnding,
+            ConjugationType.PastNegative => Stem(toConjugate) + PastNegativeEnding,
+        };
 }
