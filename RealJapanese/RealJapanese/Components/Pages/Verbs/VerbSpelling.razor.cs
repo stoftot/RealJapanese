@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using DataLoaders.Exstensions;
+using Microsoft.AspNetCore.Components;
 using RealJapanese.Components.Shared;
 using Repositories;
 
@@ -6,15 +7,42 @@ namespace RealJapanese.Components.Pages.Verbs;
 
 public class VerbSpellingBase : PracticeBase
 {
-    [Inject] public VerbData VerbData { get; set; } = null!;
+    [SupplyParameterFromQuery(Name = "training")]
+    public bool Training { get; set; } = false;
+    
+    [Inject]
+    public VerbData VerbData { get; set; } = null!;
+
+    protected int splitDataInto = 1;
+
+    private int selectedDataChunkIndex => selectedDataChunk-1;
+    protected int selectedDataChunk = 1;
+
+    protected int DataChunkSize => OrginalQuestions.Count() / splitDataInto;
+
     private string _oldUserInput = string.Empty;
 
     // ref to the shared UI so we can focus the input
     protected PracticeCard? cardRef;
-
     protected override void OnInitialized()
     {
-        Questions = VerbData.DictionaryVerbs.OrderBy(_ => Guid.NewGuid()).ToList();
+        OrginalQuestions = (Training ? VerbData.TrainingWords : VerbData.VocabWords)
+            .EnglishToRomajiQuestions();
+        
+        UpdateQuestions();
+    }
+    
+    private void UpdateQuestions()
+    {
+        Questions = OrginalQuestions
+            .Skip(selectedDataChunkIndex * DataChunkSize)
+            .Take(selectedDataChunk == splitDataInto ? int.MaxValue : DataChunkSize)
+            .OrderBy(_ => Guid.NewGuid())
+            .ToList();
+        
+        currentQuestionIndex = 0;
+        UserInput = string.Empty;
+        showAnswer = false;
     }
 
     protected override Task FocusAnswerInputAsync()
@@ -43,5 +71,17 @@ public class VerbSpellingBase : PracticeBase
 
             _oldUserInput = UserInput;
         }
+    }
+    
+    public void OnSplitDataIntoChanged(int newValue)
+    {
+        splitDataInto = newValue;
+        selectedDataChunk = 1;
+        UpdateQuestions();
+    }
+    public void OnSelectedDataChunkIndexChanged(int newValue)
+    {
+        selectedDataChunk = newValue;
+        UpdateQuestions();
     }
 }
