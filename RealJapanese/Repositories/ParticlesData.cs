@@ -224,21 +224,7 @@ public class ParticlesData
         "ね", // ne
         "よ"  // yo
     ];
-
-    private readonly IEnumerable<ParticalsModel> rawParticlesData =
-        new ParticalsLoader("SingleParticals.json").Load()
-            .Where(p => 
-                p.MissingParticles.All(m => ParticalesIKnow.Contains(m)) 
-                && p.MissingParticles.Length > 1);
-
-    public IEnumerable<FillInBlanksDto> FillInBlanksQuestions() =>
-        rawParticlesData.Select(p => new FillInBlanksDto
-        {
-            Header = p.English,
-            Template = p.Japanese,
-            Answers = p.MissingParticles.Select(mp => ParticleRomajiMap[mp]).ToList()
-        });
-
+    
     public IEnumerable<Particle> ParticalsPresentRomaji(List<FillInBlanksDto> questions)
     {
         var particalsPresent = new HashSet<string>();
