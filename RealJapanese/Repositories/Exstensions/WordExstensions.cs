@@ -1,8 +1,7 @@
 ﻿using DataLoaders.Models;
 using Repositories.DTOs;
-using WanaKanaSharp;
 
-namespace DataLoaders.Exstensions;
+namespace Repositories.Exstensions;
 
 public static class WordExstensions
 {

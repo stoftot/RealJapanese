@@ -1,4 +1,4 @@
-﻿namespace DataLoaders.Exstensions;
+﻿namespace Repositories.Exstensions;
 
 public static class RomajiExstension
 {
