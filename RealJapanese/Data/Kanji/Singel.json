@@ -1,0 +1,92 @@
+﻿[
+  {
+    "japanese": "一",
+    "kana": "いち;ひと",
+    "english": "one",
+    "category": "Number"
+  },
+  {
+    "japanese": "二",
+    "kana": "に;ふた",
+    "english": "two",
+    "category": "Number"
+  },
+  {
+    "japanese": "三",
+    "kana": "さん;み",
+    "english": "three",
+    "category": "Number"
+  },
+  {
+    "japanese": "四",
+    "kana": "し;よん;よ",
+    "english": "four",
+    "category": "Number"
+  },
+  {
+    "japanese": "五",
+    "kana": "ご;いつ",
+    "english": "five",
+    "category": "Number"
+  },
+  {
+    "japanese": "六",
+    "kana": "ろく;む",
+    "english": "six",
+    "category": "Number"
+  },
+  {
+    "japanese": "七",
+    "kana": "しち;なな",
+    "english": "seven",
+    "category": "Number"
+  },
+  {
+    "japanese": "八",
+    "kana": "はち;や",
+    "english": "eight",
+    "category": "Number"
+  },
+  {
+    "japanese": "九",
+    "kana": "きゅう;く;ここの",
+    "english": "nine",
+    "category": "Number"
+  },
+  {
+    "japanese": "十",
+    "kana": "じゅう;とお;と",
+    "english": "ten",
+    "category": "Number"
+  },
+  {
+    "japanese": "百",
+    "kana": "ひゃく;びゃく;ぴゃく",
+    "english": "hundred",
+    "category": "Number"
+  },
+  {
+    "japanese": "千",
+    "kana": "せん",
+    "english": "thousand",
+    "category": "Number"
+  },
+  {
+    "japanese": "万",
+    "kana": "まん",
+    "english": "ten thousand",
+    "category": "Number"
+  },
+  {
+    "japanese": "円",
+    "kana": "えん;まる",
+    "english": "yen;circle",
+    "category": "Currency;Shape"
+  },
+  {
+    "japanese": "時",
+    "kana": "じ;とき",
+    "english": "time;hour",
+    "category": "Time"
+  }
+]
