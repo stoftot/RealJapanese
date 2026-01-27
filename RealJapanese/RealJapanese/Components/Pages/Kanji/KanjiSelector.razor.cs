@@ -8,28 +8,28 @@ namespace RealJapanese.Components.Pages.Kanji;
 
 public class KanjiSelectorBase : WordComponentBase<Word>
 {
-    private bool singelKanjiMode = false;
+    private bool singleKanjiMode = false;
 
-    protected bool SingelKanjiMode
+    protected bool SingleKanjiMode
     {
-        get => singelKanjiMode;
+        get => singleKanjiMode;
         set
         {
-            if (singelKanjiMode == value) return;
-            singelKanjiMode = value;
+            if (singleKanjiMode == value) return;
+            singleKanjiMode = value;
             OnInitialized();
         }
     }
     
     [Inject] private KanjiData KanjiDataInjected { get; set; } = null!;
     protected override WordDataBase<Word> WordData => 
-        SingelKanjiMode ? KanjiDataInjected.Singel : KanjiDataInjected.Combined;
+        SingleKanjiMode ? KanjiDataInjected.Single : KanjiDataInjected.Combined;
 
     public List<PraticeSelectorBase.PageDescreption> GetPageDescreptions()
     {
         var pagesDescreptions = new List<PraticeSelectorBase.PageDescreption>();
 
-        if (SingelKanjiMode)
+        if (SingleKanjiMode)
         {
             pagesDescreptions.Add(
                 new()

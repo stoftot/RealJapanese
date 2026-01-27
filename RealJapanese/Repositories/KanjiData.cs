@@ -7,7 +7,7 @@ public class KanjiData
 {
     private const string BaseFolderPath = "../Data/Kanji/";
     
-    public class SingelData() : WordDataBase<Word>(FolderPath, DataFileName)
+    public class SingleData() : WordDataBase<Word>(FolderPath, DataFileName)
     {
         private const string FolderPath = BaseFolderPath + "Singel/";
         private const string DataFileName = "Singel.json";
@@ -19,6 +19,6 @@ public class KanjiData
         private const string DataFileName = "Combined.json";
     }
     
-    public SingelData Singel { get; } = new();
+    public SingleData Single { get; } = new();
     public CombinedData Combined { get; } = new();
 }
