@@ -47,6 +47,14 @@ public class NumbersQuestionGenerator
             .Concat(GenerateALlUniqTime());
     }
 
+    public IEnumerable<QuestionAnswerDto> GenerateUniqKanji()
+    {
+        foreach (int number in new[] { 1, 10, 100, 1_000, 10_000 })
+        {
+            yield return NumbersGenerator.GenerateKanji(number);
+        }
+    }
+
     public IEnumerable<QuestionAnswerDto> GenerateALlUniqCounting()
     {
         yield return NumbersGenerator.GenerateCounting(0);

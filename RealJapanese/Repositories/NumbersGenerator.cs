@@ -7,6 +7,23 @@ namespace Repositories;
 
 public class NumbersGenerator
 {
+    private readonly FlexibleDictionary kanji = new(new Dictionary<string, string>
+    {
+        { "1", "一" },
+        { "2", "二" },
+        { "3", "三" },
+        { "4", "四" },
+        { "5", "五" },
+        { "6", "六" },
+        { "7", "七" },
+        { "8", "八" },
+        { "9", "九" },
+        { "10", "十" },
+        { "100", "百" },
+        { "1000", "千" },
+        { "10000", "万" }
+    });
+    
     private readonly FlexibleDictionary counting = new(new Dictionary<string, string>
     {
         { "0", "zero" },
@@ -58,6 +75,22 @@ public class NumbersGenerator
             yield return GenerateTime(int.Parse(key));
         }
     }
+
+
+    public IEnumerable<QuestionAnswerDto> GenerateUniqKanji()
+    {
+        foreach (var (key, _) in kanji)
+        {
+            yield return GenerateKanji(int.Parse(key));
+        }
+    }
+    public QuestionAnswerDto GenerateKanji(int number) =>
+        new()
+        {
+            Answer = number.ToString(),
+            Question = GenerateNumber(number.ToString(), kanji)
+        };
+    
     
     #region Counting generators
 
