@@ -13,6 +13,8 @@ builder.Services.AddSingleton<NumbersQuestionGenerator>();
 builder.Services.AddSingleton<VerbData>();
 builder.Services.AddSingleton<WordData>();
 
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+
 var app = builder.Build();
 
 // var sentence = new SentenceLoader("jp_kana_reading_dataset_v3.jsonl").Load();
