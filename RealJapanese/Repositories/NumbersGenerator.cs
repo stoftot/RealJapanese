@@ -20,8 +20,7 @@ public class NumbersGenerator
         { "9", "九" },
         { "10", "十" },
         { "100", "百" },
-        { "1000", "千" },
-        { "10000", "万" }
+        { "1000", "千" }
     });
     
     private readonly FlexibleDictionary counting = new(new Dictionary<string, string>
@@ -75,22 +74,13 @@ public class NumbersGenerator
             yield return GenerateTime(int.Parse(key));
         }
     }
-
-
-    public IEnumerable<QuestionAnswerDto> GenerateUniqKanji()
-    {
-        foreach (var (key, _) in kanji)
-        {
-            yield return GenerateKanji(int.Parse(key));
-        }
-    }
+    
     public QuestionAnswerDto GenerateKanji(int number) =>
         new()
         {
             Answer = number.ToString(),
-            Question = GenerateNumber(number.ToString(), kanji)
+            Question = GenerateNumber(number.ToString(), kanji, kanjiMode: true)
         };
-    
     
     #region Counting generators
 
@@ -238,10 +228,9 @@ public class NumbersGenerator
 
     #endregion
 
-
     #region Generate number helpers
 
-    private static string GenerateNumber(string number, FlexibleDictionary numbers)
+    private static string GenerateNumber(string number, FlexibleDictionary numbers, bool kanjiMode = false)
     {
         if (number.Length > 1) number = number.TrimStart('0');
 
@@ -253,16 +242,19 @@ public class NumbersGenerator
         return number.Length switch
         {
             0 => "",
-            2 => GenerateTens(number, numbers),
-            3 => GenerateHundreds(number, numbers),
-            4 => GenerateThousands(number, numbers),
-            5 => GenerateTenThousands(number, numbers),
+            2 => Generate10s(number, numbers),
+            3 => Generate100s(number, numbers),
+            4 => Generate1_000s(number, numbers),
+            5 => Generate10_000s(number, numbers, kanjiMode),
+            6 => Generate100_000s(number, numbers, kanjiMode),
+            7 => Generate1_000_000s(number, numbers, kanjiMode),
+            8 => Generate10_000_000s(number, numbers, kanjiMode),
             _ => throw new ArgumentOutOfRangeException(nameof(number), number,
                 $"Number length \"{number.Length}\" not supported.")
         };
     }
 
-    private static string GenerateTens(string number, FlexibleDictionary numbers)
+    private static string Generate10s(string number, FlexibleDictionary numbers)
     {
         var firstDigit = number[0];
         var lastDigit = number[1];
@@ -272,29 +264,52 @@ public class NumbersGenerator
         return lastDigit == '0' ? head : head + numbers[lastDigit];
     }
 
-    private static string GenerateHundreds(string number, FlexibleDictionary numbers) => 
+    private static string Generate100s(string number, FlexibleDictionary numbers) => 
         GenerateTemplate(number, numbers, 
-            firstDigit => firstDigit == '1' ? numbers[100] : numbers[firstDigit] + numbers[100]);
+            firstDigit => 
+                firstDigit == '1' ? numbers[100] : numbers[firstDigit] + numbers[100]);
 
-    private static string GenerateThousands(string number, FlexibleDictionary numbers) => 
+    private static string Generate1_000s(string number, FlexibleDictionary numbers) => 
         GenerateTemplate(number, numbers, 
-            firstDigit => firstDigit == '1' ? numbers[1_000] : numbers[firstDigit] + numbers[1_000]);
+            firstDigit => 
+                firstDigit == '1' ? numbers[1_000] : numbers[firstDigit] + numbers[1_000]);
 
-    private static string GenerateTenThousands(string number, FlexibleDictionary numbers) => 
-        GenerateTemplate(number, numbers, 
-            firstDigit => numbers[firstDigit] + "man");
+    private static string Generate10_000s(string number, FlexibleDictionary numbers, bool kanjiMode) =>
+        GenerateTemplate(number, numbers,
+            firstDigit => 
+                numbers[firstDigit] + (kanjiMode ? "万" : "man")
+            ,kanjiMode);
+    
+    private static string Generate100_000s(string number, FlexibleDictionary numbers, bool kanjiMode) =>
+        GenerateTemplate(number, numbers,
+            firstDigit => 
+                GenerateNumber(firstDigit+"0", numbers, kanjiMode) + (kanjiMode ? "万" : "man")
+            ,kanjiMode);
+    
+    private static string Generate1_000_000s(string number, FlexibleDictionary numbers, bool kanjiMode) =>
+        GenerateTemplate(number, numbers,
+            firstDigit => 
+                GenerateNumber(firstDigit+"00", numbers, kanjiMode) + (kanjiMode ? "万" : "man")
+            ,kanjiMode);
+    
+    private static string Generate10_000_000s(string number, FlexibleDictionary numbers, bool kanjiMode) =>
+        GenerateTemplate(number, numbers,
+            firstDigit => 
+                GenerateNumber(firstDigit+"000", numbers, kanjiMode) + (kanjiMode ? "万" : "man")
+            ,kanjiMode);
 
     private static string GenerateTemplate(
         string number,
         FlexibleDictionary numbers,
-        Func<char, string> headGeneration)
+        Func<char, string> headGeneration,
+        bool kanjiMode = false)
     {
         var firstDigit = number[0];
         var lastDigits = number[1..];
 
         var head = headGeneration(firstDigit);
 
-        var tail = GenerateNumber(lastDigits, numbers);
+        var tail = GenerateNumber(lastDigits, numbers, kanjiMode);
         return string.IsNullOrEmpty(tail) ? head : head + tail;
     }
 
