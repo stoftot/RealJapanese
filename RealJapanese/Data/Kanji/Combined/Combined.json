@@ -1,0 +1,260 @@
+﻿[
+  {
+    "japanese": "一時",
+    "kana": "いちじ",
+    "english": "one o'clock",
+    "category": "Time"
+  },
+  {
+    "japanese": "一年生",
+    "kana": "いちねんせい",
+    "english": "first-year student",
+    "category": "Education"
+  },
+  {
+    "japanese": "一分",
+    "kana": "いっぷん",
+    "english": "one minute",
+    "category": "Time"
+  },
+  {
+    "japanese": "一つ",
+    "kana": "ひとつ",
+    "english": "one thing",
+    "category": "Quantity"
+  },
+  {
+    "japanese": "二時",
+    "kana": "にじ",
+    "english": "two o'clock",
+    "category": "Time"
+  },
+  {
+    "japanese": "二年生",
+    "kana": "にねんせい",
+    "english": "second-year student",
+    "category": "Education"
+  },
+  {
+    "japanese": "二日間",
+    "kana": "ふつかかん",
+    "english": "two days",
+    "category": "Time"
+  },
+  {
+    "japanese": "二つ",
+    "kana": "ふたつ",
+    "english": "two things",
+    "category": "Quantity"
+  },
+  {
+    "japanese": "三時",
+    "kana": "さんじ",
+    "english": "three o'clock",
+    "category": "Time"
+  },
+  {
+    "japanese": "三年生",
+    "kana": "さんねんせい",
+    "english": "third-year student",
+    "category": "Education"
+  },
+  {
+    "japanese": "三月",
+    "kana": "さんがつ",
+    "english": "March",
+    "category": "Month"
+  },
+  {
+    "japanese": "三つ",
+    "kana": "みっつ",
+    "english": "three things",
+    "category": "Quantity"
+  },
+  {
+    "japanese": "四時",
+    "kana": "よじ",
+    "english": "four o'clock",
+    "category": "Time"
+  },
+  {
+    "japanese": "四年生",
+    "kana": "よねんせい",
+    "english": "fourth-year student",
+    "category": "Education"
+  },
+  {
+    "japanese": "四月",
+    "kana": "しがつ",
+    "english": "April",
+    "category": "Month"
+  },
+  {
+    "japanese": "四つ",
+    "kana": "よっつ",
+    "english": "four things",
+    "category": "Quantity"
+  },
+  {
+    "japanese": "五時",
+    "kana": "ごじ",
+    "english": "five o'clock",
+    "category": "Time"
+  },
+  {
+    "japanese": "五月",
+    "kana": "ごがつ",
+    "english": "May",
+    "category": "Month"
+  },
+  {
+    "japanese": "五歳",
+    "kana": "ごさい",
+    "english": "five years old",
+    "category": "Age"
+  },
+  {
+    "japanese": "五つ",
+    "kana": "いつつ",
+    "english": "five things",
+    "category": "Quantity"
+  },
+  {
+    "japanese": "六時",
+    "kana": "ろくじ",
+    "english": "six o'clock",
+    "category": "Time"
+  },
+  {
+    "japanese": "六分",
+    "kana": "ろっぷん",
+    "english": "six minutes",
+    "category": "Time"
+  },
+  {
+    "japanese": "六つ",
+    "kana": "むっつ",
+    "english": "six things",
+    "category": "Quantity"
+  },
+  {
+    "japanese": "七時",
+    "kana": "しちじ",
+    "english": "seven o'clock",
+    "category": "Time"
+  },
+  {
+    "japanese": "七月",
+    "kana": "しちがつ",
+    "english": "July",
+    "category": "Month"
+  },
+  {
+    "japanese": "七つ",
+    "kana": "ななつ",
+    "english": "seven things",
+    "category": "Quantity"
+  },
+  {
+    "japanese": "七人",
+    "kana": "ななにん;しちにん",
+    "english": "seven people",
+    "category": "People"
+  },
+  {
+    "japanese": "八時",
+    "kana": "はちじ",
+    "english": "eight o'clock",
+    "category": "Time"
+  },
+  {
+    "japanese": "八歳",
+    "kana": "はっさい",
+    "english": "eight years old",
+    "category": "Age"
+  },
+  {
+    "japanese": "八つ",
+    "kana": "やっつ",
+    "english": "eight things",
+    "category": "Quantity"
+  },
+  {
+    "japanese": "九時",
+    "kana": "くじ",
+    "english": "nine o'clock",
+    "category": "Time"
+  },
+  {
+    "japanese": "九月",
+    "kana": "くがつ",
+    "english": "September",
+    "category": "Month"
+  },
+  {
+    "japanese": "九歳",
+    "kana": "きゅうさい",
+    "english": "nine years old",
+    "category": "Age"
+  },
+  {
+    "japanese": "九つ",
+    "kana": "ここのつ",
+    "english": "nine things",
+    "category": "Quantity"
+  },
+  {
+    "japanese": "十時",
+    "kana": "じゅうじ",
+    "english": "ten o'clock",
+    "category": "Time"
+  },
+  {
+    "japanese": "十月",
+    "kana": "じゅうがつ",
+    "english": "October",
+    "category": "Month"
+  },
+  {
+    "japanese": "十歳",
+    "kana": "じゅっさい;じっさい",
+    "english": "ten years old",
+    "category": "Age"
+  },
+  {
+    "japanese": "千円",
+    "kana": "せんえん",
+    "english": "one thousand yen",
+    "category": "Currency"
+  },
+  {
+    "japanese": "百円",
+    "kana": "ひゃくえん",
+    "english": "one hundred yen",
+    "category": "Currency"
+  },
+  {
+    "japanese": "時間",
+    "kana": "じかん",
+    "english": "time;hours",
+    "category": "Time"
+  },
+  {
+    "japanese": "時々",
+    "kana": "ときどき",
+    "english": "sometimes",
+    "category": "Frequency"
+  },
+  {
+    "japanese": "時計",
+    "kana": "とけい",
+    "english": "clock;watch",
+    "category": "Object"
+  },
+  {
+    "japanese": "子どもの時",
+    "kana": "こどものとき",
+    "english": "in one's childhood",
+    "category": "Time"
+  }
+]
