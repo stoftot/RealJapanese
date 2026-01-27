@@ -1,0 +1,46 @@
+﻿@page "/kanji"
+@using DataLoaders.Models
+@using RealJapanese.Components.Shared
+@inherits KanjiSelectorBase
+@rendermode InteractiveServer
+
+<ToggleSlider LeftText="Combined"
+              RightText="Single"
+              @bind-Value="SingelKanjiMode"
+/>
+
+<div class="container my-3">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <WordList
+                TItem="Word"
+                Title="Known vocabulary"
+                AllWords="@AllWords"
+                SelectedIds="@KnownIds"
+                WordSelected="@OnKnownWordSelected"
+                WordDeselected="@OnKnownWordDeSelected"
+            />
+        </div>
+
+        <div class="col-md-6">
+            <WordList
+                TItem="Word"
+                Title="Currently training"
+                AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id)).ToList()"
+                SelectedIds="@TrainingIds"
+                WordSelected="@OnTrainingWordSelected"
+                WordDeselected="@OnTrainingWordDeSelected"
+            />
+        </div>
+    </div>
+</div>
+
+<ToggleSlider LeftText="Practice vocab"
+              RightText="Train new words"
+              @bind-Value="Training"
+/>
+
+<PraticeSelector
+    MainUrl="kanji"
+    Pages="@GetPageDescreptions()"
+/>
