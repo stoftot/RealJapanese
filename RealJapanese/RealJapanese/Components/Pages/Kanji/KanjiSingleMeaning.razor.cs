@@ -49,6 +49,8 @@ public class KanjiSingleMeaningBase : PracticeBase
         currentQuestionIndex = 0;
         UserInput = string.Empty;
         showAnswer = false;
+        GivenAnswers.Clear();
+        MissingAnswers = Questions[currentQuestionIndex].Answer.Split(";").ToList();
     }
     
     protected override string Normalize(string? s) =>
