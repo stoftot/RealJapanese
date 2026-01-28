@@ -25,7 +25,7 @@ public class KanjiSelectorBase : WordComponentBase<Word>
     protected override WordDataBase<Word> WordData => 
         SingleKanjiMode ? KanjiDataInjected.Single : KanjiDataInjected.Combined;
 
-    public List<PraticeSelectorBase.PageDescreption> GetPageDescreptions()
+    public List<PraticeSelectorBase.PageDescreption> PageDescreptions()
     {
         var pagesDescreptions = new List<PraticeSelectorBase.PageDescreption>();
 
@@ -36,7 +36,7 @@ public class KanjiSelectorBase : WordComponentBase<Word>
                 {
                     Title = "Learn the kanji",
                     Description = "Practice the meaning of the individual kanji",
-                    Url = $"meaning?training={Training}",
+                    Url = $"single/meaning?training={Training}",
                 }
             );
         }
@@ -47,7 +47,7 @@ public class KanjiSelectorBase : WordComponentBase<Word>
                 {
                     Title = "Learn the kanji",
                     Description = "Practice then meaning of the kanji in words",
-                    Url = $"meaning?training={Training}",
+                    Url = $"combined/meaning?training={Training}",
                 }
             );
         }
