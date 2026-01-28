@@ -12,6 +12,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSingleton<NumbersQuestionGenerator>();
 builder.Services.AddSingleton<VerbData>();
 builder.Services.AddSingleton<WordData>();
+builder.Services.AddSingleton<KanjiData>();
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
