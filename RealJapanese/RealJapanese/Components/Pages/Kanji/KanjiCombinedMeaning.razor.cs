@@ -35,6 +35,9 @@ public class KanjiCombinedMeaningBase : PracticeBase
         UpdateQuestions();
     }
     
+    protected override string Normalize(string? s) =>
+        (s ?? string.Empty).Trim().ToLowerInvariant();
+    
     private void UpdateQuestions()
     {
         Questions = OrginalQuestions
