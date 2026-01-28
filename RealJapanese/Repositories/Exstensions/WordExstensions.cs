@@ -11,4 +11,11 @@ public static class WordExstensions
             Answer = v.Kana.ToRomaji(),
             Question = v.English
         });
+    
+    public static IEnumerable<QuestionAnswerDto> JapaneseToEnglishQuestions(this IEnumerable<Word> words) =>
+        words.Select(v => new QuestionAnswerDto
+        {
+            Answer = v.English,
+            Question = v.Japanese
+        });
 }
