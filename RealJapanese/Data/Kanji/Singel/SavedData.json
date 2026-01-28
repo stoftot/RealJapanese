@@ -1,4 +1,7 @@
-﻿{
+{
   "KnownIds": [],
-  "TrainingIds": []
+  "TrainingIds": [
+    13,
+    12
+  ]
 }

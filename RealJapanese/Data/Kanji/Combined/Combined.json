@@ -1,257 +1,300 @@
-﻿[
+[
   {
+    "id": "0",
     "japanese": "一時",
     "kana": "いちじ",
     "english": "one o'clock",
     "category": "Time"
   },
   {
+    "id": "1",
     "japanese": "一年生",
     "kana": "いちねんせい",
     "english": "first-year student",
     "category": "Education"
   },
   {
+    "id": "2",
     "japanese": "一分",
     "kana": "いっぷん",
     "english": "one minute",
     "category": "Time"
   },
   {
+    "id": "3",
     "japanese": "一つ",
     "kana": "ひとつ",
     "english": "one thing",
     "category": "Quantity"
   },
   {
+    "id": "4",
     "japanese": "二時",
     "kana": "にじ",
     "english": "two o'clock",
     "category": "Time"
   },
   {
+    "id": "5",
     "japanese": "二年生",
     "kana": "にねんせい",
     "english": "second-year student",
     "category": "Education"
   },
   {
+    "id": "6",
     "japanese": "二日間",
     "kana": "ふつかかん",
     "english": "two days",
     "category": "Time"
   },
   {
+    "id": "7",
     "japanese": "二つ",
     "kana": "ふたつ",
     "english": "two things",
     "category": "Quantity"
   },
   {
+    "id": "8",
     "japanese": "三時",
     "kana": "さんじ",
     "english": "three o'clock",
     "category": "Time"
   },
   {
+    "id": "9",
     "japanese": "三年生",
     "kana": "さんねんせい",
     "english": "third-year student",
     "category": "Education"
   },
   {
+    "id": "10",
     "japanese": "三月",
     "kana": "さんがつ",
     "english": "March",
     "category": "Month"
   },
   {
+    "id": "11",
     "japanese": "三つ",
     "kana": "みっつ",
     "english": "three things",
     "category": "Quantity"
   },
   {
+    "id": "12",
     "japanese": "四時",
     "kana": "よじ",
     "english": "four o'clock",
     "category": "Time"
   },
   {
+    "id": "13",
     "japanese": "四年生",
     "kana": "よねんせい",
     "english": "fourth-year student",
     "category": "Education"
   },
   {
+    "id": "14",
     "japanese": "四月",
     "kana": "しがつ",
     "english": "April",
     "category": "Month"
   },
   {
+    "id": "15",
     "japanese": "四つ",
     "kana": "よっつ",
     "english": "four things",
     "category": "Quantity"
   },
   {
+    "id": "16",
     "japanese": "五時",
     "kana": "ごじ",
     "english": "five o'clock",
     "category": "Time"
   },
   {
+    "id": "17",
     "japanese": "五月",
     "kana": "ごがつ",
     "english": "May",
     "category": "Month"
   },
   {
+    "id": "18",
     "japanese": "五歳",
     "kana": "ごさい",
     "english": "five years old",
     "category": "Age"
   },
   {
+    "id": "19",
     "japanese": "五つ",
     "kana": "いつつ",
     "english": "five things",
     "category": "Quantity"
   },
   {
+    "id": "20",
     "japanese": "六時",
     "kana": "ろくじ",
     "english": "six o'clock",
     "category": "Time"
   },
   {
+    "id": "21",
     "japanese": "六分",
     "kana": "ろっぷん",
     "english": "six minutes",
     "category": "Time"
   },
   {
+    "id": "22",
     "japanese": "六つ",
     "kana": "むっつ",
     "english": "six things",
     "category": "Quantity"
   },
   {
+    "id": "23",
     "japanese": "七時",
     "kana": "しちじ",
     "english": "seven o'clock",
     "category": "Time"
   },
   {
+    "id": "24",
     "japanese": "七月",
     "kana": "しちがつ",
     "english": "July",
     "category": "Month"
   },
   {
+    "id": "25",
     "japanese": "七つ",
     "kana": "ななつ",
     "english": "seven things",
     "category": "Quantity"
   },
   {
+    "id": "26",
     "japanese": "七人",
     "kana": "ななにん;しちにん",
     "english": "seven people",
     "category": "People"
   },
   {
+    "id": "27",
     "japanese": "八時",
     "kana": "はちじ",
     "english": "eight o'clock",
     "category": "Time"
   },
   {
+    "id": "28",
     "japanese": "八歳",
     "kana": "はっさい",
     "english": "eight years old",
     "category": "Age"
   },
   {
+    "id": "29",
     "japanese": "八つ",
     "kana": "やっつ",
     "english": "eight things",
     "category": "Quantity"
   },
   {
+    "id": "30",
     "japanese": "九時",
     "kana": "くじ",
     "english": "nine o'clock",
     "category": "Time"
   },
   {
+    "id": "31",
     "japanese": "九月",
     "kana": "くがつ",
     "english": "September",
     "category": "Month"
   },
   {
+    "id": "32",
     "japanese": "九歳",
     "kana": "きゅうさい",
     "english": "nine years old",
     "category": "Age"
   },
   {
+    "id": "33",
     "japanese": "九つ",
     "kana": "ここのつ",
     "english": "nine things",
     "category": "Quantity"
   },
   {
+    "id": "34",
     "japanese": "十時",
     "kana": "じゅうじ",
     "english": "ten o'clock",
     "category": "Time"
   },
   {
+    "id": "35",
     "japanese": "十月",
     "kana": "じゅうがつ",
     "english": "October",
     "category": "Month"
   },
   {
+    "id": "36",
     "japanese": "十歳",
     "kana": "じゅっさい;じっさい",
     "english": "ten years old",
     "category": "Age"
   },
   {
+    "id": "37",
     "japanese": "千円",
     "kana": "せんえん",
     "english": "one thousand yen",
     "category": "Currency"
   },
   {
+    "id": "38",
     "japanese": "百円",
     "kana": "ひゃくえん",
     "english": "one hundred yen",
     "category": "Currency"
   },
   {
+    "id": "39",
     "japanese": "時間",
     "kana": "じかん",
-    "english": "time;hours",
+    "english": "hours",
     "category": "Time"
   },
   {
+    "id": "40",
     "japanese": "時々",
     "kana": "ときどき",
     "english": "sometimes",
     "category": "Frequency"
   },
   {
+    "id": "41",
     "japanese": "時計",
     "kana": "とけい",
     "english": "clock;watch",
     "category": "Object"
   },
   {
+    "id": "42",
     "japanese": "子どもの時",
     "kana": "こどものとき",
     "english": "in one's childhood",
