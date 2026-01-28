@@ -47,10 +47,10 @@ public class KanjiSingleMeaningBase : PracticeBase
             .ToList();
         
         currentQuestionIndex = 0;
-        UserInput = string.Empty;
-        showAnswer = false;
         GivenAnswers.Clear();
         MissingAnswers = Questions[currentQuestionIndex].Answer.Split(";").ToList();
+        UserInput = string.Empty;
+        showAnswer = false;
     }
     
     protected override string Normalize(string? s) =>
