@@ -1,0 +1,59 @@
+﻿@inherits PracticeCardMultipelAnswersBase
+@namespace RealJapanese.Components.Shared
+
+<div class="d-flex justify-content-center">
+    <div class="practice-wrap w-100">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="card-title mb-0">@Title</h5>
+                        <small class="text-muted">@ProgressText</small>
+                    </div>
+                    
+                    <p class="lead mb-3" style="white-space: pre-line;">@Question</p>
+                    
+                    @if (AnswersGiven.Any())
+                    {
+                        @* <strong>Answers:</strong> @AnswersGivenDisplay *@
+                        <strong>Answers:</strong>
+                        <p class="lead mb-3" style="white-space: pre-line;">@AnswersGivenDisplay</p>
+                    }
+                    
+                    <div class="mb-2">
+                        <input class="form-control form-control-lg"
+                               placeholder="@Placeholder"
+                               value="@UserInput"
+                               @oninput="OnTyping"
+                               @onkeydown="OnKeyDownProxy"
+                               @ref="answerInputRef"/>
+                    </div>
+
+                    @if (ShowAnswer && !string.IsNullOrEmpty(MissingAnswersDisplay))
+                    {
+                        <div class="alert alert-info mt-3" role="alert">
+                            <strong>Missing answers:</strong> @MissingAnswersDisplay
+                        </div>
+                    }
+
+                    <div class="d-flex gap-2 mt-3">
+                        <button type="button"
+                                class="btn btn-outline-secondary"
+                                @onclick="RevealRequested">
+                            @RevealLabel
+                        </button>
+
+                        <button type="button"
+                                class="btn btn-primary ms-auto"
+                                @onclick="NextRequested"
+                                disabled="@NextDisabled">
+                            @NextLabel
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
