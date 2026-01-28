@@ -54,7 +54,7 @@ public abstract class PracticeBase : ComponentBase
 
     protected void RevealAnswer() => showAnswer = true;
 
-    protected bool IsCorrect() => Normalize(UserInput) == Normalize(CurrentAnswer);
+    protected virtual bool IsCorrect() => Normalize(UserInput) == Normalize(CurrentAnswer);
     
     protected virtual Task FocusAnswerInputAsync() => Task.CompletedTask;
 
@@ -67,7 +67,7 @@ public abstract class PracticeBase : ComponentBase
         StateHasChanged();
     }
 
-    private void NextQuestion()
+    protected virtual void NextQuestion()
     {
         currentQuestionIndex++;
         if (currentQuestionIndex >= Questions.Count)
@@ -78,7 +78,7 @@ public abstract class PracticeBase : ComponentBase
     }
 
     // Normalize: trim + remove all whitespace + case-insensitive
-    protected static string Normalize(string? s) =>
+    protected virtual string Normalize(string? s) =>
         new string((s ?? string.Empty).Trim().Where(c => !char.IsWhiteSpace(c)).ToArray())
             .ToLowerInvariant();   
 }

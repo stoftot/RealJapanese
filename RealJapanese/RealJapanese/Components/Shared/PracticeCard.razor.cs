@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace RealJapanese.Components.Shared;
 
-public partial class PracticeCardBase : ComponentBase
+public class PracticeCardBase : ComponentBase
 {
     // Content
     [Parameter] public string Title { get; set; } = "Practice";
