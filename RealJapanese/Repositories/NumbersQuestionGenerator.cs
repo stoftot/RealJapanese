@@ -7,12 +7,27 @@ public class NumbersQuestionGenerator
 {
     private NumbersGenerator NumbersGenerator { get; } = new();
     
+    // private readonly FlexibleDictionary kanji = new(new Dictionary<string, string>
+    // {
+    //     { "1", "一" },
+    //     { "2", "二" },
+    //     { "3", "三" },
+    //     { "4", "四" },
+    //     { "5", "五" },
+    //     { "6", "六" },
+    //     { "7", "七" },
+    //     { "8", "八" },
+    //     { "9", "九" },
+    //     { "10", "十" },
+    //     { "100", "百" },
+    //     { "1000", "千" },
+    //     { "10000", "万" }
+    // });
+    
     public QuestionAnswerDto GenerateRandomQuestion()
     {
-        int category = Random.Shared.Next(0, 3);
-#pragma warning disable CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
-        return category switch
-#pragma warning restore CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
+        return Random.Shared.Next(0, 3) switch
+
         {
             0 => GenerateRandomCountingQuestion(),
             1 => GenerateRandomAgeQuestion(),
