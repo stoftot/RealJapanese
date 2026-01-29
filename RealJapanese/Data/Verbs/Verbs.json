@@ -102,5 +102,69 @@
     "kana": "べんきょうする",
     "english": "to study",
     "category": ""
+  },
+  {
+    "verbType": "u",
+    "id": "13",
+    "japanese": "会う",
+    "kana": "あう",
+    "english": "to meet; to see (a person)",
+    "category": ""
+  },
+  {
+    "verbType": "u",
+    "id": "14",
+    "japanese": "ある",
+    "kana": "ある",
+    "english": "there is; to exist (inanimate objects)",
+    "category": ""
+  },
+  {
+    "verbType": "u",
+    "id": "15",
+    "japanese": "買う",
+    "kana": "かう",
+    "english": "to buy",
+    "category": ""
+  },
+  {
+    "verbType": "u",
+    "id": "16",
+    "japanese": "書く",
+    "kana": "かく",
+    "english": "to write",
+    "category": ""
+  },
+  {
+    "verbType": "u",
+    "id": "17",
+    "japanese": "撮る",
+    "kana": "とる",
+    "english": "to take (a picture)",
+    "category": ""
+  },
+  {
+    "verbType": "u",
+    "id": "18",
+    "japanese": "待つ",
+    "kana": "まつ",
+    "english": "to wait",
+    "category": ""
+  },
+  {
+    "verbType": "u",
+    "id": "19",
+    "japanese": "分かる",
+    "kana": "わかる",
+    "english": "to understand",
+    "category": ""
+  },
+  {
+    "verbType": "ru",
+    "id": "20",
+    "japanese": "いる",
+    "kana": "いる",
+    "english": "to be; to exist (animate beings)",
+    "category": ""
   }
 ]

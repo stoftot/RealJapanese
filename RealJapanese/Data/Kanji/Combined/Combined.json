@@ -274,27 +274,41 @@
   },
   {
     "id": "39",
+    "japanese": "円い",
+    "kana": "まるい",
+    "english": "round",
+    "category": "shape"
+  },
+  {
+    "id": "40",
+    "japanese": "円高",
+    "kana": "えんだが",
+    "english": "strong yen",
+    "category": "Currency"
+  },
+  {
+    "id": "41",
     "japanese": "時間",
     "kana": "じかん",
     "english": "hours",
     "category": "Time"
   },
   {
-    "id": "40",
+    "id": "42",
     "japanese": "時々",
     "kana": "ときどき",
     "english": "sometimes",
     "category": "Frequency"
   },
   {
-    "id": "41",
+    "id": "43",
     "japanese": "時計",
     "kana": "とけい",
     "english": "watch",
     "category": "Object"
   },
   {
-    "id": "42",
+    "id": "44",
     "japanese": "子どもの時",
     "kana": "こどものとき",
     "english": "in one's childhood",
