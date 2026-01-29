@@ -116,7 +116,7 @@
     "id": "14",
     "japanese": "ある",
     "kana": "ある",
-    "english": "there is; to exist (inanimate objects)",
+    "english": "there is; to exist (thing)",
     "category": ""
   },
   {
@@ -164,7 +164,7 @@
     "id": "20",
     "japanese": "いる",
     "kana": "いる",
-    "english": "to be; to exist (animate beings)",
+    "english": "to be; to exist (living thing)",
     "category": ""
   }
 ]
