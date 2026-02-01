@@ -166,5 +166,35 @@
     "kana": "いる",
     "english": "to be; to exist (living thing)",
     "category": ""
+  },
+  {
+    "verbType": "u",
+    "japanese": "泳ぐ",
+    "kana": "およぐ",
+    "english": "to swim"
+  },
+  {
+    "verbType": "u",
+    "japanese": "聞く",
+    "kana": "きく",
+    "english": "to ask; to listen"
+  },
+  {
+    "verbType": "u",
+    "japanese": "乗る",
+    "kana": "のる",
+    "english": "to ride; to board"
+  },
+  {
+    "verbType": "u",
+    "japanese": "やる",
+    "kana": "やる",
+    "english": "to do; to perform"
+  },
+  {
+    "verbType": "ru",
+    "japanese": "出かける",
+    "kana": "でかける",
+    "english": "to go out"
   }
 ]

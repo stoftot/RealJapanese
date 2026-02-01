@@ -1636,5 +1636,137 @@
     "kana": "あいだ",
     "english": "between",
     "category": "Location"
+  },
+  {
+    "Japanese": "食べ物",
+    "Kana": "たべもの",
+    "English": "food",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "飲み物",
+    "Kana": "のみもの",
+    "English": "drink",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "果物",
+    "Kana": "くだもの",
+    "English": "fruit",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "休み",
+    "Kana": "やすみ",
+    "English": "holiday; day off; absence",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "旅行",
+    "Kana": "りょこう",
+    "English": "travel",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "海",
+    "Kana": "うみ",
+    "English": "sea",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "サーフィン",
+    "Kana": "サーフィン",
+    "English": "surfing",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "お土産",
+    "Kana": "おみやげ",
+    "English": "souvenir",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "バス",
+    "Kana": "バス",
+    "English": "bus",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "天気",
+    "Kana": "てんき",
+    "English": "weather",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "宿題",
+    "Kana": "しゅくだい",
+    "English": "homework",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "テスト",
+    "Kana": "テスト",
+    "English": "test",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "誕生日",
+    "Kana": "たんじょうび",
+    "English": "birthday",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "部屋",
+    "Kana": "へや",
+    "English": "room",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "僕",
+    "Kana": "ぼく",
+    "English": "I (used by men)",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "Lサイズ",
+    "Kana": "エルサイズ",
+    "English": "size L",
+    "Category": "Noun"
+  },
+  {
+    "Japanese": "一緒に",
+    "Kana": "いっしょに",
+    "English": "together",
+    "Category": "Adverb/Expression"
+  },
+  {
+    "Japanese": "すごく",
+    "Kana": "すごく",
+    "English": "extremely",
+    "Category": "Adverb/Expression"
+  },
+  {
+    "Japanese": "大丈夫",
+    "Kana": "だいじょうぶ",
+    "English": "It's okay.; Not to worry.; Everything is under control.",
+    "Category": "Adverb/Expression"
+  },
+  {
+    "Japanese": "とても",
+    "Kana": "とても",
+    "English": "very",
+    "Category": "Adverb/Expression"
+  },
+  {
+    "Japanese": "どんな",
+    "Kana": "どんな",
+    "English": "what kind of …",
+    "Category": "Adverb/Expression"
+  },
+  {
+    "Japanese": "〜枚",
+    "Kana": "〜まい",
+    "English": "counter for flat objects",
+    "Category": "Counter"
   }
 ]
