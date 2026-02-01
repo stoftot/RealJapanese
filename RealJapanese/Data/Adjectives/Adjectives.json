@@ -1,153 +1,202 @@
-﻿[
-   {
-  "type": "i",
-  "japanese": "新しい",
-  "kana": "あたらしい",
-  "english": "new" 
- },
-   {
-  "type": "i",
-  "japanese": "古い",
-  "kana": "ふるい",
-  "english": "old (thing; not used for people)" 
- },
-   {
-  "type": "i",
-  "japanese": "暑い",
-  "kana": "あつい",
-  "english": "hot (weather)" 
- },
-   {
-  "type": "i",
-  "japanese": "寒い",
-  "kana": "さむい",
-  "english": "cold (weather; not used for things)" 
- },
-   {
-  "type": "i",
-  "japanese": "熱い",
-  "kana": "あつい",
-  "english": "hot (thing)" 
- },
-   {
-  "type": "i",
-  "japanese": "忙しい",
-  "kana": "いそがしい",
-  "english": "busy (people; days)" 
- },
-   {
-  "type": "i",
-  "japanese": "大きい",
-  "kana": "おおきい",
-  "english": "large" 
- },
-   {
-  "type": "i",
-  "japanese": "小さい",
-  "kana": "ちいさい",
-  "english": "small" 
- },
-   {
-  "type": "i",
-  "japanese": "面白い",
-  "kana": "おもしろい",
-  "english": "interesting; funny" 
- },
-   {
-  "type": "i",
-  "japanese": "つまらない",
-  "kana": "つまらない",
-  "english": "boring" 
- },
-   {
-  "type": "i",
-  "japanese": "優しい",
-  "kana": "やさしい",
-  "english": "easy; kind" 
- },
-   {
-  "type": "i",
-  "japanese": "難しい",
-  "kana": "むずかしい",
-  "english": "difficult" 
- },
-   {
-  "type": "i",
-  "japanese": "かっこいい",
-  "kana": "かっこいい",
-  "english": "good-looking" 
- },
-   {
-  "type": "i",
-  "japanese": "怖い",
-  "kana": "こわい",
-  "english": "frightening" 
- },
-   {
-  "type": "i",
-  "japanese": "楽しい",
-  "kana": "たのしい",
-  "english": "fun" 
- },
-   {
-  "type": "i",
-  "japanese": "安い",
-  "kana": "やすい",
-  "english": "inexpensive; cheap (thing)" 
- },
- 
-   {
-  "type": "ni",
-  "japanese": "好き",
-  "kana": "すき",
-  "english": "fond of; to like" 
- },
-   {
-  "type": "ni",
-  "japanese": "嫌い",
-  "kana": "きらい",
-  "english": "to dislike" 
- },
-   {
-  "type": "ni",
-  "japanese": "大好き",
-  "kana": "だいすき",
-  "english": "to love; very fond of" 
- },
-   {
-  "type": "ni",
-  "japanese": "大嫌い",
-  "kana": "だいきらい",
-  "english": "to hate" 
- },
-   {
-  "type": "ni",
-  "japanese": "きれい",
-  "kana": "きれい",
-  "english": "beautiful; clean" 
- },
-   {
-  "type": "ni",
-  "japanese": "元気",
-  "kana": "げんき",
-  "english": "healthy; energetic" 
- },
-   {
-  "type": "ni",
-  "japanese": "静か",
-  "kana": "しずか",
-  "english": "quiet" 
- },
-   {
-  "type": "ni",
-  "japanese": "にぎやか",
-  "kana": "にぎやか",
-  "english": "lively" 
- }, 
- {
-  "type": "ni",
-  "japanese": "暇",
-  "kana": "ひま",
-  "english": "not busy; free (time)"
- }
+[
+  {
+    "type": "i",
+    "id": "0",
+    "japanese": "新しい",
+    "kana": "あたらしい",
+    "english": "new",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "1",
+    "japanese": "古い",
+    "kana": "ふるい",
+    "english": "old (thing; not used for people)",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "2",
+    "japanese": "暑い",
+    "kana": "あつい",
+    "english": "hot (weather)",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "3",
+    "japanese": "寒い",
+    "kana": "さむい",
+    "english": "cold (weather; not used for things)",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "4",
+    "japanese": "熱い",
+    "kana": "あつい",
+    "english": "hot (thing)",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "5",
+    "japanese": "忙しい",
+    "kana": "いそがしい",
+    "english": "busy (people; days)",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "6",
+    "japanese": "大きい",
+    "kana": "おおきい",
+    "english": "large",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "7",
+    "japanese": "小さい",
+    "kana": "ちいさい",
+    "english": "small",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "8",
+    "japanese": "面白い",
+    "kana": "おもしろい",
+    "english": "interesting; funny",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "9",
+    "japanese": "つまらない",
+    "kana": "つまらない",
+    "english": "boring",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "10",
+    "japanese": "優しい",
+    "kana": "やさしい",
+    "english": "easy; kind",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "11",
+    "japanese": "難しい",
+    "kana": "むずかしい",
+    "english": "difficult",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "12",
+    "japanese": "かっこいい",
+    "kana": "かっこいい",
+    "english": "good-looking",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "13",
+    "japanese": "怖い",
+    "kana": "こわい",
+    "english": "frightening",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "14",
+    "japanese": "楽しい",
+    "kana": "たのしい",
+    "english": "fun",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "15",
+    "japanese": "安い",
+    "kana": "やすい",
+    "english": "inexpensive; cheap (thing)",
+    "category": ""
+  },
+  {
+    "type": "ni",
+    "id": "16",
+    "japanese": "好き",
+    "kana": "すき",
+    "english": "fond of; to like",
+    "category": ""
+  },
+  {
+    "type": "ni",
+    "id": "17",
+    "japanese": "嫌い",
+    "kana": "きらい",
+    "english": "to dislike",
+    "category": ""
+  },
+  {
+    "type": "ni",
+    "id": "18",
+    "japanese": "大好き",
+    "kana": "だいすき",
+    "english": "to love; very fond of",
+    "category": ""
+  },
+  {
+    "type": "ni",
+    "id": "19",
+    "japanese": "大嫌い",
+    "kana": "だいきらい",
+    "english": "to hate",
+    "category": ""
+  },
+  {
+    "type": "ni",
+    "id": "20",
+    "japanese": "きれい",
+    "kana": "きれい",
+    "english": "beautiful; clean",
+    "category": ""
+  },
+  {
+    "type": "ni",
+    "id": "21",
+    "japanese": "元気",
+    "kana": "げんき",
+    "english": "healthy; energetic",
+    "category": ""
+  },
+  {
+    "type": "ni",
+    "id": "22",
+    "japanese": "静か",
+    "kana": "しずか",
+    "english": "quiet",
+    "category": ""
+  },
+  {
+    "type": "ni",
+    "id": "23",
+    "japanese": "にぎやか",
+    "kana": "にぎやか",
+    "english": "lively",
+    "category": ""
+  },
+  {
+    "type": "ni",
+    "id": "24",
+    "japanese": "暇",
+    "kana": "ひま",
+    "english": "not busy; free (time)",
+    "category": ""
+  }
 ]
