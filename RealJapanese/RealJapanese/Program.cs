@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents()
 
 //Data
 builder.Services.AddSingleton<NumbersQuestionGenerator>();
+builder.Services.AddSingleton<AdjectiveData>();
 builder.Services.AddSingleton<VerbData>();
 builder.Services.AddSingleton<WordData>();
 builder.Services.AddSingleton<KanjiData>();
