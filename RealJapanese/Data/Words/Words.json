@@ -1638,135 +1638,157 @@
     "category": "Location"
   },
   {
-    "Japanese": "食べ物",
-    "Kana": "たべもの",
-    "English": "food",
-    "Category": "Noun"
+    "id": "234",
+    "japanese": "食べ物",
+    "kana": "たべもの",
+    "english": "food",
+    "category": "Noun"
   },
   {
-    "Japanese": "飲み物",
-    "Kana": "のみもの",
-    "English": "drink",
-    "Category": "Noun"
+    "id": "235",
+    "japanese": "飲み物",
+    "kana": "のみもの",
+    "english": "drink",
+    "category": "Noun"
   },
   {
-    "Japanese": "果物",
-    "Kana": "くだもの",
-    "English": "fruit",
-    "Category": "Noun"
+    "id": "236",
+    "japanese": "果物",
+    "kana": "くだもの",
+    "english": "fruit",
+    "category": "Noun"
   },
   {
-    "Japanese": "休み",
-    "Kana": "やすみ",
-    "English": "holiday; day off; absence",
-    "Category": "Noun"
+    "id": "237",
+    "japanese": "休み",
+    "kana": "やすみ",
+    "english": "holiday; day off; absence",
+    "category": "Noun"
   },
   {
-    "Japanese": "旅行",
-    "Kana": "りょこう",
-    "English": "travel",
-    "Category": "Noun"
+    "id": "238",
+    "japanese": "旅行",
+    "kana": "りょこう",
+    "english": "travel",
+    "category": "Noun"
   },
   {
-    "Japanese": "海",
-    "Kana": "うみ",
-    "English": "sea",
-    "Category": "Noun"
+    "id": "239",
+    "japanese": "海",
+    "kana": "うみ",
+    "english": "sea",
+    "category": "Noun"
   },
   {
-    "Japanese": "サーフィン",
-    "Kana": "サーフィン",
-    "English": "surfing",
-    "Category": "Noun"
+    "id": "240",
+    "japanese": "サーフィン",
+    "kana": "サーフィン",
+    "english": "surfing",
+    "category": "Noun"
   },
   {
-    "Japanese": "お土産",
-    "Kana": "おみやげ",
-    "English": "souvenir",
-    "Category": "Noun"
+    "id": "241",
+    "japanese": "お土産",
+    "kana": "おみやげ",
+    "english": "souvenir",
+    "category": "Noun"
   },
   {
-    "Japanese": "バス",
-    "Kana": "バス",
-    "English": "bus",
-    "Category": "Noun"
+    "id": "242",
+    "japanese": "バス",
+    "kana": "バス",
+    "english": "bus",
+    "category": "Noun"
   },
   {
-    "Japanese": "天気",
-    "Kana": "てんき",
-    "English": "weather",
-    "Category": "Noun"
+    "id": "243",
+    "japanese": "天気",
+    "kana": "てんき",
+    "english": "weather",
+    "category": "Noun"
   },
   {
-    "Japanese": "宿題",
-    "Kana": "しゅくだい",
-    "English": "homework",
-    "Category": "Noun"
+    "id": "244",
+    "japanese": "宿題",
+    "kana": "しゅくだい",
+    "english": "homework",
+    "category": "Noun"
   },
   {
-    "Japanese": "テスト",
-    "Kana": "テスト",
-    "English": "test",
-    "Category": "Noun"
+    "id": "245",
+    "japanese": "テスト",
+    "kana": "テスト",
+    "english": "test",
+    "category": "Noun"
   },
   {
-    "Japanese": "誕生日",
-    "Kana": "たんじょうび",
-    "English": "birthday",
-    "Category": "Noun"
+    "id": "246",
+    "japanese": "誕生日",
+    "kana": "たんじょうび",
+    "english": "birthday",
+    "category": "Noun"
   },
   {
-    "Japanese": "部屋",
-    "Kana": "へや",
-    "English": "room",
-    "Category": "Noun"
+    "id": "247",
+    "japanese": "部屋",
+    "kana": "へや",
+    "english": "room",
+    "category": "Noun"
   },
   {
-    "Japanese": "僕",
-    "Kana": "ぼく",
-    "English": "I (used by men)",
-    "Category": "Noun"
+    "id": "248",
+    "japanese": "僕",
+    "kana": "ぼく",
+    "english": "I (used by men)",
+    "category": "Noun"
   },
   {
-    "Japanese": "Lサイズ",
-    "Kana": "エルサイズ",
-    "English": "size L",
-    "Category": "Noun"
+    "id": "249",
+    "japanese": "Lサイズ",
+    "kana": "エルサイズ",
+    "english": "size L",
+    "category": "Noun"
   },
   {
-    "Japanese": "一緒に",
-    "Kana": "いっしょに",
-    "English": "together",
-    "Category": "Adverb/Expression"
+    "id": "250",
+    "japanese": "一緒に",
+    "kana": "いっしょに",
+    "english": "together",
+    "category": "Adverb/Expression"
   },
   {
-    "Japanese": "すごく",
-    "Kana": "すごく",
-    "English": "extremely",
-    "Category": "Adverb/Expression"
+    "id": "251",
+    "japanese": "すごく",
+    "kana": "すごく",
+    "english": "extremely",
+    "category": "Adverb/Expression"
   },
   {
-    "Japanese": "大丈夫",
-    "Kana": "だいじょうぶ",
-    "English": "It's okay.; Not to worry.; Everything is under control.",
-    "Category": "Adverb/Expression"
+    "id": "252",
+    "japanese": "大丈夫",
+    "kana": "だいじょうぶ",
+    "english": "It's okay.; Not to worry.; Everything is under control.",
+    "category": "Adverb/Expression"
   },
   {
-    "Japanese": "とても",
-    "Kana": "とても",
-    "English": "very",
-    "Category": "Adverb/Expression"
+    "id": "253",
+    "japanese": "とても",
+    "kana": "とても",
+    "english": "very",
+    "category": "Adverb/Expression"
   },
   {
-    "Japanese": "どんな",
-    "Kana": "どんな",
-    "English": "what kind of …",
-    "Category": "Adverb/Expression"
+    "id": "254",
+    "japanese": "どんな",
+    "kana": "どんな",
+    "english": "what kind of …",
+    "category": "Adverb/Expression"
   },
   {
-    "Japanese": "〜枚",
-    "Kana": "〜まい",
-    "English": "counter for flat objects",
-    "Category": "Counter"
+    "id": "255",
+    "japanese": "〜枚",
+    "kana": "〜まい",
+    "english": "counter for flat objects",
+    "category": "Counter"
   }
 ]

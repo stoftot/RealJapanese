@@ -169,32 +169,42 @@
   },
   {
     "verbType": "u",
+    "id": "21",
     "japanese": "泳ぐ",
     "kana": "およぐ",
-    "english": "to swim"
+    "english": "to swim",
+    "category": ""
   },
   {
     "verbType": "u",
+    "id": "22",
     "japanese": "聞く",
     "kana": "きく",
-    "english": "to ask; to listen"
+    "english": "to ask; to listen",
+    "category": ""
   },
   {
     "verbType": "u",
+    "id": "23",
     "japanese": "乗る",
     "kana": "のる",
-    "english": "to ride; to board"
+    "english": "to ride; to board",
+    "category": ""
   },
   {
     "verbType": "u",
+    "id": "24",
     "japanese": "やる",
     "kana": "やる",
-    "english": "to do; to perform"
+    "english": "to do; to perform",
+    "category": ""
   },
   {
     "verbType": "ru",
+    "id": "25",
     "japanese": "出かける",
     "kana": "でかける",
-    "english": "to go out"
+    "english": "to go out",
+    "category": ""
   }
 ]
