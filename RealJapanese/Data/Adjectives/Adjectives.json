@@ -128,7 +128,7 @@
     "category": ""
   },
   {
-    "type": "ni",
+    "type": "na",
     "id": "16",
     "japanese": "好き",
     "kana": "すき",
@@ -136,7 +136,7 @@
     "category": ""
   },
   {
-    "type": "ni",
+    "type": "na",
     "id": "17",
     "japanese": "嫌い",
     "kana": "きらい",
@@ -144,7 +144,7 @@
     "category": ""
   },
   {
-    "type": "ni",
+    "type": "na",
     "id": "18",
     "japanese": "大好き",
     "kana": "だいすき",
@@ -152,7 +152,7 @@
     "category": ""
   },
   {
-    "type": "ni",
+    "type": "na",
     "id": "19",
     "japanese": "大嫌い",
     "kana": "だいきらい",
@@ -160,7 +160,7 @@
     "category": ""
   },
   {
-    "type": "ni",
+    "type": "na",
     "id": "20",
     "japanese": "きれい",
     "kana": "きれい",
@@ -168,7 +168,7 @@
     "category": ""
   },
   {
-    "type": "ni",
+    "type": "na",
     "id": "21",
     "japanese": "元気",
     "kana": "げんき",
@@ -176,7 +176,7 @@
     "category": ""
   },
   {
-    "type": "ni",
+    "type": "na",
     "id": "22",
     "japanese": "静か",
     "kana": "しずか",
@@ -184,7 +184,7 @@
     "category": ""
   },
   {
-    "type": "ni",
+    "type": "na",
     "id": "23",
     "japanese": "にぎやか",
     "kana": "にぎやか",
@@ -192,7 +192,7 @@
     "category": ""
   },
   {
-    "type": "ni",
+    "type": "na",
     "id": "24",
     "japanese": "暇",
     "kana": "ひま",
