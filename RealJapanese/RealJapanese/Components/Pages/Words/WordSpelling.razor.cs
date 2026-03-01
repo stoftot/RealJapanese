@@ -27,5 +27,5 @@ public class WordSpellingBase : SingleAnwserBase
     }
 
     protected override Task FocusAnswerInputAsync()
-        => cardRef.FocusInput();
+        => cardRef.ClearAndFocusInputAsync();
 }

@@ -25,5 +25,5 @@ public class AdjectiveSpellingBase : SingleAnwserBase
     }
 
     protected override Task FocusAnswerInputAsync()
-        => cardRef.FocusInput();
+        => cardRef.ClearAndFocusInputAsync();
 }

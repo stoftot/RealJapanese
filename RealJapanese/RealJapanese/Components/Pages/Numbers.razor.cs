@@ -17,7 +17,7 @@ public partial class NumbersBase : PracticeBase
     }
 
     protected override Task FocusAnswerInputAsync()
-        => cardRef?.FocusInput() ?? Task.CompletedTask;
+        => cardRef?.ClearAndFocusInputAsync() ?? Task.CompletedTask;
 
     protected override void OnUserInputChanged(string value)
     {

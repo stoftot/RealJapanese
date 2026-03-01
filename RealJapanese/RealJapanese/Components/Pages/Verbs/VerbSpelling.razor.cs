@@ -26,5 +26,5 @@ public class VerbSpellingBase : SingleAnwserBase
     }
 
     protected override Task FocusAnswerInputAsync()
-        => cardRef.FocusInput();
+        => cardRef.ClearAndFocusInputAsync();
 }

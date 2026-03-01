@@ -25,5 +25,5 @@ public class CategoriesVerbsBase : SingleAnwserBase
     }
 
     protected override Task FocusAnswerInputAsync()
-        => cardRef.FocusInput();
+        => cardRef.ClearAndFocusInputAsync();
 }

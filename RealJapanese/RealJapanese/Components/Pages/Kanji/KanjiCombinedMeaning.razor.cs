@@ -52,7 +52,7 @@ public class KanjiCombinedMeaningBase : PracticeBase
     }
 
     protected override Task FocusAnswerInputAsync()
-        => cardRef.FocusInput();
+        => cardRef.ClearAndFocusInputAsync();
 
     protected override void OnUserInputChanged(string value)
     {

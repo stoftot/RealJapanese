@@ -25,5 +25,5 @@ public class CategoriesAdjectivesBase : SingleAnwserBase
     }
 
     protected override Task FocusAnswerInputAsync()
-        => cardRef.FocusInput();
+        => cardRef.ClearAndFocusInputAsync();
 }
