@@ -7,17 +7,17 @@ public record Word
 {
     [JsonPropertyName("id")] 
     [JsonConverter(typeof(StringToIntConverter))]
-    public int Id { get; set; } = -1;
+    public int Id { get; init; } = -1;
     
     [JsonPropertyName("japanese")]
-    public required string Japanese { get; set; }
+    public required string Japanese { get; init; }
     
     [JsonPropertyName("kana")]
-    public required string Kana { get; set; }
+    public required string Kana { get; init; }
     
     [JsonPropertyName("english")]
-    public required string English { get; set; }
+    public required string English { get; init; }
 
     [JsonPropertyName("category")] 
-    public string Category { get; set; } = "";
+    public string Category { get; init; } = "";
 }

@@ -1,25 +1,15 @@
 ﻿using System.Collections.Frozen;
-using System.Text.Json.Serialization;
 using DataLoaders.Exstensions;
 
 namespace DataLoaders.Models;
 
-public record Verb : Word
+public record Verb : Conjugatabel
 {
-    [JsonPropertyName("type")] public required string VerbType { get; set; }
-
-    public enum ToConjugate
+    private enum VerbType
     {
-        Japanese,
-        Kana
-    }
-    
-    public enum ConjugationType
-    {
-        PresentAffirmative,
-        PresentNegative,
-        PastAffirmative,
-        PastNegative
+        U,
+        RU,
+        IRREGULAR
     }
     
     private const string PresentAffirmativeEnding = "ます";
@@ -27,7 +17,7 @@ public record Verb : Word
     private const string PastAffirmativeEnding = "ました";
     private const string PastNegativeEnding = "ませんでした";
 
-    private readonly FrozenDictionary<string, string> uConjugations =
+    private static readonly FrozenDictionary<string, string> uConjugations =
         new Dictionary<string, string>
         {
             { "う", "い" },
@@ -41,13 +31,13 @@ public record Verb : Word
             { "る", "り" }
         }.ToFrozenDictionary();
 
-    private readonly FrozenDictionary<string, string> ruConjugations =
+    private static readonly FrozenDictionary<string, string> ruConjugations =
         new Dictionary<string, string>
         {
             { "る", "" }
         }.ToFrozenDictionary();
 
-    private readonly FrozenDictionary<string, string> irregularConjugations =
+    private static readonly FrozenDictionary<string, string> irregularConjugations =
         new Dictionary<string, string>
         {
             { "する", "し" },
@@ -80,15 +70,18 @@ public record Verb : Word
             ToConjugate.Kana => Kana
         };
         
-        return VerbType switch
+        if(!Enum.TryParse(Type.ToUpper(), out VerbType verbType))
+            throw new ArgumentException($"Unknown verb type: {Type}");
+        
+        return verbType switch
         {
-            "u" => StemU(str),
-            "ru" => StemRu(str),
-            "irregular" => StemIrregular(str)
+            VerbType.U => StemU(str),
+            VerbType.RU => StemRu(str), 
+            VerbType.IRREGULAR => StemIrregular(str)
         };
     }
     
-    public string Conjugate(ToConjugate toConjugate, ConjugationType conjugationType)=>
+    public override string Conjugate(ToConjugate toConjugate, ConjugationType conjugationType)=>
         conjugationType switch
         {
             ConjugationType.PresentAffirmative => Stem(toConjugate) + PresentAffirmativeEnding,
