@@ -7,7 +7,7 @@ public record Word
 {
     [JsonPropertyName("id")] 
     [JsonConverter(typeof(StringToIntConverter))]
-    public int Id { get; init; } = -1;
+    public int Id { get; set; } = -1;
     
     [JsonPropertyName("japanese")]
     public required string Japanese { get; init; }
