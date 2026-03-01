@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace RealJapanese.Components.Shared;
+﻿namespace RealJapanese.Components.Shared;
 public abstract class SingleAnwserBase : PracticeBase
 {
     protected int splitDataInto = 1;

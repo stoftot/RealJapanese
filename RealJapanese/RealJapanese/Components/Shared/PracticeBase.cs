@@ -63,8 +63,9 @@ public abstract class PracticeBase : ComponentBase
         NextQuestion();               // reshuffles at end & wraps
         _userInput = string.Empty;    // clear input backing field
         showAnswer = false;           // hide previous answer
-        await FocusAnswerInputAsync();
         StateHasChanged();
+        await FocusAnswerInputAsync();
+        
     }
 
     protected virtual void NextQuestion()
