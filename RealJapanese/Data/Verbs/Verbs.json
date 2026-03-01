@@ -1,6 +1,6 @@
 [
   {
-    "verbType": "u",
+    "type": "u",
     "id": "0",
     "japanese": "行く",
     "kana": "いく",
@@ -8,7 +8,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "1",
     "japanese": "帰る",
     "kana": "かえる",
@@ -16,7 +16,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "2",
     "japanese": "聞く",
     "kana": "きく",
@@ -24,7 +24,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "3",
     "japanese": "飲む",
     "kana": "のむ",
@@ -32,7 +32,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "4",
     "japanese": "話す",
     "kana": "はなす",
@@ -40,7 +40,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "5",
     "japanese": "読む",
     "kana": "よむ",
@@ -48,7 +48,7 @@
     "category": ""
   },
   {
-    "verbType": "ru",
+    "type": "ru",
     "id": "6",
     "japanese": "起きる",
     "kana": "おきる",
@@ -56,7 +56,7 @@
     "category": ""
   },
   {
-    "verbType": "ru",
+    "type": "ru",
     "id": "7",
     "japanese": "食べる",
     "kana": "たべる",
@@ -64,7 +64,7 @@
     "category": ""
   },
   {
-    "verbType": "ru",
+    "type": "ru",
     "id": "8",
     "japanese": "寝る",
     "kana": "ねる",
@@ -72,7 +72,7 @@
     "category": ""
   },
   {
-    "verbType": "ru",
+    "type": "ru",
     "id": "9",
     "japanese": "見る",
     "kana": "みる",
@@ -80,7 +80,7 @@
     "category": ""
   },
   {
-    "verbType": "irregular",
+    "type": "irregular",
     "id": "10",
     "japanese": "来る",
     "kana": "くる",
@@ -88,7 +88,7 @@
     "category": ""
   },
   {
-    "verbType": "irregular",
+    "type": "irregular",
     "id": "11",
     "japanese": "する",
     "kana": "する",
@@ -96,7 +96,7 @@
     "category": ""
   },
   {
-    "verbType": "irregular",
+    "type": "irregular",
     "id": "12",
     "japanese": "勉強する",
     "kana": "べんきょうする",
@@ -104,7 +104,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "13",
     "japanese": "会う",
     "kana": "あう",
@@ -112,7 +112,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "14",
     "japanese": "ある",
     "kana": "ある",
@@ -120,7 +120,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "15",
     "japanese": "買う",
     "kana": "かう",
@@ -128,7 +128,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "16",
     "japanese": "書く",
     "kana": "かく",
@@ -136,7 +136,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "17",
     "japanese": "撮る",
     "kana": "とる",
@@ -144,7 +144,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "18",
     "japanese": "待つ",
     "kana": "まつ",
@@ -152,7 +152,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "19",
     "japanese": "分かる",
     "kana": "わかる",
@@ -160,7 +160,7 @@
     "category": ""
   },
   {
-    "verbType": "ru",
+    "type": "ru",
     "id": "20",
     "japanese": "いる",
     "kana": "いる",
@@ -168,7 +168,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "21",
     "japanese": "泳ぐ",
     "kana": "およぐ",
@@ -176,7 +176,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "22",
     "japanese": "聞く",
     "kana": "きく",
@@ -184,7 +184,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "23",
     "japanese": "乗る",
     "kana": "のる",
@@ -192,7 +192,7 @@
     "category": ""
   },
   {
-    "verbType": "u",
+    "type": "u",
     "id": "24",
     "japanese": "やる",
     "kana": "やる",
@@ -200,7 +200,7 @@
     "category": ""
   },
   {
-    "verbType": "ru",
+    "type": "ru",
     "id": "25",
     "japanese": "出かける",
     "kana": "でかける",

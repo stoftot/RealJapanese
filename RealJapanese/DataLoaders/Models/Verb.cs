@@ -6,7 +6,7 @@ namespace DataLoaders.Models;
 
 public record Verb : Word
 {
-    [JsonPropertyName("verbType")] public required string VerbType { get; set; }
+    [JsonPropertyName("type")] public required string VerbType { get; set; }
 
     public enum ToConjugate
     {
