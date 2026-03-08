@@ -198,5 +198,13 @@
     "kana": "ひま",
     "english": "not busy; free (time)",
     "category": ""
+  },
+  {
+    "type": "na",
+    "id": "25",
+    "japanese": "大変",
+    "kana": "たいへん",
+    "english": "tough (situation)",
+    "category": ""
   }
 ]

@@ -1790,5 +1790,159 @@
     "kana": "〜まい",
     "english": "counter for flat objects",
     "category": "Counter"
+  },
+  {
+    "id": "256",
+    "japanese": "漢字",
+    "kana": "かんじ",
+    "english": "kanji; Chinese character",
+    "category": "Noun"
+  },
+  {
+    "id": "257",
+    "japanese": "教科書",
+    "kana": "きょうかしょ",
+    "english": "textbook",
+    "category": "Noun"
+  },
+  {
+    "id": "258",
+    "japanese": "ページ",
+    "kana": "ページ",
+    "english": "page",
+    "category": "Noun"
+  },
+  {
+    "id": "259",
+    "japanese": "次",
+    "kana": "つぎ",
+    "english": "next",
+    "category": "Noun"
+  },
+  {
+    "id": "260",
+    "japanese": "お金",
+    "kana": "おかね",
+    "english": "money",
+    "category": "Noun"
+  },
+  {
+    "id": "261",
+    "japanese": "荷物",
+    "kana": "にもつ",
+    "english": "baggage",
+    "category": "Noun"
+  },
+  {
+    "id": "262",
+    "japanese": "パソコン",
+    "kana": "パソコン",
+    "english": "personal computer",
+    "category": "Noun"
+  },
+  {
+    "id": "263",
+    "japanese": "シャワー",
+    "kana": "シャワー",
+    "english": "shower",
+    "category": "Noun"
+  },
+  {
+    "id": "264",
+    "japanese": "エアコン",
+    "kana": "エアコン",
+    "english": "air conditioner",
+    "category": "Noun"
+  },
+  {
+    "id": "265",
+    "japanese": "電気",
+    "kana": "でんき",
+    "english": "electricity; light",
+    "category": "Noun"
+  },
+  {
+    "id": "266",
+    "japanese": "窓",
+    "kana": "まど",
+    "english": "window",
+    "category": "Noun"
+  },
+  {
+    "id": "267",
+    "japanese": "電車",
+    "kana": "でんしゃ",
+    "english": "train",
+    "category": "Noun"
+  },
+  {
+    "id": "268",
+    "japanese": "国",
+    "kana": "くに",
+    "english": "country; place of origin",
+    "category": "Noun"
+  },
+  {
+    "id": "269",
+    "japanese": "今週",
+    "kana": "こんしゅう",
+    "english": "this week",
+    "category": "Time"
+  },
+  {
+    "id": "270",
+    "japanese": "来週",
+    "kana": "らいしゅう",
+    "english": "next week",
+    "category": "Time"
+  },
+  {
+    "id": "271",
+    "japanese": "来年",
+    "kana": "らいねん",
+    "english": "next year",
+    "category": "Time"
+  },
+  {
+    "id": "272",
+    "japanese": "夜",
+    "kana": "よる",
+    "english": "night",
+    "category": "Time"
+  },
+  {
+    "id": "273",
+    "japanese": "後で",
+    "kana": "あとで",
+    "english": "later on",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "274",
+    "japanese": "すぐ",
+    "kana": "すぐ",
+    "english": "right away",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "275",
+    "japanese": "ゆっくり",
+    "kana": "ゆっくり",
+    "english": "slowly; leisurely; unhurriedly",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "276",
+    "japanese": "結構です",
+    "kana": "けっこうです",
+    "english": "That would be fine.; That wouldn’t be necessary.",
+    "category": "Adverb/Expression"
+  },
+  {
+    "id": "277",
+    "japanese": "本当ですか",
+    "kana": "ほんとうですか",
+    "english": "Really?",
+    "category": "Adverb/Expression"
   }
 ]

@@ -206,5 +206,197 @@
     "kana": "でかける",
     "english": "to go out",
     "category": ""
+  },
+  {
+    "type": "u",
+    "id": "26",
+    "japanese": "遊ぶ",
+    "kana": "あそぶ",
+    "english": "to play; to spend time pleasantly",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "27",
+    "japanese": "急ぐ",
+    "kana": "いそぐ",
+    "english": "to hurry",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "28",
+    "japanese": "返す",
+    "kana": "かえす",
+    "english": "to return (a thing)",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "29",
+    "japanese": "消す",
+    "kana": "けす",
+    "english": "to turn off; to erase",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "30",
+    "japanese": "死ぬ",
+    "kana": "しぬ",
+    "english": "to die",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "31",
+    "japanese": "座る",
+    "kana": "すわる",
+    "english": "to sit down",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "32",
+    "japanese": "立つ",
+    "kana": "たつ",
+    "english": "to stand up",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "33",
+    "japanese": "たばこを吸う",
+    "kana": "たばこをすう",
+    "english": "to smoke",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "34",
+    "japanese": "使う",
+    "kana": "つかう",
+    "english": "to use",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "35",
+    "japanese": "手伝う",
+    "kana": "てつだう",
+    "english": "to help",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "36",
+    "japanese": "入る",
+    "kana": "はいる",
+    "english": "to enter",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "37",
+    "japanese": "持つ",
+    "kana": "もつ",
+    "english": "to carry; to hold",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "38",
+    "japanese": "休む",
+    "kana": "やすむ",
+    "english": "to rest; to be absent",
+    "category": ""
+  },
+  {
+    "type": "ru",
+    "id": "39",
+    "japanese": "開ける",
+    "kana": "あける",
+    "english": "to open (something)",
+    "category": ""
+  },
+  {
+    "type": "ru",
+    "id": "40",
+    "japanese": "閉める",
+    "kana": "しめる",
+    "english": "to close (something)",
+    "category": ""
+  },
+  {
+    "type": "ru",
+    "id": "41",
+    "japanese": "教える",
+    "kana": "おしえる",
+    "english": "to teach; to instruct",
+    "category": ""
+  },
+  {
+    "type": "ru",
+    "id": "42",
+    "japanese": "忘れる",
+    "kana": "わすれる",
+    "english": "to forget; to leave behind",
+    "category": ""
+  },
+  {
+    "type": "ru",
+    "id": "43",
+    "japanese": "降りる",
+    "kana": "おりる",
+    "english": "to get off",
+    "category": ""
+  },
+  {
+    "type": "ru",
+    "id": "44",
+    "japanese": "借りる",
+    "kana": "かりる",
+    "english": "to borrow",
+    "category": ""
+  },
+  {
+    "type": "ru",
+    "id": "45",
+    "japanese": "シャワーを浴びる",
+    "kana": "しゃわーをあびる",
+    "english": "to take a shower",
+    "category": ""
+  },
+  {
+    "type": "ru",
+    "id": "46",
+    "japanese": "つける",
+    "kana": "つける",
+    "english": "to turn on",
+    "category": ""
+  },
+  {
+    "type": "irregular",
+    "id": "47",
+    "japanese": "電話する",
+    "kana": "でんわする",
+    "english": "to call",
+    "category": ""
+  },
+  {
+    "type": "irregular",
+    "id": "48",
+    "japanese": "連れてくる",
+    "kana": "つれてくる",
+    "english": "to bring (a person)",
+    "category": ""
+  },
+  {
+    "type": "irregular",
+    "id": "49",
+    "japanese": "持ってくる",
+    "kana": "もってくる",
+    "english": "to bring (a thing)",
+    "category": ""
   }
 ]
