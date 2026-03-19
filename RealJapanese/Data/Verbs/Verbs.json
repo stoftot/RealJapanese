@@ -20,7 +20,7 @@
     "id": "2",
     "japanese": "聞く",
     "kana": "きく",
-    "english": "to listen; to hear",
+    "english": "to ask, to listen; to hear",
     "category": ""
   },
   {
@@ -178,14 +178,6 @@
   {
     "type": "u",
     "id": "22",
-    "japanese": "聞く",
-    "kana": "きく",
-    "english": "to ask; to listen",
-    "category": ""
-  },
-  {
-    "type": "u",
-    "id": "23",
     "japanese": "乗る",
     "kana": "のる",
     "english": "to ride; to board",
@@ -193,7 +185,7 @@
   },
   {
     "type": "u",
-    "id": "24",
+    "id": "23",
     "japanese": "やる",
     "kana": "やる",
     "english": "to do; to perform",
@@ -201,7 +193,7 @@
   },
   {
     "type": "ru",
-    "id": "25",
+    "id": "24",
     "japanese": "出かける",
     "kana": "でかける",
     "english": "to go out",
@@ -209,7 +201,7 @@
   },
   {
     "type": "u",
-    "id": "26",
+    "id": "25",
     "japanese": "遊ぶ",
     "kana": "あそぶ",
     "english": "to play; to spend time pleasantly",
@@ -217,7 +209,7 @@
   },
   {
     "type": "u",
-    "id": "27",
+    "id": "26",
     "japanese": "急ぐ",
     "kana": "いそぐ",
     "english": "to hurry",
@@ -225,7 +217,7 @@
   },
   {
     "type": "u",
-    "id": "28",
+    "id": "27",
     "japanese": "返す",
     "kana": "かえす",
     "english": "to return (a thing)",
@@ -233,7 +225,7 @@
   },
   {
     "type": "u",
-    "id": "29",
+    "id": "28",
     "japanese": "消す",
     "kana": "けす",
     "english": "to turn off; to erase",
@@ -241,7 +233,7 @@
   },
   {
     "type": "u",
-    "id": "30",
+    "id": "29",
     "japanese": "死ぬ",
     "kana": "しぬ",
     "english": "to die",
@@ -249,7 +241,7 @@
   },
   {
     "type": "u",
-    "id": "31",
+    "id": "30",
     "japanese": "座る",
     "kana": "すわる",
     "english": "to sit down",
@@ -257,7 +249,7 @@
   },
   {
     "type": "u",
-    "id": "32",
+    "id": "31",
     "japanese": "立つ",
     "kana": "たつ",
     "english": "to stand up",
@@ -265,7 +257,7 @@
   },
   {
     "type": "u",
-    "id": "33",
+    "id": "32",
     "japanese": "たばこを吸う",
     "kana": "たばこをすう",
     "english": "to smoke",
@@ -273,7 +265,7 @@
   },
   {
     "type": "u",
-    "id": "34",
+    "id": "33",
     "japanese": "使う",
     "kana": "つかう",
     "english": "to use",
@@ -281,7 +273,7 @@
   },
   {
     "type": "u",
-    "id": "35",
+    "id": "34",
     "japanese": "手伝う",
     "kana": "てつだう",
     "english": "to help",
@@ -289,7 +281,7 @@
   },
   {
     "type": "u",
-    "id": "36",
+    "id": "35",
     "japanese": "入る",
     "kana": "はいる",
     "english": "to enter",
@@ -297,7 +289,7 @@
   },
   {
     "type": "u",
-    "id": "37",
+    "id": "36",
     "japanese": "持つ",
     "kana": "もつ",
     "english": "to carry; to hold",
@@ -305,7 +297,7 @@
   },
   {
     "type": "u",
-    "id": "38",
+    "id": "37",
     "japanese": "休む",
     "kana": "やすむ",
     "english": "to rest; to be absent",
@@ -313,7 +305,7 @@
   },
   {
     "type": "ru",
-    "id": "39",
+    "id": "38",
     "japanese": "開ける",
     "kana": "あける",
     "english": "to open (something)",
@@ -321,7 +313,7 @@
   },
   {
     "type": "ru",
-    "id": "40",
+    "id": "39",
     "japanese": "閉める",
     "kana": "しめる",
     "english": "to close (something)",
@@ -329,7 +321,7 @@
   },
   {
     "type": "ru",
-    "id": "41",
+    "id": "40",
     "japanese": "教える",
     "kana": "おしえる",
     "english": "to teach; to instruct",
@@ -337,7 +329,7 @@
   },
   {
     "type": "ru",
-    "id": "42",
+    "id": "41",
     "japanese": "忘れる",
     "kana": "わすれる",
     "english": "to forget; to leave behind",
@@ -345,7 +337,7 @@
   },
   {
     "type": "ru",
-    "id": "43",
+    "id": "42",
     "japanese": "降りる",
     "kana": "おりる",
     "english": "to get off",
@@ -353,7 +345,7 @@
   },
   {
     "type": "ru",
-    "id": "44",
+    "id": "43",
     "japanese": "借りる",
     "kana": "かりる",
     "english": "to borrow",
@@ -361,7 +353,7 @@
   },
   {
     "type": "ru",
-    "id": "45",
+    "id": "44",
     "japanese": "シャワーを浴びる",
     "kana": "シャワーをあびる",
     "english": "to take a shower",
@@ -369,7 +361,7 @@
   },
   {
     "type": "ru",
-    "id": "46",
+    "id": "45",
     "japanese": "つける",
     "kana": "つける",
     "english": "to turn on",
@@ -377,7 +369,7 @@
   },
   {
     "type": "irregular",
-    "id": "47",
+    "id": "46",
     "japanese": "電話する",
     "kana": "でんわする",
     "english": "to call",
@@ -385,7 +377,7 @@
   },
   {
     "type": "irregular",
-    "id": "48",
+    "id": "47",
     "japanese": "連れてくる",
     "kana": "つれてくる",
     "english": "to bring (a person)",
@@ -393,7 +385,7 @@
   },
   {
     "type": "irregular",
-    "id": "49",
+    "id": "48",
     "japanese": "持ってくる",
     "kana": "もってくる",
     "english": "to bring (a thing)",
