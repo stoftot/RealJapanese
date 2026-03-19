@@ -20,7 +20,7 @@ public abstract record Conjugatabel : Word
         PastNegative
     }
 
-    public string TypeShortForm() => Type == "irregular" ? "irreg" : Type;
+    public string TypeShortForm() => Type == "irregular" ? "ir" : Type;
 
     public abstract string Conjugate(ToConjugate toConjugate, ConjugationType conjugationType);
 }
