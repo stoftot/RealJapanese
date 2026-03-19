@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
 
 namespace RealJapanese.Components.Shared;
 
@@ -31,6 +32,11 @@ public class PracticeCardMultipelAnswersBase : ComponentBase
 
     protected ElementReference answerInputRef;
 
+    [Inject] protected IJSRuntime JS { get; set; } = null!;
+    
+    // Let parents clear and focus the input even though it lives here
+    protected internal Task ClearAndFocusInputAsync() => JS.InvokeVoidAsync("blazorHelpers.setValueAndFocus", answerInputRef, "").AsTask();
+    
     // Let parents focus the input even though it lives here
     protected internal Task FocusInput() => answerInputRef.FocusAsync().AsTask();
 

@@ -8,7 +8,7 @@ public abstract class SingleAnwserBase : PracticeBase
     protected int DataChunkSize => OrginalQuestions.Count() / splitDataInto;
     private string _oldUserInput = string.Empty;
 
-    protected void UpdateQuestions()
+    protected virtual void UpdateQuestions()
     {
         Questions = OrginalQuestions
             .Skip(selectedDataChunkIndex * DataChunkSize)
@@ -17,8 +17,13 @@ public abstract class SingleAnwserBase : PracticeBase
             .ToList();
 
         currentQuestionIndex = 0;
+        OnQuestionsUpdated();
         UserInput = string.Empty;
         showAnswer = false;
+    }
+
+    protected virtual void OnQuestionsUpdated()
+    {
     }
 
     protected override void OnUserInputChanged(string value)
