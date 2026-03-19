@@ -25,6 +25,15 @@ public abstract class MultipleAnswerBase : SingleAnwserBase
         MissingAnswers.Remove(matchingAnswer);
         UserInput = string.Empty;
 
+        if (MissingAnswers.Count > 0)
+        {
+            _ = InvokeAsync(async () =>
+            {
+                StateHasChanged();
+                await FocusAnswerInputAsync();
+            });
+        }
+
         return MissingAnswers.Count == 0;
     }
 

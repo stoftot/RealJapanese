@@ -6,7 +6,7 @@ using Repositories.Exstensions;
 
 namespace RealJapanese.Components.Pages.Verbs;
 
-public class VerbSpellingBase : SingleAnwserBase
+public class VerbSpellingBase : MultipleAnswerBase
 {
     [SupplyParameterFromQuery(Name = "training")]
     public bool Training { get; set; } = false;
@@ -15,12 +15,15 @@ public class VerbSpellingBase : SingleAnwserBase
     public VerbData VerbData { get; set; } = null!;
 
     // ref to the shared UI so we can focus the input
-    protected PracticeCard? cardRef;
+    protected PracticeCardMultipelAnswers cardRef;
 
     protected override void OnInitialized()
     {
+        // OrginalQuestions = (Training ? VerbData.TrainingWords : VerbData.VocabWords)
+        //     .EnglishToRomajiQuestions();
+        
         OrginalQuestions = (Training ? VerbData.TrainingWords : VerbData.VocabWords)
-            .EnglishToRomajiQuestions();
+            .EnglishToRomajiAndTypeQuestion();
         
         UpdateQuestions();
     }
