@@ -71,19 +71,19 @@ public record Verb : Conjugatabel
             ToConjugate.Japanese => Japanese,
             ToConjugate.Kana => Kana
         };
-        
-        if(!Enum.TryParse(Type.ToUpper(), out VerbType verbType))
+
+        if (!Enum.TryParse(Type.ToUpper(), out VerbType verbType))
             throw new ArgumentException($"Unknown verb type: {Type}");
-        
+
         return verbType switch
         {
             VerbType.U => StemU(str),
-            VerbType.RU => StemRu(str), 
+            VerbType.RU => StemRu(str),
             VerbType.IRREGULAR => StemIrregular(str)
         };
     }
-    
-    public override string Conjugate(ToConjugate toConjugate, ConjugationType conjugationType)=>
+
+    public override string Conjugate(ToConjugate toConjugate, ConjugationType conjugationType) =>
         conjugationType switch
         {
             ConjugationType.PresentAffirmative => Stem(toConjugate) + PresentAffirmativeEnding,
