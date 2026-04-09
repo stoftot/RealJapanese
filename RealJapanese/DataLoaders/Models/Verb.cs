@@ -19,6 +19,30 @@ public record Verb : Conjugatabel
     private const string PastAffirmativeEnding = "ました";
     private const string PastNegativeEnding = "ませんでした";
 
+    public static readonly IReadOnlyList<Verb> possibleEndings = new List<Verb>()
+    {
+        new (){ Japanese = "う", Kana = "う", Type = "u", English = "NAN" },
+        new (){ Japanese = "る", Kana = "る", Type = "ru", English = "NAN" },
+        new (){ Japanese = "する", Kana = "する", Type = "irregular", English = "NAN" },
+        new (){ Japanese = "くる", Kana = "くる", Type = "irregular", English = "NAN" }
+    }.AsReadOnly();
+    
+    public static readonly IReadOnlyList<Verb> allPossibleEndings = new List<Verb>()
+    {
+        new (){ Japanese = "う", Kana = "う", Type = "u", English = "NAN" },
+        new (){ Japanese = "く", Kana = "く", Type = "u", English = "NAN" },
+        new (){ Japanese = "ぐ", Kana = "ぐ", Type = "u", English = "NAN" },
+        new (){ Japanese = "す", Kana = "す", Type = "u", English = "NAN" },
+        new (){ Japanese = "つ", Kana = "つ", Type = "u", English = "NAN" },
+        new (){ Japanese = "ぬ", Kana = "ぬ", Type = "u", English = "NAN" },
+        new (){ Japanese = "ぶ", Kana = "ぶ", Type = "u", English = "NAN" },
+        new (){ Japanese = "む", Kana = "む", Type = "u", English = "NAN" },
+        new (){ Japanese = "る", Kana = "る", Type = "u", English = "NAN" },
+        new (){ Japanese = "る", Kana = "る", Type = "ru", English = "NAN" },
+        new (){ Japanese = "する", Kana = "する", Type = "irregular", English = "NAN" },
+        new (){ Japanese = "くる", Kana = "くる", Type = "irregular", English = "NAN" }
+    }.AsReadOnly();
+    
     private static readonly FrozenDictionary<string, string> uConjugations =
         new Dictionary<string, string>
         {
