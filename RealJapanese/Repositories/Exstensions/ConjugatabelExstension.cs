@@ -11,4 +11,11 @@ public static class ConjugatabelExstension
             Question = c.Kana,
             Answer = c.TypeShortForm()
         });
+
+    public static IEnumerable<QuestionAnswerDto> EnglishToRomajiAndTypeQuestion(this IEnumerable<Conjugatabel> data)
+        => data.Select(c => new QuestionAnswerDto
+        {
+            Question = c.English,
+            Answer = $"{c.Kana.ToRomaji()};{c.TypeShortForm()}"
+        });
 }

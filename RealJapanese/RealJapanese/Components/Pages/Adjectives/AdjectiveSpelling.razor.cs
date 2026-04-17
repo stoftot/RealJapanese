@@ -5,7 +5,7 @@ using Repositories.Exstensions;
 
 namespace RealJapanese.Components.Pages.Adjectives;
 
-public class AdjectiveSpellingBase : SingleAnwserBase
+public class AdjectiveSpellingBase : MultipleAnswerBase
 {
     [SupplyParameterFromQuery(Name = "training")]
     public bool Training { get; set; } = false;
@@ -14,12 +14,12 @@ public class AdjectiveSpellingBase : SingleAnwserBase
     public AdjectiveData AdjectiveData { get; set; } = null!;
 
     // ref to the shared UI so we can focus the input
-    protected PracticeCard? cardRef;
+    protected PracticeCardMultipelAnswers cardRef;
 
     protected override void OnInitialized()
     {
         OrginalQuestions = (Training ? AdjectiveData.TrainingWords : AdjectiveData.VocabWords)
-            .EnglishToRomajiQuestions();
+            .EnglishToRomajiAndTypeQuestion();
         
         UpdateQuestions();
     }

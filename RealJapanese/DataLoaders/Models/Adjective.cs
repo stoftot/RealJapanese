@@ -23,6 +23,13 @@ public record Adjective : Conjugatabel
     private const string NA_PastAffirmativeEnding = "でした";
     private const string NA_PastNegativeEnding = "じゃなかったです";
 
+    public static readonly IReadOnlyList<Adjective> possibleEndings = new List<Adjective>()
+    {
+        new (){ Japanese = "い", Kana = "い", Type = "i", English = "NAN" },
+        new (){ Japanese = "な", Kana = "な", Type = "na", English = "NAN" },
+        new (){ Japanese = "いい", Kana = "いい", Type = "irregular", English = "NAN" }
+    }.AsReadOnly();
+    
     private string StemI(string str) => str[..^1];
 
     private string StemIrregular(string str, ConjugationType conjugationType) =>
@@ -37,7 +44,7 @@ public record Adjective : Conjugatabel
         };
 
         if (!Enum.TryParse(Type.ToUpper(), out AdjectiveType adjectiveType))
-            throw new ArgumentException($"Unknown verb type: {Type}");
+            throw new ArgumentException($"Unknown adjective type: {Type}");
 
         return adjectiveType switch
         {
