@@ -206,5 +206,77 @@
     "kana": "たいへん",
     "english": "tough (situation)",
     "category": ""
+  },
+  {
+    "type": "i",
+    "id": "26",
+    "japanese": "長い",
+    "kana": "ながい",
+    "english": "long",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "27",
+    "japanese": "短い",
+    "kana": "みじかい",
+    "english": "short (length)",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "28",
+    "japanese": "速い",
+    "kana": "はやい",
+    "english": "fast",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "29",
+    "japanese": "背が高い",
+    "kana": "せがたかい",
+    "english": "tall (stature)",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "30",
+    "japanese": "背が低い",
+    "kana": "せがひくい",
+    "english": "short (stature)",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "31",
+    "japanese": "頭がいい",
+    "kana": "あたまがいい",
+    "english": "bright; smart; clever",
+    "category": ""
+  },
+  {
+    "type": "i",
+    "id": "32",
+    "japanese": "かわいい",
+    "kana": "かわいい",
+    "english": "cute",
+    "category": ""
+  },
+  {
+    "type": "na",
+    "id": "33",
+    "japanese": "親切",
+    "kana": "しんせつ",
+    "english": "kind",
+    "category": ""
+  },
+  {
+    "type": "na",
+    "id": "34",
+    "japanese": "便利",
+    "kana": "べんり",
+    "english": "convenient",
+    "category": ""
   }
 ]

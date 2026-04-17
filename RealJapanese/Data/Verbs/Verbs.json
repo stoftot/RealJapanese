@@ -390,5 +390,93 @@
     "kana": "もってくる",
     "english": "to bring (a thing)",
     "category": ""
+  },
+  {
+    "type": "u",
+    "id": "49",
+    "japanese": "歌う",
+    "kana": "うたう",
+    "english": "to sing",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "50",
+    "japanese": "かぶる",
+    "kana": "かぶる",
+    "english": "to put on (a hat)",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "51",
+    "japanese": "はく",
+    "kana": "はく",
+    "english": "to put on (items below your waist)",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "52",
+    "japanese": "知る",
+    "kana": "しる",
+    "english": "to get to know",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "53",
+    "japanese": "住む",
+    "kana": "すむ",
+    "english": "to live",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "54",
+    "japanese": "働く",
+    "kana": "はたらく",
+    "english": "to work",
+    "category": ""
+  },
+  {
+    "type": "u",
+    "id": "55",
+    "japanese": "太る",
+    "kana": "ふとる",
+    "english": "to gain weight",
+    "category": ""
+  },
+  {
+    "type": "ru",
+    "id": "56",
+    "japanese": "（めがねを）かける",
+    "kana": "（めがねを）かける",
+    "english": "to put on (glasses)",
+    "category": ""
+  },
+  {
+    "type": "ru",
+    "id": "57",
+    "japanese": "着る",
+    "kana": "きる",
+    "english": "to put on (clothes above your waist)",
+    "category": ""
+  },
+  {
+    "type": "ru",
+    "id": "58",
+    "japanese": "やせる",
+    "kana": "やせる",
+    "english": "to lose weight",
+    "category": ""
+  },
+  {
+    "type": "irregular",
+    "id": "59",
+    "japanese": "結婚する",
+    "kana": "けっこんする",
+    "english": "to get married",
+    "category": ""
   }
 ]

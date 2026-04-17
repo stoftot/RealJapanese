@@ -1944,5 +1944,229 @@
     "kana": "ほんとうですか",
     "english": "Really?",
     "category": "Adverb/Expression"
+  },
+  {
+    "id": "278",
+    "japanese": "家族",
+    "kana": "かぞく",
+    "english": "family",
+    "category": "noun"
+  },
+  {
+    "id": "279",
+    "japanese": "おじいさん",
+    "kana": "おじいさん",
+    "english": "grandfather; old man",
+    "category": "noun"
+  },
+  {
+    "id": "280",
+    "japanese": "おばあさん",
+    "kana": "おばあさん",
+    "english": "grandmother; old woman",
+    "category": "noun"
+  },
+  {
+    "id": "281",
+    "japanese": "お兄さん",
+    "kana": "おにいさん",
+    "english": "older brother",
+    "category": "noun"
+  },
+  {
+    "id": "282",
+    "japanese": "お姉さん",
+    "kana": "おねえさん",
+    "english": "older sister",
+    "category": "noun"
+  },
+  {
+    "id": "283",
+    "japanese": "父",
+    "kana": "ちち",
+    "english": "(my) father",
+    "category": "noun"
+  },
+  {
+    "id": "284",
+    "japanese": "母",
+    "kana": "はは",
+    "english": "(my) mother",
+    "category": "noun"
+  },
+  {
+    "id": "285",
+    "japanese": "兄",
+    "kana": "あに",
+    "english": "(my) older brother",
+    "category": "noun"
+  },
+  {
+    "id": "286",
+    "japanese": "姉",
+    "kana": "あね",
+    "english": "(my) older sister",
+    "category": "noun"
+  },
+  {
+    "id": "287",
+    "japanese": "妹",
+    "kana": "いもうと",
+    "english": "younger sister",
+    "category": "noun"
+  },
+  {
+    "id": "288",
+    "japanese": "弟",
+    "kana": "おとうと",
+    "english": "younger brother",
+    "category": "noun"
+  },
+  {
+    "id": "289",
+    "japanese": "兄弟",
+    "kana": "きょうだい",
+    "english": "brothers and sisters",
+    "category": "noun"
+  },
+  {
+    "id": "290",
+    "japanese": "男の人",
+    "kana": "おとこのひと",
+    "english": "man",
+    "category": "noun"
+  },
+  {
+    "id": "291",
+    "japanese": "女の人",
+    "kana": "おんなのひと",
+    "english": "woman",
+    "category": "noun"
+  },
+  {
+    "id": "292",
+    "japanese": "会社",
+    "kana": "かいしゃ",
+    "english": "company",
+    "category": "noun"
+  },
+  {
+    "id": "293",
+    "japanese": "食堂",
+    "kana": "しょくどう",
+    "english": "cafeteria; dining commons",
+    "category": "noun"
+  },
+  {
+    "id": "294",
+    "japanese": "デパート",
+    "kana": "デパート",
+    "english": "department store",
+    "category": "noun"
+  },
+  {
+    "id": "295",
+    "japanese": "髪",
+    "kana": "かみ",
+    "english": "hair",
+    "category": "noun"
+  },
+  {
+    "id": "296",
+    "japanese": "口",
+    "kana": "くち",
+    "english": "mouth",
+    "category": "noun"
+  },
+  {
+    "id": "297",
+    "japanese": "目",
+    "kana": "め",
+    "english": "eye",
+    "category": "noun"
+  },
+  {
+    "id": "298",
+    "japanese": "眼鏡",
+    "kana": "めがね",
+    "english": "glasses",
+    "category": "noun"
+  },
+  {
+    "id": "299",
+    "japanese": "歌",
+    "kana": "うた",
+    "english": "song",
+    "category": "noun"
+  },
+  {
+    "id": "300",
+    "japanese": "サークル",
+    "kana": "サークル",
+    "english": "club activity",
+    "category": "noun"
+  },
+  {
+    "id": "301",
+    "japanese": "車",
+    "kana": "くるま",
+    "english": "car",
+    "category": "noun"
+  },
+  {
+    "id": "302",
+    "japanese": "〜が",
+    "kana": "〜が",
+    "english": "…, but",
+    "category": "adverb/expression"
+  },
+  {
+    "id": "303",
+    "japanese": "何も",
+    "kana": "なにも",
+    "english": "not … anything",
+    "category": "adverb/expression"
+  },
+  {
+    "id": "304",
+    "japanese": "〜人",
+    "kana": "〜にん",
+    "english": "counter for people",
+    "category": "counter"
+  },
+  {
+    "id": "305",
+    "japanese": "一人",
+    "kana": "ひとり",
+    "english": "one person",
+    "category": "counter"
+  },
+  {
+    "id": "306",
+    "japanese": "二人",
+    "kana": "ふたり",
+    "english": "two people",
+    "category": "counter"
+  },
+  {
+    "id": "307",
+    "japanese": "別に",
+    "kana": "べつに",
+    "english": "nothing in particular",
+    "category": "adverb/expression"
+  },
+  {
+    "id": "308",
+    "japanese": "もちろん",
+    "kana": "もちろん",
+    "english": "of course",
+    "category": "adverb/expression"
+  },
+  {
+    "id": "309",
+    "japanese": "よかったら",
+    "kana": "よかったら",
+    "english": "if you like",
+    "category": "adverb/expression"
   }
 ]
