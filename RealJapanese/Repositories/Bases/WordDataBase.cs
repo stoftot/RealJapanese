@@ -36,11 +36,15 @@ public abstract class WordDataBase<T> where T : Word
         SaveFileSaver.Save(VocabSaveFile);
     }
 
-    public IEnumerable<T> VocabWords =>
-        Words.Where(w => VocabSaveFile.KnownIds.Contains(w.Id));
+    public List<T> VocabWords =>
+        VocabSaveFile.KnownIds
+            .Select(id => Words.First(w => w.Id == id))
+            .ToList();
 
-    public IEnumerable<T> TrainingWords =>
-        Words.Where(w => VocabSaveFile.TrainingIds.Contains(w.Id));
+    public List<T> TrainingWords =>
+        VocabSaveFile.TrainingIds
+            .Select(id => Words.First(w => w.Id == id))
+            .ToList();
 
     public IEnumerable<int> VocabWordIds =>
         VocabSaveFile.KnownIds;

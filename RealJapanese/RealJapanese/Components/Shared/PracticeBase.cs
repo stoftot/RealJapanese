@@ -8,7 +8,7 @@ public abstract class PracticeBase : ComponentBase
 {
     // Data each derived class sets in OnInitialized
     protected IEnumerable<QuestionAnswerDto> OrginalQuestions { get; set; }
-    protected List<QuestionAnswerDto> Questions { get; set; } = [];
+    protected IList<QuestionAnswerDto> Questions { get; set; } = [];
     protected int currentQuestionIndex = 0;
 
     // UI

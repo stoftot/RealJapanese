@@ -1,20 +1,24 @@
-﻿namespace RealJapanese.Components.Shared;
+﻿using Repositories.DTOs;
+using Repositories.Exstensions;
+
+namespace RealJapanese.Components.Shared;
 public abstract class SingleAnwserBase : PracticeBase
 {
     protected int splitDataInto = 1;
     protected int selectedDataChunk = 1;
     private int selectedDataChunkIndex => selectedDataChunk - 1;
-    protected int selectedDataChunkPublic => selectedDataChunk; // if derived code referenced the field name, keep access via property
-    protected int DataChunkSize => OrginalQuestions.Count() / splitDataInto;
     private string _oldUserInput = string.Empty;
 
-    protected virtual void UpdateQuestions()
+    protected void UpdateQuestions()
     {
         Questions = OrginalQuestions
-            .Skip(selectedDataChunkIndex * DataChunkSize)
-            .Take(selectedDataChunk == splitDataInto ? int.MaxValue : DataChunkSize)
-            .OrderBy(_ => Guid.NewGuid())
-            .ToList();
+            .GetChunk(splitDataInto, selectedDataChunkIndex);
+        RefreshQuestions();
+    }
+    
+    protected virtual void RefreshQuestions()
+    {
+        Questions.Shuffle();
 
         currentQuestionIndex = 0;
         OnQuestionsUpdated();
