@@ -36,7 +36,7 @@ public class KanjiSelectorBase : WordComponentBase<Word>
                 {
                     Title = "Learn the kanji",
                     Description = "Practice the meaning of the individual kanji",
-                    Url = $"single/meaning?training={Training}",
+                    Url = $"single/meaning?category={SelectedCategoryQueryValue}",
                 }
             );
         }
@@ -47,7 +47,7 @@ public class KanjiSelectorBase : WordComponentBase<Word>
                 {
                     Title = "Learn the kanji",
                     Description = "Practice then meaning of the kanji in words",
-                    Url = $"combined/meaning?training={Training}",
+                    Url = $"combined/meaning?category={SelectedCategoryQueryValue}",
                 }
             );
         }

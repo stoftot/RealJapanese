@@ -9,8 +9,8 @@ namespace RealJapanese.Components.Pages.Kanji;
 
 public class KanjiSingleMeaningBase : MultipleAnswerBase
 {
-    [SupplyParameterFromQuery(Name = "training")]
-    public bool Training { get; set; } = false;
+    [SupplyParameterFromQuery(Name = "category")]
+    public string? Category { get; set; }
     
     [Inject]
     public KanjiData KanjiData{ get; set; } = null!;
@@ -21,7 +21,7 @@ public class KanjiSingleMeaningBase : MultipleAnswerBase
     protected override void OnInitialized()
     {
         WordDataBase<Word> data = KanjiData.Single;
-        OrginalQuestions = (Training ? data.TrainingWords : data.VocabWords)
+        OrginalQuestions = data.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
             .JapaneseToEnglishQuestions();
         
         UpdateQuestions();

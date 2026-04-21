@@ -1,4 +1,5 @@
-﻿using DataLoaders.Exstensions;
+using DataLoaders.Exstensions;
+using DataLoaders.Models;
 using Microsoft.AspNetCore.Components;
 using RealJapanese.Components.Shared;
 using Repositories;
@@ -9,18 +10,17 @@ namespace RealJapanese.Components.Pages.Words;
 
 public class WordSpellingBase : SingleAnwserBase
 {
-    [SupplyParameterFromQuery(Name = "training")]
-    public bool Training { get; set; } = false;
+    [SupplyParameterFromQuery(Name = "category")]
+    public string? Category { get; set; }
     
     [Inject]
     public WordData WordData { get; set; } = null!;
 
-    // ref to the shared UI so we can focus the input
     protected PracticeCard? cardRef;
 
     protected override void OnInitialized()
     {
-        OrginalQuestions = (Training ? WordData.TrainingWords : WordData.VocabWords)
+        OrginalQuestions = WordData.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
             .EnglishToRomajiQuestions();
         
         UpdateQuestions();

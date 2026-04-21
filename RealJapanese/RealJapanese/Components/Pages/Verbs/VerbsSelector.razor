@@ -6,7 +6,7 @@
 
 <div class="container my-3">
     <div class="row g-3">
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-4">
             <WordList
                 TItem="Verb"
                 Title="Known vocabulary"
@@ -17,7 +17,18 @@
             />
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-4">
+            <WordList
+                TItem="Verb"
+                Title="Currently rehearsing"
+                AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id)).ToList()"
+                SelectedIds="@RehearsingIds"
+                WordSelected="@OnRehearsingWordSelected"
+                WordDeselected="@OnRehearsingWordDeSelected"
+            />
+        </div>
+
+        <div class="col-md-6 col-lg-4">
             <WordList
                 TItem="Verb"
                 Title="Currently training"
@@ -30,9 +41,10 @@
     </div>
 </div>
 
-<ToggleSlider LeftText="Practice vocab"
-              RightText="Train new words"
-              @bind-Value="Training"
+<ToggleSlider LeftText="Known"
+              MiddleText="Rehearsing"
+              RightText="Training"
+              @bind-SelectedIndex="SelectedCategoryIndex"
 />
 
 <PraticeSelector
@@ -43,14 +55,14 @@
                {
                    Title = "Learn the verbs",
                    Description = "Practice the spelling of the verbs",
-                   Url = $"spelling?training={Training}"
+                   Url = $"spelling?category={SelectedCategoryQueryValue}"
                },
                
                new()
                {
                    Title = "Verb type categorisation",
                    Description = "Practice categorising the different Verb, into u-, ru- and irregular-verbs",
-                   Url = $"categories?training={Training}"
+                   Url = $"categories?category={SelectedCategoryQueryValue}"
                },
                new()
                {

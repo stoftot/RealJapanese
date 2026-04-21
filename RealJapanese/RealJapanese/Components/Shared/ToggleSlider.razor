@@ -1,18 +1,16 @@
-﻿@inherits ToggleSliderBase
+@inherits ToggleSliderBase
 
-<button type="button"
-        class="toggle-slider @CssClass"
-        role="switch"
-        aria-checked="@Value"
-        @onclick="Toggle">
+<div class="toggle-slider @CssClass" role="group" aria-label="Toggle selection">
     <div class="toggle-slider-track">
-        <div class="toggle-slider-option left @(Value ? "" : "active")">
-            @LeftText
-        </div>
-        <div class="toggle-slider-option right @(Value ? "active" : "")">
-            @RightText
-        </div>
-
-        <div class="toggle-slider-thumb @(Value ? "right" : "left")"></div>
+        @foreach (var option in Options)
+        {
+            <button type="button"
+                    class="toggle-slider-option @(option.Index == CurrentIndex ? "active" : "")"
+                    aria-pressed="@(option.Index == CurrentIndex)"
+                    @key="option.Index"
+                    @onclick="@(() => OnOptionClicked(option.Index))">
+                @option.Text
+            </button>
+        }
     </div>
-</button>
+</div>

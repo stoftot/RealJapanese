@@ -46,11 +46,19 @@ public abstract class WordDataBase<T> where T : Word
             .Select(id => Words.First(w => w.Id == id))
             .ToList();
 
+    public List<T> RehearsingWords =>
+        VocabSaveFile.RehearsingIds
+            .Select(id => Words.First(w => w.Id == id))
+            .ToList();
+
     public IEnumerable<int> VocabWordIds =>
         VocabSaveFile.KnownIds;
 
     public IEnumerable<int> TrainingWordIds =>
         VocabSaveFile.TrainingIds;
+
+    public IEnumerable<int> RehearsingWordIds =>
+        VocabSaveFile.RehearsingIds;
 
     public void AddToVocab(T word)
     {
@@ -75,6 +83,26 @@ public abstract class WordDataBase<T> where T : Word
         VocabSaveFile.TrainingIds.Remove(word.Id);
         SaveProgress();
     }
+
+    public void AddToRehearsing(T word)
+    {
+        VocabSaveFile.RehearsingIds.Add(word.Id);
+        SaveProgress();
+    }
+
+    public void RemoveFromRehearsing(T word)
+    {
+        VocabSaveFile.RehearsingIds.Remove(word.Id);
+        SaveProgress();
+    }
+
+    public List<T> GetWords(WordPracticeCategory category) =>
+        category switch
+        {
+            WordPracticeCategory.Training => TrainingWords,
+            WordPracticeCategory.Rehearsing => RehearsingWords,
+            _ => VocabWords
+        };
 
     private void UpdateIDs()
     {

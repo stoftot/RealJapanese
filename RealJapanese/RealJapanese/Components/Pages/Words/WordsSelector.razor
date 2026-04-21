@@ -6,7 +6,7 @@
 
 <div class="container my-3">
     <div class="row g-3">
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-4">
             <WordList
                 TItem="Word"
                 Title="Known vocabulary"
@@ -17,11 +17,23 @@
             />
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-4">
+            <WordList
+                TItem="Word"
+                Title="Currently rehearsing"
+                AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id)).ToList()"
+                SelectedIds="@RehearsingIds"
+                WordSelected="@OnRehearsingWordSelected"
+                WordDeselected="@OnRehearsingWordDeSelected"
+            />
+        </div>
+
+        <div class="col-md-6 col-lg-4">
             <WordList
                 TItem="Word"
                 Title="Currently training"
-                AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id)).ToList()"
+                AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id) && 
+                                               !RehearsingIds.Contains(w.Id)).ToList()"
                 SelectedIds="@TrainingIds"
                 WordSelected="@OnTrainingWordSelected"
                 WordDeselected="@OnTrainingWordDeSelected"
@@ -30,9 +42,10 @@
     </div>
 </div>
 
-<ToggleSlider LeftText="Practice vocab"
-              RightText="Train new words"
-              @bind-Value="Training"
+<ToggleSlider LeftText="Known"
+              MiddleText="Rehearsing"
+              RightText="Training"
+              @bind-SelectedIndex="SelectedCategoryIndex"
 />
 
 <PraticeSelector
@@ -43,7 +56,7 @@
                {
                    Title = "Learn the words",
                    Description = "Practice the spelling of the words",
-                   Url = $"spelling?training={Training}",
+                   Url = $"spelling?category={SelectedCategoryQueryValue}",
                }
            })"
 />

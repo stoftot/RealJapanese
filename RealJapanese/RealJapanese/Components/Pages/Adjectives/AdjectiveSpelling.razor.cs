@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+using DataLoaders.Models;
+using Microsoft.AspNetCore.Components;
 using RealJapanese.Components.Shared;
 using Repositories;
 using Repositories.Exstensions;
@@ -7,18 +8,17 @@ namespace RealJapanese.Components.Pages.Adjectives;
 
 public class AdjectiveSpellingBase : MultipleAnswerBase
 {
-    [SupplyParameterFromQuery(Name = "training")]
-    public bool Training { get; set; } = false;
+    [SupplyParameterFromQuery(Name = "category")]
+    public string? Category { get; set; }
     
     [Inject]
     public AdjectiveData AdjectiveData { get; set; } = null!;
 
-    // ref to the shared UI so we can focus the input
-    protected PracticeCardMultipelAnswers cardRef;
+    protected PracticeCardMultipelAnswers cardRef = null!;
 
     protected override void OnInitialized()
     {
-        OrginalQuestions = (Training ? AdjectiveData.TrainingWords : AdjectiveData.VocabWords)
+        OrginalQuestions = AdjectiveData.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
             .EnglishToRomajiAndTypeQuestion();
         
         UpdateQuestions();

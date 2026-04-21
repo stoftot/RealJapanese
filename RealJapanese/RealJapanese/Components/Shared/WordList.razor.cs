@@ -32,20 +32,14 @@ public class WordListBase<TItem> : ComponentBase where TItem : Word
 
         if (wasSelected)
         {
-            // toggle off
-            SelectedIds.Remove(item.Id);
             if (WordDeselected.HasDelegate)
                 await WordDeselected.InvokeAsync(item);
         }
         else
         {
-            // newly selected → insert at front so it appears at the very top
-            SelectedIds.Add(item.Id);
             if (WordSelected.HasDelegate)
                 await WordSelected.InvokeAsync(item);
         }
-
-        
 
         StateHasChanged();
     }

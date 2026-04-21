@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLoaders", "DataLoaders\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{93739C21-5794-4262-B26E-8CF3DDF527C4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MainSite", "MainSite", "{61B034E4-77C3-4FD5-850C-FF2C51E7BBC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,10 @@ Global
 		{93739C21-5794-4262-B26E-8CF3DDF527C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93739C21-5794-4262-B26E-8CF3DDF527C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93739C21-5794-4262-B26E-8CF3DDF527C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EBD6CFF7-A258-4C4D-AEBC-DC40F93454CD} = {61B034E4-77C3-4FD5-850C-FF2C51E7BBC3}
+		{57568139-3614-4436-8210-14236512A68B} = {61B034E4-77C3-4FD5-850C-FF2C51E7BBC3}
+		{93739C21-5794-4262-B26E-8CF3DDF527C4} = {61B034E4-77C3-4FD5-850C-FF2C51E7BBC3}
 	EndGlobalSection
 EndGlobal

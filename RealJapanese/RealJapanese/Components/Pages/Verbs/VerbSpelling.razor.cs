@@ -1,4 +1,5 @@
-﻿using DataLoaders.Exstensions;
+using DataLoaders.Exstensions;
+using DataLoaders.Models;
 using Microsoft.AspNetCore.Components;
 using RealJapanese.Components.Shared;
 using Repositories;
@@ -8,21 +9,17 @@ namespace RealJapanese.Components.Pages.Verbs;
 
 public class VerbSpellingBase : MultipleAnswerBase
 {
-    [SupplyParameterFromQuery(Name = "training")]
-    public bool Training { get; set; } = false;
+    [SupplyParameterFromQuery(Name = "category")]
+    public string? Category { get; set; }
     
     [Inject]
     public VerbData VerbData { get; set; } = null!;
 
-    // ref to the shared UI so we can focus the input
-    protected PracticeCardMultipelAnswers cardRef;
+    protected PracticeCardMultipelAnswers cardRef = null!;
 
     protected override void OnInitialized()
     {
-        // OrginalQuestions = (Training ? VerbData.TrainingWords : VerbData.VocabWords)
-        //     .EnglishToRomajiQuestions();
-        
-        OrginalQuestions = (Training ? VerbData.TrainingWords : VerbData.VocabWords)
+        OrginalQuestions = VerbData.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
             .EnglishToRomajiAndTypeQuestion();
         
         UpdateQuestions();

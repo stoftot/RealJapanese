@@ -1,6 +1,8 @@
 using DataLoaders;
 using RealJapanese.Components;
 using Repositories;
+using Repositories.Exstensions;
+using WanaKanaSharp;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,8 @@ builder.Services.AddSingleton<KanjiData>();
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 var app = builder.Build();
+
+Console.Out.WriteLine("シャワーをあびる".ToRomaji());
 
 // var sentence = new SentenceLoader("jp_kana_reading_dataset_v3.jsonl").Load();
 // var sentence = new SentenceLoader("Real sentences.json").Load();
