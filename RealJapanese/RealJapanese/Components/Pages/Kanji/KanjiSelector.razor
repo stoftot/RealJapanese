@@ -37,7 +37,8 @@
             <WordList
                 TItem="Word"
                 Title="Currently training"
-                AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id)).ToList()"
+                AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id) && 
+                                               !RehearsingIds.Contains(w.Id)).ToList()"
                 SelectedIds="@TrainingIds"
                 WordSelected="@OnTrainingWordSelected"
                 WordDeselected="@OnTrainingWordDeSelected"
