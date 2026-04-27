@@ -27,7 +27,8 @@
     24,
     25
   ],
-  "TrainingIds": [
+  "TrainingIds": [],
+  "RehearsingIds": [
     26,
     27,
     28,
@@ -37,6 +38,5 @@
     32,
     33,
     34
-  ],
-  "RehearsingIds": []
+  ]
 }

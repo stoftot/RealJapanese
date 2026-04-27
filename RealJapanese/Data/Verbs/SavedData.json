@@ -50,7 +50,8 @@
     47,
     48
   ],
-  "TrainingIds": [
+  "TrainingIds": [],
+  "RehearsingIds": [
     49,
     50,
     51,
@@ -62,6 +63,5 @@
     57,
     58,
     59
-  ],
-  "RehearsingIds": []
+  ]
 }
