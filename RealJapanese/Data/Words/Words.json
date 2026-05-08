@@ -2091,5 +2091,113 @@
     "kana": "よかったら",
     "english": "if you like",
     "category": "adverb/expression"
+  },
+  {
+    "japanese": "眉毛",
+    "kana": "まゆげ",
+    "english": "eyebrow",
+    "category": "noun"
+  },
+  {
+    "japanese": "耳",
+    "kana": "みみ",
+    "english": "ear",
+    "category": "noun"
+  },
+  {
+    "japanese": "鼻",
+    "kana": "はな",
+    "english": "nose",
+    "category": "noun"
+  },
+  {
+    "japanese": "歯",
+    "kana": "は",
+    "english": "tooth",
+    "category": "noun"
+  },
+  {
+    "japanese": "首",
+    "kana": "くび",
+    "english": "neck",
+    "category": "noun"
+  },
+  {
+    "japanese": "指",
+    "kana": "ゆび",
+    "english": "finger",
+    "category": "noun"
+  },
+  {
+    "japanese": "手",
+    "kana": "て",
+    "english": "hand",
+    "category": "noun"
+  },
+  {
+    "japanese": "頭",
+    "kana": "あたま",
+    "english": "head",
+    "category": "noun"
+  },
+  {
+    "japanese": "顔",
+    "kana": "かお",
+    "english": "face",
+    "category": "noun"
+  },
+  {
+    "japanese": "肩",
+    "kana": "かた",
+    "english": "shoulder",
+    "category": "noun"
+  },
+  {
+    "japanese": "胸",
+    "kana": "むね",
+    "english": "chest",
+    "category": "noun"
+  },
+  {
+    "japanese": "お腹",
+    "kana": "おなか",
+    "english": "stomach",
+    "category": "noun"
+  },
+  {
+    "japanese": "背中",
+    "kana": "せなか",
+    "english": "back",
+    "category": "noun"
+  },
+  {
+    "japanese": "お尻",
+    "kana": "おしり",
+    "english": "buttocks",
+    "category": "noun"
+  },
+  {
+    "japanese": "足",
+    "kana": "あし",
+    "english": "leg; foot",
+    "category": "noun"
+  },
+  {
+    "japanese": "腕",
+    "kana": "うで",
+    "english": "arm",
+    "category": "noun"
+  },
+  {
+    "japanese": "膝",
+    "kana": "ひざ",
+    "english": "knee",
+    "category": "noun"
+  },
+  {
+    "japanese": "手首",
+    "kana": "てくび",
+    "english": "wrist",
+    "category": "noun"
   }
 ]
