@@ -2093,108 +2093,126 @@
     "category": "adverb/expression"
   },
   {
+    "id": "299",
     "japanese": "眉毛",
     "kana": "まゆげ",
     "english": "eyebrow",
     "category": "noun"
   },
   {
+    "id": "300",
     "japanese": "耳",
     "kana": "みみ",
     "english": "ear",
     "category": "noun"
   },
   {
+    "id": "301",
     "japanese": "鼻",
     "kana": "はな",
     "english": "nose",
     "category": "noun"
   },
   {
+    "id": "302",
     "japanese": "歯",
     "kana": "は",
     "english": "tooth",
     "category": "noun"
   },
   {
+    "id": "303",
     "japanese": "首",
     "kana": "くび",
     "english": "neck",
     "category": "noun"
   },
   {
+    "id": "304",
     "japanese": "指",
     "kana": "ゆび",
     "english": "finger",
     "category": "noun"
   },
   {
+    "id": "305",
     "japanese": "手",
     "kana": "て",
     "english": "hand",
     "category": "noun"
   },
   {
+    "id": "306",
     "japanese": "頭",
     "kana": "あたま",
     "english": "head",
     "category": "noun"
   },
   {
+    "id": "307",
     "japanese": "顔",
     "kana": "かお",
     "english": "face",
     "category": "noun"
   },
   {
+    "id": "308",
     "japanese": "肩",
     "kana": "かた",
     "english": "shoulder",
     "category": "noun"
   },
   {
+    "id": "309",
     "japanese": "胸",
     "kana": "むね",
     "english": "chest",
     "category": "noun"
   },
   {
+    "id": "310",
     "japanese": "お腹",
     "kana": "おなか",
     "english": "stomach",
     "category": "noun"
   },
   {
+    "id": "311",
     "japanese": "背中",
     "kana": "せなか",
     "english": "back",
     "category": "noun"
   },
   {
+    "id": "312",
     "japanese": "お尻",
     "kana": "おしり",
     "english": "buttocks",
     "category": "noun"
   },
   {
+    "id": "313",
     "japanese": "足",
     "kana": "あし",
     "english": "leg; foot",
     "category": "noun"
   },
   {
+    "id": "314",
     "japanese": "腕",
     "kana": "うで",
     "english": "arm",
     "category": "noun"
   },
   {
+    "id": "315",
     "japanese": "膝",
     "kana": "ひざ",
     "english": "knee",
     "category": "noun"
   },
   {
+    "id": "316",
     "japanese": "手首",
     "kana": "てくび",
     "english": "wrist",
