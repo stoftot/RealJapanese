@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Repositories.DTOs;
+using Repositories.Exstensions;
 
 namespace RealJapanese.Components.Shared;
 
@@ -10,6 +11,7 @@ public abstract class PracticeBase : ComponentBase
     protected IEnumerable<QuestionAnswerDto> OrginalQuestions { get; set; }
     protected IList<QuestionAnswerDto> Questions { get; set; } = [];
     protected int currentQuestionIndex = 0;
+    private readonly List<QuestionAnswerDto> _retryQuestions = [];
 
     // UI
     protected double UiScale { get; set; } = 1.0;
@@ -22,6 +24,7 @@ public abstract class PracticeBase : ComponentBase
     }
 
     protected bool showAnswer = false;
+    protected bool RepeatQuestionsWithRevealedAnswers { get; set; } = false;
     protected ElementReference answerInputRef;
 
     protected string CurrentQuestion =>
@@ -58,6 +61,7 @@ public abstract class PracticeBase : ComponentBase
     
     protected virtual Task FocusAnswerInputAsync() => Task.CompletedTask;
 
+    protected abstract void UpdateQuestions();
     protected async Task GoToNextQuestionAsync()
     {
         NextQuestion();               // reshuffles at end & wraps
@@ -69,12 +73,31 @@ public abstract class PracticeBase : ComponentBase
 
     protected virtual void NextQuestion()
     {
+        if (Questions.Count == 0)
+            return;
+
+        if (RepeatQuestionsWithRevealedAnswers && showAnswer)
+            _retryQuestions.Add(Questions[currentQuestionIndex]);
+
         currentQuestionIndex++;
         if (currentQuestionIndex >= Questions.Count)
         {
-            Questions = Questions.OrderBy(_ => Guid.NewGuid()).ToList();
+            if (RepeatQuestionsWithRevealedAnswers && _retryQuestions.Count > 0)
+                Questions = _retryQuestions.ToList();
+            else
+                UpdateQuestions();
+            
+            Questions.Shuffle();
+
+            _retryQuestions.Clear();
             currentQuestionIndex = 0;
         }
+    }
+
+    private void StartRound(IEnumerable<QuestionAnswerDto> questions)
+    {
+        Questions = questions.ToList();
+        
     }
 
     // Normalize: trim + remove all whitespace + case-insensitive

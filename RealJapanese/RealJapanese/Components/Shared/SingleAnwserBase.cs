@@ -9,7 +9,7 @@ public abstract class SingleAnwserBase : PracticeBase
     private int selectedDataChunkIndex => selectedDataChunk - 1;
     private string _oldUserInput = string.Empty;
 
-    protected void UpdateQuestions()
+    protected override void UpdateQuestions()
     {
         Questions = OrginalQuestions
             .GetChunk(splitDataInto, selectedDataChunkIndex);

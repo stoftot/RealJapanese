@@ -13,7 +13,12 @@ public partial class NumbersBase : PracticeBase
     protected override void OnInitialized()
     {
         // Questions = NumbersQuestionGenerator.GenerateAllUniq().OrderBy(_ => Guid.NewGuid()).ToList();
-        Questions = NumbersQuestionGenerator.GenerateAllSpecialCases().OrderBy(_ => Guid.NewGuid()).ToList();
+        UpdateQuestions();
+    }
+
+    protected override void UpdateQuestions()
+    {
+        Questions = NumbersQuestionGenerator.GenerateAllSpecialCases().OrderBy(_ => Guid.NewGuid()).ToList(); 
     }
 
     protected override Task FocusAnswerInputAsync()

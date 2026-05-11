@@ -38,7 +38,7 @@ public class KanjiCombinedMeaningBase : PracticeBase
     protected override string Normalize(string? s) =>
         (s ?? string.Empty).Trim().ToLowerInvariant();
     
-    private void UpdateQuestions()
+    protected override void UpdateQuestions()
     {
         Questions = OrginalQuestions
             .Skip(selectedDataChunkIndex * DataChunkSize)

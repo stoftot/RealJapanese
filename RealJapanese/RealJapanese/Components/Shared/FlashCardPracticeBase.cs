@@ -9,7 +9,7 @@ public abstract class FlashCardPracticeBase : PracticeBase
     protected int selectedDataChunk = 1;
     private int selectedDataChunkIndex => selectedDataChunk - 1;
 
-    protected void UpdateQuestions()
+    protected override void UpdateQuestions()
     {
         Questions = OrginalQuestions
             .GetChunk(splitDataInto, selectedDataChunkIndex);
