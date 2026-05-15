@@ -24,7 +24,7 @@ public abstract class PracticeBase : ComponentBase
     }
 
     protected bool showAnswer = false;
-    protected bool RepeatQuestionsWithRevealedAnswers { get; set; } = false;
+    protected bool RepeatQuestionsWithRevealedAnswers { get; set; } = true;
     protected ElementReference answerInputRef;
 
     protected string CurrentQuestion =>

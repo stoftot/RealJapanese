@@ -20,7 +20,6 @@ public class WordSpellingBase : SingleAnwserBase
 
     protected override void OnInitialized()
     {
-        RepeatQuestionsWithRevealedAnswers = true;
         OrginalQuestions = WordData.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
             .EnglishToRomajiQuestions();
         
