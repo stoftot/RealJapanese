@@ -304,7 +304,7 @@
     "id": "43",
     "japanese": "〜番",
     "kana": "〜ばん",
-    "english": "number …",
+    "english": "… number",
     "category": "Others"
   },
   {
@@ -323,8 +323,8 @@
   },
   {
     "id": "46",
-    "japanese": "何／何に",
-    "kana": "なん／なに",
+    "japanese": "何",
+    "kana": "なん",
     "english": "what",
     "category": "Others"
   },
