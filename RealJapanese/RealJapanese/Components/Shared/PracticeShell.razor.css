@@ -4,6 +4,11 @@
 /* typography */
 .scaled ::deep .card-title { font-size: calc(1.25rem * var(--ui-scale)); }
 .scaled ::deep .lead       { font-size: calc(1.25rem * var(--ui-scale)); }
+.scaled ::deep .flash-card-question {
+    font-size: calc(2rem * var(--ui-scale));
+    text-align: center;
+    white-space: pre-line;
+}
 .scaled ::deep small,
 .scaled ::deep .text-muted { font-size: calc(0.875rem * var(--ui-scale)); }
 
