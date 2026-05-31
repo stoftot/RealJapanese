@@ -339,7 +339,7 @@
     "id": "48",
     "japanese": "はい",
     "kana": "はい",
-    "english": "yes",
+    "english": "yes(formal)",
     "category": "Expressions"
   },
   {
@@ -1207,7 +1207,7 @@
     "id": "172",
     "japanese": "ええ",
     "kana": "ええ",
-    "english": "yes",
+    "english": "yes;yeah(casual)",
     "category": "Expression"
   },
   {
@@ -1543,7 +1543,7 @@
     "id": "220",
     "japanese": "後ろ",
     "kana": "うしろ",
-    "english": "back",
+    "english": "back(location)",
     "category": "Location"
   },
   {
@@ -2180,7 +2180,7 @@
     "id": "311",
     "japanese": "背中",
     "kana": "せなか",
-    "english": "back",
+    "english": "back(body part)",
     "category": "noun"
   },
   {
