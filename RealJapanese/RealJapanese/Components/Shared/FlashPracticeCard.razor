@@ -29,11 +29,14 @@
                             @PrimaryActionLabel
                         </button>
 
-                        <button type="button"
-                                class="btn btn-outline-secondary"
-                                @onclick="TriggerForgotAsync">
-                            @ForgotLabel
-                        </button>
+                        @if (!ShowAnswer)
+                        {
+                            <button type="button"
+                                    class="btn btn-outline-secondary"
+                                    @onclick="TriggerForgotAsync">
+                                @ForgotLabel
+                            </button>
+                        }
                     </div>
 
                 </div>

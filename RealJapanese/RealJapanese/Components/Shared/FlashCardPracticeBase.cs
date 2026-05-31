@@ -41,10 +41,11 @@ public abstract class FlashCardPracticeBase : PracticeBase
         StateHasChanged();
     }
 
-    protected void HandleForgotAction()
+    protected async Task HandleForgotActionAsync()
     {
         RevealAnswer();
         StateHasChanged();
+        await FocusAnswerInputAsync();
     }
 
     public void OnSplitDataIntoChanged(int newValue)
