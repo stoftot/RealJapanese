@@ -12,6 +12,7 @@ public abstract class PracticeBase : ComponentBase
     protected IList<QuestionAnswerDto> Questions { get; set; } = [];
     protected int currentQuestionIndex = 0;
     private readonly List<QuestionAnswerDto> _retryQuestions = [];
+    private QuestionAnswerDto? _currentRetryQuestion;
 
     // UI
     protected double UiScale { get; set; } = 1.0;
@@ -55,8 +56,21 @@ public abstract class PracticeBase : ComponentBase
         }
     }
 
-    protected void RevealAnswer() => showAnswer = true;
-
+    protected void RevealAnswer()
+    {
+        ShowAnswer();
+        if (RepeatQuestionsWithRevealedAnswers
+            && Questions.Count > 0
+            && !ReferenceEquals(_currentRetryQuestion, Questions[currentQuestionIndex]))
+        {
+            _retryQuestions.Add(Questions[currentQuestionIndex]);
+            _currentRetryQuestion = Questions[currentQuestionIndex];
+        }
+    }
+    
+    protected void ShowAnswer() => showAnswer = true;
+    protected void HideAnswer() => showAnswer = false;
+    
     protected virtual bool IsCorrect() => Normalize(UserInput) == Normalize(CurrentAnswer);
     
     protected virtual Task FocusAnswerInputAsync() => Task.CompletedTask;
@@ -65,6 +79,7 @@ public abstract class PracticeBase : ComponentBase
     protected async Task GoToNextQuestionAsync()
     {
         NextQuestion();               // reshuffles at end & wraps
+        _currentRetryQuestion = null;
         _userInput = string.Empty;    // clear input backing field
         showAnswer = false;           // hide previous answer
         await FocusAnswerInputAsync();
@@ -76,13 +91,10 @@ public abstract class PracticeBase : ComponentBase
         if (Questions.Count == 0)
             return;
 
-        if (RepeatQuestionsWithRevealedAnswers && showAnswer)
-            _retryQuestions.Add(Questions[currentQuestionIndex]);
-
         currentQuestionIndex++;
         if (currentQuestionIndex >= Questions.Count)
         {
-            if (RepeatQuestionsWithRevealedAnswers && _retryQuestions.Count > 0)
+            if (_retryQuestions.Count > 0)
                 Questions = _retryQuestions.ToList();
             else
                 UpdateQuestions();

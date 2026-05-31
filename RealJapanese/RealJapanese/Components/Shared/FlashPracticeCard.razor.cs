@@ -11,13 +11,15 @@ public class FlashPracticeCardBase : ComponentBase, IAsyncDisposable
     [Parameter] public bool ShowAnswer { get; set; }
     [Parameter] public string ShowAnswerLabel { get; set; } = "Show answer";
     [Parameter] public string NextQuestionLabel { get; set; } = "Next question";
+    [Parameter] public string ForgotLabel { get; set; } = "Forgot";
     [Parameter] public EventCallback PrimaryActionRequested { get; set; }
+    [Parameter] public EventCallback ForgotRequested { get; set; }
 
     [Inject] protected IJSRuntime JS { get; set; } = null!;
 
     protected ElementReference actionButtonRef;
     private DotNetObjectReference<FlashPracticeCardBase>? _dotNetRef;
-    private string? _spaceShortcutId;
+    private string? _shortcutId;
     protected string PrimaryActionLabel => ShowAnswer ? NextQuestionLabel : ShowAnswerLabel;
 
     protected internal Task FocusCardAsync() => actionButtonRef.FocusAsync().AsTask();
@@ -27,7 +29,7 @@ public class FlashPracticeCardBase : ComponentBase, IAsyncDisposable
         if (firstRender)
         {
             _dotNetRef = DotNetObjectReference.Create(this);
-            _spaceShortcutId = await JS.InvokeAsync<string>("blazorHelpers.registerSpaceShortcut", _dotNetRef);
+            _shortcutId = await JS.InvokeAsync<string>("blazorHelpers.registerFlashCardShortcuts", _dotNetRef);
             await FocusCardAsync();
         }
     }
@@ -36,16 +38,23 @@ public class FlashPracticeCardBase : ComponentBase, IAsyncDisposable
     public Task HandleGlobalSpaceAsync()
         => TriggerPrimaryActionAsync();
 
+    [JSInvokable]
+    public Task HandleGlobalBackspaceAsync()
+        => TriggerForgotAsync();
+
     protected Task TriggerPrimaryActionAsync()
         => PrimaryActionRequested.InvokeAsync();
 
+    protected Task TriggerForgotAsync()
+        => ForgotRequested.InvokeAsync();
+
     public async ValueTask DisposeAsync()
     {
-        if (_spaceShortcutId is not null)
+        if (_shortcutId is not null)
         {
             try
             {
-                await JS.InvokeVoidAsync("blazorHelpers.unregisterSpaceShortcut", _spaceShortcutId);
+                await JS.InvokeVoidAsync("blazorHelpers.unregisterFlashCardShortcuts", _shortcutId);
             }
             catch (JSDisconnectedException)
             {

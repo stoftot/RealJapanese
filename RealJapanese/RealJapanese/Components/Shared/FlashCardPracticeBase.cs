@@ -22,7 +22,7 @@ public abstract class FlashCardPracticeBase : PracticeBase
 
         currentQuestionIndex = 0;
         OnQuestionsUpdated();
-        showAnswer = false;
+        HideAnswer();
     }
 
     protected virtual void OnQuestionsUpdated()
@@ -37,7 +37,13 @@ public abstract class FlashCardPracticeBase : PracticeBase
             return;
         }
 
-        showAnswer = true;
+        ShowAnswer();
+        StateHasChanged();
+    }
+
+    protected void HandleForgotAction()
+    {
+        RevealAnswer();
         StateHasChanged();
     }
 
