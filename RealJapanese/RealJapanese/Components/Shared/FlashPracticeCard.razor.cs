@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+
 namespace RealJapanese.Components.Shared;
 
 public class FlashPracticeCardBase : ComponentBase, IAsyncDisposable
@@ -11,9 +12,11 @@ public class FlashPracticeCardBase : ComponentBase, IAsyncDisposable
     [Parameter] public bool ShowAnswer { get; set; }
     [Parameter] public string ShowAnswerLabel { get; set; } = "Show answer";
     [Parameter] public string NextQuestionLabel { get; set; } = "Next question";
+    [Parameter] public string GaveWrongAnswerLabel { get; set; } = "Gave wrong answer";
     [Parameter] public string ForgotLabel { get; set; } = "Forgot";
     [Parameter] public EventCallback PrimaryActionRequested { get; set; }
     [Parameter] public EventCallback ForgotRequested { get; set; }
+    [Parameter] public EventCallback GaveWrongAnswerRequested { get; set; }
 
     [Inject] protected IJSRuntime JS { get; set; } = null!;
 
@@ -21,6 +24,7 @@ public class FlashPracticeCardBase : ComponentBase, IAsyncDisposable
     private DotNetObjectReference<FlashPracticeCardBase>? _dotNetRef;
     private string? _shortcutId;
     protected string PrimaryActionLabel => ShowAnswer ? NextQuestionLabel : ShowAnswerLabel;
+    protected bool ForgotAnswer { get; set; } = false;
 
     protected internal Task FocusCardAsync() => actionButtonRef.FocusAsync().AsTask();
 
@@ -40,13 +44,25 @@ public class FlashPracticeCardBase : ComponentBase, IAsyncDisposable
 
     [JSInvokable]
     public Task HandleGlobalBackspaceAsync()
-        => TriggerForgotAsync();
+        => ShowAnswer ? TriggerAnswerWasWrongAsync() : TriggerForgotAsync();
 
     protected Task TriggerPrimaryActionAsync()
-        => PrimaryActionRequested.InvokeAsync();
+    {
+        ForgotAnswer = false;
+        return PrimaryActionRequested.InvokeAsync();
+    }
 
     protected Task TriggerForgotAsync()
-        => ForgotRequested.InvokeAsync();
+    {
+        ForgotAnswer = true;
+        return ForgotRequested.InvokeAsync();
+    }
+
+    protected Task TriggerAnswerWasWrongAsync()
+    {
+        ForgotAnswer = false;
+        return GaveWrongAnswerRequested.InvokeAsync();
+    }
 
     public async ValueTask DisposeAsync()
     {

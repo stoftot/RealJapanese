@@ -48,6 +48,13 @@ public abstract class FlashCardPracticeBase : PracticeBase
         await FocusAnswerInputAsync();
     }
 
+    protected async Task HandleGaveWrongAnswerAsync()
+    {
+        RevealAnswer();
+        await GoToNextQuestionAsync();
+        StateHasChanged();
+    }
+
     public void OnSplitDataIntoChanged(int newValue)
     {
         splitDataInto = newValue;
