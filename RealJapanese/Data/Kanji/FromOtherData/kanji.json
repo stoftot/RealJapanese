@@ -1,0 +1,2691 @@
+[
+  {
+    "id": "0",
+    "symbol": "行",
+    "onReading": "コウ",
+    "kunReading": "い",
+    "commonEnglish": "go",
+    "otherEnglish": [
+      "row",
+      "line",
+      "travel"
+    ]
+  },
+  {
+    "id": "1",
+    "symbol": "帰",
+    "onReading": "キ",
+    "kunReading": "かえ",
+    "commonEnglish": "return",
+    "otherEnglish": [
+      "go home"
+    ]
+  },
+  {
+    "id": "2",
+    "symbol": "聞",
+    "onReading": "ブン",
+    "kunReading": "き",
+    "commonEnglish": "hear",
+    "otherEnglish": [
+      "ask"
+    ]
+  },
+  {
+    "id": "3",
+    "symbol": "飲",
+    "onReading": "イン",
+    "kunReading": "の",
+    "commonEnglish": "drink",
+    "otherEnglish": [
+      "consume"
+    ]
+  },
+  {
+    "id": "4",
+    "symbol": "話",
+    "onReading": "バ",
+    "kunReading": "はなし",
+    "commonEnglish": "story",
+    "otherEnglish": [
+      "conversation"
+    ]
+  },
+  {
+    "id": "5",
+    "symbol": "読",
+    "onReading": "ドウ",
+    "kunReading": "よ",
+    "commonEnglish": "read",
+    "otherEnglish": [
+      "reading"
+    ]
+  },
+  {
+    "id": "6",
+    "symbol": "起",
+    "onReading": "キ",
+    "kunReading": "おこ",
+    "commonEnglish": "rise",
+    "otherEnglish": [
+      "start",
+      "arise"
+    ]
+  },
+  {
+    "id": "7",
+    "symbol": "食",
+    "onReading": "ショク",
+    "kunReading": "た",
+    "commonEnglish": "eat",
+    "otherEnglish": [
+      "food"
+    ]
+  },
+  {
+    "id": "8",
+    "symbol": "寝",
+    "onReading": "シン",
+    "kunReading": "ね",
+    "commonEnglish": "sleep",
+    "otherEnglish": [
+      "bed"
+    ]
+  },
+  {
+    "id": "9",
+    "symbol": "見",
+    "onReading": "ケン",
+    "kunReading": "み",
+    "commonEnglish": "see",
+    "otherEnglish": [
+      "look",
+      "watch"
+    ]
+  },
+  {
+    "id": "10",
+    "symbol": "来",
+    "onReading": "ライ",
+    "kunReading": "く",
+    "commonEnglish": "come",
+    "otherEnglish": [
+      "come from",
+      "visit",
+      "future"
+    ]
+  },
+  {
+    "id": "11",
+    "symbol": "勉",
+    "onReading": "ベン",
+    "kunReading": "つと",
+    "commonEnglish": "study",
+    "otherEnglish": [
+      "diligence"
+    ]
+  },
+  {
+    "id": "12",
+    "symbol": "強",
+    "onReading": "ゴウ",
+    "kunReading": "つよ",
+    "commonEnglish": "strong",
+    "otherEnglish": [
+      "powerful"
+    ]
+  },
+  {
+    "id": "13",
+    "symbol": "会",
+    "onReading": "カイ",
+    "kunReading": "あ",
+    "commonEnglish": "meeting",
+    "otherEnglish": [
+      "assembly",
+      "to meet"
+    ]
+  },
+  {
+    "id": "14",
+    "symbol": "買",
+    "onReading": "バイ",
+    "kunReading": "か",
+    "commonEnglish": "buy",
+    "otherEnglish": []
+  },
+  {
+    "id": "15",
+    "symbol": "書",
+    "onReading": "ショ",
+    "kunReading": "かき",
+    "commonEnglish": "write",
+    "otherEnglish": [
+      "book"
+    ]
+  },
+  {
+    "id": "16",
+    "symbol": "撮",
+    "onReading": "サツ",
+    "kunReading": "とる",
+    "commonEnglish": "photograph",
+    "otherEnglish": [
+      "take a picture"
+    ]
+  },
+  {
+    "id": "17",
+    "symbol": "待",
+    "onReading": "タイ",
+    "kunReading": "まつ",
+    "commonEnglish": "wait",
+    "otherEnglish": [
+      "await"
+    ]
+  },
+  {
+    "id": "18",
+    "symbol": "分",
+    "onReading": "ブン",
+    "kunReading": "わ",
+    "commonEnglish": "divide",
+    "otherEnglish": [
+      "minute",
+      "understand"
+    ]
+  },
+  {
+    "id": "19",
+    "symbol": "泳",
+    "onReading": "エイ",
+    "kunReading": "およ",
+    "commonEnglish": "swim",
+    "otherEnglish": []
+  },
+  {
+    "id": "20",
+    "symbol": "乗",
+    "onReading": "ジョウ",
+    "kunReading": "の",
+    "commonEnglish": "ride",
+    "otherEnglish": [
+      "mount",
+      "board"
+    ]
+  },
+  {
+    "id": "21",
+    "symbol": "出",
+    "onReading": "シツ",
+    "kunReading": "で",
+    "commonEnglish": "come out",
+    "otherEnglish": [
+      "go out",
+      "emit"
+    ]
+  },
+  {
+    "id": "22",
+    "symbol": "遊",
+    "onReading": "ユウ",
+    "kunReading": "あそ",
+    "commonEnglish": "play",
+    "otherEnglish": [
+      "leisure"
+    ]
+  },
+  {
+    "id": "23",
+    "symbol": "急",
+    "onReading": "キュウ",
+    "kunReading": "いそ",
+    "commonEnglish": "urgent",
+    "otherEnglish": [
+      "hasty",
+      "steep"
+    ]
+  },
+  {
+    "id": "24",
+    "symbol": "返",
+    "onReading": "ヘン",
+    "kunReading": "かえ",
+    "commonEnglish": "return",
+    "otherEnglish": [
+      "repay"
+    ]
+  },
+  {
+    "id": "25",
+    "symbol": "消",
+    "onReading": "ショウ",
+    "kunReading": "きえ",
+    "commonEnglish": "extinguish",
+    "otherEnglish": [
+      "erase"
+    ]
+  },
+  {
+    "id": "26",
+    "symbol": "死",
+    "onReading": "シ",
+    "kunReading": "し",
+    "commonEnglish": "death",
+    "otherEnglish": []
+  },
+  {
+    "id": "27",
+    "symbol": "座",
+    "onReading": "ザ",
+    "kunReading": "すわ",
+    "commonEnglish": "seat",
+    "otherEnglish": [
+      "seat",
+      "sitting",
+      "constellation"
+    ]
+  },
+  {
+    "id": "28",
+    "symbol": "立",
+    "onReading": "リツ",
+    "kunReading": "たつ",
+    "commonEnglish": "stand",
+    "otherEnglish": [
+      "establish"
+    ]
+  },
+  {
+    "id": "29",
+    "symbol": "吸",
+    "onReading": "キユウ",
+    "kunReading": "すう",
+    "commonEnglish": "suck",
+    "otherEnglish": [
+      "inhale"
+    ]
+  },
+  {
+    "id": "30",
+    "symbol": "使",
+    "onReading": "シ",
+    "kunReading": "つか",
+    "commonEnglish": "use",
+    "otherEnglish": [
+      "employ",
+      "dispatch"
+    ]
+  },
+  {
+    "id": "31",
+    "symbol": "手",
+    "onReading": "シ",
+    "kunReading": "て",
+    "commonEnglish": "hand",
+    "otherEnglish": [
+      "handle"
+    ]
+  },
+  {
+    "id": "32",
+    "symbol": "伝",
+    "onReading": "デン",
+    "kunReading": "つた",
+    "commonEnglish": "transmit",
+    "otherEnglish": [
+      "hand down",
+      "convey"
+    ]
+  },
+  {
+    "id": "33",
+    "symbol": "入",
+    "onReading": "ニュウ",
+    "kunReading": "はい",
+    "commonEnglish": "enter",
+    "otherEnglish": [
+      "entering"
+    ]
+  },
+  {
+    "id": "34",
+    "symbol": "持",
+    "onReading": "ジ",
+    "kunReading": "もつ",
+    "commonEnglish": "hold",
+    "otherEnglish": [
+      "carry"
+    ]
+  },
+  {
+    "id": "35",
+    "symbol": "休",
+    "onReading": "キュウ",
+    "kunReading": "やす",
+    "commonEnglish": "rest",
+    "otherEnglish": [
+      "holiday"
+    ]
+  },
+  {
+    "id": "36",
+    "symbol": "開",
+    "onReading": "カイ",
+    "kunReading": "ひら",
+    "commonEnglish": "open",
+    "otherEnglish": [
+      "start"
+    ]
+  },
+  {
+    "id": "37",
+    "symbol": "閉",
+    "onReading": "ヒ",
+    "kunReading": "とじ",
+    "commonEnglish": "close",
+    "otherEnglish": [
+      "shut"
+    ]
+  },
+  {
+    "id": "38",
+    "symbol": "教",
+    "onReading": "キョウ",
+    "kunReading": "おし",
+    "commonEnglish": "teach",
+    "otherEnglish": [
+      "education"
+    ]
+  },
+  {
+    "id": "39",
+    "symbol": "忘",
+    "onReading": "ボウ",
+    "kunReading": "わす",
+    "commonEnglish": "forget",
+    "otherEnglish": [
+      "forgetful"
+    ]
+  },
+  {
+    "id": "40",
+    "symbol": "降",
+    "onReading": "コウ",
+    "kunReading": "ふ",
+    "commonEnglish": "fall",
+    "otherEnglish": [
+      "descend"
+    ]
+  },
+  {
+    "id": "41",
+    "symbol": "借",
+    "onReading": "シャ",
+    "kunReading": "かす",
+    "commonEnglish": "loan",
+    "otherEnglish": [
+      "borrow"
+    ]
+  },
+  {
+    "id": "42",
+    "symbol": "浴",
+    "onReading": "ヨク",
+    "kunReading": "あぶらが",
+    "commonEnglish": "bath",
+    "otherEnglish": [
+      "bathing"
+    ]
+  },
+  {
+    "id": "43",
+    "symbol": "電",
+    "onReading": "デン",
+    "kunReading": "でん",
+    "commonEnglish": "electricity",
+    "otherEnglish": [
+      "electric"
+    ]
+  },
+  {
+    "id": "44",
+    "symbol": "連",
+    "onReading": "レン",
+    "kunReading": "つら",
+    "commonEnglish": "connect",
+    "otherEnglish": [
+      "continuous",
+      "series"
+    ]
+  },
+  {
+    "id": "45",
+    "symbol": "歌",
+    "onReading": "カ",
+    "kunReading": "うた",
+    "commonEnglish": "song",
+    "otherEnglish": [
+      "lyric"
+    ]
+  },
+  {
+    "id": "46",
+    "symbol": "知",
+    "onReading": "シ",
+    "kunReading": "しる",
+    "commonEnglish": "know",
+    "otherEnglish": [
+      "knowledge"
+    ]
+  },
+  {
+    "id": "47",
+    "symbol": "住",
+    "onReading": "ジュウ",
+    "kunReading": "すみ",
+    "commonEnglish": "live",
+    "otherEnglish": [
+      "reside"
+    ]
+  },
+  {
+    "id": "48",
+    "symbol": "働",
+    "onReading": "ドウ",
+    "kunReading": "はたらく",
+    "commonEnglish": "work",
+    "otherEnglish": [
+      "labor"
+    ]
+  },
+  {
+    "id": "49",
+    "symbol": "太",
+    "onReading": "タイ",
+    "kunReading": "ふと",
+    "commonEnglish": "fat",
+    "otherEnglish": [
+      "thick"
+    ]
+  },
+  {
+    "id": "50",
+    "symbol": "着",
+    "onReading": "チャク",
+    "kunReading": "き",
+    "commonEnglish": "wear",
+    "otherEnglish": [
+      "put on",
+      "arrive"
+    ]
+  },
+  {
+    "id": "51",
+    "symbol": "結",
+    "onReading": "ケツ",
+    "kunReading": "むす",
+    "commonEnglish": "tie",
+    "otherEnglish": [
+      "knot",
+      "marriage"
+    ]
+  },
+  {
+    "id": "52",
+    "symbol": "婚",
+    "onReading": "コン",
+    "kunReading": "たけ",
+    "commonEnglish": "marriage",
+    "otherEnglish": [
+      "wedding"
+    ]
+  },
+  {
+    "id": "53",
+    "symbol": "描",
+    "onReading": "ボウ",
+    "kunReading": "かき",
+    "commonEnglish": "draw",
+    "otherEnglish": [
+      "paint"
+    ]
+  },
+  {
+    "id": "54",
+    "symbol": "新",
+    "onReading": "シン",
+    "kunReading": "あたら",
+    "commonEnglish": "new",
+    "otherEnglish": [
+      "fresh"
+    ]
+  },
+  {
+    "id": "55",
+    "symbol": "古",
+    "onReading": "コ",
+    "kunReading": "ふる",
+    "commonEnglish": "old",
+    "otherEnglish": [
+      "ancient"
+    ]
+  },
+  {
+    "id": "56",
+    "symbol": "暑",
+    "onReading": "ショ",
+    "kunReading": "あつ",
+    "commonEnglish": "hot",
+    "otherEnglish": [
+      "summer heat"
+    ]
+  },
+  {
+    "id": "57",
+    "symbol": "寒",
+    "onReading": "カン",
+    "kunReading": "さむ",
+    "commonEnglish": "cold",
+    "otherEnglish": [
+      "chilly"
+    ]
+  },
+  {
+    "id": "58",
+    "symbol": "熱",
+    "onReading": "ネツ",
+    "kunReading": "あつ",
+    "commonEnglish": "heat",
+    "otherEnglish": [
+      "fever"
+    ]
+  },
+  {
+    "id": "59",
+    "symbol": "忙",
+    "onReading": "ボウ",
+    "kunReading": "いそが",
+    "commonEnglish": "busy",
+    "otherEnglish": [
+      "occupied"
+    ]
+  },
+  {
+    "id": "60",
+    "symbol": "大",
+    "onReading": "ダイ",
+    "kunReading": "おお",
+    "commonEnglish": "big",
+    "otherEnglish": [
+      "great",
+      "large"
+    ]
+  },
+  {
+    "id": "61",
+    "symbol": "小",
+    "onReading": "ショ",
+    "kunReading": "ちいさ",
+    "commonEnglish": "small",
+    "otherEnglish": [
+      "minor"
+    ]
+  },
+  {
+    "id": "62",
+    "symbol": "面",
+    "onReading": "メン",
+    "kunReading": "おもて",
+    "commonEnglish": "face",
+    "otherEnglish": [
+      "surface",
+      "side",
+      "mask"
+    ]
+  },
+  {
+    "id": "63",
+    "symbol": "白",
+    "onReading": "ハク",
+    "kunReading": "しろ",
+    "commonEnglish": "white",
+    "otherEnglish": [
+      "bright"
+    ]
+  },
+  {
+    "id": "64",
+    "symbol": "優",
+    "onReading": "ユウ",
+    "kunReading": "まさ",
+    "commonEnglish": "superior",
+    "otherEnglish": [
+      "excellent",
+      "gentle"
+    ]
+  },
+  {
+    "id": "65",
+    "symbol": "難",
+    "onReading": "ナン",
+    "kunReading": "むずか",
+    "commonEnglish": "difficult",
+    "otherEnglish": [
+      "hard"
+    ]
+  },
+  {
+    "id": "66",
+    "symbol": "怖",
+    "onReading": "ブ",
+    "kunReading": "こわ",
+    "commonEnglish": "fear",
+    "otherEnglish": [
+      "scary"
+    ]
+  },
+  {
+    "id": "67",
+    "symbol": "楽",
+    "onReading": "ガク",
+    "kunReading": "たのし",
+    "commonEnglish": "easy",
+    "otherEnglish": [
+      "pleasure",
+      "music"
+    ]
+  },
+  {
+    "id": "68",
+    "symbol": "安",
+    "onReading": "アン",
+    "kunReading": "やす",
+    "commonEnglish": "safe",
+    "otherEnglish": [
+      "cheap",
+      "calm"
+    ]
+  },
+  {
+    "id": "69",
+    "symbol": "好",
+    "onReading": "コウ",
+    "kunReading": "すき",
+    "commonEnglish": "like",
+    "otherEnglish": [
+      "favor"
+    ]
+  },
+  {
+    "id": "70",
+    "symbol": "嫌",
+    "onReading": "ケン",
+    "kunReading": "いや",
+    "commonEnglish": "dislike",
+    "otherEnglish": [
+      "hate"
+    ]
+  },
+  {
+    "id": "71",
+    "symbol": "元",
+    "onReading": "ゲン",
+    "kunReading": "もと",
+    "commonEnglish": "origin",
+    "otherEnglish": [
+      "beginning",
+      "fund"
+    ]
+  },
+  {
+    "id": "72",
+    "symbol": "気",
+    "onReading": "キ",
+    "kunReading": "き",
+    "commonEnglish": "spirit",
+    "otherEnglish": [
+      "air",
+      "weather",
+      "mind",
+      "feeling"
+    ]
+  },
+  {
+    "id": "73",
+    "symbol": "静",
+    "onReading": "セイ",
+    "kunReading": "しず",
+    "commonEnglish": "quiet",
+    "otherEnglish": [
+      "still"
+    ]
+  },
+  {
+    "id": "74",
+    "symbol": "暇",
+    "onReading": "カ",
+    "kunReading": "ひま",
+    "commonEnglish": "free time",
+    "otherEnglish": [
+      "leisure"
+    ]
+  },
+  {
+    "id": "75",
+    "symbol": "変",
+    "onReading": "ヘン",
+    "kunReading": "かわる",
+    "commonEnglish": "change",
+    "otherEnglish": [
+      "strange"
+    ]
+  },
+  {
+    "id": "76",
+    "symbol": "長",
+    "onReading": "チョウ",
+    "kunReading": "なが",
+    "commonEnglish": "long",
+    "otherEnglish": [
+      "length"
+    ]
+  },
+  {
+    "id": "77",
+    "symbol": "短",
+    "onReading": "タン",
+    "kunReading": "みじか",
+    "commonEnglish": "short",
+    "otherEnglish": [
+      "brief"
+    ]
+  },
+  {
+    "id": "78",
+    "symbol": "速",
+    "onReading": "ソク",
+    "kunReading": "はや",
+    "commonEnglish": "fast",
+    "otherEnglish": [
+      "swift"
+    ]
+  },
+  {
+    "id": "79",
+    "symbol": "背",
+    "onReading": "ヘイ",
+    "kunReading": "せ",
+    "commonEnglish": "back",
+    "otherEnglish": [
+      "spine"
+    ]
+  },
+  {
+    "id": "80",
+    "symbol": "高",
+    "onReading": "コウ",
+    "kunReading": "たか",
+    "commonEnglish": "high",
+    "otherEnglish": [
+      "tall"
+    ]
+  },
+  {
+    "id": "81",
+    "symbol": "低",
+    "onReading": "テイ",
+    "kunReading": "ひく",
+    "commonEnglish": "low",
+    "otherEnglish": [
+      "low-lying"
+    ]
+  },
+  {
+    "id": "82",
+    "symbol": "頭",
+    "onReading": "トウ",
+    "kunReading": "あたま",
+    "commonEnglish": "head",
+    "otherEnglish": [
+      "top",
+      "chief"
+    ]
+  },
+  {
+    "id": "83",
+    "symbol": "親",
+    "onReading": "シン",
+    "kunReading": "おや",
+    "commonEnglish": "parent",
+    "otherEnglish": [
+      "close friend"
+    ]
+  },
+  {
+    "id": "84",
+    "symbol": "切",
+    "onReading": "セキ",
+    "kunReading": "きり",
+    "commonEnglish": "cut",
+    "otherEnglish": [
+      "slice",
+      "chop"
+    ]
+  },
+  {
+    "id": "85",
+    "symbol": "便",
+    "onReading": "ビン",
+    "kunReading": "たより",
+    "commonEnglish": "convenience",
+    "otherEnglish": [
+      "letter",
+      "feces"
+    ]
+  },
+  {
+    "id": "86",
+    "symbol": "利",
+    "onReading": "リ",
+    "kunReading": "とく",
+    "commonEnglish": "profit",
+    "otherEnglish": [
+      "sharp"
+    ]
+  },
+  {
+    "id": "87",
+    "symbol": "願",
+    "onReading": "ゲン",
+    "kunReading": "ねが",
+    "commonEnglish": "wish",
+    "otherEnglish": [
+      "desire"
+    ]
+  },
+  {
+    "id": "88",
+    "symbol": "学",
+    "onReading": "ガク",
+    "kunReading": "まな",
+    "commonEnglish": "study",
+    "otherEnglish": [
+      "academy"
+    ]
+  },
+  {
+    "id": "89",
+    "symbol": "校",
+    "onReading": "コウ",
+    "kunReading": "あて",
+    "commonEnglish": "school",
+    "otherEnglish": [
+      "academy"
+    ]
+  },
+  {
+    "id": "90",
+    "symbol": "生",
+    "onReading": "セイ",
+    "kunReading": "いき",
+    "commonEnglish": "life",
+    "otherEnglish": [
+      "raw",
+      "live"
+    ]
+  },
+  {
+    "id": "91",
+    "symbol": "留",
+    "onReading": "リュウ",
+    "kunReading": "とど",
+    "commonEnglish": "stay",
+    "otherEnglish": [
+      "detain"
+    ]
+  },
+  {
+    "id": "92",
+    "symbol": "先",
+    "onReading": "セン",
+    "kunReading": "さき",
+    "commonEnglish": "before",
+    "otherEnglish": [
+      "front",
+      "prior"
+    ]
+  },
+  {
+    "id": "93",
+    "symbol": "年",
+    "onReading": "ネン",
+    "kunReading": "とし",
+    "commonEnglish": "year",
+    "otherEnglish": [
+      "age"
+    ]
+  },
+  {
+    "id": "94",
+    "symbol": "一",
+    "onReading": "イチ",
+    "kunReading": "ひと",
+    "commonEnglish": "one",
+    "otherEnglish": []
+  },
+  {
+    "id": "95",
+    "symbol": "専",
+    "onReading": "セン",
+    "kunReading": "もと",
+    "commonEnglish": "specialist",
+    "otherEnglish": [
+      "exclusive"
+    ]
+  },
+  {
+    "id": "96",
+    "symbol": "攻",
+    "onReading": "コウ",
+    "kunReading": "せん",
+    "commonEnglish": "attack",
+    "otherEnglish": [
+      "assault",
+      "offensive"
+    ]
+  },
+  {
+    "id": "97",
+    "symbol": "私",
+    "onReading": "シ",
+    "kunReading": "わたし",
+    "commonEnglish": "I",
+    "otherEnglish": []
+  },
+  {
+    "id": "98",
+    "symbol": "友",
+    "onReading": "ユウ",
+    "kunReading": "とも",
+    "commonEnglish": "friend",
+    "otherEnglish": [
+      "companion"
+    ]
+  },
+  {
+    "id": "99",
+    "symbol": "人",
+    "onReading": "ジン",
+    "kunReading": "ひと",
+    "commonEnglish": "person",
+    "otherEnglish": [
+      "people"
+    ]
+  },
+  {
+    "id": "100",
+    "symbol": "日",
+    "onReading": "ニチ",
+    "kunReading": "ひ",
+    "commonEnglish": "sun",
+    "otherEnglish": [
+      "day"
+    ]
+  },
+  {
+    "id": "101",
+    "symbol": "本",
+    "onReading": "ホン",
+    "kunReading": "ほん",
+    "commonEnglish": "book",
+    "otherEnglish": [
+      "tree trunk",
+      "origin",
+      "main"
+    ]
+  },
+  {
+    "id": "102",
+    "symbol": "今",
+    "onReading": "キン",
+    "kunReading": "いま",
+    "commonEnglish": "now",
+    "otherEnglish": []
+  },
+  {
+    "id": "103",
+    "symbol": "午",
+    "onReading": "ゴ",
+    "kunReading": "うま",
+    "commonEnglish": "noon",
+    "otherEnglish": [
+      "horse"
+    ]
+  },
+  {
+    "id": "104",
+    "symbol": "前",
+    "onReading": "ゼン",
+    "kunReading": "まえ",
+    "commonEnglish": "before",
+    "otherEnglish": [
+      "front"
+    ]
+  },
+  {
+    "id": "105",
+    "symbol": "後",
+    "onReading": "コウ",
+    "kunReading": "あと",
+    "commonEnglish": "after",
+    "otherEnglish": [
+      "rear",
+      "behind"
+    ]
+  },
+  {
+    "id": "106",
+    "symbol": "時",
+    "onReading": "ジ",
+    "kunReading": "とき",
+    "commonEnglish": "time",
+    "otherEnglish": [
+      "hour"
+    ]
+  },
+  {
+    "id": "107",
+    "symbol": "語",
+    "onReading": "ゴ",
+    "kunReading": "ことば",
+    "commonEnglish": "word",
+    "otherEnglish": [
+      "language"
+    ]
+  },
+  {
+    "id": "108",
+    "symbol": "歳",
+    "onReading": "セイ",
+    "kunReading": "とし",
+    "commonEnglish": "age",
+    "otherEnglish": [
+      "year"
+    ]
+  },
+  {
+    "id": "109",
+    "symbol": "番",
+    "onReading": "バン",
+    "kunReading": "ばん",
+    "commonEnglish": "turn",
+    "otherEnglish": [
+      "number",
+      "guard"
+    ]
+  },
+  {
+    "id": "110",
+    "symbol": "号",
+    "onReading": "ゴウ",
+    "kunReading": "ご",
+    "commonEnglish": "number",
+    "otherEnglish": [
+      "call",
+      "cry"
+    ]
+  },
+  {
+    "id": "111",
+    "symbol": "名",
+    "onReading": "メイ",
+    "kunReading": "な",
+    "commonEnglish": "name",
+    "otherEnglish": [
+      "famous"
+    ]
+  },
+  {
+    "id": "112",
+    "symbol": "何",
+    "onReading": "ナ",
+    "kunReading": "なに",
+    "commonEnglish": "what",
+    "otherEnglish": []
+  },
+  {
+    "id": "113",
+    "symbol": "韓",
+    "onReading": "カン",
+    "kunReading": "かん",
+    "commonEnglish": "korean",
+    "otherEnglish": []
+  },
+  {
+    "id": "114",
+    "symbol": "国",
+    "onReading": "コク",
+    "kunReading": "くに",
+    "commonEnglish": "country",
+    "otherEnglish": [
+      "nation"
+    ]
+  },
+  {
+    "id": "115",
+    "symbol": "中",
+    "onReading": "チュウ",
+    "kunReading": "なか",
+    "commonEnglish": "middle",
+    "otherEnglish": [
+      "inside",
+      "center"
+    ]
+  },
+  {
+    "id": "116",
+    "symbol": "研",
+    "onReading": "ケン",
+    "kunReading": "とぐ",
+    "commonEnglish": "grind",
+    "otherEnglish": [
+      "polish"
+    ]
+  },
+  {
+    "id": "117",
+    "symbol": "究",
+    "onReading": "キウ",
+    "kunReading": "いため",
+    "commonEnglish": "pursue",
+    "otherEnglish": [
+      "investigate"
+    ]
+  },
+  {
+    "id": "118",
+    "symbol": "経",
+    "onReading": "ケイ",
+    "kunReading": "つご",
+    "commonEnglish": "experience",
+    "otherEnglish": [
+      "pass through",
+      "scripture"
+    ]
+  },
+  {
+    "id": "119",
+    "symbol": "済",
+    "onReading": "セイ",
+    "kunReading": "すむ",
+    "commonEnglish": "complete",
+    "otherEnglish": [
+      "finish",
+      "settle"
+    ]
+  },
+  {
+    "id": "120",
+    "symbol": "工",
+    "onReading": "コウ",
+    "kunReading": "つくえ",
+    "commonEnglish": "work",
+    "otherEnglish": [
+      "engineering"
+    ]
+  },
+  {
+    "id": "121",
+    "symbol": "際",
+    "onReading": "セキ",
+    "kunReading": "わき",
+    "commonEnglish": "occasion",
+    "otherEnglish": [
+      "margin",
+      "edge"
+    ]
+  },
+  {
+    "id": "122",
+    "symbol": "関",
+    "onReading": "カン",
+    "kunReading": "せき",
+    "commonEnglish": "relation",
+    "otherEnglish": [
+      "concern",
+      "regard"
+    ]
+  },
+  {
+    "id": "123",
+    "symbol": "係",
+    "onReading": "カイ",
+    "kunReading": "かかり",
+    "commonEnglish": "charge",
+    "otherEnglish": [
+      "connection",
+      "link"
+    ]
+  },
+  {
+    "id": "124",
+    "symbol": "政",
+    "onReading": "セイ",
+    "kunReading": "まつりごと",
+    "commonEnglish": "government",
+    "otherEnglish": [
+      "politics"
+    ]
+  },
+  {
+    "id": "125",
+    "symbol": "治",
+    "onReading": "チ",
+    "kunReading": "はる",
+    "commonEnglish": "govern",
+    "otherEnglish": [
+      "cure"
+    ]
+  },
+  {
+    "id": "126",
+    "symbol": "物",
+    "onReading": "ブツ",
+    "kunReading": "もの",
+    "commonEnglish": "thing",
+    "otherEnglish": [
+      "object"
+    ]
+  },
+  {
+    "id": "127",
+    "symbol": "文",
+    "onReading": "ブン",
+    "kunReading": "ふみ",
+    "commonEnglish": "text",
+    "otherEnglish": [
+      "literature"
+    ]
+  },
+  {
+    "id": "128",
+    "symbol": "歴",
+    "onReading": "レキ",
+    "kunReading": "なが",
+    "commonEnglish": "history",
+    "otherEnglish": [
+      "record"
+    ]
+  },
+  {
+    "id": "129",
+    "symbol": "史",
+    "onReading": "シ",
+    "kunReading": "ふみ",
+    "commonEnglish": "history",
+    "otherEnglish": [
+      "historical record"
+    ]
+  },
+  {
+    "id": "130",
+    "symbol": "医",
+    "onReading": "イ",
+    "kunReading": "い",
+    "commonEnglish": "doctor",
+    "otherEnglish": [
+      "medicine"
+    ]
+  },
+  {
+    "id": "131",
+    "symbol": "者",
+    "onReading": "シャ",
+    "kunReading": "もの",
+    "commonEnglish": "person",
+    "otherEnglish": [
+      "one",
+      "individual"
+    ]
+  },
+  {
+    "id": "132",
+    "symbol": "社",
+    "onReading": "シャ",
+    "kunReading": "やしろ",
+    "commonEnglish": "shrine",
+    "otherEnglish": [
+      "company"
+    ]
+  },
+  {
+    "id": "133",
+    "symbol": "員",
+    "onReading": "イン",
+    "kunReading": "かず",
+    "commonEnglish": "member",
+    "otherEnglish": [
+      "staff",
+      "personnel"
+    ]
+  },
+  {
+    "id": "134",
+    "symbol": "看",
+    "onReading": "カン",
+    "kunReading": "み",
+    "commonEnglish": "watch over",
+    "otherEnglish": [
+      "attend"
+    ]
+  },
+  {
+    "id": "135",
+    "symbol": "護",
+    "onReading": "コク",
+    "kunReading": "まも",
+    "commonEnglish": "protect",
+    "otherEnglish": [
+      "guard"
+    ]
+  },
+  {
+    "id": "136",
+    "symbol": "師",
+    "onReading": "シ",
+    "kunReading": "もろ",
+    "commonEnglish": "teacher",
+    "otherEnglish": [
+      "master",
+      "season"
+    ]
+  },
+  {
+    "id": "137",
+    "symbol": "主 - FAILED",
+    "onReading": "NA",
+    "kunReading": "NA",
+    "commonEnglish": "{\n  \"symbol\": \"主\",\n  \"onReading\": \"シゅ\",\n  \"kunReading\": \"ぬし\",\n  \"commonEnglish\": \"master\",\n  \"otherEnglish\": [\n    \"owner\",\n    \"host\"\n  ]\n}",
+    "otherEnglish": []
+  },
+  {
+    "id": "138",
+    "symbol": "婦",
+    "onReading": "フ",
+    "kunReading": "おんな",
+    "commonEnglish": "woman",
+    "otherEnglish": [
+      "female"
+    ]
+  },
+  {
+    "id": "139",
+    "symbol": "院",
+    "onReading": "イン",
+    "kunReading": "いん",
+    "commonEnglish": "ward",
+    "otherEnglish": [
+      "palace",
+      "monastery"
+    ]
+  },
+  {
+    "id": "140",
+    "symbol": "弁",
+    "onReading": "ヘン",
+    "kunReading": "べん",
+    "commonEnglish": "reason",
+    "otherEnglish": [
+      "explanation",
+      "butterfly"
+    ]
+  },
+  {
+    "id": "141",
+    "symbol": "士",
+    "onReading": "シ",
+    "kunReading": "もののし",
+    "commonEnglish": "gentleman",
+    "otherEnglish": [
+      "samurai",
+      "scholar"
+    ]
+  },
+  {
+    "id": "142",
+    "symbol": "母",
+    "onReading": "ボ",
+    "kunReading": "はは",
+    "commonEnglish": "mother",
+    "otherEnglish": []
+  },
+  {
+    "id": "143",
+    "symbol": "父",
+    "onReading": "ホウ",
+    "kunReading": "ちち",
+    "commonEnglish": "father",
+    "otherEnglish": []
+  },
+  {
+    "id": "144",
+    "symbol": "姉",
+    "onReading": "シ",
+    "kunReading": "あね",
+    "commonEnglish": "older sister",
+    "otherEnglish": []
+  },
+  {
+    "id": "145",
+    "symbol": "兄",
+    "onReading": "ケイ",
+    "kunReading": "あに",
+    "commonEnglish": "older brother",
+    "otherEnglish": []
+  },
+  {
+    "id": "146",
+    "symbol": "妹",
+    "onReading": "メイ",
+    "kunReading": "いもうと",
+    "commonEnglish": "younger sister",
+    "otherEnglish": []
+  },
+  {
+    "id": "147",
+    "symbol": "弟",
+    "onReading": "テイ",
+    "kunReading": "おとうと",
+    "commonEnglish": "younger brother",
+    "otherEnglish": []
+  },
+  {
+    "id": "148",
+    "symbol": "魚",
+    "onReading": "ギョ",
+    "kunReading": "さかな",
+    "commonEnglish": "fish",
+    "otherEnglish": []
+  },
+  {
+    "id": "149",
+    "symbol": "肉",
+    "onReading": "ニク",
+    "kunReading": "にく",
+    "commonEnglish": "meat",
+    "otherEnglish": [
+      "flesh"
+    ]
+  },
+  {
+    "id": "150",
+    "symbol": "野",
+    "onReading": "ヤ",
+    "kunReading": "の",
+    "commonEnglish": "field",
+    "otherEnglish": [
+      "wild",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "151",
+    "symbol": "菜",
+    "onReading": "サイ",
+    "kunReading": "な",
+    "commonEnglish": "vegetable",
+    "otherEnglish": [
+      "greens"
+    ]
+  },
+  {
+    "id": "152",
+    "symbol": "傘",
+    "onReading": "サン",
+    "kunReading": "かさ",
+    "commonEnglish": "umbrella",
+    "otherEnglish": []
+  },
+  {
+    "id": "153",
+    "symbol": "鞄 - FAILED",
+    "onReading": "NA",
+    "kunReading": "NA",
+    "commonEnglish": "{\n  \"symbol\": \"鞄\",\n  \"onReading\": \"КАН\",\n  \"kunReading\": \"かば\",\n  \"commonEnglish\": \"bag\",\n  \"otherEnglish\": [\n    \"satchel\"\n  ]\n}",
+    "otherEnglish": []
+  },
+  {
+    "id": "154",
+    "symbol": "靴",
+    "onReading": "カク",
+    "kunReading": "くつ",
+    "commonEnglish": "shoe",
+    "otherEnglish": []
+  },
+  {
+    "id": "155",
+    "symbol": "財",
+    "onReading": "ザイ",
+    "kunReading": "かね",
+    "commonEnglish": "money",
+    "otherEnglish": [
+      "property"
+    ]
+  },
+  {
+    "id": "156",
+    "symbol": "布",
+    "onReading": "フ",
+    "kunReading": "ぬの",
+    "commonEnglish": "cloth",
+    "otherEnglish": [
+      "fabric"
+    ]
+  },
+  {
+    "id": "157",
+    "symbol": "自",
+    "onReading": "ジ",
+    "kunReading": "みずかたり",
+    "commonEnglish": "self",
+    "otherEnglish": [
+      "from",
+      "by oneself"
+    ]
+  },
+  {
+    "id": "158",
+    "symbol": "転",
+    "onReading": "テン",
+    "kunReading": "ころ",
+    "commonEnglish": "turn",
+    "otherEnglish": [
+      "fall",
+      "transfer"
+    ]
+  },
+  {
+    "id": "159",
+    "symbol": "車",
+    "onReading": "シャ",
+    "kunReading": "くるま",
+    "commonEnglish": "car",
+    "otherEnglish": [
+      "vehicle"
+    ]
+  },
+  {
+    "id": "160",
+    "symbol": "計",
+    "onReading": "キ",
+    "kunReading": "はか",
+    "commonEnglish": "calculate",
+    "otherEnglish": [
+      "plan"
+    ]
+  },
+  {
+    "id": "161",
+    "symbol": "帽",
+    "onReading": "ボウ",
+    "kunReading": "ぼう",
+    "commonEnglish": "hat",
+    "otherEnglish": []
+  },
+  {
+    "id": "162",
+    "symbol": "子",
+    "onReading": "コ",
+    "kunReading": "こ",
+    "commonEnglish": "child",
+    "otherEnglish": [
+      "offspring"
+    ]
+  },
+  {
+    "id": "163",
+    "symbol": "銀",
+    "onReading": "ギン",
+    "kunReading": "にんべん",
+    "commonEnglish": "silver",
+    "otherEnglish": [
+      "argent"
+    ]
+  },
+  {
+    "id": "164",
+    "symbol": "図",
+    "onReading": "ト",
+    "kunReading": "ず",
+    "commonEnglish": "diagram",
+    "otherEnglish": [
+      "picture",
+      "figure"
+    ]
+  },
+  {
+    "id": "165",
+    "symbol": "館",
+    "onReading": "カン",
+    "kunReading": "たて",
+    "commonEnglish": "mansion",
+    "otherEnglish": [
+      "building",
+      "hall"
+    ]
+  },
+  {
+    "id": "166",
+    "symbol": "郵",
+    "onReading": "ユウ",
+    "kunReading": "ゆう",
+    "commonEnglish": "mail",
+    "otherEnglish": [
+      "postal"
+    ]
+  },
+  {
+    "id": "167",
+    "symbol": "局",
+    "onReading": "キョク",
+    "kunReading": "つぼね",
+    "commonEnglish": "office",
+    "otherEnglish": [
+      "bureau",
+      "department"
+    ]
+  },
+  {
+    "id": "168",
+    "symbol": "英",
+    "onReading": "エイ",
+    "kunReading": "ふるさと",
+    "commonEnglish": "english",
+    "otherEnglish": [
+      "flower"
+    ]
+  },
+  {
+    "id": "169",
+    "symbol": "円",
+    "onReading": "ゲン",
+    "kunReading": "まる",
+    "commonEnglish": "circle",
+    "otherEnglish": [
+      "yen"
+    ]
+  },
+  {
+    "id": "170",
+    "symbol": "映",
+    "onReading": "エイ",
+    "kunReading": "うつ",
+    "commonEnglish": "reflection",
+    "otherEnglish": [
+      "project",
+      "film"
+    ]
+  },
+  {
+    "id": "171",
+    "symbol": "画",
+    "onReading": "ガ",
+    "kunReading": "えが",
+    "commonEnglish": "picture",
+    "otherEnglish": [
+      "drawing"
+    ]
+  },
+  {
+    "id": "172",
+    "symbol": "音",
+    "onReading": "オン",
+    "kunReading": "おと",
+    "commonEnglish": "sound",
+    "otherEnglish": [
+      "tone"
+    ]
+  },
+  {
+    "id": "173",
+    "symbol": "雑",
+    "onReading": "ゾウ",
+    "kunReading": "ざつ",
+    "commonEnglish": "miscellaneous",
+    "otherEnglish": [
+      "mixed"
+    ]
+  },
+  {
+    "id": "174",
+    "symbol": "誌",
+    "onReading": "シ",
+    "kunReading": "ふみ",
+    "commonEnglish": "magazine",
+    "otherEnglish": [
+      "journal"
+    ]
+  },
+  {
+    "id": "175",
+    "symbol": "酒",
+    "onReading": "シク",
+    "kunReading": "さけ",
+    "commonEnglish": "sake",
+    "otherEnglish": [
+      "alcohol"
+    ]
+  },
+  {
+    "id": "176",
+    "symbol": "茶",
+    "onReading": "チャ",
+    "kunReading": "ちゃ",
+    "commonEnglish": "tea",
+    "otherEnglish": [
+      "brown"
+    ]
+  },
+  {
+    "id": "177",
+    "symbol": "水",
+    "onReading": "スイ",
+    "kunReading": "みず",
+    "commonEnglish": "water",
+    "otherEnglish": [
+      "liquid"
+    ]
+  },
+  {
+    "id": "178",
+    "symbol": "朝",
+    "onReading": "ショウ",
+    "kunReading": "あさ",
+    "commonEnglish": "morning",
+    "otherEnglish": [
+      "dawn"
+    ]
+  },
+  {
+    "id": "179",
+    "symbol": "飯",
+    "onReading": "ヘン",
+    "kunReading": "めし",
+    "commonEnglish": "rice",
+    "otherEnglish": [
+      "meal"
+    ]
+  },
+  {
+    "id": "180",
+    "symbol": "昼",
+    "onReading": "ジュウ",
+    "kunReading": "ひる",
+    "commonEnglish": "noon",
+    "otherEnglish": [
+      "daytime"
+    ]
+  },
+  {
+    "id": "181",
+    "symbol": "晩",
+    "onReading": "バン",
+    "kunReading": "くら",
+    "commonEnglish": "evening",
+    "otherEnglish": [
+      "late"
+    ]
+  },
+  {
+    "id": "182",
+    "symbol": "家",
+    "onReading": "カ",
+    "kunReading": "いえ",
+    "commonEnglish": "house",
+    "otherEnglish": [
+      "home"
+    ]
+  },
+  {
+    "id": "183",
+    "symbol": "明",
+    "onReading": "メイ",
+    "kunReading": "あか",
+    "commonEnglish": "bright",
+    "otherEnglish": [
+      "clear"
+    ]
+  },
+  {
+    "id": "184",
+    "symbol": "毎",
+    "onReading": "マイ",
+    "kunReading": "まつ",
+    "commonEnglish": "every",
+    "otherEnglish": [
+      "each"
+    ]
+  },
+  {
+    "id": "185",
+    "symbol": "週",
+    "onReading": "シユウ",
+    "kunReading": "しゅう",
+    "commonEnglish": "week",
+    "otherEnglish": []
+  },
+  {
+    "id": "186",
+    "symbol": "末",
+    "onReading": "マツ",
+    "kunReading": "すえ",
+    "commonEnglish": "end",
+    "otherEnglish": [
+      "tip",
+      "terminal"
+    ]
+  },
+  {
+    "id": "187",
+    "symbol": "土",
+    "onReading": "ド",
+    "kunReading": "つち",
+    "commonEnglish": "soil",
+    "otherEnglish": [
+      "earth"
+    ]
+  },
+  {
+    "id": "188",
+    "symbol": "曜",
+    "onReading": "ヨウ",
+    "kunReading": "よう",
+    "commonEnglish": "day",
+    "otherEnglish": [
+      "day of the week"
+    ]
+  },
+  {
+    "id": "189",
+    "symbol": "早",
+    "onReading": "ソウ",
+    "kunReading": "はや",
+    "commonEnglish": "early",
+    "otherEnglish": [
+      "quick"
+    ]
+  },
+  {
+    "id": "190",
+    "symbol": "全",
+    "onReading": "ゼン",
+    "kunReading": "つま",
+    "commonEnglish": "all",
+    "otherEnglish": [
+      "whole"
+    ]
+  },
+  {
+    "id": "191",
+    "symbol": "然",
+    "onReading": "ゼン",
+    "kunReading": "そ",
+    "commonEnglish": "thus",
+    "otherEnglish": [
+      "so"
+    ]
+  },
+  {
+    "id": "192",
+    "symbol": "犬",
+    "onReading": "ケン",
+    "kunReading": "いぬ",
+    "commonEnglish": "dog",
+    "otherEnglish": [
+      "canine"
+    ]
+  },
+  {
+    "id": "193",
+    "symbol": "猫",
+    "onReading": "ネコ",
+    "kunReading": "ねこ",
+    "commonEnglish": "cat",
+    "otherEnglish": []
+  },
+  {
+    "id": "194",
+    "symbol": "供",
+    "onReading": "コウ",
+    "kunReading": "たす",
+    "commonEnglish": "offer",
+    "otherEnglish": [
+      "accompany"
+    ]
+  },
+  {
+    "id": "195",
+    "symbol": "椅",
+    "onReading": "イス",
+    "kunReading": "いす",
+    "commonEnglish": "chair",
+    "otherEnglish": []
+  },
+  {
+    "id": "196",
+    "symbol": "机",
+    "onReading": "キ",
+    "kunReading": "つくえ",
+    "commonEnglish": "desk",
+    "otherEnglish": []
+  },
+  {
+    "id": "197",
+    "symbol": "写",
+    "onReading": "シャ",
+    "kunReading": "か",
+    "commonEnglish": "write",
+    "otherEnglish": [
+      "photograph"
+    ]
+  },
+  {
+    "id": "198",
+    "symbol": "真",
+    "onReading": "シン",
+    "kunReading": "まこと",
+    "commonEnglish": "true",
+    "otherEnglish": [
+      "real",
+      "genuine"
+    ]
+  },
+  {
+    "id": "199",
+    "symbol": "花",
+    "onReading": "カ",
+    "kunReading": "はな",
+    "commonEnglish": "flower",
+    "otherEnglish": [
+      "bloom"
+    ]
+  },
+  {
+    "id": "200",
+    "symbol": "寺",
+    "onReading": "ジ",
+    "kunReading": "てら",
+    "commonEnglish": "temple",
+    "otherEnglish": []
+  },
+  {
+    "id": "201",
+    "symbol": "公",
+    "onReading": "コウ",
+    "kunReading": "おおやけ",
+    "commonEnglish": "public",
+    "otherEnglish": [
+      "official"
+    ]
+  },
+  {
+    "id": "202",
+    "symbol": "園",
+    "onReading": "エン",
+    "kunReading": "その",
+    "commonEnglish": "garden",
+    "otherEnglish": [
+      "park"
+    ]
+  },
+  {
+    "id": "203",
+    "symbol": "停",
+    "onReading": "テイ",
+    "kunReading": "とど",
+    "commonEnglish": "stop",
+    "otherEnglish": [
+      "halt"
+    ]
+  },
+  {
+    "id": "204",
+    "symbol": "病",
+    "onReading": "バイョウ",
+    "kunReading": "やまい",
+    "commonEnglish": "illness",
+    "otherEnglish": [
+      "disease"
+    ]
+  },
+  {
+    "id": "205",
+    "symbol": "屋",
+    "onReading": "ヤク",
+    "kunReading": "や",
+    "commonEnglish": "house",
+    "otherEnglish": [
+      "shop",
+      "store"
+    ]
+  },
+  {
+    "id": "206",
+    "symbol": "町",
+    "onReading": "チョウ",
+    "kunReading": "まち",
+    "commonEnglish": "town",
+    "otherEnglish": [
+      "district",
+      "street"
+    ]
+  },
+  {
+    "id": "207",
+    "symbol": "昨",
+    "onReading": "サク",
+    "kunReading": "きのう",
+    "commonEnglish": "yesterday",
+    "otherEnglish": [
+      "past"
+    ]
+  },
+  {
+    "id": "208",
+    "symbol": "間",
+    "onReading": "カン",
+    "kunReading": "ま",
+    "commonEnglish": "interval",
+    "otherEnglish": [
+      "room",
+      "in between"
+    ]
+  },
+  {
+    "id": "209",
+    "symbol": "月",
+    "onReading": "ゲツ",
+    "kunReading": "つき",
+    "commonEnglish": "moon",
+    "otherEnglish": [
+      "month"
+    ]
+  },
+  {
+    "id": "210",
+    "symbol": "火",
+    "onReading": "カ",
+    "kunReading": "ひ",
+    "commonEnglish": "fire",
+    "otherEnglish": [
+      "flame"
+    ]
+  },
+  {
+    "id": "211",
+    "symbol": "木",
+    "onReading": "モク",
+    "kunReading": "き",
+    "commonEnglish": "tree",
+    "otherEnglish": [
+      "wood"
+    ]
+  },
+  {
+    "id": "212",
+    "symbol": "金",
+    "onReading": "キン",
+    "kunReading": "かな",
+    "commonEnglish": "gold",
+    "otherEnglish": [
+      "money"
+    ]
+  },
+  {
+    "id": "213",
+    "symbol": "右",
+    "onReading": "ユウ",
+    "kunReading": "みぎ",
+    "commonEnglish": "right",
+    "otherEnglish": [
+      "right-hand"
+    ]
+  },
+  {
+    "id": "214",
+    "symbol": "左",
+    "onReading": "サ",
+    "kunReading": "ひだり",
+    "commonEnglish": "left",
+    "otherEnglish": [
+      "sinister"
+    ]
+  },
+  {
+    "id": "215",
+    "symbol": "上",
+    "onReading": "ジョウ",
+    "kunReading": "うえ",
+    "commonEnglish": "top",
+    "otherEnglish": [
+      "above",
+      "upper"
+    ]
+  },
+  {
+    "id": "216",
+    "symbol": "下",
+    "onReading": "カ",
+    "kunReading": "した",
+    "commonEnglish": "below",
+    "otherEnglish": [
+      "under",
+      "down"
+    ]
+  },
+  {
+    "id": "217",
+    "symbol": "近",
+    "onReading": "キン",
+    "kunReading": "ちか",
+    "commonEnglish": "near",
+    "otherEnglish": [
+      "close"
+    ]
+  },
+  {
+    "id": "218",
+    "symbol": "隣",
+    "onReading": "リン",
+    "kunReading": "となり",
+    "commonEnglish": "neighbor",
+    "otherEnglish": [
+      "next to"
+    ]
+  },
+  {
+    "id": "219",
+    "symbol": "果",
+    "onReading": "カ",
+    "kunReading": "まつ",
+    "commonEnglish": "fruit",
+    "otherEnglish": [
+      "result"
+    ]
+  },
+  {
+    "id": "220",
+    "symbol": "旅",
+    "onReading": "リョウ",
+    "kunReading": "たび",
+    "commonEnglish": "journey",
+    "otherEnglish": [
+      "trip"
+    ]
+  },
+  {
+    "id": "221",
+    "symbol": "海",
+    "onReading": "カイ",
+    "kunReading": "うみ",
+    "commonEnglish": "sea",
+    "otherEnglish": [
+      "ocean"
+    ]
+  },
+  {
+    "id": "222",
+    "symbol": "産",
+    "onReading": "サン",
+    "kunReading": "うむ",
+    "commonEnglish": "birth",
+    "otherEnglish": [
+      "produce",
+      "generate"
+    ]
+  },
+  {
+    "id": "223",
+    "symbol": "天",
+    "onReading": "テン",
+    "kunReading": "あま",
+    "commonEnglish": "sky",
+    "otherEnglish": [
+      "heaven"
+    ]
+  },
+  {
+    "id": "224",
+    "symbol": "宿",
+    "onReading": "ショク",
+    "kunReading": "やど",
+    "commonEnglish": "inn",
+    "otherEnglish": [
+      "accommodation",
+      "lodging"
+    ]
+  },
+  {
+    "id": "225",
+    "symbol": "題",
+    "onReading": "ダイ",
+    "kunReading": "だい",
+    "commonEnglish": "title",
+    "otherEnglish": [
+      "topic"
+    ]
+  },
+  {
+    "id": "226",
+    "symbol": "誕",
+    "onReading": "タン",
+    "kunReading": "たん",
+    "commonEnglish": "birth",
+    "otherEnglish": [
+      "birthday"
+    ]
+  },
+  {
+    "id": "227",
+    "symbol": "部",
+    "onReading": "ブ",
+    "kunReading": "べつ",
+    "commonEnglish": "section",
+    "otherEnglish": [
+      "department",
+      "team"
+    ]
+  },
+  {
+    "id": "228",
+    "symbol": "僕",
+    "onReading": "ボク",
+    "kunReading": "ぼく",
+    "commonEnglish": "i",
+    "otherEnglish": [
+      "me",
+      "myself"
+    ]
+  },
+  {
+    "id": "229",
+    "symbol": "緒",
+    "onReading": "コ",
+    "kunReading": "お",
+    "commonEnglish": "thread",
+    "otherEnglish": [
+      "beginning"
+    ]
+  },
+  {
+    "id": "230",
+    "symbol": "丈",
+    "onReading": "チョウ",
+    "kunReading": "たけ",
+    "commonEnglish": "height",
+    "otherEnglish": [
+      "stature"
+    ]
+  },
+  {
+    "id": "231",
+    "symbol": "夫",
+    "onReading": "フ",
+    "kunReading": "おっと",
+    "commonEnglish": "husband",
+    "otherEnglish": [
+      "man"
+    ]
+  },
+  {
+    "id": "232",
+    "symbol": "枚",
+    "onReading": "バイ",
+    "kunReading": "まい",
+    "commonEnglish": "piece",
+    "otherEnglish": [
+      "sheet"
+    ]
+  },
+  {
+    "id": "233",
+    "symbol": "漢",
+    "onReading": "カン",
+    "kunReading": "かん",
+    "commonEnglish": "han",
+    "otherEnglish": [
+      "china"
+    ]
+  },
+  {
+    "id": "234",
+    "symbol": "字",
+    "onReading": "ジ",
+    "kunReading": "あざ",
+    "commonEnglish": "character",
+    "otherEnglish": [
+      "letter",
+      "word"
+    ]
+  },
+  {
+    "id": "235",
+    "symbol": "科",
+    "onReading": "カ",
+    "kunReading": "かんむり",
+    "commonEnglish": "section",
+    "otherEnglish": [
+      "department",
+      "family"
+    ]
+  },
+  {
+    "id": "236",
+    "symbol": "次",
+    "onReading": "ジ",
+    "kunReading": "つぎ",
+    "commonEnglish": "next",
+    "otherEnglish": [
+      "following"
+    ]
+  },
+  {
+    "id": "237",
+    "symbol": "荷",
+    "onReading": "ニ",
+    "kunReading": "にんべん",
+    "commonEnglish": "cargo",
+    "otherEnglish": [
+      "load"
+    ]
+  },
+  {
+    "id": "238",
+    "symbol": "窓",
+    "onReading": "ショウ",
+    "kunReading": "まど",
+    "commonEnglish": "window",
+    "otherEnglish": []
+  },
+  {
+    "id": "239",
+    "symbol": "夜",
+    "onReading": "ヤ",
+    "kunReading": "よ",
+    "commonEnglish": "night",
+    "otherEnglish": []
+  },
+  {
+    "id": "240",
+    "symbol": "構",
+    "onReading": "コウ",
+    "kunReading": "かま",
+    "commonEnglish": "structure",
+    "otherEnglish": [
+      "concern",
+      "worry"
+    ]
+  },
+  {
+    "id": "241",
+    "symbol": "当",
+    "onReading": "トウ",
+    "kunReading": "あたる",
+    "commonEnglish": "hit",
+    "otherEnglish": [
+      "appropriate",
+      "current"
+    ]
+  },
+  {
+    "id": "242",
+    "symbol": "族",
+    "onReading": "ゾク",
+    "kunReading": "むら",
+    "commonEnglish": "clan",
+    "otherEnglish": [
+      "group",
+      "tribe"
+    ]
+  },
+  {
+    "id": "243",
+    "symbol": "男",
+    "onReading": "ダン",
+    "kunReading": "おとこ",
+    "commonEnglish": "man",
+    "otherEnglish": [
+      "male"
+    ]
+  },
+  {
+    "id": "244",
+    "symbol": "女",
+    "onReading": "ジョ",
+    "kunReading": "おんな",
+    "commonEnglish": "woman",
+    "otherEnglish": [
+      "female"
+    ]
+  },
+  {
+    "id": "245",
+    "symbol": "堂",
+    "onReading": "ドウ",
+    "kunReading": "どう",
+    "commonEnglish": "hall",
+    "otherEnglish": [
+      "shrine building"
+    ]
+  },
+  {
+    "id": "246",
+    "symbol": "髪",
+    "onReading": "カツ",
+    "kunReading": "かみ",
+    "commonEnglish": "hair",
+    "otherEnglish": []
+  },
+  {
+    "id": "247",
+    "symbol": "口",
+    "onReading": "コウ",
+    "kunReading": "くち",
+    "commonEnglish": "mouth",
+    "otherEnglish": [
+      "opening"
+    ]
+  },
+  {
+    "id": "248",
+    "symbol": "目",
+    "onReading": "メ",
+    "kunReading": "め",
+    "commonEnglish": "eye",
+    "otherEnglish": [
+      "target",
+      "goal"
+    ]
+  },
+  {
+    "id": "249",
+    "symbol": "眼",
+    "onReading": "ゲン",
+    "kunReading": "ま",
+    "commonEnglish": "eye",
+    "otherEnglish": []
+  },
+  {
+    "id": "250",
+    "symbol": "鏡",
+    "onReading": "ケイ",
+    "kunReading": "かがみ",
+    "commonEnglish": "mirror",
+    "otherEnglish": [
+      "looking glass"
+    ]
+  },
+  {
+    "id": "251",
+    "symbol": "二",
+    "onReading": "ニ",
+    "kunReading": "ふた",
+    "commonEnglish": "two",
+    "otherEnglish": [
+      "second"
+    ]
+  },
+  {
+    "id": "252",
+    "symbol": "別",
+    "onReading": "ベツ",
+    "kunReading": "わかれ",
+    "commonEnglish": "separate",
+    "otherEnglish": [
+      "different"
+    ]
+  },
+  {
+    "id": "253",
+    "symbol": "眉",
+    "onReading": "メイ",
+    "kunReading": "まゆ",
+    "commonEnglish": "eyebrow",
+    "otherEnglish": []
+  },
+  {
+    "id": "254",
+    "symbol": "毛",
+    "onReading": "モ",
+    "kunReading": "け",
+    "commonEnglish": "hair",
+    "otherEnglish": [
+      "fur"
+    ]
+  },
+  {
+    "id": "255",
+    "symbol": "耳",
+    "onReading": "ジ",
+    "kunReading": "みみ",
+    "commonEnglish": "ear",
+    "otherEnglish": []
+  },
+  {
+    "id": "256",
+    "symbol": "鼻 - FAILED",
+    "onReading": "NA",
+    "kunReading": "NA",
+    "commonEnglish": "It appears there was no error in the previous response. If you need a specific kanji character to be processed or if you have any other requests, please provide the details. Here is an example for the kanji \"水\":\n\nInput:\n水\n\nOutput:\n{\n  \"symbol\": \"水\",\n  \"onReading\": \"スイ\",\n  \"kunReading\": \"みず\",\n  \"commonEnglish\": \"water\",\n  \"otherEnglish\": [\n    \"liquid\"\n  ]\n}\n\nIf you have another kanji in mind, please provide it.",
+    "otherEnglish": []
+  },
+  {
+    "id": "257",
+    "symbol": "歯",
+    "onReading": "シ",
+    "kunReading": "は",
+    "commonEnglish": "tooth",
+    "otherEnglish": [
+      "teeth"
+    ]
+  },
+  {
+    "id": "258",
+    "symbol": "首",
+    "onReading": "シュウ",
+    "kunReading": "くび",
+    "commonEnglish": "neck",
+    "otherEnglish": [
+      "head",
+      "capital"
+    ]
+  },
+  {
+    "id": "259",
+    "symbol": "指",
+    "onReading": "シ",
+    "kunReading": "ゆび",
+    "commonEnglish": "finger",
+    "otherEnglish": [
+      "to point"
+    ]
+  },
+  {
+    "id": "260",
+    "symbol": "顔",
+    "onReading": "カン",
+    "kunReading": "かお",
+    "commonEnglish": "face",
+    "otherEnglish": [
+      "countenance"
+    ]
+  },
+  {
+    "id": "261",
+    "symbol": "肩",
+    "onReading": "ケン",
+    "kunReading": "かた",
+    "commonEnglish": "shoulder",
+    "otherEnglish": []
+  },
+  {
+    "id": "262",
+    "symbol": "胸",
+    "onReading": "キョウ",
+    "kunReading": "むね",
+    "commonEnglish": "chest",
+    "otherEnglish": [
+      "bosom"
+    ]
+  },
+  {
+    "id": "263",
+    "symbol": "腹",
+    "onReading": "フク",
+    "kunReading": "はら",
+    "commonEnglish": "stomach",
+    "otherEnglish": [
+      "belly"
+    ]
+  },
+  {
+    "id": "264",
+    "symbol": "尻",
+    "onReading": "シキ",
+    "kunReading": "しり",
+    "commonEnglish": "buttocks",
+    "otherEnglish": [
+      "rear end"
+    ]
+  },
+  {
+    "id": "265",
+    "symbol": "足",
+    "onReading": "ソク",
+    "kunReading": "あし",
+    "commonEnglish": "foot",
+    "otherEnglish": [
+      "leg",
+      "to add"
+    ]
+  },
+  {
+    "id": "266",
+    "symbol": "腕",
+    "onReading": "バン",
+    "kunReading": "うで",
+    "commonEnglish": "arm",
+    "otherEnglish": [
+      "wrist"
+    ]
+  },
+  {
+    "id": "267",
+    "symbol": "膝",
+    "onReading": "シツ",
+    "kunReading": "ひざ",
+    "commonEnglish": "knee",
+    "otherEnglish": []
+  }
+]
