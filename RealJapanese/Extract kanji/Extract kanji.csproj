@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <RootNamespace>Extract_kanji</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\DataLoaders\DataLoaders.csproj" />
+        <ProjectReference Include="E:\AI\Code_projects\Ai library\src\AiLibrary.Core\AiLibrary.Core.csproj" />
+        <ProjectReference Include="E:\AI\Code_projects\Ai library\src\AiLibrary.LlamaServer\AiLibrary.LlamaServer.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="WanaKanaSharp" Version="0.2.0" />
+    </ItemGroup>
+
+</Project>

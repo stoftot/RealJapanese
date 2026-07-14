@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MainSite", "MainSite", "{61
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckDataForDuplicates", "CheckDataForDuplicates\CheckDataForDuplicates.csproj", "{A7276A2F-9215-40A4-995E-AA9A994F81C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract kanji", "Extract kanji\Extract kanji.csproj", "{E12F5DD6-FCB2-427A-BE56-D3F03EF03CD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{A7276A2F-9215-40A4-995E-AA9A994F81C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7276A2F-9215-40A4-995E-AA9A994F81C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7276A2F-9215-40A4-995E-AA9A994F81C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E12F5DD6-FCB2-427A-BE56-D3F03EF03CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E12F5DD6-FCB2-427A-BE56-D3F03EF03CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E12F5DD6-FCB2-427A-BE56-D3F03EF03CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E12F5DD6-FCB2-427A-BE56-D3F03EF03CD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EBD6CFF7-A258-4C4D-AEBC-DC40F93454CD} = {61B034E4-77C3-4FD5-850C-FF2C51E7BBC3}
