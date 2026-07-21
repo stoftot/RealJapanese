@@ -18,6 +18,7 @@ public class AdjectiveSpellingBase : MultipleAnswerBase
 
     protected override void OnInitialized()
     {
+        OrderedAnswers = true;
         OrginalQuestions = AdjectiveData.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
             .EnglishToRomajiAndTypeQuestion();
         

@@ -1,4 +1,3 @@
-using DataLoaders.Exstensions;
 using DataLoaders.Models;
 using Microsoft.AspNetCore.Components;
 using RealJapanese.Components.Shared;
@@ -19,6 +18,7 @@ public class VerbSpellingBase : MultipleAnswerBase
 
     protected override void OnInitialized()
     {
+        OrderedAnswers = true;
         OrginalQuestions = VerbData.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
             .EnglishToRomajiAndTypeQuestion();
         

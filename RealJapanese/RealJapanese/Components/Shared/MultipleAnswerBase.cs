@@ -4,6 +4,7 @@ public abstract class MultipleAnswerBase : SingleAnwserBase
 {
     protected List<string> GivenAnswers { get; set; } = [];
     protected List<string> MissingAnswers { get; set; } = [];
+    protected bool OrderedAnswers { get; set; } = false;
 
     protected override void OnQuestionsUpdated()
     {
@@ -17,7 +18,10 @@ public abstract class MultipleAnswerBase : SingleAnwserBase
         if (string.IsNullOrWhiteSpace(givenAnswer))
             return MissingAnswers.Count == 0;
 
-        var matchingAnswer = MissingAnswers.FirstOrDefault(answer => Normalize(answer) == givenAnswer);
+        var matchingAnswer = 
+            OrderedAnswers 
+                ? (MissingAnswers[0] ==  givenAnswer ? MissingAnswers[0] : null)
+                : MissingAnswers.FirstOrDefault(answer => Normalize(answer) == givenAnswer);
         if (matchingAnswer is null)
             return MissingAnswers.Count == 0;
 
