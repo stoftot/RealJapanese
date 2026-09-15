@@ -10,7 +10,7 @@
     "id": "1",
     "japanese": "おはようございます",
     "kana": "おはようございます",
-    "english": "Good morning",
+    "english": "Good morning (polite)",
     "category": "Greeting"
   },
   {
@@ -29,9 +29,9 @@
   },
   {
     "id": "4",
-    "japanese": "さようなら",
+    "japanese": "左様なら",
     "kana": "さようなら",
-    "english": "Good-bye",
+    "english": "Good-bye (forever/ending)",
     "category": "Farewell"
   },
   {
@@ -52,7 +52,7 @@
     "id": "7",
     "japanese": "ありがとうございます",
     "kana": "ありがとうございます",
-    "english": "Thank you ",
+    "english": "Thank you (polite)",
     "category": "Expression"
   },
   {
@@ -1578,7 +1578,7 @@
     "id": "225",
     "japanese": "隣",
     "kana": "となり",
-    "english": "next",
+    "english": "next to",
     "category": "Location"
   },
   {

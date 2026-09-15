@@ -17,6 +17,7 @@ public static class WordPracticeCategoryExtensions
         {
             "training" => WordPracticeCategory.Training,
             "rehearsing" => WordPracticeCategory.Rehearsing,
-            _ => WordPracticeCategory.Known
+            "known" => WordPracticeCategory.Known,
+            _ => throw new ArgumentException($"Unknown category: {category}"),
         };
 }
