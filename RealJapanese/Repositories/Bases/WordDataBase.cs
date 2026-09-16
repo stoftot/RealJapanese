@@ -1,141 +1,78 @@
-﻿using DataLoaders;
+using DataLoaders;
 using DataLoaders.Models;
+using Repositories.Sync;
 
 namespace Repositories.Bases;
 
 public abstract class WordDataBase<T> where T : Word
 {
-    private const string SaveFileName = "SavedData.json";
-    
-    protected readonly JsonLoader<T> DataFileLoader;
-    protected readonly JsonLoader<VocabSaveFile> SaveFileLoader;
-    protected readonly JsonSaver<VocabSaveFile> SaveFileSaver;
+    private readonly ProgressStore progress;
+    private readonly string dataset;
+    public IEnumerable<T> Words { get; }
 
-    public IEnumerable<T> Words { get; set; }
-    protected VocabSaveFile VocabSaveFile { get; set; }
-
-    protected WordDataBase(string folderPath, string dataFileName)
-        : this(folderPath, dataFileName, folderPath)
+    protected WordDataBase(RepositoryPaths paths, string dataset, string dataFileName)
     {
-    }
-
-    protected WordDataBase(string dataFolderPath, string dataFileName, string progressFolderPath)
-    {
-        DataFileLoader = new JsonLoader<T>(folderPath: dataFolderPath, fileName: dataFileName);
-        SaveFileLoader = new JsonLoader<VocabSaveFile>(folderPath: progressFolderPath, fileName: SaveFileName);
-        SaveFileSaver = new JsonSaver<VocabSaveFile>(folderPath: progressFolderPath, fileName: SaveFileName);
-
-        var words = DataFileLoader.Load().ToList();
-        UpdateIDs(words);
+        this.dataset = dataset;
+        progress = paths.Progress;
+        var words = new JsonLoader<T>(Path.Combine(paths.CatalogRoot, dataset), dataFileName).Load().ToList();
+        var nextId = words.Where(w => w.Id >= 0).Select(w => w.Id).DefaultIfEmpty(-1).Max() + 1;
+        foreach (var word in words.Where(w => w.Id == -1)) word.Id = nextId++;
         Words = words;
-
-        var saveFilePath = Path.Combine(progressFolderPath, SaveFileName);
-        VocabSaveFile = File.Exists(saveFilePath)
-            ? SaveFileLoader.Load().FirstOrDefault() ?? new VocabSaveFile()
-            : new VocabSaveFile();
-        RemoveStaleProgressIds();
     }
 
-
-    public void SaveProgress()
+    private VocabSaveFile ReadProgress()
     {
-        SaveFileSaver.Save(VocabSaveFile);
+        var saved = progress.Read().Data[dataset];
+        var ids = Words.Select(word => word.Id).ToHashSet();
+        saved.KnownIds.RemoveAll(id => !ids.Contains(id));
+        saved.TrainingIds.RemoveAll(id => !ids.Contains(id));
+        saved.RehearsingIds.RemoveAll(id => !ids.Contains(id));
+        return saved;
     }
 
-    public List<T> VocabWords => ResolveWords(VocabSaveFile.KnownIds);
+    public List<T> VocabWords => ResolveWords(VocabWordIds);
+    public List<T> TrainingWords => ResolveWords(TrainingWordIds);
+    public List<T> RehearsingWords => ResolveWords(RehearsingWordIds);
+    public IEnumerable<int> VocabWordIds => ReadProgress().KnownIds;
+    public IEnumerable<int> TrainingWordIds => ReadProgress().TrainingIds;
+    public IEnumerable<int> RehearsingWordIds => ReadProgress().RehearsingIds;
 
-    public List<T> TrainingWords => ResolveWords(VocabSaveFile.TrainingIds);
+    public void AddToVocab(T word) => SetCategory(word, WordPracticeCategory.Known);
+    public void AddToTraining(T word) => SetCategory(word, WordPracticeCategory.Training);
+    public void AddToRehearsing(T word) => SetCategory(word, WordPracticeCategory.Rehearsing);
+    public void RemoveFromVocab(T word) => progress.Change(dataset, saved => saved.KnownIds.Remove(word.Id));
+    public void RemoveFromTraining(T word) => progress.Change(dataset, saved => saved.TrainingIds.Remove(word.Id));
+    public void RemoveFromRehearsing(T word) => progress.Change(dataset, saved => saved.RehearsingIds.Remove(word.Id));
 
-    public List<T> RehearsingWords => ResolveWords(VocabSaveFile.RehearsingIds);
-
-    public IEnumerable<int> VocabWordIds =>
-        VocabSaveFile.KnownIds;
-
-    public IEnumerable<int> TrainingWordIds =>
-        VocabSaveFile.TrainingIds;
-
-    public IEnumerable<int> RehearsingWordIds =>
-        VocabSaveFile.RehearsingIds;
-
-    public void AddToVocab(T word)
+    private void SetCategory(T word, WordPracticeCategory category)
     {
-        VocabSaveFile.KnownIds.Add(word.Id);
-        SaveProgress();
-    }
-
-    public void RemoveFromVocab(T word)
-    {
-        VocabSaveFile.KnownIds.Remove(word.Id);
-        SaveProgress();
-    }
-
-    public void AddToTraining(T word)
-    {
-        VocabSaveFile.TrainingIds.Add(word.Id);
-        SaveProgress();
-    }
-
-    public void RemoveFromTraining(T word)
-    {
-        VocabSaveFile.TrainingIds.Remove(word.Id);
-        SaveProgress();
-    }
-
-    public void AddToRehearsing(T word)
-    {
-        VocabSaveFile.RehearsingIds.Add(word.Id);
-        SaveProgress();
-    }
-
-    public void RemoveFromRehearsing(T word)
-    {
-        VocabSaveFile.RehearsingIds.Remove(word.Id);
-        SaveProgress();
-    }
-
-    public List<T> GetWords(WordPracticeCategory category) =>
-        category switch
+        if (!Words.Any(candidate => candidate.Id == word.Id))
+            throw new ArgumentException("The word is not in this catalog.", nameof(word));
+        progress.Change(dataset, saved =>
         {
-            WordPracticeCategory.Training => TrainingWords,
-            WordPracticeCategory.Rehearsing => RehearsingWords,
-            _ => VocabWords
-        };
-
-    private static void UpdateIDs(IList<T> words)
-    {
-        var maxExistingId = words
-            .Where(w => w.Id >= 0)
-            .Select(w => w.Id)
-            .DefaultIfEmpty(-1)
-            .Max();
-
-        var nextId = maxExistingId + 1; // 0 on first run
-
-        foreach (var word in words.Where(w => w.Id == -1))
-        {
-            word.Id = nextId;
-            nextId++;
-        }
+            saved.KnownIds.Remove(word.Id);
+            saved.TrainingIds.Remove(word.Id);
+            saved.RehearsingIds.Remove(word.Id);
+            var target = category switch
+            {
+                WordPracticeCategory.Known => saved.KnownIds,
+                WordPracticeCategory.Training => saved.TrainingIds,
+                _ => saved.RehearsingIds
+            };
+            target.Add(word.Id);
+        });
     }
+
+    public List<T> GetWords(WordPracticeCategory category) => category switch
+    {
+        WordPracticeCategory.Training => TrainingWords,
+        WordPracticeCategory.Rehearsing => RehearsingWords,
+        _ => VocabWords
+    };
 
     private List<T> ResolveWords(IEnumerable<int> ids)
     {
-        var wordsById = Words
-            .GroupBy(word => word.Id)
-            .ToDictionary(group => group.Key, group => group.First());
-
-        return ids
-            .Where(wordsById.ContainsKey)
-            .Select(id => wordsById[id])
-            .ToList();
-    }
-
-    private void RemoveStaleProgressIds()
-    {
-        var validIds = Words.Select(word => word.Id).ToHashSet();
-
-        VocabSaveFile.KnownIds = VocabSaveFile.KnownIds?.Where(validIds.Contains).ToList() ?? [];
-        VocabSaveFile.TrainingIds = VocabSaveFile.TrainingIds?.Where(validIds.Contains).ToList() ?? [];
-        VocabSaveFile.RehearsingIds = VocabSaveFile.RehearsingIds?.Where(validIds.Contains).ToList() ?? [];
+        var wordsById = Words.GroupBy(word => word.Id).ToDictionary(group => group.Key, group => group.First());
+        return ids.Where(wordsById.ContainsKey).Select(id => wordsById[id]).ToList();
     }
 }

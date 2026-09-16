@@ -16,7 +16,7 @@ public class VerbData : WordDataBase<Verb>
     }
 
     public VerbData(RepositoryPaths paths)
-        : base(paths.CatalogFolder("Verbs"), DataFileName, paths.ProgressFolder("Verbs"))
+        : base(paths, "Verbs", DataFileName)
     {
     }
     

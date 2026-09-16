@@ -13,6 +13,8 @@ try
     VerifyRealCatalogs(catalogRoot, temporaryRoot);
     VerifyIndependentProgressAndRestart(catalogRoot, temporaryRoot);
     VerifyStableMissingIds(temporaryRoot);
+    SyncChecks.Run(catalogRoot, temporaryRoot);
+    LocalTransferChecks.Run();
     VerifyFilesUnchanged(originalSourceFiles);
 
     Console.WriteLine("Storage checks passed.");
@@ -78,15 +80,17 @@ static void VerifyIndependentProgressAndRestart(string catalogRoot, string tempo
     first.AddToTraining(firstWord);
     second.AddToVocab(secondWord);
 
-    var restartedFirst = new WordData(firstPaths);
-    var restartedSecond = new WordData(secondPaths);
+    var restartedFirst = new WordData(new RepositoryPaths(catalogRoot, firstProgressRoot));
+    var restartedSecond = new WordData(new RepositoryPaths(catalogRoot, secondProgressRoot));
 
     Assert(restartedFirst.TrainingWordIds.SequenceEqual([firstWord.Id]), "First progress did not survive restart.");
     Assert(!restartedFirst.VocabWordIds.Any(), "Second progress leaked into first progress root.");
     Assert(restartedSecond.VocabWordIds.SequenceEqual([secondWord.Id]), "Second progress did not survive restart.");
     Assert(!restartedSecond.TrainingWordIds.Any(), "First progress leaked into second progress root.");
 
-    var staleProgressPath = Path.Combine(firstProgressRoot, "Words", "SavedData.json");
+    var staleProgressRoot = Path.Combine(temporaryRoot, "stale-legacy-progress");
+    var staleProgressPath = Path.Combine(staleProgressRoot, "Words", "SavedData.json");
+    Directory.CreateDirectory(Path.GetDirectoryName(staleProgressPath)!);
     File.WriteAllText(
         staleProgressPath,
         $$"""
@@ -97,7 +101,7 @@ static void VerifyIndependentProgressAndRestart(string catalogRoot, string tempo
         }
         """);
 
-    var withStaleId = new WordData(firstPaths);
+    var withStaleId = new WordData(new RepositoryPaths(catalogRoot, staleProgressRoot));
     Assert(withStaleId.VocabWords.Select(word => word.Id).SequenceEqual([firstWord.Id]), "A stale progress ID was not ignored.");
     Assert(withStaleId.VocabWordIds.SequenceEqual([firstWord.Id]), "A stale progress ID remained in memory.");
 }

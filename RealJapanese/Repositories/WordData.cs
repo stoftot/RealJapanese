@@ -14,7 +14,7 @@ public class WordData : WordDataBase<Word>
     }
 
     public WordData(RepositoryPaths paths)
-        : base(paths.CatalogFolder("Words"), DataFileName, paths.ProgressFolder("Words"))
+        : base(paths, "Words", DataFileName)
     {
     }
 }

@@ -12,3 +12,7 @@ bin/
 .idea/
 __pycache__/
 *.pyc
+
+# Private unified progress and interrupted atomic writes
+RealJapanese/Data/Progress.json
+RealJapanese/Data/Progress.json.*.tmp

@@ -15,10 +15,7 @@ public class KanjiData
         }
 
         public SingleData(RepositoryPaths paths)
-            : base(
-                paths.CatalogFolder("Kanji", "Singel"),
-                DataFileName,
-                paths.ProgressFolder("Kanji", "Singel"))
+            : base(paths, "Kanji/Singel", DataFileName)
         {
         }
     }
@@ -33,10 +30,7 @@ public class KanjiData
         }
 
         public CombinedData(RepositoryPaths paths)
-            : base(
-                paths.CatalogFolder("Kanji", "Combined"),
-                DataFileName,
-                paths.ProgressFolder("Kanji", "Combined"))
+            : base(paths, "Kanji/Combined", DataFileName)
         {
         }
     }

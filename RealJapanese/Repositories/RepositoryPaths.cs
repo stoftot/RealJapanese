@@ -5,6 +5,8 @@ namespace Repositories;
 /// </summary>
 public sealed class RepositoryPaths
 {
+    private readonly Lazy<Sync.ProgressStore> progress;
+    public Sync.ProgressStore Progress => progress.Value;
     public static RepositoryPaths Default { get; } = new("../Data", "../Data");
 
     public string CatalogRoot { get; }
@@ -17,6 +19,7 @@ public sealed class RepositoryPaths
 
         CatalogRoot = catalogRoot;
         ProgressRoot = progressRoot;
+        progress = new(() => new Sync.ProgressStore(ProgressRoot));
     }
 
     internal string CatalogFolder(params string[] segments) =>

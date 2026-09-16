@@ -13,7 +13,7 @@ public class AdjectiveData : WordDataBase<Adjective>
     }
 
     public AdjectiveData(RepositoryPaths paths)
-        : base(paths.CatalogFolder("Adjectives"), DataFileName, paths.ProgressFolder("Adjectives"))
+        : base(paths, "Adjectives", DataFileName)
     {
     }
 }

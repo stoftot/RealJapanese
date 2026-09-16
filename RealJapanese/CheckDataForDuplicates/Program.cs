@@ -6,6 +6,9 @@ using DataLoaders.Models;
 const string basePath = "../../../../Data/";
 const string SaveFileName = "SavedData.json";
 
+if (File.Exists(Path.Combine(basePath, "Progress.json")))
+    throw new InvalidOperationException("This legacy cleanup tool cannot remap unified Progress.json saves. No data was changed.");
+
 var wordData = new JsonLoader<Word>(folderPath: basePath+"Words", fileName: "Words.json") 
     .Load();
 var wordDataSaver = new JsonSaver<Word>(folderPath: basePath+"Words", fileName: "Words.json");
