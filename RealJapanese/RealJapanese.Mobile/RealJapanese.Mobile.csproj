@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RealJapanese.Mobile</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDefaultCssItems>false</EnableDefaultCssItems>
+    <ApplicationTitle>RealJapanese</ApplicationTitle>
+    <ApplicationId>com.realjapanese.mobile</ApplicationId>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <SupportedOSPlatformVersion>24.0</SupportedOSPlatformVersion>
+    <AndroidPackageFormats>apk</AndroidPackageFormats>
+    <!-- A Debug APK must also work when sideloaded without IDE fast deployment. -->
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <!-- Preserve the existing reflection-based JSON contracts in Release builds. -->
+    <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
+  </PropertyGroup>
+  <ItemGroup>
+    <MauiIcon Include="Resources/AppIcon/appicon.svg" ForegroundFile="Resources/AppIcon/appiconfg.svg" Color="#052767" />
+    <MauiSplashScreen Include="Resources/Splash/splash.svg" Color="#052767" BaseSize="128,128" />
+    <!-- Only vocabulary is packaged; never include web SavedData.json files. -->
+    <MauiAsset Include="../Data/Words/Words.json" LogicalName="Data/Words/Words.json" />
+    <MauiAsset Include="../Data/Verbs/Verbs.json" LogicalName="Data/Verbs/Verbs.json" />
+    <MauiAsset Include="../Data/Adjectives/Adjectives.json" LogicalName="Data/Adjectives/Adjectives.json" />
+    <MauiAsset Include="../Data/Kanji/Singel/Singel.json" LogicalName="Data/Kanji/Singel/Singel.json" />
+    <MauiAsset Include="../Data/Kanji/Combined/Combined.json" LogicalName="Data/Kanji/Combined/Combined.json" />
+    <TrimmerRootAssembly Include="DataLoaders" RootMode="All" />
+    <TrimmerRootAssembly Include="Repositories" RootMode="All" />
+    <TrimmerRootAssembly Include="RealJapanese.UI" RootMode="All" />
+    <ProjectReference Include="../RealJapanese.UI/RealJapanese.UI.csproj" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="10.0.20" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+  </ItemGroup>
+</Project>

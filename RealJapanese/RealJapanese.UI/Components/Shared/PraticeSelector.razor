@@ -1,0 +1,29 @@
+@inherits PraticeSelectorBase
+
+<section class="practice-selector" aria-labelledby="practice-options-title">
+    <div class="section-heading">
+        <h2 id="practice-options-title">Practice this list</h2>
+        <p>Choose a short exercise using the study list selected above.</p>
+    </div>
+    <div class="practice-wrap w-100">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @foreach (var pd in Pages)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="h5">@pd.Title</h3>
+                            <p class="text-muted flex-grow-1">@pd.Description</p>
+                            <button 
+                                class="btn btn-primary" 
+                                @onclick="() => GoToUrl(pd)">
+                                Start practice
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+

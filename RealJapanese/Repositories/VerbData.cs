@@ -6,10 +6,19 @@ using WanaKanaSharp;
 
 namespace Repositories;
 
-public class VerbData() : WordDataBase<Verb>(FolderPath, DataFileName)
+public class VerbData : WordDataBase<Verb>
 {
-    private const string FolderPath = "../Data/Verbs";
     private const string DataFileName = "Verbs.json";
+
+    public VerbData()
+        : this(RepositoryPaths.Default)
+    {
+    }
+
+    public VerbData(RepositoryPaths paths)
+        : base(paths.CatalogFolder("Verbs"), DataFileName, paths.ProgressFolder("Verbs"))
+    {
+    }
     
     
     // private IEnumerable<Verb> RawVerbs { get; }

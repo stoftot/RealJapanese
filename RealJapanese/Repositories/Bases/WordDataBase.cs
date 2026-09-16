@@ -9,25 +9,31 @@ public abstract class WordDataBase<T> where T : Word
     
     protected readonly JsonLoader<T> DataFileLoader;
     protected readonly JsonLoader<VocabSaveFile> SaveFileLoader;
-    protected readonly JsonSaver<T> DataFileSaver;
     protected readonly JsonSaver<VocabSaveFile> SaveFileSaver;
-
-    protected readonly IEnumerable<T> wordData;
 
     public IEnumerable<T> Words { get; set; }
     protected VocabSaveFile VocabSaveFile { get; set; }
 
     protected WordDataBase(string folderPath, string dataFileName)
+        : this(folderPath, dataFileName, folderPath)
     {
-        DataFileLoader = new JsonLoader<T>(folderPath: folderPath, fileName: dataFileName);
-        SaveFileLoader = new JsonLoader<VocabSaveFile>(folderPath: folderPath, fileName: SaveFileName);
-        DataFileSaver = new JsonSaver<T>(folderPath: folderPath, fileName: dataFileName);
-        SaveFileSaver = new JsonSaver<VocabSaveFile>(folderPath: folderPath, fileName: SaveFileName);
+    }
 
-        wordData = DataFileLoader.Load();
-        Words = new List<T>(wordData);
-        VocabSaveFile = SaveFileLoader.Load().FirstOrDefault() ?? new VocabSaveFile();
-        UpdateIDs();
+    protected WordDataBase(string dataFolderPath, string dataFileName, string progressFolderPath)
+    {
+        DataFileLoader = new JsonLoader<T>(folderPath: dataFolderPath, fileName: dataFileName);
+        SaveFileLoader = new JsonLoader<VocabSaveFile>(folderPath: progressFolderPath, fileName: SaveFileName);
+        SaveFileSaver = new JsonSaver<VocabSaveFile>(folderPath: progressFolderPath, fileName: SaveFileName);
+
+        var words = DataFileLoader.Load().ToList();
+        UpdateIDs(words);
+        Words = words;
+
+        var saveFilePath = Path.Combine(progressFolderPath, SaveFileName);
+        VocabSaveFile = File.Exists(saveFilePath)
+            ? SaveFileLoader.Load().FirstOrDefault() ?? new VocabSaveFile()
+            : new VocabSaveFile();
+        RemoveStaleProgressIds();
     }
 
 
@@ -36,20 +42,11 @@ public abstract class WordDataBase<T> where T : Word
         SaveFileSaver.Save(VocabSaveFile);
     }
 
-    public List<T> VocabWords =>
-        VocabSaveFile.KnownIds
-            .Select(id => Words.First(w => w.Id == id))
-            .ToList();
+    public List<T> VocabWords => ResolveWords(VocabSaveFile.KnownIds);
 
-    public List<T> TrainingWords =>
-        VocabSaveFile.TrainingIds
-            .Select(id => Words.First(w => w.Id == id))
-            .ToList();
+    public List<T> TrainingWords => ResolveWords(VocabSaveFile.TrainingIds);
 
-    public List<T> RehearsingWords =>
-        VocabSaveFile.RehearsingIds
-            .Select(id => Words.First(w => w.Id == id))
-            .ToList();
+    public List<T> RehearsingWords => ResolveWords(VocabSaveFile.RehearsingIds);
 
     public IEnumerable<int> VocabWordIds =>
         VocabSaveFile.KnownIds;
@@ -104,12 +101,12 @@ public abstract class WordDataBase<T> where T : Word
             _ => VocabWords
         };
 
-    private void UpdateIDs()
+    private static void UpdateIDs(IList<T> words)
     {
-        var words = DataFileLoader.Load().ToList();
-
         var maxExistingId = words
+            .Where(w => w.Id >= 0)
             .Select(w => w.Id)
+            .DefaultIfEmpty(-1)
             .Max();
 
         var nextId = maxExistingId + 1; // 0 on first run
@@ -119,7 +116,26 @@ public abstract class WordDataBase<T> where T : Word
             word.Id = nextId;
             nextId++;
         }
+    }
 
-        DataFileSaver.Save(words);
+    private List<T> ResolveWords(IEnumerable<int> ids)
+    {
+        var wordsById = Words
+            .GroupBy(word => word.Id)
+            .ToDictionary(group => group.Key, group => group.First());
+
+        return ids
+            .Where(wordsById.ContainsKey)
+            .Select(id => wordsById[id])
+            .ToList();
+    }
+
+    private void RemoveStaleProgressIds()
+    {
+        var validIds = Words.Select(word => word.Id).ToHashSet();
+
+        VocabSaveFile.KnownIds = VocabSaveFile.KnownIds?.Where(validIds.Contains).ToList() ?? [];
+        VocabSaveFile.TrainingIds = VocabSaveFile.TrainingIds?.Where(validIds.Contains).ToList() ?? [];
+        VocabSaveFile.RehearsingIds = VocabSaveFile.RehearsingIds?.Where(validIds.Contains).ToList() ?? [];
     }
 }

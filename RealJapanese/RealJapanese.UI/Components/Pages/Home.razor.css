@@ -1,0 +1,111 @@
+.home-hero {
+    max-width: 760px;
+    padding: clamp(1rem, 4vw, 2.5rem) 0 1.5rem;
+}
+
+.eyebrow {
+    display: inline-block;
+    color: #5d2c72;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0.35rem 0 0.65rem;
+    font-size: clamp(2rem, 6vw, 3.25rem);
+    line-height: 1.08;
+    color: #102a56;
+}
+
+.home-hero p {
+    margin: 0;
+    color: #5f6876;
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+}
+
+.study-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+    gap: 1rem;
+    max-width: 960px;
+}
+
+.study-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    min-height: 6.5rem;
+    padding: 1rem;
+    color: #17233b;
+    background: white;
+    border: 1px solid #dce2eb;
+    border-radius: 1rem;
+    box-shadow: 0 0.3rem 1rem rgba(30, 45, 70, 0.07);
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.study-card:hover,
+.study-card:focus-visible {
+    color: #17233b;
+    border-color: #8ca9d1;
+    box-shadow: 0 0.5rem 1.25rem rgba(30, 45, 70, 0.13);
+    transform: translateY(-2px);
+}
+
+.study-symbol {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.35rem;
+    height: 3.35rem;
+    color: white;
+    background: linear-gradient(145deg, #0b4d96, #5d1f70);
+    border-radius: 0.9rem;
+    font-size: 1.45rem;
+    font-weight: 700;
+}
+
+.study-card strong,
+.study-card small {
+    display: block;
+}
+
+.study-card strong {
+    margin-bottom: 0.2rem;
+    font-size: 1.05rem;
+}
+
+.study-card small {
+    color: #667085;
+    line-height: 1.35;
+}
+
+.study-arrow {
+    color: #52647d;
+    font-size: 1.8rem;
+}
+
+@media (max-width: 640.98px) {
+    .home-hero {
+        padding-top: 0.35rem;
+    }
+
+    .study-grid {
+        gap: 0.75rem;
+    }
+
+    .study-card {
+        min-height: 5.6rem;
+        padding: 0.8rem;
+        border-radius: 0.85rem;
+    }
+
+    .study-symbol {
+        width: 2.9rem;
+        height: 2.9rem;
+    }
+}

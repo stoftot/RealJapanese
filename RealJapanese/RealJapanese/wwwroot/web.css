@@ -1,0 +1,36 @@
+/* Web choices fill the content area and add columns as space allows. */
+.page .study-grid,
+.page .practice-selector .practice-wrap {
+    max-width: none;
+}
+
+.page .practice-selector .practice-wrap > .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+    gap: 1.5rem;
+    margin: 0;
+}
+
+.page .practice-selector .practice-wrap > .row > .col {
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+/* Web practice uses the available viewport; Android keeps its top-aligned layout. */
+.page .content:has(> .practice-shell) {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page .content > .practice-shell {
+    /* Auto margins center short sessions and leave tall sessions scrollable. */
+    margin-block: auto;
+}
+
+@media (min-width: 641px) {
+    .page .content:has(> .practice-shell) {
+        padding-block: 2rem;
+    }
+}

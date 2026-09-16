@@ -4,8 +4,17 @@ using Repositories.Bases;
 
 namespace Repositories;
 
-public class WordData() : WordDataBase<Word>(FolderPath, DataFileName)
+public class WordData : WordDataBase<Word>
 {
-    private const string FolderPath = "../Data/Words";
     private const string DataFileName = "Words.json";
+
+    public WordData()
+        : this(RepositoryPaths.Default)
+    {
+    }
+
+    public WordData(RepositoryPaths paths)
+        : base(paths.CatalogFolder("Words"), DataFileName, paths.ProgressFolder("Words"))
+    {
+    }
 }

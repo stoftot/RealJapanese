@@ -1,0 +1,63 @@
+@inherits PracticeCardBase
+@namespace RealJapanese.Components.Shared
+
+<div class="d-flex justify-content-center">
+    <div class="practice-wrap w-100">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                @if (string.IsNullOrWhiteSpace(Question))
+                {
+                    <div class="text-center py-3">
+                        <h2 class="h5">Nothing to practise yet</h2>
+                        <p class="text-muted mb-0">Return to this study area and add items to the selected list.</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="card-title mb-0">@Title</h5>
+                        <small class="text-muted">@ProgressText</small>
+                    </div>
+                    
+                    <p class="lead mb-3" style="white-space: pre-line;">@Question</p>
+
+                    <div class="mb-2">
+                        <input class="form-control form-control-lg"
+                               placeholder="@Placeholder"
+                               value="@UserInput"
+                               @oninput="OnTyping"
+                               @onkeydown="OnKeyDownProxy"
+                               autocomplete="off"
+                               autocapitalize="none"
+                               spellcheck="false"
+                               enterkeyhint="next"
+                               @ref="answerInputRef"/>
+                    </div>
+
+                    @if (ShowAnswer && !string.IsNullOrEmpty(Answer))
+                    {
+                        <div class="alert alert-info mt-3" role="alert">
+                            <strong>Answers:</strong> @Answer
+                        </div>
+                    }
+
+                    <div class="practice-actions mt-3">
+                        <button type="button"
+                                class="btn btn-outline-secondary"
+                                @onclick="RevealRequested">
+                            @RevealLabel
+                        </button>
+
+                        <button type="button"
+                                class="btn btn-primary ms-auto"
+                                @onclick="NextRequested"
+                                disabled="@NextDisabled">
+                            @NextLabel
+                        </button>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>

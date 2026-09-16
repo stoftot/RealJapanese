@@ -1,0 +1,82 @@
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+
+namespace RealJapanese.Components.Shared;
+
+public class FlashPracticeCardBase : ComponentBase, IAsyncDisposable
+{
+    [Parameter] public string Title { get; set; } = "Practice";
+    [Parameter] public string ProgressText { get; set; } = "";
+    [Parameter] public string Question { get; set; } = "";
+    [Parameter] public string Answer { get; set; } = "";
+    [Parameter] public bool ShowAnswer { get; set; }
+    [Parameter] public string ShowAnswerLabel { get; set; } = "Show answer";
+    [Parameter] public string NextQuestionLabel { get; set; } = "Next question";
+    [Parameter] public string GaveWrongAnswerLabel { get; set; } = "Gave wrong answer";
+    [Parameter] public string ForgotLabel { get; set; } = "Forgot";
+    [Parameter] public EventCallback PrimaryActionRequested { get; set; }
+    [Parameter] public EventCallback ForgotRequested { get; set; }
+    [Parameter] public EventCallback GaveWrongAnswerRequested { get; set; }
+
+    [Inject] protected IJSRuntime JS { get; set; } = null!;
+
+    protected ElementReference actionButtonRef;
+    private DotNetObjectReference<FlashPracticeCardBase>? _dotNetRef;
+    private string? _shortcutId;
+    protected string PrimaryActionLabel => ShowAnswer ? NextQuestionLabel : ShowAnswerLabel;
+    protected bool ForgotAnswer { get; set; } = false;
+
+    protected internal Task FocusCardAsync() => actionButtonRef.FocusAsync().AsTask();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !string.IsNullOrWhiteSpace(Question))
+        {
+            _dotNetRef = DotNetObjectReference.Create(this);
+            _shortcutId = await JS.InvokeAsync<string>("blazorHelpers.registerFlashCardShortcuts", _dotNetRef);
+            await FocusCardAsync();
+        }
+    }
+
+    [JSInvokable]
+    public Task HandleGlobalSpaceAsync()
+        => TriggerPrimaryActionAsync();
+
+    [JSInvokable]
+    public Task HandleGlobalBackspaceAsync()
+        => ShowAnswer ? TriggerAnswerWasWrongAsync() : TriggerForgotAsync();
+
+    protected Task TriggerPrimaryActionAsync()
+    {
+        ForgotAnswer = false;
+        return PrimaryActionRequested.InvokeAsync();
+    }
+
+    protected Task TriggerForgotAsync()
+    {
+        ForgotAnswer = true;
+        return ForgotRequested.InvokeAsync();
+    }
+
+    protected Task TriggerAnswerWasWrongAsync()
+    {
+        ForgotAnswer = false;
+        return GaveWrongAnswerRequested.InvokeAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_shortcutId is not null)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("blazorHelpers.unregisterFlashCardShortcuts", _shortcutId);
+            }
+            catch (JSDisconnectedException)
+            {
+            }
+        }
+
+        _dotNetRef?.Dispose();
+    }
+}

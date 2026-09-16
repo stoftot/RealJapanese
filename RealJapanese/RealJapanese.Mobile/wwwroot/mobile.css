@@ -1,0 +1,9 @@
+@media (max-width: 640.98px) {
+    html.android-keyboard-open .page .sidebar {
+        display: none;
+    }
+
+    html.android-keyboard-open .page .content {
+        padding-bottom: 1rem;
+    }
+}

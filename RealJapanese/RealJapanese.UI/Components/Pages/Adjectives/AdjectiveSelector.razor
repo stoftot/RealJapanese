@@ -1,0 +1,82 @@
+@page "/adjectives"
+@using DataLoaders.Models
+@using RealJapanese.Components.Shared
+@inherits AdjectiveSelectorBase
+
+<header class="selector-heading">
+    <h1>Adjectives</h1>
+    <p>Choose a list, organise your adjectives, then start an exercise.</p>
+</header>
+
+<div class="selector-toolbar">
+    <span class="fw-semibold">Study list</span>
+    <ToggleSlider LeftText="Known"
+                  MiddleText="Rehearsing"
+                  RightText="Training"
+                  @bind-SelectedIndex="SelectedCategoryIndex" />
+</div>
+
+<div class="container-fluid px-0 my-3">
+    <div class="row g-3">
+        <div class="col-md-6 col-lg-4 category-column @(SelectedCategoryIndex == 0 ? "category-column-active" : "")">
+            <WordList
+                TItem="Adjective"
+                Title="Known vocabulary"
+                AllWords="@AllWords"
+                SelectedIds="@KnownIds"
+                WordSelected="@OnKnownWordSelected"
+                WordDeselected="@OnKnownWordDeSelected"
+            />
+        </div>
+
+        <div class="col-md-6 col-lg-4 category-column @(SelectedCategoryIndex == 1 ? "category-column-active" : "")">
+            <WordList
+                TItem="Adjective"
+                Title="Currently rehearsing"
+                AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id)).ToList()"
+                SelectedIds="@RehearsingIds"
+                WordSelected="@OnRehearsingWordSelected"
+                WordDeselected="@OnRehearsingWordDeSelected"
+            />
+        </div>
+
+        <div class="col-md-6 col-lg-4 category-column @(SelectedCategoryIndex == 2 ? "category-column-active" : "")">
+            <WordList
+                TItem="Adjective"
+                Title="Currently training"
+                AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id) && 
+                                               !RehearsingIds.Contains(w.Id)).ToList()"
+                SelectedIds="@TrainingIds"
+                WordSelected="@OnTrainingWordSelected"
+                WordDeselected="@OnTrainingWordDeSelected"
+            />
+        </div>
+    </div>
+</div>
+
+<PraticeSelector
+    MainUrl="adjectives"
+    Pages="@(new List<PraticeSelectorBase.PageDescreption>
+           {
+               new()
+               {
+                   Title = "Learn the adjectives",
+                   Description = "Practice the spelling of the adjectives",
+                   Url = $"spelling?category={SelectedCategoryQueryValue}"
+               },
+               
+               new()
+               {
+                   Title = "Adjectives type categorisation",
+                   Description = "Practice adjectives categorising the different adjectives, into い, な and irregular",
+                   Url = $"categories?category={SelectedCategoryQueryValue}"
+               },
+
+               new()
+               {
+                   Title = "Adjectives Type Conjugation",
+                   Description = "Practice conjugating the different adjective types",
+                   Url = "conjugateBase"
+               }
+           })"
+/>

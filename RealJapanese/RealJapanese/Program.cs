@@ -6,6 +6,11 @@ using WanaKanaSharp;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var catalogRoot = Path.GetFullPath(builder.Configuration["StudyData:CatalogRoot"]
+    ?? Path.Combine(builder.Environment.ContentRootPath, "..", "Data"));
+var progressRoot = Path.GetFullPath(builder.Configuration["StudyData:ProgressRoot"] ?? catalogRoot);
+builder.Services.AddSingleton(new RepositoryPaths(catalogRoot, progressRoot));
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
@@ -49,6 +54,7 @@ app.UseAntiforgery();
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode()
+    .AddAdditionalAssemblies(typeof(Routes).Assembly);
 
 app.Run();

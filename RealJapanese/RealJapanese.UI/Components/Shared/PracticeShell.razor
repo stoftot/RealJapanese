@@ -1,0 +1,25 @@
+@inherits PracticeShellBase
+@using System.Globalization
+
+<div class="practice-shell">
+    <div class="scaled" style="--ui-scale:@UiScale.ToString(CultureInfo.InvariantCulture)">
+
+        @if (ShowScaleToolbar)
+        {
+            <div class="scale-toolbar">
+                <label class="form-label mb-0" for="practice-size">Text size</label>
+                <div class="scale-control">
+                    <input type="range"
+                           id="practice-size"
+                           class="form-range"
+                           min="@Min.ToString(CultureInfo.InvariantCulture)" max="@Max.ToString(CultureInfo.InvariantCulture)" step="@Step.ToString(CultureInfo.InvariantCulture)"
+                           value="@UiScale.ToString(CultureInfo.InvariantCulture)"
+                           @oninput="OnScaleInput" />
+                </div>
+                <span class="text-muted">@($"{UiScale:P0}")</span>
+            </div>
+        }
+
+        @ChildContent
+    </div>
+</div>

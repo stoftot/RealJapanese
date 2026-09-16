@@ -1,0 +1,99 @@
+.practice-shell {
+    width: 100%;
+    max-width: 900px;
+    margin-inline: auto;
+}
+
+.scaled {
+    --ui-scale: 1;
+    width: 100%;
+}
+
+.scale-toolbar {
+    display: grid;
+    grid-template-columns: auto minmax(8rem, 22rem) auto;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.scale-control {
+    min-width: 0;
+}
+
+.scaled ::deep .card-title {
+    font-size: calc(1.25rem * var(--ui-scale));
+}
+
+.scaled ::deep .lead {
+    font-size: calc(1.25rem * var(--ui-scale));
+}
+
+.scaled ::deep .flash-card-question {
+    font-size: calc(2rem * var(--ui-scale));
+    text-align: center;
+    white-space: pre-line;
+}
+
+.scaled ::deep small,
+.scaled ::deep .text-muted {
+    font-size: calc(0.875rem * var(--ui-scale));
+}
+
+.scaled ::deep .form-control,
+.scaled ::deep .form-control.form-control-lg {
+    font-size: max(1rem, calc(1rem * var(--ui-scale)));
+    padding: calc(0.5rem * var(--ui-scale)) calc(1rem * var(--ui-scale));
+}
+
+.scaled ::deep .practice-wrap {
+    max-width: min(48rem, 100%);
+    margin-inline: auto;
+    font-size: calc(1rem * var(--ui-scale));
+}
+
+.scaled ::deep .practice-settings {
+    max-width: 30rem;
+    margin: 0 auto 1rem;
+}
+
+.scaled ::deep .practice-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.scaled ::deep .btn {
+    min-height: 2.75rem;
+    padding: calc(0.5rem * var(--ui-scale)) calc(1rem * var(--ui-scale));
+    font-size: calc(1rem * var(--ui-scale));
+}
+
+.scaled ::deep .alert {
+    font-size: calc(1rem * var(--ui-scale));
+}
+
+.form-range {
+    width: 100%;
+}
+
+@media (max-width: 640.98px) {
+    .scale-toolbar {
+        grid-template-columns: auto minmax(6rem, 1fr) auto;
+        gap: 0.55rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .scaled ::deep .card-body {
+        padding: 1rem;
+    }
+
+    .scaled ::deep .practice-actions .btn {
+        flex: 1 1 0;
+        padding-inline: 0.65rem;
+    }
+
+    .scaled ::deep .flash-card-question {
+        font-size: calc(1.75rem * var(--ui-scale));
+    }
+}

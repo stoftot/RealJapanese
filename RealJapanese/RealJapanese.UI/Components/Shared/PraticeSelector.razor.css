@@ -1,0 +1,45 @@
+.practice-selector {
+    margin-top: 1.75rem;
+}
+
+.section-heading {
+    margin-bottom: 1rem;
+}
+
+.section-heading h2 {
+    margin: 0;
+    color: #102a56;
+    font-size: clamp(1.35rem, 4vw, 1.75rem);
+}
+
+.section-heading p {
+    margin: 0.25rem 0 0;
+    color: #667085;
+}
+
+.practice-wrap {
+    max-width: 960px;
+}
+
+.card {
+    border-color: #dce2eb;
+    border-radius: 0.85rem;
+}
+
+.card-body {
+    padding: 1.1rem;
+}
+
+.btn {
+    min-height: 2.75rem;
+}
+
+@media (max-width: 640.98px) {
+    .practice-selector {
+        margin-top: 1.25rem;
+    }
+
+    .row {
+        --bs-gutter-y: 0.75rem;
+    }
+}

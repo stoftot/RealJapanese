@@ -6,6 +6,8 @@ application. It retains the reusable template's optional tooling and workflows:
 tooling provides capabilities; this layer guides their use.
 Start orientation at [PROJECT_MAP](PROJECT_MAP.md). The existing
 [tooling guide](../tooling.md) owns installation and machine setup.
+The [development guide](../development.md) explains solution selection and normal
+web, shared and Android build/run commands.
 
 ## Ownership
 
@@ -21,6 +23,7 @@ Start orientation at [PROJECT_MAP](PROJECT_MAP.md). The existing
 | `.agents/skills/*/SKILL.md` | Repeatable procedures |
 | [RELEASES.md](RELEASES.md) | Release rules and format |
 | [releases/](../../releases/) | Actual release outcomes |
+| [development.md](../development.md) | Human setup, solution selection and normal build/run commands |
 
 Reference authoritative documentation instead of copying it. `[TODO: ...]` means
 an owner input is needed; `Unknown` means evidence is missing; `None` is an observed

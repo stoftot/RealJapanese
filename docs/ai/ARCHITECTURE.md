@@ -3,93 +3,106 @@
 ## Components and dependency direction
 
 ```text
-Blazor web host -> Repositories -> DataLoaders -> local JSON files
-Duplicate-cleanup console ------> DataLoaders
-Kanji extraction console -------> DataLoaders
-                          \----> external AiLibrary -> local llama-server/model
+ASP.NET host -------\
+                     > RealJapanese.UI -> Repositories -> DataLoaders -> local JSON
+MAUI Android host --/                       ^
+       |                                    |
+       +-> packaged catalogs -> app storage-+
+
+Duplicate-cleanup console -------------------------------> DataLoaders
+Kanji extraction console --------------------------------> DataLoaders
+                                                    \----> external AiLibrary
 ```
 
-The [project map](PROJECT_MAP.md) owns paths and project relationships. These are
-observed boundaries, not newly imposed dependency rules.
+The [project map](PROJECT_MAP.md) owns paths and project relationships.
 
-- **Web host:** registers singleton repositories and Interactive Server services,
-  routes Razor pages, and owns browser-facing layout and practice components.
-- **Repositories:** owns vocabulary/progress collections and persistence calls;
-  converts selected domain records into question DTOs, romanizes text and generates
-  number questions.
+- **Web host:** owns the HTML document, error page, Interactive Server setup,
+  middleware and web-specific storage configuration.
+- **Android host:** owns MAUI startup, the local `BlazorWebView`, app-private
+  catalog installation and Android lifecycle/package configuration.
+- **Shared UI:** owns routes, navigation, study pages, reusable components and
+  their CSS/JavaScript/Bootstrap assets. It contains no host startup.
+- **Repositories:** owns catalog/progress collections, persistence, question
+  conversion, romanization and number generation.
 - **DataLoaders:** owns JSON/JSONL IO and serialized domain records. Verb/adjective
-  conjugation behavior also lives in these models, despite the library's IO name.
-- **Data utilities:** maintain the same datasets outside normal web requests.
-  Extraction adds local model inference through external projects.
+  conjugation behavior also lives in these models.
+- **Data utilities:** maintain canonical datasets outside normal app execution.
 
-## State boundaries
+The mobile app follows the standard MAUI Blazor Hybrid shape described by
+[Microsoft's MAUI Blazor Hybrid guidance](https://learn.microsoft.com/en-us/aspnet/core/blazor/hybrid/tutorials/maui-blazor-web-app?view=aspnetcore-10.0):
+Razor components execute in the native app and render into a local WebView.
 
-Vocabulary, verbs, adjectives, kanji repositories and number generation are
-singletons in `Program.cs`. The running server shares their in-memory state and
-one set of progress files across sessions. No user identity, database transaction
-or per-user persistence boundary is implemented.
+## Host and state boundaries
 
-Per-practice UI state (current question, input, revealed answer, chunk selection
-and retry queue) resides in component instances. Shared cards communicate through
-parameters/callbacks; JavaScript keyboard/focus helpers call .NET handlers through
-Blazor interop. This is a server-interactive app, not a WebAssembly client.
+Both hosts register repository instances as singletons within their own process.
+They share code and catalog content but do not share running state or save files.
+
+- Web catalog and progress roots come from `StudyData:CatalogRoot` and
+  `StudyData:ProgressRoot`. Both default to the existing `RealJapanese/Data/` tree.
+- Android uses `FileSystem.AppDataDirectory/Catalog` for copied catalogs and
+  `FileSystem.AppDataDirectory/Progress` for saves.
+- There is no account, server API, cloud backup or synchronization boundary.
+- Web sessions need the local ASP.NET process because the UI uses Interactive
+  Server. Android study features run offline in-process without that server.
+
+Per-practice UI state remains in component instances. Shared cards communicate
+through parameters/callbacks; JavaScript keyboard/focus helpers use the host's
+Blazor interop runtime.
 
 ## Important flows
 
-### Vocabulary selection and persistence
+### Catalog and progress initialization
 
-1. A selector derives from `WordComponentBase<T>` and injects a typed repository.
-2. Repository construction loads vocabulary and `SavedData.json`, then calls
-   `UpdateIDs()` and saves the vocabulary file.
-3. UI category actions remove membership from other categories, add the chosen
-   membership and save progress through `WordDataBase<T>`.
-4. Practice links pass `category=known|rehearsing|training` to the route.
+1. A host registers a `RepositoryPaths` value with independent catalog/progress roots.
+2. A repository reads its catalog once. Missing IDs are assigned deterministically
+   in memory; startup does not rewrite the source catalog.
+3. Missing progress initializes as empty. Existing progress is loaded from its own
+   root, and IDs absent from the current catalog are ignored in memory.
+4. Category changes save only `SavedData.json` under the progress root.
 
-Repository add/remove methods save immediately; they do not themselves guarantee
-mutually exclusive membership. Exclusivity is coordinated by the selector.
+On Android, `StudyDataInstaller` first copies these five packaged files to the
+private catalog root, writing a temporary file before replacing each earlier copy:
 
-### Practice rounds
+- `Words/Words.json`
+- `Verbs/Verbs.json`
+- `Adjectives/Adjectives.json`
+- `Kanji/Singel/Singel.json`
+- `Kanji/Combined/Combined.json`
 
-A page such as `WordSpellingBase` parses the category, obtains repository records
-and converts them to `QuestionAnswerDto` sequences. Shared answer bases select
-chunks, shuffle, check normalized input and advance. `PracticeBase` owns revealed
-question retries and round progression; single-answer, multiple-answer and
-flashcard bases specialize interaction. Cards and `blazorHelpers.js` handle
-keyboard/focus interactions.
+Packaged assets never include web `SavedData.json` files, and catalog refreshes do
+not touch the private progress root.
+
+### Vocabulary selection and practice
+
+A selector derives from `WordComponentBase<T>` and injects a typed repository.
+Category actions coordinate exclusive known/training/rehearsing membership and
+save progress. Practice links pass `category=known|rehearsing|training`; shared
+practice bases select chunks, shuffle, check normalized input and manage retries.
 
 ### Data maintenance
 
-Duplicate cleanup deduplicates words, assigns replacement IDs and remaps all three
-progress lists before saving. Kanji extraction reads verbs/adjectives/words,
-builds kanji-to-word relations, asks a local model to fill new kanji records and
-writes the resulting datasets. The generated relation dataset is separate from
-the web app's single/combined kanji vocabulary.
+Duplicate cleanup deduplicates words, assigns replacement IDs and remaps progress.
+Kanji extraction reads verbs/adjectives/words, builds relations, asks a local model
+to fill new records and writes generated datasets. These utilities are not used by
+the web or Android runtime.
 
 ## Data contracts and constraints
 
-- Relative file paths make working directory part of the runtime contract;
-  [ASP.NET](modules/ASPNET.md) and [DOTNET](modules/DOTNET.md) own launch details.
 - Vocabulary IDs connect records to saved progress and extracted relations.
-  Preserving these associations matters when editing data or using maintenance tools.
-- `JsonLoader<T>` dispatches by extension, supports JSON arrays or a single object,
-  and reads JSONL line by line. Missing files propagate file IO errors.
-- `JsonSaver<T>` writes directly to target files, creating directories. There is no
-  atomic replacement or concurrency control in this persistence layer.
-- `UpdateIDs()` expects nonempty vocabulary and assigns IDs to records with `-1`.
-  It writes the primary dataset even during initialization. This is observed
-  behavior, not a claim of concurrency safety or a rationale for the design.
-- Practice category parsing rejects unknown/missing values; persisted progress
-  lookups expect each referenced ID to exist in the corresponding dataset.
+- `JsonLoader<T>` supports JSON arrays/single objects and JSONL. Missing catalog
+  files remain an error; missing progress is valid and starts empty.
+- `JsonSaver<T>` creates directories and writes directly. It has no transaction or
+  cross-process concurrency control.
+- The `Singel` directory spelling is part of the current persisted path contract.
+- Practice category parsing rejects unknown or missing query values.
 
-## Integrations and unknowns
+## Integrations and current limits
 
 WanaKanaSharp supports romanization and kanji detection. CsvHelper is declared by
-DataLoaders; the inspected persistence path uses System.Text.Json. Bootstrap is
-vendored under the web root. No configured remote service is required for the web
-host. Extraction's external projects, model directory and `LLAMA_SERVER_PATH`
-are a separate integration boundary.
+DataLoaders. No remote service is needed by either application host. Extraction's
+external projects, model directory and `LLAMA_SERVER_PATH` form a separate local
+integration boundary.
 
-Deployment topology, concurrent-use expectations and the rationale for singleton
-file-backed storage are Unknown. No architecture rationale document was found;
-see [DECISIONS](DECISIONS.md). Runtime validation is necessary before asserting
-correctness of the observed flows.
+The web and Android Debug builds have been observed passing. The Android build
+produced a sideloadable debug APK, but installation, startup and device behavior
+remain unverified; no connected adb target or installed AVD was available.

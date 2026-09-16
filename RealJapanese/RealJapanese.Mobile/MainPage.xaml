@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RealJapanese.Mobile.MainPage"
+             BackgroundColor="#F8FAFC" SafeAreaEdges="All">
+    <Grid x:Name="Root">
+        <VerticalStackLayout x:Name="Loading" Spacing="18" Padding="28" VerticalOptions="Center">
+            <Label Text="RealJapanese" FontSize="30" TextColor="#052767" HorizontalTextAlignment="Center" />
+            <ActivityIndicator x:Name="Spinner" IsRunning="True" Color="#1B6EC2" />
+            <Label x:Name="Status" Text="Preparing your offline vocabulary…" TextColor="#334155" HorizontalTextAlignment="Center" />
+            <Button x:Name="Retry" Text="Try again" IsVisible="False" Clicked="RetryClicked" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

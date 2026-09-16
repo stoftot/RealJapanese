@@ -2,55 +2,56 @@
 
 ## Project summary
 
-RealJapanese is a browser-based Japanese study application with vocabulary, verbs,
-adjectives, kanji meanings and Japanese number practice. Study collections and
-progress are stored in local JSON files. This is an existing application adopted
-into the AI guidance template; evidence comes from the
-[solution](../../RealJapanese/RealJapanese.sln), source and datasets.
+RealJapanese is a Japanese study application delivered through two local hosts:
+an ASP.NET Core Blazor web application and an Android-only .NET MAUI Blazor Hybrid
+application. Both hosts reuse the same Razor UI, study models and repositories.
+Vocabulary catalogs and study progress are stored as local JSON files.
 
 ## Users, goals and capabilities
 
 The apparent user is a Japanese learner practicing against a curated vocabulary
-collection. This audience is inferred from the UI; a separate product
-specification or owner-approved roadmap was not found.
+collection. This audience is inferred from the UI; a separate product specification
+or owner-approved roadmap was not found.
 
 - Select known, training or rehearsing vocabulary and maintain those collections.
 - Practice spelling and flashcards, verb/adjective categories and conjugation,
   single/combined kanji meanings, and generated number questions.
 - Reveal answers and repeat difficult questions during a practice session.
+- Use the Android application offline without running the ASP.NET host.
 - Maintain datasets with separate duplicate-cleanup and AI-assisted kanji utilities.
 
 ## Scope and constraints
 
-- ASP.NET Core Blazor Interactive Server pages require a running server connection.
-- Singleton repositories share server-side state and progress files. No accounts,
-  authentication configuration or per-user storage were found.
-- Data lives in `RealJapanese/Data/`, outside the web project. Relative paths and
-  write access matter; see [ASP.NET facts](modules/ASPNET.md).
-- No database or remote service is configured for the web app. The extraction
-  utility separately needs external AI-library projects and a local model/server.
-- No automated test projects, CI pipeline or deployment configuration were found.
-  Some selector links have no matching page; see [ASP.NET facts](modules/ASPNET.md).
-
-Explicit product non-goals are Unknown. Native mobile, accounts and hosted
-multi-user operation are not implemented; this does not establish future exclusions.
-Initialization documents the current application without changing its design.
+- The web host uses Blazor Interactive Server and therefore needs its local ASP.NET
+  process while in use. It does not require internet access.
+- The Android host renders the shared Razor UI inside a local `BlazorWebView`; it
+  has no backend-server or internet dependency for study features.
+- Web and Android progress are intentionally separate. There are no accounts,
+  authentication, cloud backup or synchronization features.
+- The Android application supports API level 24 and later and uses package ID
+  `com.realjapanese.mobile`.
+- The canonical catalog remains under `RealJapanese/Data/`. The Android package
+  embeds the five study catalogs and copies them to app-private storage.
+- The extraction utility separately needs external AI-library projects and a local
+  model/server. It is not part of either application runtime.
+- There is no CI pipeline or automated browser/device suite. `StorageChecks` is a
+  dependency-free regression executable for catalog and progress persistence.
 
 ## Enabled technology modules
 
 | Module | Enabled? | Evidence and facts |
 | --- | --- | --- |
-| .NET | Yes | Five C# projects; four net9.0, extraction net10.0; [DOTNET](modules/DOTNET.md) |
-| ASP.NET | Yes | Web SDK, Razor components and Interactive Server startup; [ASPNET](modules/ASPNET.md) |
-| MAUI/Android | No | No MAUI project, Android TFM or application manifest; [MAUI_ANDROID](modules/MAUI_ANDROID.md) |
+| .NET | Yes | All projects target .NET 10; [DOTNET](modules/DOTNET.md) |
+| ASP.NET | Yes | Web SDK, Interactive Server host and shared Razor UI; [ASPNET](modules/ASPNET.md) |
+| MAUI/Android | Yes | Android-only MAUI Blazor Hybrid host; [MAUI_ANDROID](modules/MAUI_ANDROID.md) |
 
-The supplied tooling profile retains core, .NET, Rider, web and Android support.
-Installed workloads and scratch probes do not activate an application module.
-Setup and relocation procedures remain owned by [tooling](../tooling.md).
+Setup and day-to-day commands are in the [development guide](../development.md).
+Tooling installation and relocation remain owned by [tooling](../tooling.md).
 
 ## Unknowns requiring future owner input
 
-- Deployment environment and whether multiple independent learners are a goal.
 - Dataset provenance/licensing and expected backup policy for saved progress.
-- Confirmed released baseline and intended next product version; see [RELEASES](RELEASES.md).
+- Whether accounts or cross-device progress synchronization are future goals.
+- Confirmed released baseline and intended next product version; see
+  [RELEASES](RELEASES.md).
 - Portable setup for the extraction utility's external dependencies.

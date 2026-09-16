@@ -5,18 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
-    <link rel="stylesheet" href="@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]" />
-    <link rel="stylesheet" href="@Assets["app.css"]" />
+    <link rel="stylesheet" href="@Assets["_content/RealJapanese.UI/lib/bootstrap/dist/css/bootstrap.min.css"]" />
+    <link rel="stylesheet" href="@Assets["_content/RealJapanese.UI/app.css"]" />
     <link rel="stylesheet" href="@Assets["RealJapanese.styles.css"]" />
+    <link rel="stylesheet" href="@Assets["web.css"]" />
     <ImportMap />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <HeadOutlet />
+    <HeadOutlet @rendermode="InteractiveServer" />
 </head>
 
 <body>
-<Routes />
-    <script src="@Assets["lib/bootstrap/dist/js/bootstrap.bundle.min.js"]"></script>
-    <script src="@Assets["blazorHelpers.js"]"></script>
+<WebRoutes @rendermode="InteractiveServer" />
+    <script src="@Assets["_content/RealJapanese.UI/lib/bootstrap/dist/js/bootstrap.bundle.min.js"]"></script>
+    <script src="@Assets["_content/RealJapanese.UI/blazorHelpers.js"]"></script>
     <script src="_framework/blazor.web.js"></script>
 </body>
 
