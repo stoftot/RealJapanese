@@ -1,0 +1,37 @@
+# Generated from actual Rider tools/list; rediscover after IDE upgrades.
+[mcp_servers.rider]
+url = "http://127.0.0.1:64342/stream"
+required = false
+startup_timeout_sec = 10
+tool_timeout_sec = 120
+enabled_tools = ["analyze_calls", "build_solution_start", "build_solution_state", "execute_run_configuration", "get_file_problems", "get_project_dependencies", "get_run_configurations", "get_solution_projects", "get_symbol_info", "search_symbol"]
+
+[mcp_servers.rider.tools.analyze_calls]
+output_token_limit = 4000
+
+[mcp_servers.rider.tools.build_solution_start]
+output_token_limit = 4000
+
+[mcp_servers.rider.tools.build_solution_state]
+output_token_limit = 4000
+
+[mcp_servers.rider.tools.execute_run_configuration]
+output_token_limit = 4000
+
+[mcp_servers.rider.tools.get_file_problems]
+output_token_limit = 4000
+
+[mcp_servers.rider.tools.get_project_dependencies]
+output_token_limit = 4000
+
+[mcp_servers.rider.tools.get_run_configurations]
+output_token_limit = 4000
+
+[mcp_servers.rider.tools.get_solution_projects]
+output_token_limit = 4000
+
+[mcp_servers.rider.tools.get_symbol_info]
+output_token_limit = 4000
+
+[mcp_servers.rider.tools.search_symbol]
+output_token_limit = 4000

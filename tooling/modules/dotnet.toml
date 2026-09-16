@@ -1,0 +1,30 @@
+[mcp_servers.netcoredbg]
+command = "powershell.exe"
+args = ["-NoProfile", "-File", "tooling/mcp-launch.ps1", "-Server", "netcoredbg"]
+required = true
+startup_timeout_sec = 45
+tool_timeout_sec = 120
+enabled_tools = ["start_debug", "attach_debug", "stop_debug", "terminate_debug", "add_breakpoint", "remove_breakpoint", "list_breakpoints", "continue_execution", "pause_execution", "step_over", "step_into", "step_out", "get_debug_state", "get_threads", "get_call_stack", "get_scopes", "get_variables", "evaluate_expression"]
+
+[mcp_servers.netcoredbg.tools.start_debug]
+output_token_limit = 4000
+[mcp_servers.netcoredbg.tools.get_debug_state]
+output_token_limit = 3000
+[mcp_servers.netcoredbg.tools.get_threads]
+output_token_limit = 2000
+[mcp_servers.netcoredbg.tools.get_call_stack]
+output_token_limit = 4000
+[mcp_servers.netcoredbg.tools.get_scopes]
+output_token_limit = 2000
+[mcp_servers.netcoredbg.tools.get_variables]
+output_token_limit = 4000
+[mcp_servers.netcoredbg.tools.evaluate_expression]
+output_token_limit = 2000
+[mcp_servers.netcoredbg.tools.continue_execution]
+output_token_limit = 3000
+[mcp_servers.netcoredbg.tools.step_over]
+output_token_limit = 3000
+[mcp_servers.netcoredbg.tools.step_into]
+output_token_limit = 3000
+[mcp_servers.netcoredbg.tools.step_out]
+output_token_limit = 3000

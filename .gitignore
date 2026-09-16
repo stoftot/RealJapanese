@@ -2,3 +2,13 @@
 obj/
 bin/
 *.user
+
+# ai gitignore
+.tooling/
+.playwright-cli/
+**/bin/
+**/obj/
+*.user
+.idea/
+__pycache__/
+*.pyc
