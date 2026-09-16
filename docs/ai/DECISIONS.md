@@ -65,7 +65,7 @@ an empty save; stale progress IDs are ignored.
 
 ## Explicit authenticated sync on a trusted local network
 
-- **Status:** Accepted
+- **Status:** Superseded by "Plain one-fetch sync on a trusted local network"
 - **Date:** 2026-09-16
 
 ### Context
@@ -96,4 +96,41 @@ state as one-level recovery.
   does not turn an untrusted LAN into a trusted environment.
 - Two-way reconciliation is receiver merge followed by sharing the result back and
   replacing the original sender.
+- There is no discovery service, cloud copy, account or unattended background sync.
+
+## Plain one-fetch sync on a trusted local network
+
+- **Status:** Accepted
+- **Date:** 2026-09-16
+
+### Context
+
+The pairing code and authenticated encrypted frames added input and coordination
+to a deliberately short-lived local transfer. The user chose a simpler receiver
+flow that needs only the sender's address and port, while retaining strict snapshot
+validation, a reviewable preview and the prohibition on remote writes.
+
+### Decision
+
+Replace the pairing protocol with `RJLAN002`, a plain framed TCP protocol. The
+receiver sends one fixed empty fetch request and accepts a bounded snapshot reply
+of at most 4 MiB. The sender listens for at most five minutes and stops after the
+first successful fetch. Both ends accept only literal RFC1918 private IPv4 or
+loopback addresses.
+
+The protocol has no encryption or sender authentication. Anyone on the LAN who
+knows the displayed address and port can fetch while sharing is active, and a
+network peer can observe, alter or substitute the snapshot. A trusted network,
+strict schema/catalog/ID validation and the user's preview are the security
+boundary. Imports remain local actions: the transport exposes no remote-write or
+arbitrary-path operation.
+
+### Consequences
+
+- Receiving requires only the sender's IP address and port.
+- Both installations must be updated together; the earlier pairing protocol and
+  `RJLAN002` are incompatible.
+- Sharing remains foreground-only, transient and limited to one successful fetch.
+- Two-way reconciliation, merge modes, atomic import and one-level recovery are
+  unchanged.
 - There is no discovery service, cloud copy, account or unattended background sync.

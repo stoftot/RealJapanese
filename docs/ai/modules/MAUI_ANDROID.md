@@ -59,10 +59,11 @@ On-device checks have covered startup and keyboard opening/Back dismissal on an
 Android phone: bottom navigation hides while the IME is visible and returns when
 it closes. These checks used a temporary app identity because the existing
 installation's signing certificate differed from the local development key.
-Local sync checks also cover phone-to-web and web-to-phone transfers over Wi-Fi,
-preview/conflict resolution, persisted matching selections, and recovery after
-restarting the temporary Android app. Broader practice interaction remains outside
-these checks. The user's existing installation and private progress were preserved.
+Local sync checks cover `RJLAN002` phone-to-web and web-to-phone transfers over
+Wi-Fi using only address and port, preview/apply, and persisted matching selections.
+StorageChecks additionally covers conflict resolution and restart recovery.
+Broader practice interaction remains outside these checks. The user's existing
+installation and private progress were preserved.
 
 Use the [development guide](../../development.md) for beginner commands and the
 [MAUI Android skill](../../../.agents/skills/maui-android/SKILL.md) for evidence-led

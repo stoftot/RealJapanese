@@ -11,7 +11,6 @@ public partial class Sync
     private Task? refreshTask;
     private string address = "";
     private int port;
-    private string pairingCode = "";
     private bool busy;
     private string? message;
     private string? error;
@@ -52,9 +51,7 @@ public partial class Sync
     private Task Receive() => Run(async () =>
     {
         CancelPreview();
-        received = await LocalProgressTransfer.ReceiveAsync(address.Trim(), port,
-            pairingCode.Replace(" ", "").Replace("-", "").Trim(), lifetime.Token);
-        pairingCode = "";
+        received = await LocalProgressTransfer.ReceiveAsync(address.Trim(), port, lifetime.Token);
         preview = ProgressSync.PreviewSnapshot(received, mode);
         message = "Progress received. Review the preview below; your progress has not changed.";
     });
@@ -97,9 +94,9 @@ public partial class Sync
         message = null;
         try { await action(); }
         catch (Exception exception) when (exception is SocketException or TimeoutException)
-        { error = "Could not connect. Check the address, port and pairing code, keep both apps open, and use the same private Wi-Fi. Try sharing from the phone if the PC firewall blocks sharing."; }
+        { error = "Could not connect. Check the address and port, keep both apps open, and use the same private Wi-Fi. Try sharing from the phone if the PC firewall blocks sharing."; }
         catch (ArgumentException)
-        { error = "Enter a private IPv4 address, a port between 1 and 65535, and the 32-character pairing code shown on the other device."; }
+        { error = "Enter the private IPv4 address and port (1 to 65535) shown on the other device."; }
         catch (Exception exception) when (exception is InvalidDataException or InvalidOperationException)
         { error = exception.Message; }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)

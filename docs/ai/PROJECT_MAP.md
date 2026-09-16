@@ -73,7 +73,7 @@ No test-framework project, CI pipeline or automated browser/device suite was fou
   independent progress load; construction does not rewrite the catalog.
 - Packaged mobile catalog → app-private `Catalog/`; progress remains under the
   separate app-private `Progress/` tree.
-- `/sync` → frozen snapshot → one-use authenticated private-network transfer →
+- `/sync` → frozen snapshot → one successful framed private-network fetch →
   validated merge preview → atomic progress import with one-level recovery.
 - Extraction → source vocabulary → kanji relations → local model enrichment → JSON.
 

@@ -82,9 +82,10 @@ not touch the private progress root.
 
 1. The sharing app freezes its current progress snapshot and listens on a temporary
    random TCP port for at most five minutes.
-2. The receiving app connects with a displayed private IPv4 address, port and
-   one-use 32-hex-character code. SHA-256 expands the 128-bit code into an AES-GCM
-   key; authenticated frames carry a challenge and at most 4 MiB of snapshot data.
+2. The receiving app connects with a displayed IPv4 address and port. It sends the
+   fixed empty `RJLAN002` fetch request; the sender returns one bounded framed
+   snapshot reply of at most 4 MiB, then stops sharing after the first successful
+   fetch.
 3. The receiver rejects unknown schema/IDs or any catalog whose raw-file SHA-256
    differs, then previews `MergeKeepLocal`, `MergeUseIncoming` or `Replace` before
    writing. `MergeKeepLocal` is the default.
@@ -92,9 +93,16 @@ not touch the private progress root.
    one-level recovery snapshot. A later import replaces recovery; ordinary study
    changes do not discard it.
 
-The listener accepts only RFC1918 private IPv4 peers and is disposed on success,
-cancel, page navigation or expiry. Transfer code has no arbitrary-path or remote
-write API. It does not change firewall rules or configure router forwarding.
+The listener and receiver accept only literal RFC1918 private IPv4 or loopback
+addresses; hostnames and other address forms are rejected. The listener is disposed
+on success, cancel, page navigation or expiry. Transfer code has no arbitrary-path
+or remote-write API. It does not change firewall rules or configure router forwarding.
+
+The transport has no pairing secret, encryption or sender authentication. Anyone
+on the LAN who knows the displayed address and port can fetch the snapshot while
+sharing is active, and a network peer can observe, alter or substitute traffic.
+The security boundary is therefore a trusted local network plus the receiver's
+strict validation and user-reviewed preview, rather than transport authentication.
 
 ### Vocabulary selection and practice
 
@@ -128,9 +136,9 @@ DataLoaders. No remote service is needed by either application host. Extraction'
 external projects, model directory and `LLAMA_SERVER_PATH` form a separate local
 integration boundary.
 
-Web and Android Debug builds pass. Browser and physical Android checks have
-exercised two-way Wi-Fi transfer, conflict resolution, matching saved selections,
-and recovery after Android restart using disposable progress and a temporary app
-identity. The user's installed Android app was preserved because its signing key
-differs from the local development key. Broader practice/device coverage remains
-outside these sync checks.
+Web and Android Debug builds pass. Browser and physical Android checks exercise
+`RJLAN002` two-way Wi-Fi transfer using only IP and port, preview/apply, and matching
+saved selections. StorageChecks covers conflict resolution, restart recovery and
+malformed frames. Device checks use disposable progress and a temporary app identity
+to preserve the installed app, whose signing key differs from the local development
+key. Broader practice/device coverage remains outside these sync checks.

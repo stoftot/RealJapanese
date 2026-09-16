@@ -3,6 +3,5 @@
 .sync-page h2 { font-size: 1.3rem; }
 .sync-panel { margin: 1.25rem 0; padding: 1.25rem; border: 1px solid #d9dfe8; border-radius: .75rem; background: #fff; }
 .sync-panel label { display: block; margin-top: .8rem; margin-bottom: .3rem; font-weight: 600; }
-.pairing-code { font-family: monospace; overflow-wrap: anywhere; font-size: 1rem; }
 .sync-panel dd { margin-bottom: .8rem; }
 .sync-panel th, .sync-panel td { white-space: nowrap; }

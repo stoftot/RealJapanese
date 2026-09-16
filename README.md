@@ -5,6 +5,10 @@ verb/adjective conjugation, kanji meanings and number practice. Study data and
 progress are stored locally; two open installations can explicitly reconcile
 progress over a trusted local network.
 
+Local transfer uses a short-lived, unencrypted connection addressed by IP and port.
+Use it only on a network you trust and review the validated import preview before
+applying changes.
+
 Start with the [project map](docs/ai/PROJECT_MAP.md) for code navigation and the
 [project brief](docs/ai/PROJECT_BRIEF.md) for implemented scope and unknowns.
 

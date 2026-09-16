@@ -8,7 +8,7 @@ internal static class LocalTransferChecks
     public static void Run()
     {
         VerifyRoundTripAsync().GetAwaiter().GetResult();
-        VerifyWrongSecretDoesNotConsumeSessionAsync().GetAwaiter().GetResult();
+        VerifyRejectedResponsesAsync().GetAwaiter().GetResult();
         VerifyExpiryAsync().GetAwaiter().GetResult();
         VerifyPayloadBoundsAsync().GetAwaiter().GetResult();
         VerifyMalformedRequestDoesNotConsumeSessionAsync().GetAwaiter().GetResult();
@@ -21,23 +21,44 @@ internal static class LocalTransferChecks
     {
         var expected = "local 日本語 progress"u8.ToArray();
         await using var session = LocalProgressTransfer.Start(expected);
-        var received = await LocalProgressTransfer.ReceiveAsync("127.0.0.1", session.Port, session.PairingCode);
+        var received = await LocalProgressTransfer.ReceiveAsync("127.0.0.1", session.Port);
         Assert(received.SequenceEqual(expected), "Local transfer did not survive a loopback round trip.");
         await WaitUntilInactiveAsync(session);
         Assert(!session.IsActive, "A completed local transfer session remained active.");
+        await AssertThrowsAnyAsync(() => LocalProgressTransfer.ReceiveAsync("127.0.0.1", session.Port),
+            "A completed session served a second fetch.");
     }
 
-    private static async Task VerifyWrongSecretDoesNotConsumeSessionAsync()
+    private static async Task VerifyRejectedResponsesAsync()
     {
-        var expected = "still available"u8.ToArray();
-        await using var session = LocalProgressTransfer.Start(expected);
-        var wrongCode = (session.PairingCode[0] == 'A' ? 'B' : 'A') + session.PairingCode[1..];
-        await AssertThrowsAsync<InvalidDataException>(
-            () => LocalProgressTransfer.ReceiveAsync("127.0.0.1", session.Port, wrongCode),
-            "A wrong local-transfer secret was accepted.");
-        Assert(session.IsActive, "A wrong secret consumed the local transfer session.");
-        var received = await LocalProgressTransfer.ReceiveAsync("127.0.0.1", session.Port, session.PairingCode);
-        Assert(received.SequenceEqual(expected), "The valid receiver could not use the session after a wrong secret.");
+        foreach (var (magic, type, length) in new[]
+        {
+            ("RJLAN001", (byte)2, 0), // A pairing-enabled peer is incompatible.
+            ("RJLAN002", (byte)1, 0), // A request cannot masquerade as a response.
+            ("RJLAN002", (byte)2, -1),
+            ("RJLAN002", (byte)2, LocalProgressTransfer.MaxSnapshotBytes + 1),
+            ("RJLAN002", (byte)2, 10) // Truncated body.
+        })
+        {
+            using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            using var listener = new TcpListener(IPAddress.Loopback, 0);
+            listener.Start();
+            var receiver = LocalProgressTransfer.ReceiveAsync("127.0.0.1", ((IPEndPoint)listener.LocalEndpoint).Port, timeout.Token);
+            using (var client = await listener.AcceptTcpClientAsync(timeout.Token))
+            {
+                var request = new byte[13];
+                await client.GetStream().ReadExactlyAsync(request, timeout.Token);
+                Assert(request.AsSpan(0, 8).SequenceEqual("RJLAN002"u8) && request[8] == 1 &&
+                    IPAddress.NetworkToHostOrder(BitConverter.ToInt32(request, 9)) == 0,
+                    "A fetch must be an empty request, with no credentials or writable data.");
+                var response = new byte[13];
+                System.Text.Encoding.ASCII.GetBytes(magic).CopyTo(response, 0);
+                response[8] = type;
+                BitConverter.GetBytes(IPAddress.HostToNetworkOrder(length)).CopyTo(response, 9);
+                await client.GetStream().WriteAsync(response, timeout.Token);
+            }
+            await AssertThrowsAsync<InvalidDataException>(() => receiver, "An incompatible or malformed response was accepted.");
+        }
     }
 
     private static async Task VerifyExpiryAsync()
@@ -46,7 +67,7 @@ internal static class LocalTransferChecks
         await WaitUntilInactiveAsync(session);
         Assert(!session.IsActive, "An expired local transfer session remained active.");
         await AssertThrowsAnyAsync(
-            () => LocalProgressTransfer.ReceiveAsync("127.0.0.1", session.Port, session.PairingCode),
+            () => LocalProgressTransfer.ReceiveAsync("127.0.0.1", session.Port),
             "An expired local transfer session accepted a receiver.");
     }
 
@@ -55,7 +76,7 @@ internal static class LocalTransferChecks
         var expected = new byte[LocalProgressTransfer.MaxSnapshotBytes];
         Random.Shared.NextBytes(expected);
         await using var maximum = LocalProgressTransfer.Start(expected);
-        var received = await LocalProgressTransfer.ReceiveAsync("127.0.0.1", maximum.Port, maximum.PairingCode);
+        var received = await LocalProgressTransfer.ReceiveAsync("127.0.0.1", maximum.Port);
         Assert(received.SequenceEqual(expected), "A maximum-size local transfer did not survive a round trip.");
         AssertThrows<ArgumentException>(
             () => LocalProgressTransfer.Start(new byte[LocalProgressTransfer.MaxSnapshotBytes + 1]),
@@ -70,15 +91,15 @@ internal static class LocalTransferChecks
         {
             await client.ConnectAsync(IPAddress.Loopback, session.Port);
             var oversizedHeader = new byte[13];
-            "RJLAN001"u8.CopyTo(oversizedHeader);
+            "RJLAN002"u8.CopyTo(oversizedHeader);
             oversizedHeader[8] = 1;
-            BitConverter.GetBytes(IPAddress.HostToNetworkOrder(33)).CopyTo(oversizedHeader, 9);
+            BitConverter.GetBytes(IPAddress.HostToNetworkOrder(1)).CopyTo(oversizedHeader, 9);
             await client.GetStream().WriteAsync(oversizedHeader);
             client.Close();
         }
         await Task.Delay(50);
         Assert(session.IsActive, "A malformed request consumed the local transfer session.");
-        var received = await LocalProgressTransfer.ReceiveAsync("127.0.0.1", session.Port, session.PairingCode);
+        var received = await LocalProgressTransfer.ReceiveAsync("127.0.0.1", session.Port);
         Assert(received.SequenceEqual(expected), "The valid receiver could not use the session after a malformed request.");
     }
 
@@ -87,7 +108,7 @@ internal static class LocalTransferChecks
         await using var session = LocalProgressTransfer.Start([], TimeSpan.FromMilliseconds(100));
         using var client = new TcpClient(AddressFamily.InterNetwork);
         await client.ConnectAsync(IPAddress.Loopback, session.Port);
-        await client.GetStream().WriteAsync("RJLAN001"u8.ToArray());
+        await client.GetStream().WriteAsync("RJLAN002"u8.ToArray());
         await WaitUntilInactiveAsync(session);
         Assert(!session.IsActive, "A partial client frame prevented session expiry.");
     }
@@ -106,20 +127,17 @@ internal static class LocalTransferChecks
     private static async Task VerifyReceiverInputValidationAsync()
     {
         await AssertThrowsAsync<ArgumentException>(
-            () => LocalProgressTransfer.ReceiveAsync("localhost", 1234, new string('A', 43)),
+            () => LocalProgressTransfer.ReceiveAsync("localhost", 1234),
             "A hostname was accepted by the local-transfer receiver.");
         await AssertThrowsAsync<ArgumentException>(
-            () => LocalProgressTransfer.ReceiveAsync("169.254.169.254", 1234, new string('A', 43)),
+            () => LocalProgressTransfer.ReceiveAsync("169.254.169.254", 1234),
             "A link-local metadata address was accepted by the local-transfer receiver.");
         await AssertThrowsAsync<ArgumentException>(
-            () => LocalProgressTransfer.ReceiveAsync("8.8.8.8", 1234, new string('A', 43)),
+            () => LocalProgressTransfer.ReceiveAsync("8.8.8.8", 1234),
             "A public address was accepted by the local-transfer receiver.");
         await AssertThrowsAsync<ArgumentOutOfRangeException>(
-            () => LocalProgressTransfer.ReceiveAsync("127.0.0.1", 0, new string('A', 43)),
+            () => LocalProgressTransfer.ReceiveAsync("127.0.0.1", 0),
             "An invalid local-transfer port was accepted.");
-        await AssertThrowsAsync<ArgumentException>(
-            () => LocalProgressTransfer.ReceiveAsync("127.0.0.1", 1234, "short"),
-            "An invalid local-transfer pairing-code length was accepted.");
     }
 
     private static async Task WaitUntilInactiveAsync(LocalProgressTransferSession session)

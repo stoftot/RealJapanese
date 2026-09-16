@@ -42,7 +42,7 @@ dotnet build RealJapanese/RealJapanese.Web.sln --no-restore
 
 Debug is the default unless specified. `StorageChecks` is a self-checking console
 program rather than a `dotnet test` project; it covers catalog integrity, atomic
-progress persistence, migration, sync merge/recovery and authenticated local
+progress persistence, migration, sync merge/recovery and framed local
 transport. See the [development guide](../../development.md) for running and
 installing each host.
 

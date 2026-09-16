@@ -25,20 +25,21 @@
     <section class="sync-panel" aria-labelledby="share-title">
         <h2 id="share-title">1. Share from this device</h2>
         <p>Share a copy of the progress saved right now. On a PC, the local web app performs the connection.</p>
+        <p class="text-muted">While sharing is active, anyone on your local network with this address and port
+            can fetch this copy. Only share on a network you trust.</p>
         @if (sharing is { IsActive: true })
         {
             <dl>
                 <dt>Device address</dt>
                 <dd>@string.Join(" or ", sharing.Addresses.Where(address => !address.StartsWith("127.")))</dd>
                 <dt>Port</dt><dd>@sharing.Port</dd>
-                <dt>One-time pairing code</dt><dd><code class="pairing-code">@sharing.PairingCode</code></dd>
             </dl>
-            <p>Enter these details on the receiving device. Code expires at @sharing.ExpiresUtc.ToLocalTime().ToString("HH:mm").</p>
+            <p>Enter these details on the receiving device. Sharing expires at @sharing.ExpiresUtc.ToLocalTime().ToString("HH:mm").</p>
             <button class="btn btn-outline-secondary" @onclick="StopSharing">Stop sharing</button>
         }
         else
         {
-            @if (sharing is not null) { <p>Sharing has ended. Start again for a new code.</p> }
+            @if (sharing is not null) { <p>Sharing has ended. Start again to share another copy.</p> }
             <button class="btn btn-primary" disabled="@busy" @onclick="StartSharing">Share progress</button>
         }
     </section>
@@ -50,8 +51,6 @@
             <input id="sync-address" class="form-control" placeholder="192.168.1.20" autocomplete="off" @bind="address" />
             <label for="sync-port">Port</label>
             <input id="sync-port" class="form-control" type="number" min="1" max="65535" @bind="port" />
-            <label for="sync-code">One-time pairing code</label>
-            <input id="sync-code" class="form-control pairing-code" maxlength="64" autocomplete="off" autocapitalize="off" spellcheck="false" @bind="pairingCode" />
             <button class="btn btn-primary mt-3" @onclick="Receive">@(busy ? "Receiving…" : "Receive preview")</button>
         </fieldset>
         <p class="text-muted mt-3">If a connection fails, try sharing from the phone and receiving on the PC.

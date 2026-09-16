@@ -1,22 +1,17 @@
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Security.Cryptography;
 
 namespace Repositories.Sync;
 
+// Deliberately unauthenticated: only share on a trusted local network.
+// The request has no body, paths, commands or remote mutation operations.
 public static class LocalProgressTransfer
 {
     public const int MaxSnapshotBytes = 4 * 1024 * 1024;
-
-    private const int SecretBytes = 16;
-    private const int ChallengeBytes = 32;
-    private const int NonceBytes = 12;
-    private const int TagBytes = 16;
     private const int HeaderBytes = 13;
-    private static readonly byte[] Magic = "RJLAN001"u8.ToArray();
+    private static readonly byte[] Magic = "RJLAN002"u8.ToArray();
     private static readonly TimeSpan DefaultLifetime = TimeSpan.FromMinutes(5);
-    private static readonly TimeSpan ServerClientTimeout = TimeSpan.FromSeconds(5);
     private static readonly TimeSpan ReceiverTimeout = TimeSpan.FromSeconds(15);
 
     public static LocalProgressTransferSession Start(byte[] snapshot, TimeSpan? lifetime = null)
@@ -24,26 +19,16 @@ public static class LocalProgressTransfer
         ArgumentNullException.ThrowIfNull(snapshot);
         if (snapshot.Length > MaxSnapshotBytes)
             throw new ArgumentException($"The progress snapshot cannot exceed {MaxSnapshotBytes} bytes.", nameof(snapshot));
-
         var actualLifetime = lifetime ?? DefaultLifetime;
         if (actualLifetime <= TimeSpan.Zero || actualLifetime > DefaultLifetime)
             throw new ArgumentOutOfRangeException(nameof(lifetime), "The session lifetime must be positive and no longer than five minutes.");
-
         return new LocalProgressTransferSession(snapshot.ToArray(), actualLifetime);
     }
 
-    public static async Task<byte[]> ReceiveAsync(
-        string address,
-        int port,
-        string pairingCode,
-        CancellationToken cancellationToken = default)
+    public static async Task<byte[]> ReceiveAsync(string address, int port, CancellationToken cancellationToken = default)
     {
         var ipAddress = ParsePrivateAddress(address);
-        if (port is < 1 or > IPEndPoint.MaxPort)
-            throw new ArgumentOutOfRangeException(nameof(port));
-        var key = DecodePairingCode(pairingCode);
-        var challenge = RandomNumberGenerator.GetBytes(ChallengeBytes);
-
+        if (port is < 1 or > IPEndPoint.MaxPort) throw new ArgumentOutOfRangeException(nameof(port));
         using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         timeout.CancelAfter(ReceiverTimeout);
         using var client = new TcpClient(AddressFamily.InterNetwork);
@@ -51,24 +36,8 @@ public static class LocalProgressTransfer
         {
             await client.ConnectAsync(ipAddress, port, timeout.Token).ConfigureAwait(false);
             using var stream = client.GetStream();
-            await WriteEncryptedFrameAsync(stream, 1, challenge, key, timeout.Token).ConfigureAwait(false);
-
-            var response = await ReadEncryptedFrameAsync(
-                stream,
-                2,
-                key,
-                ChallengeBytes + MaxSnapshotBytes,
-                timeout.Token).ConfigureAwait(false);
-            if (response.Length < ChallengeBytes ||
-                !CryptographicOperations.FixedTimeEquals(response.AsSpan(0, ChallengeBytes), challenge))
-            {
-                CryptographicOperations.ZeroMemory(response);
-                throw new InvalidDataException("The transfer response did not match this request.");
-            }
-
-            var snapshot = response.AsSpan(ChallengeBytes).ToArray();
-            CryptographicOperations.ZeroMemory(response);
-            return snapshot;
+            await WriteFrameAsync(stream, 1, ReadOnlyMemory<byte>.Empty, timeout.Token).ConfigureAwait(false);
+            return await ReadFrameAsync(stream, 2, MaxSnapshotBytes, timeout.Token).ConfigureAwait(false);
         }
         catch (OperationCanceledException exception) when (!cancellationToken.IsCancellationRequested)
         {
@@ -76,79 +45,34 @@ public static class LocalProgressTransfer
         }
         catch (IOException exception)
         {
-            throw new InvalidDataException("The local transfer peer rejected the request or returned an incomplete response.", exception);
-        }
-        finally
-        {
-            CryptographicOperations.ZeroMemory(key);
-            CryptographicOperations.ZeroMemory(challenge);
+            throw new InvalidDataException("The other app rejected the request or returned an incomplete response. Use matching app versions.", exception);
         }
     }
 
-    internal static async Task WriteEncryptedFrameAsync(
-        Stream stream,
-        byte messageType,
-        ReadOnlyMemory<byte> plaintext,
-        byte[] key,
+    internal static async Task WriteFrameAsync(Stream stream, byte messageType, ReadOnlyMemory<byte> payload,
         CancellationToken cancellationToken)
     {
-        var header = CreateHeader(messageType, plaintext.Length);
-        var nonce = RandomNumberGenerator.GetBytes(NonceBytes);
-        var ciphertext = new byte[plaintext.Length];
-        var tag = new byte[TagBytes];
-        using (var aes = new AesGcm(key, TagBytes))
-            aes.Encrypt(nonce, plaintext.Span, ciphertext, tag, header);
-
+        var header = new byte[HeaderBytes];
+        Magic.CopyTo(header, 0);
+        header[Magic.Length] = messageType;
+        BitConverter.GetBytes(IPAddress.HostToNetworkOrder(payload.Length)).CopyTo(header, Magic.Length + 1);
         await stream.WriteAsync(header, cancellationToken).ConfigureAwait(false);
-        await stream.WriteAsync(nonce, cancellationToken).ConfigureAwait(false);
-        await stream.WriteAsync(ciphertext, cancellationToken).ConfigureAwait(false);
-        await stream.WriteAsync(tag, cancellationToken).ConfigureAwait(false);
+        await stream.WriteAsync(payload, cancellationToken).ConfigureAwait(false);
     }
 
-    internal static async Task<byte[]> ReadEncryptedFrameAsync(
-        Stream stream,
-        byte expectedMessageType,
-        byte[] key,
-        int maximumPlaintextBytes,
+    internal static async Task<byte[]> ReadFrameAsync(Stream stream, byte expectedMessageType, int maximumBytes,
         CancellationToken cancellationToken)
     {
         var header = new byte[HeaderBytes];
         await stream.ReadExactlyAsync(header, cancellationToken).ConfigureAwait(false);
         if (!header.AsSpan(0, Magic.Length).SequenceEqual(Magic) || header[Magic.Length] != expectedMessageType)
-            throw new InvalidDataException("The local transfer protocol header is invalid.");
-
+            throw new InvalidDataException("Unsupported local transfer protocol. Update both applications to matching versions.");
         var length = IPAddress.NetworkToHostOrder(BitConverter.ToInt32(header, Magic.Length + 1));
-        if (length < 0 || length > maximumPlaintextBytes)
+        if (length < 0 || length > maximumBytes)
             throw new InvalidDataException("The local transfer frame has an invalid length.");
-
-        var nonce = new byte[NonceBytes];
-        var ciphertext = new byte[length];
-        var tag = new byte[TagBytes];
-        await stream.ReadExactlyAsync(nonce, cancellationToken).ConfigureAwait(false);
-        await stream.ReadExactlyAsync(ciphertext, cancellationToken).ConfigureAwait(false);
-        await stream.ReadExactlyAsync(tag, cancellationToken).ConfigureAwait(false);
-
-        var plaintext = new byte[length];
-        try
-        {
-            using var aes = new AesGcm(key, TagBytes);
-            aes.Decrypt(nonce, ciphertext, tag, plaintext, header);
-            return plaintext;
-        }
-        catch (CryptographicException exception)
-        {
-            CryptographicOperations.ZeroMemory(plaintext);
-            throw new InvalidDataException("The local transfer could not be authenticated.", exception);
-        }
-    }
-
-    private static byte[] CreateHeader(byte messageType, int plaintextLength)
-    {
-        var header = new byte[HeaderBytes];
-        Magic.CopyTo(header, 0);
-        header[Magic.Length] = messageType;
-        BitConverter.GetBytes(IPAddress.HostToNetworkOrder(plaintextLength)).CopyTo(header, Magic.Length + 1);
-        return header;
+        var payload = new byte[length];
+        await stream.ReadExactlyAsync(payload, cancellationToken).ConfigureAwait(false);
+        return payload;
     }
 
     private static IPAddress ParsePrivateAddress(string address)
@@ -176,24 +100,6 @@ public static class LocalProgressTransfer
             bytes[0] == 127;
     }
 
-    private static byte[] DecodePairingCode(string pairingCode)
-    {
-        ArgumentNullException.ThrowIfNull(pairingCode);
-        if (pairingCode.Length != SecretBytes * 2 || pairingCode.Any(character => !Uri.IsHexDigit(character)))
-            throw new ArgumentException("Pairing code must be exactly 32 hexadecimal characters.", nameof(pairingCode));
-
-        try
-        {
-            return SHA256.HashData(Convert.FromHexString(pairingCode));
-        }
-        catch (FormatException exception)
-        {
-            throw new ArgumentException("Pairing code is not valid hexadecimal text.", nameof(pairingCode), exception);
-        }
-    }
-
-    internal static string EncodePairingCode(byte[] secret) => Convert.ToHexString(secret);
-
     internal static IReadOnlyList<string> GetLocalAddresses() => NetworkInterface.GetAllNetworkInterfaces()
         .Where(network => network.OperationalStatus == OperationalStatus.Up)
         .SelectMany(network => network.GetIPProperties().UnicastAddresses)
@@ -213,7 +119,6 @@ public static class LocalProgressTransfer
 public sealed class LocalProgressTransferSession : IDisposable, IAsyncDisposable
 {
     private readonly byte[] snapshot;
-    private readonly byte[] key;
     private readonly TcpListener listener;
     private readonly CancellationTokenSource lifetimeCancellation;
     private readonly Task serverTask;
@@ -224,10 +129,6 @@ public sealed class LocalProgressTransferSession : IDisposable, IAsyncDisposable
     internal LocalProgressTransferSession(byte[] snapshot, TimeSpan lifetime)
     {
         this.snapshot = snapshot;
-        var secret = RandomNumberGenerator.GetBytes(16);
-        PairingCode = LocalProgressTransfer.EncodePairingCode(secret);
-        key = SHA256.HashData(secret);
-        CryptographicOperations.ZeroMemory(secret);
         ExpiresUtc = DateTimeOffset.UtcNow.Add(lifetime);
         Addresses = LocalProgressTransfer.GetLocalAddresses();
         listener = new TcpListener(IPAddress.Any, 0);
@@ -238,7 +139,6 @@ public sealed class LocalProgressTransferSession : IDisposable, IAsyncDisposable
     }
 
     public int Port { get; }
-    public string PairingCode { get; }
     public DateTimeOffset ExpiresUtc { get; }
     public IReadOnlyList<string> Addresses { get; }
     public bool IsActive => Volatile.Read(ref disposed) == 0 && Volatile.Read(ref terminal) == 0 &&
@@ -286,8 +186,7 @@ public sealed class LocalProgressTransferSession : IDisposable, IAsyncDisposable
             {
                 // Observe every client task; the session is already terminal and cannot be reused.
             }
-            CryptographicOperations.ZeroMemory(snapshot);
-            CryptographicOperations.ZeroMemory(key);
+            Array.Clear(snapshot);
         }
     }
 
@@ -303,34 +202,21 @@ public sealed class LocalProgressTransferSession : IDisposable, IAsyncDisposable
                     !LocalProgressTransfer.IsPrivateOrLoopback(remote.Address))
                     return;
                 using var stream = client.GetStream();
-                var challenge = await LocalProgressTransfer.ReadEncryptedFrameAsync(stream, 1, key, 32, timeout.Token).ConfigureAwait(false);
-                if (challenge.Length != 32 || Interlocked.CompareExchange(ref transferState, 1, 0) != 0)
-                {
-                    CryptographicOperations.ZeroMemory(challenge);
-                    return;
-                }
-
+                await LocalProgressTransfer.ReadFrameAsync(stream, 1, 0, timeout.Token).ConfigureAwait(false);
+                if (Interlocked.CompareExchange(ref transferState, 1, 0) != 0) return;
                 try
                 {
-                    var response = new byte[challenge.Length + snapshot.Length];
-                    challenge.CopyTo(response, 0);
-                    snapshot.CopyTo(response, challenge.Length);
-                    await LocalProgressTransfer.WriteEncryptedFrameAsync(stream, 2, response, key, timeout.Token).ConfigureAwait(false);
+                    await LocalProgressTransfer.WriteFrameAsync(stream, 2, snapshot, timeout.Token).ConfigureAwait(false);
                     Interlocked.Exchange(ref transferState, 2);
                     lifetimeCancellation.Cancel();
-                    CryptographicOperations.ZeroMemory(response);
                 }
                 catch
                 {
                     Interlocked.CompareExchange(ref transferState, 0, 1);
                     throw;
                 }
-                finally
-                {
-                    CryptographicOperations.ZeroMemory(challenge);
-                }
             }
-            catch (Exception exception) when (exception is IOException or InvalidDataException or OperationCanceledException or SocketException or CryptographicException)
+            catch (Exception exception) when (exception is IOException or InvalidDataException or OperationCanceledException or SocketException)
             {
                 // Invalid or stalled clients do not consume the one-use session.
             }

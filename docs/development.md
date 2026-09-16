@@ -64,7 +64,7 @@ dotnet run --project RealJapanese/StorageChecks/StorageChecks.csproj --no-build 
 
 `StorageChecks` reads the real catalogs, verifies their IDs and content remain
 unchanged, and exercises atomic persistence, migration, sync merge/recovery and the
-authenticated local transport in temporary directories. Success prints
+local framed transport in temporary directories. Success prints
 `Storage checks passed.`
 
 ## Transfer progress locally
