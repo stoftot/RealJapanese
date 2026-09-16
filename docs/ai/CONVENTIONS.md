@@ -34,8 +34,11 @@ owned by project manifests.
 - Each host supplies catalog and progress roots. Preserve the relative dataset
   layout (`Words`, `Verbs`, `Adjectives`, `Kanji/Singel`, `Kanji/Combined`) beneath
   both roots.
-- Per-dataset progress is `SavedData.json` with known, rehearsing and training ID
-  collections. IDs reference catalog entries.
+- Current progress is one `Progress.json` bundle containing all five datasets and
+  their known, rehearsing and training ID collections. Legacy per-dataset
+  `SavedData.json` files are migration inputs only and must remain untouched.
+- Sync snapshots are accepted only when their schema, IDs and raw catalog hashes
+  match. Keep preview separate from apply so the store revision can reject stale work.
 - Android package assets contain catalogs only. Never package web `SavedData.json`.
 - Category query values come from `WordPracticeCategoryExtensions`; unknown or
   missing category values are rejected.

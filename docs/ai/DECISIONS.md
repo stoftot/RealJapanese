@@ -59,6 +59,41 @@ an empty save; stale progress IDs are ignored.
 
 - Web and Android progress do not affect each other.
 - Installing a newer APK can refresh packaged vocabulary without resetting progress.
-- There is no account-based backup or synchronization between installations.
+- Cross-installation progress moves only through an explicit local transfer.
 - Uninstalling the Android app clears its private progress.
 - Dataset maintenance remains an explicit utility workflow rather than app startup.
+
+## Explicit authenticated sync on a trusted local network
+
+- **Status:** Accepted
+- **Date:** 2026-09-16
+
+### Context
+
+Web and Android installations keep separate local progress, but users need a
+simple way to reconcile them without accounts, cloud storage or a permanent server.
+The transfer must not expose file paths or silently accept incompatible catalogs.
+
+### Decision
+
+Provide a shared `/sync` page that transfers a frozen progress snapshot directly
+between two open app instances over RFC1918 private IPv4. A temporary listener uses
+a random port and a one-use 128-bit displayed code; SHA-256 derives the AES-GCM key
+for authenticated protocol frames. Sessions last at most five minutes and end on
+success, cancellation or leaving the page.
+
+The receiver validates the version, five-dataset shape, IDs, 4 MiB bound and raw
+catalog SHA-256 hashes before offering `MergeKeepLocal`, `MergeUseIncoming` or
+`Replace`. Apply uses the same atomic progress store and retains the pre-import
+state as one-level recovery.
+
+### Consequences
+
+- Sync requires both apps in the foreground on the same trusted Wi-Fi or personal hotspot.
+- The feature does not configure firewalls or routers; phone-to-PC sharing is the
+  practical fallback when inbound PC connections are blocked.
+- The pairing code protects the session from unauthenticated peers, but the feature
+  does not turn an untrusted LAN into a trusted environment.
+- Two-way reconciliation is receiver merge followed by sharing the result back and
+  replacing the original sender.
+- There is no discovery service, cloud copy, account or unattended background sync.

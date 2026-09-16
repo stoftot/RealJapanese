@@ -21,7 +21,7 @@ for commands and prerequisites.
 | `RealJapanese/RealJapanese/` | ASP.NET Core Blazor host | References RealJapanese.UI |
 | `RealJapanese/RealJapanese.Mobile/` | Android-only MAUI Blazor Hybrid host | References RealJapanese.UI; installs packaged catalogs |
 | `RealJapanese/RealJapanese.UI/` | Shared routes, study pages, reusable Razor components and static assets | References Repositories |
-| `RealJapanese/Repositories/` | Vocabulary/progress, question conversion and number generation | Depends on DataLoaders and WanaKanaSharp |
+| `RealJapanese/Repositories/` | Vocabulary/progress, local sync transport, question conversion and number generation | Depends on DataLoaders and WanaKanaSharp |
 | `RealJapanese/DataLoaders/` | JSON IO, serialized models and conjugation logic | Shared by repositories and utilities |
 | `RealJapanese/Data/` | Canonical study datasets, web progress and extracted kanji relations | Source for web and packaged mobile catalogs |
 | `RealJapanese/StorageChecks/` | Dependency-free storage regression executable | Uses real catalogs read-only and disposable progress |
@@ -59,18 +59,22 @@ No test-framework project, CI pipeline or automated browser/device suite was fou
 | Shared routes and navigation | `RealJapanese/RealJapanese.UI/Components/Routes.razor`, `Layout/NavMenu.razor` |
 | Shared study pages | `RealJapanese/RealJapanese.UI/Components/Pages/` |
 | Shared practice lifecycle | `RealJapanese/RealJapanese.UI/Components/Shared/PracticeBase.cs`, `PracticeShell.razor` |
-| Storage paths and persistence | `RealJapanese/Repositories/RepositoryPaths.cs`, `Bases/WordDataBase.cs` |
+| Local sync UI | `RealJapanese/RealJapanese.UI/Components/Pages/Sync.razor` |
+| Storage paths and persistence | `RealJapanese/Repositories/RepositoryPaths.cs`, `Bases/WordDataBase.cs`, `Sync/ProgressStore.cs` |
+| Snapshot validation and local transport | `RealJapanese/Repositories/Sync/ProgressSyncService.cs`, `LocalProgressTransfer.cs` |
 | Serialization and conjugation | `RealJapanese/DataLoaders/JsonLoader.cs`, `JsonSaver.cs`, `Models/` |
 | Storage regression entry point | `RealJapanese/StorageChecks/Program.cs` |
 
 ## Important flows
 
 - Both hosts render routes and pages from RealJapanese.UI.
-- Selector → progress category → repository → host-specific `SavedData.json`.
+- Selector → progress category → repository → host-specific atomic `Progress.json`.
 - Repository construction → one catalog load → stable in-memory ID assignment →
   independent progress load; construction does not rewrite the catalog.
 - Packaged mobile catalog → app-private `Catalog/`; progress remains under the
   separate app-private `Progress/` tree.
+- `/sync` → frozen snapshot → one-use authenticated private-network transfer →
+  validated merge preview → atomic progress import with one-level recovery.
 - Extraction → source vocabulary → kanji relations → local model enrichment → JSON.
 
 [ARCHITECTURE](ARCHITECTURE.md) owns boundaries and state implications;

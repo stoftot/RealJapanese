@@ -18,6 +18,8 @@ or owner-approved roadmap was not found.
   single/combined kanji meanings, and generated number questions.
 - Reveal answers and repeat difficult questions during a practice session.
 - Use the Android application offline without running the ASP.NET host.
+- Transfer progress directly between two open installations on the same trusted
+  Wi-Fi network or personal hotspot, with an explicit merge preview.
 - Maintain datasets with separate duplicate-cleanup and AI-assisted kanji utilities.
 
 ## Scope and constraints
@@ -26,8 +28,8 @@ or owner-approved roadmap was not found.
   process while in use. It does not require internet access.
 - The Android host renders the shared Razor UI inside a local `BlazorWebView`; it
   has no backend-server or internet dependency for study features.
-- Web and Android progress are intentionally separate. There are no accounts,
-  authentication, cloud backup or synchronization features.
+- Web and Android progress remain separate at rest. There are no accounts or cloud
+  backup; users can explicitly transfer progress over a trusted local network.
 - The Android application supports API level 24 and later and uses package ID
   `com.realjapanese.mobile`.
 - The canonical catalog remains under `RealJapanese/Data/`. The Android package
@@ -51,7 +53,7 @@ Tooling installation and relocation remain owned by [tooling](../tooling.md).
 ## Unknowns requiring future owner input
 
 - Dataset provenance/licensing and expected backup policy for saved progress.
-- Whether accounts or cross-device progress synchronization are future goals.
+- Whether accounts, cloud backup or unattended synchronization are future goals.
 - Confirmed released baseline and intended next product version; see
   [RELEASES](RELEASES.md).
 - Portable setup for the extraction utility's external dependencies.

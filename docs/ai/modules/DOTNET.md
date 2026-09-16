@@ -41,12 +41,14 @@ dotnet build RealJapanese/RealJapanese.Web.sln --no-restore
 ```
 
 Debug is the default unless specified. `StorageChecks` is a self-checking console
-program rather than a `dotnet test` project. See the [development guide](../../development.md)
-for running and installing each host.
+program rather than a `dotnet test` project; it covers catalog integrity, atomic
+progress persistence, migration, sync merge/recovery and authenticated local
+transport. See the [development guide](../../development.md) for running and
+installing each host.
 
 The web and Android Debug builds have passed for the current structure. The Android
 build produced `.tooling/android-artifacts/bin/RealJapanese.Mobile/debug/com.realjapanese.mobile-Signed.apk`.
-Installation and device behavior remain unverified.
+Local sync device evidence is recorded in [MAUI_ANDROID](MAUI_ANDROID.md).
 
 ## Launchable projects and utilities
 
@@ -61,8 +63,8 @@ Installation and device behavior remain unverified.
 
 The current host has .NET SDK 10.0.401, the `maui-android` workload from workload
 set 10.0.400 with manifest 10.0.20, and an Android SDK path configured. These are
-machine observations, not portable repository guarantees. No connected adb target
-or installed Android virtual device was found during the current validation.
+machine observations, not portable repository guarantees. Detect connected devices
+for each session; sync has been exercised on a physical Android phone.
 
 The repository path contains Unicode characters that cause Android `aapt2` to fail
 with APT2265. `tooling/build-android.ps1` is the canonical build entry: it creates a

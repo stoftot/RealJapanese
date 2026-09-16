@@ -63,8 +63,16 @@ dotnet run --project RealJapanese/StorageChecks/StorageChecks.csproj --no-build 
 ```
 
 `StorageChecks` reads the real catalogs, verifies their IDs and content remain
-unchanged, and exercises save/restart behavior in temporary directories. Success
-prints `Storage checks passed.`
+unchanged, and exercises atomic persistence, migration, sync merge/recovery and the
+authenticated local transport in temporary directories. Success prints
+`Storage checks passed.`
+
+## Transfer progress locally
+
+Open **Sync progress** from Home in both running apps and follow the sharing and
+receiving prompts. Both devices must be on the same trusted Wi-Fi or personal
+hotspot, and both apps must remain in the foreground. See the
+[local sync guide](local-sync.md) for merge choices and network limitations.
 
 ## Build and run Android
 
@@ -109,8 +117,8 @@ adb install -r ".tooling\android-artifacts\bin\RealJapanese.Mobile\debug\com.rea
 Debug APKs use development signing and are for local testing. `-r` keeps private
 app data when the installed app has the same package ID and signing key. Changing
 machines can mean a different debug key. A signer mismatch requires uninstalling
-the old app first. Uninstalling clears mobile progress, and no account or sync
-service can restore it.
+the old app first. Uninstalling clears mobile progress; there is no account or
+cloud backup, so transfer progress first if it must be preserved.
 
 Android Debug and ARM64 Release builds have passed. The Debug APK above includes
 both ARM64 and x64 support; the Release APK is under

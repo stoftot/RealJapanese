@@ -33,7 +33,8 @@ At startup, `StudyDataInstaller` replaces catalog copies under
 `FileSystem.AppDataDirectory/Catalog`. Repositories save under the independent
 `FileSystem.AppDataDirectory/Progress` tree. Reinstalling/upgrading the same package
 with the same signing identity normally preserves this private data; uninstalling
-the app clears it. There is no account, backup service or synchronization fallback.
+the app clears it. There is no account or cloud backup; progress can be explicitly
+transferred to another open installation over a trusted local network.
 The manifest disables Android backup with `android:allowBackup="false"`.
 
 ## Build, install and validation status
@@ -58,7 +59,10 @@ On-device checks have covered startup and keyboard opening/Back dismissal on an
 Android phone: bottom navigation hides while the IME is visible and returns when
 it closes. These checks used a temporary app identity because the existing
 installation's signing certificate differed from the local development key.
-Progress persistence and broader device interaction still need device coverage.
+Local sync checks also cover phone-to-web and web-to-phone transfers over Wi-Fi,
+preview/conflict resolution, persisted matching selections, and recovery after
+restarting the temporary Android app. Broader practice interaction remains outside
+these checks. The user's existing installation and private progress were preserved.
 
 Use the [development guide](../../development.md) for beginner commands and the
 [MAUI Android skill](../../../.agents/skills/maui-android/SKILL.md) for evidence-led

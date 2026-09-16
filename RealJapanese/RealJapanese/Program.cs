@@ -21,6 +21,7 @@ builder.Services.AddSingleton<AdjectiveData>();
 builder.Services.AddSingleton<VerbData>();
 builder.Services.AddSingleton<WordData>();
 builder.Services.AddSingleton<KanjiData>();
+builder.Services.AddSingleton<Repositories.Sync.ProgressSyncService>();
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 

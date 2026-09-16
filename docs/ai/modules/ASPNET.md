@@ -46,8 +46,9 @@ empty and is created when progress is first saved.
 
 Repository construction no longer rewrites catalogs. Web repositories remain
 singletons inside the server process, so concurrent browser sessions share the
-configured web progress files. No database, remote API, identity provider or
-authentication middleware is configured.
+configured `Progress.json`. The sync page may temporarily listen on a random TCP
+port for an authenticated private-network transfer; there is no permanent sync
+endpoint, database, identity provider or authentication middleware.
 
 Middleware includes HTTPS redirection, antiforgery and mapped static assets;
 non-Development adds HSTS and exception handling. HTTPS requires an appropriate

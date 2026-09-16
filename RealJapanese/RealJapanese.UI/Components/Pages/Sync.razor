@@ -1,0 +1,115 @@
+@page "/sync"
+@using Repositories.Sync
+@implements IAsyncDisposable
+@inject ProgressSyncService ProgressSync
+
+<PageTitle>Sync progress</PageTitle>
+
+<div class="sync-page">
+    <a href="">← Home</a>
+    <h1>Sync progress</h1>
+    <p>Open this page on both devices and connect them to the same private Wi-Fi network.
+        Share from one device, then receive and review on the other.</p>
+    <p class="text-muted">Only study progress is transferred. Nothing is applied until you confirm the preview.
+        Sharing stops after one transfer, after five minutes, or when you leave this page. Keep the phone awake.</p>
+
+    @if (message is not null)
+    {
+        <p role="status" class="alert alert-success">@message</p>
+    }
+    @if (error is not null)
+    {
+        <p role="alert" class="alert alert-danger">@error</p>
+    }
+
+    <section class="sync-panel" aria-labelledby="share-title">
+        <h2 id="share-title">1. Share from this device</h2>
+        <p>Share a copy of the progress saved right now. On a PC, the local web app performs the connection.</p>
+        @if (sharing is { IsActive: true })
+        {
+            <dl>
+                <dt>Device address</dt>
+                <dd>@string.Join(" or ", sharing.Addresses.Where(address => !address.StartsWith("127.")))</dd>
+                <dt>Port</dt><dd>@sharing.Port</dd>
+                <dt>One-time pairing code</dt><dd><code class="pairing-code">@sharing.PairingCode</code></dd>
+            </dl>
+            <p>Enter these details on the receiving device. Code expires at @sharing.ExpiresUtc.ToLocalTime().ToString("HH:mm").</p>
+            <button class="btn btn-outline-secondary" @onclick="StopSharing">Stop sharing</button>
+        }
+        else
+        {
+            @if (sharing is not null) { <p>Sharing has ended. Start again for a new code.</p> }
+            <button class="btn btn-primary" disabled="@busy" @onclick="StartSharing">Share progress</button>
+        }
+    </section>
+
+    <section class="sync-panel" aria-labelledby="receive-title">
+        <h2 id="receive-title">2. Receive on this device</h2>
+        <fieldset disabled="@busy">
+            <label for="sync-address">Other device's address</label>
+            <input id="sync-address" class="form-control" placeholder="192.168.1.20" autocomplete="off" @bind="address" />
+            <label for="sync-port">Port</label>
+            <input id="sync-port" class="form-control" type="number" min="1" max="65535" @bind="port" />
+            <label for="sync-code">One-time pairing code</label>
+            <input id="sync-code" class="form-control pairing-code" maxlength="64" autocomplete="off" autocapitalize="off" spellcheck="false" @bind="pairingCode" />
+            <button class="btn btn-primary mt-3" @onclick="Receive">@(busy ? "Receiving…" : "Receive preview")</button>
+        </fieldset>
+        <p class="text-muted mt-3">If a connection fails, try sharing from the phone and receiving on the PC.
+            Guest Wi-Fi may block connections between devices. No router changes or internet access are needed.</p>
+    </section>
+
+    @if (received is not null)
+    {
+        <section class="sync-panel" aria-labelledby="preview-title">
+            <h2 id="preview-title">3. Review before applying</h2>
+            <label for="sync-mode">How should this progress be combined?</label>
+            <select id="sync-mode" class="form-select" @bind="mode" @bind:after="RefreshPreview" disabled="@busy">
+                <option value="@ImportMode.MergeKeepLocal">Merge — keep this device's category when they differ</option>
+                <option value="@ImportMode.MergeUseIncoming">Merge — use the other device's category when they differ</option>
+                <option value="@ImportMode.Replace">Replace — make this device match the shared copy</option>
+            </select>
+            <p class="mt-2">Merge keeps items selected on either device. It cannot infer deselections or which change is newer.
+                Replace also removes selections missing from the shared copy.</p>
+            @if (preview is not null) { @PreviewTable() }
+        </section>
+    }
+    else if (preview is not null)
+    {
+        <section class="sync-panel">
+            <h2>Restore previous progress</h2>
+            <p>This replaces current progress with the copy saved immediately before the previous import.</p>
+            @PreviewTable()
+        </section>
+    }
+
+    <section class="sync-panel">
+        <h2>Recovery</h2>
+        <p>Each import saves the previous progress on this device. That recovery copy survives restarting the app;
+            the next import replaces it.</p>
+        <button class="btn btn-outline-secondary" disabled="@(busy || !ProgressSync.HasRecovery)" @onclick="PreviewRecovery">Preview recovery copy</button>
+    </section>
+    <p>To finish a two-way sync: merge on the receiving device, then share its combined progress back and
+        choose <strong>Replace</strong> on the original device. Review the counts on each device.</p>
+</div>
+
+@code {
+    private RenderFragment PreviewTable() => @<div>
+        <p>Copy time reported by the sender: @preview!.CreatedUtc.ToLocalTime().ToString("g").</p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr><th>Study area</th><th>Added</th><th>Changed</th><th>Removed</th><th>Conflicts</th></tr></thead>
+                <tbody>
+                    @foreach (var row in preview.Summary)
+                    {
+                        <tr><th scope="row">@row.Dataset.Replace("Kanji/Singel", "Single kanji").Replace("Kanji/Combined", "Combined kanji")</th>
+                            <td>@row.Added</td><td>@row.Changed</td><td>@row.Removed</td><td>@row.Conflicts</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <p>Conflicts mean the same item has different categories on the two devices. The choice above applies to all conflicts.</p>
+        <button class="btn btn-primary" disabled="@busy" @onclick="Apply">Apply this preview</button>
+        <button class="btn btn-outline-secondary ms-2" disabled="@busy" @onclick="RefreshCurrentPreview">Refresh preview</button>
+        <button class="btn btn-outline-secondary ms-2" disabled="@busy" @onclick="CancelPreview">Cancel</button>
+    </div>;
+}
