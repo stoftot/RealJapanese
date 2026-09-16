@@ -34,7 +34,7 @@ public sealed class ProgressStore
         lock (gate)
         {
             if (Load().Revision != expectedRevision)
-                throw new InvalidOperationException("Progress changed after this preview. Preview the file again before importing.");
+                throw new InvalidOperationException("Progress changed after this preview. Refresh the preview before applying.");
             Commit(new ProgressDocument { Data = Clone(data), Recovery = Clone(backup) });
         }
     }
@@ -73,6 +73,15 @@ public sealed class ProgressStore
         next.Revision = Guid.NewGuid();
         var bytes = JsonSerializer.SerializeToUtf8Bytes(next);
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        // Separate app processes must never silently overwrite each other's cached progress.
+        using var ownership = new FileStream(path + ".lock", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+        if (File.Exists(path))
+        {
+            var onDisk = JsonSerializer.Deserialize<ProgressDocument>(File.ReadAllBytes(path))
+                ?? throw new InvalidDataException("The progress file is empty.");
+            if (onDisk.Revision != Load().Revision)
+                throw new InvalidOperationException("Another app changed this progress folder. Restart this app before saving or syncing.");
+        }
         var temporary = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
         try
         {

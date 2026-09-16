@@ -16,6 +16,21 @@ internal static class SyncChecks
         VerifyRejectedSnapshotsDoNotWrite(catalogRoot, temporaryRoot);
         VerifyFailedAtomicWrite(catalogRoot, temporaryRoot);
         VerifyParallelAssignmentsRemainExclusive(catalogRoot, temporaryRoot);
+        VerifySeparateOwnersCannotOverwrite(catalogRoot, temporaryRoot);
+    }
+
+    private static void VerifySeparateOwnersCannotOverwrite(string catalogRoot, string temporaryRoot)
+    {
+        var root = NewRoot(temporaryRoot, "separate-owners");
+        var first = Open(catalogRoot, root);
+        var second = Open(catalogRoot, root);
+        _ = second.Service.ExportSnapshot(); // Cache the old revision before the first writer commits.
+        first.Words.AddToTraining(first.Words.Words.First());
+        var saved = File.ReadAllBytes(Path.Combine(root, "Progress.json"));
+        AssertThrows<InvalidOperationException>(() => second.Words.AddToVocab(second.Words.Words.First()),
+            "A second progress owner overwrote a newer on-disk revision.");
+        Assert(saved.SequenceEqual(File.ReadAllBytes(Path.Combine(root, "Progress.json"))), "Conflicting writer changed disk progress.");
+        Assert(!second.Words.VocabWordIds.Any(), "Conflicting writer changed cached progress.");
     }
 
     private static void VerifyLegacyMigration(string catalogRoot, string temporaryRoot)
@@ -134,6 +149,13 @@ internal static class SyncChecks
         var valid = source.Service.ExportSnapshot();
         VerifyRejected(catalogRoot, temporaryRoot, "malformed", "not json"u8.ToArray());
         VerifyRejected(catalogRoot, temporaryRoot, "version", Mutate(valid, root => root["Version"] = 2));
+        VerifyRejected(catalogRoot, temporaryRoot, "missing-version", Mutate(valid, root => root.Remove("Version")));
+        VerifyRejected(catalogRoot, temporaryRoot, "missing-category", Mutate(valid, root =>
+            root["Data"]!.AsObject()["Words"]!.AsObject().Remove("KnownIds")));
+        VerifyRejected(catalogRoot, temporaryRoot, "extra-field", Mutate(valid, root => root["Path"] = "ignored-is-not-allowed"));
+        VerifyRejected(catalogRoot, temporaryRoot, "too-many-entries", Mutate(valid, root =>
+            root["Data"]!.AsObject()["Words"]!.AsObject()["KnownIds"] =
+                new JsonArray(Enumerable.Range(0, 10000).Select(id => JsonValue.Create(id)).ToArray())));
         VerifyRejected(catalogRoot, temporaryRoot, "hash", Mutate(valid, root => root["CatalogHashes"]!.AsObject()["Words"] = "BAD"));
         VerifyRejected(catalogRoot, temporaryRoot, "unknown-id", Mutate(valid, root =>
             root["Data"]!.AsObject()["Words"]!.AsObject()["KnownIds"]!.AsArray().Add(int.MaxValue)));

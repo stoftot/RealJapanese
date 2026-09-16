@@ -218,6 +218,7 @@ public sealed class LocalProgressTransferSession : IDisposable, IAsyncDisposable
     private readonly CancellationTokenSource lifetimeCancellation;
     private readonly Task serverTask;
     private int transferState;
+    private int terminal;
     private int disposed;
 
     internal LocalProgressTransferSession(byte[] snapshot, TimeSpan lifetime)
@@ -240,7 +241,8 @@ public sealed class LocalProgressTransferSession : IDisposable, IAsyncDisposable
     public string PairingCode { get; }
     public DateTimeOffset ExpiresUtc { get; }
     public IReadOnlyList<string> Addresses { get; }
-    public bool IsActive => Volatile.Read(ref disposed) == 0 && Volatile.Read(ref transferState) != 2 && !lifetimeCancellation.IsCancellationRequested;
+    public bool IsActive => Volatile.Read(ref disposed) == 0 && Volatile.Read(ref terminal) == 0 &&
+        Volatile.Read(ref transferState) != 2 && !lifetimeCancellation.IsCancellationRequested;
 
     private async Task RunAsync()
     {
@@ -249,8 +251,12 @@ public sealed class LocalProgressTransferSession : IDisposable, IAsyncDisposable
         {
             while (!lifetimeCancellation.IsCancellationRequested && Volatile.Read(ref transferState) != 2)
             {
+                foreach (var completed in clients.Where(task => task.IsCompleted).ToArray())
+                {
+                    completed.GetAwaiter().GetResult();
+                    clients.Remove(completed);
+                }
                 var client = await listener.AcceptTcpClientAsync(lifetimeCancellation.Token).ConfigureAwait(false);
-                clients.RemoveWhere(task => task.IsCompleted);
                 if (clients.Count >= 4)
                 {
                     client.Dispose();
@@ -262,10 +268,24 @@ public sealed class LocalProgressTransferSession : IDisposable, IAsyncDisposable
         catch (OperationCanceledException) when (lifetimeCancellation.IsCancellationRequested) { }
         catch (ObjectDisposedException) when (lifetimeCancellation.IsCancellationRequested) { }
         catch (SocketException) when (lifetimeCancellation.IsCancellationRequested) { }
+        catch (Exception)
+        {
+            // A listener or client-worker failure terminates this one-use session. The UI must not
+            // continue advertising a socket that can no longer serve the snapshot.
+        }
         finally
         {
+            Interlocked.Exchange(ref terminal, 1);
+            lifetimeCancellation.Cancel();
             listener.Stop();
-            await Task.WhenAll(clients).ConfigureAwait(false);
+            try
+            {
+                await Task.WhenAll(clients).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                // Observe every client task; the session is already terminal and cannot be reused.
+            }
             CryptographicOperations.ZeroMemory(snapshot);
             CryptographicOperations.ZeroMemory(key);
         }

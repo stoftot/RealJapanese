@@ -15,4 +15,5 @@ __pycache__/
 
 # Private unified progress and interrupted atomic writes
 RealJapanese/Data/Progress.json
+RealJapanese/Data/Progress.json.lock
 RealJapanese/Data/Progress.json.*.tmp

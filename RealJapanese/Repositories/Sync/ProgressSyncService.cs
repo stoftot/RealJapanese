@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 using DataLoaders.Models;
 
 namespace Repositories.Sync;
@@ -23,7 +24,15 @@ public sealed class ProgressSyncService
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         MaxDepth = 16,
-        UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow
+        UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
+        TypeInfoResolver = new DefaultJsonTypeInfoResolver
+        {
+            Modifiers = { type =>
+            {
+                if (type.Type == typeof(ProgressSnapshot) || type.Type == typeof(VocabSaveFile))
+                    foreach (var property in type.Properties) property.IsRequired = true;
+            } }
+        }
     };
     private readonly ProgressStore store;
     private readonly Dictionary<string, string> hashes;
@@ -70,6 +79,15 @@ public sealed class ProgressSyncService
     {
         if (!Enum.IsDefined(mode)) throw new ArgumentOutOfRangeException(nameof(mode));
         if (incoming.Version != 1) throw new InvalidDataException("Unsupported sync version. Update both applications.");
+        if (incoming.Data is null || incoming.Data.Count != validIds.Count)
+            throw new InvalidDataException("The snapshot must contain all five study datasets.");
+        foreach (var pair in incoming.Data)
+        {
+            if (!validIds.TryGetValue(pair.Key, out var ids) || pair.Value is null ||
+                (long)(pair.Value.KnownIds?.Count ?? 0) + (pair.Value.TrainingIds?.Count ?? 0) +
+                (pair.Value.RehearsingIds?.Count ?? 0) > ids.Count)
+                throw new InvalidDataException("The snapshot contains more entries than the study catalog permits.");
+        }
         ProgressStore.ValidateShape(incoming.Data);
         if (incoming.CatalogHashes is null || incoming.CatalogHashes.Count != hashes.Count ||
             hashes.Any(pair => !incoming.CatalogHashes.TryGetValue(pair.Key, out var hash) || hash != pair.Value))

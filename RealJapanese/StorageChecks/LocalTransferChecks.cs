@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using Repositories.Sync;
 
 internal static class LocalTransferChecks
@@ -12,6 +13,7 @@ internal static class LocalTransferChecks
         VerifyPayloadBoundsAsync().GetAwaiter().GetResult();
         VerifyMalformedRequestDoesNotConsumeSessionAsync().GetAwaiter().GetResult();
         VerifyMidFrameExpiryAsync().GetAwaiter().GetResult();
+        VerifyListenerFailureEndsSessionAsync().GetAwaiter().GetResult();
         VerifyReceiverInputValidationAsync().GetAwaiter().GetResult();
     }
 
@@ -88,6 +90,17 @@ internal static class LocalTransferChecks
         await client.GetStream().WriteAsync("RJLAN001"u8.ToArray());
         await WaitUntilInactiveAsync(session);
         Assert(!session.IsActive, "A partial client frame prevented session expiry.");
+    }
+
+    private static async Task VerifyListenerFailureEndsSessionAsync()
+    {
+        await using var session = LocalProgressTransfer.Start([]);
+        var listener = (TcpListener?)typeof(LocalProgressTransferSession)
+            .GetField("listener", BindingFlags.Instance | BindingFlags.NonPublic)?
+            .GetValue(session) ?? throw new InvalidOperationException("Could not access the test session listener.");
+        listener.Stop();
+        await WaitUntilInactiveAsync(session);
+        Assert(!session.IsActive, "A failed local-transfer listener remained advertised as active.");
     }
 
     private static async Task VerifyReceiverInputValidationAsync()
