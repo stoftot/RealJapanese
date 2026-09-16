@@ -1,38 +1,45 @@
-# AI-assisted development repository template
+# RealJapanese
 
-Repository-resident AI guidance and a modular external toolchain for Codex on
-Windows x64. This template contains no application.
+A Blazor web application for Japanese vocabulary, verb/adjective conjugation,
+kanji meanings and number practice. Study data and progress are stored in local
+JSON files. The repository also contains two data-maintenance console utilities.
 
-Start with the [AI development guide](docs/ai/README.md) and
-[project map](docs/ai/PROJECT_MAP.md). Use `$initialize-project` to adopt an existing
-application or define a new one. The [release policy](docs/ai/RELEASES.md) governs
-completed, validated, version-worthy outcomes.
+Start with the [project map](docs/ai/PROJECT_MAP.md) for code navigation and the
+[project brief](docs/ai/PROJECT_BRIEF.md) for implemented scope and unknowns.
 
-- **Core:** explicit Headroom compression and retrieval over MCP.
-- **.NET:** .NET 10, built-in `dotnet format`, Rider MCP, NetCoreDbg and its MCP controller.
-- **Web:** Microsoft Playwright CLI and Chromium.
-- **MAUI Android:** workload, Microsoft OpenJDK 21, Android SDK and adb.
+## Build and run
 
-Start with [setup and removal](docs/tooling.md), [verification procedure](docs/verification.md),
-and [optional modules](docs/optional-tools.md).
-
-From the repository root, in PowerShell 7:
+The web app targets .NET 9; the full solution also includes a .NET 10 utility.
+Use a compatible SDK and install the .NET 9 / ASP.NET Core 9 runtimes for web
+execution. From the repository root:
 
 ```powershell
-./tooling/setup.ps1 -Modules core,dotnet,web,maui
-./tooling/configure.ps1 -Modules core,dotnet,rider
-. ./tooling/enter-env.ps1
-codex
+dotnet restore RealJapanese/RealJapanese/RealJapanese.csproj
+dotnet build RealJapanese/RealJapanese/RealJapanese.csproj --no-restore
+dotnet run --project RealJapanese/RealJapanese/RealJapanese.csproj --no-build --launch-profile http
 ```
 
-When copying or moving this template, use the
-[relocation procedure](docs/tooling.md#copying-or-moving-the-template);
-`$initialize-project` now checks local tooling as part of initialization.
+The HTTP profile uses `http://localhost:5287`. The app expects
+`RealJapanese/Data/` beside the web project and needs write access. Loading
+repositories and changing progress can rewrite data; see
+[ASP.NET facts](docs/ai/modules/ASPNET.md) before runtime validation.
 
-Inspect existing installations before running setup on another machine. Installers
-resolve current official releases; installed package receipts stay in ignored
-`.tooling/`. Machine installers require an elevated PowerShell. Never infer a
-successful setup from installation alone: follow the functional verification guide.
+[.NET facts](docs/ai/modules/DOTNET.md) document full-solution targets and the
+extraction utility's external dependencies. No automated application tests were
+found.
 
-For a technology-neutral repository, select only `core` in both setup and configure.
-The web module can be used independently of .NET and MAUI.
+## Development guidance and optional tools
+
+[AGENTS.md](AGENTS.md) and the [AI development guide](docs/ai/README.md) define
+workflows and context ownership. [RELEASES](docs/ai/RELEASES.md) owns release policy;
+a confirmed product release baseline has not been established.
+
+The retained tooling template supports core MCP tools, .NET/Rider/debugging,
+Playwright/Chromium and optional MAUI/Android. Application modules are .NET and
+ASP.NET; installed Android tooling does not make this an Android application.
+
+Tool installation, configuration, relocation and removal remain in the
+[tooling guide](docs/tooling.md), [verification procedure](docs/verification.md)
+and [optional modules](docs/optional-tools.md). Inspect existing installations and
+select needed modules before setup. Tool acceptance and application validation
+are separate checks.

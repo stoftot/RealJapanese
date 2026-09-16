@@ -1,8 +1,9 @@
 # AI development infrastructure
 
 This is the repository's durable context and workflow layer for AI-assisted
-development, primarily with Codex. Together with the existing tooling, it forms
-one reusable template: tooling provides capabilities; this layer guides their use.
+development, primarily with Codex, initialized for the existing RealJapanese
+application. It retains the reusable template's optional tooling and workflows:
+tooling provides capabilities; this layer guides their use.
 Start orientation at [PROJECT_MAP](PROJECT_MAP.md). The existing
 [tooling guide](../tooling.md) owns installation and machine setup.
 

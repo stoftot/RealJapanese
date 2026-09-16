@@ -1,20 +1,14 @@
 # Decisions
 
-Record only actual durable, non-obvious architectural choices. Do not use this
-file as a changelog, task history or debugging journal. Preserve rationale for
-superseded decisions with an explicit replacement reference.
+No accepted architectural decision with a discoverable rationale was found in
+the existing documentation or inspected history. Initialization does not invent
+alternatives, tradeoffs or owner agreement from code patterns.
 
-## Entry template
+Observed choices such as singleton JSON-backed state, relative data paths,
+component inheritance and external AI-library references are documented in
+[ARCHITECTURE](ARCHITECTURE.md). Their original rationale is Unknown.
 
-Copy this entry when an actual decision needs recording:
-
-```markdown
-## DNNN: [TODO: decision title]
-
-- **Status:** [TODO: Proposed / Accepted / Superseded by DNNN]
-- **Context:** [TODO: constraints and problem requiring a decision]
-- **Decision:** [TODO: chosen approach]
-- **Rationale:** [TODO: why, including meaningful alternatives/tradeoffs]
-- **Consequences:** [TODO: benefits, costs and implications]
-- **Affected areas:** [TODO: components and links]
-```
+Add a decision when a non-obvious choice and its rationale are established,
+recording status (Proposed/Accepted/Superseded), context, decision, alternatives
+and tradeoffs, consequences, and affected areas. Preserve superseded rationale
+with a replacement reference. This file is not a changelog or task journal.

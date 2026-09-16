@@ -7,7 +7,8 @@ are outside V2.
 
 ## Initial version and adoption
 
-**Initial expected version: `0.1.0`** (owner-customizable before the first release).
+**Initial expected version: `0.1.0`** (retained template default, not a confirmed
+RealJapanese release target; resolve the existing product baseline before using it).
 Inspect actual project history during adoption. Do not infer released versions
 from a template/specification generation label or invent a historical baseline.
 
@@ -26,8 +27,15 @@ from a template/specification generation label or invent a historical baseline.
   Record a known external baseline here if not represented in local records;
   if evidence conflicts or is unknown, resolve that before assigning a next version.
 
-**External released baseline:** [TODO: confirmed version and evidence link for
-an existing project, or None when initializing a genuinely new project.]
+**External released baseline:** Unknown. The existing repository contains
+application history, but no local tags, changelog, product version properties or
+actual release records were found during adoption. Package and target-framework
+versions are not product release evidence. Do not infer a released baseline or
+assign a next version until the owner supplies confirmation.
+
+Context initialization and local environment repair document/restore the existing
+setup; they do not establish a product release. No release record is created for
+this adoption, and the retained initial default remains provisional.
 
 ## Invariants and schema
 

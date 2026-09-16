@@ -1,39 +1,13 @@
 # MAUI / Android project facts
 
-Populate only for an applicable MAUI Android project. Keep build/deploy/device
-procedures in the `maui-android` skill; activation belongs in PROJECT_BRIEF.
+**Inactive for this application.** The solution contains web, library and console
+projects only. No `UseMaui`, Android target framework, application package ID,
+Android manifest or device deployment configuration was found.
 
-## Projects and Android target
+The supplied [MAUI adapter](../../../.agents/skills/maui-android/SKILL.md) and optional
+toolchain remain available for future explicit Android work. Installed workloads
+and ignored scratch projects do not establish an Android application. No device
+build/deploy acceptance is required for current application work.
 
-| Fact | Project-specific value |
-| --- | --- |
-| MAUI projects | [TODO: actual project paths] |
-| Android target framework | [TODO: actual TFM] |
-| API / minimum OS / architecture | [TODO: project values and supported ABIs] |
-| Package/application IDs | [TODO: identifiers by configuration] |
-| Application entry points | [TODO: startup, activity and initial navigation] |
-
-## Canonical build / run targets
-
-- **Build:** [TODO: project, TFM, configuration and required options.]
-- **Run/deploy:** [TODO: supported target, artifact and deployment method.]
-- **Tests:** [TODO: shared logic tests and required device scenarios.]
-
-## Device assumptions
-
-[TODO: selection criteria, supported runtime/API/ABI, authorization and connection
-requirements. Discover current devices before device-dependent work.]
-
-## Deployment-specific information
-
-- **Artifact/package/activity:** [TODO: actual build/manifest values.]
-- **Services/ports:** [TODO: backend and forwarding requirements.]
-- **Test data:** [TODO: preservation/reset implications.]
-- **Development signing:** [TODO: setup references; no secrets.]
-
-## Optional tooling configuration
-
-- **DevFlow:** [TODO: intentional opt-in, connection and app instrumentation.]
-- **Emulator:** [TODO: configured AVD/system image, if enabled.]
-- **Source debugger compatibility:** [TODO: actual runtime/transport evidence;
-  desktop CoreCLR acceptance does not establish Android compatibility.]
+Activation belongs in [PROJECT_BRIEF](../PROJECT_BRIEF.md); setup/removal remains
+owned by the [tooling guide](../../tooling.md).
