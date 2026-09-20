@@ -54,6 +54,4 @@ Tooling installation and relocation remain owned by [tooling](../tooling.md).
 
 - Dataset provenance/licensing and expected backup policy for saved progress.
 - Whether accounts, cloud backup or unattended synchronization are future goals.
-- Confirmed released baseline and intended next product version; see
-  [RELEASES](RELEASES.md).
 - Portable setup for the extraction utility's external dependencies.

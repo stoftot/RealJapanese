@@ -114,6 +114,8 @@ practice bases select chunks, shuffle, check normalized input and manage retries
 ### Data maintenance
 
 Duplicate cleanup deduplicates words, assigns replacement IDs and remaps progress.
+It supports legacy saves only and refuses to run if the unified `Progress.json`
+exists, preventing catalog rewrites that would invalidate current progress.
 Kanji extraction reads verbs/adjectives/words, builds relations, asks a local model
 to fill new records and writes generated datasets. These utilities are not used by
 the web or Android runtime.

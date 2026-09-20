@@ -2,22 +2,25 @@
 
 This is the canonical release policy. Actual records live in [releases/](../../releases/).
 Release notes describe completed, sufficiently validated, version-worthy outcomes;
-they are not task logs. Publishing, tagging, GitHub releases, and artifact upload
-are outside V2.
+keep them short, simple and user-facing. Technical implementation and validation
+details belong in development documentation. Publishing, tagging, GitHub releases,
+and artifact upload are outside V2.
 
 ## Initial version and adoption
 
-**Initial expected version: `0.1.0`** (retained template default, not a confirmed
-RealJapanese release target; resolve the existing product baseline before using it).
+**Assumed base release: `0.0.0`.** This is the owner-approved starting baseline
+for version tracking, not a claim that `0.0.0` was published.
+**Initial expected version: `0.1.0`.**
 Inspect actual project history during adoption. Do not infer released versions
 from a template/specification generation label or invent a historical baseline.
 
 - A fresh copy may have no release records; `releases/.gitkeep` retains the directory.
 - On the first completed, validated, version-worthy change, create the initial
   expected version with `released: false`, `release_date: null`, and
-  `previous_release: null`. Do not fabricate a released baseline.
+  `previous_release: "0.0.0"`, using the assumed baseline above. Do not create a
+  published release record for that assumption.
 - Before any release has happened, accumulate further outcomes in that initial
-  pending version, rather than incrementing per task against an invented baseline.
+  pending version, rather than incrementing per task.
   The owner may change the initial target; rename the same record and preserve notes.
 - When copying the template for a new product, omit template release records and
   choose that product's initial expected version here.
@@ -27,15 +30,10 @@ from a template/specification generation label or invent a historical baseline.
   Record a known external baseline here if not represented in local records;
   if evidence conflicts or is unknown, resolve that before assigning a next version.
 
-**External released baseline:** Unknown. The existing repository contains
-application history, but no local tags, changelog, product version properties or
-actual release records were found during adoption. Package and target-framework
-versions are not product release evidence. Do not infer a released baseline or
-assign a next version until the owner supplies confirmation.
-
-Context initialization and local environment repair document/restore the existing
-setup; they do not establish a product release. No release record is created for
-this adoption, and the retained initial default remains provisional.
+Use the assumed `0.0.0` baseline until a record is marked `released: true`.
+Thereafter, use the latest released version. Keep updating the same pending
+record; create another only after the current one has been marked released.
+Package and target-framework versions do not establish a product release baseline.
 
 ## Invariants and schema
 
@@ -46,7 +44,8 @@ version-worthy work or just after a release. Every actual record has:
 - A quoted three-part version with nonnegative integers and no leading zeros.
 - `released`: YAML boolean; `release_date`: `null` while pending, otherwise an
   ISO `YYYY-MM-DD` date; `previous_release`: quoted latest confirmed released
-  version, or `null` when none exists. It never points to an abandoned pending version.
+  version, or the assumed `"0.0.0"` baseline before the first release. It never
+  points to an abandoned pending version.
 - Human-readable outcome notes under applicable Added, Changed, Fixed, Removed,
   and Notes headings; omit empty sections.
 
@@ -93,23 +92,24 @@ The [implementation skill](../../.agents/skills/implement-change/SKILL.md) invok
 this procedure only after the change is complete enough and validated:
 
 1. Read all actual release frontmatter, locate the most recent confirmed released
-   version (compare version integers, not lexical filenames), and find the pending
-   record. Exclude `.gitkeep`. If multiple pending records, mismatched fields, or
+   version (compare version integers, not lexical filenames), or use the assumed
+   `0.0.0` baseline if none exists, and find the pending record. Exclude `.gitkeep`.
+   If multiple pending records, mismatched fields, or
    contradictory baselines exist, reconcile from evidence while preserving notes;
    do not add another record or guess release history.
 2. Classify the new outcome using the table. A non-worthy change adds no note/bump.
 3. With a released baseline, calculate the new candidate from that baseline.
    Determine the already-required bump from the pending version and its notes.
    Use the highest level required by ALL accumulated outcomes: never downgrade
-   or repeatedly bump from the pending version. Without a baseline use initial
-   behavior above. If the pending version is inconsistent with policy, resolve it
+   or repeatedly bump from the pending version. Before the first release, use the
+   initial expected version above. If the pending version is inconsistent with policy, resolve it
    from evidence before changing it.
 4. Create a pending file if absent. If escalating, rename/update that same pending
    record, preserving all accumulated notes. Check destination collisions first;
    never overwrite a released record. Leave no abandoned intermediate file.
 5. Keep filename, H1, frontmatter version, and previous released baseline consistent.
-   Add concise user/developer-facing outcomes, grouped and deduplicated. Mention
-   material validation limitations without turning notes into execution transcripts.
+   Add concise user-facing outcomes, grouped and deduplicated. Keep technical
+   details and validation reports in the development documentation.
 6. Re-read the directory: at most one pending record, correct version/baseline,
    `release_date: null`, and every previously accumulated outcome preserved.
 

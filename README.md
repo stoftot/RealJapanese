@@ -11,6 +11,7 @@ applying changes.
 
 Start with the [project map](docs/ai/PROJECT_MAP.md) for code navigation and the
 [project brief](docs/ai/PROJECT_BRIEF.md) for implemented scope and unknowns.
+Upcoming changes are listed in the [0.1.0 release notes](releases/0.1.0.md).
 
 ## Build and run
 
@@ -34,8 +35,7 @@ regression suite for persistence and local transfer.
 ## Development guidance and optional tools
 
 [AGENTS.md](AGENTS.md) and the [AI development guide](docs/ai/README.md) define
-workflows and context ownership. [RELEASES](docs/ai/RELEASES.md) owns release policy;
-a confirmed product release baseline has not been established.
+workflows and context ownership. [RELEASES](docs/ai/RELEASES.md) owns release policy.
 
 The retained tooling template supports core MCP tools, .NET/Rider/debugging,
 Playwright/Chromium and MAUI/Android workflows.

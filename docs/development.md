@@ -124,12 +124,16 @@ Android Debug and ARM64 Release builds have passed. The Debug APK above includes
 both ARM64 and x64 support; the Release APK is under
 `.tooling/android-artifacts/bin/RealJapanese.Mobile/release_android-arm64/`.
 Both use local development signing unless release keys are explicitly configured.
-Device checks have covered startup and keyboard/navigation visibility in a
-temporary test installation. Broader study interaction and progress persistence
-still need device coverage.
+Device checks have covered startup, keyboard/navigation visibility, and two-way
+`RJLAN002` Wi-Fi sync with preview/apply and matching saved progress in a temporary
+test installation. StorageChecks covers restart persistence and recovery. Broader
+study interaction remains outside that coverage; the final pairing-free protocol
+has not been retested in an Android Release build.
 
 ## Data-maintenance utilities
 
 `CheckDataForDuplicates` and `Extract kanji` can rewrite datasets. They are not
 read-only checks. Extraction also depends on external projects and a local model
 configuration outside this repository.
+The duplicate-cleanup utility stops without changes if `Progress.json` exists;
+it only knows how to remap the older per-dataset save files.
