@@ -125,10 +125,13 @@ both ARM64 and x64 support; the Release APK is under
 `.tooling/android-artifacts/bin/RealJapanese.Mobile/release_android-arm64/`.
 Both use local development signing unless release keys are explicitly configured.
 Device checks have covered startup, keyboard/navigation visibility, and two-way
-`RJLAN002` Wi-Fi sync with preview/apply and matching saved progress in a temporary
-test installation. StorageChecks covers restart persistence and recovery. Broader
-study interaction remains outside that coverage; the final pairing-free protocol
-has not been retested in an Android Release build.
+`RJLAN003` Wi-Fi sync in both directions using Automatic discovery and Manual
+address entry. Both modes were exercised with matching-code confirmation,
+preview/apply and matching saved progress in a temporary test installation;
+cancellation and rejected codes were also checked. StorageChecks covers restart
+persistence, recovery, tampered records and replay rejection. Broader study
+interaction remains outside that coverage. Android Release compilation is checked
+separately; physical-device UI checks use the Debug test package.
 
 ## Data-maintenance utilities
 

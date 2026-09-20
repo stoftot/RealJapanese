@@ -82,10 +82,10 @@ not touch the private progress root.
 
 1. The sharing app freezes its current progress snapshot and listens on a temporary
    random TCP port for at most five minutes.
-2. The receiving app connects with a displayed IPv4 address and port. It sends the
-   fixed empty `RJLAN002` fetch request; the sender returns one bounded framed
-   snapshot reply of at most 4 MiB, then stops sharing after the first successful
-   fetch.
+2. Automatic mode announces/finds the endpoint with bounded local UDP multicast;
+   Manual enters its IPv4 address and port. Both use the same `RJLAN003` exchange:
+   ephemeral committed P-256 keys, matching six-digit comparison on both screens,
+   and explicit approval at both ends before sending a snapshot of at most 4 MiB.
 3. The receiver rejects unknown schema/IDs or any catalog whose raw-file SHA-256
    differs, then previews `MergeKeepLocal`, `MergeUseIncoming` or `Replace` before
    writing. `MergeKeepLocal` is the default.
@@ -98,11 +98,17 @@ addresses; hostnames and other address forms are rejected. The listener is dispo
 on success, cancel, page navigation or expiry. Transfer code has no arbitrary-path
 or remote-write API. It does not change firewall rules or configure router forwarding.
 
-The transport has no pairing secret, encryption or sender authentication. Anyone
-on the LAN who knows the displayed address and port can fetch the snapshot while
-sharing is active, and a network peer can observe, alter or substitute traffic.
-The security boundary is therefore a trusted local network plus the receiver's
-strict validation and user-reviewed preview, rather than transport authentication.
+Directional HMAC-SHA256 records authenticate the confirmed connection and detect
+tampering/replay; contents remain unencrypted. Names and discovery addresses are
+untrusted hints. Both screens must be compared correctly; discovery alone grants
+no trust. A short comparison has a finite guessing risk, bounded by five attempts
+per share. See [protocol details](../local-sync-protocol.md) for framing, derivation,
+timeouts, disposal and acknowledgement ambiguity. The sharing session ends once
+confirmed delivery starts, even if its receipt is lost.
+
+`ISyncNetworkEnvironment` supplies display names and discovery leases. Android
+holds a Wi-Fi multicast lock while announcing/finding; desktop needs no lease.
+The shared page releases these resources on mode changes, completion and navigation.
 
 ### Vocabulary selection and practice
 
@@ -139,8 +145,8 @@ external projects, model directory and `LLAMA_SERVER_PATH` form a separate local
 integration boundary.
 
 Web and Android Debug builds pass. Browser and physical Android checks exercise
-`RJLAN002` two-way Wi-Fi transfer using only IP and port, preview/apply, and matching
-saved selections. StorageChecks covers conflict resolution, restart recovery and
-malformed frames. Device checks use disposable progress and a temporary app identity
+`RJLAN003` automatic two-way Wi-Fi discovery/pairing, preview/apply, and matching
+saved selections. StorageChecks covers conflict resolution, restart recovery,
+approval gating, malformed frames, tampering and replay. Device checks use disposable progress and a temporary app identity
 to preserve the installed app, whose signing key differs from the local development
 key. Broader practice/device coverage remains outside these sync checks.

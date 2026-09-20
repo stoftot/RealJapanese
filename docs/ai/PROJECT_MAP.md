@@ -61,7 +61,9 @@ No test-framework project, CI pipeline or automated browser/device suite was fou
 | Shared practice lifecycle | `RealJapanese/RealJapanese.UI/Components/Shared/PracticeBase.cs`, `PracticeShell.razor` |
 | Local sync UI | `RealJapanese/RealJapanese.UI/Components/Pages/Sync.razor` |
 | Storage paths and persistence | `RealJapanese/Repositories/RepositoryPaths.cs`, `Bases/WordDataBase.cs`, `Sync/ProgressStore.cs` |
-| Snapshot validation and local transport | `RealJapanese/Repositories/Sync/ProgressSyncService.cs`, `LocalProgressTransfer.cs` |
+| Snapshot validation and paired local transport | `RealJapanese/Repositories/Sync/ProgressSyncService.cs`, `LocalProgressTransfer.cs`, `PairingProtocol.cs` |
+| Local sync discovery and host network lifecycle | `RealJapanese/Repositories/Sync/LocalSyncDiscovery.cs`, `ISyncNetworkEnvironment.cs` |
+| Local sync user/protocol documentation | `docs/local-sync.md`, `docs/local-sync-protocol.md` |
 | Serialization and conjugation | `RealJapanese/DataLoaders/JsonLoader.cs`, `JsonSaver.cs`, `Models/` |
 | Storage regression entry point | `RealJapanese/StorageChecks/Program.cs` |
 
@@ -73,8 +75,11 @@ No test-framework project, CI pipeline or automated browser/device suite was fou
   independent progress load; construction does not rewrite the catalog.
 - Packaged mobile catalog → app-private `Catalog/`; progress remains under the
   separate app-private `Progress/` tree.
-- `/sync` → frozen snapshot → one successful framed private-network fetch →
-  validated merge preview → atomic progress import with one-level recovery.
+- `/sync` automatic mode → app-specific UDP multicast discovery → selected private
+  IPv4 endpoint; manual mode → entered private IPv4 endpoint. Both continue through
+  ephemeral paired transport → matching six-digit confirmation on both devices →
+  one integrity-checked snapshot → validated merge preview → atomic progress import
+  with one-level recovery.
 - Extraction → source vocabulary → kanji relations → local model enrichment → JSON.
 
 [ARCHITECTURE](ARCHITECTURE.md) owns boundaries and state implications;

@@ -100,7 +100,7 @@ state as one-level recovery.
 
 ## Plain one-fetch sync on a trusted local network
 
-- **Status:** Accepted
+- **Status:** Superseded by "Discovery with temporary code-confirmed integrity protection"
 - **Date:** 2026-09-16
 
 ### Context
@@ -134,3 +134,35 @@ arbitrary-path operation.
 - Two-way reconciliation, merge modes, atomic import and one-level recovery are
   unchanged.
 - There is no discovery service, cloud copy, account or unattended background sync.
+
+## Discovery with temporary code-confirmed integrity protection
+
+- **Status:** Accepted
+- **Date:** 2026-09-20
+
+### Context
+
+The user wants nearby-device selection with manual address entry as a fallback,
+and the same matching-code confirmation in both modes. Preventing undetected
+changes matters; hiding the study progress from network observers does not.
+
+### Decision
+
+Offer an Automatic/Manual switch on the shared sync page. Automatic uses bounded
+app-specific UDP multicast discovery with untrusted device labels. Both modes
+establish temporary `RJLAN003` sessions, compare a six-digit code derived from a
+committed ephemeral key exchange, and require approval on both screens. Derived
+directional keys authenticate cleartext records and bind them to that session.
+The [protocol document](../local-sync-protocol.md) owns exact framing and limits.
+
+### Consequences
+
+- Either host can announce/share or find/receive. Manual mode changes only endpoint
+  selection; it never bypasses pairing or integrity checks.
+- Pairing lasts for the current transfer, with no stored device trust or accounts.
+- Contents remain readable to network observers. Correct comparison is essential;
+  finite code guessing and denial of service remain limitations.
+- Discovery permissions, guest isolation and PC firewall rules can affect discovery
+  or connectivity; the app does not alter firewall/router settings.
+- Existing snapshot validation, local preview/apply and recovery remain mandatory.
+- Both installations need this protocol version; earlier transfers are incompatible.
