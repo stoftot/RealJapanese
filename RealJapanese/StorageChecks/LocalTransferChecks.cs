@@ -15,6 +15,27 @@ internal static class LocalTransferChecks
         VerifyTamperingAndReplayAsync().GetAwaiter().GetResult();
         VerifyIndependentPairingsAsync().GetAwaiter().GetResult();
         VerifyModifiedCommitmentAsync().GetAwaiter().GetResult();
+        VerifyAttemptLimitAsync().GetAwaiter().GetResult();
+    }
+
+    private static async Task VerifyAttemptLimitAsync()
+    {
+        await using var sender = LocalProgressTransfer.Start([]);
+        using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+        for (var attempt = 0; attempt < 5; attempt++)
+        {
+            using var client = new TcpClient(AddressFamily.InterNetwork);
+            await client.ConnectAsync(IPAddress.Loopback, sender.Port, timeout.Token);
+            var invalidCommitment = new byte[13];
+            "RJLAN003"u8.CopyTo(invalidCommitment);
+            invalidCommitment[8] = 1; // Empty commitment is malformed; length must be 32.
+            await client.GetStream().WriteAsync(invalidCommitment, timeout.Token);
+            Assert(await client.GetStream().ReadAsync(new byte[1], timeout.Token) == 0,
+                "A malformed pairing attempt was not closed.");
+        }
+        await WaitInactiveAsync(sender);
+        Assert(!sender.IsActive && !sender.Succeeded && sender.LastError?.Contains("Too many") == true,
+            "Repeated failed handshakes did not end the bounded sharing session.");
     }
 
     private static async Task VerifyRoundTripAndApprovalsAsync()

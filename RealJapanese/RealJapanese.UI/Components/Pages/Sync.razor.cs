@@ -1,4 +1,5 @@
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Components;
 using Repositories.Sync;
 
@@ -7,54 +8,156 @@ namespace RealJapanese.Components.Pages;
 public partial class Sync
 {
     private LocalProgressTransferSession? sharing;
+    private LocalProgressReceiveSession? receiving;
+    private IAsyncDisposable? advertisement;
+    private IDisposable? advertisingLease;
     private readonly CancellationTokenSource lifetime = new();
+    private CancellationTokenSource? operation;
     private Task? refreshTask;
+    private Task? operationTask;
+    private bool automatic = true;
+    private bool searched;
+    private IReadOnlyList<DiscoveredSyncDevice> devices = [];
     private string address = "";
     private int port;
     private bool busy;
     private string? message;
     private string? error;
+    private string? discoveryError;
     private byte[]? received;
     private ImportMode mode = ImportMode.MergeKeepLocal;
     private ImportPreview? preview;
+    private PairingApproval? CurrentPairing => receiving?.Pairing ?? sharing?.Pairing;
 
     protected override void OnInitialized() => refreshTask = RefreshStatus();
 
     private async Task RefreshStatus()
     {
-        using var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+        using var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(300));
         try
         {
             while (await timer.WaitForNextTickAsync(lifetime.Token))
-                if (sharing is not null) await InvokeAsync(StateHasChanged);
+                await InvokeAsync(async () =>
+                {
+                    if (sharing is { IsActive: false }) await StopAdvertising();
+                    StateHasChanged();
+                });
         }
         catch (OperationCanceledException) { }
     }
 
+    private Task SetAutomatic(bool value) => Run(async () =>
+    {
+        automatic = value;
+        devices = [];
+        searched = false;
+        await StopAdvertising();
+        if (automatic && sharing is { IsActive: true }) TryAdvertise();
+    });
+
     private Task StartSharing() => Run(async () =>
     {
         await StopSharing();
+        CancelPreview();
         sharing = LocalProgressTransfer.Start(ProgressSync.ExportSnapshot());
         if (!sharing.Addresses.Any(value => !value.StartsWith("127.")))
         {
             await StopSharing();
             throw new InvalidOperationException("No private network address was found. Connect this device to Wi-Fi and try again.");
         }
+        if (automatic) TryAdvertise();
     });
+
+    private void TryAdvertise()
+    {
+        discoveryError = null;
+        try
+        {
+            advertisingLease = NetworkEnvironment.EnableDiscovery();
+            advertisement = LocalSyncDiscovery.Advertise(NetworkEnvironment.DeviceName, sharing!.Port);
+        }
+        catch (Exception exception) when (exception is SocketException or InvalidOperationException or UnauthorizedAccessException)
+        {
+            advertisingLease?.Dispose();
+            advertisingLease = null;
+            discoveryError = "This device could not announce itself. Switch to Manual to connect using its address and port.";
+        }
+    }
+
+    private async Task StopAdvertising()
+    {
+        var previous = advertisement;
+        advertisement = null;
+        try { if (previous is not null) await previous.DisposeAsync(); }
+        finally { advertisingLease?.Dispose(); advertisingLease = null; }
+    }
 
     private async Task StopSharing()
     {
-        if (sharing is not null) await sharing.DisposeAsync();
+        var previous = sharing;
         sharing = null;
+        try { await StopAdvertising(); }
+        finally
+        {
+            // Discovery failures must never leave the TCP share alive on navigation/stop.
+            if (previous is not null) await previous.DisposeAsync();
+            discoveryError = null;
+        }
     }
 
-    private Task Receive() => Run(async () =>
+    private Task FindDevices() => StartOperation(async token =>
     {
-        CancelPreview();
-        received = await LocalProgressTransfer.ReceiveAsync(address.Trim(), port, lifetime.Token);
-        preview = ProgressSync.PreviewSnapshot(received, mode);
-        message = "Progress received. Review the preview below; your progress has not changed.";
+        devices = [];
+        searched = false;
+        using var lease = NetworkEnvironment.EnableDiscovery();
+        devices = await LocalSyncDiscovery.FindAsync(token);
+        // Do not offer this page's own active advertisement as a receiving target.
+        if (sharing is not null)
+            devices = devices.Where(device => device.Port != sharing.Port || !sharing.Addresses.Contains(device.Address)).ToArray();
+        searched = true;
     });
+
+    private Task SelectDevice(DiscoveredSyncDevice device)
+    {
+        address = device.Address;
+        port = device.Port;
+        return Receive();
+    }
+
+    private Task Receive() => StartOperation(async token =>
+    {
+        await StopSharing();
+        CancelPreview();
+        receiving = await LocalProgressTransfer.ConnectAsync(address.Trim(), port, token);
+        StateHasChanged();
+        try
+        {
+            received = await receiving.Completion;
+            preview = ProgressSync.PreviewSnapshot(received, mode);
+            message = "Pairing and integrity checks passed. Review the preview; your progress has not changed.";
+        }
+        catch { CancelPreview(); throw; }
+        finally
+        {
+            await receiving.DisposeAsync();
+            receiving = null;
+        }
+    });
+
+    private Task StartOperation(Func<CancellationToken, Task> action)
+    {
+        if (busy) return Task.CompletedTask;
+        operation = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
+        var current = operation;
+        operationTask = Run(async () =>
+        {
+            try { await action(current.Token); }
+            finally { operation = null; current.Dispose(); }
+        });
+        return operationTask;
+    }
+
+    private void CancelConnection() => operation?.Cancel();
 
     private Task RefreshPreview() => Run(() =>
     {
@@ -81,11 +184,7 @@ public partial class Sync
         return Task.CompletedTask;
     });
 
-    private void CancelPreview()
-    {
-        received = null;
-        preview = null;
-    }
+    private void CancelPreview() { received = null; preview = null; }
 
     private async Task Run(Func<Task> action)
     {
@@ -94,20 +193,25 @@ public partial class Sync
         message = null;
         try { await action(); }
         catch (Exception exception) when (exception is SocketException or TimeoutException)
-        { error = "Could not connect. Check the address and port, keep both apps open, and use the same private Wi-Fi. Try sharing from the phone if the PC firewall blocks sharing."; }
+        { error = "Connection ended or timed out. Keep both apps open on the same Wi-Fi and confirm matching codes on both screens. If discovery fails, try Manual."; }
         catch (ArgumentException)
         { error = "Enter the private IPv4 address and port (1 to 65535) shown on the other device."; }
         catch (Exception exception) when (exception is InvalidDataException or InvalidOperationException)
         { error = exception.Message; }
+        catch (CryptographicException)
+        { error = "Pairing verification failed. Nothing was imported. Start again and compare both screens."; }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
-        { error = "Could not read or save progress. Check available storage and access, then try again. No import was applied."; }
-        catch (OperationCanceledException) when (lifetime.IsCancellationRequested) { }
+        { error = "The transfer or save could not complete. Check the connection and storage, then try again."; }
+        catch (OperationCanceledException)
+        { if (!lifetime.IsCancellationRequested) message = "Connection cancelled. No progress was imported."; }
         finally { busy = false; }
     }
 
     public async ValueTask DisposeAsync()
     {
         lifetime.Cancel();
+        operation?.Cancel();
+        if (operationTask is not null) await operationTask;
         await StopSharing();
         if (refreshTask is not null) await refreshTask;
         lifetime.Dispose();

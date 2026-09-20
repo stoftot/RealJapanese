@@ -5,3 +5,18 @@
 .sync-panel label { display: block; margin-top: .8rem; margin-bottom: .3rem; font-weight: 600; }
 .sync-panel dd { margin-bottom: .8rem; }
 .sync-panel th, .sync-panel td { white-space: nowrap; }
+.connection-toggle { border: 0; margin: 1rem 0; padding: 0; }
+.mode-switch { position: relative; display: grid; grid-template-columns: 1fr 1fr; max-width: 24rem; padding: .25rem; border: 1px solid #cad2df; border-radius: 2rem; background: #e9edf3; }
+.switch-thumb { position: absolute; top: .25rem; bottom: .25rem; left: .25rem; width: calc(50% - .25rem); border-radius: 2rem; background: #164f8d; transition: transform .2s ease; }
+.manual .switch-thumb { transform: translateX(100%); }
+.mode-switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.mode-switch label { position: relative; margin: 0; padding: .65rem 1rem; text-align: center; font-weight: 600; cursor: pointer; border-radius: 2rem; }
+.mode-switch input:checked + label { color: white; }
+.mode-switch input:focus-visible + label { outline: 3px solid #d68300; outline-offset: 2px; }
+.connection-toggle:disabled { opacity: .65; }
+.device-list { list-style: none; padding: 0; margin: 1rem 0 0; }
+.device-choice { display: flex; flex-direction: column; gap: .25rem; width: 100%; text-align: left; padding: .8rem 1rem; margin: .5rem 0; border: 1px solid #bac9da; border-radius: .5rem; background: #f5f8fc; color: #173958; }
+.device-choice span { font-size: .9rem; }
+.pairing-panel { border: 2px solid #164f8d; }
+.pairing-code { font-size: clamp(2rem, 8vw, 3rem); font-weight: 700; letter-spacing: .15em; font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .switch-thumb { transition: none; } }

@@ -2,16 +2,29 @@
 @using Repositories.Sync
 @implements IAsyncDisposable
 @inject ProgressSyncService ProgressSync
+@inject ISyncNetworkEnvironment NetworkEnvironment
 
 <PageTitle>Sync progress</PageTitle>
 
 <div class="sync-page">
     <a href="">← Home</a>
     <h1>Sync progress</h1>
+    <fieldset class="connection-toggle" disabled="@(busy || CurrentPairing is not null)">
+        <legend class="visually-hidden">Connection method</legend>
+        <div class="mode-switch @(automatic ? "automatic" : "manual")">
+            <span class="switch-thumb" aria-hidden="true"></span>
+            <input id="connection-automatic" type="radio" name="connection-method" checked="@automatic" @onchange="() => SetAutomatic(true)" />
+            <label for="connection-automatic">Automatic</label>
+            <input id="connection-manual" type="radio" name="connection-method" checked="@(!automatic)" @onchange="() => SetAutomatic(false)" />
+            <label for="connection-manual">Manual</label>
+        </div>
+    </fieldset>
     <p>Open this page on both devices and connect them to the same private Wi-Fi network.
         Share from one device, then receive and review on the other.</p>
     <p class="text-muted">Only study progress is transferred. Nothing is applied until you confirm the preview.
         Sharing stops after one transfer, after five minutes, or when you leave this page. Keep the phone awake.</p>
+    <p class="text-muted">Both modes require matching codes on both screens. Transfers are checked for changes,
+        but their contents are not encrypted.</p>
 
     @if (message is not null)
     {
@@ -22,37 +35,84 @@
         <p role="alert" class="alert alert-danger">@error</p>
     }
 
+    @if (CurrentPairing is { } pairing)
+    {
+        <section @key="pairing" class="sync-panel pairing-panel" aria-labelledby="pairing-title" aria-live="polite">
+            <h2 id="pairing-title">Compare the codes</h2>
+            <p>Check the code on the other device's screen. Only confirm if all six digits match.</p>
+            <p class="pairing-code" aria-label="Pairing code">@pairing.Code</p>
+            @if (pairing.IsConfirmed)
+            {
+                <p>Confirmed here. Waiting for the other device…</p>
+            }
+            else
+            {
+                <button class="btn btn-primary" @onclick="() => pairing.Confirm(true)">Codes match</button>
+                <button class="btn btn-outline-danger ms-2" @onclick="() => pairing.Confirm(false)">Codes do not match</button>
+            }
+            <p class="text-muted mt-3">Confirm on both devices within 90 seconds. No progress is sent before confirmation.</p>
+        </section>
+    }
+
     <section class="sync-panel" aria-labelledby="share-title">
         <h2 id="share-title">1. Share from this device</h2>
         <p>Share a copy of the progress saved right now. On a PC, the local web app performs the connection.</p>
-        <p class="text-muted">While sharing is active, anyone on your local network with this address and port
-            can fetch this copy. Only share on a network you trust.</p>
         @if (sharing is { IsActive: true })
         {
+            @if (automatic)
+            {
+                <p>Available as <strong>@NetworkEnvironment.DeviceName</strong>. Choose Find devices on the other device.</p>
+                @if (discoveryError is not null) { <p role="alert" class="alert alert-warning">@discoveryError</p> }
+            }
+            else
+            {
             <dl>
                 <dt>Device address</dt>
                 <dd>@string.Join(" or ", sharing.Addresses.Where(address => !address.StartsWith("127.")))</dd>
                 <dt>Port</dt><dd>@sharing.Port</dd>
             </dl>
-            <p>Enter these details on the receiving device. Sharing expires at @sharing.ExpiresUtc.ToLocalTime().ToString("HH:mm").</p>
+            <p>Enter these details on the receiving device.</p>
+            }
+            <p>Sharing expires at @sharing.ExpiresUtc.ToLocalTime().ToString("HH:mm").</p>
             <button class="btn btn-outline-secondary" @onclick="StopSharing">Stop sharing</button>
         }
         else
         {
-            @if (sharing is not null) { <p>Sharing has ended. Start again to share another copy.</p> }
+            @if (sharing is not null) { <p role="status">@(sharing.Succeeded ? "Progress sent. Review and apply it on the other device." : "Sharing has ended. Start again to share another copy.")</p> }
             <button class="btn btn-primary" disabled="@busy" @onclick="StartSharing">Share progress</button>
         }
+        @if (sharing?.LastError is not null) { <p role="status" class="mt-2">@sharing.LastError</p> }
     </section>
 
     <section class="sync-panel" aria-labelledby="receive-title">
         <h2 id="receive-title">2. Receive on this device</h2>
-        <fieldset disabled="@busy">
+        <fieldset disabled="@(busy || CurrentPairing is not null)">
+            @if (automatic)
+            {
+                <button class="btn btn-primary" @onclick="FindDevices">@(busy && receiving is null ? "Searching…" : "Find devices")</button>
+                @if (searched && devices.Count == 0)
+                {
+                    <p class="mt-3">No sharing devices found. Start sharing on the other device, or try Manual if your network blocks discovery.</p>
+                }
+                <ul class="device-list">
+                    @foreach (var device in devices)
+                    {
+                        <li><button class="device-choice" @onclick="() => SelectDevice(device)">
+                            <strong>@device.Name</strong><span>@device.Address · @device.Port</span>
+                        </button></li>
+                    }
+                </ul>
+            }
+            else
+            {
             <label for="sync-address">Other device's address</label>
             <input id="sync-address" class="form-control" placeholder="192.168.1.20" autocomplete="off" @bind="address" />
             <label for="sync-port">Port</label>
             <input id="sync-port" class="form-control" type="number" min="1" max="65535" @bind="port" />
-            <button class="btn btn-primary mt-3" @onclick="Receive">@(busy ? "Receiving…" : "Receive preview")</button>
+            <button class="btn btn-primary mt-3" @onclick="Receive">@(busy ? "Connecting…" : "Connect")</button>
+            }
         </fieldset>
+        @if (operation is not null) { <button class="btn btn-outline-secondary mt-3" @onclick="CancelConnection">Cancel connection</button> }
         <p class="text-muted mt-3">If a connection fails, try sharing from the phone and receiving on the PC.
             Guest Wi-Fi may block connections between devices. No router changes or internet access are needed.</p>
     </section>

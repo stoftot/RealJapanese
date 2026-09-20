@@ -15,6 +15,7 @@ try
     VerifyStableMissingIds(temporaryRoot);
     SyncChecks.Run(catalogRoot, temporaryRoot);
     LocalTransferChecks.Run();
+    LocalDiscoveryChecks.Run();
     VerifyFilesUnchanged(originalSourceFiles);
 
     Console.WriteLine("Storage checks passed.");

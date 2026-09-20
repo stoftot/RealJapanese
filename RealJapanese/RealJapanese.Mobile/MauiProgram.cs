@@ -19,6 +19,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<AdjectiveData>();
         builder.Services.AddSingleton<KanjiData>();
         builder.Services.AddSingleton<Repositories.Sync.ProgressSyncService>();
+        builder.Services.AddSingleton<Repositories.Sync.ISyncNetworkEnvironment, AndroidSyncNetworkEnvironment>();
         builder.Services.AddSingleton<MainPage>();
 #if DEBUG
         builder.Services.AddBlazorWebViewDeveloperTools();
