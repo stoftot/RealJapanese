@@ -8,15 +8,63 @@ internal static class SyncChecks
 {
     public static void Run(string catalogRoot, string temporaryRoot)
     {
+        VerifyRepositoryCategoryChanges(catalogRoot, temporaryRoot);
         VerifyLegacyMigration(catalogRoot, temporaryRoot);
         VerifyAllDatasetsTransferAndRestart(catalogRoot, temporaryRoot);
+        VerifyPreviewModesDoNotMutate(catalogRoot, temporaryRoot);
         VerifyMergePoliciesAndReplace(catalogRoot, temporaryRoot);
         VerifyRecoveryAfterRestart(catalogRoot, temporaryRoot);
+        VerifyRecoveryLifecycle(catalogRoot, temporaryRoot);
         VerifyStalePreview(catalogRoot, temporaryRoot);
         VerifyRejectedSnapshotsDoNotWrite(catalogRoot, temporaryRoot);
         VerifyFailedAtomicWrite(catalogRoot, temporaryRoot);
         VerifyParallelAssignmentsRemainExclusive(catalogRoot, temporaryRoot);
         VerifySeparateOwnersCannotOverwrite(catalogRoot, temporaryRoot);
+    }
+
+    private static void VerifyRepositoryCategoryChanges(string catalogRoot, string temporaryRoot)
+    {
+        var root = NewRoot(temporaryRoot, "repository-categories");
+        var fixture = Open(catalogRoot, root);
+        var moved = fixture.Words.Words.First();
+        var preserved = fixture.Words.Words.Skip(1).First();
+        var preservedVerb = fixture.Verbs.Words.First();
+        fixture.Words.AddToVocab(preserved);
+        fixture.Verbs.AddToTraining(preservedVerb);
+
+        fixture.Words.AddToVocab(moved);
+        Assert(fixture.Words.VocabWordIds.Order().SequenceEqual(new[] { moved.Id, preserved.Id }.Order()),
+            "Adding a known word lost existing word progress.");
+        fixture.Words.AddToTraining(moved);
+        fixture.Words.AddToTraining(moved);
+        Assert(!fixture.Words.VocabWordIds.Contains(moved.Id) && fixture.Words.TrainingWordIds.SequenceEqual([moved.Id]),
+            "Moving a word to training did not remain exclusive and duplicate-free.");
+        fixture.Words.AddToRehearsing(moved);
+        fixture.Words.AddToRehearsing(moved);
+        Assert(!fixture.Words.TrainingWordIds.Contains(moved.Id) && fixture.Words.RehearsingWordIds.SequenceEqual([moved.Id]),
+            "Moving a word to rehearsing did not remain exclusive and duplicate-free.");
+
+        fixture.Words.RemoveFromRehearsing(moved);
+        fixture.Words.AddToVocab(moved);
+        fixture.Words.RemoveFromVocab(moved);
+        fixture.Words.AddToTraining(moved);
+        fixture.Words.RemoveFromTraining(moved);
+        Assert(!fixture.Words.VocabWordIds.Contains(moved.Id) && !fixture.Words.TrainingWordIds.Contains(moved.Id) &&
+            !fixture.Words.RehearsingWordIds.Contains(moved.Id), "Removing a word from each category left progress behind.");
+
+        var beforeRejectedAdd = File.ReadAllBytes(Path.Combine(root, "Progress.json"));
+        var unknown = new Word { Id = int.MaxValue, Japanese = "外", Kana = "そと", English = "outside" };
+        AssertThrows<ArgumentException>(() => fixture.Words.AddToVocab(unknown), "A word outside the catalog was accepted.");
+        Assert(beforeRejectedAdd.SequenceEqual(File.ReadAllBytes(Path.Combine(root, "Progress.json"))),
+            "Rejecting an unknown word changed progress on disk.");
+        Assert(fixture.Words.VocabWordIds.SequenceEqual([preserved.Id]) &&
+            fixture.Verbs.TrainingWordIds.SequenceEqual([preservedVerb.Id]),
+            "Rejecting an unknown word changed other IDs or datasets.");
+
+        var restarted = Open(catalogRoot, root);
+        Assert(restarted.Words.VocabWordIds.SequenceEqual([preserved.Id]) &&
+            restarted.Verbs.TrainingWordIds.SequenceEqual([preservedVerb.Id]),
+            "Repository category changes did not survive restart.");
     }
 
     private static void VerifySeparateOwnersCannotOverwrite(string catalogRoot, string temporaryRoot)
@@ -36,24 +84,97 @@ internal static class SyncChecks
     private static void VerifyLegacyMigration(string catalogRoot, string temporaryRoot)
     {
         var root = NewRoot(temporaryRoot, "legacy");
+        var catalogs = Open(catalogRoot, NewRoot(temporaryRoot, "legacy-catalogs"));
+        var ids = CatalogIds(catalogs);
         var legacyFiles = new Dictionary<string, byte[]>();
-        foreach (var dataset in ProgressStore.DatasetNames)
+        var expected = new Dictionary<string, VocabSaveFile>();
+        for (var index = 0; index < ProgressStore.DatasetNames.Length; index++)
         {
+            var dataset = ProgressStore.DatasetNames[index];
             var folder = Path.Combine(root, dataset);
             Directory.CreateDirectory(folder);
             var path = Path.Combine(folder, "SavedData.json");
-            var bytes = JsonSerializer.SerializeToUtf8Bytes(new[] { new VocabSaveFile() });
+            VocabSaveFile saved;
+            if (dataset == "Kanji/Combined")
+            {
+                saved = new VocabSaveFile { KnownIds = null!, TrainingIds = null!, RehearsingIds = null! };
+                expected[dataset] = new();
+            }
+            else
+            {
+                var datasetIds = ids[dataset];
+                saved = new VocabSaveFile
+                {
+                    KnownIds = [datasetIds[0], datasetIds[0]],
+                    TrainingIds = [datasetIds[0], datasetIds[1], datasetIds[1]],
+                    RehearsingIds = [datasetIds[0], datasetIds[1], datasetIds[2], datasetIds[2]]
+                };
+                expected[dataset] = new VocabSaveFile
+                {
+                    KnownIds = [datasetIds[0]], TrainingIds = [datasetIds[1]], RehearsingIds = [datasetIds[2]]
+                };
+            }
+            var bytes = index % 2 == 0
+                ? JsonSerializer.SerializeToUtf8Bytes(saved)
+                : JsonSerializer.SerializeToUtf8Bytes(new[] { saved });
             File.WriteAllBytes(path, bytes);
             legacyFiles[path] = bytes;
         }
 
         var fixture = Open(catalogRoot, root);
-        var word = fixture.Words.Words.First();
-        fixture.Words.AddToVocab(word);
+        var migrated = Snapshot(fixture);
+        foreach (var dataset in ProgressStore.DatasetNames)
+            AssertSaved(migrated.Data[dataset], expected[dataset], $"Legacy {dataset} progress was not normalized.");
+        fixture.Words.AddToVocab(fixture.Words.Words.First(word => word.Id == expected["Words"].KnownIds[0]));
 
         Assert(File.Exists(Path.Combine(root, "Progress.json")), "Legacy progress was not migrated to the unified store on first change.");
         foreach (var pair in legacyFiles)
             Assert(File.ReadAllBytes(pair.Key).SequenceEqual(pair.Value), $"Legacy file '{pair.Key}' changed during migration.");
+
+        foreach (var path in legacyFiles.Keys)
+            File.WriteAllBytes(path, JsonSerializer.SerializeToUtf8Bytes(new VocabSaveFile()));
+        var restarted = Open(catalogRoot, root);
+        var afterLegacyEdit = Snapshot(restarted);
+        foreach (var dataset in ProgressStore.DatasetNames)
+            AssertSaved(afterLegacyEdit.Data[dataset], expected[dataset],
+                $"Edited legacy {dataset} progress overrode the unified store after restart.");
+    }
+
+    private static void VerifyPreviewModesDoNotMutate(string catalogRoot, string temporaryRoot)
+    {
+        foreach (var mode in Enum.GetValues<ImportMode>())
+        {
+            var localRoot = NewRoot(temporaryRoot, "preview-local-" + mode);
+            var local = Open(catalogRoot, localRoot);
+            var a = local.Words.Words.First();
+            var b = local.Words.Words.Skip(1).First();
+            var c = local.Words.Words.Skip(2).First();
+            local.Words.AddToVocab(a);
+            local.Words.AddToTraining(b);
+
+            var incoming = Open(catalogRoot, NewRoot(temporaryRoot, "preview-incoming-" + mode));
+            incoming.Words.AddToVocab(incoming.Words.Words.First(word => word.Id == b.Id));
+            incoming.Words.AddToRehearsing(incoming.Words.Words.First(word => word.Id == c.Id));
+
+            var progressPath = Path.Combine(localRoot, "Progress.json");
+            var beforeBytes = File.ReadAllBytes(progressPath);
+            var beforeData = CaptureData(local);
+            var exported = incoming.Service.ExportSnapshot();
+            var preview = local.Service.PreviewSnapshot(exported, mode);
+            var words = preview.Summary.Single(summary => summary.Dataset == "Words");
+            var expected = mode switch
+            {
+                ImportMode.MergeKeepLocal => new SyncSummary("Words", 1, 0, 0, 1),
+                ImportMode.MergeUseIncoming => new SyncSummary("Words", 1, 1, 0, 1),
+                _ => new SyncSummary("Words", 1, 1, 1, 1)
+            };
+            Assert(words == expected, $"{mode} preview returned an incorrect exact Words summary.");
+            Assert(preview.Summary.Where(summary => summary.Dataset != "Words")
+                .All(summary => summary.Added == 0 && summary.Changed == 0 && summary.Removed == 0 && summary.Conflicts == 0),
+                $"{mode} preview reported changes in untouched datasets.");
+            Assert(beforeBytes.SequenceEqual(File.ReadAllBytes(progressPath)), $"{mode} preview or export changed progress on disk.");
+            Assert(beforeData.SequenceEqual(CaptureData(local)), $"{mode} preview or export changed live categories.");
+        }
     }
 
     private static void VerifyAllDatasetsTransferAndRestart(string catalogRoot, string temporaryRoot)
@@ -130,6 +251,82 @@ internal static class SyncChecks
         Assert(!restarted.Words.TrainingWordIds.Any(), "Recovery retained imported progress.");
     }
 
+    private static void VerifyRecoveryLifecycle(string catalogRoot, string temporaryRoot)
+    {
+        VerifyOrdinaryEditsPreserveRecovery(catalogRoot, temporaryRoot);
+        VerifySecondImportReplacesRecovery(catalogRoot, temporaryRoot);
+        VerifyMissingAndStaleRecovery(catalogRoot, temporaryRoot);
+    }
+
+    private static void VerifyOrdinaryEditsPreserveRecovery(string catalogRoot, string temporaryRoot)
+    {
+        var root = NewRoot(temporaryRoot, "recovery-edit");
+        var target = Open(catalogRoot, root);
+        var original = target.Words.Words.First();
+        target.Words.AddToVocab(original);
+        var incoming = Open(catalogRoot, NewRoot(temporaryRoot, "recovery-edit-incoming"));
+        var imported = incoming.Words.Words.Skip(1).First();
+        incoming.Words.AddToTraining(imported);
+        target.Service.Apply(target.Service.PreviewSnapshot(incoming.Service.ExportSnapshot(), ImportMode.Replace));
+        target.Words.AddToRehearsing(target.Words.Words.Skip(2).First());
+
+        var restarted = Open(catalogRoot, root);
+        Assert(restarted.Service.HasRecovery, "An ordinary study edit discarded recovery after restart.");
+        restarted.Service.Apply(restarted.Service.PreviewRecovery());
+        Assert(restarted.Words.VocabWordIds.SequenceEqual([original.Id]) &&
+            !restarted.Words.TrainingWordIds.Any() && !restarted.Words.RehearsingWordIds.Any(),
+            "Recovery changed by an ordinary study edit instead of restoring the pre-import state.");
+    }
+
+    private static void VerifySecondImportReplacesRecovery(string catalogRoot, string temporaryRoot)
+    {
+        var root = NewRoot(temporaryRoot, "recovery-replaced");
+        var target = Open(catalogRoot, root);
+        target.Words.AddToVocab(target.Words.Words.First());
+
+        var firstIncoming = Open(catalogRoot, NewRoot(temporaryRoot, "recovery-replaced-first"));
+        var firstImported = firstIncoming.Words.Words.Skip(1).First();
+        firstIncoming.Words.AddToTraining(firstImported);
+        target.Service.Apply(target.Service.PreviewSnapshot(firstIncoming.Service.ExportSnapshot(), ImportMode.Replace));
+
+        var secondIncoming = Open(catalogRoot, NewRoot(temporaryRoot, "recovery-replaced-second"));
+        var secondImported = secondIncoming.Words.Words.Skip(2).First();
+        secondIncoming.Words.AddToRehearsing(secondImported);
+        target.Service.Apply(target.Service.PreviewSnapshot(secondIncoming.Service.ExportSnapshot(), ImportMode.Replace));
+
+        var restarted = Open(catalogRoot, root);
+        restarted.Service.Apply(restarted.Service.PreviewRecovery());
+        Assert(restarted.Words.TrainingWordIds.SequenceEqual([firstImported.Id]) &&
+            !restarted.Words.VocabWordIds.Any() && !restarted.Words.RehearsingWordIds.Any(),
+            "A second import did not replace recovery with its immediate pre-import state.");
+    }
+
+    private static void VerifyMissingAndStaleRecovery(string catalogRoot, string temporaryRoot)
+    {
+        var withoutRecovery = Open(catalogRoot, NewRoot(temporaryRoot, "recovery-missing"));
+        withoutRecovery.Words.AddToVocab(withoutRecovery.Words.Words.First());
+        AssertThrows<InvalidOperationException>(() => withoutRecovery.Service.PreviewRecovery(),
+            "Recovery preview succeeded without an import backup.");
+
+        var root = NewRoot(temporaryRoot, "recovery-stale");
+        var target = Open(catalogRoot, root);
+        var original = target.Words.Words.First();
+        target.Words.AddToVocab(original);
+        var incoming = Open(catalogRoot, NewRoot(temporaryRoot, "recovery-stale-incoming"));
+        incoming.Words.AddToTraining(incoming.Words.Words.Skip(1).First());
+        target.Service.Apply(target.Service.PreviewSnapshot(incoming.Service.ExportSnapshot(), ImportMode.Replace));
+        var recovery = target.Service.PreviewRecovery();
+        var subsequentEdit = target.Words.Words.Skip(2).First();
+        target.Words.AddToRehearsing(subsequentEdit);
+        var afterEdit = File.ReadAllBytes(Path.Combine(root, "Progress.json"));
+
+        AssertThrows<InvalidOperationException>(() => target.Service.Apply(recovery),
+            "A stale recovery preview overwrote a subsequent study edit.");
+        Assert(afterEdit.SequenceEqual(File.ReadAllBytes(Path.Combine(root, "Progress.json"))) &&
+            target.Words.RehearsingWordIds.SequenceEqual([subsequentEdit.Id]),
+            "Rejecting a stale recovery preview changed the subsequent study edit.");
+    }
+
     private static void VerifyStalePreview(string catalogRoot, string temporaryRoot)
     {
         var target = Open(catalogRoot, NewRoot(temporaryRoot, "stale-target"));
@@ -147,6 +344,12 @@ internal static class SyncChecks
     {
         var source = Open(catalogRoot, NewRoot(temporaryRoot, "invalid-source"));
         var valid = source.Service.ExportSnapshot();
+        var validWordId = source.Words.Words.First().Id;
+        var freshRoot = NewRoot(temporaryRoot, "reject-fresh");
+        var fresh = Open(catalogRoot, freshRoot);
+        AssertThrows<InvalidDataException>(() => fresh.Service.PreviewSnapshot("not json"u8.ToArray(), ImportMode.Replace),
+            "A malformed snapshot was accepted on a fresh installation.");
+        Assert(!File.Exists(Path.Combine(freshRoot, "Progress.json")), "A rejected snapshot created progress on a fresh installation.");
         VerifyRejected(catalogRoot, temporaryRoot, "malformed", "not json"u8.ToArray());
         VerifyRejected(catalogRoot, temporaryRoot, "version", Mutate(valid, root => root["Version"] = 2));
         VerifyRejected(catalogRoot, temporaryRoot, "missing-version", Mutate(valid, root => root.Remove("Version")));
@@ -161,15 +364,56 @@ internal static class SyncChecks
             root["Data"]!.AsObject()["Words"]!.AsObject()["KnownIds"]!.AsArray().Add(int.MaxValue)));
         VerifyRejected(catalogRoot, temporaryRoot, "null-category", Mutate(valid, root =>
             root["Data"]!.AsObject()["Words"]!.AsObject()["KnownIds"] = null));
+        VerifyRejected(catalogRoot, temporaryRoot, "negative-id", Mutate(valid, root =>
+            root["Data"]!.AsObject()["Words"]!.AsObject()["KnownIds"]!.AsArray().Add(-1)));
+        VerifyRejected(catalogRoot, temporaryRoot, "duplicate-id", Mutate(valid, root =>
+            root["Data"]!.AsObject()["Words"]!.AsObject()["KnownIds"] = new JsonArray(validWordId, validWordId)));
+        VerifyRejected(catalogRoot, temporaryRoot, "overlapping-id", Mutate(valid, root =>
+        {
+            root["Data"]!.AsObject()["Words"]!.AsObject()["KnownIds"] = new JsonArray(validWordId);
+            root["Data"]!.AsObject()["Words"]!.AsObject()["TrainingIds"] = new JsonArray(validWordId);
+        }));
+        VerifyRejected(catalogRoot, temporaryRoot, "missing-dataset", Mutate(valid, root =>
+            root["Data"]!.AsObject().Remove("Verbs")));
+        VerifyRejected(catalogRoot, temporaryRoot, "extra-dataset", Mutate(valid, root =>
+            root["Data"]!.AsObject()["Other"] = JsonSerializer.SerializeToNode(new VocabSaveFile())));
+        VerifyRejected(catalogRoot, temporaryRoot, "oversized", new byte[LocalProgressTransfer.MaxSnapshotBytes + 1]);
+        VerifyRejectedMode(catalogRoot, temporaryRoot, valid);
     }
 
     private static void VerifyRejected(string catalogRoot, string temporaryRoot, string name, byte[] snapshot)
     {
         var root = NewRoot(temporaryRoot, "reject-" + name);
         var fixture = Open(catalogRoot, root);
+        SeedRejectedFixture(fixture);
+        var progressPath = Path.Combine(root, "Progress.json");
+        var beforeBytes = File.ReadAllBytes(progressPath);
+        var beforeData = CaptureData(fixture);
         AssertThrows<InvalidDataException>(() => fixture.Service.PreviewSnapshot(snapshot, ImportMode.Replace), $"The {name} snapshot was accepted.");
-        Assert(!File.Exists(Path.Combine(root, "Progress.json")), $"Rejecting the {name} snapshot wrote progress to disk.");
-        Assert(AllCategoriesEmpty(fixture), $"Rejecting the {name} snapshot changed in-memory progress.");
+        Assert(beforeBytes.SequenceEqual(File.ReadAllBytes(progressPath)), $"Rejecting the {name} snapshot changed progress bytes.");
+        Assert(beforeData.SequenceEqual(CaptureData(fixture)), $"Rejecting the {name} snapshot changed live categories.");
+    }
+
+    private static void VerifyRejectedMode(string catalogRoot, string temporaryRoot, byte[] valid)
+    {
+        var root = NewRoot(temporaryRoot, "reject-import-mode");
+        var fixture = Open(catalogRoot, root);
+        SeedRejectedFixture(fixture);
+        var progressPath = Path.Combine(root, "Progress.json");
+        var beforeBytes = File.ReadAllBytes(progressPath);
+        var beforeData = CaptureData(fixture);
+        AssertThrows<ArgumentOutOfRangeException>(() => fixture.Service.PreviewSnapshot(valid, (ImportMode)int.MaxValue),
+            "An undefined import mode was accepted.");
+        Assert(beforeBytes.SequenceEqual(File.ReadAllBytes(progressPath)), "Rejecting an undefined import mode changed progress bytes.");
+        Assert(beforeData.SequenceEqual(CaptureData(fixture)), "Rejecting an undefined import mode changed live categories.");
+    }
+
+    private static void SeedRejectedFixture(Fixture fixture)
+    {
+        fixture.Words.AddToVocab(fixture.Words.Words.First());
+        fixture.Words.AddToTraining(fixture.Words.Words.Skip(1).First());
+        fixture.Words.AddToRehearsing(fixture.Words.Words.Skip(2).First());
+        fixture.Verbs.AddToVocab(fixture.Verbs.Words.First());
     }
 
     private static void VerifyFailedAtomicWrite(string catalogRoot, string temporaryRoot)
@@ -235,8 +479,27 @@ internal static class SyncChecks
         return JsonSerializer.SerializeToUtf8Bytes(root);
     }
 
-    private static bool AllCategoriesEmpty(Fixture fixture) =>
-        !fixture.Words.VocabWordIds.Any() && !fixture.Words.TrainingWordIds.Any() && !fixture.Words.RehearsingWordIds.Any();
+    private static ProgressSnapshot Snapshot(Fixture fixture) =>
+        JsonSerializer.Deserialize<ProgressSnapshot>(fixture.Service.ExportSnapshot())
+        ?? throw new InvalidOperationException("An exported snapshot could not be read by the storage check.");
+
+    private static byte[] CaptureData(Fixture fixture) => JsonSerializer.SerializeToUtf8Bytes(Snapshot(fixture).Data);
+
+    private static Dictionary<string, int[]> CatalogIds(Fixture fixture) => new()
+    {
+        ["Words"] = fixture.Words.Words.Take(3).Select(word => word.Id).ToArray(),
+        ["Verbs"] = fixture.Verbs.Words.Take(3).Select(word => word.Id).ToArray(),
+        ["Adjectives"] = fixture.Adjectives.Words.Take(3).Select(word => word.Id).ToArray(),
+        ["Kanji/Singel"] = fixture.Kanji.Single.Words.Take(3).Select(word => word.Id).ToArray(),
+        ["Kanji/Combined"] = fixture.Kanji.Combined.Words.Take(3).Select(word => word.Id).ToArray()
+    };
+
+    private static void AssertSaved(VocabSaveFile actual, VocabSaveFile expected, string message)
+    {
+        Assert(actual.KnownIds.SequenceEqual(expected.KnownIds) &&
+            actual.TrainingIds.SequenceEqual(expected.TrainingIds) &&
+            actual.RehearsingIds.SequenceEqual(expected.RehearsingIds), message);
+    }
 
     private static void AssertFiveAssignments(Fixture fixture, string message)
     {

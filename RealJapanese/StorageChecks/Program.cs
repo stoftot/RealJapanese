@@ -13,6 +13,7 @@ try
     VerifyRealCatalogs(catalogRoot, temporaryRoot);
     VerifyIndependentProgressAndRestart(catalogRoot, temporaryRoot);
     VerifyStableMissingIds(temporaryRoot);
+    JsonChecks.Run(temporaryRoot);
     SyncChecks.Run(catalogRoot, temporaryRoot);
     LocalTransferChecks.Run();
     LocalDiscoveryChecks.Run();
