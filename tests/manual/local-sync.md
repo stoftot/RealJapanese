@@ -111,3 +111,107 @@ Protect the UI boundary between receiving a snapshot and applying saved changes.
 ### Cleanup
 
 Use the cleanup from SYNC-001.
+
+## SYNC-004 — Pairing rejection, cancellation and leaving the page
+
+### Purpose
+
+Protect the UI approval boundary and release sharing/connection resources when a
+user cancels or navigates away. Transport denial is automated; these steps check
+the dialogs and whether a fresh UI operation remains usable.
+
+### Preconditions
+
+Use the two disposable installations and recorded initial progress from SYNC-001.
+Use Manual mode to retain the displayed endpoint for the cancellation check.
+
+### Steps
+
+1. Start sharing and connect. Confirm **Codes match** on only one installation.
+   Verify it shows that it is waiting; the receiver must not show a merge preview.
+2. On the other installation choose **Codes do not match**. Verify neither save
+   changed and no preview is offered. Start a fresh session and connect again.
+3. Dismiss pairing using the close button, then repeat with Escape on a keyboard
+   host. Verify both peers leave the pending approval state and can start again.
+4. Start sharing again, record its port, then navigate Home on the sender. Attempt
+   to connect to that old endpoint on the receiver. It must fail without a preview.
+5. Return to Sync, start a fresh share, connect and confirm both codes. Reach a
+   preview, then cancel it. Repeat with the other host as sender.
+
+### Expected result
+
+One-sided approval, rejection, dismissal and navigation never apply progress.
+Dialogs do not remain stuck, old sessions stop accepting connections, and fresh
+pairing and preview still work. A closed endpoint may fail immediately or time out.
+
+### Cleanup
+
+Use the cleanup from SYNC-001; cancel any pending connection on both installations.
+
+## SYNC-005 — Merge choices, stale preview and recovery through the UI
+
+### Purpose
+
+Protect selection of import modes, displayed conflict counts, stale-preview error
+recovery and the recovery-copy dialog. StorageChecks owns the underlying merge math.
+
+### Preconditions
+
+Use matching disposable installations. Receiver: word A Known, word B Training.
+Sender: word B Known, word C Rehearsing. No other selections. Record the identities.
+For the stale-preview step, use a second browser tab on the receiver's web host.
+
+### Steps
+
+1. Receive the snapshot. Check Words counts (Added, Changed, Removed, Conflicts):
+   Keep local `(1,0,0,1)`, Use incoming `(1,1,0,1)`, Replace `(1,1,1,1)`.
+   Change modes in the dialog and verify the counts update before applying.
+2. Leave a Replace preview open. In another browser tab on the same receiver,
+   select word D Training. Return and choose **Apply this preview**.
+3. Verify the stale preview is rejected, D remains selected and the dialog offers
+   **Refresh preview**. Refresh, review the changed counts and apply Replace.
+4. Verify only B Known and C Rehearsing remain. Restart the receiver, open Sync and
+   choose **Preview recovery copy**. Cancel once and verify no change.
+5. Preview recovery again and apply it. Verify the pre-import state, including D,
+   is restored. On Android repeat mode selection and recovery; the second-tab
+   stale-preview step applies to the web host only.
+
+### Expected result
+
+Displayed counts follow the selected mode. Stale work is rejected visibly without
+losing the newer save; refresh permits a reviewed import. Recovery survives restart
+and changes progress only after explicit apply.
+
+### Cleanup
+
+Close the extra test tab and use the cleanup from SYNC-001.
+
+## SYNC-006 — Invalid endpoint and incompatible catalogs
+
+### Purpose
+
+Protect actionable connection/validation errors and the ability to retry afterward.
+
+### Preconditions
+
+Disposable web hosts with separate progress. For catalog mismatch, make a complete
+temporary catalog copy for one host and add harmless JSON whitespace to Words.json;
+never edit the canonical catalogs. Raw catalog bytes must match for sync.
+
+### Steps
+
+1. In Manual mode attempt an invalid address (`not-an-ip`), public address
+   (`8.8.8.8`) and port `0`. Verify rejection and usable controls after each attempt.
+2. Connect the hosts with different catalog bytes and confirm matching codes.
+   Verify the receiver reports incompatible catalogs without an applicable preview.
+3. Restart the temporary sender with the matching original catalogs and repeat.
+   Verify normal pairing and preview work; cancel before applying.
+
+### Expected result
+
+Each invalid input or incompatible snapshot produces a visible error without
+changing either save. A corrected attempt works without reloading the receiver.
+
+### Cleanup
+
+Stop temporary hosts, discard their copied catalogs/progress and use SYNC-001 cleanup.

@@ -29,8 +29,8 @@ assets live in the RealJapanese.UI Razor class library. The host maps that assem
 and exposes its static assets through `_content/RealJapanese.UI/`.
 
 Vocabulary practice routes require `?category=known|rehearsing|training`, normally
-supplied by selectors. Some selector targets remain unimplemented; source inspection
-is required before assuming a route exists.
+supplied by selectors. Offered study actions and their expected routes are listed
+in [STUDY-002](../../../tests/manual/study-practice.md#study-002--offered-practice-routes-use-the-selected-list).
 
 ## Services, data and environment
 

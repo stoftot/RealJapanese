@@ -10,7 +10,7 @@ Keep run results and unexecuted steps in the current task, not in these files.
 
 | Domain | Cases |
 | --- | --- |
-| [Local sync](local-sync.md) | Automatic transfer, Manual transfer, preview cancellation across web and Android |
+| [Local sync](local-sync.md) | SYNC-001–006: Automatic/Manual transfer, cancellation, pairing rejection, merge/recovery and errors across web and Android |
 | [Study selection and practice](study-practice.md) | STUDY-001–008: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout and language oracles |
 | [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–003: offline catalogs, update/restart persistence, IME/Back/lifecycle and controlled startup failure |
 | [Data maintenance](data-maintenance.md) | DATA-001–002: controlled extraction/model validation and interrupted legacy cleanup |
