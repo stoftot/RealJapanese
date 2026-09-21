@@ -64,6 +64,7 @@ No test-framework project, CI pipeline or automated browser/device suite was fou
 | Snapshot validation and paired local transport | `RealJapanese/Repositories/Sync/ProgressSyncService.cs`, `LocalProgressTransfer.cs`, `PairingProtocol.cs` |
 | Local sync discovery and host network lifecycle | `RealJapanese/Repositories/Sync/LocalSyncDiscovery.cs`, `ISyncNetworkEnvironment.cs` |
 | Local sync user/protocol documentation | `docs/local-sync.md`, `docs/local-sync-protocol.md` |
+| Security boundaries and public-release considerations | `docs/security.md` |
 | Serialization and conjugation | `RealJapanese/DataLoaders/JsonLoader.cs`, `JsonSaver.cs`, `Models/` |
 | Storage regression entry point | `RealJapanese/StorageChecks/Program.cs` |
 

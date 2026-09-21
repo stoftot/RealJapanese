@@ -12,9 +12,17 @@ There is no account or cloud copy.
 3. On the other app, leave **Automatic** selected and choose **Find devices**. Pick
    the sharing device from the list. Device names are supplied by nearby apps, so
    use the code comparison rather than trusting a name by itself.
-4. Compare the six-digit code on both screens. Confirm on both devices only when
-   every digit matches.
-5. Review the proposed changes, choose a merge mode, then apply them.
+4. Compare the six-digit code in the popup on both screens. Confirm on both devices
+   only when every digit matches.
+5. A progress popup shows the transfer. Once checked, the received copy opens in a
+   review popup. Choose a merge mode, check the proposed changes, then apply them.
+
+Closing a popup with its close button, Escape, or the shaded background cancels
+that step. Closing the review is the same as **Cancel**: it discards the preview
+without changing saved progress. Closing during pairing or transfer ends that
+connection. Once connected, the receiver clears its device list; choose **Find
+devices** again for a fresh list before another transfer. Very small transfers
+may finish too quickly to see the progress bar.
 
 If automatic discovery finds nothing, switch both pages to **Manual**. Enter one
 of the private IP addresses and the port displayed by the sharing device, then
@@ -61,6 +69,8 @@ catalog IDs and identical raw catalog files. Update both installations to matchi
 catalogs if validation fails. The `RJLAN003` protocol is incompatible with prior
 versions, so update both installations together. See
 [Local sync protocol](local-sync-protocol.md) for technical details and limits.
+The [security overview](security.md) records current boundaries, decisions and
+considerations for future public distribution or hosting.
 The transfer exposes no API for arbitrary filesystem paths or remote writes; only
 a validated progress snapshot can be previewed and applied.
 

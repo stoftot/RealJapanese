@@ -27,6 +27,8 @@ The HTTP profile uses `http://localhost:5287`. The app expects
 `RealJapanese/Data/` beside the web project and needs write access for progress.
 See the [local sync guide](docs/local-sync.md) to transfer progress and
 [ASP.NET facts](docs/ai/modules/ASPNET.md) before runtime validation.
+The [security overview](docs/security.md) covers current protections, limitations,
+and considerations before public distribution or hosting.
 
 [.NET facts](docs/ai/modules/DOTNET.md) document solution targets and the extraction
 utility's external dependencies. `StorageChecks` is the dependency-free executable
