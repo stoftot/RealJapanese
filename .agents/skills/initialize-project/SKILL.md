@@ -109,5 +109,6 @@ existing application to fit a preferred template.
 Use [maintain-project-context](../maintain-project-context/SKILL.md) to reconcile
 cross-file facts, without copying procedures into documents. Report observed facts,
 proposals/unknowns, actual checks and remaining owner inputs. Assess any completed
-version-worthy infrastructure changes under RELEASES after validation. The result
+application outcomes under RELEASES after validation; infrastructure-only work
+does not warrant release notes or a version bump. The result
 should enable ordinary work through [implement-change](../implement-change/SKILL.md).

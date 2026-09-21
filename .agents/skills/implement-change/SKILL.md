@@ -23,9 +23,13 @@ conversation; no persistent task plans or progress files.
    validation. Include an observable behavior check when source/build evidence
    alone cannot establish the requested outcome. Use applicable installed adapters
    for technology execution; core work does not require any adapter.
-5. Implement within the authorized scope. Add/update tests when they protect a
-   meaningful behavior/regression; avoid tests that merely mirror an implementation
-   or low-impact prose edit. Respect generated files and unrelated work.
+5. Implement within the authorized scope. Respect generated files and unrelated work.
+6. After implementing or materially changing observable behavior, use
+   [plan-tests](../plan-tests/SKILL.md) to determine whether permanent automated or
+   manual regression coverage needs to be created or updated, then use
+   [create-tests](../create-tests/SKILL.md) for warranted coverage before completed-change
+   validation. If existing coverage is sufficient, continue to normal validation.
+   Obviously non-behavioral edits do not need a dedicated test-planning pass.
 
 ## Validate and finish
 

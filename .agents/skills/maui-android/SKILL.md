@@ -10,6 +10,12 @@ Use with the relevant core workflow and [.NET adapter](../dotnet/SKILL.md). Read
 package IDs, build/run targets, deployment and device assumptions. Do not invent
 identifiers or use prior scratch probes as application projects.
 
+Support `plan-tests` and `create-tests` with execution mechanics: run normal .NET
+automated checks for shared logic through the .NET adapter, and use the device
+workflow below for cases selected by `validate-change`. Reuse durable manual
+device/UI cases when stable automation is impractical; report human steps still
+required. Test design and manual-case selection remain in the core skills.
+
 ## Keep tool responsibilities separate
 
 | Mechanism | Responsibility |

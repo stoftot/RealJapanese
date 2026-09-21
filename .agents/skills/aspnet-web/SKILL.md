@@ -11,6 +11,11 @@ for entry projects, profiles, URLs, services and important flows; read .NET fact
 only for the needed build/test/run target. No ASP.NET project means this adapter
 applies only to explicitly requested supporting toolchain work.
 
+Support `plan-tests` and `create-tests` with server/integration test mechanics
+through the .NET adapter and real-browser mechanics below. `validate-change`
+selects existing manual browser cases; execute them with this workflow where
+reliable automation is possible and identify remaining human checks.
+
 ## Establish a runnable application
 
 1. Detect .NET and the actual project; use the .NET adapter for build/test/run.
@@ -30,7 +35,7 @@ applies only to explicitly requested supporting toolchain work.
 
 ## Gather real-browser evidence
 
-1. Choose the relevant scenario from the change or original reproduction. Establish
+1. Use the scenario selected by validation, the change or original reproduction. Establish
    inputs and a concrete observable expected result; use known local test state.
 2. Launch Chromium with the detected Playwright CLI and navigate to the actual
    application URL. Inspect current page/UI or accessible representation where

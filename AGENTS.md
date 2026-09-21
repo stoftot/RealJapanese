@@ -26,6 +26,10 @@
 ## Work from evidence
 
 - Editing files alone does not complete a task. Execute proportionate validation.
+- After meaningful behavioral changes, deliberately assess durable regression
+  coverage with [plan-tests](.agents/skills/plan-tests/SKILL.md), add/update automated
+  or manual cases with [create-tests](.agents/skills/create-tests/SKILL.md) where
+  warranted, and reuse that coverage during later validation.
 - Reproduce failures and gather evidence before selecting a fix; avoid speculative
   edit/build/retry loops. Keep observations, hypotheses, evidence, and conclusions distinct.
 - Prefer repository search, filesystem inspection, and CLI when sufficient.

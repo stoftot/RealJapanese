@@ -1,8 +1,8 @@
 # Release tracking
 
 This is the canonical release policy. Actual records live in [releases/](../../releases/).
-Release notes describe completed, sufficiently validated, version-worthy outcomes;
-keep them short, simple and user-facing. Technical implementation and validation
+Release notes describe completed, sufficiently validated application outcomes
+relevant to end users; keep them short, simple and user-facing. Technical implementation and validation
 details belong in development documentation. Publishing, tagging, GitHub releases,
 and artifact upload are outside V2.
 
@@ -80,10 +80,17 @@ Use `major.minor.patch` terminology:
 | Patch | Backward-compatible bug fix or corrective version-worthy change | M.m.(p+1) |
 | None | No version-worthy outcome | No bump/record required |
 
-Meaningful developer-facing template/workflow functionality can be release-worthy.
-Typo-only edits, routine rephrasing, transient investigations, and unsuccessful
-attempts normally are not. State a compatibility rationale for breaking changes.
-For consistency this template uses these bump rules even after a `0.x` baseline
+Only application changes relevant to end users are release-worthy: features, fixes,
+usability, performance, reliability, security and compatibility changes. Describe
+the effect on the app and its users, not the internal implementation work.
+
+Internal tools, AI infrastructure, agent skills, development workflows, test-only
+changes and developer documentation do not warrant release notes or a version bump.
+When such work accompanies a qualifying app change, record only the app outcome.
+Typo-only edits, routine rephrasing, transient investigations and unsuccessful
+attempts normally are not release-worthy. State a compatibility rationale for
+breaking changes.
+For consistency this project uses these bump rules even after a `0.x` baseline
 release; an alternative pre-1.0 policy must be explicitly adopted here first.
 
 ## Update the single pending record

@@ -21,6 +21,7 @@ web, shared and Android build/run commands.
 | [DECISIONS.md](DECISIONS.md) | Durable non-obvious choices and rationale |
 | `docs/ai/modules/*.md` | Project-specific technology facts |
 | `.agents/skills/*/SKILL.md` | Repeatable procedures |
+| [tests/manual/](../../tests/manual/README.md) | Durable manual regression cases; execution results stay in the current task |
 | [RELEASES.md](RELEASES.md) | Release rules and format |
 | [releases/](../../releases/) | Actual release outcomes |
 | [development.md](../development.md) | Human setup, solution selection and normal build/run commands |
@@ -38,7 +39,9 @@ absence. Replace placeholders with actual repository facts over time.
   idea, intended users, main use cases, and constraints. It defines enough scope
   and architecture to start implementation, marking proposed layout as proposed.
 - **Normal work:** use `$implement-change`; unclear failures use `$debug-problem`.
-  `$validate-change` chooses checks; `$review-change` reports findings;
+  After meaningful behavioral changes, `$plan-tests` designs durable coverage and
+  `$create-tests` adds/updates it. `$validate-change` chooses automated checks and
+  existing manual cases to execute; `$review-change` reports findings;
   `$maintain-project-context` keeps durable facts synchronized.
 
 Skills have YAML `name` and `description` metadata in repository `.agents/skills`.
@@ -77,7 +80,7 @@ by core workflows. Missing tools produce bounded fallbacks and explicit gaps.
    core procedures always test for applicability and presence.
 3. ASP.NET and MAUI can each be removed independently. Removing .NET also means
    removing those dependent adapters, or first rewriting them for a different
-   explicitly supported base. All six core skills remain useful on their own.
+   explicitly supported base. The core skills remain useful on their own.
 4. If removing installed tools too, follow [tooling removal](../tooling.md#clean-removal).
    Regenerate MCP configuration before deleting required servers; preserve shared
    machine installations. Removing documentation alone does not uninstall tools.

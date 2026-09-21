@@ -5,7 +5,8 @@ description: Supply .NET execution and evidence for a core workflow, using SDK b
 
 # .NET adapter
 
-Use with `implement-change`, `debug-problem`, `validate-change` or `review-change`;
+Use with `implement-change`, `plan-tests`, `create-tests`, `debug-problem`,
+`validate-change` or `review-change`;
 this adapter does not replace their scope, diagnostic reasoning or completion rules.
 Read [DOTNET facts](../../../docs/ai/modules/DOTNET.md) and the relevant project/build
 configuration. Read only needed setup details from [tooling](../../../docs/tooling.md).
@@ -20,6 +21,10 @@ Do not run placeholder targets or assume a disposable tooling probe is an app.
 2. Select the canonical solution/project, configuration and meaningful test scope
    from module facts/configuration. Use normal CLI as the deterministic mechanism
    for restore, build, test and run. Inspect completion status and relevant output.
+   Reuse established unit/integration frameworks and fixtures. For framework-based
+   projects use `dotnet test`, with `--filter` for targeted cases when supported;
+   preserve non-framework runners such as this project's `StorageChecks` and its
+   canonical `dotnet run` command. Build verification alone is not test execution.
 3. `dotnet restore`, `build`, `test`, `run`, `publish`, `clean`, `new`, `workload` and
    other SDK operations are available categories, not a checklist. Choose only
    what the task needs: scaffolding, publishing build output, cleaning or workload

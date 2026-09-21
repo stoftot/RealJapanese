@@ -25,6 +25,7 @@ for commands and prerequisites.
 | `RealJapanese/DataLoaders/` | JSON IO, serialized models and conjugation logic | Shared by repositories and utilities |
 | `RealJapanese/Data/` | Canonical study datasets, web progress and extracted kanji relations | Source for web and packaged mobile catalogs |
 | `RealJapanese/StorageChecks/` | Dependency-free storage regression executable | Uses real catalogs read-only and disposable progress |
+| `tests/manual/` | Reusable application regression scenarios | Complements StorageChecks with browser/device observations; [catalog](../../tests/manual/README.md) |
 | `RealJapanese/CheckDataForDuplicates/` | Console cleanup utility | Rewrites word IDs and corresponding progress |
 | `RealJapanese/Extract kanji/` | Console extraction/enrichment utility | Uses DataLoaders and external AiLibrary projects |
 | `docs/ai/`, `.agents/skills/` | Project facts and workflows | Ownership in [README](README.md) |
