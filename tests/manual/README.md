@@ -13,12 +13,14 @@ Keep run results and unexecuted steps in the current task, not in these files.
 | [Local sync](local-sync.md) | Automatic transfer, Manual transfer, preview cancellation across web and Android |
 | [Study selection and practice](study-practice.md) | STUDY-001–008: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout and language oracles |
 | [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–003: offline catalogs, update/restart persistence, IME/Back/lifecycle and controlled startup failure |
+| [Data maintenance](data-maintenance.md) | DATA-001–002: controlled extraction/model validation and interrupted legacy cleanup |
 
 The initial cases reuse behavior documented in the [sync guide](../../docs/local-sync.md).
 That guide remains the owner of user instructions and network/compatibility limits.
 This catalog is selective, not a claim of complete application regression coverage.
 
-Automated storage, merge/recovery and transport checks remain in
+Automated JSON, study logic, storage, merge/recovery, transport and isolated
+duplicate-cleanup checks remain in
 [`StorageChecks`](../../RealJapanese/StorageChecks/Program.cs); use the canonical
 commands in the [development guide](../../docs/development.md#build-shared-code-and-run-storage-checks).
 Do not duplicate those assertions as manual cases unless actual UI/device behavior

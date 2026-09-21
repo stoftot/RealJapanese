@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\CheckDataForDuplicates\CheckDataForDuplicates.csproj" ReferenceOutputAssembly="false" />
         <ProjectReference Include="..\Repositories\Repositories.csproj" />
     </ItemGroup>
 

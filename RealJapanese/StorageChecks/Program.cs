@@ -1,5 +1,8 @@
 using Repositories;
 
+// Catch expected utility failures in the test child instead of opening an OS crash dialog.
+if (args is ["--invoke-cleanup"]) return UtilityChecks.InvokeCleanupEntryPoint();
+
 var catalogRoot = FindCatalogRoot(args.FirstOrDefault());
 var temporaryRoot = Path.Combine(Path.GetTempPath(), $"RealJapanese.StorageChecks-{Guid.NewGuid():N}");
 
@@ -15,6 +18,7 @@ try
     VerifyStableMissingIds(temporaryRoot);
     JsonChecks.Run(temporaryRoot);
     StudyLogicChecks.Run();
+    UtilityChecks.Run(temporaryRoot);
     SyncChecks.Run(catalogRoot, temporaryRoot);
     LocalTransferChecks.Run();
     LocalDiscoveryChecks.Run();

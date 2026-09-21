@@ -24,7 +24,7 @@ for commands and prerequisites.
 | `RealJapanese/Repositories/` | Vocabulary/progress, local sync transport, question conversion and number generation | Depends on DataLoaders and WanaKanaSharp |
 | `RealJapanese/DataLoaders/` | JSON IO, serialized models and conjugation logic | Shared by repositories and utilities |
 | `RealJapanese/Data/` | Canonical study datasets, web progress and extracted kanji relations | Source for web and packaged mobile catalogs |
-| `RealJapanese/StorageChecks/` | Dependency-free storage regression executable | Uses real catalogs read-only and disposable progress |
+| `RealJapanese/StorageChecks/` | Dependency-free regression executable for JSON, study logic, storage/sync and duplicate cleanup | Uses real catalogs read-only and disposable data/progress |
 | `tests/manual/` | Reusable application regression scenarios | Complements StorageChecks with browser/device observations; [catalog](../../tests/manual/README.md) |
 | `RealJapanese/CheckDataForDuplicates/` | Console cleanup utility | Rewrites word IDs and corresponding progress |
 | `RealJapanese/Extract kanji/` | Console extraction/enrichment utility | Uses DataLoaders and external AiLibrary projects |
@@ -41,8 +41,8 @@ Paths below are relative to `RealJapanese/`. All projects target .NET 10.
 | `RealJapanese.UI/RealJapanese.UI.csproj` | Razor class library / `net10.0` | Repositories | Covered through hosts |
 | `Repositories/Repositories.csproj` | Library / `net10.0` | DataLoaders | StorageChecks |
 | `DataLoaders/DataLoaders.csproj` | Library / `net10.0` | None | StorageChecks |
-| `StorageChecks/StorageChecks.csproj` | Console regression check / `net10.0` | Repositories | Self-checking executable |
-| `CheckDataForDuplicates/CheckDataForDuplicates.csproj` | Console utility / `net10.0` | DataLoaders | None found |
+| `StorageChecks/StorageChecks.csproj` | Console regression check / `net10.0` | Repositories; CheckDataForDuplicates (build only) | Self-checking executable |
+| `CheckDataForDuplicates/CheckDataForDuplicates.csproj` | Console utility / `net10.0` | DataLoaders | StorageChecks isolated executable integration |
 | `Extract kanji/Extract kanji.csproj` | Console utility / `net10.0` | DataLoaders; external AiLibrary projects | None found |
 
 No test-framework project, CI pipeline or automated browser/device suite was found.

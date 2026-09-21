@@ -41,10 +41,12 @@ dotnet build RealJapanese/RealJapanese.Web.sln --no-restore
 ```
 
 Debug is the default unless specified. `StorageChecks` is a self-checking console
-program rather than a `dotnet test` project; it covers catalog integrity, atomic
-progress persistence, migration, sync merge/recovery and framed local
-transport. See the [development guide](../../development.md) for running and
-installing each host.
+program rather than a `dotnet test` project; it covers JSON contracts, study logic,
+catalog integrity, atomic progress persistence, migration, sync merge/recovery,
+framed local transport and isolated duplicate-cleanup integration. Its build-only
+utility reference is built transitively; checks locate that executable in the
+normal sibling `bin/<configuration>/<TFM>` output. See the
+[development guide](../../development.md) for running and installing each host.
 
 The web and Android Debug builds have passed for the current structure. The Android
 build produced `.tooling/android-artifacts/bin/RealJapanese.Mobile/debug/com.realjapanese.mobile-Signed.apk`.
