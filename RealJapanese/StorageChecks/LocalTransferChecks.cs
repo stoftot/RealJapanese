@@ -8,6 +8,7 @@ internal static class LocalTransferChecks
     public static void Run()
     {
         VerifyRoundTripAndApprovalsAsync().GetAwaiter().GetResult();
+        VerifyTransferProgressAsync().GetAwaiter().GetResult();
         VerifyDenialsAsync().GetAwaiter().GetResult();
         VerifyCancellationAndExpiryAsync().GetAwaiter().GetResult();
         VerifyBoundsAndAddressesAsync().GetAwaiter().GetResult();
@@ -45,18 +46,59 @@ internal static class LocalTransferChecks
         await using var receiver = await LocalProgressTransfer.ConnectAsync("127.0.0.1", sender.Port);
         var pairing = await SenderPairingAsync(sender);
         Assert(pairing.Code == receiver.Pairing.Code, "The peers displayed different pairing codes.");
+        Assert(sender.Progress is null && receiver.Progress is null,
+            "Transfer progress started before either approval.");
         receiver.Pairing.Confirm(true);
         await AssertPendingAsync(receiver.Completion, "One approval released the snapshot.");
+        Assert(sender.Progress is null && receiver.Progress is null,
+            "Transfer progress started before both approvals.");
         pairing.Confirm(true);
         Assert((await receiver.Completion.WaitAsync(TimeSpan.FromSeconds(5))).SequenceEqual(expected),
             "The paired snapshot did not survive a loopback round trip.");
         await WaitInactiveAsync(sender);
         Assert(sender.Succeeded && sender.LastError is null, "A completed sender did not report success.");
+        Assert(sender.Progress == new SyncTransferProgress(expected.Length, expected.Length, true) &&
+            receiver.Progress == new SyncTransferProgress(expected.Length, expected.Length, true),
+            "A completed transfer did not expose final byte progress.");
         await ThrowsAnyAsync(async () =>
         {
             await using var ignored = await LocalProgressTransfer.ConnectAsync("127.0.0.1", sender.Port);
         },
             "A successful one-use sender accepted another receiver.");
+    }
+
+    private static async Task VerifyTransferProgressAsync()
+    {
+        var expected = new byte[1024 * 1024];
+        Random.Shared.NextBytes(expected);
+        await using var sender = LocalProgressTransfer.Start(expected);
+        await using var proxy = new FrameProxy(sender.Port, static (_, frame) => frame, 16 * 1024, TimeSpan.FromMilliseconds(2));
+        await using var receiver = await LocalProgressTransfer.ConnectAsync("127.0.0.1", proxy.Port);
+        await ApproveAsync(sender, receiver);
+
+        var observed = new List<int>();
+        while (!receiver.Completion.IsCompleted)
+        {
+            if (receiver.Progress is { } current)
+            {
+                Assert(current.BytesTransferred >= 0 && current.BytesTransferred <= current.TotalBytes &&
+                    current.TotalBytes is 0 or 1024 * 1024 &&
+                    (!current.IsComplete || current.BytesTransferred == expected.Length),
+                    "In-flight receive progress was inaccurate, unbounded, or prematurely complete.");
+                if (current.TotalBytes == expected.Length &&
+                    (observed.Count == 0 || observed[^1] != current.BytesTransferred)) observed.Add(current.BytesTransferred);
+            }
+            await Task.Delay(1);
+        }
+
+        Assert((await receiver.Completion).SequenceEqual(expected), "The throttled progress transfer changed the snapshot.");
+        await WaitInactiveAsync(sender);
+        Assert(observed.Count >= 2 && observed.Zip(observed.Skip(1)).All(pair => pair.First <= pair.Second) &&
+            observed.Any(value => value is > 0 && value < 1024 * 1024),
+            "Receive progress was not observably monotonic and incremental.");
+        Assert(sender.Progress == new SyncTransferProgress(expected.Length, expected.Length, true) &&
+            receiver.Progress == new SyncTransferProgress(expected.Length, expected.Length, true),
+            "The throttled transfer did not finish with exact complete progress.");
     }
 
     private static async Task VerifyDenialsAsync()
@@ -190,6 +232,10 @@ internal static class LocalTransferChecks
         await ApproveAsync(sender, receiver);
         await ThrowsAnyAsync(async () => _ = await receiver.Completion.WaitAsync(TimeSpan.FromSeconds(5)),
             "A snapshot with a modified authenticated envelope was accepted.");
+        Assert(receiver.Progress is null or { IsComplete: false },
+            "A tampered snapshot was reported as complete by the receiver.");
+        Assert(sender.Progress is null or { IsComplete: false },
+            "A tampered snapshot was reported as complete by the sender.");
         Assert(!sender.Succeeded, "The sender succeeded without an authenticated receipt.");
     }
 
@@ -314,11 +360,16 @@ internal static class LocalTransferChecks
         private readonly Func<bool, byte[], byte[]> transform;
         private readonly Task runTask;
         private readonly int targetPort;
+        private readonly int relayChunkBytes;
+        private readonly TimeSpan relayDelay;
 
-        public FrameProxy(int targetPort, Func<bool, byte[], byte[]> transform)
+        public FrameProxy(int targetPort, Func<bool, byte[], byte[]> transform, int relayChunkBytes = int.MaxValue,
+            TimeSpan relayDelay = default)
         {
             this.targetPort = targetPort;
             this.transform = transform;
+            this.relayChunkBytes = relayChunkBytes;
+            this.relayDelay = relayDelay;
             listener.Start(1);
             Port = ((IPEndPoint)listener.LocalEndpoint).Port;
             runTask = RunAsync();
@@ -348,7 +399,12 @@ internal static class LocalTransferChecks
             while (!cancellation.IsCancellationRequested)
             {
                 var frame = transform(fromClient, await ReadFrameAsync(source, cancellation.Token));
-                await destination.WriteAsync(frame, cancellation.Token);
+                for (var offset = 0; offset < frame.Length; offset += relayChunkBytes)
+                {
+                    var count = Math.Min(relayChunkBytes, frame.Length - offset);
+                    await destination.WriteAsync(frame.AsMemory(offset, count), cancellation.Token);
+                    if (relayDelay > TimeSpan.Zero) await Task.Delay(relayDelay, cancellation.Token);
+                }
             }
         }
 

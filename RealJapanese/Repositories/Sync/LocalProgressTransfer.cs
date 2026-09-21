@@ -5,6 +5,8 @@ using System.Security.Cryptography;
 
 namespace Repositories.Sync;
 
+public sealed record SyncTransferProgress(int BytesTransferred, int TotalBytes, bool IsComplete);
+
 public static class LocalProgressTransfer
 {
     public const int MaxSnapshotBytes = 4 * 1024 * 1024;
@@ -51,17 +53,26 @@ public static class LocalProgressTransfer
         }
     }
 
-    internal static async Task WriteFrameAsync(Stream stream, byte type, ReadOnlyMemory<byte> payload, CancellationToken cancellationToken)
+    internal static async Task WriteFrameAsync(Stream stream, byte type, ReadOnlyMemory<byte> payload, CancellationToken cancellationToken,
+        Action<int, int>? progress = null)
     {
         var header = new byte[HeaderBytes];
         Magic.CopyTo(header, 0);
         header[8] = type;
         BitConverter.GetBytes(IPAddress.HostToNetworkOrder(payload.Length)).CopyTo(header, 9);
         await stream.WriteAsync(header, cancellationToken).ConfigureAwait(false);
-        await stream.WriteAsync(payload, cancellationToken).ConfigureAwait(false);
+        const int chunkBytes = 32 * 1024;
+        for (var offset = 0; offset < payload.Length; offset += chunkBytes)
+        {
+            var count = Math.Min(chunkBytes, payload.Length - offset);
+            await stream.WriteAsync(payload.Slice(offset, count), cancellationToken).ConfigureAwait(false);
+            progress?.Invoke(offset + count, payload.Length);
+        }
+        if (payload.IsEmpty) progress?.Invoke(0, 0);
     }
 
-    internal static async Task<byte[]> ReadFrameAsync(Stream stream, byte type, int maximumBytes, CancellationToken cancellationToken)
+    internal static async Task<byte[]> ReadFrameAsync(Stream stream, byte type, int maximumBytes, CancellationToken cancellationToken,
+        Action<int, int>? progress = null)
     {
         var header = new byte[HeaderBytes];
         await stream.ReadExactlyAsync(header, cancellationToken).ConfigureAwait(false);
@@ -69,8 +80,15 @@ public static class LocalProgressTransfer
             throw new InvalidDataException("Unsupported pairing message. Update both applications to matching versions.");
         var length = IPAddress.NetworkToHostOrder(BitConverter.ToInt32(header, 9));
         if (length < 0 || length > maximumBytes) throw new InvalidDataException("The transfer message is too large or invalid.");
+        progress?.Invoke(0, length);
         var payload = new byte[length];
-        await stream.ReadExactlyAsync(payload, cancellationToken).ConfigureAwait(false);
+        const int chunkBytes = 32 * 1024;
+        for (var offset = 0; offset < payload.Length; offset += chunkBytes)
+        {
+            var count = Math.Min(chunkBytes, payload.Length - offset);
+            await stream.ReadExactlyAsync(payload.AsMemory(offset, count), cancellationToken).ConfigureAwait(false);
+            progress?.Invoke(offset + count, payload.Length);
+        }
         return payload;
     }
 
@@ -107,8 +125,10 @@ public sealed class LocalProgressReceiveSession : IAsyncDisposable
     private readonly CancellationTokenSource cancellation;
     private readonly CancellationToken callerCancellation;
     private int disposed;
+    private SyncTransferProgress? progress;
     public PairingApproval Pairing { get; }
     public Task<byte[]> Completion { get; }
+    public SyncTransferProgress? Progress => Volatile.Read(ref progress);
 
     internal LocalProgressReceiveSession(TcpClient client, PairingProtocol protocol, CancellationTokenSource cancellation, CancellationToken callerCancellation)
     {
@@ -127,8 +147,11 @@ public sealed class LocalProgressReceiveSession : IAsyncDisposable
             {
                 await protocol.ConfirmAsync(true, cancellation.Token).ConfigureAwait(false);
                 cancellation.CancelAfter(LocalProgressTransfer.TransferTimeout);
-                var result = await protocol.ReadAsync(7, LocalProgressTransfer.MaxSnapshotBytes, cancellation.Token).ConfigureAwait(false);
+                Volatile.Write(ref progress, new(0, 0, false));
+                var result = await protocol.ReadAsync(7, LocalProgressTransfer.MaxSnapshotBytes, cancellation.Token,
+                    (transferred, total) => Volatile.Write(ref progress, new(transferred, total, false))).ConfigureAwait(false);
                 await protocol.WriteAsync(8, new byte[] { 1 }, cancellation.Token).ConfigureAwait(false);
+                Volatile.Write(ref progress, new(result.Length, result.Length, true));
                 return result;
             }
             catch (OperationCanceledException exception) when (!callerCancellation.IsCancellationRequested && Volatile.Read(ref disposed) == 0)
@@ -159,10 +182,12 @@ public sealed class LocalProgressTransferSession : IDisposable, IAsyncDisposable
     private int succeeded;
     private int cleanedUp;
     private string? lastError;
+    private SyncTransferProgress? progress;
     public int Port { get; }
     public IReadOnlyList<string> Addresses { get; }
     public DateTimeOffset ExpiresUtc { get; }
     public PairingApproval? Pairing => Volatile.Read(ref pairing);
+    public SyncTransferProgress? Progress => Volatile.Read(ref progress);
     public string? LastError => Volatile.Read(ref lastError);
     public bool Succeeded => Volatile.Read(ref succeeded) != 0;
     public bool IsActive => Volatile.Read(ref disposed) == 0 && Volatile.Read(ref terminal) == 0 && !lifetimeCancellation.IsCancellationRequested;
@@ -202,9 +227,12 @@ public sealed class LocalProgressTransferSession : IDisposable, IAsyncDisposable
                     await protocol.ConfirmAsync(false, timeout.Token).ConfigureAwait(false);
                     timeout.CancelAfter(LocalProgressTransfer.TransferTimeout);
                     deliveryStarted = true;
-                    await protocol.WriteAsync(7, snapshot, timeout.Token).ConfigureAwait(false);
+                    Volatile.Write(ref progress, new(0, snapshot.Length, false));
+                    await protocol.WriteAsync(7, snapshot, timeout.Token,
+                        (transferred, total) => Volatile.Write(ref progress, new(transferred, total, false))).ConfigureAwait(false);
                     var receipt = await protocol.ReadAsync(8, 1, timeout.Token).ConfigureAwait(false);
                     if (receipt.Length != 1 || receipt[0] != 1) throw new InvalidDataException("Invalid transfer receipt.");
+                    Volatile.Write(ref progress, new(snapshot.Length, snapshot.Length, true));
                     Interlocked.Exchange(ref succeeded, 1);
                     return;
                 }

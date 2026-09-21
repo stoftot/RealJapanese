@@ -122,18 +122,25 @@ internal sealed class PairingProtocol : IDisposable
             throw new InvalidDataException("The other device declined pairing. No progress was transferred.");
     }
 
-    public async Task WriteAsync(byte type, byte[] body, CancellationToken cancellationToken)
+    public async Task WriteAsync(byte type, byte[] body, CancellationToken cancellationToken,
+        Action<int, int>? progress = null)
     {
         var envelope = new byte[8 + body.Length + 32];
         BinaryPrimitives.WriteUInt64BigEndian(envelope, sendSequence++);
         body.CopyTo(envelope, 8);
         Tag(sendKey, type, envelope.AsSpan(0, envelope.Length - 32)).CopyTo(envelope, envelope.Length - 32);
-        await LocalProgressTransfer.WriteFrameAsync(stream, type, envelope, cancellationToken).ConfigureAwait(false);
+        await LocalProgressTransfer.WriteFrameAsync(stream, type, envelope, cancellationToken,
+            progress is null ? null : (transferred, _) => progress(Math.Clamp(transferred - 8, 0, body.Length), body.Length))
+            .ConfigureAwait(false);
     }
 
-    public async Task<byte[]> ReadAsync(byte type, int maximumBytes, CancellationToken cancellationToken)
+    public async Task<byte[]> ReadAsync(byte type, int maximumBytes, CancellationToken cancellationToken,
+        Action<int, int>? progress = null)
     {
-        var envelope = await LocalProgressTransfer.ReadFrameAsync(stream, type, maximumBytes + 40, cancellationToken).ConfigureAwait(false);
+        var envelope = await LocalProgressTransfer.ReadFrameAsync(stream, type, maximumBytes + 40, cancellationToken,
+            progress is null ? null : (transferred, total) =>
+                progress(Math.Clamp(transferred - 8, 0, Math.Max(0, total - 40)), Math.Max(0, total - 40)))
+            .ConfigureAwait(false);
         if (envelope.Length < 40 || BinaryPrimitives.ReadUInt64BigEndian(envelope) != receiveSequence ||
             !CryptographicOperations.FixedTimeEquals(envelope.AsSpan(envelope.Length - 32),
                 Tag(receiveKey, type, envelope.AsSpan(0, envelope.Length - 32))))
