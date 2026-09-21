@@ -83,11 +83,13 @@ public static class LocalProgressTransfer
         progress?.Invoke(0, length);
         var payload = new byte[length];
         const int chunkBytes = 32 * 1024;
-        for (var offset = 0; offset < payload.Length; offset += chunkBytes)
+        for (var offset = 0; offset < payload.Length;)
         {
             var count = Math.Min(chunkBytes, payload.Length - offset);
-            await stream.ReadExactlyAsync(payload.AsMemory(offset, count), cancellationToken).ConfigureAwait(false);
-            progress?.Invoke(offset + count, payload.Length);
+            var read = await stream.ReadAsync(payload.AsMemory(offset, count), cancellationToken).ConfigureAwait(false);
+            if (read == 0) throw new EndOfStreamException("The transfer ended before its complete message arrived.");
+            offset += read;
+            progress?.Invoke(offset, payload.Length);
         }
         return payload;
     }

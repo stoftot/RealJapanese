@@ -1,0 +1,6 @@
+.sync-dialog { width: min(48rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); margin: auto; padding: 1.25rem; border: 1px solid #bac9da; border-radius: .9rem; color: #212529; background: white; overflow-y: auto; box-shadow: 0 1rem 4rem #0004; }
+.sync-dialog::backdrop { background: #14223499; }
+header { display: flex; align-items: start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+h2 { font-size: 1.4rem; margin: .3rem 0; }
+.dialog-close { flex-shrink: 0; width: 2.75rem; height: 2.75rem; border: 0; border-radius: .4rem; background: #edf1f6; font-size: 1.75rem; line-height: 1; }
+.dialog-close:focus-visible { outline: 3px solid #164f8d; outline-offset: 2px; }

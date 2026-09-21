@@ -1,5 +1,6 @@
 @page "/sync"
 @using Repositories.Sync
+@using RealJapanese.Components.Shared
 @implements IAsyncDisposable
 @inject ProgressSyncService ProgressSync
 @inject ISyncNetworkEnvironment NetworkEnvironment
@@ -33,25 +34,6 @@
     @if (error is not null)
     {
         <p role="alert" class="alert alert-danger">@error</p>
-    }
-
-    @if (CurrentPairing is { } pairing)
-    {
-        <section @key="pairing" class="sync-panel pairing-panel" aria-labelledby="pairing-title" aria-live="polite">
-            <h2 id="pairing-title">Compare the codes</h2>
-            <p>Check the code on the other device's screen. Only confirm if all six digits match.</p>
-            <p class="pairing-code" aria-label="Pairing code">@pairing.Code</p>
-            @if (pairing.IsConfirmed)
-            {
-                <p>Confirmed here. Waiting for the other device…</p>
-            }
-            else
-            {
-                <button class="btn btn-primary" @onclick="() => pairing.Confirm(true)">Codes match</button>
-                <button class="btn btn-outline-danger ms-2" @onclick="() => pairing.Confirm(false)">Codes do not match</button>
-            }
-            <p class="text-muted mt-3">Confirm on both devices within 90 seconds. No progress is sent before confirmation.</p>
-        </section>
     }
 
     <section class="sync-panel" aria-labelledby="share-title">
@@ -117,30 +99,6 @@
             Guest Wi-Fi may block connections between devices. No router changes or internet access are needed.</p>
     </section>
 
-    @if (received is not null)
-    {
-        <section class="sync-panel" aria-labelledby="preview-title">
-            <h2 id="preview-title">3. Review before applying</h2>
-            <label for="sync-mode">How should this progress be combined?</label>
-            <select id="sync-mode" class="form-select" @bind="mode" @bind:after="RefreshPreview" disabled="@busy">
-                <option value="@ImportMode.MergeKeepLocal">Merge — keep this device's category when they differ</option>
-                <option value="@ImportMode.MergeUseIncoming">Merge — use the other device's category when they differ</option>
-                <option value="@ImportMode.Replace">Replace — make this device match the shared copy</option>
-            </select>
-            <p class="mt-2">Merge keeps items selected on either device. It cannot infer deselections or which change is newer.
-                Replace also removes selections missing from the shared copy.</p>
-            @if (preview is not null) { @PreviewTable() }
-        </section>
-    }
-    else if (preview is not null)
-    {
-        <section class="sync-panel">
-            <h2>Restore previous progress</h2>
-            <p>This replaces current progress with the copy saved immediately before the previous import.</p>
-            @PreviewTable()
-        </section>
-    }
-
     <section class="sync-panel">
         <h2>Recovery</h2>
         <p>Each import saves the previous progress on this device. That recovery copy survives restarting the app;
@@ -150,6 +108,67 @@
     <p>To finish a two-way sync: merge on the receiving device, then share its combined progress back and
         choose <strong>Replace</strong> on the original device. Review the counts on each device.</p>
 </div>
+
+
+<SyncDialog Open="@DialogOpen" Title="@DialogTitle" OnDismiss="DismissDialog">
+    @if (error is not null) { <p role="alert" class="alert alert-danger">@error</p> }
+    @if (CurrentTransfer is { } transfer)
+    {
+        <p>@(receiving is not null ? "Receiving a copy of your study progress…" : "Sending a copy of your study progress…")</p>
+        @if (transfer.TotalBytes > 0)
+        {
+            <progress class="transfer-progress" max="@transfer.TotalBytes" value="@transfer.BytesTransferred" aria-label="Transfer progress"></progress>
+            <p role="status">@TransferStatus(transfer)</p>
+        }
+        else
+        {
+            <progress class="transfer-progress" aria-label="Transfer progress"></progress>
+            <p role="status">Preparing transfer…</p>
+        }
+        <p>No changes are saved on the receiving device until its preview is applied.</p>
+        <button class="btn btn-outline-secondary" @onclick="DismissDialog">Cancel transfer</button>
+    }
+    else if (CurrentPairing is { } pairing)
+    {
+        <div @key="pairing" aria-live="polite">
+            <p>Check the code on the other device's screen. Only confirm if all six digits match.</p>
+            <p class="pairing-code" aria-label="Pairing code">@pairing.Code</p>
+            @if (pairing.IsConfirmed)
+            {
+                <p>Confirmed here. Waiting for the other device…</p>
+            }
+            else
+            {
+                <button class="btn btn-primary" @onclick="() => pairing.Confirm(true)">Codes match</button>
+                <button class="btn btn-outline-danger ms-2" @onclick="() => pairing.Confirm(false)">Codes do not match</button>
+            }
+            <p class="text-muted mt-3">Confirm on both devices within 90 seconds. No progress is sent before confirmation.</p>
+        </div>
+    }
+
+    else if (received is not null)
+    {
+        <div class="preview-content">
+            <label for="sync-mode">How should this progress be combined?</label>
+            <select id="sync-mode" class="form-select" @bind="mode" @bind:after="RefreshPreview" disabled="@busy">
+                <option value="@ImportMode.MergeKeepLocal">Merge — keep this device's category when they differ</option>
+                <option value="@ImportMode.MergeUseIncoming">Merge — use the other device's category when they differ</option>
+                <option value="@ImportMode.Replace">Replace — make this device match the shared copy</option>
+            </select>
+            <p class="mt-2">Merge keeps items selected on either device. It cannot infer deselections or which change is newer.
+                Replace also removes selections missing from the shared copy.</p>
+            @if (preview is not null) { @PreviewTable() }
+        </div>
+    }
+    else if (preview is not null)
+    {
+        <div class="preview-content">
+            <p>This replaces current progress with the copy saved immediately before the previous import.</p>
+            @PreviewTable()
+        </div>
+    }
+
+</SyncDialog>
 
 @code {
     private RenderFragment PreviewTable() => @<div>

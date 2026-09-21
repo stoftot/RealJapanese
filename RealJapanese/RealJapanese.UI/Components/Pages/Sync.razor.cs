@@ -28,6 +28,25 @@ public partial class Sync
     private ImportMode mode = ImportMode.MergeKeepLocal;
     private ImportPreview? preview;
     private PairingApproval? CurrentPairing => receiving?.Pairing ?? sharing?.Pairing;
+    private SyncTransferProgress? CurrentTransfer => receiving?.Progress ??
+        (sharing is { IsActive: true } ? sharing.Progress : null);
+    private bool DialogOpen => CurrentPairing is not null || CurrentTransfer is not null || received is not null || preview is not null;
+    private string DialogTitle => CurrentTransfer is not null ? "Transferring progress" :
+        CurrentPairing is not null ? "Compare the codes" : received is not null ? "Review before applying" : "Restore previous progress";
+
+    private string TransferStatus(SyncTransferProgress transfer) => transfer.BytesTransferred >= transfer.TotalBytes
+        ? receiving is not null ? "Checking transfer integrity…" : "Waiting for the receiving device to verify…"
+        : $"{(long)transfer.BytesTransferred * 100 / transfer.TotalBytes}% · {transfer.BytesTransferred:N0} of {transfer.TotalBytes:N0} bytes";
+
+    private async Task DismissDialog()
+    {
+        var dismissingConnection = CurrentPairing is not null || CurrentTransfer is not null;
+        CancelPreview();
+        if (!dismissingConnection) return;
+        CancelConnection();
+        if (receiving is not null && operationTask is not null) await operationTask;
+        if (sharing is not null) await StopSharing();
+    }
 
     protected override void OnInitialized() => refreshTask = RefreshStatus();
 
@@ -129,10 +148,13 @@ public partial class Sync
         await StopSharing();
         CancelPreview();
         receiving = await LocalProgressTransfer.ConnectAsync(address.Trim(), port, token);
+        devices = [];
+        searched = false;
         StateHasChanged();
         try
         {
             received = await receiving.Completion;
+            token.ThrowIfCancellationRequested();
             preview = ProgressSync.PreviewSnapshot(received, mode);
             message = "Pairing and integrity checks passed. Review the preview; your progress has not changed.";
         }

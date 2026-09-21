@@ -1,0 +1,65 @@
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<dialog @ref="element" class="sync-dialog" aria-labelledby="sync-dialog-title">
+    <header>
+        <h2 id="sync-dialog-title" tabindex="-1">@Title</h2>
+        <button type="button" class="dialog-close" aria-label="Close dialog" @onclick="Dismiss">×</button>
+    </header>
+    @ChildContent
+</dialog>
+
+@code {
+    [Parameter] public bool Open { get; set; }
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public EventCallback OnDismiss { get; set; }
+    private ElementReference element;
+    private IJSObjectReference? module;
+    private DotNetObjectReference<SyncDialog>? reference;
+    private Task? initialization;
+    private bool disposed;
+    private bool shown;
+    private int generation;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (disposed) return;
+        // Status refreshes can render again while the first JS import is pending.
+        await (initialization ??= InitializeAsync());
+        if (disposed || shown == Open) return;
+        shown = Open;
+        await module!.InvokeVoidAsync("setOpen", element, Open, ++generation);
+    }
+
+    private async Task InitializeAsync()
+    {
+        module = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/RealJapanese.UI/js/sync-dialog.js");
+        if (disposed) return;
+        reference = DotNetObjectReference.Create(this);
+        await module.InvokeVoidAsync("attach", element, reference);
+    }
+
+    private Task Dismiss() => Open ? OnDismiss.InvokeAsync() : Task.CompletedTask;
+
+    [JSInvokable]
+    public Task DismissFromBrowser(int currentGeneration) =>
+        currentGeneration == generation ? Dismiss() : Task.CompletedTask;
+
+    public async ValueTask DisposeAsync()
+    {
+        disposed = true;
+        try
+        {
+            if (initialization is not null) await initialization;
+            if (module is not null)
+            {
+                await module.InvokeVoidAsync("detach", element);
+                await module.DisposeAsync();
+            }
+        }
+        catch (JSDisconnectedException) { }
+        catch (TaskCanceledException) { }
+        finally { reference?.Dispose(); }
+    }
+}
