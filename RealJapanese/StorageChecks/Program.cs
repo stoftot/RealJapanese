@@ -14,6 +14,7 @@ try
     VerifyIndependentProgressAndRestart(catalogRoot, temporaryRoot);
     VerifyStableMissingIds(temporaryRoot);
     JsonChecks.Run(temporaryRoot);
+    StudyLogicChecks.Run();
     SyncChecks.Run(catalogRoot, temporaryRoot);
     LocalTransferChecks.Run();
     LocalDiscoveryChecks.Run();

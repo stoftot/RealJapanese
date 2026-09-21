@@ -11,6 +11,8 @@ Keep run results and unexecuted steps in the current task, not in these files.
 | Domain | Cases |
 | --- | --- |
 | [Local sync](local-sync.md) | Automatic transfer, Manual transfer, preview cancellation across web and Android |
+| [Study selection and practice](study-practice.md) | STUDY-001–008: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout and language oracles |
+| [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–003: offline catalogs, update/restart persistence, IME/Back/lifecycle and controlled startup failure |
 
 The initial cases reuse behavior documented in the [sync guide](../../docs/local-sync.md).
 That guide remains the owner of user instructions and network/compatibility limits.
