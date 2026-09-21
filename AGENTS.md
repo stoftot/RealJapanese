@@ -73,6 +73,34 @@
 - After completed validation, assess release relevance using [RELEASES](docs/ai/RELEASES.md).
   Preserve the single pending record and its accumulated notes. Publishing is separate.
 
+## Create meaningful local commits
+
+- First determine whether the project is inside a Git working tree. If Git is
+  unavailable or the project is not in a repository, continue normally; Git absence
+  is not an error and does not require repository initialization.
+- Inside a repository, create useful local commits as coherent, sufficiently
+  validated work is completed. Small tasks normally get one final commit; medium
+  tasks get one or a few natural milestones; large tasks progressively commit
+  independently valid portions and continue until the full task is complete.
+- Group implementation with its relevant automated/manual regression coverage,
+  durable context and release metadata. Do not split commits by workflow step or
+  skill. Intermediate commits do not replace final validation of the whole task.
+- Before staging or committing, inspect status and relevant working-tree/staged
+  diffs against the task's starting state. Stage explicit task-owned files/hunks;
+  never automatically include, discard, reset or overwrite unrelated work. If
+  intertwined changes cannot be safely separated, leave affected work uncommitted
+  and explain why. Do not create knowingly broken checkpoint commits.
+- Inspect recent history and follow established message conventions. Describe
+  the completed result; avoid vague messages such as `updates` or `WIP`.
+- The primary agent coordinates Git and inspects status/diffs before every commit.
+  Subagents normally return work/results; avoid concurrent staging/committing in
+  the same working tree.
+- Local commits are authorized. Push/force-push, remote branch creation or changes,
+  PRs, merges, rebasing user/published history, amending existing user commits,
+  tags and release publication require explicit instruction or a dedicated workflow.
+  Follow the [implementation procedure](.agents/skills/implement-change/SKILL.md)
+  for commit preparation and final reporting.
+
 ## Apply technology modules conditionally
 
 - Technology adapters apply only when their files and corresponding projects exist,
