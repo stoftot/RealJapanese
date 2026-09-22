@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/RealJapanese.ComponentTests/RealJapanese.ComponentTests.csproj" />
+    <Project Path="tests/RealJapanese.IntegrationTests/RealJapanese.IntegrationTests.csproj" />
+    <Project Path="tests/RealJapanese.Tests/RealJapanese.Tests.csproj" />
+    <Project Path="tests/RealJapanese.WebTests/RealJapanese.WebTests.csproj" />
+  </Folder>
+</Solution>

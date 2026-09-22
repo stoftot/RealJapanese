@@ -95,7 +95,9 @@ results and 32 replies per second. Private/loopback IPv4 restrictions narrow the
 scope but are not authentication. No file paths, commands, persistent trust keys,
 automatic imports, or arbitrary remote-write operations are exposed.
 
-`StorageChecks` exercises approval gating, denial/cancellation, size/framing
-limits, modified commitments, payload/tag/type/sequence tampering, cross-session
-replay and discovery parsing/request-reply behavior. Actual multicast and
-Windows/Android cryptographic interoperability require browser/device checks.
+The xUnit integration suite exercises approval gating, denial/cancellation,
+size/framing limits, modified commitments, payload/tag/type/sequence tampering,
+cross-session replay and discovery parsing/request-reply behavior. Playwright
+tests exercise preview, recovery, pairing and error flows across isolated web-host
+pairs. Private-network multicast can be unavailable and reported as skipped;
+Android cryptographic and Wi-Fi interoperability still require device checks.

@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <Import Project="../TestProject.props" />
+  <ItemGroup>
+    <PackageReference Include="bunit" Version="2.11.3" />
+    <ProjectReference Include="../../RealJapanese/RealJapanese.UI/RealJapanese.UI.csproj" />
+    <ProjectReference Include="../RealJapanese.TestSupport/RealJapanese.TestSupport.csproj" />
+  </ItemGroup>
+</Project>

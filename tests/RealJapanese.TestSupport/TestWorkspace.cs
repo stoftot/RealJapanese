@@ -12,13 +12,17 @@ public sealed class TestWorkspace : IDisposable
 
     public TestWorkspace()
     {
-        foreach (var dataset in ProgressStore.DatasetNames)
+        try
         {
-            var relative = Path.Combine(dataset, dataset.Split('/')[^1] + ".json");
-            var destination = Path.Combine(CatalogRoot, relative);
-            Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
-            File.Copy(Path.Combine(RepositoryRoot, "RealJapanese", "Data", relative), destination);
+            foreach (var dataset in ProgressStore.DatasetNames)
+            {
+                var relative = Path.Combine(dataset, dataset.Split('/')[^1] + ".json");
+                var destination = Path.Combine(CatalogRoot, relative);
+                Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
+                File.Copy(Path.Combine(RepositoryRoot, "RealJapanese", "Data", relative), destination);
+            }
         }
+        catch { Dispose(); throw; }
     }
 
     public RepositoryPaths CreatePaths(string name = "progress") => new(CatalogRoot, Path.Combine(Root, name));

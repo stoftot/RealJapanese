@@ -19,13 +19,46 @@ The initial cases reuse behavior documented in the [sync guide](../../docs/local
 That guide remains the owner of user instructions and network/compatibility limits.
 This catalog is selective, not a claim of complete application regression coverage.
 
-Automated JSON, study logic, storage, merge/recovery, transport and isolated
-duplicate-cleanup checks remain in
-[`StorageChecks`](../../RealJapanese/StorageChecks/Program.cs); use the canonical
-commands in the [development guide](../../docs/development.md#build-shared-code-and-run-storage-checks).
-Do not duplicate those assertions as manual cases unless actual UI/device behavior
-adds evidence. [Tooling verification](../../docs/verification.md) continues to own
-tool acceptance procedures, which do not establish application correctness.
+Automated coverage lives in the xUnit unit/integration projects, bUnit component
+project and Playwright browser project. Use the commands in the
+[testing guide](../../docs/testing.md). Do not repeat their assertions manually
+unless a different host or human observation adds evidence.
+[Tooling verification](../../docs/verification.md) owns tool acceptance procedures,
+which do not establish application correctness.
+
+## Automation and remaining manual scope
+
+The specifications below remain reusable acceptance procedures. This table records
+current ownership, not execution history. Automated web coverage does not establish
+Android WebView, OS lifecycle or two-device Wi-Fi behavior. Known-defect cases
+assert intended behavior but require explicit execution; see the testing guide.
+
+| Case | Automated coverage | Remaining manual scope / reason |
+| --- | --- | --- |
+| STUDY-001 | `SelectorComponentTests`; `RepositoryPersistenceTests`; `StudyBrowserTests` selection/reload/restart | Android UI/save integration; browser restart check samples Words while shared repositories cover all datasets |
+| STUDY-002 | `PracticeRouteComponentTests` selector routes, category data and empty states | Android navigation integration; component rendering alone does not establish the native host |
+| STUDY-003 | `SingleAnswerPracticeComponentTests`; `StudyBrowserTests` real Enter/focus | Android IME and soft-keyboard behavior |
+| STUDY-004 | `ChunkingPracticeComponentTests`; unit chunk contracts; explicit retry-leak regression | Repeat on Android after a shared fix; known defects are not passing coverage |
+| STUDY-005 | `FlashcardComponentTests`; `FlashcardBrowserTests` Space/Backspace and SPA disposal | Android hardware/emulator keyboard behavior |
+| STUDY-006 | `MultipleAnswerPracticeComponentTests` accepted-order/duplicate/reset behavior | Native keyboard/focus integration |
+| STUDY-007 | `SharedPracticeControlTests`; `LayoutBrowserTests` 320/1280 px, column visibility, scale and overflow | Human readability, visible focus quality and screen-reader announcements; browser assertions cannot judge these fully |
+| STUDY-008 | Literal conjugation/number unit oracles and `AdjectiveLanguageOracleComponentTests`, including explicit known-defect cases | Human language review when adding new catalog content or accepted readings |
+| SYNC-001 | Real loopback transfer and private-interface discovery integration tests; shared web approval/apply flow | Automatic discovery over actual Wi-Fi and Windows/Android cryptographic interoperability, both directions |
+| SYNC-002 | Two-host Playwright sync through Manual mode | Actual web/Android reachability and transfer in both directions |
+| SYNC-003 | `SyncPreviewBrowserTests`: Cancel, close, backdrop and Escape, no-write and fresh transfer; `SyncDialogComponentTests` | Native WebView dialog behavior and other-device dismissal combinations |
+| SYNC-004 | `SyncPairingBrowserTests`: one approval, denial, dismissal, navigation stops listener, renewed transfer; socket cancellation tests | Android navigation/background and peer combinations |
+| SYNC-005 | `SyncRecoveryBrowserTests`: all mode counts, second-circuit stale preview, refresh/apply, cancel and recovery after restart; storage merge/recovery matrix | Android dialog and cold-start integration |
+| SYNC-006 | `SyncErrorBrowserTests`: invalid/public addresses, port zero, mismatched catalog bytes and corrected retry | Android network error presentation/recovery |
+| MOBILE-001 | Shared catalog/progress restart contracts covered in integration tests | Native packaging, first install, offline operation and same-signer update require disposable Android installation |
+| MOBILE-002 | Shared practice state covered at component/browser levels | IME, Back, rotation and foreground lifecycle require native device automation or observation; no device automation runner is configured |
+| MOBILE-003 | No native fault-injection automation | Needs a disposable package or controllable packaged-file provider; current installer directly uses MAUI FileSystem |
+| DATA-001 | No portable external-model extraction automation | External AiLibrary projects/model/server and controlled responses are required; current utility has no isolated provider seam |
+| DATA-002 | `UtilityCleanupIntegrationTests` explicit Windows file-lock consistency regression | Optional fault-injection confirmation on other supported filesystems; normal cleanup/guard/remap is already automated |
+
+Classes are in the corresponding [`tests/`](../) projects. Keep full procedures
+for the residual host combinations and for diagnosis; prioritize the unautomated
+steps when selecting manual validation. Do not claim that a known failing
+regression or unavailable platform was validated successfully.
 
 ## Case conventions
 

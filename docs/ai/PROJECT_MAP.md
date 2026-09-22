@@ -2,14 +2,16 @@
 
 ## Repository at a glance
 
-The C# projects and four solutions sit under `RealJapanese/`:
+The production C# projects and four older solutions sit under `RealJapanese/`;
+the complete automated-test solution is at the repository root:
 
 | Solution | Use |
 | --- | --- |
 | [`RealJapanese.Web.sln`](../../RealJapanese/RealJapanese.Web.sln) | Web host plus shared UI and data libraries |
 | [`RealJapanese.Mobile.sln`](../../RealJapanese/RealJapanese.Mobile.sln) | Android host plus shared UI and data libraries |
-| [`RealJapanese.Shared.sln`](../../RealJapanese/RealJapanese.Shared.sln) | Shared UI/data work and `StorageChecks` |
+| [`RealJapanese.Shared.sln`](../../RealJapanese/RealJapanese.Shared.sln) | Shared UI/data work plus unit, integration and component tests |
 | [`RealJapanese.sln`](../../RealJapanese/RealJapanese.sln) | Existing web-and-utilities aggregate; intentionally excludes mobile |
+| [`RealJapanese.Tests.slnx`](../../RealJapanese.Tests.slnx) | Complete xUnit suite, including Playwright browser tests |
 
 Choose the smallest solution for the work. See the [development guide](../development.md)
 for commands and prerequisites.
@@ -24,29 +26,37 @@ for commands and prerequisites.
 | `RealJapanese/Repositories/` | Vocabulary/progress, local sync transport, question conversion and number generation | Depends on DataLoaders and WanaKanaSharp |
 | `RealJapanese/DataLoaders/` | JSON IO, serialized models and conjugation logic | Shared by repositories and utilities |
 | `RealJapanese/Data/` | Canonical study datasets, web progress and extracted kanji relations | Source for web and packaged mobile catalogs |
-| `RealJapanese/StorageChecks/` | Dependency-free regression executable for JSON, study logic, storage/sync and duplicate cleanup | Uses real catalogs read-only and disposable data/progress |
-| `tests/manual/` | Reusable application regression scenarios | Complements StorageChecks with browser/device observations; [catalog](../../tests/manual/README.md) |
+| `tests/RealJapanese.Tests/` | Pure unit tests for study transformations and generators | xUnit v3; references Repositories |
+| `tests/RealJapanese.IntegrationTests/` | File, repository, sync, network and cleanup integration tests | Uses isolated workspaces and a child utility host |
+| `tests/RealJapanese.ComponentTests/` | Rendered shared Razor component tests | xUnit v3 and bUnit |
+| `tests/RealJapanese.WebTests/` | Real Chromium behavior against task-owned web hosts | xUnit v3 and Microsoft Playwright |
+| `tests/RealJapanese.TestSupport/`, `tests/RealJapanese.UtilityHost/` | Shared disposable-workspace support and guarded cleanup entry point | Support projects, not test suites |
+| `tests/manual/` | Reusable application and device regression scenarios | Records automated/manual boundaries; [catalog](../../tests/manual/README.md) |
 | `RealJapanese/CheckDataForDuplicates/` | Console cleanup utility | Rewrites word IDs and corresponding progress |
 | `RealJapanese/Extract kanji/` | Console extraction/enrichment utility | Uses DataLoaders and external AiLibrary projects |
 | `docs/ai/`, `.agents/skills/` | Project facts and workflows | Ownership in [README](README.md) |
 
 ## Projects and checks
 
-Paths below are relative to `RealJapanese/`. All projects target .NET 10.
+Paths below are relative to the repository root. All projects target .NET 10.
 
 | Project | Type / TFM | Direct project dependencies | Checks |
 | --- | --- | --- | --- |
-| `RealJapanese/RealJapanese.csproj` | Web executable / `net10.0` | RealJapanese.UI | Browser checks as needed |
-| `RealJapanese.Mobile/RealJapanese.Mobile.csproj` | MAUI executable / `net10.0-android` | RealJapanese.UI | Build/device checks as available |
-| `RealJapanese.UI/RealJapanese.UI.csproj` | Razor class library / `net10.0` | Repositories | Covered through hosts |
-| `Repositories/Repositories.csproj` | Library / `net10.0` | DataLoaders | StorageChecks |
-| `DataLoaders/DataLoaders.csproj` | Library / `net10.0` | None | StorageChecks |
-| `StorageChecks/StorageChecks.csproj` | Console regression check / `net10.0` | Repositories; CheckDataForDuplicates (build only) | Self-checking executable |
-| `CheckDataForDuplicates/CheckDataForDuplicates.csproj` | Console utility / `net10.0` | DataLoaders | StorageChecks isolated executable integration |
-| `Extract kanji/Extract kanji.csproj` | Console utility / `net10.0` | DataLoaders; external AiLibrary projects | None found |
+| `RealJapanese/RealJapanese/RealJapanese.csproj` | Web executable / `net10.0` | RealJapanese.UI | RealJapanese.WebTests |
+| `RealJapanese/RealJapanese.Mobile/RealJapanese.Mobile.csproj` | MAUI executable / `net10.0-android` | RealJapanese.UI | Build/manual device checks |
+| `RealJapanese/RealJapanese.UI/RealJapanese.UI.csproj` | Razor class library / `net10.0` | Repositories | Component and browser tests |
+| `RealJapanese/Repositories/Repositories.csproj` | Library / `net10.0` | DataLoaders | Unit and integration tests |
+| `RealJapanese/DataLoaders/DataLoaders.csproj` | Library / `net10.0` | None | Unit and integration tests |
+| `RealJapanese/CheckDataForDuplicates/CheckDataForDuplicates.csproj` | Console utility / `net10.0` | DataLoaders | Isolated integration tests through UtilityHost |
+| `RealJapanese/Extract kanji/Extract kanji.csproj` | Console utility / `net10.0` | DataLoaders; external AiLibrary projects | None found |
+| `tests/RealJapanese.Tests/RealJapanese.Tests.csproj` | xUnit executable / `net10.0` | Repositories | Pure unit tests |
+| `tests/RealJapanese.IntegrationTests/RealJapanese.IntegrationTests.csproj` | xUnit executable / `net10.0` | TestSupport; UtilityHost (build only) | File/process/network integration |
+| `tests/RealJapanese.ComponentTests/RealJapanese.ComponentTests.csproj` | Razor xUnit executable / `net10.0` | RealJapanese.UI; TestSupport | bUnit component tests |
+| `tests/RealJapanese.WebTests/RealJapanese.WebTests.csproj` | xUnit executable / `net10.0` | TestSupport; web host (build only) | Playwright Chromium tests |
 
-No test-framework project, CI pipeline or automated browser/device suite was found.
-`tooling/verify-*` and ignored `.tooling/scratch/` fixtures verify tools, not the app.
+No CI pipeline was found. The local automated suite and its setup are documented in
+[testing](../testing.md). `tooling/verify-*` and ignored `.tooling/scratch/` fixtures
+verify tools, not the app.
 
 ## Entry points and investigation anchors
 
@@ -67,7 +77,7 @@ No test-framework project, CI pipeline or automated browser/device suite was fou
 | Local sync user/protocol documentation | `docs/local-sync.md`, `docs/local-sync-protocol.md` |
 | Security boundaries and public-release considerations | `docs/security.md` |
 | Serialization and conjugation | `RealJapanese/DataLoaders/JsonLoader.cs`, `JsonSaver.cs`, `Models/` |
-| Storage regression entry point | `RealJapanese/StorageChecks/Program.cs` |
+| Automated test setup and ownership | `docs/testing.md`, `RealJapanese.Tests.slnx`, `tests/` |
 
 ## Important flows
 

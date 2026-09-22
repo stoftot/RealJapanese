@@ -144,6 +144,7 @@ public sealed class AdjectiveConjugationTests
 
     [Fact(Explicit = true)]
     [Trait("Category", "KnownDefect")]
+    // The final い is currently removed even for the affirmative present, producing 高です.
     public void PresentAffirmative_IAdjectiveRetainsFinalI()
     {
         var adjective = new Adjective

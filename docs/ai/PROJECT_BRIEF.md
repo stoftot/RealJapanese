@@ -36,8 +36,9 @@ or owner-approved roadmap was not found.
   embeds the five study catalogs and copies them to app-private storage.
 - The extraction utility separately needs external AI-library projects and a local
   model/server. It is not part of either application runtime.
-- There is no CI pipeline or automated browser/device suite. `StorageChecks` is a
-  dependency-free regression executable for catalog and progress persistence.
+- There is no CI pipeline. The local xUnit suite covers pure logic, file/process/
+  network integration, rendered Razor components and real Chromium behavior; it
+  does not automate Android device behavior. See the [test guide](../testing.md).
 
 ## Enabled technology modules
 

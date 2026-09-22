@@ -9,7 +9,8 @@ below run from the repository root.
 | --- | --- |
 | `RealJapanese/RealJapanese.Web.sln` | ASP.NET host and web-specific behavior |
 | `RealJapanese/RealJapanese.Mobile.sln` | Android app, packaging and device behavior |
-| `RealJapanese/RealJapanese.Shared.sln` | Shared Razor UI, repositories, models and storage checks |
+| `RealJapanese/RealJapanese.Shared.sln` | Shared Razor UI/data plus unit, integration and component tests |
+| `RealJapanese.Tests.slnx` | Complete automated suite, including real-browser tests |
 | `RealJapanese/RealJapanese.sln` | Existing web plus data-maintenance utilities |
 
 The older aggregate intentionally excludes mobile. Its extraction project has
@@ -54,23 +55,13 @@ Remove-Item Env:StudyData__ProgressRoot
 must contain the normal `Words`, `Verbs`, `Adjectives`, `Kanji/Singel` and
 `Kanji/Combined` layout. A new progress root may be empty.
 
-## Build shared code and run storage checks
+## Build shared code and run automated tests
 
-```powershell
-dotnet restore RealJapanese/RealJapanese.Shared.sln
-dotnet build RealJapanese/RealJapanese.Shared.sln --no-restore
-dotnet run --project RealJapanese/StorageChecks/StorageChecks.csproj --no-build --no-restore
-```
-
-`StorageChecks` reads the real catalogs, verifies their IDs and content remain
-unchanged, and exercises atomic persistence, migration, sync merge/recovery and the
-local framed transport in temporary directories. It also checks JSON loading and
-round-trips, study transformations/conjugation/number examples, and duplicate
-cleanup against constructed legacy data. The cleanup project is built as a
-dependency; its entry point runs in an isolated child process whose relative data
-path is checked before execution. Canonical data is never passed to that utility.
-Use the normal project output layout for these executable checks. Success prints
-`Storage checks passed.`
+`RealJapanese/RealJapanese.Shared.sln` builds the shared application projects and
+the unit, integration and component test projects. `RealJapanese.Tests.slnx` adds
+the Playwright browser project for the complete suite. See the
+[automated test guide](testing.md) for setup, commands, test ownership, isolation,
+parallelism and explicit known-defect cases.
 
 ## Transfer progress locally
 
@@ -133,10 +124,11 @@ Device checks have covered startup, keyboard/navigation visibility, and two-way
 `RJLAN003` Wi-Fi sync in both directions using Automatic discovery and Manual
 address entry. Both modes were exercised with matching-code confirmation,
 preview/apply and matching saved progress in a temporary test installation;
-cancellation and rejected codes were also checked. StorageChecks covers restart
-persistence, recovery, tampered records and replay rejection. Broader study
-interaction remains outside that coverage. Android Release compilation is checked
-separately; physical-device UI checks use the Debug test package.
+cancellation and rejected codes were also checked. Automated integration and
+browser tests cover restart persistence, recovery, tampered records, replay
+rejection and shared study behavior on desktop .NET/Chromium. They do not establish
+Android runtime behavior. Android Release compilation is checked separately;
+physical-device UI checks use the Debug test package.
 
 ## Data-maintenance utilities
 

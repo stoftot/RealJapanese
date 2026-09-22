@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealJapanese.UtilityHost", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckDataForDuplicates", "CheckDataForDuplicates\CheckDataForDuplicates.csproj", "{1CB422BB-4D4B-452B-AA2D-B831C54C2B72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealJapanese.ComponentTests", "..\tests\RealJapanese.ComponentTests\RealJapanese.ComponentTests.csproj", "{80EAA3BD-FE26-477D-8190-E8F0379A7529}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{1CB422BB-4D4B-452B-AA2D-B831C54C2B72}.Release|x64.Build.0 = Release|Any CPU
 		{1CB422BB-4D4B-452B-AA2D-B831C54C2B72}.Release|x86.ActiveCfg = Release|Any CPU
 		{1CB422BB-4D4B-452B-AA2D-B831C54C2B72}.Release|x86.Build.0 = Release|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Debug|x64.Build.0 = Debug|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Debug|x86.Build.0 = Debug|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Release|x64.ActiveCfg = Release|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Release|x64.Build.0 = Release|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Release|x86.ActiveCfg = Release|Any CPU
+		{80EAA3BD-FE26-477D-8190-E8F0379A7529}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

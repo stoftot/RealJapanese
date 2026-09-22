@@ -4,6 +4,9 @@ These cases cover the shared study UI used by both the web and Android hosts. Ru
 them against disposable progress and preserve the canonical catalogs. Record the
 host, viewport, catalog version and the identities of selected study items in the
 current task. Random question order does not change the expected sets below.
+The [coverage catalog](README.md#automation-and-remaining-manual-scope) maps these
+cases to automated unit, component and browser tests. Focus manual runs on native
+Android behavior and human usability observations not established by those tests.
 
 ## STUDY-001 — Search, assign and persist study lists
 

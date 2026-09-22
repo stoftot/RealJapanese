@@ -6,8 +6,10 @@ owned by project manifests.
 ## Organization and components
 
 - Open `RealJapanese.Web.sln`, `RealJapanese.Mobile.sln` or
-  `RealJapanese.Shared.sln` for focused work; the older `RealJapanese.sln` remains
-  the web-and-utilities aggregate and does not contain mobile.
+  `RealJapanese.Shared.sln` for focused application work. The shared solution also
+  carries unit, integration and component tests; open root `RealJapanese.Tests.slnx`
+  for the complete suite including browser tests. The older `RealJapanese.sln`
+  remains the web-and-utilities aggregate and does not contain mobile.
 - Host-only startup and lifecycle code stays in `RealJapanese/` or
   `RealJapanese.Mobile/`. Reusable routes, pages, components and static web assets
   belong in the `RealJapanese.UI` Razor class library.
@@ -51,7 +53,11 @@ All projects enable nullable reference types and implicit usings. No `.editorcon
 dedicated analyzer configuration or CI pipeline was found. Avoid introducing a
 repository-wide formatting policy from incidental whitespace patterns.
 
-Use `StorageChecks` for storage changes, the real web host/browser for browser
-behavior, and the MAUI Android workflow for device behavior. Compilation does not
+Use the lowest applicable xUnit project for automated behavior: unit tests for pure
+logic, integration tests for files/processes/network boundaries, bUnit for rendered
+shared components and Playwright for real Chromium behavior. Follow
+[the test guide](../testing.md) for commands, isolation and parallelism. Use the
+MAUI Android workflow for device behavior; desktop/browser automation does not
 establish that an APK installed or ran on a device. Data utilities can rewrite
-canonical files and must not be used as read-only verification commands.
+canonical files and must run only through isolated test fixtures when used for
+automated verification.

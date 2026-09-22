@@ -1,10 +1,12 @@
 # Local sync regression cases
 
-These cases complement `StorageChecks` with actual web/Android interaction and
+These cases complement the xUnit, bUnit and Playwright suites with web/Android interaction and
 network evidence. Use the [sync guide](../../docs/local-sync.md) for the transfer
 procedure and the [development guide](../../docs/development.md) for host setup.
 Record the tested direction, host/device versions and observations in the current
-task. A pass in one direction does not establish the reverse direction.
+task. A pass in one direction does not establish the reverse direction. The
+[coverage catalog](README.md#automation-and-remaining-manual-scope) identifies the
+automated web portions and the remaining device/network combinations.
 
 ## SYNC-001 — Automatic transfer between web and Android
 
@@ -153,7 +155,8 @@ Use the cleanup from SYNC-001; cancel any pending connection on both installatio
 ### Purpose
 
 Protect selection of import modes, displayed conflict counts, stale-preview error
-recovery and the recovery-copy dialog. StorageChecks owns the underlying merge math.
+recovery and the recovery-copy dialog. `ProgressSyncTests` owns the underlying merge math;
+`SyncRecoveryBrowserTests` covers the web interaction.
 
 ### Preconditions
 

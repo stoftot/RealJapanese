@@ -3,7 +3,9 @@
 These cases require an Android emulator or device. Use a disposable app identity
 or disposable installation and record the Android version, package version,
 signing identity and device form factor in the current task. A browser result does
-not substitute for native lifecycle, WebView, packaged-file or IME evidence.
+not substitute for native lifecycle, WebView, packaged-file or IME evidence. The
+[coverage catalog](README.md#automation-and-remaining-manual-scope) identifies shared
+logic covered automatically; these native lifecycle procedures remain manual.
 
 ## MOBILE-001 — Offline install and progress preservation
 

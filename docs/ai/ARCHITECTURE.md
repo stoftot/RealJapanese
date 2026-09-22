@@ -12,6 +12,8 @@ MAUI Android host --/                       ^
 Duplicate-cleanup console -------------------------------> DataLoaders
 Kanji extraction console --------------------------------> DataLoaders
                                                     \----> external AiLibrary
+
+Automated tests ---> UI / Repositories / DataLoaders / task-owned web hosts
 ```
 
 The [project map](PROJECT_MAP.md) owns paths and project relationships.
@@ -27,6 +29,9 @@ The [project map](PROJECT_MAP.md) owns paths and project relationships.
 - **DataLoaders:** owns JSON/JSONL IO and serialized domain records. Verb/adjective
   conjugation behavior also lives in these models.
 - **Data utilities:** maintain canonical datasets outside normal app execution.
+- **Automated tests:** depend inward on production projects. Unit, integration,
+  rendered-component and real-browser projects share disposable workspace support;
+  the duplicate-cleanup utility is reached through a guarded child-process host.
 
 The mobile app follows the standard MAUI Blazor Hybrid shape described by
 [Microsoft's MAUI Blazor Hybrid guidance](https://learn.microsoft.com/en-us/aspnet/core/blazor/hybrid/tutorials/maui-blazor-web-app?view=aspnetcore-10.0):
@@ -126,6 +131,22 @@ Kanji extraction reads verbs/adjectives/words, builds relations, asks a local mo
 to fill new records and writes generated datasets. These utilities are not used by
 the web or Android runtime.
 
+### Automated test isolation
+
+The root `RealJapanese.Tests.slnx` contains four xUnit v3 projects. Unit tests own
+pure transformations. Integration tests own file, repository, socket/protocol and
+utility-process boundaries. Component tests render shared Razor components with
+bUnit. Playwright tests start task-owned ASP.NET hosts and Chromium instances for
+browser behavior; sync coverage is split across preview, recovery, pairing and
+error classes so isolated host/workspace pairs can run with browser concurrency
+capped at two.
+
+Every mutable test gets a unique temporary catalog/progress workspace. Cleanup
+tests invoke the real utility in a child process whose working directory resolves
+only to constructed data, and browser builds are isolated from normal application
+output. Test helpers do not make canonical catalogs or user progress disposable.
+The [test guide](../testing.md) owns setup, commands and scheduling details.
+
 ## Data contracts and constraints
 
 - Vocabulary IDs connect records to saved progress and extracted relations.
@@ -146,7 +167,9 @@ integration boundary.
 
 Web and Android Debug builds pass. Browser and physical Android checks exercise
 `RJLAN003` automatic two-way Wi-Fi discovery/pairing, preview/apply, and matching
-saved selections. StorageChecks covers conflict resolution, restart recovery,
-approval gating, malformed frames, tampering and replay. Device checks use disposable progress and a temporary app identity
-to preserve the installed app, whose signing key differs from the local development
-key. Broader practice/device coverage remains outside these sync checks.
+saved selections. Automated integration/browser tests cover conflict resolution,
+restart recovery, approval gating, malformed frames, tampering and replay on
+desktop .NET/Chromium. Device checks use disposable progress and a temporary app
+identity to preserve the installed app, whose signing key differs from the local
+development key. Automated desktop/browser results do not establish Android
+runtime behavior; broader device coverage remains manual.

@@ -9,8 +9,9 @@ All repository projects target .NET 10. The Android project targets
 | --- | --- |
 | `RealJapanese/RealJapanese.Web.sln` | Web, UI, Repositories, DataLoaders |
 | `RealJapanese/RealJapanese.Mobile.sln` | Mobile, UI, Repositories, DataLoaders |
-| `RealJapanese/RealJapanese.Shared.sln` | UI, Repositories, DataLoaders, StorageChecks |
-| `RealJapanese/RealJapanese.sln` | Web, UI, libraries and both data utilities; no Mobile or StorageChecks |
+| `RealJapanese/RealJapanese.Shared.sln` | UI, Repositories, DataLoaders plus unit, integration and component tests |
+| `RealJapanese/RealJapanese.sln` | Web, UI, libraries and both data utilities; no Mobile or test projects |
+| `RealJapanese.Tests.slnx` | Unit, integration, component and Playwright browser tests |
 
 There is no `global.json`, central package management, custom Directory.Build file,
 repository NuGet configuration or package lock file. Project manifests pin package
@@ -27,10 +28,9 @@ work.
 From the repository root:
 
 ```powershell
-# Shared libraries and storage regression check
+# Shared libraries and non-browser automated tests
 dotnet restore RealJapanese/RealJapanese.Shared.sln
 dotnet build RealJapanese/RealJapanese.Shared.sln --no-restore
-dotnet run --project RealJapanese/StorageChecks/StorageChecks.csproj --no-build --no-restore
 
 # Web application
 dotnet restore RealJapanese/RealJapanese.Web.sln
@@ -40,13 +40,11 @@ dotnet build RealJapanese/RealJapanese.Web.sln --no-restore
 .\tooling\build-android.ps1
 ```
 
-Debug is the default unless specified. `StorageChecks` is a self-checking console
-program rather than a `dotnet test` project; it covers JSON contracts, study logic,
-catalog integrity, atomic progress persistence, migration, sync merge/recovery,
-framed local transport and isolated duplicate-cleanup integration. Its build-only
-utility reference is built transitively; checks locate that executable in the
-normal sibling `bin/<configuration>/<TFM>` output. See the
-[development guide](../../development.md) for running and installing each host.
+Debug is the default unless specified. The root xUnit solution adds real-browser
+coverage to the three non-browser test projects in the shared solution. See the
+[automated test guide](../../testing.md) for restore/build/test commands, Playwright
+setup, project responsibilities, parallelism and explicit known-defect cases. See
+the [development guide](../../development.md) for running and installing each host.
 
 The web and Android Debug builds have passed for the current structure. The Android
 build produced `.tooling/android-artifacts/bin/RealJapanese.Mobile/debug/com.realjapanese.mobile-Signed.apk`.
@@ -57,7 +55,8 @@ Local sync device evidence is recorded in [MAUI_ANDROID](MAUI_ANDROID.md).
 - Web runtime facts are in [ASPNET](ASPNET.md).
 - Android build/deploy facts are in [MAUI_ANDROID](MAUI_ANDROID.md).
 - `CheckDataForDuplicates` rewrites vocabulary and remaps progress. Do not run it
-  against canonical data as a build check.
+  against canonical data as a build check; its integration tests use a constructed
+  data tree through `RealJapanese.UtilityHost`.
 - Extraction requires its external projects, configured model directory and
   `LLAMA_SERVER_PATH`. Compilation alone does not validate inference/data quality.
 

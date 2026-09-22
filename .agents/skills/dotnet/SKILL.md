@@ -23,8 +23,8 @@ Do not run placeholder targets or assume a disposable tooling probe is an app.
    for restore, build, test and run. Inspect completion status and relevant output.
    Reuse established unit/integration frameworks and fixtures. For framework-based
    projects use `dotnet test`, with `--filter` for targeted cases when supported;
-   preserve non-framework runners such as this project's `StorageChecks` and its
-   canonical `dotnet run` command. Build verification alone is not test execution.
+   use the canonical test projects and commands in `docs/testing.md`. Framework
+   fixtures support isolation; build verification alone is not test execution.
 3. `dotnet restore`, `build`, `test`, `run`, `publish`, `clean`, `new`, `workload` and
    other SDK operations are available categories, not a checklist. Choose only
    what the task needs: scaffolding, publishing build output, cleaning or workload

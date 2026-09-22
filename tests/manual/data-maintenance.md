@@ -1,9 +1,11 @@
 # Data maintenance integration cases
 
 The duplicate-cleanup guard, legacy ID remapping and stale-ID rejection are
-automated by `StorageChecks`. The following cases require a controlled external
-model or IO failure, so they remain manual integration procedures. Never run a
-maintenance utility against canonical data for validation.
+automated by `UtilityCleanupIntegrationTests`. DATA-002 also has an explicit
+Windows file-lock regression for its known consistency defect. DATA-001 retains
+its external-model requirement. See the [coverage catalog](README.md#automation-and-remaining-manual-scope)
+and [test commands](../../docs/testing.md). Never run a maintenance utility against
+canonical data for validation.
 
 ## DATA-001 — Extraction preserves symbol identity and unique relations
 

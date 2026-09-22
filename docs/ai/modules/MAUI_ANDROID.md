@@ -63,8 +63,9 @@ Local sync checks cover `RJLAN003` phone-to-web and web-to-phone transfers over
 Wi-Fi in Automatic and Manual modes: discovery, matching codes on both screens,
 cancellation, preview/apply, and persisted matching selections. Device evidence
 uses a temporary Debug package; Release compilation is checked separately.
-StorageChecks additionally covers conflict resolution, restart recovery,
-authenticated-record tampering and cross-session replay.
+Automated integration and browser tests additionally cover conflict resolution,
+restart recovery, authenticated-record tampering and cross-session replay on
+desktop .NET/Chromium. They do not add Android runtime evidence.
 Broader practice interaction remains outside these checks. The user's existing
 installation and private progress were preserved.
 

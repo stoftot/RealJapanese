@@ -31,8 +31,9 @@ The [security overview](docs/security.md) covers current protections, limitation
 and considerations before public distribution or hosting.
 
 [.NET facts](docs/ai/modules/DOTNET.md) document solution targets and the extraction
-utility's external dependencies. `StorageChecks` is the dependency-free executable
-regression suite for persistence and local transfer.
+utility's external dependencies. The [testing guide](docs/testing.md) covers the
+xUnit unit/integration, bUnit component and Playwright browser suites, including
+parallel execution with `dotnet test RealJapanese.Tests.slnx --settings tests/parallel.runsettings`.
 
 ## Development guidance and optional tools
 

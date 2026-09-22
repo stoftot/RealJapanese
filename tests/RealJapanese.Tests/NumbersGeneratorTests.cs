@@ -65,6 +65,7 @@ public sealed class NumbersGeneratorTests
     [Theory(Explicit = true)]
     [Trait("Category", "KnownDefect")]
     [MemberData(nameof(DefectiveCountingCases))]
+    // Irregular hundreds/thousands and combined man groups must retain their standard readings.
     public void GenerateCounting_ComposesIrregularEmbeddedGroups(int number, string expected)
     {
         var result = new NumbersGenerator().GenerateCounting(number);
@@ -76,6 +77,7 @@ public sealed class NumbersGeneratorTests
     [Theory(Explicit = true)]
     [Trait("Category", "KnownDefect")]
     [MemberData(nameof(AgeCases))]
+    // Allow the accepted counter alternatives documented by the STUDY-008 language oracle.
     public void GenerateAge_UsesAcceptedJapaneseCounterReading(int age, string[] acceptedAnswers)
     {
         var result = new NumbersGenerator().GenerateAge(age);
@@ -164,6 +166,7 @@ public sealed class NumbersGeneratorTests
 
     [Fact(Explicit = true)]
     [Trait("Category", "KnownDefect")]
+    // The default caller currently supplies zero although GenerateRandomTime requires a minimum of one.
     public void GenerateRandomTimeQuestion_DefaultRangeProducesValidTime()
     {
         var result = new NumbersQuestionGenerator().GenerateRandomTimeQuestion();
