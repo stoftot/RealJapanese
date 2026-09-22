@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../TestProject.props" />
+  <ItemGroup>
+    <ProjectReference Include="../../RealJapanese/Repositories/Repositories.csproj" />
+  </ItemGroup>
+</Project>

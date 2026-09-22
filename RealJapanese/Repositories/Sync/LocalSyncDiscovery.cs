@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 
-[assembly: InternalsVisibleTo("StorageChecks")]
+[assembly: InternalsVisibleTo("RealJapanese.IntegrationTests")]
 
 namespace Repositories.Sync;
 

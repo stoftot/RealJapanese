@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../TestProject.props" />
+  <ItemGroup>
+    <ProjectReference Include="../RealJapanese.TestSupport/RealJapanese.TestSupport.csproj" />
+    <ProjectReference Include="../RealJapanese.UtilityHost/RealJapanese.UtilityHost.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+</Project>
