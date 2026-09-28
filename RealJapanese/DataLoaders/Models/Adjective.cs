@@ -13,6 +13,13 @@ public record Adjective : Conjugatabel
         IRREGULAR
     }
 
+    private AdjectiveType CateGoryAsAdjectiveType()
+    {
+        if (!Enum.TryParse(Type.ToUpper(), out AdjectiveType adjectiveType))
+            throw new ArgumentException($"Unknown adjective type: {Type}");
+        return adjectiveType;
+    }
+
     #region conjugation
     private const string I_PresentAffirmativeEnding = "です";
     private const string I_PresentNegativeEnding = "くないです";
@@ -44,10 +51,7 @@ public record Adjective : Conjugatabel
             ToConjugate.Kana => Kana
         };
 
-        if (!Enum.TryParse(Type.ToUpper(), out AdjectiveType adjectiveType))
-            throw new ArgumentException($"Unknown adjective type: {Type}");
-
-        return adjectiveType switch
+        return CateGoryAsAdjectiveType() switch
         {
             AdjectiveType.I => StemI(str),
             AdjectiveType.NA => str,
@@ -86,5 +90,25 @@ public record Adjective : Conjugatabel
 
         return string.Concat(stem, ending);
     }
+    #endregion
+
+    #region TeForm
+
+    public string TeForm(ToConjugate toConjugate)
+    {
+        var str = toConjugate switch
+        {
+            ToConjugate.Japanese => Japanese,
+            ToConjugate.Kana => Kana
+        };
+
+        return CateGoryAsAdjectiveType() switch
+        {
+            AdjectiveType.I => str[..^1] + "くて",
+            AdjectiveType.NA => str[..^2] + "よくて",
+            AdjectiveType.IRREGULAR => str + "で",
+        };
+    }
+
     #endregion
 }

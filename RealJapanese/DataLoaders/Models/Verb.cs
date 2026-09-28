@@ -144,10 +144,7 @@ public record Verb : Conjugatabel
             ToConjugate.Kana => Kana
         };
 
-        if (!Enum.TryParse(Type.ToUpper(), out VerbType verbType))
-            throw new ArgumentException($"Unknown verb type: {Type}");
-
-        switch (verbType)
+        switch (CategoryAsVerbType())
         {
             case VerbType.U:
             {
