@@ -12,6 +12,13 @@ public record Verb : Conjugatabel
         IRREGULAR
     }
 
+    private VerbType CategoryAsVerbType()
+    {
+        if (!Enum.TryParse(Type.ToUpper(), out VerbType verbType))
+            throw new ArgumentException($"Unknown verb type: {Type}");
+        return verbType;
+    }
+
     #region conjugation
 
     private const string PresentAffirmativeEnding = "ます";
@@ -88,33 +95,36 @@ public record Verb : Conjugatabel
         return firstPart + irregularConjugations[lastTwoChars];
     }
 
-    private string Stem(ToConjugate conjugate)
+    private string Stem(string conjugate)
     {
-        var str = conjugate switch
+        return CategoryAsVerbType() switch
         {
-            ToConjugate.Japanese => Japanese,
-            ToConjugate.Kana => Kana
-        };
-
-        if (!Enum.TryParse(Type.ToUpper(), out VerbType verbType))
-            throw new ArgumentException($"Unknown verb type: {Type}");
-
-        return verbType switch
-        {
-            VerbType.U => StemU(str),
-            VerbType.RU => StemRu(str),
-            VerbType.IRREGULAR => StemIrregular(str)
+            VerbType.U => StemU(conjugate),
+            VerbType.RU => StemRu(conjugate),
+            VerbType.IRREGULAR => StemIrregular(conjugate)
         };
     }
-
-    public override string Conjugate(ToConjugate toConjugate, ConjugationType conjugationType) =>
-        conjugationType switch
+    
+    private string Conjugate(string toConjugate, ConjugationType conjugationType)
+    {
+        return conjugationType switch
         {
             ConjugationType.PresentAffirmative => Stem(toConjugate) + PresentAffirmativeEnding,
             ConjugationType.PresentNegative => Stem(toConjugate) + PresentNegativeEnding,
             ConjugationType.PastAffirmative => Stem(toConjugate) + PastAffirmativeEnding,
             ConjugationType.PastNegative => Stem(toConjugate) + PastNegativeEnding,
         };
+    }
+
+    public override string Conjugate(ToConjugate toConjugate, ConjugationType conjugationType)
+    {
+        var str = toConjugate switch
+        {
+            ToConjugate.Japanese => Japanese,
+            ToConjugate.Kana => Kana
+        };
+        return Conjugate(str, conjugationType);
+    }
 
     #endregion
 
@@ -183,6 +193,16 @@ public record Verb : Conjugatabel
             "する" => "し" + (form.Equals(VerbForm.TE) ? "て" : "な"),
             "くる" => "き" + (form.Equals(VerbForm.TE) ? "て" : "な")
         };
+
+    #endregion
+
+    #region Action
+
+    public string ActionOrChangeForm(ToConjugate toConjugate, ConjugationType conjugationType)
+    {
+        var teForm = Form(toConjugate, VerbForm.TE);
+        return Conjugate(teForm + "いる", conjugationType);
+    }
 
     #endregion
 }

@@ -13,6 +13,7 @@ public record Adjective : Conjugatabel
         IRREGULAR
     }
 
+    #region conjugation
     private const string I_PresentAffirmativeEnding = "です";
     private const string I_PresentNegativeEnding = "くないです";
     private const string I_PastAffirmativeEnding = "かったです";
@@ -85,4 +86,5 @@ public record Adjective : Conjugatabel
 
         return string.Concat(stem, ending);
     }
+    #endregion
 }
