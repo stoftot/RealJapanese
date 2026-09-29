@@ -22,6 +22,8 @@ The Android host observes IME visibility through window insets and passes it to
 the local document through `KeyboardNavigationObserver`. Mobile-only CSS hides
 the bottom navigation and removes its reserved space while the keyboard is open;
 closing the keyboard restores navigation even if a text input retains focus.
+Kana practice also reduces its card height while the keyboard is open, keeping
+the answer field and actions available in the smaller viewport.
 The observer is detached when the native WebView handler changes.
 
 ## Packaged data and private state

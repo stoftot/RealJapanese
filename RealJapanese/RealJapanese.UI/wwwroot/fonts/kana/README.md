@@ -1,0 +1,7 @@
+# Offline kana font subsets
+
+These weight 400 WOFF2 assets are sourced from Google Fonts CSS and contain the requested hiragana (U+3041–U+3096) and katakana (U+30A1–U+30FA) text subset. They support offline kana font previews while keeping the downloaded font files limited to kana glyphs.
+
+Each family is distributed under the SIL Open Font License 1.1. The matching `*-OFL.txt` file contains the full license and copyright notice from the official [google/fonts](https://github.com/google/fonts) repository. Family source pages: [Noto Sans JP](https://fonts.google.com/specimen/Noto+Sans+JP), [Noto Serif JP](https://fonts.google.com/specimen/Noto+Serif+JP), [Zen Kurenaido](https://fonts.google.com/specimen/Zen+Kurenaido), [Kaisei Tokumin](https://fonts.google.com/specimen/Kaisei+Tokumin), [Kiwi Maru](https://fonts.google.com/specimen/Kiwi+Maru), [Stick](https://fonts.google.com/specimen/Stick), [Shippori Antique B1](https://fonts.google.com/specimen/Shippori+Antique+B1), [Kaisei Opti](https://fonts.google.com/specimen/Kaisei+Opti), and [Klee One](https://fonts.google.com/specimen/Klee+One).
+
+Load `kana-fonts.css` to register the local faces. Font binaries are served from relative URLs, with `font-display: swap`.

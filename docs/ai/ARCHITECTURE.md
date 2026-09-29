@@ -122,6 +122,27 @@ Category actions coordinate exclusive known/training/rehearsing membership and
 save progress. Practice links pass `category=known|rehearsing|training`; shared
 practice bases select chunks, shuffle, check normalized input and manage retries.
 
+### Kana selection and practice
+
+The shared `/kana` module contains Hiragana, Katakana, Study and Settings views.
+`Repositories/Kana` owns the fixed character catalog, accepted rōmaji readings,
+finite practice rounds and preference model. It does not depend on vocabulary
+catalog files. The nine kana font subsets ship as shared static assets with their
+licenses; practice needs no remote fonts or reference-site connection.
+
+The page loads and saves versioned preferences through `wwwroot/js/kana-storage.js`
+under the browser/WebView localStorage key `realjapanese.kana.v1`. Selected kana,
+last script/group, fonts, study options, review cards and per-set best scores/times
+are device-local. They are separate from `Progress.json` and local progress sync;
+web browser profiles do not share kana preferences through server singletons.
+Clearing browser/app storage removes these choices. Blocked storage leaves the
+module usable for the current visit and displays a persistence warning.
+
+Practice rounds remain in component memory. Only first-try, unassisted answers
+count as correct; missed/revealed cards stay in review until answered correctly
+in a later attempt. Review can also be adjusted explicitly. Empty selections,
+invalid saved IDs and unavailable storage have explicit handling.
+
 ### Data maintenance
 
 Duplicate cleanup deduplicates words, assigns replacement IDs and remaps progress.

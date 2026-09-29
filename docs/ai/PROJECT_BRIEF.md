@@ -14,6 +14,8 @@ collection. This audience is inferred from the UI; a separate product specificat
 or owner-approved roadmap was not found.
 
 - Select known, training or rehearsing vocabulary and maintain those collections.
+- Practise hiragana and katakana characters in one Kana module, with saved
+  selections/settings, offline font choices, review and local high scores.
 - Practice spelling and flashcards, verb/adjective categories and conjugation,
   single/combined kanji meanings, and generated number questions.
 - Reveal answers and repeat difficult questions during a practice session.

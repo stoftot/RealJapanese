@@ -1,0 +1,83 @@
+:root {
+  --kana-font-noto-sans-jp: 'Kana Noto Sans JP', sans-serif;
+  --kana-font-noto-serif-jp: 'Kana Noto Serif JP', serif;
+  --kana-font-zen-kurenaido: 'Kana Zen Kurenaido', sans-serif;
+  --kana-font-kaisei-tokumin: 'Kana Kaisei Tokumin', serif;
+  --kana-font-kiwi-maru: 'Kana Kiwi Maru', serif;
+  --kana-font-stick: 'Kana Stick', sans-serif;
+  --kana-font-shippori-antique-b1: 'Kana Shippori Antique B1', sans-serif;
+  --kana-font-kaisei-opti: 'Kana Kaisei Opti', serif;
+  --kana-font-klee-one: 'Kana Klee One', cursive;
+}
+
+@font-face {
+  font-family: 'Kana Noto Sans JP';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./notosansjp-400-kana.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Kana Noto Serif JP';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./notoserifjp-400-kana.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Kana Zen Kurenaido';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./zenkurenaido-400-kana.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Kana Kaisei Tokumin';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./kaiseitokumin-400-kana.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Kana Kiwi Maru';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./kiwimaru-400-kana.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Kana Stick';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./stick-400-kana.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Kana Shippori Antique B1';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./shipporiantiqueb1-400-kana.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Kana Kaisei Opti';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./kaiseiopti-400-kana.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Kana Klee One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./kleeone-400-kana.woff2') format('woff2');
+}

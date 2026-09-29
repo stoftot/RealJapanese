@@ -6,4 +6,21 @@
     html.android-keyboard-open .page .content {
         padding-bottom: 1rem;
     }
+
+    html.android-keyboard-open .kana-module .study-card-face {
+        min-height: 6rem;
+        height: 18vh;
+        max-height: 8rem;
+    }
+
+    html.android-keyboard-open .kana-module .study-character {
+        font-size: 3rem;
+        line-height: 1.2;
+    }
+
+    html.android-keyboard-open .kana-module .revealed-answer,
+    html.android-keyboard-open .kana-module .wrong-answer {
+        margin: .25rem 0;
+        font-size: 1rem;
+    }
 }

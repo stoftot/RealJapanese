@@ -1,0 +1,78 @@
+.kana-module {
+    --kana-blue: #315779;
+    --kana-line: #a5b8c9;
+    max-width: 880px;
+    margin: clamp(.5rem, 4vh, 3rem) auto;
+    color: #203348;
+    background: #fff;
+    border: 1px solid #dbe2e9;
+    box-shadow: 0 4px 22px #193c6010;
+}
+.kana-tabs { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--kana-line); }
+button { color: var(--kana-blue); background: white; border: 1px solid var(--kana-line); padding: .45rem .7rem; border-radius: 2px; cursor: pointer; }
+button:hover:not(:disabled) { background: #ecf3f8; }
+button:focus-visible, input:focus-visible, .kana-chart-scroll:focus-visible { outline: 3px solid #4283b5; outline-offset: 2px; }
+button:disabled { opacity: .45; cursor: default; }
+.kana-tabs button { text-transform: uppercase; font-size: .86rem; font-weight: 600; padding: 1rem .3rem; border: 0; border-right: 1px solid var(--kana-line); border-radius: 0; }
+.kana-tabs button:last-child { border-right: 0; }
+.kana-tabs .active { background: #edf4fa; box-shadow: inset 0 -3px var(--kana-blue); }
+.kana-content { padding: clamp(1rem, 3vw, 1.8rem); }
+.kana-heading { display: flex; align-items: center; gap: .7rem; margin-bottom: 1.1rem; }
+.kana-mark { font-family: 'Kana Noto Serif JP', serif; background: #dceaf5; color: #305c85; font-size: 2rem; width: 3rem; height: 3.1rem; text-align: center; }
+h1 { font-size: 1.65rem; margin: 0; font-weight: 650; }
+h2 { font-size: 1.05rem; margin: .2rem 0 0; font-weight: 500; }
+.text-action { padding: 0; border: 0; text-decoration: underline; font-weight: 600; }
+.group-tabs { display: flex; gap: .5rem; flex-wrap: wrap; margin: 1.5rem 0 1rem; }
+.group-tabs button { display: flex; gap: .7rem; align-items: center; }
+.group-tabs small { color: #526779; font-variant-numeric: tabular-nums; }
+.group-tabs .active { background: #e1edf7; border-color: var(--kana-blue); }
+.selection-tools { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.selection-tools > span { margin-right: auto; color: #526779; font-size: .9rem; }
+.table-hint { font-size: .78rem; color: #5f7080; margin: .7rem 0; }
+.kana-chart-scroll { max-width: 100%; overflow-x: auto; padding-bottom: .5rem; }
+.kana-chart { display: grid; border-left: 1px solid var(--kana-line); width: 100%; min-width: max-content; }
+.kana-column { border: 1px solid var(--kana-line); border-left: 0; }
+.column-toggle { width: 100%; font-size: .7rem; min-height: 32px; border: 0; border-bottom: 1px solid var(--kana-line); background: #f5f8fb; border-radius: 0; }
+.kana-cell { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 65px; border: 0; border-radius: 0; padding: .25rem; }
+.kana-cell span { font-family: 'Kana Noto Sans JP', sans-serif; font-size: 1.22rem; white-space: nowrap; }
+.kana-cell small { font-size: .67rem; color: #617284; margin-top: .1rem; }
+.chosen { background: #c8def0; box-shadow: inset 0 -2px #567d9f; }
+.kana-cell.chosen:hover, .font-option.chosen:hover { background: #b9d3e8; }
+.empty { background: #fafbfd; }
+.selection-bottom { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+.selection-bottom > span, .saved-note { color: #5f7080; font-size: .85rem; }
+.primary-action { background: var(--kana-blue); color: white; border-color: var(--kana-blue); }
+.primary-action:hover:not(:disabled) { background: #264563; }
+.font-options { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); margin: 1.4rem 0 .5rem; }
+.font-option { min-width: 0; padding: .5rem .15rem; border-radius: 0; }
+.font-option span { display: block; font-size: 2rem; }
+.font-option small { display: block; font-size: .62rem; line-height: 1.25; min-height: 2.4em; margin-top: .5rem; }
+.study-options { display: grid; gap: 1.2rem; margin: 2rem 0; }
+.study-options label { display: flex; align-items: flex-start; gap: .7rem; cursor: pointer; }
+.study-options input { width: 1.1rem; height: 1.1rem; margin-top: .2rem; accent-color: var(--kana-blue); }
+.study-options small { display: block; font-size: .82rem; color: #5f7080; margin-top: .15rem; }
+.review-tools, .practice-actions { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; margin-bottom: 1rem; }
+.review-tools button, .practice-actions button { font-size: .8rem; }
+.study-status { display: flex; justify-content: space-between; font-size: .85rem; color: #5f7080; }
+.study-card-face { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 280px; height: 36vh; max-height: 400px; }
+.study-character { font-size: clamp(4.5rem, 12vw, 6.5rem); line-height: 1.4; color: #18232e; }
+.revealed-answer { font-size: 1.5rem; margin-top: 1rem; color: var(--kana-blue); }
+.wrong-answer { color: #a13333; margin-top: 1rem; }
+.kana-answer-form { display: flex; gap: .5rem; max-width: 400px; margin: 1rem auto; }
+.kana-answer-form input { min-width: 0; width: 100%; border: 0; border-bottom: 2px solid var(--kana-line); text-align: center; font-size: 1.25rem; padding: .6rem; color: #203348; background: white; border-radius: 0; }
+.practice-actions { justify-content: center; margin: 1.2rem 0 0; }
+.empty-state, .round-summary { padding: 3rem 0; text-align: center; }
+.empty-state h2, .round-summary h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+.round-summary button { margin: .3rem; }
+.round-score { font-size: 1.25rem; }
+.summary-symbol { display: block; color: #386c64; font-size: 3rem; margin-bottom: 1rem; }
+.storage-message { color: #805219; background: #fff6e6; padding: .75rem; font-size: .85rem; }
+.kana-loading { padding: 2rem; }
+@media (max-width: 600px) {
+    .kana-module { margin: 0 auto; }
+    .kana-tabs button { font-size: .68rem; padding: .85rem .2rem; }
+    .font-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .font-option small { min-height: auto; }
+    .selection-tools > span { flex-basis: 100%; }
+    .study-card-face { min-height: 220px; height: 32vh; }
+}

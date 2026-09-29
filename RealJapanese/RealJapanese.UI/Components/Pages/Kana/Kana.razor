@@ -1,0 +1,170 @@
+@page "/kana"
+@using Repositories.Kana
+@inherits KanaBase
+
+<PageTitle>Kana · RealJapanese</PageTitle>
+
+<section class="kana-module" aria-label="Kana module">
+    <nav class="kana-tabs" aria-label="Kana navigation">
+        @foreach (var tab in Tabs)
+        {
+            <button type="button" class="@(View == tab ? "active" : "")" aria-current="@(View == tab ? "page" : null)"
+                    disabled="@(!Ready)" @onclick="() => ChangeTab(tab)">@tab</button>
+        }
+    </nav>
+    @if (!Ready)
+    {
+        <p class="kana-loading" role="status">Loading your kana choices…</p>
+    }
+    else
+    {
+        <div class="kana-content">
+            @if (StorageMessage is not null)
+            {
+                <p class="storage-message" role="status">@StorageMessage</p>
+            }
+            @if (View is "Hiragana" or "Katakana")
+            {
+                <header class="kana-heading">
+                    <span class="kana-mark" aria-hidden="true">@(Preferences.Script == KanaScript.Hiragana ? "あ" : "ア")</span>
+                    <div><h1>@View</h1><h2>Characters</h2></div>
+                </header>
+                <p>Choose your characters, then <button class="text-action" @onclick='() => ChangeTab("Study")'>study</button>.</p>
+                <div class="group-tabs" aria-label="Character sets">
+                    @foreach (var group in Groups)
+                    {
+                        <button type="button" class="@(Preferences.Group == group ? "active" : "")"
+                                aria-pressed="@Pressed(Preferences.Group == group)" @onclick="() => ChangeGroup(group)">
+                            @group <small>@SelectedCount(group)/@GroupCards(group).Count()</small>
+                        </button>
+                    }
+                </div>
+                <div class="selection-tools">
+                    <span role="status">@Preferences.Selected.Count characters selected</span>
+                    <button @onclick="() => SelectGroup(true)">Add all</button>
+                    <button @onclick="() => SelectGroup(false)">Clear all</button>
+                </div>
+                <p class="table-hint">Select a column heading or individual characters. Swipe the chart to see more.</p>
+                <div class="kana-chart-scroll" tabindex="0" role="region" aria-label="Scrollable character chart">
+                    <div class="kana-chart" style="grid-template-columns: repeat(@Columns.Count, minmax(46px, 1fr))">
+                        @foreach (var column in Columns)
+                        {
+                            <div class="kana-column">
+                                <button class="column-toggle @(column.All(IsSelected) ? "chosen" : "")"
+                                        aria-label="@($"Select {column[0].Text} {column[0].Romaji} column")" aria-pressed="@Pressed(column.All(IsSelected))"
+                                        @onclick="() => ToggleColumn(column)">@column[0].Romaji</button>
+                                @for (var row = 0; row < RowCount; row++)
+                                {
+                                    var character = column.FirstOrDefault(c => c.Row == row);
+                                    if (character is null)
+                                    {
+                                        <div class="kana-cell empty" aria-hidden="true"></div>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="kana-cell @(IsSelected(character) ? "chosen" : "")"
+                                                aria-label="@($"{character.Text} {character.Romaji}")" aria-pressed="@Pressed(IsSelected(character))"
+                                                @onclick="() => ToggleCharacter(character)">
+                                            <span lang="ja">@character.Text</span><small>@character.Romaji</small>
+                                        </button>
+                                    }
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="selection-bottom">
+                    <button class="primary-action" disabled="@(Preferences.Selected.Count == 0)" @onclick='() => ChangeTab("Study")'>Study @Preferences.Selected.Count characters</button>
+                    <span>Hiragana and katakana can be studied together.</span>
+                </div>
+            }
+            else if (View == "Settings")
+            {
+                <header class="kana-heading"><span class="kana-mark" aria-hidden="true">あ</span><div><h1>Settings</h1><h2>Fonts and study options</h2></div></header>
+                <p>Choose one or more fonts. Each card uses one of your selected fonts.</p>
+                <div class="font-options" aria-label="Study fonts">
+                    @for (var i = 0; i < FontNames.Length; i++)
+                    {
+                        var font = i;
+                        <button class="font-option @(Preferences.Fonts.Contains(font) ? "chosen" : "")"
+                                aria-label="@FontNames[font]" aria-pressed="@Pressed(Preferences.Fonts.Contains(font))" @onclick="() => ToggleFont(font)">
+                            <span lang="ja" style="font-family: @FontFamily(font)">あ</span><small>@FontNames[font]</small>
+                        </button>
+                    }
+                </div>
+                <p class="table-hint">Keep at least one font selected.</p>
+                <div class="study-options">
+                    <label><input type="checkbox" @bind="Preferences.AutoSubmit" @bind:after="Save" /> <span>Auto-submit<small>Advance as soon as your rōmaji answer is correct.</small></span></label>
+                    <label><input type="checkbox" @bind="Preferences.HighScores" @bind:after="Save" /> <span>High scores<small>Remember your best score and fastest time for each set.</small></span></label>
+                    <label><input type="checkbox" @bind="Preferences.RandomOrder" @bind:after="Save" /> <span>Random order<small>Shuffle the cards at the start of each round.</small></span></label>
+                    <label><input type="checkbox" @bind="Preferences.Review" @bind:after="Save" /> <span>Review<small>Keep missed and revealed cards for extra practice.</small></span></label>
+                    <label><input type="checkbox" @bind="Preferences.Scoring" @bind:after="Save" /> <span>Scoring<small>Show your score while studying.</small></span></label>
+                </div>
+                <p class="saved-note">Selections, fonts and options are remembered on this device.</p>
+            }
+            else
+            {
+                <header class="kana-heading">
+                    <span class="kana-mark" aria-hidden="true">あ</span>
+                    <div><h1>@(ReviewMode ? "Review" : "Study")</h1><h2>@(Session?.Total ?? 0) kana cards</h2></div>
+                </header>
+                @if (Preferences.Review)
+                {
+                    <div class="review-tools">
+                        @if (ReviewMode) { <button @onclick="() => Start(false)">Back to study</button> }
+                        else { <button disabled="@(Preferences.ReviewCards.Count == 0)" @onclick="() => Start(true)">Review (@Preferences.ReviewCards.Count)</button> }
+                        <button disabled="@(Preferences.ReviewCards.Count == 0)" @onclick="ClearReview">Clear review</button>
+                    </div>
+                }
+                @if (Session is null || Session.Total == 0)
+                {
+                    <div class="empty-state"><h2>@(ReviewMode ? "No cards to review" : "Choose some kana first")</h2>
+                        <p>@(ReviewMode ? "Missed or revealed cards will appear here." : "Select characters from Hiragana or Katakana to begin.")</p>
+                        <button @onclick="() => ChangeTab(Preferences.Script.ToString())">Choose characters</button>
+                    </div>
+                }
+                else if (Session.Finished)
+                {
+                    <div class="round-summary" role="status">
+                        <span class="summary-symbol" aria-hidden="true">✓</span><h2>Round complete</h2>
+                        @if (Preferences.Scoring) { <p class="round-score">@Session.Correct / @Session.Total correct · @Session.Percent%</p> }
+                        <p>Time: @FormatTime(Session.Seconds)</p>
+                        @if (Preferences.HighScores && !ReviewMode && Best is not null)
+                        {
+                            <p>Best score: @Best.Percent% · Fastest time: @FormatTime(Best.Seconds)</p>
+                        }
+                        <button class="primary-action" @onclick="() => Start(ReviewMode)">Study again</button>
+                        @if (Preferences.Review && Preferences.ReviewCards.Count > 0 && !ReviewMode)
+                        { <button @onclick="() => Start(true)">Review missed cards (@Preferences.ReviewCards.Count)</button> }
+                    </div>
+                }
+                else if (Session.Current is { } current)
+                {
+                    <p>Type the rōmaji equivalent.</p>
+                    <div class="study-status"><span>Card @(Session.Completed + 1) / @Session.Total</span>
+                        @if (Preferences.Scoring) { <span>Score: @Session.Correct / @Session.Completed</span> }
+                    </div>
+                    <div class="study-card-face">
+                        <div class="study-character" lang="ja" style="font-family: @FontFamily(CurrentFont)">@current.Text</div>
+                        @if (Session.Revealed) { <p class="revealed-answer" role="status">@current.Romaji</p> }
+                        else if (Wrong) { <p class="wrong-answer" role="status">Try again, or show the answer.</p> }
+                    </div>
+                    <form class="kana-answer-form" @onsubmit="Submit" @onsubmit:preventDefault>
+                        <label for="kana-answer" class="visually-hidden">Rōmaji answer</label>
+                        <input id="kana-answer" @ref="AnswerElement" @bind:get="Answer" @bind:set="Input" @bind:event="oninput" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type rōmaji…" />
+                        <button type="submit" class="primary-action">@(Session.Revealed ? "Next" : "Check")</button>
+                    </form>
+                    <div class="practice-actions">
+                        <button disabled="@Session.Revealed" @onclick="Reveal">Show answer</button>
+                        @if (Preferences.Review)
+                        {
+                            <button aria-pressed="@Pressed(Preferences.ReviewCards.Contains(current.Id))" @onclick="ToggleReview">
+                                @(Preferences.ReviewCards.Contains(current.Id) ? "Remove from review" : "Add to review")
+                            </button>
+                        }
+                    </div>
+                }
+            }
+        </div>
+    }
+</section>

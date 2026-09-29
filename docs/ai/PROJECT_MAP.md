@@ -69,6 +69,7 @@ verify tools, not the app.
 | Mobile WebView host | `RealJapanese/RealJapanese.Mobile/MainPage.xaml.cs`, `wwwroot/index.html` |
 | Shared routes and navigation | `RealJapanese/RealJapanese.UI/Components/Routes.razor`, `Layout/NavMenu.razor` |
 | Shared study pages | `RealJapanese/RealJapanese.UI/Components/Pages/` |
+| Kana selection, settings and study | `RealJapanese/RealJapanese.UI/Components/Pages/Kana/`; catalog/session in `RealJapanese/Repositories/Kana/` |
 | Shared practice lifecycle | `RealJapanese/RealJapanese.UI/Components/Shared/PracticeBase.cs`, `PracticeShell.razor` |
 | Local sync UI | `RealJapanese/RealJapanese.UI/Components/Pages/Sync.razor` |
 | Storage paths and persistence | `RealJapanese/Repositories/RepositoryPaths.cs`, `Bases/WordDataBase.cs`, `Sync/ProgressStore.cs` |
