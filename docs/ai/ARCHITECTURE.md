@@ -122,6 +122,24 @@ Category actions coordinate exclusive known/training/rehearsing membership and
 save progress. Practice links pass `category=known|rehearsing|training`; shared
 practice bases select chunks, shuffle, check normalized input and manage retries.
 
+### Conjugation models and study integration
+
+The DataLoaders [Verb](../../RealJapanese/DataLoaders/Models/Verb.cs) and
+[Adjective](../../RealJapanese/DataLoaders/Models/Adjective.cs) models own
+conjugation logic. Both expose `ShortForm(ToConjugate, ConjugationType)` for
+present/past affirmative and negative short forms. `Adjective.TeForm(ToConjugate)`
+adds adjective te-form generation; `Verb.ActionOrChangeForm(ToConjugate,
+ConjugationType)` builds a te-form plus conjugated `いる` construction.
+`ToConjugate` selects the model's Japanese or Kana value.
+
+These methods currently have no callers in the study UI and no automated test
+coverage. The verb study page uses polite `Conjugate()` and `Form(..., TE)`;
+the adjective study page uses polite `Conjugate()` only. Existing
+[conjugation tests](../../tests/RealJapanese.Tests/ConjugationTests.cs) cover those
+older APIs, including explicit known-defect cases. The new methods still need
+language-correctness validation and regression coverage before being exposed as
+study features.
+
 ### Kana selection and practice
 
 The shared `/kana` module contains Hiragana, Katakana, Study and Settings views.
