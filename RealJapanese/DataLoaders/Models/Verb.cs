@@ -18,14 +18,7 @@ public record Verb : Conjugatabel
             throw new ArgumentException($"Unknown verb type: {Type}");
         return verbType;
     }
-
-    #region conjugation
-
-    private const string PresentAffirmativeEnding = "ます";
-    private const string PresentNegativeEnding = "ません";
-    private const string PastAffirmativeEnding = "ました";
-    private const string PastNegativeEnding = "ませんでした";
-
+    
     public static readonly IReadOnlyList<Verb> possibleEndings = new List<Verb>()
     {
         new (){ Japanese = "う", Kana = "う", Type = "u", English = "NAN" },
@@ -49,6 +42,13 @@ public record Verb : Conjugatabel
         new (){ Japanese = "する", Kana = "する", Type = "irregular", English = "NAN" },
         new (){ Japanese = "くる", Kana = "くる", Type = "irregular", English = "NAN" }
     }.AsReadOnly();
+
+    #region conjugation
+
+    private const string PresentAffirmativeEnding = "ます";
+    private const string PresentNegativeEnding = "ません";
+    private const string PastAffirmativeEnding = "ました";
+    private const string PastNegativeEnding = "ませんでした";
     
     private static readonly FrozenDictionary<string, string> uConjugations =
         new Dictionary<string, string>
@@ -193,7 +193,7 @@ public record Verb : Conjugatabel
 
     #endregion
 
-    #region Action
+    #region Action/change form
 
     public string ActionOrChangeForm(ToConjugate toConjugate, ConjugationType conjugationType)
     {
@@ -201,5 +201,90 @@ public record Verb : Conjugatabel
         return Conjugate(teForm + "いる", conjugationType);
     }
 
+    #endregion
+
+    #region Short forms
+    
+    private const string ShortPresentNegativeEnding = "ない";
+    private const string ShortPastNegativeEnding = "なかった";
+    
+    private static readonly FrozenDictionary<string, string> ShortUConjugations =
+        new Dictionary<string, string>
+        {
+            { "う", "わ" },
+            { "く", "か" },
+            { "ぐ", "が" },
+            { "す", "さ" },
+            { "つ", "た" },
+            { "ぬ", "な" },
+            { "ぶ", "ば" },
+            { "む", "ま" },
+            { "る", "ら" }
+        }.ToFrozenDictionary();
+
+    private static readonly FrozenDictionary<string, string> ShortRuConjugations =
+        new Dictionary<string, string>
+        {
+            { "る", "" }
+        }.ToFrozenDictionary();
+
+    private static readonly FrozenDictionary<string, string> ShortIrregularConjugations =
+        new Dictionary<string, string>
+        {
+            { "する", "し" },
+            { "くる", "こ" }
+        }.ToFrozenDictionary();
+    
+    private string ShortStemU(string str)
+    {
+        var (firstPart, lastChar) = str.LastChar();
+        return firstPart + ShortUConjugations[lastChar];
+    }
+
+    private string ShortStemRu(string str)
+    {
+        var (firstPart, lastChar) = str.LastChar();
+        return firstPart + ShortRuConjugations[lastChar];
+    }
+
+    private string ShortStemIrregular(string str)
+    {
+        var (firstPart, lastTwoChars) = str.LastTwoChars();
+        return firstPart + ShortIrregularConjugations[lastTwoChars];
+    }
+    
+    private string ShortStem(string conjugate)
+    {
+        return CategoryAsVerbType() switch
+        {
+            VerbType.U => ShortStemU(conjugate),
+            VerbType.RU => ShortStemRu(conjugate),
+            VerbType.IRREGULAR => ShortStemIrregular(conjugate)
+        };
+    }
+
+    private string ShortFormPastAffirmative(ToConjugate toConjugate)
+    {
+        var teForm = Form(toConjugate, VerbForm.TE);
+        var(firstPart, lastChar) = teForm.LastChar();
+        return lastChar.Equals("て") ? firstPart + "た" : firstPart + "だ";
+    }
+
+    public string ShortForm(ToConjugate toConjugate, ConjugationType conjugationType)
+    {
+        var str = toConjugate switch
+        {
+            ToConjugate.Japanese => Japanese,
+            ToConjugate.Kana => Kana
+        };
+        
+        return conjugationType switch
+        {
+            ConjugationType.PresentAffirmative => Stem(str),
+            ConjugationType.PresentNegative => (str == "ある" ? "" : ShortStem(str)) + ShortPresentNegativeEnding,
+            ConjugationType.PastAffirmative => ShortFormPastAffirmative(toConjugate),
+            ConjugationType.PastNegative => ShortStem(str) + ShortPastNegativeEnding,
+        };
+    }
     #endregion
 }

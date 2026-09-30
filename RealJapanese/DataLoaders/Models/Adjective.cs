@@ -111,4 +111,47 @@ public record Adjective : Conjugatabel
     }
 
     #endregion
+
+    #region Short forms
+    private const string Short_I_PresentNegativeEnding = "くない";
+    private const string Short_I_PastAffirmativeEnding = "かった";
+    private const string Short_I_PastNegativeEnding = "なかった";
+
+    private const string Short_NA_PresentAffirmativeEnding = "だ";
+    private const string Short_NA_PresentNegativeEnding = "じゃない";
+    private const string Short_NA_PastAffirmativeEnding = "だった";
+    private const string Short_NA_PastNegativeEnding = "じゃなかった";
+    
+    public string ShortForm(ToConjugate toConjugate, ConjugationType conjugationType)
+    {
+        var adjectiveType = CateGoryAsAdjectiveType();
+
+        var stem = Stem(toConjugate, conjugationType);
+
+        var ending = adjectiveType switch
+        {
+            AdjectiveType.I or AdjectiveType.IRREGULAR => conjugationType switch
+            {
+                ConjugationType.PresentAffirmative => "",
+                ConjugationType.PresentNegative => Short_I_PresentNegativeEnding,
+                ConjugationType.PastAffirmative => Short_I_PastAffirmativeEnding,
+                ConjugationType.PastNegative => Short_I_PastNegativeEnding,
+                _ => throw new ArgumentOutOfRangeException(nameof(conjugationType), conjugationType, null)
+            },
+
+            AdjectiveType.NA => conjugationType switch
+            {
+                ConjugationType.PresentAffirmative => Short_NA_PresentAffirmativeEnding,
+                ConjugationType.PresentNegative => Short_NA_PresentNegativeEnding,
+                ConjugationType.PastAffirmative => Short_NA_PastAffirmativeEnding,
+                ConjugationType.PastNegative => Short_NA_PastNegativeEnding,
+                _ => throw new ArgumentOutOfRangeException(nameof(conjugationType), conjugationType, null)
+            },
+            _ => throw new ArgumentOutOfRangeException(nameof(conjugationType), conjugationType, null)
+        };
+
+        return string.Concat(stem, ending);
+    }
+    
+    #endregion
 }
