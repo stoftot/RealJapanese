@@ -1,0 +1,132 @@
+@page "/genki"
+@page "/genki/{LessonNumber:int}"
+@inherits GenkiBase
+@using RealJapanese.Components.Shared
+
+<PageTitle>Genki grammar practice</PageTitle>
+
+<div class="genki-module">
+    <header class="genki-header">
+        <p class="text-muted mb-1">GENKI I · Third edition companion</p>
+        <h1>Build your own Japanese sentences</h1>
+        <p>Quick grammar refreshers and original sentence practice, following all 12 lessons.
+            Use the textbook for the full explanations. Kana answers are welcome.</p>
+    </header>
+
+    @if (LessonNumber is null)
+    {
+        <div class="lesson-grid">
+            @foreach (var item in Catalog.Lessons)
+            {
+                <a class="lesson-tile" href="@($"genki/{item.Number}")">
+                    <span class="lesson-number">Lesson @item.Number</span>
+                    <h2>@item.Title</h2>
+                    <span>@item.GrammarPoints.Count grammar points · @item.GrammarPoints.Sum(p => p.Schemas.Count) practice patterns</span>
+                </a>
+            }
+        </div>
+        <p class="text-muted mt-4">Need to practise the writing system? <a href="kana">Open Kana</a>.</p>
+    }
+    else if (Lesson is null)
+    {
+        <div role="alert" class="alert alert-warning">This lesson does not exist. <a href="genki">Choose a lesson</a>.</div>
+    }
+    else
+    {
+        <nav class="lesson-nav" aria-label="Genki lessons">
+            <a href="genki">All lessons</a>
+            @if (Lesson.Number > 1) { <a href="@($"genki/{Lesson.Number - 1}")">Previous lesson</a> }
+            @if (Lesson.Number < 12) { <a href="@($"genki/{Lesson.Number + 1}")">Next lesson</a> }
+        </nav>
+        <h2>Lesson @Lesson.Number · @Lesson.Title</h2>
+        <p class="text-muted">Textbook pages @Lesson.SourcePages (printed page numbers). Grammar builds on earlier lessons.</p>
+
+        @if (Current is null && !Finished)
+        {
+            <div class="practice-settings">
+                <label for="genki-vocabulary">Vocabulary through lesson</label>
+                <select id="genki-vocabulary" class="form-select" @bind="VocabularyLesson">
+                    @for (var n = Lesson.Number; n <= 12; n++) { <option value="@n">@n</option> }
+                </select>
+                <span class="text-muted">Expand the word pool while keeping this lesson’s grammar.</span>
+                <button class="btn btn-primary" @onclick="() => Start(null)">Practise whole lesson</button>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Error)) { <div class="alert alert-warning" role="alert">@Error</div> }
+
+        @if (Current is not null)
+        {
+            <section class="sentence-practice" aria-label="Sentence practice">
+                <div class="d-flex flex-wrap justify-content-between gap-2">
+                    <h3 tabindex="-1" @ref="PracticeHeading">@CurrentPoint?.Title</h3>
+                    <button class="btn btn-outline-secondary btn-sm" @onclick="Stop">Back to recap</button>
+                </div>
+                <p><strong>Context:</strong> @Current.Context</p>
+                <p><strong>Register:</strong> @Current.Schema.Register · @Current.Instruction</p>
+                <PracticeShell>
+                    <PracticeCard Title="Write in Japanese" ProgressText="@ProgressText"
+                                  Question="@Current.QuestionAnswer.Question" Answer="@VisibleAnswer"
+                                  UserInput="@Input" UserInputChanged="SetInput" Placeholder="Your Japanese sentence"
+                                  ShowAnswer="@Revealed" RevealRequested="Compare" RevealLabel="Compare with model"
+                                  NextRequested="Next" NextLabel="I understand · next" NextDisabled="@(!Revealed)" />
+                </PracticeShell>
+                @if (Revealed)
+                {
+                    <div class="review-note" role="status">
+                        <p>@Feedback</p>
+                        <p><strong>Check:</strong> @CurrentPoint?.Formation</p>
+                        <p>@Current.Schema.Omission</p>
+                        <button class="btn btn-outline-primary" @onclick="Retry">Practise this again</button>
+                    </div>
+                }
+                <details class="word-help"><summary>Vocabulary help (dictionary forms)</summary>
+                    <ul>@foreach (var word in Current.Words.Values.DistinctBy(x => x.Key))
+                        { <li><span lang="ja">@word.Japanese</span> · <span lang="ja">@word.Kana</span> — @word.English (@word.WordType)</li> }</ul>
+                </details>
+                <p class="text-muted small">Model comparison recognizes the supplied examples. It is not an automatic grammar grade;
+                    other word orders and contextually appropriate omissions can also be correct. Review the target form, then rate your own answer.</p>
+            </section>
+        }
+        else if (Finished)
+        {
+            <section class="alert alert-success" role="status">
+                <h3>Round complete</h3>
+                <p>You reviewed @Reviewed sentence prompts. Try a new round for different combinations.</p>
+                <button class="btn btn-primary" @onclick="() => Start(SelectedPoint)">New round</button>
+                <button class="btn btn-outline-secondary ms-2" @onclick="Stop">Back to recap</button>
+            </section>
+        }
+
+        <section aria-label="Grammar recap" class="grammar-recap">
+            @foreach (var point in Lesson.GrammarPoints)
+            {
+                <details class="grammar-point" id="@point.Id" open="@(Current is null && !Finished)">
+                    <summary>@point.Title</summary>
+                    <div class="recap-body">
+                        <p>@point.Meaning</p>
+                        <p><strong>Build it:</strong> @point.Formation</p>
+                        @foreach (var example in point.Examples)
+                        {
+                            <div class="grammar-example"><p lang="ja">@example.Japanese</p>
+                                @if (example.Kana != example.Japanese) { <p lang="ja" class="text-muted">@example.Kana</p> }
+                                <p>@example.English</p></div>
+                        }
+                        <ul>@foreach (var note in point.Notes) { <li>@note</li> }</ul>
+                        @if (point.Prerequisites.Count > 0)
+                        {
+                            <p class="small">Builds on:
+                                @foreach (var id in point.Prerequisites)
+                                { <a class="prerequisite" href="@PrerequisiteLink(id)">@PrerequisiteTitle(id)</a> }
+                            </p>
+                        }
+                        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                            <span class="small text-muted">Textbook pp. @point.SourcePages · @point.Schemas.Count patterns</span>
+                            <button class="btn btn-outline-primary" @onclick="() => Start(point.Id)">Practise @point.Title</button>
+                        </div>
+                    </div>
+                </details>
+            }
+        </section>
+    }
+</div>

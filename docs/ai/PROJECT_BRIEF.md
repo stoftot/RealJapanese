@@ -19,6 +19,8 @@ or owner-approved roadmap was not found.
 - Practice spelling and flashcards, verb/adjective categories and conjugation,
   single/combined kanji meanings, and generated number questions.
 - Reveal answers and repeat difficult questions during a practice session.
+- Follow GENKI I third-edition lessons with original grammar recaps and generated
+  sentence-production exercises, vocabulary help and model-based self-review.
 - Use the Android application offline without running the ASP.NET host.
 - Transfer progress directly between two open installations on the same trusted
   Wi-Fi network or personal hotspot, with an explicit merge preview.

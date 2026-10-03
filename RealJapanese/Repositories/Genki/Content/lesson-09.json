@@ -1,0 +1,1941 @@
+{
+  "schemaVersion": 1,
+  "number": 9,
+  "title": "Talking about the past and identifying people",
+  "sourcePages": "210–229",
+  "grammarPoints": [
+    {
+      "id": "g09-01",
+      "title": "Past short forms",
+      "sourcePages": "214",
+      "meaning": "Describe completed events and past states in plain form. These forms also fit inside quoted thoughts and other larger structures.",
+      "formation": "Verbs: change te-form て/で to た/だ. I-adjectives: い → かった. Nouns and na-adjectives: add だった. In any negative short form, change final ない to なかった.",
+      "notes": [
+        "The irregular te-form of 行く gives 行った. する → した; 来る → 来た（きた）.",
+        "いい uses よかった and よくなかった. Do not put だった after an i-adjective."
+      ],
+      "prerequisites": [
+        "g08-01",
+        "g06-01",
+        "g05-02"
+      ],
+      "examples": [
+        {
+          "english": "I wrote an email yesterday.",
+          "japanese": "昨日、メールを書いた。",
+          "kana": "きのう、めーるをかいた。"
+        },
+        {
+          "english": "The room was not quiet.",
+          "japanese": "部屋は静かじゃなかった。",
+          "kana": "へやはしずかじゃなかった。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g09-01-verb-affirmative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "casual",
+          "english": "Yesterday, I {action:past} {text}.",
+          "japanese": "昨日、{text}を{action:past}。",
+          "kana": "きのう、{text}を{action:past}。",
+          "slots": [
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l09-text"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l09-text-action"
+              ],
+              "forms": [
+                "past"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "text"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use a text that the selected verb can read or write. The whole sentence ends in a past short form."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-01-i-affirmative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "casual",
+          "english": "{thing} {quality:past}.",
+          "japanese": "{thing}は{quality:past}。",
+          "kana": "{thing}は{quality:past}。",
+          "slots": [
+            {
+              "name": "thing",
+              "wordType": "noun",
+              "tags": [
+                "l09-entertainment"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l09-entertainment-quality"
+              ],
+              "forms": [
+                "past"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Restrict these qualities to films or stories. No copula follows the i-adjective."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-01-na-affirmative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "casual",
+          "english": "{place} {quality:past}.",
+          "japanese": "{place}は{quality:past}。",
+          "kana": "{place}は{quality:past}。",
+          "slots": [
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l09-interior"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "na-adjective",
+              "tags": [
+                "l09-interior-quality"
+              ],
+              "forms": [
+                "past"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Both selected qualities describe interiors naturally. Retain だった in the affirmative."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-01-noun-affirmative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Describe this person several years ago.",
+          "register": "casual",
+          "english": "{person} {role:past}.",
+          "japanese": "{person}は{role:past}。",
+          "kana": "{person}は{role:past}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l09-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "role",
+              "wordType": "noun",
+              "tags": [
+                "l09-role"
+              ],
+              "forms": [
+                "past"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use a human role for the person. A noun needs the past copula or its negative."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-01-verb-negative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "casual",
+          "english": "Yesterday, I {action:pastNegative} {text}.",
+          "japanese": "昨日、{text}を{action:pastNegative}。",
+          "kana": "きのう、{text}を{action:pastNegative}。",
+          "slots": [
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l09-text"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l09-text-action"
+              ],
+              "forms": [
+                "pastNegative"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "text"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "negative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use a text that the selected verb can read or write. The whole sentence ends in a past short form."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-01-i-negative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "casual",
+          "english": "{thing} {quality:pastNegative}.",
+          "japanese": "{thing}は{quality:pastNegative}。",
+          "kana": "{thing}は{quality:pastNegative}。",
+          "slots": [
+            {
+              "name": "thing",
+              "wordType": "noun",
+              "tags": [
+                "l09-entertainment"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l09-entertainment-quality"
+              ],
+              "forms": [
+                "pastNegative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Restrict these qualities to films or stories. No copula follows the i-adjective."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-01-na-negative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "casual",
+          "english": "{place} {quality:pastNegative}.",
+          "japanese": "{place}は{quality:pastNegative}。",
+          "kana": "{place}は{quality:pastNegative}。",
+          "slots": [
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l09-interior"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "na-adjective",
+              "tags": [
+                "l09-interior-quality"
+              ],
+              "forms": [
+                "pastNegative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Both selected qualities describe interiors naturally. Retain だった in the affirmative."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-01-noun-negative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Describe this person several years ago.",
+          "register": "casual",
+          "english": "{person} {role:pastNegative}.",
+          "japanese": "{person}は{role:pastNegative}。",
+          "kana": "{person}は{role:pastNegative}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l09-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "role",
+              "wordType": "noun",
+              "tags": [
+                "l09-role"
+              ],
+              "forms": [
+                "pastNegative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use a human role for the person. A noun needs the past copula or its negative."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g09-02",
+      "title": "Casual questions and replies about the past",
+      "sourcePages": "214–215",
+      "meaning": "Use past short forms when chatting with close friends or family. A rising tone makes a casual question.",
+      "formation": "Past short predicate + question intonation; do not add polite か. Keep だった in noun and na-adjective past questions and replies.",
+      "notes": [
+        "Use うん/ううん in casual replies when appropriate. A reply can omit information already shared.",
+        "Changing the register does not change the time or polarity of the event."
+      ],
+      "prerequisites": [
+        "g09-01",
+        "g08-02"
+      ],
+      "examples": [
+        {
+          "english": "Did you write a letter yesterday?",
+          "japanese": "昨日、手紙を書いた？",
+          "kana": "きのう、てがみをかいた？"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g09-02-question",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Ask a close friend casually.",
+          "register": "casual",
+          "english": "Did you {action} {text} yesterday?",
+          "japanese": "昨日、{text}を{action:past}？",
+          "kana": "きのう、{text}を{action:past}？",
+          "slots": [
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l09-text-action"
+              ],
+              "forms": [
+                "base",
+                "past"
+              ]
+            },
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l09-text"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "text"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use a rising question without か. Use a past verb, not a dictionary-form question."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-02-reply",
+          "kind": "response",
+          "instruction": "Write this in Japanese.",
+          "context": "A close friend asks whether you did this yesterday. Give a negative reply.",
+          "register": "casual",
+          "english": "No, I {action:pastNegative} {text}.",
+          "japanese": "ううん、{text}を{action:pastNegative}。",
+          "kana": "ううん、{text}を{action:pastNegative}。",
+          "slots": [
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l09-text-action"
+              ],
+              "forms": [
+                "pastNegative"
+              ]
+            },
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l09-text"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "text"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "negative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use only the indicated predicate form and preserve the stated meaning."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g09-03",
+      "title": "Thoughts about past events: とおもいます",
+      "sourcePages": "215",
+      "meaning": "Give your current opinion or belief about a past event or state.",
+      "formation": "Past short clause + と思います. Put a negative belief inside the quoted clause: 〜なかったと思います.",
+      "notes": [
+        "The event can be past while 思います remains nonpast: you think this now.",
+        "Do not use ました or でした before と in this pattern."
+      ],
+      "prerequisites": [
+        "g09-01",
+        "g08-03"
+      ],
+      "examples": [
+        {
+          "english": "I think the film was long.",
+          "japanese": "映画は長かったと思います。",
+          "kana": "えいがはながかったとおもいます。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g09-03-opinion-affirmative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Give your present opinion about yesterday.",
+          "register": "polite",
+          "english": "I think {thing} {quality:past}.",
+          "japanese": "{thing}は{quality:past}と思います。",
+          "kana": "{thing}は{quality:past}とおもいます。",
+          "slots": [
+            {
+              "name": "thing",
+              "wordType": "noun",
+              "tags": [
+                "l09-entertainment"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l09-entertainment-quality"
+              ],
+              "forms": [
+                "past"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "と"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The short past form is inside the quotation; 思います is the polite main predicate."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-03-opinion-negative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Give your present opinion about yesterday.",
+          "register": "polite",
+          "english": "I think {thing} {quality:pastNegative}.",
+          "japanese": "{thing}は{quality:pastNegative}と思います。",
+          "kana": "{thing}は{quality:pastNegative}とおもいます。",
+          "slots": [
+            {
+              "name": "thing",
+              "wordType": "noun",
+              "tags": [
+                "l09-entertainment"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l09-entertainment-quality"
+              ],
+              "forms": [
+                "pastNegative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "negative",
+          "particles": [
+            "は",
+            "と"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The short past form is inside the quotation; 思います is the polite main predicate."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g09-04",
+      "title": "Reporting statements about the past",
+      "sourcePages": "215–216",
+      "meaning": "Report what another person said using a short-form quotation.",
+      "formation": "Speaker は + short clause + と言っていました. Preserve the time intended in the original statement.",
+      "notes": [
+        "Japanese does not automatically shift a quoted nonpast form to past just because the reporting verb is past.",
+        "Context must distinguish “said they had done it” from “said they were doing it then.”"
+      ],
+      "prerequisites": [
+        "g09-01",
+        "g08-04"
+      ],
+      "examples": [
+        {
+          "english": "Aki said that they had written a letter.",
+          "japanese": "あきさんは手紙を書いたと言っていました。",
+          "kana": "あきさんはてがみをかいたといっていました。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g09-04-report-affirmative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Report the statement indirectly in one polite sentence.",
+          "register": "polite",
+          "english": "{person} said, “I {action:past} {text}.”",
+          "japanese": "{person}は{text}を{action:past}と言っていました。",
+          "kana": "{person}は{text}を{action:past}といっていました。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l09-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l09-text-action"
+              ],
+              "forms": [
+                "past"
+              ]
+            },
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l09-text"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "text"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "を",
+            "と"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The original event was completed before the person spoke. Retain the past form inside と."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-04-report-negative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Report the statement indirectly in one polite sentence.",
+          "register": "polite",
+          "english": "{person} said, “I {action:pastNegative} {text}.”",
+          "japanese": "{person}は{text}を{action:pastNegative}と言っていました。",
+          "kana": "{person}は{text}を{action:pastNegative}といっていました。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l09-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l09-text-action"
+              ],
+              "forms": [
+                "pastNegative"
+              ]
+            },
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l09-text"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "text"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "negative",
+          "particles": [
+            "は",
+            "を",
+            "と"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The original event was completed before the person spoke. Retain the past form inside と."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-04-preserve-nonpast",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Report what was happening when the person spoke. Use an indirect report.",
+          "register": "polite",
+          "english": "{person} said, “I am {action:progressive} {text}.”",
+          "japanese": "{person}は{text}を{action:progressive}と言っていました。",
+          "kana": "{person}は{text}を{action:progressive}といっていました。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l09-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l09-text-action"
+              ],
+              "forms": [
+                "progressive"
+              ]
+            },
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l09-text"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "text"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "past report; nonpast quotation",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "を",
+            "と"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Keep ている inside the quote; do not change it to ていた merely because the report is past."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g09-05",
+      "title": "Describing a noun with a clause",
+      "sourcePages": "216",
+      "meaning": "Identify a person or thing by putting its description directly before the noun.",
+      "formation": "I-adjective + noun; na-adjective + な + noun; short verb clause + noun. For a visible ongoing action, use ている + 人.",
+      "notes": [
+        "No relative pronoun equivalent to “who” is needed, and no の belongs between a verb and the noun.",
+        "This lesson concentrates on current actions and states; keep complex relative-clause constructions for later study."
+      ],
+      "prerequisites": [
+        "g07-01",
+        "g08-01",
+        "g05-03"
+      ],
+      "examples": [
+        {
+          "english": "The person writing an email is Ren.",
+          "japanese": "メールを書いている人はれんさんです。",
+          "kana": "めーるをかいているひとはれんさんです。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g09-05-ongoing-person",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Identify someone by the action they are doing now.",
+          "register": "polite",
+          "english": "The person {action:progressive} {text} is {person}.",
+          "japanese": "{text}を{action:progressive}人は{person}です。",
+          "kana": "{text}を{action:progressive}ひとは{person}です。",
+          "slots": [
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l09-text-action"
+              ],
+              "forms": [
+                "progressive"
+              ]
+            },
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l09-text"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l09-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "text"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "を",
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use a human head noun and an ongoing action. The modifier ends in ている, not ています."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-05-na-noun",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Describe the kind of place you are in.",
+          "register": "polite",
+          "english": "This is a {quality} {place:bare}.",
+          "japanese": "ここは{quality:attributive}{place}です。",
+          "kana": "ここは{quality:attributive}{place}です。",
+          "slots": [
+            {
+              "name": "quality",
+              "wordType": "na-adjective",
+              "tags": [
+                "l09-interior-quality"
+              ],
+              "forms": [
+                "base",
+                "attributive"
+              ]
+            },
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l09-interior"
+              ],
+              "forms": [
+                "base",
+                "bare"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Keep な between the adjective and noun."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g09-06",
+      "title": "Already done and not done yet",
+      "sourcePages": "217",
+      "meaning": "Distinguish a completed task with a present result from a task that is still pending.",
+      "formation": "もう + verb polite past; まだ + verb te-form + いません.",
+      "notes": [
+        "For “not yet,” do not use the simple past negative: that describes a finished past period instead.",
+        "Use a context where completing the action matters now. Casual equivalents are もう〜た and まだ〜ていない."
+      ],
+      "prerequisites": [
+        "g07-01",
+        "g04-04"
+      ],
+      "examples": [
+        {
+          "english": "I have already written an email.",
+          "japanese": "もうメールを書きました。",
+          "kana": "もうめーるをかきました。"
+        },
+        {
+          "english": "I have not read the letter yet.",
+          "japanese": "まだ手紙を読んでいません。",
+          "kana": "まだてがみをよんでいません。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g09-06-already",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Report a completed task. Use the already-done construction.",
+          "register": "polite",
+          "english": "I have already {action:completed} {text}.",
+          "japanese": "もう{text}を{action:politePast}。",
+          "kana": "もう{text}を{action:politePast}。",
+          "slots": [
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l09-text-action"
+              ],
+              "forms": [
+                "completed",
+                "politePast"
+              ]
+            },
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l09-text"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "text"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "past with present relevance",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use only the indicated predicate form and preserve the stated meaning."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-06-not-yet",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "The task is still on your list and may be completed later.",
+          "register": "polite",
+          "english": "I have not {action:completed} {text} yet.",
+          "japanese": "まだ{text}を{action:te}いません。",
+          "kana": "まだ{text}を{action:te}いません。",
+          "slots": [
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l09-text-action"
+              ],
+              "forms": [
+                "completed",
+                "te"
+              ]
+            },
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l09-text"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "text"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "current uncompleted state",
+          "polarity": "negative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use まだ with negative ている. Do not replace it with a past negative."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g09-07",
+      "title": "Reason first with から",
+      "sourcePages": "217–218",
+      "meaning": "Join a reason and its consequence in one sentence.",
+      "formation": "Reason clause + から、result clause. A short noun or na-adjective affirmative reason keeps だ before から.",
+      "notes": [
+        "A polite result can follow a short or polite reason. Use a short reason when the whole sentence is casual.",
+        "Choose causally compatible clauses; two unrelated facts do not make a useful explanation."
+      ],
+      "prerequisites": [
+        "g06-06",
+        "g09-01"
+      ],
+      "examples": [
+        {
+          "english": "Today is a day off, so I will read a book.",
+          "japanese": "今日は休みだから、本を読みます。",
+          "kana": "きょうはやすみだから、ほんをよみます。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g09-07-noun-reason",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "You are explaining why you will spend time reading indoors.",
+          "register": "polite",
+          "english": "It is {day} today, so I will read {text}.",
+          "japanese": "今日は{day}だから、{text}を読みます。",
+          "kana": "きょうは{day}だから、{text}をよみます。",
+          "slots": [
+            {
+              "name": "day",
+              "wordType": "noun",
+              "tags": [
+                "l09-reason-day"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l09-text"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "から",
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The selected day condition is a reason for indoor reading in this context. Keep だ before から."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-07-past-reason",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "You decided not to watch after learning its description.",
+          "register": "polite",
+          "english": "{thing} {quality:past}, so I did not watch it.",
+          "japanese": "{thing}は{quality:past}から、見ませんでした。",
+          "kana": "{thing}は{quality:past}から、みませんでした。",
+          "slots": [
+            {
+              "name": "thing",
+              "wordType": "noun",
+              "tags": [
+                "l09-entertainment"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l09-viewing-obstacle"
+              ],
+              "forms": [
+                "past"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "negative",
+          "particles": [
+            "は",
+            "から"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "In this context, length or difficulty is a reason not to watch. Do not substitute a favorable feature without changing the result."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g09-09",
+      "title": "Extra: color words before nouns",
+      "sourcePages": "229",
+      "meaning": "Describe an object with either a color adjective or a color noun.",
+      "formation": "I-adjective color + noun; noun color + の + noun.",
+      "notes": [
+        "赤い and 白い are adjectives; 緑 and 紫 take の here. Do not automatically add い to every color.",
+        "Color nouns can also stand alone as the topic of a sentence."
+      ],
+      "prerequisites": [
+        "g05-03",
+        "g01-03",
+        "g04-04"
+      ],
+      "examples": [
+        {
+          "english": "I bought a purple hat.",
+          "japanese": "紫の帽子を買いました。",
+          "kana": "むらさきのぼうしをかいました。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g09-09-adjective-color",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "I bought a {color} {item}.",
+          "japanese": "{color}{item}を買いました。",
+          "kana": "{color}{item}をかいました。",
+          "slots": [
+            {
+              "name": "color",
+              "wordType": "i-adjective",
+              "tags": [
+                "l09-color-i"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l09-colorable"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use only true i-adjective color forms; no の follows them."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g09-09-noun-color",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "I bought a {color} {item}.",
+          "japanese": "{color}の{item}を買いました。",
+          "kana": "{color}の{item}をかいました。",
+          "slots": [
+            {
+              "name": "color",
+              "wordType": "noun",
+              "tags": [
+                "l09-color-noun"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l09-colorable"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "の",
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use a noun color and join it to the object with の."
+          ],
+          "alternatives": []
+        }
+      ]
+    }
+  ],
+  "lexicon": [
+    {
+      "key": "l09-aki",
+      "japanese": "あきさん",
+      "kana": "あきさん",
+      "english": "Aki",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-person"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-ren",
+      "japanese": "れんさん",
+      "kana": "れんさん",
+      "english": "Ren",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-person"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-nao",
+      "japanese": "なおさん",
+      "kana": "なおさん",
+      "english": "Nao",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-person"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-letter",
+      "japanese": "手紙",
+      "kana": "てがみ",
+      "english": "a letter",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-text",
+        "l09-readable",
+        "l09-writable"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-email",
+      "japanese": "メール",
+      "kana": "めーる",
+      "english": "an email",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-text",
+        "l09-readable",
+        "l09-writable"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-book",
+      "japanese": "本",
+      "kana": "ほん",
+      "english": "a book",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-text",
+        "l09-readable",
+        "l09-writable"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-read",
+      "japanese": "読む",
+      "kana": "よむ",
+      "english": "read",
+      "wordType": "verb",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-text-action"
+      ],
+      "accepts": [
+        "l09-readable"
+      ],
+      "forms": {
+        "past": {
+          "japanese": "読んだ",
+          "kana": "よんだ",
+          "english": "read",
+          "introducedLesson": 9
+        },
+        "pastNegative": {
+          "japanese": "読まなかった",
+          "kana": "よまなかった",
+          "english": "did not read",
+          "introducedLesson": 9
+        },
+        "politePast": {
+          "japanese": "読みました",
+          "kana": "よみました",
+          "english": "read",
+          "introducedLesson": 4
+        },
+        "te": {
+          "japanese": "読んで",
+          "kana": "よんで",
+          "english": "reading",
+          "introducedLesson": 6
+        },
+        "negative": {
+          "japanese": "読まない",
+          "kana": "よまない",
+          "english": "do not read",
+          "introducedLesson": 8
+        },
+        "progressive": {
+          "japanese": "読んでいる",
+          "kana": "よんでいる",
+          "english": "reading",
+          "introducedLesson": 8
+        },
+        "completed": {
+          "japanese": "読みました",
+          "kana": "よみました",
+          "english": "read",
+          "introducedLesson": 4
+        }
+      }
+    },
+    {
+      "key": "l09-write",
+      "japanese": "書く",
+      "kana": "かく",
+      "english": "write",
+      "wordType": "verb",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-text-action"
+      ],
+      "accepts": [
+        "l09-writable"
+      ],
+      "forms": {
+        "past": {
+          "japanese": "書いた",
+          "kana": "かいた",
+          "english": "wrote",
+          "introducedLesson": 9
+        },
+        "pastNegative": {
+          "japanese": "書かなかった",
+          "kana": "かかなかった",
+          "english": "did not write",
+          "introducedLesson": 9
+        },
+        "politePast": {
+          "japanese": "書きました",
+          "kana": "かきました",
+          "english": "wrote",
+          "introducedLesson": 4
+        },
+        "te": {
+          "japanese": "書いて",
+          "kana": "かいて",
+          "english": "writing",
+          "introducedLesson": 6
+        },
+        "negative": {
+          "japanese": "書かない",
+          "kana": "かかない",
+          "english": "do not write",
+          "introducedLesson": 8
+        },
+        "progressive": {
+          "japanese": "書いている",
+          "kana": "かいている",
+          "english": "writing",
+          "introducedLesson": 8
+        },
+        "completed": {
+          "japanese": "書きました",
+          "kana": "かきました",
+          "english": "written",
+          "introducedLesson": 4
+        }
+      }
+    },
+    {
+      "key": "l09-film",
+      "japanese": "映画",
+      "kana": "えいが",
+      "english": "the film",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-entertainment"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-play",
+      "japanese": "劇",
+      "kana": "げき",
+      "english": "the play",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-entertainment"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-interesting",
+      "japanese": "おもしろい",
+      "kana": "おもしろい",
+      "english": "interesting",
+      "wordType": "i-adjective",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-entertainment-quality"
+      ],
+      "accepts": [],
+      "forms": {
+        "past": {
+          "japanese": "おもしろかった",
+          "kana": "おもしろかった",
+          "english": "was interesting",
+          "introducedLesson": 9
+        },
+        "pastNegative": {
+          "japanese": "おもしろくなかった",
+          "kana": "おもしろくなかった",
+          "english": "was not interesting",
+          "introducedLesson": 9
+        }
+      }
+    },
+    {
+      "key": "l09-long",
+      "japanese": "長い",
+      "kana": "ながい",
+      "english": "long",
+      "wordType": "i-adjective",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-entertainment-quality"
+      ],
+      "accepts": [],
+      "forms": {
+        "past": {
+          "japanese": "長かった",
+          "kana": "ながかった",
+          "english": "was long",
+          "introducedLesson": 9
+        },
+        "pastNegative": {
+          "japanese": "長くなかった",
+          "kana": "ながくなかった",
+          "english": "was not long",
+          "introducedLesson": 9
+        }
+      }
+    },
+    {
+      "key": "l09-library",
+      "japanese": "図書館",
+      "kana": "としょかん",
+      "english": "the library",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-interior"
+      ],
+      "accepts": [],
+      "forms": {
+        "bare": {
+          "japanese": "図書館",
+          "kana": "としょかん",
+          "english": "library",
+          "introducedLesson": 9
+        }
+      }
+    },
+    {
+      "key": "l09-room",
+      "japanese": "部屋",
+      "kana": "へや",
+      "english": "the room",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-interior"
+      ],
+      "accepts": [],
+      "forms": {
+        "bare": {
+          "japanese": "部屋",
+          "kana": "へや",
+          "english": "room",
+          "introducedLesson": 9
+        }
+      }
+    },
+    {
+      "key": "l09-quiet",
+      "japanese": "静か",
+      "kana": "しずか",
+      "english": "quiet",
+      "wordType": "na-adjective",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-interior-quality"
+      ],
+      "accepts": [],
+      "forms": {
+        "past": {
+          "japanese": "静かだった",
+          "kana": "しずかだった",
+          "english": "was quiet",
+          "introducedLesson": 9
+        },
+        "pastNegative": {
+          "japanese": "静かじゃなかった",
+          "kana": "しずかじゃなかった",
+          "english": "was not quiet",
+          "introducedLesson": 9
+        },
+        "attributive": {
+          "japanese": "静かな",
+          "kana": "しずかな",
+          "english": "quiet",
+          "introducedLesson": 5
+        }
+      }
+    },
+    {
+      "key": "l09-clean",
+      "japanese": "きれい",
+      "kana": "きれい",
+      "english": "clean",
+      "wordType": "na-adjective",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-interior-quality"
+      ],
+      "accepts": [],
+      "forms": {
+        "past": {
+          "japanese": "きれいだった",
+          "kana": "きれいだった",
+          "english": "was clean",
+          "introducedLesson": 9
+        },
+        "pastNegative": {
+          "japanese": "きれいじゃなかった",
+          "kana": "きれいじゃなかった",
+          "english": "was not clean",
+          "introducedLesson": 9
+        },
+        "attributive": {
+          "japanese": "きれいな",
+          "kana": "きれいな",
+          "english": "clean",
+          "introducedLesson": 5
+        }
+      }
+    },
+    {
+      "key": "l09-student",
+      "japanese": "学生",
+      "kana": "がくせい",
+      "english": "a student",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-role"
+      ],
+      "accepts": [],
+      "forms": {
+        "past": {
+          "japanese": "学生だった",
+          "kana": "がくせいだった",
+          "english": "was a student",
+          "introducedLesson": 9
+        },
+        "pastNegative": {
+          "japanese": "学生じゃなかった",
+          "kana": "がくせいじゃなかった",
+          "english": "was not a student",
+          "introducedLesson": 9
+        }
+      }
+    },
+    {
+      "key": "l09-teacher",
+      "japanese": "先生",
+      "kana": "せんせい",
+      "english": "a teacher",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-role"
+      ],
+      "accepts": [],
+      "forms": {
+        "past": {
+          "japanese": "先生だった",
+          "kana": "せんせいだった",
+          "english": "was a teacher",
+          "introducedLesson": 9
+        },
+        "pastNegative": {
+          "japanese": "先生じゃなかった",
+          "kana": "せんせいじゃなかった",
+          "english": "was not a teacher",
+          "introducedLesson": 9
+        }
+      }
+    },
+    {
+      "key": "l09-bag",
+      "japanese": "かばん",
+      "kana": "かばん",
+      "english": "bag",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-colorable"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "かばん",
+          "kana": "かばん",
+          "english": "a bag",
+          "introducedLesson": 9
+        }
+      }
+    },
+    {
+      "key": "l09-hat",
+      "japanese": "帽子",
+      "kana": "ぼうし",
+      "english": "hat",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-colorable",
+        "l01-owned-item",
+        "l02-identifiable-item",
+        "l02-owned-item",
+        "l05-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "帽子",
+          "kana": "ぼうし",
+          "english": "a hat",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l09-red",
+      "japanese": "赤い",
+      "kana": "あかい",
+      "english": "red",
+      "wordType": "i-adjective",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-color-i"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-white",
+      "japanese": "白い",
+      "kana": "しろい",
+      "english": "white",
+      "wordType": "i-adjective",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-color-i"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-green",
+      "japanese": "緑",
+      "kana": "みどり",
+      "english": "green",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-color-noun"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-purple",
+      "japanese": "紫",
+      "kana": "むらさき",
+      "english": "purple",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-color-noun"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-rain",
+      "japanese": "雨",
+      "kana": "あめ",
+      "english": "rainy",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-reason-day"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-holiday",
+      "japanese": "休み",
+      "kana": "やすみ",
+      "english": "a day off",
+      "wordType": "noun",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-reason-day"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l09-too-long-cause",
+      "japanese": "長い",
+      "kana": "ながい",
+      "english": "long",
+      "wordType": "i-adjective",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-viewing-obstacle"
+      ],
+      "accepts": [],
+      "forms": {
+        "past": {
+          "japanese": "長かった",
+          "kana": "ながかった",
+          "english": "was long",
+          "introducedLesson": 5
+        }
+      }
+    },
+    {
+      "key": "l09-difficult-cause",
+      "japanese": "難しい",
+      "kana": "むずかしい",
+      "english": "difficult",
+      "wordType": "i-adjective",
+      "introducedLesson": 9,
+      "tags": [
+        "l09-viewing-obstacle"
+      ],
+      "accepts": [],
+      "forms": {
+        "past": {
+          "japanese": "難しかった",
+          "kana": "むずかしかった",
+          "english": "was difficult",
+          "introducedLesson": 5
+        }
+      }
+    }
+  ]
+}

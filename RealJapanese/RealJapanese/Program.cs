@@ -17,6 +17,8 @@ builder.Services.AddRazorComponents()
 
 //Data
 builder.Services.AddSingleton<NumbersQuestionGenerator>();
+builder.Services.AddSingleton<Repositories.Genki.GenkiCatalog>();
+builder.Services.AddSingleton<Repositories.Genki.GenkiGenerator>();
 builder.Services.AddSingleton<AdjectiveData>();
 builder.Services.AddSingleton<VerbData>();
 builder.Services.AddSingleton<WordData>();

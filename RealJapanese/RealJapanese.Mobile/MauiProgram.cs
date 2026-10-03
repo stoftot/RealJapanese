@@ -14,6 +14,8 @@ public static class MauiProgram
             Path.Combine(FileSystem.AppDataDirectory, "Progress")));
         builder.Services.AddSingleton<StudyDataInstaller>();
         builder.Services.AddSingleton<NumbersQuestionGenerator>();
+        builder.Services.AddSingleton<Repositories.Genki.GenkiCatalog>();
+        builder.Services.AddSingleton<Repositories.Genki.GenkiGenerator>();
         builder.Services.AddSingleton<WordData>();
         builder.Services.AddSingleton<VerbData>();
         builder.Services.AddSingleton<AdjectiveData>();

@@ -1,0 +1,1935 @@
+{
+  "schemaVersion": 1,
+  "number": 12,
+  "title": "Explaining situations and giving advice",
+  "sourcePages": "272–293",
+  "grammarPoints": [
+    {
+      "id": "g12-01",
+      "title": "Explanatory んです",
+      "sourcePages": "276–277",
+      "meaning": "Connect a fact to the situation being discussed: explain, give relevant background, or invite an explanation.",
+      "formation": "Short predicate + んです. Nonpast affirmative nouns and na-adjectives use な before んです. Ask with んですか.",
+      "notes": [
+        "Put tense and negation on the predicate before んです; keep んです itself unchanged in these patterns.",
+        "Use a real conversational reason for the explanatory tone. どうしたんですか often receives a reply with a new subject marked が.",
+        "Written のです has the same basic function in a more formal style. Casual んだ / の questions are noted in the book but developed later."
+      ],
+      "prerequisites": [
+        "g08-01",
+        "g09-01"
+      ],
+      "examples": [
+        {
+          "english": "I lost my wallet, you see.",
+          "japanese": "財布をなくしたんです。",
+          "kana": "さいふをなくしたんです。"
+        },
+        {
+          "english": "You see, I am a teacher.",
+          "japanese": "教師なんです。",
+          "kana": "きょうしなんです。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g12-01-past-event",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Someone notices you searching anxiously. Explain what happened.",
+          "register": "polite",
+          "english": "I lost {item}, you see.",
+          "japanese": "{item}をなくしたんです。",
+          "kana": "{item}をなくしたんです。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l12-lost-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use なくした before んです. The context makes this an explanation rather than an isolated announcement."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-01-event",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Explain why you cannot go out late tonight.",
+          "register": "polite",
+          "english": "You see, I have {event} tomorrow.",
+          "japanese": "明日は{event}があるんです。",
+          "kana": "あしたは{event}があるんです。",
+          "slots": [
+            {
+              "name": "event",
+              "wordType": "noun",
+              "tags": [
+                "l12-commitment"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "が"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The event explains the present decision. Use short ある, not あります, before んです."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-01-i-state",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Explain why you do not want to go out tonight.",
+          "register": "polite",
+          "english": "You see, I am {state}.",
+          "japanese": "{state}んです。",
+          "kana": "{state}んです。",
+          "slots": [
+            {
+              "name": "state",
+              "wordType": "i-adjective",
+              "tags": [
+                "l12-personal-state"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "An i-adjective attaches directly to んです: no だ and no な."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-01-i-negative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Someone is surprised you can keep working tonight. Explain why.",
+          "register": "polite",
+          "english": "You see, I am {state:negative}.",
+          "japanese": "{state:negative}んです。",
+          "kana": "{state:negative}んです。",
+          "slots": [
+            {
+              "name": "state",
+              "wordType": "i-adjective",
+              "tags": [
+                "l12-personal-state"
+              ],
+              "forms": [
+                "negative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Negation belongs inside the explanatory construction, before んです."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-01-na-state",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Someone is surprised that you can help today. Explain your situation.",
+          "register": "polite",
+          "english": "You see, I am {state}.",
+          "japanese": "{state}なんです。",
+          "kana": "{state}なんです。",
+          "slots": [
+            {
+              "name": "state",
+              "wordType": "na-adjective",
+              "tags": [
+                "l12-personal-na"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "A nonpast affirmative na-adjective needs な before んです."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-01-noun-state",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Explain why you spend so much time at school.",
+          "register": "polite",
+          "english": "You see, I am {role}.",
+          "japanese": "{role}なんです。",
+          "kana": "{role}なんです。",
+          "slots": [
+            {
+              "name": "role",
+              "wordType": "noun",
+              "tags": [
+                "l12-role"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "A nonpast affirmative noun needs な before んです. Do not use だんです."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-01-why-question",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "A classmate has mentioned losing this item. Ask for the explanation.",
+          "register": "polite",
+          "english": "Why did you lose {item:your}?",
+          "japanese": "どうして{item}をなくしたんですか。",
+          "kana": "どうして{item}をなくしたんですか。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l12-lost-item"
+              ],
+              "forms": [
+                "base",
+                "your"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "を",
+            "か"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The question seeks clarification of an already-mentioned event. It is not a neutral yes/no fact question."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g12-02",
+      "title": "Excess with すぎる",
+      "sourcePages": "278",
+      "meaning": "Say that an action or quality exceeds an appropriate amount.",
+      "formation": "Verb masu-stem + すぎる; i-adjective without final い + すぎる; na-adjective base + すぎる. Conjugate すぎる as a ru-verb.",
+      "notes": [
+        "The sense is excessive or unwelcome. Use とても for a neutral “very” instead.",
+        "Do not leave い or な before すぎる. A resulting form such as 食べすぎました is a verb."
+      ],
+      "prerequisites": [
+        "g05-01",
+        "g03-01"
+      ],
+      "examples": [
+        {
+          "english": "The classroom is too dark.",
+          "japanese": "教室は暗すぎます。",
+          "kana": "きょうしつはくらすぎます。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g12-02-verb-excess",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "You regret the amount you consumed.",
+          "register": "polite",
+          "english": "I {action:past} too much {item:mass}.",
+          "japanese": "{item}を{action:stem}すぎました。",
+          "kana": "{item}を{action:stem}すぎました。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l12-consumable"
+              ],
+              "forms": [
+                "base",
+                "mass"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l12-consume"
+              ],
+              "forms": [
+                "past",
+                "stem"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "item"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Express excess, not merely a large welcome amount. Conjugate すぎる as a ru-verb."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-02-i-excess",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "The room does not meet your needs.",
+          "register": "polite",
+          "english": "{place} is too {quality}.",
+          "japanese": "{place}は{quality:stem}すぎます。",
+          "kana": "{place}は{quality:stem}すぎます。",
+          "slots": [
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l12-interior"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l12-interior-quality"
+              ],
+              "forms": [
+                "base",
+                "stem"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Drop the i-adjective’s final い. The property is unwelcome in this context."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-02-na-excess",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "The material is unsuitable for this learner’s level.",
+          "register": "polite",
+          "english": "{item} is too {quality}.",
+          "japanese": "{item}は{quality}すぎます。",
+          "kana": "{item}は{quality}すぎます。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l12-complexity-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "na-adjective",
+              "tags": [
+                "l12-complexity"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Attach すぎる to the na-adjective base without な. Both excessive simplicity and complexity are unsuitable here."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g12-03",
+      "title": "Advice with ほうがいい",
+      "sourcePages": "278",
+      "meaning": "Recommend an action or advise against it.",
+      "formation": "Affirmative past short verb + ほうがいいです; nonpast negative verb + ほうがいいです.",
+      "notes": [
+        "The past-looking affirmative form gives present or future advice, not a claim that the action already happened.",
+        "For negative advice use ない, not なかった. Advice can sound direct, so use an appropriate relationship or an invitation to advise."
+      ],
+      "prerequisites": [
+        "g09-01",
+        "g08-01"
+      ],
+      "examples": [
+        {
+          "english": "You should eat some bread.",
+          "japanese": "パンを食べたほうがいいです。",
+          "kana": "ぱんをたべたほうがいいです。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g12-03-positive-advice",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "A friend asks which refreshments to try. Recommend this choice.",
+          "register": "polite",
+          "english": "You should {action} {item}.",
+          "japanese": "{item}を{action:past}ほうがいいです。",
+          "kana": "{item}を{action:past}ほうがいいです。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l12-consumable"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l12-consume"
+              ],
+              "forms": [
+                "base",
+                "past"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "item"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "を",
+            "が"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The affirmative action must be past short before ほうがいい; the advice concerns what to do now."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-03-negative-advice",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "This particular refreshment tastes bad. A friend asks your advice.",
+          "register": "polite",
+          "english": "You should not {action} {item}.",
+          "japanese": "{item}を{action:negative}ほうがいいです。",
+          "kana": "{item}を{action:negative}ほうがいいです。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l12-consumable"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l12-consume"
+              ],
+              "forms": [
+                "base",
+                "negative"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "item"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "を",
+            "が"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use the nonpast negative ない form, not past negative. This is advice, not a formal prohibition."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g12-04",
+      "title": "Giving a reason with ので",
+      "sourcePages": "279",
+      "meaning": "Join a reason to its result in a slightly more formal explanatory style.",
+      "formation": "Short reason clause + ので、result. Nonpast affirmative noun/na-adjective + なので.",
+      "notes": [
+        "Keep the reason before the result. ので has a similar causal meaning to から.",
+        "Use なので after a noun or na-adjective in the nonpast affirmative; compare だから with から."
+      ],
+      "prerequisites": [
+        "g09-07",
+        "g12-01"
+      ],
+      "examples": [
+        {
+          "english": "Because I lost my ticket, I will not ride the train.",
+          "japanese": "切符をなくしたので、電車に乗りません。",
+          "kana": "きっぷをなくしたので、でんしゃにのりません。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g12-04-verb-reason",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "I will look for {item} because I lost it.",
+          "japanese": "{item}をなくしたので、探します。",
+          "kana": "{item}をなくしたので、さがします。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l12-lost-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past reason; nonpast result",
+          "polarity": "affirmative",
+          "particles": [
+            "を",
+            "ので"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The past event motivates the present action. Keep the past short verb before ので."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-04-i-reason",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "I will not go out because I am {state}.",
+          "japanese": "{state}ので、出かけません。",
+          "kana": "{state}ので、でかけません。",
+          "slots": [
+            {
+              "name": "state",
+              "wordType": "i-adjective",
+              "tags": [
+                "l12-personal-state"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "negative result",
+          "particles": [
+            "ので"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The personal state plausibly prevents going out. I-adjectives do not take な before ので."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-04-noun-reason",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "You attend school on weekdays.",
+          "register": "polite",
+          "english": "I will go to school because it is {day}.",
+          "japanese": "{day}なので、学校に行きます。",
+          "kana": "{day}なので、がっこうにいきます。",
+          "slots": [
+            {
+              "name": "day",
+              "wordType": "noun",
+              "tags": [
+                "l12-day"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "ので",
+            "に"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use なので after a nonpast affirmative noun. The selected day must be a school day in context."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-04-na-reason",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "You are able to help today and explain why.",
+          "register": "polite",
+          "english": "I will help because I am {state}.",
+          "japanese": "{state}なので、手伝います。",
+          "kana": "{state}なので、てつだいます。",
+          "slots": [
+            {
+              "name": "state",
+              "wordType": "na-adjective",
+              "tags": [
+                "l12-personal-na"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "ので"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use なので after a nonpast affirmative na-adjective."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g12-05",
+      "title": "Obligation: なければ / なきゃいけません",
+      "sourcePages": "279–280",
+      "meaning": "Say that an action is necessary, including a past obligation or an informal “I have to.”",
+      "formation": "Take the nonpast negative ない form; replace final い with ければ or きゃ; add いけません. Past: いけませんでした. Casual: なきゃいけない or simply なきゃ.",
+      "notes": [
+        "The overall meaning is affirmative obligation despite the negative-looking parts. It does not mean “must not.”",
+        "なければ is more formal; なきゃ is common in speech. Casual shortened なきゃ must suit the relationship.",
+        "Other variants exist, but these exercises focus on the two forms introduced here."
+      ],
+      "prerequisites": [
+        "g08-01",
+        "g09-01"
+      ],
+      "examples": [
+        {
+          "english": "I have to finish my homework.",
+          "japanese": "宿題を終えなければいけません。",
+          "kana": "しゅくだいをおえなければいけません。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g12-05-formal-duty",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "State an obligation in a formal or careful polite style.",
+          "register": "polite",
+          "english": "I must {action} {task} on {day}.",
+          "japanese": "{day}に{task}を{action:obligationStem}ければいけません。",
+          "kana": "{day}に{task}を{action:obligationStem}ければいけません。",
+          "slots": [
+            {
+              "name": "day",
+              "wordType": "noun",
+              "tags": [
+                "l12-day"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "task",
+              "wordType": "noun",
+              "tags": [
+                "l12-work-to-do"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l12-duty"
+              ],
+              "forms": [
+                "base",
+                "obligationStem"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "task"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "に",
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The action is required, not prohibited. Build なければ from the negative form."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-05-spoken-duty",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "State your obligation in polite conversation using なきゃ.",
+          "register": "polite",
+          "english": "I have to {action} {task}.",
+          "japanese": "{task}を{action:obligationStem}きゃいけません。",
+          "kana": "{task}を{action:obligationStem}きゃいけません。",
+          "slots": [
+            {
+              "name": "task",
+              "wordType": "noun",
+              "tags": [
+                "l12-work-to-do"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l12-duty"
+              ],
+              "forms": [
+                "base",
+                "obligationStem"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "task"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use the spoken contraction なきゃ but retain the polite final いけません."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-05-past-duty",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Talk about last week’s obligation.",
+          "register": "polite",
+          "english": "I had to {action} {task} on {day}.",
+          "japanese": "{day}に{task}を{action:obligationStem}ければいけませんでした。",
+          "kana": "{day}に{task}を{action:obligationStem}ければいけませんでした。",
+          "slots": [
+            {
+              "name": "day",
+              "wordType": "noun",
+              "tags": [
+                "l12-day"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "task",
+              "wordType": "noun",
+              "tags": [
+                "l12-work-to-do"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l12-duty"
+              ],
+              "forms": [
+                "base",
+                "obligationStem"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "task"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "に",
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The final いけませんでした marks past obligation. Do not put the main action in past tense."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-05-casual-duty",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Tell a close friend casually. Use なきゃ.",
+          "register": "casual",
+          "english": "I have to {action} {task}.",
+          "japanese": "{task}を{action:obligationStem}きゃいけない。",
+          "kana": "{task}を{action:obligationStem}きゃいけない。",
+          "slots": [
+            {
+              "name": "task",
+              "wordType": "noun",
+              "tags": [
+                "l12-work-to-do"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l12-duty"
+              ],
+              "forms": [
+                "base",
+                "obligationStem"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "action",
+              "right": "task"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use a casual ending. The final いけない can be omitted without removing the obligation meaning."
+          ],
+          "alternatives": [
+            {
+              "japanese": "{task}を{action:obligationStem}きゃ。",
+              "kana": "{task}を{action:obligationStem}きゃ。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g12-06",
+      "title": "Tentative questions and guesses with でしょう",
+      "sourcePages": "280–281",
+      "meaning": "Ask for an informed opinion gently, or make a tentative prediction.",
+      "formation": "Short predicate + でしょうか for a question; short predicate + でしょう for a guess. Remove nonpast affirmative だ after nouns and na-adjectives.",
+      "notes": [
+        "Tense and polarity stay in the short predicate; でしょう remains unchanged.",
+        "たぶん can emphasize a guess. Casual rising でしょ can check agreement, but is different from the careful opinion question practiced here."
+      ],
+      "prerequisites": [
+        "g08-01",
+        "g09-01"
+      ],
+      "examples": [
+        {
+          "english": "Do you think it will be warm next week?",
+          "japanese": "来週は暖かいでしょうか。",
+          "kana": "らいしゅうはあたたかいでしょうか。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g12-06-weather-question",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Ask someone whose local weather knowledge may be better than yours. Use でしょうか.",
+          "register": "polite",
+          "english": "Do you think it will be {weather} {time}?",
+          "japanese": "{time}は{weather}でしょうか。",
+          "kana": "{time}は{weather}でしょうか。",
+          "slots": [
+            {
+              "name": "time",
+              "wordType": "adverb",
+              "tags": [
+                "l12-future"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "weather",
+              "wordType": "i-adjective",
+              "tags": [
+                "l12-weather"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "This asks for an opinion, not an asserted forecast. Do not insert です or だ before でしょうか."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-06-negative-guess",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "It probably will not be {weather} {time}.",
+          "japanese": "たぶん{time}は{weather:negative}でしょう。",
+          "kana": "たぶん{time}は{weather:negative}でしょう。",
+          "slots": [
+            {
+              "name": "time",
+              "wordType": "adverb",
+              "tags": [
+                "l12-future"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "weather",
+              "wordType": "i-adjective",
+              "tags": [
+                "l12-weather"
+              ],
+              "forms": [
+                "base",
+                "negative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The adjective carries negation. This is a tentative language-practice prediction, not a factual weather report."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-06-na-question",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Ask for an informed guess about how busy or quiet it may be.",
+          "register": "polite",
+          "english": "Do you think {place} will be {quality} tomorrow?",
+          "japanese": "明日、{place}は{quality}でしょうか。",
+          "kana": "あした、{place}は{quality}でしょうか。",
+          "slots": [
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l12-public-place"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "na-adjective",
+              "tags": [
+                "l12-atmosphere"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "A nonpast affirmative na-adjective attaches directly to でしょうか without だ or な."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g12-06-noun-question",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Ask a companion for a tentative opinion.",
+          "register": "polite",
+          "english": "Do you think that person is {role}?",
+          "japanese": "あの人は{role}でしょうか。",
+          "kana": "あのひとは{role}でしょうか。",
+          "slots": [
+            {
+              "name": "role",
+              "wordType": "noun",
+              "tags": [
+                "l12-role"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "A nonpast affirmative noun attaches directly to でしょうか; omit だ."
+          ],
+          "alternatives": []
+        }
+      ]
+    }
+  ],
+  "lexicon": [
+    {
+      "key": "l12-ticket",
+      "japanese": "切符",
+      "kana": "きっぷ",
+      "english": "my ticket",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-lost-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "your": {
+          "japanese": "切符",
+          "kana": "きっぷ",
+          "english": "your ticket",
+          "introducedLesson": 12
+        }
+      }
+    },
+    {
+      "key": "l12-wallet",
+      "japanese": "財布",
+      "kana": "さいふ",
+      "english": "my wallet",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-lost-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "your": {
+          "japanese": "財布",
+          "kana": "さいふ",
+          "english": "your wallet",
+          "introducedLesson": 12
+        }
+      }
+    },
+    {
+      "key": "l12-exam",
+      "japanese": "試験",
+      "kana": "しけん",
+      "english": "an exam",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-commitment"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-work",
+      "japanese": "アルバイト",
+      "kana": "あるばいと",
+      "english": "a part-time job shift",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-commitment"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-student",
+      "japanese": "学生",
+      "kana": "がくせい",
+      "english": "a student",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-role"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-teacher",
+      "japanese": "教師",
+      "kana": "きょうし",
+      "english": "a teacher",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-role"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-busy",
+      "japanese": "忙しい",
+      "kana": "いそがしい",
+      "english": "busy",
+      "wordType": "i-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-personal-state"
+      ],
+      "accepts": [],
+      "forms": {
+        "negative": {
+          "japanese": "忙しくない",
+          "kana": "いそがしくない",
+          "english": "not busy",
+          "introducedLesson": 8
+        },
+        "past": {
+          "japanese": "忙しかった",
+          "kana": "いそがしかった",
+          "english": "busy",
+          "introducedLesson": 9
+        }
+      }
+    },
+    {
+      "key": "l12-sleepy",
+      "japanese": "眠い",
+      "kana": "ねむい",
+      "english": "sleepy",
+      "wordType": "i-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-personal-state"
+      ],
+      "accepts": [],
+      "forms": {
+        "negative": {
+          "japanese": "眠くない",
+          "kana": "ねむくない",
+          "english": "not sleepy",
+          "introducedLesson": 8
+        },
+        "past": {
+          "japanese": "眠かった",
+          "kana": "ねむかった",
+          "english": "sleepy",
+          "introducedLesson": 9
+        }
+      }
+    },
+    {
+      "key": "l12-free",
+      "japanese": "暇",
+      "kana": "ひま",
+      "english": "free",
+      "wordType": "na-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-personal-na"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-well",
+      "japanese": "元気",
+      "kana": "げんき",
+      "english": "well",
+      "wordType": "na-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-personal-na"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-rice",
+      "japanese": "ご飯",
+      "kana": "ごはん",
+      "english": "rice",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-consumable",
+        "l12-edible"
+      ],
+      "accepts": [],
+      "forms": {
+        "mass": {
+          "japanese": "ご飯",
+          "kana": "ごはん",
+          "english": "rice",
+          "introducedLesson": 12
+        }
+      }
+    },
+    {
+      "key": "l12-bread",
+      "japanese": "パン",
+      "kana": "ぱん",
+      "english": "bread",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-consumable",
+        "l12-edible"
+      ],
+      "accepts": [],
+      "forms": {
+        "mass": {
+          "japanese": "パン",
+          "kana": "ぱん",
+          "english": "bread",
+          "introducedLesson": 12
+        }
+      }
+    },
+    {
+      "key": "l12-tea",
+      "japanese": "お茶",
+      "kana": "おちゃ",
+      "english": "tea",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-consumable",
+        "l12-drinkable"
+      ],
+      "accepts": [],
+      "forms": {
+        "mass": {
+          "japanese": "お茶",
+          "kana": "おちゃ",
+          "english": "tea",
+          "introducedLesson": 12
+        }
+      }
+    },
+    {
+      "key": "l12-coffee",
+      "japanese": "コーヒー",
+      "kana": "こーひー",
+      "english": "coffee",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-consumable",
+        "l12-drinkable"
+      ],
+      "accepts": [],
+      "forms": {
+        "mass": {
+          "japanese": "コーヒー",
+          "kana": "こーひー",
+          "english": "coffee",
+          "introducedLesson": 12
+        }
+      }
+    },
+    {
+      "key": "l12-eat",
+      "japanese": "食べる",
+      "kana": "たべる",
+      "english": "eat",
+      "wordType": "verb",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-consume"
+      ],
+      "accepts": [
+        "l12-edible"
+      ],
+      "forms": {
+        "stem": {
+          "japanese": "食べ",
+          "kana": "たべ",
+          "english": "eat",
+          "introducedLesson": 3
+        },
+        "past": {
+          "japanese": "食べた",
+          "kana": "たべた",
+          "english": "ate",
+          "introducedLesson": 9
+        },
+        "negative": {
+          "japanese": "食べない",
+          "kana": "たべない",
+          "english": "eat",
+          "introducedLesson": 8
+        }
+      }
+    },
+    {
+      "key": "l12-drink",
+      "japanese": "飲む",
+      "kana": "のむ",
+      "english": "drink",
+      "wordType": "verb",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-consume"
+      ],
+      "accepts": [
+        "l12-drinkable"
+      ],
+      "forms": {
+        "stem": {
+          "japanese": "飲み",
+          "kana": "のみ",
+          "english": "drink",
+          "introducedLesson": 3
+        },
+        "past": {
+          "japanese": "飲んだ",
+          "kana": "のんだ",
+          "english": "drank",
+          "introducedLesson": 9
+        },
+        "negative": {
+          "japanese": "飲まない",
+          "kana": "のまない",
+          "english": "drink",
+          "introducedLesson": 8
+        }
+      }
+    },
+    {
+      "key": "l12-room",
+      "japanese": "部屋",
+      "kana": "へや",
+      "english": "the room",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-interior"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-classroom",
+      "japanese": "教室",
+      "kana": "きょうしつ",
+      "english": "the classroom",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-interior"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-small",
+      "japanese": "小さい",
+      "kana": "ちいさい",
+      "english": "small",
+      "wordType": "i-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-interior-quality"
+      ],
+      "accepts": [],
+      "forms": {
+        "stem": {
+          "japanese": "小さ",
+          "kana": "ちいさ",
+          "english": "small",
+          "introducedLesson": 5
+        }
+      }
+    },
+    {
+      "key": "l12-dark",
+      "japanese": "暗い",
+      "kana": "くらい",
+      "english": "dark",
+      "wordType": "i-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-interior-quality"
+      ],
+      "accepts": [],
+      "forms": {
+        "stem": {
+          "japanese": "暗",
+          "kana": "くら",
+          "english": "dark",
+          "introducedLesson": 5
+        }
+      }
+    },
+    {
+      "key": "l12-explanation",
+      "japanese": "説明",
+      "kana": "せつめい",
+      "english": "the explanation",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-complexity-item"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-problem",
+      "japanese": "問題",
+      "kana": "もんだい",
+      "english": "the problem",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-complexity-item"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-simple",
+      "japanese": "簡単",
+      "kana": "かんたん",
+      "english": "simple",
+      "wordType": "na-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-complexity"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-complicated",
+      "japanese": "複雑",
+      "kana": "ふくざつ",
+      "english": "complicated",
+      "wordType": "na-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-complexity"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-monday",
+      "japanese": "月曜日",
+      "kana": "げつようび",
+      "english": "Monday",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-day",
+        "l10-day"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-tuesday",
+      "japanese": "火曜日",
+      "kana": "かようび",
+      "english": "Tuesday",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-day",
+        "l10-day"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-report",
+      "japanese": "レポート",
+      "kana": "れぽーと",
+      "english": "my report",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-work-to-do",
+        "l06-object",
+        "l06-readable",
+        "l08-object",
+        "l08-readable",
+        "l09-text",
+        "l09-readable",
+        "l09-writable",
+        "l10-writing-content"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-homework",
+      "japanese": "宿題",
+      "kana": "しゅくだい",
+      "english": "my homework",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-work-to-do"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-do",
+      "japanese": "する",
+      "kana": "する",
+      "english": "do",
+      "wordType": "verb",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-duty"
+      ],
+      "accepts": [
+        "l12-work-to-do"
+      ],
+      "forms": {
+        "obligationStem": {
+          "japanese": "しな",
+          "kana": "しな",
+          "english": "do",
+          "introducedLesson": 12
+        }
+      }
+    },
+    {
+      "key": "l12-finish",
+      "japanese": "終える",
+      "kana": "おえる",
+      "english": "finish",
+      "wordType": "verb",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-duty"
+      ],
+      "accepts": [
+        "l12-work-to-do"
+      ],
+      "forms": {
+        "obligationStem": {
+          "japanese": "終えな",
+          "kana": "おえな",
+          "english": "finish",
+          "introducedLesson": 12
+        }
+      }
+    },
+    {
+      "key": "l12-warm",
+      "japanese": "暖かい",
+      "kana": "あたたかい",
+      "english": "warm",
+      "wordType": "i-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-weather"
+      ],
+      "accepts": [],
+      "forms": {
+        "negative": {
+          "japanese": "暖かくない",
+          "kana": "あたたかくない",
+          "english": "not warm",
+          "introducedLesson": 8
+        }
+      }
+    },
+    {
+      "key": "l12-cold",
+      "japanese": "寒い",
+      "kana": "さむい",
+      "english": "cold",
+      "wordType": "i-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-weather"
+      ],
+      "accepts": [],
+      "forms": {
+        "negative": {
+          "japanese": "寒くない",
+          "kana": "さむくない",
+          "english": "not cold",
+          "introducedLesson": 8
+        }
+      }
+    },
+    {
+      "key": "l12-tomorrow",
+      "japanese": "明日",
+      "kana": "あした",
+      "english": "tomorrow",
+      "wordType": "adverb",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-future"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-next-week",
+      "japanese": "来週",
+      "kana": "らいしゅう",
+      "english": "next week",
+      "wordType": "adverb",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-future"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-library",
+      "japanese": "図書館",
+      "kana": "としょかん",
+      "english": "the library",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-public-place"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-museum",
+      "japanese": "博物館",
+      "kana": "はくぶつかん",
+      "english": "the museum",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-public-place",
+        "l06-destination",
+        "l10-destination"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-quiet",
+      "japanese": "静か",
+      "kana": "しずか",
+      "english": "quiet",
+      "wordType": "na-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-atmosphere"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-lively",
+      "japanese": "にぎやか",
+      "kana": "にぎやか",
+      "english": "lively",
+      "wordType": "na-adjective",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-atmosphere"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l12-sakura",
+      "japanese": "さくらさん",
+      "kana": "さくらさん",
+      "english": "Sakura",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "person",
+        "l01-named-person",
+        "l05-person",
+        "l07-person",
+        "l08-person",
+        "l09-person",
+        "l10-person",
+        "l11-person"
+      ],
+      "accepts": [],
+      "forms": {
+        "possessive": {
+          "japanese": "さくらさん",
+          "kana": "さくらさん",
+          "english": "Sakura's",
+          "introducedLesson": 1
+        }
+      }
+    },
+    {
+      "key": "l12-daichi",
+      "japanese": "だいちさん",
+      "kana": "だいちさん",
+      "english": "Daichi",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "person",
+        "l01-named-person",
+        "l05-person",
+        "l07-person",
+        "l08-person",
+        "l09-person",
+        "l10-person",
+        "l11-person"
+      ],
+      "accepts": [],
+      "forms": {
+        "possessive": {
+          "japanese": "だいちさん",
+          "kana": "だいちさん",
+          "english": "Daichi's",
+          "introducedLesson": 1
+        }
+      }
+    },
+    {
+      "key": "l12-tofu",
+      "japanese": "豆腐",
+      "kana": "とうふ",
+      "english": "tofu",
+      "wordType": "noun",
+      "introducedLesson": 12,
+      "tags": [
+        "l12-consumable",
+        "l12-edible",
+        "l05-preference-object",
+        "l11-consumable",
+        "l11-purchase",
+        "l11-edible"
+      ],
+      "accepts": [],
+      "forms": {
+        "mass": {
+          "japanese": "豆腐",
+          "kana": "とうふ",
+          "english": "tofu",
+          "introducedLesson": 12
+        },
+        "list": {
+          "japanese": "豆腐",
+          "kana": "とうふ",
+          "english": "tofu",
+          "introducedLesson": 11
+        },
+        "pronoun": {
+          "japanese": "豆腐",
+          "kana": "とうふ",
+          "english": "it",
+          "introducedLesson": 11
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1929 @@
+{
+  "schemaVersion": 1,
+  "number": 2,
+  "title": "Choosing, locating, and asking about things",
+  "sourcePages": "56–81",
+  "grammarPoints": [
+    {
+      "id": "g02-01",
+      "title": "これ・それ・あれ・どれ",
+      "sourcePages": "60",
+      "meaning": "These stand alone as noun-like words for this one, that one near the listener, that one away from both speakers, and which one.",
+      "formation": "これ／それ／あれ + は + noun predicate; どれ appears in a question such as どれですか or どれが…ですか.",
+      "notes": [
+        "Choose the demonstrative by distance from speaker and listener, not by English this/that alone.",
+        "Avoid pointing to a nearby person in earshot with the これ/それ/あれ series; a name or title is more natural.",
+        "どれ is a question word; when it is the grammatical subject in ‘which one is X?’, use が rather than は.",
+        "いくらですか asks the price. To answer, put a yen amount before です."
+      ],
+      "prerequisites": [
+        "g01-01",
+        "g01-02"
+      ],
+      "examples": [
+        {
+          "english": "This one is a notebook.",
+          "japanese": "これはノートです。",
+          "kana": "これはノートです。"
+        },
+        {
+          "english": "Which one is the umbrella?",
+          "japanese": "どれが傘ですか。",
+          "kana": "どれがかさですか。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g02-01-demonstrative",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Point to a thing {demonstrative:distance}.",
+          "register": "polite",
+          "english": "{demonstrative} is {item:indefinite}.",
+          "japanese": "{demonstrative}は{item}です。",
+          "kana": "{demonstrative}は{item}です。",
+          "slots": [
+            {
+              "name": "demonstrative",
+              "wordType": "expression",
+              "tags": [
+                "l02-demonstrative"
+              ],
+              "forms": [
+                "base",
+                "distance"
+              ]
+            },
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l02-identifiable-item"
+              ],
+              "forms": [
+                "base",
+                "indefinite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Choose これ, それ or あれ using the distance. The distance belongs to the selected demonstrative, so it cannot contradict it."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g02-01-which",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Several things of the same type are visible. Ask which belongs to the named person.",
+          "register": "polite",
+          "english": "Which one is {owner}'s {item}?",
+          "japanese": "どれが{owner}の{item}ですか。",
+          "kana": "どれが{owner}の{item}ですか。",
+          "slots": [
+            {
+              "name": "owner",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l02-identifiable-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-02",
+            "g01-03"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "が",
+            "の",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use が with question subject どれ, as introduced in this section’s note; どれは is not a question-subject pattern."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g02-01-price-question",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "You are shopping. Point to an item {demonstrative:distance}.",
+          "register": "polite",
+          "english": "How much is {demonstrative:lower}?",
+          "japanese": "{demonstrative}はいくらですか。",
+          "kana": "{demonstrative}はいくらですか。",
+          "slots": [
+            {
+              "name": "demonstrative",
+              "wordType": "expression",
+              "tags": [
+                "l02-demonstrative"
+              ],
+              "forms": [
+                "base",
+                "distance",
+                "lower"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "いくら asks price. The demonstrative stands alone without an additional noun."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g02-02",
+      "title": "この・その・あの・どの + noun",
+      "sourcePages": "61",
+      "meaning": "Use this demonstrative series directly before a noun to identify which person or thing is meant.",
+      "formation": "この／その／あの／どの + noun. Unlike これ and its series, these forms cannot stand alone.",
+      "notes": [
+        "この is near the speaker, その near the listener, あの away from both, and どの asks which one.",
+        "The noun must immediately follow; do not add は directly after この／その／あの.",
+        "These can refer to people, unlike the standalone これ/それ/あれ forms in ordinary conversation."
+      ],
+      "prerequisites": [
+        "g02-01"
+      ],
+      "examples": [
+        {
+          "english": "That item near you is a watch.",
+          "japanese": "その品物は時計です。",
+          "kana": "そのしなものはとけいです。"
+        },
+        {
+          "english": "Which student is Canadian?",
+          "japanese": "どの学生がカナダ人ですか。",
+          "kana": "どのがくせいがカナダじんですか。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g02-02-demonstrative-noun",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "State the price of an item {determiner:distance}.",
+          "register": "polite",
+          "english": "{determiner} {item} is {price}.",
+          "japanese": "{determiner}{item}は{price}です。",
+          "kana": "{determiner}{item}は{price}です。",
+          "slots": [
+            {
+              "name": "determiner",
+              "wordType": "expression",
+              "tags": [
+                "l02-noun-demonstrative"
+              ],
+              "forms": [
+                "base",
+                "distance"
+              ]
+            },
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l02-identifiable-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "price",
+              "wordType": "counter",
+              "tags": [
+                "l02-item-price"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Keep the noun immediately after この, その or あの. The prices are plausible shop amounts for every item in the pool."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g02-02-which-noun",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Several items of this type are visible. Ask which belongs to the named person.",
+          "register": "polite",
+          "english": "Which {item} is {owner}'s?",
+          "japanese": "どの{item}が{owner}の{item}ですか。",
+          "kana": "どの{item}が{owner}の{item}ですか。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l02-identifiable-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "owner",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-02",
+            "g01-03"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "が",
+            "の",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "どの modifies the noun. Use が for the unknown subject and retain the owned noun in this beginner pattern."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g02-02-person",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Identify the nationality of someone {determiner:distance}.",
+          "register": "polite",
+          "english": "{determiner} {person-type} is {nationality}.",
+          "japanese": "{determiner}{person-type}は{nationality}です。",
+          "kana": "{determiner}{person-type}は{nationality}です。",
+          "slots": [
+            {
+              "name": "determiner",
+              "wordType": "expression",
+              "tags": [
+                "l02-noun-demonstrative"
+              ],
+              "forms": [
+                "base",
+                "distance"
+              ]
+            },
+            {
+              "name": "person-type",
+              "wordType": "noun",
+              "tags": [
+                "l02-person-category"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "nationality",
+              "wordType": "noun",
+              "tags": [
+                "l02-nationality"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Unlike standalone これ, この + a person noun can politely identify a person. The predicate is a nationality, avoiding contradictory roles."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g02-02-price-question",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Ask the price of an item {determiner:distance}.",
+          "register": "polite",
+          "english": "How much is {determiner:lower} {item}?",
+          "japanese": "{determiner}{item}はいくらですか。",
+          "kana": "{determiner}{item}はいくらですか。",
+          "slots": [
+            {
+              "name": "determiner",
+              "wordType": "expression",
+              "tags": [
+                "l02-noun-demonstrative"
+              ],
+              "forms": [
+                "base",
+                "distance",
+                "lower"
+              ]
+            },
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l02-identifiable-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-02",
+            "g02-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The item noun must follow the この-series determiner."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g02-03",
+      "title": "ここ・そこ・あそこ・どこ",
+      "sourcePages": "62",
+      "meaning": "Use these words to refer to places: here near the speaker, there near the listener, over there, or where.",
+      "formation": "A question uses [place/topic] は どこですか; an answer can use ここ／そこ／あそこ + です.",
+      "notes": [
+        "The こ・そ・あ distance pattern matches the demonstratives from the previous section."
+      ],
+      "prerequisites": [
+        "g02-01",
+        "g01-02"
+      ],
+      "examples": [
+        {
+          "english": "Where is the library?",
+          "japanese": "図書館はどこですか。",
+          "kana": "としょかんはどこですか。"
+        },
+        {
+          "english": "The post office is over there.",
+          "japanese": "郵便局はあそこです。",
+          "kana": "ゆうびんきょくはあそこです。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g02-03-ask-location",
+          "kind": "translation",
+          "instruction": "Ask where the place is in Japanese.",
+          "context": "You are politely asking someone for directions.",
+          "register": "polite",
+          "english": "Where is the {place}?",
+          "japanese": "{place}はどこですか。",
+          "kana": "{place}はどこですか。",
+          "slots": [
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l02-public-place"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "The place topic can be omitted when already obvious.",
+          "restrictions": [
+            "Use a place noun in the topic slot."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g02-03-answer-location",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "The place is {location:distance}. Point it out to the listener.",
+          "register": "polite",
+          "english": "The {place} is {location}.",
+          "japanese": "{place}は{location}です。",
+          "kana": "{place}は{location}です。",
+          "slots": [
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l02-public-place"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "location",
+              "wordType": "expression",
+              "tags": [
+                "l02-place-deictic"
+              ],
+              "forms": [
+                "base",
+                "distance"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use only ここ, そこ or あそこ as a statement predicate; どこ belongs in a question."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g02-04",
+      "title": "だれの + noun",
+      "sourcePages": "62",
+      "meaning": "Ask who owns or is associated with an item by placing だれの before its noun.",
+      "formation": "だれの + noun; answer with owner + の + noun.",
+      "notes": [
+        "This extends the noun-linking particle の from Lesson 1; the question word だれ means who."
+      ],
+      "prerequisites": [
+        "g01-03",
+        "g01-02"
+      ],
+      "examples": [
+        {
+          "english": "Whose umbrella is this?",
+          "japanese": "これは誰の傘ですか。",
+          "kana": "これはだれのかさですか。"
+        },
+        {
+          "english": "It is Yui's notebook.",
+          "japanese": "ユイさんのノートです。",
+          "kana": "ユイさんのノートです。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g02-04-whose-item",
+          "kind": "translation",
+          "instruction": "Ask the question in Japanese.",
+          "context": "You found an item and are politely asking about its owner.",
+          "register": "polite",
+          "english": "Whose {item} is this?",
+          "japanese": "これは誰の{item}ですか。",
+          "kana": "これはだれの{item}ですか。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l02-identifiable-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-02",
+            "g01-03",
+            "g02-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "の",
+            "か"
+          ],
+          "omission": "The item is retained because it is the noun modified by だれの.",
+          "restrictions": [
+            "Keep だれの immediately before the owned noun."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g02-04-owner-answer",
+          "kind": "translation",
+          "instruction": "Answer with the owner's name in Japanese.",
+          "context": "You are identifying the person who owns an item.",
+          "register": "polite",
+          "english": "It is {owner}'s {item}.",
+          "japanese": "{owner}の{item}です。",
+          "kana": "{owner}の{item}です。",
+          "slots": [
+            {
+              "name": "owner",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l02-identifiable-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-03"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "の"
+          ],
+          "omission": "The topic is omitted because it is a short answer; the item may be omitted if already identified.",
+          "restrictions": [
+            "The owner must be a person and the head noun an owned item."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g02-05",
+      "title": "も for ‘also’",
+      "sourcePages": "62–63",
+      "meaning": "も marks a newly mentioned person or thing as sharing an attribute already established for another item.",
+      "formation": "Replace the earlier topic marker は with も on the parallel item: A は X です。B も X です。",
+      "notes": [
+        "Put も directly after the parallel item, not at the end of the sentence.",
+        "The meaning depends on an earlier matching item or shared property; it is not a general marker for two unrelated facts.",
+        "This lesson models も in topic position. Other particle combinations are introduced later."
+      ],
+      "prerequisites": [
+        "g01-01"
+      ],
+      "examples": [
+        {
+          "english": "Aoi is a student. Ken is a student too.",
+          "japanese": "アオイさんは学生です。ケンさんも学生です。",
+          "kana": "アオイさんはがくせいです。ケンさんもがくせいです。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g02-05-parallel-identity",
+          "kind": "translation",
+          "instruction": "Translate the second sentence into Japanese.",
+          "context": "You have already said that {first-person} is {identity}. Now add that {second-person} shares that fact.",
+          "register": "polite",
+          "english": "{second-person} is {identity}, too.",
+          "japanese": "{second-person}も{identity}です。",
+          "kana": "{second-person}も{identity}です。",
+          "slots": [
+            {
+              "name": "first-person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "second-person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "identity",
+              "wordType": "noun",
+              "tags": [
+                "l01-person-identity"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "distinct",
+              "left": "first-person",
+              "right": "second-person"
+            }
+          ],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "も"
+          ],
+          "omission": "The previously mentioned person is in the context; the new parallel topic remains explicit.",
+          "restrictions": [
+            "Both people must plausibly share the same identity; do not use も to express two different attributes of one person."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g02-06",
+      "title": "Negative noun sentences",
+      "sourcePages": "63–64",
+      "meaning": "Negate a noun predicate politely to say that the topic is not a member of the stated category.",
+      "formation": "Noun + じゃないです. More conservative speech uses じゃありません; formal writing commonly uses ではありません.",
+      "notes": [
+        "Keep the noun before the negative expression; じゃないです does not stand alone as ‘no’.",
+        "じゃ is a contraction of では. Match the chosen form to the context's politeness level.",
+        "This pattern negates noun predicates only. Adjectives use their own conjugation patterns, taught later."
+      ],
+      "prerequisites": [
+        "g01-01"
+      ],
+      "examples": [
+        {
+          "english": "Rin is not a teacher.",
+          "japanese": "リンさんは先生じゃないです。",
+          "kana": "リンさんはせんせいじゃないです。"
+        },
+        {
+          "english": "That is not a library.",
+          "japanese": "そこは図書館ではありません。",
+          "kana": "そこはとしょかんではありません。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g02-06-negative-noun",
+          "kind": "translation",
+          "instruction": "Write this polite negative sentence in Japanese.",
+          "context": "You are correcting a mistaken assumption about {person}.",
+          "register": "polite",
+          "english": "{person} is not {identity}.",
+          "japanese": "{person}は{identity}じゃないです。",
+          "kana": "{person}は{identity}じゃないです。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "identity",
+              "wordType": "noun",
+              "tags": [
+                "l01-person-identity"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The topic may be omitted if clear, but keep it when correcting a specific assumption.",
+          "restrictions": [
+            "Use a noun predicate here. Do not attach じゃないです directly to an い-adjective; adjective patterns arrive in Lesson 5."
+          ],
+          "alternatives": [
+            {
+              "japanese": "{person}は{identity}じゃありません。",
+              "kana": "{person}は{identity}じゃありません。"
+            },
+            {
+              "japanese": "{person}は{identity}ではありません。",
+              "kana": "{person}は{identity}ではありません。"
+            }
+          ]
+        },
+        {
+          "id": "g02-06-negative-response",
+          "kind": "response",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Someone has asked whether you have this identity. Correct them politely.",
+          "register": "polite",
+          "english": "No, I am not {identity}.",
+          "japanese": "いいえ、{identity}じゃないです。",
+          "kana": "いいえ、{identity}じゃないです。",
+          "slots": [
+            {
+              "name": "identity",
+              "wordType": "noun",
+              "tags": [
+                "l01-person-identity"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [],
+          "omission": "The question establishes the speaker as topic, so 私は is naturally omitted.",
+          "restrictions": [
+            "Retain the identity noun; いいえ、じゃないです alone is incomplete."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g02-07",
+      "title": "Sentence-final ね and よ",
+      "sourcePages": "64",
+      "meaning": "Add ね when inviting confirmation or agreement; use よ to assert or supply information with confidence to the listener.",
+      "formation": "Polite statement + ね or よ.",
+      "notes": [
+        "ね and よ express different speaker-listener stances; they are not interchangeable decoration.",
+        "Either can follow a negative noun sentence as well as an affirmative one."
+      ],
+      "prerequisites": [
+        "g01-01",
+        "g02-06"
+      ],
+      "examples": [
+        {
+          "english": "This is Yui's notebook, right?",
+          "japanese": "これはユイさんのノートですね。",
+          "kana": "これはユイさんのノートですね。"
+        },
+        {
+          "english": "That is not a wallet, you know.",
+          "japanese": "あれは財布じゃないですよ。",
+          "kana": "あれはさいふじゃないですよ。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g02-07-seeking-agreement",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "You believe this fact and invite the listener to confirm it.",
+          "register": "polite",
+          "english": "{person} is {identity}, right?",
+          "japanese": "{person}は{identity}ですね。",
+          "kana": "{person}は{identity}ですね。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "identity",
+              "wordType": "noun",
+              "tags": [
+                "l01-person-identity"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "ね"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use ね to seek agreement."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g02-07-informing",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Correct a mistaken assumption confidently; you already know the answer.",
+          "register": "polite",
+          "english": "{person} is not {identity}, you know.",
+          "japanese": "{person}は{identity}じゃないですよ。",
+          "kana": "{person}は{identity}じゃないですよ。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "identity",
+              "wordType": "noun",
+              "tags": [
+                "l01-person-identity"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g02-06"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "は",
+            "よ"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use よ to supply information, not to ask for confirmation."
+          ],
+          "alternatives": [
+            {
+              "japanese": "{person}は{identity}じゃありませんよ。",
+              "kana": "{person}は{identity}じゃありませんよ。"
+            }
+          ]
+        },
+        {
+          "id": "g02-07-informing-affirmative",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "The listener is unsure about this person. Tell them the fact confidently.",
+          "register": "polite",
+          "english": "{person} is {identity}, you know.",
+          "japanese": "{person}は{identity}ですよ。",
+          "kana": "{person}は{identity}ですよ。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "identity",
+              "wordType": "noun",
+              "tags": [
+                "l01-person-identity"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "よ"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use よ for new or correcting information."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g02-07-negative-agreement",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "You think the negative fact is true and want confirmation.",
+          "register": "polite",
+          "english": "{person} is not {identity}, right?",
+          "japanese": "{person}は{identity}じゃないですね。",
+          "kana": "{person}は{identity}じゃないですね。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "identity",
+              "wordType": "noun",
+              "tags": [
+                "l01-person-identity"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g02-06"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "は",
+            "ね"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "ね can follow a negative predicate; retain the negative copula."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g02-09",
+      "title": "Requesting and offering things",
+      "sourcePages": "65",
+      "meaning": "Use をください to ask for a concrete thing. をお願いします is a polite request often heard when ordering, and をどうぞ offers an item to someone.",
+      "formation": "Item を ください／お願いします／どうぞ.",
+      "notes": [
+        "These are useful set request patterns here; general verb-object sentences arrive in Lesson 3.",
+        "ください requests a concrete object. お願いします also works for services, but this practice stays with tangible items.",
+        "In an obvious handover, を or the whole item phrase may be omitted."
+      ],
+      "prerequisites": [
+        "g01-01"
+      ],
+      "examples": [
+        {
+          "english": "Please give me a menu.",
+          "japanese": "メニューをください。",
+          "kana": "メニューをください。"
+        },
+        {
+          "english": "Here is some water for you.",
+          "japanese": "水をどうぞ。",
+          "kana": "みずをどうぞ。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g02-09-request",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Politely request a concrete item at a counter.",
+          "register": "polite",
+          "english": "Please give me {item:indefinite}.",
+          "japanese": "{item}をください。",
+          "kana": "{item}をください。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l02-request-item"
+              ],
+              "forms": [
+                "base",
+                "indefinite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use a tangible thing; do not substitute an action or attach a verb here."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g02-09-order",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Place a polite café order.",
+          "register": "polite",
+          "english": "I would like {item:indefinite}, please.",
+          "japanese": "{item}をお願いします。",
+          "kana": "{item}をおねがいします。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l02-order-item"
+              ],
+              "forms": [
+                "base",
+                "indefinite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "This schema uses a food or drink noun and the set expression お願いします."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g02-09-offer",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Hand the requested item to the listener.",
+          "register": "polite",
+          "english": "Here is {item:indefinite} for you.",
+          "japanese": "{item}をどうぞ。",
+          "kana": "{item}をどうぞ。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l02-request-item"
+              ],
+              "forms": [
+                "base",
+                "indefinite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "どうぞ offers the item; ください would request it instead."
+          ],
+          "alternatives": []
+        }
+      ]
+    }
+  ],
+  "lexicon": [
+    {
+      "key": "l02-notebook",
+      "japanese": "ノート",
+      "kana": "ノート",
+      "english": "notebook",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-identifiable-item",
+        "l02-owned-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "ノート",
+          "kana": "ノート",
+          "english": "a notebook",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-watch",
+      "japanese": "時計",
+      "kana": "とけい",
+      "english": "watch",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-identifiable-item",
+        "l02-owned-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "時計",
+          "kana": "とけい",
+          "english": "a watch",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-shoes",
+      "japanese": "靴",
+      "kana": "くつ",
+      "english": "pair of shoes",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-identifiable-item",
+        "l02-owned-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "靴",
+          "kana": "くつ",
+          "english": "a pair of shoes",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-bag",
+      "japanese": "かばん",
+      "kana": "かばん",
+      "english": "bag",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-identifiable-item",
+        "l02-owned-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "かばん",
+          "kana": "かばん",
+          "english": "a bag",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-umbrella",
+      "japanese": "傘",
+      "kana": "かさ",
+      "english": "umbrella",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-identifiable-item",
+        "l02-owned-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "傘",
+          "kana": "かさ",
+          "english": "an umbrella",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-wallet",
+      "japanese": "財布",
+      "kana": "さいふ",
+      "english": "wallet",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-identifiable-item",
+        "l02-owned-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "財布",
+          "kana": "さいふ",
+          "english": "a wallet",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-food",
+      "japanese": "食べ物",
+      "kana": "たべもの",
+      "english": "food",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-item-description"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-school-supply",
+      "japanese": "文房具",
+      "kana": "ぶんぼうぐ",
+      "english": "school supplies",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-item-description"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-clock",
+      "japanese": "時計",
+      "kana": "とけい",
+      "english": "clock",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-item-description"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-library",
+      "japanese": "図書館",
+      "kana": "としょかん",
+      "english": "library",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-public-place"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-post-office",
+      "japanese": "郵便局",
+      "kana": "ゆうびんきょく",
+      "english": "post office",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-public-place"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-bank",
+      "japanese": "銀行",
+      "kana": "ぎんこう",
+      "english": "bank",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-public-place"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-convenience-store",
+      "japanese": "コンビニ",
+      "kana": "コンビニ",
+      "english": "convenience store",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-public-place"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-home",
+      "japanese": "家",
+      "kana": "いえ",
+      "english": "house",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-public-place"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-person-category-student",
+      "japanese": "学生",
+      "kana": "がくせい",
+      "english": "student",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-person-category"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-person-category-teacher",
+      "japanese": "先生",
+      "kana": "せんせい",
+      "english": "teacher",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-person-category"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-person-category-friend",
+      "japanese": "友達",
+      "kana": "ともだち",
+      "english": "friend",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-person-category"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-near-me",
+      "japanese": "話し手の近く",
+      "kana": "はなしてのちかく",
+      "english": "near the speaker",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-distance-cue"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-near-listener",
+      "japanese": "聞き手の近く",
+      "kana": "ききてのちかく",
+      "english": "near the listener",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-distance-cue"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-away",
+      "japanese": "二人から離れた所",
+      "kana": "ふたりからはなれたところ",
+      "english": "away from both people",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-distance-cue"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-kore",
+      "japanese": "これ",
+      "kana": "これ",
+      "english": "This",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-demonstrative"
+      ],
+      "accepts": [],
+      "forms": {
+        "distance": {
+          "japanese": "これ",
+          "kana": "これ",
+          "english": "near you, the speaker",
+          "introducedLesson": 2
+        },
+        "lower": {
+          "japanese": "これ",
+          "kana": "これ",
+          "english": "this",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-sore",
+      "japanese": "それ",
+      "kana": "それ",
+      "english": "That",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-demonstrative"
+      ],
+      "accepts": [],
+      "forms": {
+        "distance": {
+          "japanese": "それ",
+          "kana": "それ",
+          "english": "near the listener",
+          "introducedLesson": 2
+        },
+        "lower": {
+          "japanese": "それ",
+          "kana": "それ",
+          "english": "that",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-are",
+      "japanese": "あれ",
+      "kana": "あれ",
+      "english": "That",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-demonstrative"
+      ],
+      "accepts": [],
+      "forms": {
+        "distance": {
+          "japanese": "あれ",
+          "kana": "あれ",
+          "english": "away from both of you",
+          "introducedLesson": 2
+        },
+        "lower": {
+          "japanese": "あれ",
+          "kana": "あれ",
+          "english": "that",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-dore",
+      "japanese": "どれ",
+      "kana": "どれ",
+      "english": "which one",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-demonstrative-question"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-kono",
+      "japanese": "この",
+      "kana": "この",
+      "english": "This",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-noun-demonstrative"
+      ],
+      "accepts": [],
+      "forms": {
+        "distance": {
+          "japanese": "この",
+          "kana": "この",
+          "english": "near you, the speaker",
+          "introducedLesson": 2
+        },
+        "lower": {
+          "japanese": "この",
+          "kana": "この",
+          "english": "this",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-sono",
+      "japanese": "その",
+      "kana": "その",
+      "english": "That",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-noun-demonstrative"
+      ],
+      "accepts": [],
+      "forms": {
+        "distance": {
+          "japanese": "その",
+          "kana": "その",
+          "english": "near the listener",
+          "introducedLesson": 2
+        },
+        "lower": {
+          "japanese": "その",
+          "kana": "その",
+          "english": "that",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-ano",
+      "japanese": "あの",
+      "kana": "あの",
+      "english": "That",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-noun-demonstrative"
+      ],
+      "accepts": [],
+      "forms": {
+        "distance": {
+          "japanese": "あの",
+          "kana": "あの",
+          "english": "away from both of you",
+          "introducedLesson": 2
+        },
+        "lower": {
+          "japanese": "あの",
+          "kana": "あの",
+          "english": "that",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-dono",
+      "japanese": "どの",
+      "kana": "どの",
+      "english": "which",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-noun-demonstrative-question"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-koko",
+      "japanese": "ここ",
+      "kana": "ここ",
+      "english": "here",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-place-deictic"
+      ],
+      "accepts": [],
+      "forms": {
+        "distance": {
+          "japanese": "ここ",
+          "kana": "ここ",
+          "english": "near you, the speaker",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-soko",
+      "japanese": "そこ",
+      "kana": "そこ",
+      "english": "there near you",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-place-deictic"
+      ],
+      "accepts": [],
+      "forms": {
+        "distance": {
+          "japanese": "そこ",
+          "kana": "そこ",
+          "english": "near the listener",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-asoko",
+      "japanese": "あそこ",
+      "kana": "あそこ",
+      "english": "over there",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-place-deictic"
+      ],
+      "accepts": [],
+      "forms": {
+        "distance": {
+          "japanese": "あそこ",
+          "kana": "あそこ",
+          "english": "away from both of you",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-doko",
+      "japanese": "どこ",
+      "kana": "どこ",
+      "english": "where",
+      "wordType": "expression",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-place-deictic-question"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-price1200",
+      "japanese": "千二百円",
+      "kana": "せんにひゃくえん",
+      "english": "1,200 yen",
+      "wordType": "counter",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-item-price"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-price2400",
+      "japanese": "二千四百円",
+      "kana": "にせんよんひゃくえん",
+      "english": "2,400 yen",
+      "wordType": "counter",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-item-price"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-price3600",
+      "japanese": "三千六百円",
+      "kana": "さんぜんろっぴゃくえん",
+      "english": "3,600 yen",
+      "wordType": "counter",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-item-price"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-japanese",
+      "japanese": "日本人",
+      "kana": "にほんじん",
+      "english": "Japanese",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-nationality"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-canadian",
+      "japanese": "カナダ人",
+      "kana": "カナダじん",
+      "english": "Canadian",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-nationality"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-korean",
+      "japanese": "韓国人",
+      "kana": "かんこくじん",
+      "english": "Korean",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-nationality"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l02-water",
+      "japanese": "水",
+      "kana": "みず",
+      "english": "water",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-request-item",
+        "l02-order-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "水",
+          "kana": "みず",
+          "english": "some water",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-menu",
+      "japanese": "メニュー",
+      "kana": "メニュー",
+      "english": "menu",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-request-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "メニュー",
+          "kana": "メニュー",
+          "english": "a menu",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-tea",
+      "japanese": "お茶",
+      "kana": "おちゃ",
+      "english": "tea",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-request-item",
+        "l02-order-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "お茶",
+          "kana": "おちゃ",
+          "english": "some tea",
+          "introducedLesson": 2
+        }
+      }
+    },
+    {
+      "key": "l02-sandwich",
+      "japanese": "サンドイッチ",
+      "kana": "サンドイッチ",
+      "english": "sandwich",
+      "wordType": "noun",
+      "introducedLesson": 2,
+      "tags": [
+        "l02-request-item",
+        "l02-order-item"
+      ],
+      "accepts": [],
+      "forms": {
+        "indefinite": {
+          "japanese": "サンドイッチ",
+          "kana": "サンドイッチ",
+          "english": "a sandwich",
+          "introducedLesson": 2
+        }
+      }
+    }
+  ]
+}

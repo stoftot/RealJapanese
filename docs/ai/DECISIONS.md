@@ -1,5 +1,33 @@
 # Decisions
 
+## Reviewed Genki frames and learner sentence review
+
+- **Status:** Accepted
+- **Date:** 2026-10-03
+
+### Context
+
+Sentence production needs cumulative grammar, compatible word meanings and more
+than one possible correct answer. Existing vocabulary categories do not encode
+valency or semantic restrictions, and exact vocabulary-answer matching cannot
+judge all valid Japanese sentences.
+
+### Decision
+
+Embed original lesson recaps and typed generation frames as JSON. Extend `Word`
+with reviewed semantic metadata and explicit forms; reuse the existing question
+DTO and practice controls. Keep vocabulary expansion separate from the grammar
+ceiling. Provide model comparison and learner review instead of claiming a
+general grammar grader. [Genki](../genki.md) owns the detailed contract.
+
+### Consequences
+
+Both hosts can practise offline with the same curriculum. New compatible words
+extend existing patterns once their metadata is reviewed. Known vocabulary is not
+imported without that review. Sessions do not alter vocabulary mastery or sync
+data. The existing conjugation APIs remain separate until their known language
+defects are corrected with independent tests.
+
 ## Shared UI with separate web and Android hosts
 
 - **Status:** Accepted

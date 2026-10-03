@@ -1,0 +1,1124 @@
+{
+  "schemaVersion": 1,
+  "number": 1,
+  "title": "Meeting and introducing yourself",
+  "sourcePages": "36–55",
+  "grammarPoints": [
+    {
+      "id": "g01-01",
+      "title": "Noun sentences with は and です",
+      "sourcePages": "41–42, 44–47",
+      "meaning": "Use a polite noun predicate to identify or describe the topic: X is Y. Japanese often leaves the topic unspoken when the situation makes it clear. Nouns do not take English-style a/an or plural endings; context supplies that meaning.",
+      "formation": "(X は) Y です. は marks the topic and is pronounced wa in this use. です follows the noun or noun phrase.",
+      "notes": [
+        "は marks what the sentence is about, not necessarily its grammatical subject.",
+        "The affirmative nonpast pattern is introduced here; noun negation and past forms appear in later lessons.",
+        "Use names and titles naturally; speakers commonly omit a clear topic and address a listener by name or title rather than あなた.",
+        "Use さん after another person’s name, never after your own. 先生 normally describes someone else; 教師 is a modest way to state your own teaching profession.",
+        "Ages use 歳, school years use 年生, and clock times use 時; learn the counter with its pronunciation (四時 is よじ, 七時 is しちじ, 九時 is くじ). 二十歳 is はたち."
+      ],
+      "prerequisites": [],
+      "examples": [
+        {
+          "english": "Mika is a new student.",
+          "japanese": "ミカさんは新入生です。",
+          "kana": "ミカさんはしんにゅうせいです。"
+        },
+        {
+          "english": "My major is history.",
+          "japanese": "専攻は歴史です。",
+          "kana": "せんこうはれきしです。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g01-01-identity",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Introduce another person at a school event.",
+          "register": "polite",
+          "english": "{person} is {identity}.",
+          "japanese": "{person}は{identity}です。",
+          "kana": "{person}は{identity}です。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "identity",
+              "wordType": "noun",
+              "tags": [
+                "l01-person-identity"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use a named person and a human identity. Do not add an English-style article in Japanese."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g01-01-topic-comment",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "You are telling a new classmate about your studies.",
+          "register": "polite",
+          "english": "My major is {field}.",
+          "japanese": "専攻は{field}です。",
+          "kana": "せんこうは{field}です。",
+          "slots": [
+            {
+              "name": "field",
+              "wordType": "noun",
+              "tags": [
+                "l01-field-of-study"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The speaker’s ownership is clear from context; no の phrase is needed yet."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g01-01-age",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Give another adult student’s age.",
+          "register": "polite",
+          "english": "{person} is {age}.",
+          "japanese": "{person}は{age}です。",
+          "kana": "{person}は{age}です。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "age",
+              "wordType": "counter",
+              "tags": [
+                "l01-age"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use a complete age counter with its reviewed pronunciation, including はたち for twenty."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g01-01-school-year",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Introduce the student’s year in college.",
+          "register": "polite",
+          "english": "{person} is {year}.",
+          "japanese": "{person}は{year}です。",
+          "kana": "{person}は{year}です。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "year",
+              "wordType": "counter",
+              "tags": [
+                "l01-school-year"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "年生 describes a student’s school year, not their age."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g01-01-clock",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "You are telling someone the current time.",
+          "register": "polite",
+          "english": "It is {time} now.",
+          "japanese": "今、{time}です。",
+          "kana": "いま、{time}です。",
+          "slots": [
+            {
+              "name": "time",
+              "wordType": "counter",
+              "tags": [
+                "l01-clock-time"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use clock 時, not duration 時間. 半 follows 時."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g01-02",
+      "title": "Polite questions and question words",
+      "sourcePages": "42–43",
+      "meaning": "Turn a polite statement into a yes-or-no question with か. For a question-word question, put the needed question word in the corresponding noun or value position and keep the polite sentence frame.",
+      "formation": "Polite statement + か. Wh-question: topic は question word ですか, or topic は question word + counter/time expression ですか.",
+      "notes": [
+        "A Japanese question normally does not need a question mark in standard printed text.",
+        "Japanese は in the topic position is pronounced wa.",
+        "Read 何 as なん immediately before です and these counters: 何時 (なんじ), 何歳 (なんさい), 何年生 (なんねんせい), 何番 (なんばん). Before many particles it is なに; 何人 meaning “what nationality” is なにじん.",
+        "When answering, the listener can omit a repeated topic when it is obvious."
+      ],
+      "prerequisites": [
+        "g01-01"
+      ],
+      "examples": [
+        {
+          "english": "Is Ren a teacher?",
+          "japanese": "レンさんは先生ですか。",
+          "kana": "レンさんはせんせいですか。"
+        },
+        {
+          "english": "What is your major?",
+          "japanese": "専攻は何ですか。",
+          "kana": "せんこうはなんですか。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g01-02-yes-no",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Check information about another person.",
+          "register": "polite",
+          "english": "Is {person} {identity}?",
+          "japanese": "{person}は{identity}ですか。",
+          "kana": "{person}は{identity}ですか。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "identity",
+              "wordType": "noun",
+              "tags": [
+                "l01-person-identity"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Put か after です."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g01-02-wh-noun",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "You are politely asking the listener for an entry on a school introduction form.",
+          "register": "polite",
+          "english": "What is your {topic}?",
+          "japanese": "{topic}は何ですか。",
+          "kana": "{topic}はなんですか。",
+          "slots": [
+            {
+              "name": "topic",
+              "wordType": "noun",
+              "tags": [
+                "l01-wh-topic"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use only a name or major here; ages, school years and numbers need their specific counter question."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g01-02-wh-value",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Ask a classmate about another student’s age.",
+          "register": "polite",
+          "english": "How old is {person}?",
+          "japanese": "{person}は何歳ですか。",
+          "kana": "{person}はなんさいですか。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "何歳 asks age; do not independently substitute a school-year counter."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g01-02-school-year",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Ask which school year another student is in.",
+          "register": "polite",
+          "english": "What year is {person} in college?",
+          "japanese": "{person}は何年生ですか。",
+          "kana": "{person}はなんねんせいですか。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use 何年生 for a student’s year, not 何歳."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g01-02-time",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "You are checking the time in another city.",
+          "register": "polite",
+          "english": "What time is it now in {city}?",
+          "japanese": "{city}は今何時ですか。",
+          "kana": "{city}はいまなんじですか。",
+          "slots": [
+            {
+              "name": "city",
+              "wordType": "noun",
+              "tags": [
+                "l01-time-location"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The city is the topic; 何時 asks for clock time."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g01-02-number",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Ask the listener for a number on their registration details.",
+          "register": "polite",
+          "english": "What is your {number-topic}?",
+          "japanese": "{number-topic}は何番ですか。",
+          "kana": "{number-topic}はなんばんですか。",
+          "slots": [
+            {
+              "name": "number-topic",
+              "wordType": "noun",
+              "tags": [
+                "l01-number-topic"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use 何番 for the identifying number, not 何歳 or 何年生."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g01-03",
+      "title": "Connecting nouns with の",
+      "sourcePages": "43",
+      "meaning": "の links two nouns to show ownership, affiliation, origin, or another close relationship. The second noun names the main thing; the first narrows whose or what kind it is.",
+      "formation": "Noun 1 の Noun 2. Treat the complete phrase as one noun phrase wherever a noun can appear.",
+      "notes": [
+        "The English relationship may be possessive (‘Aki’s bag’) or descriptive (‘a student of biology’); の does not always translate as English of.",
+        "The rightmost noun is the head of the phrase."
+      ],
+      "prerequisites": [
+        "g01-01"
+      ],
+      "examples": [
+        {
+          "english": "This is Yui’s notebook.",
+          "japanese": "ユイさんのノートです。",
+          "kana": "ユイさんのノートです。"
+        },
+        {
+          "english": "Ren’s major is biology.",
+          "japanese": "レンさんの専攻は生物学です。",
+          "kana": "レンさんのせんこうはせいぶつがくです。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g01-03-possessive-head",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Identify an item or piece of information that the listener is looking at.",
+          "register": "polite",
+          "english": "It is {owner}'s {item}.",
+          "japanese": "{owner}の{item}です。",
+          "kana": "{owner}の{item}です。",
+          "slots": [
+            {
+              "name": "owner",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l01-owned-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "の"
+          ],
+          "omission": "The understood item is the omitted topic; keep the owner and head noun.",
+          "restrictions": [
+            "の links the owner to the head noun; finish the utterance with です."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g01-03-affiliation-head",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Introduce a student and the institution they attend.",
+          "register": "polite",
+          "english": "{person} is a student at {school}.",
+          "japanese": "{person}は{school}の学生です。",
+          "kana": "{person}は{school}のがくせいです。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "school",
+              "wordType": "noun",
+              "tags": [
+                "l01-school-name"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "の"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The institution precedes の; 学生 is the head noun."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g01-03-person-major",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Share another student’s academic information.",
+          "register": "polite",
+          "english": "{person}'s major is {field}.",
+          "japanese": "{person}の専攻は{field}です。",
+          "kana": "{person}のせんこうは{field}です。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "field",
+              "wordType": "noun",
+              "tags": [
+                "l01-field-of-study"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "の",
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The whole phrase person の 専攻 is the topic; do not reverse owner and head noun."
+          ],
+          "alternatives": []
+        }
+      ]
+    }
+  ],
+  "lexicon": [
+    {
+      "key": "l01-mika",
+      "japanese": "ミカさん",
+      "kana": "ミカさん",
+      "english": "Mika",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "person",
+        "l01-named-person"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-ren",
+      "japanese": "レンさん",
+      "kana": "レンさん",
+      "english": "Ren",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "person",
+        "l01-named-person"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-yui",
+      "japanese": "ユイさん",
+      "kana": "ユイさん",
+      "english": "Yui",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "person",
+        "l01-named-person"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-kenta",
+      "japanese": "ケンタさん",
+      "kana": "ケンタさん",
+      "english": "Kenta",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "person",
+        "l01-named-person"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-student",
+      "japanese": "学生",
+      "kana": "がくせい",
+      "english": "a student",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-person-identity",
+        "l01-role-identity"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-teacher",
+      "japanese": "先生",
+      "kana": "せんせい",
+      "english": "a teacher",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-person-identity",
+        "l01-role-identity"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-new-student",
+      "japanese": "新入生",
+      "kana": "しんにゅうせい",
+      "english": "a new student",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-person-identity",
+        "l01-role-identity"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-international-student",
+      "japanese": "留学生",
+      "kana": "りゅうがくせい",
+      "english": "an international student",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-person-identity",
+        "l01-role-identity"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-college-student",
+      "japanese": "大学生",
+      "kana": "だいがくせい",
+      "english": "a college student",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-person-identity",
+        "l01-role-identity"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-japanese-person",
+      "japanese": "日本人",
+      "kana": "にほんじん",
+      "english": "Japanese",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-person-identity"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-major-topic",
+      "japanese": "専攻",
+      "kana": "せんこう",
+      "english": "major",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-wh-topic"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-name",
+      "japanese": "名前",
+      "kana": "なまえ",
+      "english": "name",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-wh-topic"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-phone-number",
+      "japanese": "電話番号",
+      "kana": "でんわばんごう",
+      "english": "phone number",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-identifiable-object",
+        "l01-owned-item",
+        "l01-number-topic"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-notebook",
+      "japanese": "ノート",
+      "kana": "ノート",
+      "english": "notebook",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-identifiable-object",
+        "l01-owned-item"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-umbrella",
+      "japanese": "傘",
+      "kana": "かさ",
+      "english": "umbrella",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-identifiable-object",
+        "l01-owned-item"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-wallet",
+      "japanese": "財布",
+      "kana": "さいふ",
+      "english": "wallet",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-identifiable-object",
+        "l01-owned-item"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-book",
+      "japanese": "本",
+      "kana": "ほん",
+      "english": "book",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-identifiable-object",
+        "l01-owned-item"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-field-history",
+      "japanese": "歴史学",
+      "kana": "れきしがく",
+      "english": "history",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-field-of-study"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-field-biology",
+      "japanese": "生物学",
+      "kana": "せいぶつがく",
+      "english": "biology",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-field-of-study"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-field-politics",
+      "japanese": "政治学",
+      "kana": "せいじがく",
+      "english": "political science",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-field-of-study"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-age18",
+      "japanese": "十八歳",
+      "kana": "じゅうはっさい",
+      "english": "eighteen years old",
+      "wordType": "counter",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-age"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-age20",
+      "japanese": "二十歳",
+      "kana": "はたち",
+      "english": "twenty years old",
+      "wordType": "counter",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-age"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-age24",
+      "japanese": "二十四歳",
+      "kana": "にじゅうよんさい",
+      "english": "twenty-four years old",
+      "wordType": "counter",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-age"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-year1",
+      "japanese": "一年生",
+      "kana": "いちねんせい",
+      "english": "a first-year student",
+      "wordType": "counter",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-school-year"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-year3",
+      "japanese": "三年生",
+      "kana": "さんねんせい",
+      "english": "a third-year student",
+      "wordType": "counter",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-school-year"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-year4",
+      "japanese": "四年生",
+      "kana": "よねんせい",
+      "english": "a fourth-year student",
+      "wordType": "counter",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-school-year"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-time4",
+      "japanese": "四時",
+      "kana": "よじ",
+      "english": "four o’clock",
+      "wordType": "counter",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-clock-time"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-time730",
+      "japanese": "七時半",
+      "kana": "しちじはん",
+      "english": "half past seven",
+      "wordType": "counter",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-clock-time"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-time9",
+      "japanese": "九時",
+      "kana": "くじ",
+      "english": "nine o’clock",
+      "wordType": "counter",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-clock-time"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-tokyo",
+      "japanese": "東京",
+      "kana": "とうきょう",
+      "english": "Tokyo",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-time-location"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-london",
+      "japanese": "ロンドン",
+      "kana": "ロンドン",
+      "english": "London",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-time-location"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-room-number",
+      "japanese": "部屋番号",
+      "kana": "へやばんごう",
+      "english": "room number",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-number-topic"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-river-university",
+      "japanese": "リバー大学",
+      "kana": "リバーだいがく",
+      "english": "River University",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-school-name"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l01-kaihin-university",
+      "japanese": "海浜大学",
+      "kana": "かいひんだいがく",
+      "english": "Kaihin University",
+      "wordType": "noun",
+      "introducedLesson": 1,
+      "tags": [
+        "l01-school-name"
+      ],
+      "accepts": [],
+      "forms": {}
+    }
+  ]
+}

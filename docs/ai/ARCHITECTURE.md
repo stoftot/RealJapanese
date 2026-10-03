@@ -161,6 +161,22 @@ count as correct; missed/revealed cards stay in review until answered correctly
 in a later attempt. Review can also be adjusted explicitly. Empty selections,
 invalid saved IDs and unavailable storage have explicit handling.
 
+### Genki grammar practice
+
+The shared `/genki` and `/genki/{lesson}` routes use an embedded, versioned JSON
+curriculum in Repositories. DataLoaders owns lesson/schema records and a
+`GenkiLexeme` extension of `Word` carrying reviewed semantic tags and forms.
+The generator enforces typed slots, compatibility relations and separate grammar
+and vocabulary ceilings. It wraps the existing `QuestionAnswerDto` with context,
+kana and model variants; the page reuses `PracticeShell` and `PracticeCard`.
+Both hosts register the same catalog/generator. Embedding delivers the curriculum
+offline without modifying mobile catalog installation or progress/sync formats.
+
+Sentence answers use transparent model comparison and self-review, because exact
+matching cannot judge arbitrary valid Japanese. Session/retry state is per page
+and is not persisted. Reviewed forms avoid the existing conjugators' known defects.
+[Genki](../genki.md) owns the source mapping, authoring contract and extension rules.
+
 ### Data maintenance
 
 Duplicate cleanup deduplicates words, assigns replacement IDs and remaps progress.

@@ -1,0 +1,1882 @@
+{
+  "schemaVersion": 1,
+  "number": 10,
+  "title": "Comparing choices and making plans",
+  "sourcePages": "230–253",
+  "grammarPoints": [
+    {
+      "id": "g10-01",
+      "title": "Comparing two choices",
+      "sourcePages": "234",
+      "meaning": "Say which of two things has more of a quality, or ask which one does.",
+      "formation": "A のほうが B より adjective です. Question: A と B と、どちらのほうが adjective ですか.",
+      "notes": [
+        "のほうが identifies the higher side and より the comparison standard; word order may change without reversing the meaning.",
+        "The adjective itself does not get a special comparative ending. どっち is a more conversational alternative to どちら."
+      ],
+      "prerequisites": [
+        "g05-01",
+        "g05-03"
+      ],
+      "examples": [
+        {
+          "english": "The white bag is smaller than the red bag.",
+          "japanese": "白いかばんのほうが赤いかばんより小さいです。",
+          "kana": "しろいかばんのほうがあかいかばんよりちいさいです。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g10-01-statement",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Compare the two named items in a shop.",
+          "register": "polite",
+          "english": "{a} is {quality:comparative} than {b}.",
+          "japanese": "{a}のほうが{b}より{quality}です。",
+          "kana": "{a}のほうが{b}より{quality}です。",
+          "slots": [
+            {
+              "name": "a",
+              "wordType": "noun",
+              "tags": [
+                "l10-compare-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "b",
+              "wordType": "noun",
+              "tags": [
+                "l10-compare-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l10-comparison"
+              ],
+              "forms": [
+                "base",
+                "comparative"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "distinct",
+              "left": "a",
+              "right": "b"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "のほうが",
+            "より"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Compare distinct physical objects on the same dimension. The truth is supplied by the English prompt."
+          ],
+          "alternatives": [
+            {
+              "japanese": "{b}より{a}のほうが{quality}です。",
+              "kana": "{b}より{a}のほうが{quality}です。"
+            }
+          ]
+        },
+        {
+          "id": "g10-01-question",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "Which is {quality:comparative}, {a} or {b}?",
+          "japanese": "{a}と{b}と、どちらのほうが{quality}ですか。",
+          "kana": "{a}と{b}と、どちらのほうが{quality}ですか。",
+          "slots": [
+            {
+              "name": "a",
+              "wordType": "noun",
+              "tags": [
+                "l10-compare-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "b",
+              "wordType": "noun",
+              "tags": [
+                "l10-compare-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l10-comparison"
+              ],
+              "forms": [
+                "base",
+                "comparative"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "distinct",
+              "left": "a",
+              "right": "b"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "と",
+            "が",
+            "か"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Exactly two alternatives are being compared. Do not use いちばん here."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g10-02",
+      "title": "Choosing the most from a group",
+      "sourcePages": "234–235",
+      "meaning": "Identify the highest degree of a quality among three or more choices.",
+      "formation": "Group の中で、item がいちばん adjective です. Ask with the suitable question word + がいちばん.",
+      "notes": [
+        "Use どれ for a visible list of items, 何 for many category questions, だれ for people, どこ for places, and いつ for times.",
+        "For three or more choices, do not replace the superlative pattern with どっち or のほう."
+      ],
+      "prerequisites": [
+        "g10-01"
+      ],
+      "examples": [
+        {
+          "english": "Among these hats, the red hat is the largest.",
+          "japanese": "帽子の中で、赤い帽子がいちばん大きいです。",
+          "kana": "ぼうしのなかで、あかいぼうしがいちばんおおきいです。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g10-02-superlative",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "At least three items of this category are on display.",
+          "register": "polite",
+          "english": "Among {group}, {item} is the {quality:superlative}.",
+          "japanese": "{group}の中で、{item}がいちばん{quality}です。",
+          "kana": "{group}のなかで、{item}がいちばん{quality}です。",
+          "slots": [
+            {
+              "name": "group",
+              "wordType": "noun",
+              "tags": [
+                "l10-compare-group"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l10-compare-item"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l10-comparison"
+              ],
+              "forms": [
+                "base",
+                "superlative"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "group",
+              "right": "item"
+            }
+          ],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "の",
+            "で",
+            "が"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The selected item must belong to the group. There must be three or more alternatives in context."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-02-question",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "You can see at least three items of the stated category.",
+          "register": "polite",
+          "english": "Among {group}, which is the {quality:superlative}?",
+          "japanese": "{group}の中で、どれがいちばん{quality}ですか。",
+          "kana": "{group}のなかで、どれがいちばん{quality}ですか。",
+          "slots": [
+            {
+              "name": "group",
+              "wordType": "noun",
+              "tags": [
+                "l10-compare-group"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l10-comparison"
+              ],
+              "forms": [
+                "base",
+                "superlative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "の",
+            "で",
+            "が",
+            "か"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use どれ because the alternatives are visible things, not people or places."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g10-03",
+      "title": "Replacing a known noun with の",
+      "sourcePages": "235–236",
+      "meaning": "Avoid repeating a thing already identified: “the small one,” “the clean one,” or “Aki’s.”",
+      "formation": "I-adjective + の; na-adjective + な + の; possessor noun + の.",
+      "notes": [
+        "The missing noun must be recoverable from context. In ordinary descriptions of people, use 人 rather than this “one” pattern.",
+        "Possessive の appears just once: あきさんの, not あきさんのの."
+      ],
+      "prerequisites": [
+        "g05-03",
+        "g01-03"
+      ],
+      "examples": [
+        {
+          "english": "I will buy the small one.",
+          "japanese": "小さいのを買います。",
+          "kana": "ちいさいのをかいます。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g10-03-i-one",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "You have been comparing two bags. Avoid repeating “bag.”",
+          "register": "polite",
+          "english": "I will buy the {quality} one.",
+          "japanese": "{quality}のを買います。",
+          "kana": "{quality}のをかいます。",
+          "slots": [
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l10-size"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "の",
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "の replaces a known inanimate object. Keep the final い."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-03-na-one",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "You have been comparing two rooms. Avoid repeating “room.”",
+          "register": "polite",
+          "english": "I will use the {quality} one.",
+          "japanese": "{quality:attributive}のを使います。",
+          "kana": "{quality:attributive}のをつかいます。",
+          "slots": [
+            {
+              "name": "quality",
+              "wordType": "na-adjective",
+              "tags": [
+                "l10-room-quality"
+              ],
+              "forms": [
+                "base",
+                "attributive"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "の",
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Keep な before the replacement の. The referent is a room."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-03-possessive",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "This bag is {person:possessive}.",
+          "japanese": "このかばんは{person}のです。",
+          "kana": "このかばんは{person}のです。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l10-person"
+              ],
+              "forms": [
+                "base",
+                "possessive"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "の"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The person owns the bag. Do not add a second の or repeat かばん after の."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g10-04",
+      "title": "Intentions with つもり",
+      "sourcePages": "236",
+      "meaning": "Describe an intention to do or avoid an action. A past form describes an earlier plan.",
+      "formation": "Nonpast short verb + つもりです; nonpast negative + つもりです. Earlier plan: verb + つもりでした.",
+      "notes": [
+        "Keep the action verb nonpast even when the intention is past.",
+        "A plan is stronger than simply wondering about an action. Use a controllable action and a person who can intend it."
+      ],
+      "prerequisites": [
+        "g08-01",
+        "g09-01"
+      ],
+      "examples": [
+        {
+          "english": "I intend to exercise on Sunday.",
+          "japanese": "日曜日に運動するつもりです。",
+          "kana": "にちようびにうんどうするつもりです。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g10-04-plan",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "I intend to {action} on {day}.",
+          "japanese": "{day}に{action}つもりです。",
+          "kana": "{day}に{action}つもりです。",
+          "slots": [
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l10-planned-action"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "day",
+              "wordType": "noun",
+              "tags": [
+                "l10-day"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "に"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use a controllable action in its dictionary form. The day is in the future."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-04-negative-plan",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "I intend not to {action} on {day}.",
+          "japanese": "{day}に{action:negative}つもりです。",
+          "kana": "{day}に{action:negative}つもりです。",
+          "slots": [
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l10-planned-action"
+              ],
+              "forms": [
+                "base",
+                "negative"
+              ]
+            },
+            {
+              "name": "day",
+              "wordType": "noun",
+              "tags": [
+                "l10-day"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "に"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Negate the action before つもり. The intention itself is present."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-04-past-plan",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Describe last week’s plan, which you did not carry out.",
+          "register": "polite",
+          "english": "I had intended to {action} on {day}.",
+          "japanese": "{day}に{action}つもりでした。",
+          "kana": "{day}に{action}つもりでした。",
+          "slots": [
+            {
+              "name": "action",
+              "wordType": "verb",
+              "tags": [
+                "l10-planned-action"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "day",
+              "wordType": "noun",
+              "tags": [
+                "l10-day"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past intention",
+          "polarity": "affirmative",
+          "particles": [
+            "に"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Past tense belongs on でした; do not put a past verb before つもり."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g10-05",
+      "title": "Becoming different: なる",
+      "sourcePages": "236–237",
+      "meaning": "Describe a change of state, degree, or role.",
+      "formation": "I-adjective: remove い and add くなる. Na-adjective or noun: add になる. Conjugate なる for time and politeness.",
+      "notes": [
+        "Do not say 大きいになる. いい becomes よくなる.",
+        "A change can be absolute or relative. 前より explicitly compares with before."
+      ],
+      "prerequisites": [
+        "g05-01",
+        "g10-01",
+        "g04-04"
+      ],
+      "examples": [
+        {
+          "english": "The classroom became quiet.",
+          "japanese": "教室は静かになりました。",
+          "kana": "きょうしつはしずかになりました。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g10-05-i-change",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Describe the area after rebuilding.",
+          "register": "polite",
+          "english": "{place} became {quality:become}.",
+          "japanese": "{place}は{quality:become}なりました。",
+          "kana": "{place}は{quality:become}なりました。",
+          "slots": [
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l10-resizable"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "i-adjective",
+              "tags": [
+                "l10-size"
+              ],
+              "forms": [
+                "become"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The selected physical place can become larger or smaller. Use く, not に, with the i-adjective."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-05-na-change",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "{place} became {quality}.",
+          "japanese": "{place}は{quality:become}なりました。",
+          "kana": "{place}は{quality:become}なりました。",
+          "slots": [
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l10-room"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "quality",
+              "wordType": "na-adjective",
+              "tags": [
+                "l10-room-quality"
+              ],
+              "forms": [
+                "base",
+                "become"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "に"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use a room quality and に before なる."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-05-noun-change",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "{person} became {job}.",
+          "japanese": "{person}は{job}になりました。",
+          "kana": "{person}は{job}になりました。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l10-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "job",
+              "wordType": "noun",
+              "tags": [
+                "l10-occupation"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "に"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "A person can enter the occupation; use noun + に."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g10-06",
+      "title": "Somewhere, someone, and their negatives",
+      "sourcePages": "237",
+      "meaning": "Refer to an unspecified place or person, or say that none was involved.",
+      "formation": "どこかに / だれかに with an affirmative or question; どこにも / だれにも with a negative predicate.",
+      "notes": [
+        "Particles such as に, へ, and で follow か but come before negative も: どこかで / どこでも + negative.",
+        "In these basic patterns, 何か and 何も do not need を. Negative も requires a negative predicate."
+      ],
+      "prerequisites": [
+        "g08-08",
+        "g04-04"
+      ],
+      "examples": [
+        {
+          "english": "I did not go anywhere on Saturday.",
+          "japanese": "土曜日はどこにも行きませんでした。",
+          "kana": "どようびはどこにもいきませんでした。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g10-06-somewhere",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "Will you go somewhere on {day}?",
+          "japanese": "{day}にどこかに行きますか。",
+          "kana": "{day}にどこかにいきますか。",
+          "slots": [
+            {
+              "name": "day",
+              "wordType": "noun",
+              "tags": [
+                "l10-day"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "に",
+            "か"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Destination に follows どこか. This is an open question, not a negative assertion."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-06-nowhere",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "I did not go anywhere on {day}.",
+          "japanese": "{day}はどこにも行きませんでした。",
+          "kana": "{day}はどこにもいきませんでした。",
+          "slots": [
+            {
+              "name": "day",
+              "wordType": "noun",
+              "tags": [
+                "l10-day"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "negative",
+          "particles": [
+            "は",
+            "に",
+            "も"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use どこにも with a negative motion verb; not どこもに."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-06-someone",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "Did you meet anyone on {day}?",
+          "japanese": "{day}にだれかに会いましたか。",
+          "kana": "{day}にだれかにあいましたか。",
+          "slots": [
+            {
+              "name": "day",
+              "wordType": "noun",
+              "tags": [
+                "l10-day"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "に",
+            "か"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "会う marks the person met with に. Keep that に after だれか."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-06-no-one",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "I did not meet anyone on {day}.",
+          "japanese": "{day}はだれにも会いませんでした。",
+          "kana": "{day}はだれにもあいませんでした。",
+          "slots": [
+            {
+              "name": "day",
+              "wordType": "noun",
+              "tags": [
+                "l10-day"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "negative",
+          "particles": [
+            "は",
+            "に",
+            "も"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Preserve 会う’s に before も and make the verb negative."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g10-07",
+      "title": "Means, tools, and language with で",
+      "sourcePages": "238",
+      "meaning": "Name the means of transport, tool, medium, or language used to do something.",
+      "formation": "Means noun + で + action. The destination still takes に or へ; an object still takes を.",
+      "notes": [
+        "A location can also take で, but here で answers “by what means?”",
+        "“On foot” is 歩いて, not a transport noun plus で. Match tools to actions they can perform."
+      ],
+      "prerequisites": [
+        "g03-03",
+        "g04-04"
+      ],
+      "examples": [
+        {
+          "english": "I wrote my name with a pencil.",
+          "japanese": "鉛筆で名前を書きました。",
+          "kana": "えんぴつでなまえをかきました。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g10-07-transport",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "I will go to {place} by {transport}.",
+          "japanese": "{transport}で{place}に行きます。",
+          "kana": "{transport}で{place}にいきます。",
+          "slots": [
+            {
+              "name": "transport",
+              "wordType": "noun",
+              "tags": [
+                "l10-transport"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l10-destination"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "で",
+            "に"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "Use transport vehicles that can reach these local destinations. Do not generate 歩いてで."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-07-tool",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "I wrote {text} with {tool}.",
+          "japanese": "{tool}で{text}を書きました。",
+          "kana": "{tool}で{text}をかきました。",
+          "slots": [
+            {
+              "name": "tool",
+              "wordType": "noun",
+              "tags": [
+                "l10-writing-tool"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "text",
+              "wordType": "noun",
+              "tags": [
+                "l10-writing-content"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "で",
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The tool must be suitable for writing and the object must be writable."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-07-language",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "",
+          "register": "polite",
+          "english": "I spoke in {language} with {person}.",
+          "japanese": "{person}と{language}で話しました。",
+          "kana": "{person}と{language}ではなしました。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l10-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "language",
+              "wordType": "noun",
+              "tags": [
+                "l10-language"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "と",
+            "で"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "で marks the language used, while と marks the conversation partner."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g10-09",
+      "title": "Extra: do something and come back",
+      "sourcePages": "238",
+      "meaning": "Use てくる when an action happens elsewhere and is followed by movement toward the current location.",
+      "formation": "Verb te-form + 来る; polite nonpast 〜てきます, past 〜てきました.",
+      "notes": [
+        "Context must establish a return or movement toward the speaker’s reference location.",
+        "This introductory use is physical movement; do not generate later abstract “has begun to” meanings."
+      ],
+      "prerequisites": [
+        "g06-01",
+        "g04-04"
+      ],
+      "examples": [
+        {
+          "english": "I will go buy milk and come back.",
+          "japanese": "牛乳を買ってきます。",
+          "kana": "ぎゅうにゅうをかってきます。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g10-09-buy-return",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "You are at home, about to go to a shop and return home.",
+          "register": "polite",
+          "english": "I will go buy {item} and come back.",
+          "japanese": "{item}を買ってきます。",
+          "kana": "{item}をかってきます。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l10-purchase"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The action is buying a portable item elsewhere and returning here."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-09-bought-return",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "You have returned home with the purchase.",
+          "register": "polite",
+          "english": "I went and bought {item} and came back.",
+          "japanese": "{item}を買ってきました。",
+          "kana": "{item}をかってきました。",
+          "slots": [
+            {
+              "name": "item",
+              "wordType": "noun",
+              "tags": [
+                "l10-purchase"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "past",
+          "polarity": "affirmative",
+          "particles": [
+            "を"
+          ],
+          "omission": "The understood speaker or topic may be omitted; retain the information requested.",
+          "restrictions": [
+            "The past ending applies to 来る; the buying verb stays in te-form."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g10-10",
+      "title": "Extra: leaving room for a reply with が or けど",
+      "sourcePages": "238",
+      "meaning": "End with が or けど to offer relevant information and invite the other person to respond.",
+      "formation": "Polite sentence + が…; conversational sentence + けど….",
+      "notes": [
+        "The unfinished ending can soften a request or let the listener choose. It need not mean a strong contradiction.",
+        "Provide a conversational opening in the scenario so that the incomplete ending has a purpose."
+      ],
+      "prerequisites": [
+        "g08-02"
+      ],
+      "examples": [
+        {
+          "english": "I am free in the afternoon…",
+          "japanese": "午後は暇ですが…。",
+          "kana": "ごごはひまですが…。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g10-10-opening",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "Someone is arranging a meeting. Offer this information politely, ending with が and leaving room for their suggestion.",
+          "register": "polite",
+          "english": "I am free in {time}…",
+          "japanese": "{time}は暇ですが…。",
+          "kana": "{time}はひまですが…。",
+          "slots": [
+            {
+              "name": "time",
+              "wordType": "noun",
+              "tags": [
+                "l10-daypart"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "が"
+          ],
+          "omission": "The request or suggestion is left implicit for the listener to supply.",
+          "restrictions": [
+            "This is intentionally an unfinished conversational turn. Do not force an unrelated contrasting clause."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g10-10-casual-opening",
+          "kind": "translation",
+          "instruction": "Write this in Japanese.",
+          "context": "A close friend is arranging a meeting. End casually with けど and leave room for their suggestion.",
+          "register": "casual",
+          "english": "I am free in {time}…",
+          "japanese": "{time}は暇だけど…。",
+          "kana": "{time}はひまだけど…。",
+          "slots": [
+            {
+              "name": "time",
+              "wordType": "noun",
+              "tags": [
+                "l10-daypart"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "けど"
+          ],
+          "omission": "The request or suggestion is left implicit for the listener to supply.",
+          "restrictions": [
+            "Retain だ after 暇 before けど. The unfinished turn invites a response."
+          ],
+          "alternatives": []
+        }
+      ]
+    }
+  ],
+  "lexicon": [
+    {
+      "key": "l10-red-bag",
+      "japanese": "赤いかばん",
+      "kana": "あかいかばん",
+      "english": "the red bag",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-compare-item",
+        "l10-bag"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-white-bag",
+      "japanese": "白いかばん",
+      "kana": "しろいかばん",
+      "english": "the white bag",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-compare-item",
+        "l10-bag"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-red-hat",
+      "japanese": "赤い帽子",
+      "kana": "あかいぼうし",
+      "english": "the red hat",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-compare-item",
+        "l10-hat"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-white-hat",
+      "japanese": "白い帽子",
+      "kana": "しろいぼうし",
+      "english": "the white hat",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-compare-item",
+        "l10-hat"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-bags",
+      "japanese": "かばん",
+      "kana": "かばん",
+      "english": "these bags",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-compare-group"
+      ],
+      "accepts": [
+        "l10-bag"
+      ],
+      "forms": {}
+    },
+    {
+      "key": "l10-hats",
+      "japanese": "帽子",
+      "kana": "ぼうし",
+      "english": "these hats",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-compare-group"
+      ],
+      "accepts": [
+        "l10-hat"
+      ],
+      "forms": {}
+    },
+    {
+      "key": "l10-large",
+      "japanese": "大きい",
+      "kana": "おおきい",
+      "english": "large",
+      "wordType": "i-adjective",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-size",
+        "l10-comparison"
+      ],
+      "accepts": [],
+      "forms": {
+        "comparative": {
+          "japanese": "大きい",
+          "kana": "おおきい",
+          "english": "larger",
+          "introducedLesson": 10
+        },
+        "superlative": {
+          "japanese": "大きい",
+          "kana": "おおきい",
+          "english": "largest",
+          "introducedLesson": 10
+        },
+        "become": {
+          "japanese": "大きく",
+          "kana": "おおきく",
+          "english": "larger",
+          "introducedLesson": 10
+        }
+      }
+    },
+    {
+      "key": "l10-small",
+      "japanese": "小さい",
+      "kana": "ちいさい",
+      "english": "small",
+      "wordType": "i-adjective",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-size",
+        "l10-comparison"
+      ],
+      "accepts": [],
+      "forms": {
+        "comparative": {
+          "japanese": "小さい",
+          "kana": "ちいさい",
+          "english": "smaller",
+          "introducedLesson": 10
+        },
+        "superlative": {
+          "japanese": "小さい",
+          "kana": "ちいさい",
+          "english": "smallest",
+          "introducedLesson": 10
+        },
+        "become": {
+          "japanese": "小さく",
+          "kana": "ちいさく",
+          "english": "smaller",
+          "introducedLesson": 10
+        }
+      }
+    },
+    {
+      "key": "l10-expensive",
+      "japanese": "高い",
+      "kana": "たかい",
+      "english": "expensive",
+      "wordType": "i-adjective",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-comparison"
+      ],
+      "accepts": [],
+      "forms": {
+        "comparative": {
+          "japanese": "高い",
+          "kana": "たかい",
+          "english": "more expensive",
+          "introducedLesson": 10
+        },
+        "superlative": {
+          "japanese": "高い",
+          "kana": "たかい",
+          "english": "most expensive",
+          "introducedLesson": 10
+        }
+      }
+    },
+    {
+      "key": "l10-aki",
+      "japanese": "あきさん",
+      "kana": "あきさん",
+      "english": "Aki",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-person"
+      ],
+      "accepts": [],
+      "forms": {
+        "possessive": {
+          "japanese": "あきさん",
+          "kana": "あきさん",
+          "english": "Aki's",
+          "introducedLesson": 10
+        }
+      }
+    },
+    {
+      "key": "l10-nao",
+      "japanese": "なおさん",
+      "kana": "なおさん",
+      "english": "Nao",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-person"
+      ],
+      "accepts": [],
+      "forms": {
+        "possessive": {
+          "japanese": "なおさん",
+          "kana": "なおさん",
+          "english": "Nao's",
+          "introducedLesson": 10
+        }
+      }
+    },
+    {
+      "key": "l10-quiet",
+      "japanese": "静か",
+      "kana": "しずか",
+      "english": "quiet",
+      "wordType": "na-adjective",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-room-quality"
+      ],
+      "accepts": [],
+      "forms": {
+        "attributive": {
+          "japanese": "静かな",
+          "kana": "しずかな",
+          "english": "quiet",
+          "introducedLesson": 5
+        },
+        "become": {
+          "japanese": "静かに",
+          "kana": "しずかに",
+          "english": "quiet",
+          "introducedLesson": 10
+        }
+      }
+    },
+    {
+      "key": "l10-clean",
+      "japanese": "きれい",
+      "kana": "きれい",
+      "english": "clean",
+      "wordType": "na-adjective",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-room-quality"
+      ],
+      "accepts": [],
+      "forms": {
+        "attributive": {
+          "japanese": "きれいな",
+          "kana": "きれいな",
+          "english": "clean",
+          "introducedLesson": 5
+        },
+        "become": {
+          "japanese": "きれいに",
+          "kana": "きれいに",
+          "english": "clean",
+          "introducedLesson": 10
+        }
+      }
+    },
+    {
+      "key": "l10-room",
+      "japanese": "部屋",
+      "kana": "へや",
+      "english": "the room",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-room"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-classroom",
+      "japanese": "教室",
+      "kana": "きょうしつ",
+      "english": "the classroom",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-room"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-garden",
+      "japanese": "庭",
+      "kana": "にわ",
+      "english": "the garden",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-resizable"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-park",
+      "japanese": "公園",
+      "kana": "こうえん",
+      "english": "the park",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-resizable"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-teacher",
+      "japanese": "先生",
+      "kana": "せんせい",
+      "english": "a teacher",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-occupation"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-doctor",
+      "japanese": "医者",
+      "kana": "いしゃ",
+      "english": "a doctor",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-occupation"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-saturday",
+      "japanese": "土曜日",
+      "kana": "どようび",
+      "english": "Saturday",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-day"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-sunday",
+      "japanese": "日曜日",
+      "kana": "にちようび",
+      "english": "Sunday",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-day"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-study",
+      "japanese": "勉強する",
+      "kana": "べんきょうする",
+      "english": "study",
+      "wordType": "verb",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-planned-action"
+      ],
+      "accepts": [],
+      "forms": {
+        "negative": {
+          "japanese": "勉強しない",
+          "kana": "べんきょうしない",
+          "english": "study",
+          "introducedLesson": 8
+        }
+      }
+    },
+    {
+      "key": "l10-exercise",
+      "japanese": "運動する",
+      "kana": "うんどうする",
+      "english": "exercise",
+      "wordType": "verb",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-planned-action"
+      ],
+      "accepts": [],
+      "forms": {
+        "negative": {
+          "japanese": "運動しない",
+          "kana": "うんどうしない",
+          "english": "exercise",
+          "introducedLesson": 8
+        }
+      }
+    },
+    {
+      "key": "l10-bus",
+      "japanese": "バス",
+      "kana": "ばす",
+      "english": "bus",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-transport"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-train",
+      "japanese": "電車",
+      "kana": "でんしゃ",
+      "english": "train",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-transport"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-bike",
+      "japanese": "自転車",
+      "kana": "じてんしゃ",
+      "english": "bicycle",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-transport"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-school",
+      "japanese": "学校",
+      "kana": "がっこう",
+      "english": "school",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-destination"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-station",
+      "japanese": "駅",
+      "kana": "えき",
+      "english": "the station",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-destination"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-library",
+      "japanese": "図書館",
+      "kana": "としょかん",
+      "english": "the library",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-destination"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-pen",
+      "japanese": "ペン",
+      "kana": "ぺん",
+      "english": "a pen",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-writing-tool"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-pencil",
+      "japanese": "鉛筆",
+      "kana": "えんぴつ",
+      "english": "a pencil",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-writing-tool",
+        "l06-object",
+        "l06-tool",
+        "l07-possession"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-letter",
+      "japanese": "手紙",
+      "kana": "てがみ",
+      "english": "a letter",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-writing-content"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-name",
+      "japanese": "名前",
+      "kana": "なまえ",
+      "english": "my name",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-writing-content"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-japanese",
+      "japanese": "日本語",
+      "kana": "にほんご",
+      "english": "Japanese",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-language"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-english",
+      "japanese": "英語",
+      "kana": "えいご",
+      "english": "English",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-language",
+        "l03-study-subject"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-bread",
+      "japanese": "パン",
+      "kana": "ぱん",
+      "english": "bread",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-purchase"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-milk",
+      "japanese": "牛乳",
+      "kana": "ぎゅうにゅう",
+      "english": "milk",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-purchase"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-morning",
+      "japanese": "午前",
+      "kana": "ごぜん",
+      "english": "the morning",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-daypart"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l10-afternoon",
+      "japanese": "午後",
+      "kana": "ごご",
+      "english": "the afternoon",
+      "wordType": "noun",
+      "introducedLesson": 10,
+      "tags": [
+        "l10-daypart"
+      ],
+      "accepts": [],
+      "forms": {}
+    }
+  ]
+}

@@ -1,0 +1,2213 @@
+{
+  "schemaVersion": 1,
+  "number": 3,
+  "title": "Daily actions, time, and invitations",
+  "sourcePages": "82–101",
+  "grammarPoints": [
+    {
+      "id": "g03-01",
+      "title": "Verb classes and polite conjugation",
+      "sourcePages": "86–88",
+      "meaning": "Japanese verbs fall into three classes, and class determines how the polite stem is formed. The polite forms let a speaker choose an appropriate level of formality.",
+      "formation": "Ru-verbs drop final る and add ます／ません. U-verbs change the final u-row sound to the matching i-row sound before ます／ません. Irregular する becomes します／しません, and 来る becomes 来ます／来ません (きます／きません).",
+      "notes": [
+        "The dictionary form identifies a verb but is not the polite sentence ending used in these exercises.",
+        "Learn a verb’s class with the verb; some verbs ending in る are class 1.",
+        "This point focuses on how the form is made. The common meanings of polite nonpast are the next point.",
+        "The polite stem is the part before ます: 読み, 食べ, し, and き. Do not classify every verb ending in る as a ru-verb."
+      ],
+      "prerequisites": [
+        "g01-01"
+      ],
+      "examples": [
+        {
+          "english": "I read.",
+          "japanese": "読みます。",
+          "kana": "よみます。"
+        },
+        {
+          "english": "I do not study.",
+          "japanese": "勉強しません。",
+          "kana": "べんきょうしません。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g03-01-polite-form",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "A teacher asks what each participant does during a free activity period. State the activity.",
+          "register": "polite",
+          "english": "{person} {verb:polite}.",
+          "japanese": "{person}は{verb:polite}。",
+          "kana": "{person}は{verb:polite}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "verb",
+              "wordType": "verb",
+              "tags": [
+                "l03-basic-action"
+              ],
+              "forms": [
+                "polite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "These activities can naturally appear without an explicit object. Use a polite verb, not verb + です."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-01-polite-negative-form",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Explain what a participant does not do during the free activity period.",
+          "register": "polite",
+          "english": "{person} does not {verb}.",
+          "japanese": "{person}は{verb:politeNegative}。",
+          "kana": "{person}は{verb:politeNegative}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "verb",
+              "wordType": "verb",
+              "tags": [
+                "l03-basic-action"
+              ],
+              "forms": [
+                "base",
+                "politeNegative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The negative polite verb ends in ません."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-01-conjugation-drill",
+          "kind": "transformation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Practise the u-verb, ru-verb and irregular classes.",
+          "register": "polite",
+          "english": "Give the polite affirmative and polite negative forms of the verb meaning “{verb}”.",
+          "japanese": "{verb:polite}／{verb:politeNegative}",
+          "kana": "{verb:polite}／{verb:politeNegative}",
+          "slots": [
+            {
+              "name": "verb",
+              "wordType": "verb",
+              "tags": [
+                "l03-form-drill"
+              ],
+              "forms": [
+                "base",
+                "polite",
+                "politeNegative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "This supplementary drill isolates endings; the other exercises use full sentences."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g03-02",
+      "title": "Present/nonpast meaning of verbs",
+      "sourcePages": "88",
+      "meaning": "The polite nonpast covers repeated habits and actions expected or planned for the future. It does not normally mean that an action is happening right now.",
+      "formation": "Use a polite verb form for affirmative nonpast and the polite negative form for a negative nonpast sentence. Context and time words distinguish habit from future.",
+      "notes": [
+        "Japanese verbs do not change for person or number.",
+        "A nonpast sentence can describe a routine or a future plan; use context to show which.",
+        "Do not use this form alone to say an action is in progress."
+      ],
+      "prerequisites": [
+        "g03-01"
+      ],
+      "examples": [
+        {
+          "english": "Yui studies.",
+          "japanese": "ユイさんは勉強します。",
+          "kana": "ユイさんはべんきょうします。"
+        },
+        {
+          "english": "Ren will eat.",
+          "japanese": "レンさんは食べます。",
+          "kana": "レンさんはたべます。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g03-02-affirmative",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Describe the participant’s usual activity during a free period.",
+          "register": "polite",
+          "english": "{person} {activity:polite}.",
+          "japanese": "{person}は{activity:polite}。",
+          "kana": "{person}は{activity:polite}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-basic-action"
+              ],
+              "forms": [
+                "polite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The context makes this a habit, not an action in progress."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-02-future",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Describe the participant’s plan for the next free period.",
+          "register": "polite",
+          "english": "{person} will {activity}.",
+          "japanese": "{person}は{activity:polite}。",
+          "kana": "{person}は{activity:polite}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-basic-action"
+              ],
+              "forms": [
+                "base",
+                "polite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-01"
+          ],
+          "tense": "future",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The same Japanese nonpast form can describe a future plan."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-02-negative",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Describe an activity someone does not do during free periods.",
+          "register": "polite",
+          "english": "{person} does not {activity}.",
+          "japanese": "{person}は{activity:politeNegative}。",
+          "kana": "{person}は{activity:politeNegative}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-basic-action"
+              ],
+              "forms": [
+                "base",
+                "politeNegative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Negate the verb with ません."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-02-negative-future",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Explain the participant’s plan for the next free period.",
+          "register": "polite",
+          "english": "{person} will not {activity}.",
+          "japanese": "{person}は{activity:politeNegative}。",
+          "kana": "{person}は{activity:politeNegative}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-basic-action"
+              ],
+              "forms": [
+                "base",
+                "politeNegative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-01"
+          ],
+          "tense": "future",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Context gives ません a future negative meaning."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g03-03",
+      "title": "を, で, に, and へ with verbs",
+      "sourcePages": "88–89",
+      "meaning": "を marks a direct object, で the place where an action happens, に a destination or arrival point, and へ the direction toward which someone goes.",
+      "formation": "Place the particle-marked phrase before the verb: [topic] は [time] [destination] に/へ [place] で [object] を verb. Use に or へ with movement verbs, and で with an action location.",
+      "notes": [
+        "を is pronounced お.",
+        "へ is pronounced え when used as a particle.",
+        "The destination and action location have different roles; avoid marking the destination with で in a simple movement sentence.",
+        "Word order is flexible, but particles show the roles and the verb usually comes last.",
+        "来る describes movement toward the speaker’s location; 行く describes movement away. English “I’m coming to you” may therefore require 行きます."
+      ],
+      "prerequisites": [
+        "g03-02"
+      ],
+      "examples": [
+        {
+          "english": "I study Japanese at the library.",
+          "japanese": "私は図書館で日本語を勉強します。",
+          "kana": "わたしはとしょかんでにほんごをべんきょうします。"
+        },
+        {
+          "english": "Kenta goes to the store.",
+          "japanese": "ケンタさんは店に行きます。",
+          "kana": "ケンタさんはみせにいきます。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g03-03-object-place",
+          "kind": "translation",
+          "instruction": "Write the sentence in Japanese, marking the action place and object.",
+          "context": "Describe a polite study or reading activity.",
+          "register": "polite",
+          "english": "{person} studies {subject} at {place}.",
+          "japanese": "{person}は{place}で{subject}を勉強します。",
+          "kana": "{person}は{place}で{subject}をべんきょうします。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l03-study-place"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "subject",
+              "wordType": "noun",
+              "tags": [
+                "l03-study-subject"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "で",
+            "を"
+          ],
+          "omission": "Topic and action place can be omitted if already established.",
+          "restrictions": [
+            "Use で for the place where studying happens; use を for the subject studied.",
+            "This schema uses the lexical verb 勉強する in its polite form."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-03-destination",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Describe a regular trip away from the speaker’s location.",
+          "register": "polite",
+          "english": "{person} goes to {destination}.",
+          "japanese": "{person}は{destination}に行きます。",
+          "kana": "{person}は{destination}にいきます。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "destination",
+              "wordType": "noun",
+              "tags": [
+                "l03-destination"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "に",
+            "へ"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "に and へ both mark this destination. Time に cannot be replaced by へ. Transportation で is not required here."
+          ],
+          "alternatives": [
+            {
+              "japanese": "{person}は{destination}へ行きます。",
+              "kana": "{person}は{destination}へいきます。"
+            }
+          ]
+        },
+        {
+          "id": "g03-03-coming",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "You are already at {destination}. Report another person’s plan to join you there.",
+          "register": "polite",
+          "english": "{person} will come to {destination}.",
+          "japanese": "{person}は{destination}に来ます。",
+          "kana": "{person}は{destination}にきます。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "destination",
+              "wordType": "noun",
+              "tags": [
+                "l03-destination"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02"
+          ],
+          "tense": "future",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "に"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use 来る because movement is toward the speaker’s location."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-03-return",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Describe a return to a familiar base after an outing.",
+          "register": "polite",
+          "english": "{person} returns to {destination:destination}.",
+          "japanese": "{person}は{destination}に帰ります。",
+          "kana": "{person}は{destination}にかえります。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "destination",
+              "wordType": "noun",
+              "tags": [
+                "l03-return-place"
+              ],
+              "forms": [
+                "base",
+                "destination"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "に"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "帰る means return to a base such as home or one’s school; do not use it for every destination."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g03-04",
+      "title": "Time expressions with に",
+      "sourcePages": "90",
+      "meaning": "に marks a specific time when an action occurs. Many relative or broad time expressions do not take に.",
+      "formation": "Specific clock times, days, and dates + に; expressions such as today, tomorrow, every day, and relative time periods normally appear without に.",
+      "notes": [
+        "Use に with clock times and days of the week. Relative words such as 今日／明日, repeated intervals such as 毎日, and いつ do not take に.",
+        "Parts of the day and 週末 usually appear without に; に is possible with a different emphasis or style.",
+        "Use ごろ for an approximate clock time: time ごろ or time ごろに. It is different from duration ぐらい in Lesson 4."
+      ],
+      "prerequisites": [
+        "g03-02"
+      ],
+      "examples": [
+        {
+          "english": "I eat dinner at seven.",
+          "japanese": "私は七時に晩ご飯を食べます。",
+          "kana": "わたしはしちじにばんごはんをたべます。"
+        },
+        {
+          "english": "I study every day.",
+          "japanese": "私は毎日勉強します。",
+          "kana": "わたしはまいにちべんきょうします。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g03-04-specific-time",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "State a regular schedule.",
+          "register": "polite",
+          "english": "{person} {activity:polite} {specific-time}.",
+          "japanese": "{person}は{specific-time}に{activity:polite}。",
+          "kana": "{person}は{specific-time}に{activity:polite}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "specific-time",
+              "wordType": "expression",
+              "tags": [
+                "l03-specific-time"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-basic-action"
+              ],
+              "forms": [
+                "polite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "に"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The time lexeme contains no に; the schema adds it."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-04-broad-time",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Describe someone’s routine.",
+          "register": "polite",
+          "english": "{person} {activity:polite} {broad-time}.",
+          "japanese": "{person}は{broad-time}{activity:polite}。",
+          "kana": "{person}は{broad-time}{activity:polite}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "broad-time",
+              "wordType": "expression",
+              "tags": [
+                "l03-habit-time"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-basic-action"
+              ],
+              "forms": [
+                "polite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use these time expressions without に in this model."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-04-approximate-clock",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Give an approximate schedule.",
+          "register": "polite",
+          "english": "{person} {activity:polite} at about {time:clock}.",
+          "japanese": "{person}は{time}ごろ{activity:polite}。",
+          "kana": "{person}は{time}ごろ{activity:polite}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "time",
+              "wordType": "expression",
+              "tags": [
+                "l03-specific-time"
+              ],
+              "forms": [
+                "base",
+                "clock"
+              ]
+            },
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-basic-action"
+              ],
+              "forms": [
+                "polite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use ごろ for clock time; ごろに is also possible."
+          ],
+          "alternatives": [
+            {
+              "japanese": "{person}は{time}ごろに{activity:polite}。",
+              "kana": "{person}は{time}ごろに{activity:polite}。"
+            }
+          ]
+        },
+        {
+          "id": "g03-04-when",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Ask about a planned trip.",
+          "register": "polite",
+          "english": "When will {person} go to {destination}?",
+          "japanese": "{person}はいつ{destination}に行きますか。",
+          "kana": "{person}はいつ{destination}にいきますか。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "destination",
+              "wordType": "noun",
+              "tags": [
+                "l03-destination"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-03",
+            "g01-02"
+          ],
+          "tense": "future",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "に",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Do not put に after いつ. The に in this sentence marks the destination."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g03-05",
+      "title": "Inviting with ませんか",
+      "sourcePages": "90, 93",
+      "meaning": "A polite negative question can gently invite the listener to do an activity together.",
+      "formation": "Verb polite-negative form + か. The invitation commonly includes the listener contextually, so a separate ‘you’ is unnecessary.",
+      "notes": [
+        "This is an invitation, not simply a question asking whether the listener does not act.",
+        "Use an activity the speaker and listener can reasonably do together.",
+        "ちょっと… can gently decline an invitation by leaving the difficulty unstated; いいですね can accept enthusiastically."
+      ],
+      "prerequisites": [
+        "g03-02",
+        "g03-03"
+      ],
+      "examples": [
+        {
+          "english": "Won't you have lunch with me?",
+          "japanese": "一緒に昼ご飯を食べませんか。",
+          "kana": "いっしょにひるごはんをたべませんか。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g03-05-invitation",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Invite a classmate to share an activity.",
+          "register": "polite",
+          "english": "Would you like to {activity} together {time}?",
+          "japanese": "{time}一緒に{activity:politeNegative}か。",
+          "kana": "{time}いっしょに{activity:politeNegative}か。",
+          "slots": [
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-shared-activity"
+              ],
+              "forms": [
+                "base",
+                "politeNegative"
+              ]
+            },
+            {
+              "name": "time",
+              "wordType": "expression",
+              "tags": [
+                "l03-invitation-time"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02",
+            "g03-04"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative-question-invitation",
+          "particles": [
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use ませんか for an invitation; ますか simply asks about their plans. 一緒に is a fixed expression here."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-05-invitation-destination",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Invite a friend on a trip away from your current location.",
+          "register": "polite",
+          "english": "Would you like to go to {destination} together {time}?",
+          "japanese": "{time}一緒に{destination}に行きませんか。",
+          "kana": "{time}いっしょに{destination}にいきませんか。",
+          "slots": [
+            {
+              "name": "destination",
+              "wordType": "noun",
+              "tags": [
+                "l03-destination"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "time",
+              "wordType": "expression",
+              "tags": [
+                "l03-invitation-time"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-03",
+            "g03-04"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative-question-invitation",
+          "particles": [
+            "に",
+            "か"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The subject is understood to include the speaker and listener."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-05-soft-refusal",
+          "kind": "response",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Someone has invited you out on {day}. Decline gently using the customary unfinished response.",
+          "register": "polite",
+          "english": "{day} is not convenient for me.",
+          "japanese": "{day}は、ちょっと。",
+          "kana": "{day}は、ちょっと。",
+          "slots": [
+            {
+              "name": "day",
+              "wordType": "expression",
+              "tags": [
+                "l03-day-name"
+              ],
+              "forms": [
+                "base"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g01-01"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "ちょっと leaves the inconvenient reason unsaid; a blunt いいえ is usually avoided."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g03-06",
+      "title": "Frequency adverbs",
+      "sourcePages": "91",
+      "meaning": "Frequency words describe how often an action happens. Most occur before the verb; ぜんぜん and あまり normally accompany a negative predicate.",
+      "formation": "Topic + frequency adverb + (time/place/object phrases) + verb. Pair ぜんぜん／あまり with a negative verb.",
+      "notes": [
+        "よく means often; ときどき means sometimes; あまり and ぜんぜん mean not very often / not at all when paired with a negative.",
+        "Do not use the marked negative adverbs with an affirmative verb in the beginner pattern."
+      ],
+      "prerequisites": [
+        "g03-02"
+      ],
+      "examples": [
+        {
+          "english": "I often watch movies.",
+          "japanese": "私はよく映画を見ます。",
+          "kana": "わたしはよくえいがをみます。"
+        },
+        {
+          "english": "I do not drink tea very often.",
+          "japanese": "私はあまりお茶を飲みません。",
+          "kana": "わたしはあまりおちゃをのみません。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g03-06-affirmative-frequency",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Explain a reading or studying habit.",
+          "register": "polite",
+          "english": "{person} {frequency} {activity:polite}.",
+          "japanese": "{person}は{frequency}{activity:polite}。",
+          "kana": "{person}は{frequency}{activity:polite}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "frequency",
+              "wordType": "adverb",
+              "tags": [
+                "l03-affirmative-frequency"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-standalone-routine"
+              ],
+              "forms": [
+                "polite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "Use an affirmative frequency adverb with the affirmative verb."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-06-negative-frequency",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "Explain how infrequently someone reads or studies.",
+          "register": "polite",
+          "english": "{person} does not {activity} {negative-frequency}.",
+          "japanese": "{person}は{negative-frequency}{activity:politeNegative}。",
+          "kana": "{person}は{negative-frequency}{activity:politeNegative}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "negative-frequency",
+              "wordType": "adverb",
+              "tags": [
+                "l03-negative-frequency"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-standalone-routine"
+              ],
+              "forms": [
+                "base",
+                "politeNegative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "あまり means not very often/much with the negative; ぜんぜん means not at all."
+          ],
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "g03-07",
+      "title": "Basic Japanese word order",
+      "sourcePages": "91",
+      "meaning": "Japanese sentences normally put the verb at the end. Time, place, and object phrases usually come before it, while particles make their roles clear even when their order shifts.",
+      "formation": "[topic] は [time] [place] で [object] を [verb]. Keep the predicate at the end; phrase order before it can vary when the intended roles remain clear.",
+      "notes": [
+        "Do not mechanically copy English subject–verb–object order.",
+        "Use particles to show each phrase’s role; the object marked を normally precedes its verb.",
+        "A sentence can omit an understood subject or topic."
+      ],
+      "prerequisites": [
+        "g03-03"
+      ],
+      "examples": [
+        {
+          "english": "I read a book at home every day.",
+          "japanese": "私は毎日家で本を読みます。",
+          "kana": "わたしはまいにちいえでほんをよみます。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g03-07-verb-final",
+          "kind": "translation",
+          "instruction": "Arrange the Japanese phrases and particles so the verb comes last.",
+          "context": "Describe a routine at a particular place.",
+          "register": "polite",
+          "english": "{person} {verb:polite} {object} at {place} {time}.",
+          "japanese": "{person}は{time}{place}で{object}を{verb:polite}。",
+          "kana": "{person}は{time}{place}で{object}を{verb:polite}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "object",
+              "wordType": "noun",
+              "tags": [
+                "l03-order-object"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "place",
+              "wordType": "noun",
+              "tags": [
+                "l03-study-place"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "time",
+              "wordType": "expression",
+              "tags": [
+                "l03-habit-time"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "verb",
+              "wordType": "verb",
+              "tags": [
+                "l03-order-verb"
+              ],
+              "forms": [
+                "base",
+                "polite"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "verb",
+              "right": "object"
+            }
+          ],
+          "prerequisites": [
+            "g03-03",
+            "g03-04"
+          ],
+          "tense": "nonpast",
+          "polarity": "affirmative",
+          "particles": [
+            "は",
+            "で",
+            "を"
+          ],
+          "omission": "Topic and time can be omitted if clear.",
+          "restrictions": [
+            "Place the verb last.",
+            "Use a verb compatible with the selected object."
+          ],
+          "alternatives": [
+            {
+              "japanese": "{time}{person}は{place}で{object}を{verb:polite}。",
+              "kana": "{time}{person}は{place}で{object}を{verb:polite}。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g03-08",
+      "title": "Topic marker は",
+      "sourcePages": "91–92",
+      "meaning": "は marks what a sentence is about. A topic need not be the grammatical subject, and は can contrast one topic with another.",
+      "formation": "Topic は comment. Besides a person, a time or an object can be the topic. For an object topic, は takes the place of を; a short “noun は？” invites the listener to comment.",
+      "notes": [
+        "A topic is what the utterance is about; it need not be the actor.",
+        "は can introduce a topic for discussion or contrast it with another item.",
+        "Keep は on the phrase being contrasted, and do not stack をは in this beginner object-topic pattern."
+      ],
+      "prerequisites": [
+        "g03-03"
+      ],
+      "examples": [
+        {
+          "english": "As for tomorrow, I will study.",
+          "japanese": "明日は勉強します。",
+          "kana": "あしたはべんきょうします。"
+        },
+        {
+          "english": "As for coffee, I do not drink it.",
+          "japanese": "コーヒーは飲みません。",
+          "kana": "コーヒーはのみません。"
+        }
+      ],
+      "schemas": [
+        {
+          "id": "g03-08-topic-contrast",
+          "kind": "translation",
+          "instruction": "Set the stated person as the topic with は.",
+          "context": "You are contrasting two people’s routines; the other person’s routine is already known.",
+          "register": "polite",
+          "english": "Unlike the other person, {person} does not {activity}.",
+          "japanese": "{person}は{activity:politeNegative}。",
+          "kana": "{person}は{activity:politeNegative}。",
+          "slots": [
+            {
+              "name": "person",
+              "wordType": "noun",
+              "tags": [
+                "l01-named-person"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-standalone-routine"
+              ],
+              "forms": [
+                "base",
+                "politeNegative"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "Keep the contrasted topic explicit.",
+          "restrictions": [
+            "Use は as the topic marker; it is pronounced wa.",
+            "The sentence illustrates a topic that is also the actor; the topic and grammatical subject do not always coincide."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-08-time-topic",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "The conversation has turned to what you will do at the stated time.",
+          "register": "polite",
+          "english": "As for {time}, I will {activity}.",
+          "japanese": "{time}は{activity:polite}。",
+          "kana": "{time}は{activity:polite}。",
+          "slots": [
+            {
+              "name": "time",
+              "wordType": "expression",
+              "tags": [
+                "l03-future-time"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "activity",
+              "wordType": "verb",
+              "tags": [
+                "l03-basic-action"
+              ],
+              "forms": [
+                "base",
+                "polite"
+              ]
+            }
+          ],
+          "relations": [],
+          "prerequisites": [
+            "g03-02",
+            "g03-04"
+          ],
+          "tense": "future",
+          "polarity": "affirmative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The time is the topic; the understood actor is the speaker."
+          ],
+          "alternatives": []
+        },
+        {
+          "id": "g03-08-object-topic",
+          "kind": "translation",
+          "instruction": "Write this in polite Japanese.",
+          "context": "The listener asks about your habits concerning this drink.",
+          "register": "polite",
+          "english": "As for {object}, I do not {verb} it.",
+          "japanese": "{object}は{verb:politeNegative}。",
+          "kana": "{object}は{verb:politeNegative}。",
+          "slots": [
+            {
+              "name": "object",
+              "wordType": "noun",
+              "tags": [
+                "l03-topic-drink"
+              ],
+              "forms": [
+                "base"
+              ]
+            },
+            {
+              "name": "verb",
+              "wordType": "verb",
+              "tags": [
+                "l03-topic-verb"
+              ],
+              "forms": [
+                "base",
+                "politeNegative"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "kind": "accepts",
+              "left": "verb",
+              "right": "object"
+            }
+          ],
+          "prerequisites": [
+            "g03-03"
+          ],
+          "tense": "nonpast",
+          "polarity": "negative",
+          "particles": [
+            "は"
+          ],
+          "omission": "A clear topic may be omitted in conversation; the model keeps it explicit.",
+          "restrictions": [
+            "The drink is the topic, not the actor. Use は in place of を."
+          ],
+          "alternatives": []
+        }
+      ]
+    }
+  ],
+  "lexicon": [
+    {
+      "key": "l03-go",
+      "japanese": "行く",
+      "kana": "いく",
+      "english": "go",
+      "wordType": "verb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-intransitive-activity",
+        "l03-negatable-activity",
+        "l03-form-drill"
+      ],
+      "accepts": [],
+      "forms": {
+        "polite": {
+          "japanese": "行きます",
+          "kana": "いきます",
+          "english": "goes",
+          "introducedLesson": 3
+        },
+        "politeNegative": {
+          "japanese": "行きません",
+          "kana": "いきません",
+          "english": "do not go",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-come",
+      "japanese": "来る",
+      "kana": "くる",
+      "english": "come",
+      "wordType": "verb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-intransitive-activity",
+        "l03-negatable-activity",
+        "l03-form-drill"
+      ],
+      "accepts": [],
+      "forms": {
+        "polite": {
+          "japanese": "来ます",
+          "kana": "きます",
+          "english": "comes",
+          "introducedLesson": 3
+        },
+        "politeNegative": {
+          "japanese": "来ません",
+          "kana": "きません",
+          "english": "do not come",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-read",
+      "japanese": "読む",
+      "kana": "よむ",
+      "english": "read",
+      "wordType": "verb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-intransitive-activity",
+        "l03-negatable-activity",
+        "l03-basic-action",
+        "l03-standalone-routine",
+        "l03-form-drill"
+      ],
+      "accepts": [],
+      "forms": {
+        "polite": {
+          "japanese": "読みます",
+          "kana": "よみます",
+          "english": "reads",
+          "introducedLesson": 3
+        },
+        "politeNegative": {
+          "japanese": "読みません",
+          "kana": "よみません",
+          "english": "do not read",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-eat",
+      "japanese": "食べる",
+      "kana": "たべる",
+      "english": "eat",
+      "wordType": "verb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-intransitive-activity",
+        "l03-negatable-activity",
+        "l03-basic-action",
+        "l03-form-drill",
+        "l03-shared-activity"
+      ],
+      "accepts": [],
+      "forms": {
+        "polite": {
+          "japanese": "食べます",
+          "kana": "たべます",
+          "english": "eats",
+          "introducedLesson": 3
+        },
+        "politeNegative": {
+          "japanese": "食べません",
+          "kana": "たべません",
+          "english": "do not eat",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-drink",
+      "japanese": "飲む",
+      "kana": "のむ",
+      "english": "drink",
+      "wordType": "verb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-intransitive-activity",
+        "l03-negatable-activity",
+        "l03-form-drill",
+        "l03-topic-verb"
+      ],
+      "accepts": [
+        "l03-topic-drink"
+      ],
+      "forms": {
+        "polite": {
+          "japanese": "飲みます",
+          "kana": "のみます",
+          "english": "drinks",
+          "introducedLesson": 3
+        },
+        "politeNegative": {
+          "japanese": "飲みません",
+          "kana": "のみません",
+          "english": "do not drink",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-watch",
+      "japanese": "見る",
+      "kana": "みる",
+      "english": "watch",
+      "wordType": "verb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-intransitive-activity",
+        "l03-negatable-activity",
+        "l03-form-drill"
+      ],
+      "accepts": [],
+      "forms": {
+        "polite": {
+          "japanese": "見ます",
+          "kana": "みます",
+          "english": "watches",
+          "introducedLesson": 3
+        },
+        "politeNegative": {
+          "japanese": "見ません",
+          "kana": "みません",
+          "english": "do not watch",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-study",
+      "japanese": "勉強する",
+      "kana": "べんきょうする",
+      "english": "study",
+      "wordType": "verb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-intransitive-activity",
+        "l03-negatable-activity",
+        "l03-study-verb",
+        "l03-basic-action",
+        "l03-standalone-routine",
+        "l03-form-drill",
+        "l03-shared-activity"
+      ],
+      "accepts": [],
+      "forms": {
+        "polite": {
+          "japanese": "勉強します",
+          "kana": "べんきょうします",
+          "english": "studies",
+          "introducedLesson": 3
+        },
+        "politeNegative": {
+          "japanese": "勉強しません",
+          "kana": "べんきょうしません",
+          "english": "do not study",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-sleep",
+      "japanese": "寝る",
+      "kana": "ねる",
+      "english": "sleep",
+      "wordType": "verb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-intransitive-activity",
+        "l03-negatable-activity",
+        "l03-basic-action",
+        "l03-form-drill"
+      ],
+      "accepts": [],
+      "forms": {
+        "polite": {
+          "japanese": "寝ます",
+          "kana": "ねます",
+          "english": "sleeps",
+          "introducedLesson": 3
+        },
+        "politeNegative": {
+          "japanese": "寝ません",
+          "kana": "ねません",
+          "english": "do not sleep",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-movie",
+      "japanese": "映画",
+      "kana": "えいが",
+      "english": "movies",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-order-object",
+        "l03-viewable-media"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-japanese",
+      "japanese": "日本語",
+      "kana": "にほんご",
+      "english": "Japanese",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-study-subject"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-math",
+      "japanese": "数学",
+      "kana": "すうがく",
+      "english": "math",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-study-subject"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-library",
+      "japanese": "図書館",
+      "kana": "としょかん",
+      "english": "the library",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-study-place"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-home",
+      "japanese": "家",
+      "kana": "いえ",
+      "english": "home",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-study-place",
+        "l03-return-place"
+      ],
+      "accepts": [],
+      "forms": {
+        "destination": {
+          "japanese": "家",
+          "kana": "いえ",
+          "english": "their home",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-cafe",
+      "japanese": "カフェ",
+      "kana": "カフェ",
+      "english": "a café",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-study-place"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-school",
+      "japanese": "学校",
+      "kana": "がっこう",
+      "english": "school",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-destination",
+        "l03-return-place"
+      ],
+      "accepts": [],
+      "forms": {
+        "destination": {
+          "japanese": "学校",
+          "kana": "がっこう",
+          "english": "their school",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-tokyo",
+      "japanese": "東京",
+      "kana": "とうきょう",
+      "english": "Tokyo",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-destination"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-store",
+      "japanese": "店",
+      "kana": "みせ",
+      "english": "the store",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-destination"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-bus",
+      "japanese": "バス",
+      "kana": "バス",
+      "english": "bus",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-transport"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-train",
+      "japanese": "電車",
+      "kana": "でんしゃ",
+      "english": "train",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-transport"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-at-night",
+      "japanese": "夜",
+      "kana": "よる",
+      "english": "at night",
+      "wordType": "expression",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-time",
+        "l03-broad-time",
+        "l03-habit-time"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-every-day",
+      "japanese": "毎日",
+      "kana": "まいにち",
+      "english": "every day",
+      "wordType": "expression",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-time",
+        "l03-broad-time",
+        "l03-habit-time"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-tomorrow",
+      "japanese": "明日",
+      "kana": "あした",
+      "english": "tomorrow",
+      "wordType": "expression",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-time",
+        "l03-broad-time",
+        "l03-invitation-time",
+        "l03-future-time"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-at-seven",
+      "japanese": "七時",
+      "kana": "しちじ",
+      "english": "at seven",
+      "wordType": "expression",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-specific-time"
+      ],
+      "accepts": [],
+      "forms": {
+        "clock": {
+          "japanese": "七時",
+          "kana": "しちじ",
+          "english": "seven o’clock",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-at-eight",
+      "japanese": "八時",
+      "kana": "はちじ",
+      "english": "at eight",
+      "wordType": "expression",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-specific-time"
+      ],
+      "accepts": [],
+      "forms": {
+        "clock": {
+          "japanese": "八時",
+          "kana": "はちじ",
+          "english": "eight o’clock",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-often",
+      "japanese": "よく",
+      "kana": "よく",
+      "english": "often",
+      "wordType": "adverb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-affirmative-frequency"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-sometimes",
+      "japanese": "時々",
+      "kana": "ときどき",
+      "english": "sometimes",
+      "wordType": "adverb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-affirmative-frequency"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-not-often",
+      "japanese": "あまり",
+      "kana": "あまり",
+      "english": "very often",
+      "wordType": "adverb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-negative-frequency"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-never",
+      "japanese": "全然",
+      "kana": "ぜんぜん",
+      "english": "at all",
+      "wordType": "adverb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-negative-frequency"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-together",
+      "japanese": "一緒に",
+      "kana": "いっしょに",
+      "english": "together",
+      "wordType": "expression",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-together"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-tonight",
+      "japanese": "今晩",
+      "kana": "こんばん",
+      "english": "tonight",
+      "wordType": "expression",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-invitation-time",
+        "l03-future-time"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-book",
+      "japanese": "本",
+      "kana": "ほん",
+      "english": "books",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-order-object",
+        "l03-reading-material"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-magazine",
+      "japanese": "雑誌",
+      "kana": "ざっし",
+      "english": "magazines",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-order-object",
+        "l03-reading-material"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-watch-movie",
+      "japanese": "見る",
+      "kana": "みる",
+      "english": "watch",
+      "wordType": "verb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-order-verb"
+      ],
+      "accepts": [
+        "l03-viewable-media"
+      ],
+      "forms": {
+        "polite": {
+          "japanese": "見ます",
+          "kana": "みます",
+          "english": "watches",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-read-verb",
+      "japanese": "読む",
+      "kana": "よむ",
+      "english": "read",
+      "wordType": "verb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-order-verb",
+        "l03-basic-action"
+      ],
+      "accepts": [
+        "l03-reading-material"
+      ],
+      "forms": {
+        "polite": {
+          "japanese": "読みます",
+          "kana": "よみます",
+          "english": "reads",
+          "introducedLesson": 3
+        }
+      }
+    },
+    {
+      "key": "l03-to-particle-ni",
+      "japanese": "に",
+      "kana": "に",
+      "english": "to",
+      "wordType": "expression",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-destination-particle"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-to-particle-e",
+      "japanese": "へ",
+      "kana": "へ",
+      "english": "to",
+      "wordType": "expression",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-destination-particle"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-history",
+      "japanese": "歴史",
+      "kana": "れきし",
+      "english": "history",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-study-subject"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-saturday",
+      "japanese": "土曜日",
+      "kana": "どようび",
+      "english": "Saturday",
+      "wordType": "expression",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-day-name"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-sunday",
+      "japanese": "日曜日",
+      "kana": "にちようび",
+      "english": "Sunday",
+      "wordType": "expression",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-day-name"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-coffee",
+      "japanese": "コーヒー",
+      "kana": "コーヒー",
+      "english": "coffee",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-topic-drink"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-tea",
+      "japanese": "お茶",
+      "kana": "おちゃ",
+      "english": "tea",
+      "wordType": "noun",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-topic-drink"
+      ],
+      "accepts": [],
+      "forms": {}
+    },
+    {
+      "key": "l03-buy",
+      "japanese": "買う",
+      "kana": "かう",
+      "english": "buy",
+      "wordType": "verb",
+      "introducedLesson": 3,
+      "tags": [
+        "l03-topic-verb"
+      ],
+      "accepts": [
+        "l03-topic-drink"
+      ],
+      "forms": {
+        "politeNegative": {
+          "japanese": "買いません",
+          "kana": "かいません",
+          "english": "does not buy",
+          "introducedLesson": 3
+        }
+      }
+    }
+  ]
+}
