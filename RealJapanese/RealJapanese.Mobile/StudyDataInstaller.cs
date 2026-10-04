@@ -7,7 +7,7 @@ public sealed class StudyDataInstaller(RepositoryPaths paths)
 {
     private static readonly string[] CatalogFiles =
     [
-        "Words/Words.json", "Verbs/Verbs.json", "Adjectives/Adjectives.json",
+        "Words/Words.json", "Nouns/Nouns.json", "Verbs/Verbs.json", "Adjectives/Adjectives.json",
         "Kanji/Singel/Singel.json", "Kanji/Combined/Combined.json"
     ];
 

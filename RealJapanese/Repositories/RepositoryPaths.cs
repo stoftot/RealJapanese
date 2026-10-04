@@ -19,7 +19,7 @@ public sealed class RepositoryPaths
 
         CatalogRoot = catalogRoot;
         ProgressRoot = progressRoot;
-        progress = new(() => new Sync.ProgressStore(ProgressRoot));
+        progress = new(() => new Sync.ProgressStore(ProgressRoot, CatalogRoot));
     }
 
     internal string CatalogFolder(params string[] segments) =>

@@ -38,6 +38,13 @@ var data = new Dictionary<DataType, List<MinimumWordData>>()
             .ToList()
     },
     {
+        DataType.Noun,
+        new JsonLoader<Word>(folderPath: baseDataPath + "Nouns", fileName: "Nouns.json")
+            .Load()
+            .Select(w => new MinimumWordData(w.Id, w.Japanese))
+            .ToList()
+    },
+    {
         DataType.Word,
         new JsonLoader<Word>(folderPath: baseDataPath + "Words", fileName: "Words.json")
             .Load()
@@ -155,6 +162,9 @@ void PutIntoCorrectCategory (int kanjiId, int valueId, DataType category)
         case DataType.Word:
             kanjiRelationData[kanjiId].WordIds.Add(valueId);
             break;
+        case DataType.Noun:
+            kanjiRelationData[kanjiId].NounIds.Add(valueId);
+            break;
         default:
             throw new ArgumentOutOfRangeException(nameof(category), category, null);
     }
@@ -179,7 +189,8 @@ internal enum DataType
 {
     Verbs,
     Adjective,
-    Word
+    Word,
+    Noun
 }
 
 public record NewKanji()

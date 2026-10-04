@@ -7,9 +7,11 @@
     "AdjectiveIds": [],
     "WordIds": [
       10,
-      11,
-      115,
-      231
+      11
+    ],
+    "NounIds": [
+      70,
+      153
     ]
   },
   {
@@ -20,7 +22,8 @@
     "AdjectiveIds": [],
     "WordIds": [
       13
-    ]
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 2,
@@ -28,8 +31,9 @@
       2
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      107
+    "WordIds": [],
+    "NounIds": [
+      62
     ]
   },
   {
@@ -38,8 +42,9 @@
       3
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      228
+    "WordIds": [],
+    "NounIds": [
+      150
     ]
   },
   {
@@ -49,8 +54,9 @@
       46
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      42
+    "WordIds": [],
+    "NounIds": [
+      17
     ]
   },
   {
@@ -59,7 +65,8 @@
       5
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 6,
@@ -67,7 +74,8 @@
       6
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 7,
@@ -75,9 +83,10 @@
       7
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      227,
-      282
+    "WordIds": [],
+    "NounIds": [
+      149,
+      193
     ]
   },
   {
@@ -86,7 +95,8 @@
       8
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 9,
@@ -94,7 +104,8 @@
       9
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 10,
@@ -102,9 +113,10 @@
       10
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      263,
-      264
+    "WordIds": [],
+    "NounIds": [
+      179,
+      180
     ]
   },
   {
@@ -113,7 +125,8 @@
       12
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 12,
@@ -121,7 +134,8 @@
       12
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 13,
@@ -129,9 +143,10 @@
       13
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      70,
-      281
+    "WordIds": [],
+    "NounIds": [
+      39,
+      192
     ]
   },
   {
@@ -140,8 +155,9 @@
       15
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      175
+    "WordIds": [],
+    "NounIds": [
+      107
     ]
   },
   {
@@ -150,9 +166,10 @@
       16
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      118,
-      250
+    "WordIds": [],
+    "NounIds": [
+      73,
+      166
     ]
   },
   {
@@ -161,7 +178,8 @@
       17
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 17,
@@ -169,7 +187,8 @@
       18
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 18,
@@ -177,7 +196,8 @@
       19
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 19,
@@ -185,7 +205,8 @@
       21
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 20,
@@ -193,7 +214,8 @@
       22
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 21,
@@ -201,7 +223,8 @@
       24
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 22,
@@ -209,7 +232,8 @@
       25
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 23,
@@ -217,7 +241,8 @@
       26
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 24,
@@ -225,7 +250,8 @@
       27
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 25,
@@ -233,7 +259,8 @@
       28
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 26,
@@ -241,7 +268,8 @@
       29
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 27,
@@ -249,7 +277,8 @@
       30
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 28,
@@ -257,7 +286,8 @@
       31
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 29,
@@ -265,7 +295,8 @@
       32
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 30,
@@ -273,7 +304,8 @@
       33
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 31,
@@ -281,9 +313,10 @@
       34
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      305,
-      316
+    "WordIds": [],
+    "NounIds": [
+      208,
+      219
     ]
   },
   {
@@ -292,7 +325,8 @@
       34
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 33,
@@ -300,7 +334,8 @@
       35
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 34,
@@ -309,7 +344,8 @@
       48
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 35,
@@ -318,8 +354,10 @@
     ],
     "AdjectiveIds": [],
     "WordIds": [
-      5,
-      230
+      5
+    ],
+    "NounIds": [
+      152
     ]
   },
   {
@@ -328,7 +366,8 @@
       38
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 37,
@@ -336,7 +375,8 @@
       39
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 38,
@@ -344,8 +384,9 @@
       40
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      250
+    "WordIds": [],
+    "NounIds": [
+      166
     ]
   },
   {
@@ -354,7 +395,8 @@
       41
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 40,
@@ -362,7 +404,8 @@
       42
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 41,
@@ -370,7 +413,8 @@
       43
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 42,
@@ -378,7 +422,8 @@
       44
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 43,
@@ -386,10 +431,11 @@
       46
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      42,
-      258,
-      260
+    "WordIds": [],
+    "NounIds": [
+      17,
+      174,
+      176
     ]
   },
   {
@@ -398,7 +444,8 @@
       47
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 45,
@@ -406,8 +453,9 @@
       49
     ],
     "AdjectiveIds": [],
-    "WordIds": [
-      288
+    "WordIds": [],
+    "NounIds": [
+      199
     ]
   },
   {
@@ -416,7 +464,8 @@
       52
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 47,
@@ -424,7 +473,8 @@
       53
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 48,
@@ -432,7 +482,8 @@
       54
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 49,
@@ -440,7 +491,8 @@
       55
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 50,
@@ -448,7 +500,8 @@
       57
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 51,
@@ -457,8 +510,9 @@
     ],
     "AdjectiveIds": [],
     "WordIds": [
-      269
-    ]
+      87
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 52,
@@ -466,7 +520,8 @@
       59
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 53,
@@ -474,7 +529,8 @@
       60
     ],
     "AdjectiveIds": [],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 54,
@@ -482,8 +538,9 @@
     "AdjectiveIds": [
       0
     ],
-    "WordIds": [
-      107
+    "WordIds": [],
+    "NounIds": [
+      62
     ]
   },
   {
@@ -492,7 +549,8 @@
     "AdjectiveIds": [
       1
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 56,
@@ -500,7 +558,8 @@
     "AdjectiveIds": [
       2
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 57,
@@ -508,7 +567,8 @@
     "AdjectiveIds": [
       3
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 58,
@@ -516,7 +576,8 @@
     "AdjectiveIds": [
       4
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 59,
@@ -524,7 +585,8 @@
     "AdjectiveIds": [
       5
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 60,
@@ -536,10 +598,12 @@
       25
     ],
     "WordIds": [
-      19,
-      22,
-      74,
-      245
+      80
+    ],
+    "NounIds": [
+      0,
+      3,
+      43
     ]
   },
   {
@@ -548,7 +612,8 @@
     "AdjectiveIds": [
       7
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 62,
@@ -556,7 +621,8 @@
     "AdjectiveIds": [
       8
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 63,
@@ -564,7 +630,8 @@
     "AdjectiveIds": [
       8
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 64,
@@ -572,7 +639,8 @@
     "AdjectiveIds": [
       10
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 65,
@@ -580,7 +648,8 @@
     "AdjectiveIds": [
       11
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 66,
@@ -588,7 +657,8 @@
     "AdjectiveIds": [
       13
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 67,
@@ -596,8 +666,9 @@
     "AdjectiveIds": [
       14
     ],
-    "WordIds": [
-      131
+    "WordIds": [],
+    "NounIds": [
+      77
     ]
   },
   {
@@ -606,7 +677,8 @@
     "AdjectiveIds": [
       15
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 69,
@@ -615,7 +687,8 @@
       16,
       18
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 70,
@@ -624,7 +697,8 @@
       17,
       19
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 71,
@@ -632,7 +706,8 @@
     "AdjectiveIds": [
       21
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 72,
@@ -640,9 +715,10 @@
     "AdjectiveIds": [
       21
     ],
-    "WordIds": [
-      236,
-      258
+    "WordIds": [],
+    "NounIds": [
+      158,
+      174
     ]
   },
   {
@@ -651,7 +727,8 @@
     "AdjectiveIds": [
       22
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 74,
@@ -659,7 +736,8 @@
     "AdjectiveIds": [
       24
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 75,
@@ -667,7 +745,8 @@
     "AdjectiveIds": [
       25
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 76,
@@ -675,7 +754,8 @@
     "AdjectiveIds": [
       26
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 77,
@@ -683,7 +763,8 @@
     "AdjectiveIds": [
       27
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 78,
@@ -691,7 +772,8 @@
     "AdjectiveIds": [
       28
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 79,
@@ -700,8 +782,9 @@
       29,
       30
     ],
-    "WordIds": [
-      311
+    "WordIds": [],
+    "NounIds": [
+      214
     ]
   },
   {
@@ -711,9 +794,11 @@
       29
     ],
     "WordIds": [
-      20,
-      72,
-      123
+      47
+    ],
+    "NounIds": [
+      1,
+      41
     ]
   },
   {
@@ -722,7 +807,8 @@
     "AdjectiveIds": [
       30
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 82,
@@ -730,8 +816,9 @@
     "AdjectiveIds": [
       31
     ],
-    "WordIds": [
-      306
+    "WordIds": [],
+    "NounIds": [
+      209
     ]
   },
   {
@@ -740,7 +827,8 @@
     "AdjectiveIds": [
       33
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 84,
@@ -748,7 +836,8 @@
     "AdjectiveIds": [
       33
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 85,
@@ -756,8 +845,9 @@
     "AdjectiveIds": [
       34
     ],
-    "WordIds": [
-      119
+    "WordIds": [],
+    "NounIds": [
+      74
     ]
   },
   {
@@ -766,7 +856,8 @@
     "AdjectiveIds": [
       34
     ],
-    "WordIds": []
+    "WordIds": [],
+    "NounIds": []
   },
   {
     "KanjiId": 87,
@@ -774,33 +865,36 @@
     "AdjectiveIds": [],
     "WordIds": [
       18,
-      125
-    ]
+      49
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 88,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      19,
-      21,
-      22,
-      23,
-      61,
-      65,
-      67,
-      74,
-      148
+    "WordIds": [],
+    "NounIds": [
+      0,
+      2,
+      3,
+      4,
+      30,
+      34,
+      36,
+      43,
+      94
     ]
   },
   {
     "KanjiId": 89,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      20,
-      72,
-      148
+    "WordIds": [],
+    "NounIds": [
+      1,
+      41,
+      94
     ]
   },
   {
@@ -808,33 +902,37 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      65,
-      72,
-      74,
-      239
+      19
+    ],
+    "NounIds": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      34,
+      41,
+      43,
+      161
     ]
   },
   {
     "KanjiId": 91,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      23
+    "WordIds": [],
+    "NounIds": [
+      4
     ]
   },
   {
     "KanjiId": 92,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      24,
-      201
+    "WordIds": [],
+    "NounIds": [
+      5,
+      132
     ]
   },
   {
@@ -842,9 +940,11 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      25,
-      26,
-      264
+      19
+    ],
+    "NounIds": [
+      6,
+      180
     ]
   },
   {
@@ -852,43 +952,49 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      26,
-      200,
-      215,
-      243,
-      294
+      76,
+      78,
+      92
+    ],
+    "NounIds": [
+      6,
+      131
     ]
   },
   {
     "KanjiId": 95,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      27
+    "WordIds": [],
+    "NounIds": [
+      7
     ]
   },
   {
     "KanjiId": 96,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      27
+    "WordIds": [],
+    "NounIds": [
+      7
     ]
   },
   {
     "KanjiId": 97,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      28
+    "WordIds": [],
+    "NounIds": [
+      8
     ]
   },
   {
     "KanjiId": 98,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      29
+    "WordIds": [],
+    "NounIds": [
+      9
     ]
   },
   {
@@ -896,38 +1002,41 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      31,
-      32,
-      179,
-      215,
-      279,
-      280,
-      293,
-      294,
-      295
+      21,
+      76,
+      91,
+      92,
+      93
+    ],
+    "NounIds": [
+      10,
+      111,
+      190,
+      191
     ]
   },
   {
     "KanjiId": 100,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      32,
-      37,
-      40,
-      150,
-      151,
-      154,
-      157,
-      158,
-      158,
-      198,
-      203,
-      204,
-      205,
-      206,
-      207,
-      239
+    "WordIds": [],
+    "NounIds": [
+      10,
+      14,
+      16,
+      96,
+      97,
+      100,
+      103,
+      104,
+      104,
+      130,
+      134,
+      135,
+      136,
+      137,
+      138,
+      161
     ]
   },
   {
@@ -935,42 +1044,47 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      32,
-      37,
-      40,
-      114,
-      195,
-      270
+      88
+    ],
+    "NounIds": [
+      10,
+      14,
+      16,
+      69,
+      127
     ]
   },
   {
     "KanjiId": 102,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      33,
-      151,
-      153,
-      262
+    "WordIds": [],
+    "NounIds": [
+      11,
+      97,
+      99,
+      178
     ]
   },
   {
     "KanjiId": 103,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      34,
-      35
+    "WordIds": [],
+    "NounIds": [
+      12,
+      13
     ]
   },
   {
     "KanjiId": 104,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      34,
-      45,
-      219
+    "WordIds": [],
+    "NounIds": [
+      12,
+      19,
+      141
     ]
   },
   {
@@ -978,9 +1092,11 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      35,
-      220,
-      266
+      84
+    ],
+    "NounIds": [
+      13,
+      142
     ]
   },
   {
@@ -988,12 +1104,14 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      36,
-      110,
-      167,
-      199,
-      200,
-      202
+      22,
+      62,
+      68
+    ],
+    "NounIds": [
+      65,
+      131,
+      133
     ]
   },
   {
@@ -1001,9 +1119,11 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      39,
-      40,
-      120
+      23
+    ],
+    "NounIds": [
+      16,
+      75
     ]
   },
   {
@@ -1011,32 +1131,37 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      41
-    ]
+      24
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 109,
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      43,
-      44
+      25
+    ],
+    "NounIds": [
+      18
     ]
   },
   {
     "KanjiId": 110,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      44
+    "WordIds": [],
+    "NounIds": [
+      18
     ]
   },
   {
     "KanjiId": 111,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      45
+    "WordIds": [],
+    "NounIds": [
+      19
     ]
   },
   {
@@ -1044,479 +1169,536 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      46,
-      292
-    ]
+      26,
+      90
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 113,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      53
+    "WordIds": [],
+    "NounIds": [
+      22
     ]
   },
   {
     "KanjiId": 114,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      53,
-      55,
-      62,
-      261
+    "WordIds": [],
+    "NounIds": [
+      22,
+      24,
+      31,
+      177
     ]
   },
   {
     "KanjiId": 115,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      55,
-      221,
-      311
+    "WordIds": [],
+    "NounIds": [
+      24,
+      143,
+      214
     ]
   },
   {
     "KanjiId": 116,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      59
+    "WordIds": [],
+    "NounIds": [
+      28
     ]
   },
   {
     "KanjiId": 117,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      59
+    "WordIds": [],
+    "NounIds": [
+      28
     ]
   },
   {
     "KanjiId": 118,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      60
+    "WordIds": [],
+    "NounIds": [
+      29
     ]
   },
   {
     "KanjiId": 119,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      60
+    "WordIds": [],
+    "NounIds": [
+      29
     ]
   },
   {
     "KanjiId": 120,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      61
+    "WordIds": [],
+    "NounIds": [
+      30
     ]
   },
   {
     "KanjiId": 121,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      62
+    "WordIds": [],
+    "NounIds": [
+      31
     ]
   },
   {
     "KanjiId": 122,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      62
+    "WordIds": [],
+    "NounIds": [
+      31
     ]
   },
   {
     "KanjiId": 123,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      62
+    "WordIds": [],
+    "NounIds": [
+      31
     ]
   },
   {
     "KanjiId": 124,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      64
+    "WordIds": [],
+    "NounIds": [
+      33
     ]
   },
   {
     "KanjiId": 125,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      64
+    "WordIds": [],
+    "NounIds": [
+      33
     ]
   },
   {
     "KanjiId": 126,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      65,
-      175,
-      227,
-      228,
-      229,
-      254
+    "WordIds": [],
+    "NounIds": [
+      34,
+      107,
+      149,
+      150,
+      151,
+      170
     ]
   },
   {
     "KanjiId": 127,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      67
+    "WordIds": [],
+    "NounIds": [
+      36
     ]
   },
   {
     "KanjiId": 128,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      68
+    "WordIds": [],
+    "NounIds": [
+      37
     ]
   },
   {
     "KanjiId": 129,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      68
+    "WordIds": [],
+    "NounIds": [
+      37
     ]
   },
   {
     "KanjiId": 130,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      69
+    "WordIds": [],
+    "NounIds": [
+      38
     ]
   },
   {
     "KanjiId": 131,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      69
+    "WordIds": [],
+    "NounIds": [
+      38
     ]
   },
   {
     "KanjiId": 132,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      70,
-      281
+    "WordIds": [],
+    "NounIds": [
+      39,
+      192
     ]
   },
   {
     "KanjiId": 133,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      70
+    "WordIds": [],
+    "NounIds": [
+      39
     ]
   },
   {
     "KanjiId": 134,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      71
+    "WordIds": [],
+    "NounIds": [
+      40
     ]
   },
   {
     "KanjiId": 135,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      71,
-      75
+    "WordIds": [],
+    "NounIds": [
+      40,
+      44
     ]
   },
   {
     "KanjiId": 136,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      71
+    "WordIds": [],
+    "NounIds": [
+      40
     ]
   },
   {
     "KanjiId": 137,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      73
+    "WordIds": [],
+    "NounIds": [
+      42
     ]
   },
   {
     "KanjiId": 138,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      73
+    "WordIds": [],
+    "NounIds": [
+      42
     ]
   },
   {
     "KanjiId": 139,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      74,
-      193
+    "WordIds": [],
+    "NounIds": [
+      43,
+      125
     ]
   },
   {
     "KanjiId": 140,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      75
+    "WordIds": [],
+    "NounIds": [
+      44
     ]
   },
   {
     "KanjiId": 141,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      75
+    "WordIds": [],
+    "NounIds": [
+      44
     ]
   },
   {
     "KanjiId": 142,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      76,
-      275
+    "WordIds": [],
+    "NounIds": [
+      45,
+      186
     ]
   },
   {
     "KanjiId": 143,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      77,
-      274
+    "WordIds": [],
+    "NounIds": [
+      46,
+      185
     ]
   },
   {
     "KanjiId": 144,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      78,
-      277
+    "WordIds": [],
+    "NounIds": [
+      47,
+      188
     ]
   },
   {
     "KanjiId": 145,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      79,
-      276,
-      278
+    "WordIds": [],
+    "NounIds": [
+      48,
+      187,
+      189
     ]
   },
   {
     "KanjiId": 146,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      80
+    "WordIds": [],
+    "NounIds": [
+      49
     ]
   },
   {
     "KanjiId": 147,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      81,
-      278
+    "WordIds": [],
+    "NounIds": [
+      50,
+      189
     ]
   },
   {
     "KanjiId": 148,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      96
+    "WordIds": [],
+    "NounIds": [
+      51
     ]
   },
   {
     "KanjiId": 149,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      98
+    "WordIds": [],
+    "NounIds": [
+      53
     ]
   },
   {
     "KanjiId": 150,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      100
+    "WordIds": [],
+    "NounIds": [
+      55
     ]
   },
   {
     "KanjiId": 151,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      100
+    "WordIds": [],
+    "NounIds": [
+      55
     ]
   },
   {
     "KanjiId": 152,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      101
+    "WordIds": [],
+    "NounIds": [
+      56
     ]
   },
   {
     "KanjiId": 153,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      102
+    "WordIds": [],
+    "NounIds": [
+      57
     ]
   },
   {
     "KanjiId": 154,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      103
+    "WordIds": [],
+    "NounIds": [
+      58
     ]
   },
   {
     "KanjiId": 155,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      104
+    "WordIds": [],
+    "NounIds": [
+      59
     ]
   },
   {
     "KanjiId": 156,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      104
+    "WordIds": [],
+    "NounIds": [
+      59
     ]
   },
   {
     "KanjiId": 157,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      106
+    "WordIds": [],
+    "NounIds": [
+      61
     ]
   },
   {
     "KanjiId": 158,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      106
+    "WordIds": [],
+    "NounIds": [
+      61
     ]
   },
   {
     "KanjiId": 159,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      106,
-      260,
-      290
+    "WordIds": [],
+    "NounIds": [
+      61,
+      176,
+      201
     ]
   },
   {
     "KanjiId": 160,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      110
+    "WordIds": [],
+    "NounIds": [
+      65
     ]
   },
   {
     "KanjiId": 161,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      113
+    "WordIds": [],
+    "NounIds": [
+      68
     ]
   },
   {
     "KanjiId": 162,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      113,
-      180,
-      182
+    "WordIds": [],
+    "NounIds": [
+      68,
+      112,
+      114
     ]
   },
   {
     "KanjiId": 163,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      115
+    "WordIds": [],
+    "NounIds": [
+      70
     ]
   },
   {
     "KanjiId": 164,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      118
+    "WordIds": [],
+    "NounIds": [
+      73
     ]
   },
   {
     "KanjiId": 165,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      118
+    "WordIds": [],
+    "NounIds": [
+      73
     ]
   },
   {
     "KanjiId": 166,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      119
+    "WordIds": [],
+    "NounIds": [
+      74
     ]
   },
   {
     "KanjiId": 167,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      119
+    "WordIds": [],
+    "NounIds": [
+      74
     ]
   },
   {
     "KanjiId": 168,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      120
+    "WordIds": [],
+    "NounIds": [
+      75
     ]
   },
   {
@@ -1524,178 +1706,198 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      122
-    ]
+      46
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 170,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      130
+    "WordIds": [],
+    "NounIds": [
+      76
     ]
   },
   {
     "KanjiId": 171,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      130
+    "WordIds": [],
+    "NounIds": [
+      76
     ]
   },
   {
     "KanjiId": 172,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      131
+    "WordIds": [],
+    "NounIds": [
+      77
     ]
   },
   {
     "KanjiId": 173,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      132
+    "WordIds": [],
+    "NounIds": [
+      78
     ]
   },
   {
     "KanjiId": 174,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      132
+    "WordIds": [],
+    "NounIds": [
+      78
     ]
   },
   {
     "KanjiId": 175,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      139
+    "WordIds": [],
+    "NounIds": [
+      85
     ]
   },
   {
     "KanjiId": 176,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      140
+    "WordIds": [],
+    "NounIds": [
+      86
     ]
   },
   {
     "KanjiId": 177,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      142,
-      205
+    "WordIds": [],
+    "NounIds": [
+      88,
+      136
     ]
   },
   {
     "KanjiId": 178,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      143,
-      152
+    "WordIds": [],
+    "NounIds": [
+      89,
+      98
     ]
   },
   {
     "KanjiId": 179,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      143,
-      144,
-      145,
-      187
+    "WordIds": [],
+    "NounIds": [
+      89,
+      90,
+      91,
+      119
     ]
   },
   {
     "KanjiId": 180,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      144
+    "WordIds": [],
+    "NounIds": [
+      90
     ]
   },
   {
     "KanjiId": 181,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      145,
-      153,
-      155
+    "WordIds": [],
+    "NounIds": [
+      91,
+      99,
+      101
     ]
   },
   {
     "KanjiId": 182,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      146,
-      271
+    "WordIds": [],
+    "NounIds": [
+      92,
+      182
     ]
   },
   {
     "KanjiId": 183,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      150
+    "WordIds": [],
+    "NounIds": [
+      96
     ]
   },
   {
     "KanjiId": 184,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      154,
-      155
+    "WordIds": [],
+    "NounIds": [
+      100,
+      101
     ]
   },
   {
     "KanjiId": 185,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      156,
-      201,
-      262,
-      263
+    "WordIds": [],
+    "NounIds": [
+      102,
+      132,
+      178,
+      179
     ]
   },
   {
     "KanjiId": 186,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      156
+    "WordIds": [],
+    "NounIds": [
+      102
     ]
   },
   {
     "KanjiId": 187,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      157,
-      234
+    "WordIds": [],
+    "NounIds": [
+      103,
+      156
     ]
   },
   {
     "KanjiId": 188,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      157,
-      158,
-      203,
-      204,
-      205,
-      206,
-      207
+    "WordIds": [],
+    "NounIds": [
+      103,
+      104,
+      134,
+      135,
+      136,
+      137,
+      138
     ]
   },
   {
@@ -1703,152 +1905,171 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      162
-    ]
+      57
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 190,
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      164
-    ]
+      59
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 191,
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      164
-    ]
+      59
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 192,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      177
+    "WordIds": [],
+    "NounIds": [
+      109
     ]
   },
   {
     "KanjiId": 193,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      178
+    "WordIds": [],
+    "NounIds": [
+      110
     ]
   },
   {
     "KanjiId": 194,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      180
+    "WordIds": [],
+    "NounIds": [
+      112
     ]
   },
   {
     "KanjiId": 195,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      182
+    "WordIds": [],
+    "NounIds": [
+      114
     ]
   },
   {
     "KanjiId": 196,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      183
+    "WordIds": [],
+    "NounIds": [
+      115
     ]
   },
   {
     "KanjiId": 197,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      184
+    "WordIds": [],
+    "NounIds": [
+      116
     ]
   },
   {
     "KanjiId": 198,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      184
+    "WordIds": [],
+    "NounIds": [
+      116
     ]
   },
   {
     "KanjiId": 199,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      185
+    "WordIds": [],
+    "NounIds": [
+      117
     ]
   },
   {
     "KanjiId": 200,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      189
+    "WordIds": [],
+    "NounIds": [
+      121
     ]
   },
   {
     "KanjiId": 201,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      190
+    "WordIds": [],
+    "NounIds": [
+      122
     ]
   },
   {
     "KanjiId": 202,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      190
+    "WordIds": [],
+    "NounIds": [
+      122
     ]
   },
   {
     "KanjiId": 203,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      192
+    "WordIds": [],
+    "NounIds": [
+      124
     ]
   },
   {
     "KanjiId": 204,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      193
+    "WordIds": [],
+    "NounIds": [
+      125
     ]
   },
   {
     "KanjiId": 205,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      195,
-      240
+    "WordIds": [],
+    "NounIds": [
+      127,
+      162
     ]
   },
   {
     "KanjiId": 206,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      196
+    "WordIds": [],
+    "NounIds": [
+      128
     ]
   },
   {
     "KanjiId": 207,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      198
+    "WordIds": [],
+    "NounIds": [
+      130
     ]
   },
   {
@@ -1856,170 +2077,192 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      199,
-      200,
-      226
+      68
+    ],
+    "NounIds": [
+      131,
+      148
     ]
   },
   {
     "KanjiId": 209,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      203
+    "WordIds": [],
+    "NounIds": [
+      134
     ]
   },
   {
     "KanjiId": 210,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      204
+    "WordIds": [],
+    "NounIds": [
+      135
     ]
   },
   {
     "KanjiId": 211,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      206
+    "WordIds": [],
+    "NounIds": [
+      137
     ]
   },
   {
     "KanjiId": 212,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      207,
-      253
+    "WordIds": [],
+    "NounIds": [
+      138,
+      169
     ]
   },
   {
     "KanjiId": 213,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      217
+    "WordIds": [],
+    "NounIds": [
+      139
     ]
   },
   {
     "KanjiId": 214,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      218
+    "WordIds": [],
+    "NounIds": [
+      140
     ]
   },
   {
     "KanjiId": 215,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      222
+    "WordIds": [],
+    "NounIds": [
+      144
     ]
   },
   {
     "KanjiId": 216,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      223
+    "WordIds": [],
+    "NounIds": [
+      145
     ]
   },
   {
     "KanjiId": 217,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      224
+    "WordIds": [],
+    "NounIds": [
+      146
     ]
   },
   {
     "KanjiId": 218,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      225
+    "WordIds": [],
+    "NounIds": [
+      147
     ]
   },
   {
     "KanjiId": 219,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      229
+    "WordIds": [],
+    "NounIds": [
+      151
     ]
   },
   {
     "KanjiId": 220,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      231
+    "WordIds": [],
+    "NounIds": [
+      153
     ]
   },
   {
     "KanjiId": 221,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      232
+    "WordIds": [],
+    "NounIds": [
+      154
     ]
   },
   {
     "KanjiId": 222,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      234
+    "WordIds": [],
+    "NounIds": [
+      156
     ]
   },
   {
     "KanjiId": 223,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      236
+    "WordIds": [],
+    "NounIds": [
+      158
     ]
   },
   {
     "KanjiId": 224,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      237
+    "WordIds": [],
+    "NounIds": [
+      159
     ]
   },
   {
     "KanjiId": 225,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      237
+    "WordIds": [],
+    "NounIds": [
+      159
     ]
   },
   {
     "KanjiId": 226,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      239
+    "WordIds": [],
+    "NounIds": [
+      161
     ]
   },
   {
     "KanjiId": 227,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      240
+    "WordIds": [],
+    "NounIds": [
+      162
     ]
   },
   {
     "KanjiId": 228,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      241
+    "WordIds": [],
+    "NounIds": [
+      163
     ]
   },
   {
@@ -2027,87 +2270,98 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      243
-    ]
+      78
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 230,
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      245
-    ]
+      80
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 231,
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      245
-    ]
+      80
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 232,
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      248
-    ]
+      83
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 233,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      249
+    "WordIds": [],
+    "NounIds": [
+      165
     ]
   },
   {
     "KanjiId": 234,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      249
+    "WordIds": [],
+    "NounIds": [
+      165
     ]
   },
   {
     "KanjiId": 235,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      250
+    "WordIds": [],
+    "NounIds": [
+      166
     ]
   },
   {
     "KanjiId": 236,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      252
+    "WordIds": [],
+    "NounIds": [
+      168
     ]
   },
   {
     "KanjiId": 237,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      254
+    "WordIds": [],
+    "NounIds": [
+      170
     ]
   },
   {
     "KanjiId": 238,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      259
+    "WordIds": [],
+    "NounIds": [
+      175
     ]
   },
   {
     "KanjiId": 239,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      265
+    "WordIds": [],
+    "NounIds": [
+      181
     ]
   },
   {
@@ -2115,87 +2369,98 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      269
-    ]
+      87
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 241,
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      270
-    ]
+      88
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 242,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      271
+    "WordIds": [],
+    "NounIds": [
+      182
     ]
   },
   {
     "KanjiId": 243,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      279
+    "WordIds": [],
+    "NounIds": [
+      190
     ]
   },
   {
     "KanjiId": 244,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      280
+    "WordIds": [],
+    "NounIds": [
+      191
     ]
   },
   {
     "KanjiId": 245,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      282
+    "WordIds": [],
+    "NounIds": [
+      193
     ]
   },
   {
     "KanjiId": 246,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      284
+    "WordIds": [],
+    "NounIds": [
+      195
     ]
   },
   {
     "KanjiId": 247,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      285
+    "WordIds": [],
+    "NounIds": [
+      196
     ]
   },
   {
     "KanjiId": 248,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      286
+    "WordIds": [],
+    "NounIds": [
+      197
     ]
   },
   {
     "KanjiId": 249,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      287
+    "WordIds": [],
+    "NounIds": [
+      198
     ]
   },
   {
     "KanjiId": 250,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      287
+    "WordIds": [],
+    "NounIds": [
+      198
     ]
   },
   {
@@ -2203,136 +2468,153 @@
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      295
-    ]
+      93
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 252,
     "VerbIds": [],
     "AdjectiveIds": [],
     "WordIds": [
-      296
-    ]
+      94
+    ],
+    "NounIds": []
   },
   {
     "KanjiId": 253,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      299
+    "WordIds": [],
+    "NounIds": [
+      202
     ]
   },
   {
     "KanjiId": 254,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      299
+    "WordIds": [],
+    "NounIds": [
+      202
     ]
   },
   {
     "KanjiId": 255,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      300
+    "WordIds": [],
+    "NounIds": [
+      203
     ]
   },
   {
     "KanjiId": 256,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      301
+    "WordIds": [],
+    "NounIds": [
+      204
     ]
   },
   {
     "KanjiId": 257,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      302
+    "WordIds": [],
+    "NounIds": [
+      205
     ]
   },
   {
     "KanjiId": 258,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      303,
-      316
+    "WordIds": [],
+    "NounIds": [
+      206,
+      219
     ]
   },
   {
     "KanjiId": 259,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      304
+    "WordIds": [],
+    "NounIds": [
+      207
     ]
   },
   {
     "KanjiId": 260,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      307
+    "WordIds": [],
+    "NounIds": [
+      210
     ]
   },
   {
     "KanjiId": 261,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      308
+    "WordIds": [],
+    "NounIds": [
+      211
     ]
   },
   {
     "KanjiId": 262,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      309
+    "WordIds": [],
+    "NounIds": [
+      212
     ]
   },
   {
     "KanjiId": 263,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      310
+    "WordIds": [],
+    "NounIds": [
+      213
     ]
   },
   {
     "KanjiId": 264,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      312
+    "WordIds": [],
+    "NounIds": [
+      215
     ]
   },
   {
     "KanjiId": 265,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      313
+    "WordIds": [],
+    "NounIds": [
+      216
     ]
   },
   {
     "KanjiId": 266,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      314
+    "WordIds": [],
+    "NounIds": [
+      217
     ]
   },
   {
     "KanjiId": 267,
     "VerbIds": [],
     "AdjectiveIds": [],
-    "WordIds": [
-      315
+    "WordIds": [],
+    "NounIds": [
+      218
     ]
   }
 ]

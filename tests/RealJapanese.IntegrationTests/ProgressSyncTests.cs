@@ -121,11 +121,12 @@ public sealed class ProgressSyncTests
     }
 
     [Fact]
-    public void Snapshot_transfers_all_five_datasets_to_live_instances_and_restart()
+    public void Snapshot_transfers_all_six_datasets_to_live_instances_and_restart()
     {
         using var workspace = new TestWorkspace();
         var source = Open(workspace, "all-source");
         source.Words.AddToVocab(source.Words.Words.First());
+        source.Nouns.AddToVocab(source.Nouns.Words.First());
         source.Verbs.AddToTraining(source.Verbs.Words.First());
         source.Adjectives.AddToRehearsing(source.Adjectives.Words.First());
         source.Kanji.Single.AddToVocab(source.Kanji.Single.Words.First());
@@ -133,8 +134,8 @@ public sealed class ProgressSyncTests
 
         var target = Open(workspace, "all-target");
         target.Service.Apply(target.Service.PreviewSnapshot(source.Service.ExportSnapshot(), ImportMode.Replace));
-        AssertFiveAssignments(target);
-        AssertFiveAssignments(Open(workspace, "all-target"));
+        AssertSixAssignments(target);
+        AssertSixAssignments(Open(workspace, "all-target"));
     }
 
     [Theory]
@@ -418,7 +419,7 @@ public sealed class ProgressSyncTests
     private static byte[] InvalidSnapshot(string scenario, byte[] valid, int validWordId) => scenario switch
     {
         "malformed" => "not json"u8.ToArray(),
-        "version" => Mutate(valid, root => root["Version"] = 2),
+        "version" => Mutate(valid, root => root["Version"] = 1),
         "missing-version" => Mutate(valid, root => root.Remove("Version")),
         "missing-category" => Mutate(valid, root => root["Data"]!.AsObject()["Words"]!.AsObject().Remove("KnownIds")),
         "extra-field" => Mutate(valid, root => root["Path"] = "not-allowed"),
@@ -449,7 +450,8 @@ public sealed class ProgressSyncTests
         var verbs = new VerbData(paths);
         var adjectives = new AdjectiveData(paths);
         var kanji = new KanjiData(paths);
-        return new(paths, words, verbs, adjectives, kanji, new ProgressSyncService(paths, words, verbs, adjectives, kanji));
+        var nouns = new NounData(paths);
+        return new(paths, words, verbs, adjectives, kanji, nouns, new ProgressSyncService(paths, words, verbs, adjectives, kanji, nouns));
     }
 
     private static byte[] Mutate(byte[] source, Action<JsonObject> mutate)
@@ -467,6 +469,7 @@ public sealed class ProgressSyncTests
     private static Dictionary<string, int[]> CatalogIds(Fixture fixture) => new()
     {
         ["Words"] = fixture.Words.Words.Take(3).Select(word => word.Id).ToArray(),
+        ["Nouns"] = fixture.Nouns.Words.Take(3).Select(word => word.Id).ToArray(),
         ["Verbs"] = fixture.Verbs.Words.Take(3).Select(word => word.Id).ToArray(),
         ["Adjectives"] = fixture.Adjectives.Words.Take(3).Select(word => word.Id).ToArray(),
         ["Kanji/Singel"] = fixture.Kanji.Single.Words.Take(3).Select(word => word.Id).ToArray(),
@@ -483,9 +486,10 @@ public sealed class ProgressSyncTests
         }
     }
 
-    private static void AssertFiveAssignments(Fixture fixture)
+    private static void AssertSixAssignments(Fixture fixture)
     {
         Assert.Single(fixture.Words.VocabWordIds);
+        Assert.Single(fixture.Nouns.VocabWordIds);
         Assert.Single(fixture.Verbs.TrainingWordIds);
         Assert.Single(fixture.Adjectives.RehearsingWordIds);
         Assert.Single(fixture.Kanji.Single.VocabWordIds);
@@ -502,5 +506,5 @@ public sealed class ProgressSyncTests
 
     /// <summary>Holds repositories that share one progress owner for a test scenario.</summary>
     private sealed record Fixture(RepositoryPaths Paths, WordData Words, VerbData Verbs, AdjectiveData Adjectives,
-        KanjiData Kanji, ProgressSyncService Service);
+        KanjiData Kanji, NounData Nouns, ProgressSyncService Service);
 }

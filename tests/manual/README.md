@@ -37,8 +37,8 @@ assert intended behavior but require explicit execution; see the testing guide.
 | Case | Automated coverage | Remaining manual scope / reason |
 | --- | --- | --- |
 | KANA-001–003 | `KanaCatalogTests`, `KanaSessionTests`; `KanaBrowserTests` persistence/isolation, answers/review, options, storage errors, 320/1280 px and local font loading | Android WebView persistence, native IME/Back, offline cold start and human font/readability assessment |
-| STUDY-001 | `SelectorComponentTests`; `RepositoryPersistenceTests`; `StudyBrowserTests` selection/reload/restart | Android UI/save integration; browser restart check samples Words while shared repositories cover all datasets |
-| STUDY-002 | `PracticeRouteComponentTests` selector routes, category data and empty states | Android navigation integration; component rendering alone does not establish the native host |
+| STUDY-001 | `SelectorComponentTests`; `RepositoryPersistenceTests`; `StudyBrowserTests` selection/reload/restart; `NounPracticeBrowserTests` noun assignment | Android UI/save integration; browser restart check samples Words while shared repositories cover all datasets |
+| STUDY-002 | `PracticeRouteComponentTests` selector routes, category data and empty states; `NounPracticeBrowserTests` noun spelling and flashcards | Android navigation integration; component rendering alone does not establish the native host |
 | STUDY-003 | `SingleAnswerPracticeComponentTests`; `StudyBrowserTests` real Enter/focus | Android IME and soft-keyboard behavior |
 | STUDY-004 | `ChunkingPracticeComponentTests`; unit chunk contracts; explicit retry-leak regression | Repeat on Android after a shared fix; known defects are not passing coverage |
 | STUDY-005 | `FlashcardComponentTests`; `FlashcardBrowserTests` Space/Backspace and SPA disposal | Android hardware/emulator keyboard behavior |

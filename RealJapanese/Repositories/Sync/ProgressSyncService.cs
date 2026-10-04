@@ -38,12 +38,13 @@ public sealed class ProgressSyncService
     private readonly Dictionary<string, string> hashes;
     private readonly Dictionary<string, HashSet<int>> validIds;
 
-    public ProgressSyncService(RepositoryPaths paths, WordData words, VerbData verbs, AdjectiveData adjectives, KanjiData kanji)
+    public ProgressSyncService(RepositoryPaths paths, WordData words, VerbData verbs, AdjectiveData adjectives, KanjiData kanji, NounData nouns)
     {
         store = paths.Progress;
         validIds = new()
         {
             ["Words"] = words.Words.Select(w => w.Id).ToHashSet(),
+            ["Nouns"] = nouns.Words.Select(w => w.Id).ToHashSet(),
             ["Verbs"] = verbs.Words.Select(w => w.Id).ToHashSet(),
             ["Adjectives"] = adjectives.Words.Select(w => w.Id).ToHashSet(),
             ["Kanji/Singel"] = kanji.Single.Words.Select(w => w.Id).ToHashSet(),
@@ -78,9 +79,9 @@ public sealed class ProgressSyncService
     private ImportPreview Preview(ProgressSnapshot incoming, ImportMode mode)
     {
         if (!Enum.IsDefined(mode)) throw new ArgumentOutOfRangeException(nameof(mode));
-        if (incoming.Version != 1) throw new InvalidDataException("Unsupported sync version. Update both applications.");
+        if (incoming.Version != 2) throw new InvalidDataException("Unsupported sync version. Update both applications.");
         if (incoming.Data is null || incoming.Data.Count != validIds.Count)
-            throw new InvalidDataException("The snapshot must contain all five study datasets.");
+            throw new InvalidDataException("The snapshot must contain all six study datasets.");
         foreach (var pair in incoming.Data)
         {
             if (!validIds.TryGetValue(pair.Key, out var ids) || pair.Value is null ||

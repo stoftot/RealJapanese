@@ -18,7 +18,7 @@ independent single/combined kanji lists.
 ### Preconditions
 
 - A running host with disposable, initially empty progress and the normal catalogs.
-- For Words, Verbs and Adjectives, record one item whose English has mixed case and
+- For Words, Nouns, Verbs and Adjectives, record one item whose English has mixed case and
   whose Japanese and kana values can each be searched independently.
 - For both Combined and Single kanji, record one item and its three searchable text
   values. Use different items for the two kanji sets.
@@ -35,7 +35,7 @@ independent single/combined kanji lists.
    Rehearsing. Deselect it there before selecting it in Training.
 4. Refresh the page and confirm the item remains selected only in Training.
    Deselect it, refresh again, then reselect it in Known and refresh once more.
-5. Repeat steps 1–4 for **Verbs** and **Adjectives**.
+5. Repeat steps 1–4 for **Nouns**, **Verbs** and **Adjectives**.
 6. Open **Kanji**, choose Combined, and repeat steps 1–4 with the recorded combined
    item. Switch to Single and repeat with the recorded single item.
 7. Switch between Combined and Single several times and inspect the recorded item
@@ -51,6 +51,8 @@ independent single/combined kanji lists.
   assigned through the next list's own UI.
 - Selected counts and highlighting update immediately. Clear, reselect and refresh
   preserve exactly the last saved state.
+- Nouns are available in their own selector and retain independent Known,
+  Rehearsing and Training assignments.
 - Combined and Single kanji retain independent category assignments.
 
 ### Cleanup
@@ -69,7 +71,7 @@ query selection, including an empty category.
 
 - A running host with disposable progress.
 - Put one identifiable item in each of Known, Rehearsing and Training for Words,
-  Verbs and Adjectives. Do the same for both Combined and Single kanji.
+  Nouns, Verbs and Adjectives. Do the same for both Combined and Single kanji.
 - Keep one additional category empty in a separate disposable dataset or after
   recording enough state to restore this setup.
 
@@ -83,6 +85,8 @@ query selection, including an empty category.
    | --- | --- | --- |
    | Words — Learn the words | `/words/spelling?category=<list>` | All three |
    | Words — Flash cards | `/words/flashcards?category=<list>` | All three |
+   | Nouns — Learn the nouns | `/nouns/spelling?category=<list>` | All three |
+   | Nouns — Flash cards | `/nouns/flashcards?category=<list>` | All three |
    | Verbs — Learn the verbs | `/verbs/spelling?category=<list>` | All three |
    | Verbs — Verb type categorisation | `/verbs/categories?category=<list>` | All three |
    | Verbs — Conjugation and forms | `/verbs/ConjugationsAndForms` | Category-independent |

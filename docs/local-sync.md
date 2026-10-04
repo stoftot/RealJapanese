@@ -74,8 +74,11 @@ considerations for future public distribution or hosting.
 The transfer exposes no API for arbitrary filesystem paths or remote writes; only
 a validated progress snapshot can be previewed and applied.
 
-Current progress lives in one atomic `Progress.json`. On first use, an installation
-without that file reads the five older `SavedData.json` files and leaves them
-untouched. Older app versions will therefore not see progress changed by the new
-version. Separate running processes do not receive live updates; a conflicting
+Current progress lives in one atomic version 2 `Progress.json`, including Nouns.
+Older progress is migrated automatically: nouns move out of Words and retain
+their learned, training or rehearsing state as IDs are reassigned. An installation
+without a unified file reads its legacy `SavedData.json` files and leaves them
+untouched at runtime. Both devices must use the noun-capable version before syncing;
+older app versions cannot read newly saved progress. Separate running processes
+do not receive live updates; a conflicting
 writer is refused instead of silently overwriting newer disk state.

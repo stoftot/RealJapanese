@@ -24,6 +24,7 @@
     <MauiSplashScreen Include="Resources/Splash/splash.svg" Color="#052767" BaseSize="128,128" />
     <!-- Only vocabulary is packaged; never include web SavedData.json files. -->
     <MauiAsset Include="../Data/Words/Words.json" LogicalName="Data/Words/Words.json" />
+    <MauiAsset Include="../Data/Nouns/Nouns.json" LogicalName="Data/Nouns/Nouns.json" />
     <MauiAsset Include="../Data/Verbs/Verbs.json" LogicalName="Data/Verbs/Verbs.json" />
     <MauiAsset Include="../Data/Adjectives/Adjectives.json" LogicalName="Data/Adjectives/Adjectives.json" />
     <MauiAsset Include="../Data/Kanji/Singel/Singel.json" LogicalName="Data/Kanji/Singel/Singel.json" />

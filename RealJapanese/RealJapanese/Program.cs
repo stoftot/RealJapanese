@@ -20,6 +20,7 @@ builder.Services.AddSingleton<NumbersQuestionGenerator>();
 builder.Services.AddSingleton<AdjectiveData>();
 builder.Services.AddSingleton<VerbData>();
 builder.Services.AddSingleton<WordData>();
+builder.Services.AddSingleton<NounData>();
 builder.Services.AddSingleton<KanjiData>();
 builder.Services.AddSingleton<Repositories.Sync.ProgressSyncService>();
 builder.Services.AddSingleton<Repositories.Sync.ISyncNetworkEnvironment, Repositories.Sync.DesktopSyncNetworkEnvironment>();

@@ -35,7 +35,7 @@ background synchronization in the current application architecture.
 Progress writes use a temporary file and replacement, serialize in-process
 changes, check the stored revision before committing, and retain one recovery
 snapshot for imports. Incoming sync data is size-bounded, parsed into a fixed
-schema, checked against the five expected datasets, catalog hashes, and known
+schema, checked against the six expected datasets, catalog hashes, and known
 IDs, and shown as a local merge/replace preview before the user applies it.
 
 Local sync is an explicit, short-lived action restricted to literal private IPv4

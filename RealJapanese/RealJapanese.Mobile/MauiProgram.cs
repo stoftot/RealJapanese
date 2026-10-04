@@ -15,6 +15,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<StudyDataInstaller>();
         builder.Services.AddSingleton<NumbersQuestionGenerator>();
         builder.Services.AddSingleton<WordData>();
+        builder.Services.AddSingleton<NounData>();
         builder.Services.AddSingleton<VerbData>();
         builder.Services.AddSingleton<AdjectiveData>();
         builder.Services.AddSingleton<KanjiData>();

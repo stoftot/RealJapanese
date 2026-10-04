@@ -1,0 +1,1542 @@
+[
+  {
+    "id": "0",
+    "japanese": "大学",
+    "kana": "だいがく",
+    "english": "college; university",
+    "category": "School"
+  },
+  {
+    "id": "1",
+    "japanese": "高校",
+    "kana": "こうこう",
+    "english": "high school",
+    "category": "School"
+  },
+  {
+    "id": "2",
+    "japanese": "学生",
+    "kana": "がくせい",
+    "english": "student",
+    "category": "School"
+  },
+  {
+    "id": "3",
+    "japanese": "大学生",
+    "kana": "だいがくせい",
+    "english": "college student",
+    "category": "School"
+  },
+  {
+    "id": "4",
+    "japanese": "留学生",
+    "kana": "りゅうがくせい",
+    "english": "international student",
+    "category": "School"
+  },
+  {
+    "id": "5",
+    "japanese": "先生",
+    "kana": "せんせい",
+    "english": "teacher; professor",
+    "category": "School"
+  },
+  {
+    "id": "6",
+    "japanese": "一年生",
+    "kana": "いちねんせい",
+    "english": "first-year student",
+    "category": "School"
+  },
+  {
+    "id": "7",
+    "japanese": "専攻",
+    "kana": "せんこう",
+    "english": "major",
+    "category": "School"
+  },
+  {
+    "id": "8",
+    "japanese": "私",
+    "kana": "わたし",
+    "english": "I",
+    "category": "Person"
+  },
+  {
+    "id": "9",
+    "japanese": "友だち",
+    "kana": "ともだち",
+    "english": "friend",
+    "category": "Person"
+  },
+  {
+    "id": "10",
+    "japanese": "日本人",
+    "kana": "にほんじん",
+    "english": "japanese person",
+    "category": "Person"
+  },
+  {
+    "id": "11",
+    "japanese": "今",
+    "kana": "いま",
+    "english": "now",
+    "category": "Time"
+  },
+  {
+    "id": "12",
+    "japanese": "午前",
+    "kana": "ごぜん",
+    "english": "A.M.",
+    "category": "Time"
+  },
+  {
+    "id": "13",
+    "japanese": "午後",
+    "kana": "ごご",
+    "english": "P.M.",
+    "category": "Time"
+  },
+  {
+    "id": "14",
+    "japanese": "日本",
+    "kana": "にほん",
+    "english": "Japan",
+    "category": "Others"
+  },
+  {
+    "id": "15",
+    "japanese": "アメリカ",
+    "kana": "アメリカ",
+    "english": "U.S.A.",
+    "category": "Others"
+  },
+  {
+    "id": "16",
+    "japanese": "日本語",
+    "kana": "にほんご",
+    "english": "japanese language",
+    "category": "Others"
+  },
+  {
+    "id": "17",
+    "japanese": "電話",
+    "kana": "でんわ",
+    "english": "telephone",
+    "category": "Others"
+  },
+  {
+    "id": "18",
+    "japanese": "番号",
+    "kana": "ばんごう",
+    "english": "number",
+    "category": "Others"
+  },
+  {
+    "id": "19",
+    "japanese": "名前",
+    "kana": "なまえ",
+    "english": "name",
+    "category": "Others"
+  },
+  {
+    "id": "20",
+    "japanese": "イギリス",
+    "kana": "イギリス",
+    "english": "Britain",
+    "category": "Country"
+  },
+  {
+    "id": "21",
+    "japanese": "オーストラリア",
+    "kana": "オーストラリア",
+    "english": "Australia",
+    "category": "Country"
+  },
+  {
+    "id": "22",
+    "japanese": "韓国",
+    "kana": "かんこく",
+    "english": "Korea",
+    "category": "Country"
+  },
+  {
+    "id": "23",
+    "japanese": "カナダ",
+    "kana": "カナダ",
+    "english": "Canada",
+    "category": "Country"
+  },
+  {
+    "id": "24",
+    "japanese": "中国",
+    "kana": "ちゅうごく",
+    "english": "China",
+    "category": "Country"
+  },
+  {
+    "id": "25",
+    "japanese": "インド",
+    "kana": "インド",
+    "english": "India",
+    "category": "Country"
+  },
+  {
+    "id": "26",
+    "japanese": "エジプト",
+    "kana": "エジプト",
+    "english": "Egypt",
+    "category": "Country"
+  },
+  {
+    "id": "27",
+    "japanese": "フィリピン",
+    "kana": "フィリピン",
+    "english": "Philippines",
+    "category": "Country"
+  },
+  {
+    "id": "28",
+    "japanese": "アジア研究",
+    "kana": "アジアけんきゅう",
+    "english": "Asian studies",
+    "category": "Major"
+  },
+  {
+    "id": "29",
+    "japanese": "経済",
+    "kana": "けいざい",
+    "english": "economics",
+    "category": "Major"
+  },
+  {
+    "id": "30",
+    "japanese": "工学",
+    "kana": "こうがく",
+    "english": "engineering",
+    "category": "Major"
+  },
+  {
+    "id": "31",
+    "japanese": "国際関係",
+    "kana": "こくさいかんけい",
+    "english": "international relations",
+    "category": "Major"
+  },
+  {
+    "id": "32",
+    "japanese": "コンピューター",
+    "kana": "コンピューター",
+    "english": "computer",
+    "category": "Major"
+  },
+  {
+    "id": "33",
+    "japanese": "政治",
+    "kana": "せいじ",
+    "english": "politics",
+    "category": "Major"
+  },
+  {
+    "id": "34",
+    "japanese": "生物学",
+    "kana": "せいぶつがく",
+    "english": "biology",
+    "category": "Major"
+  },
+  {
+    "id": "35",
+    "japanese": "ビジネス",
+    "kana": "ビジネス",
+    "english": "business",
+    "category": "Major"
+  },
+  {
+    "id": "36",
+    "japanese": "文学",
+    "kana": "ぶんがく",
+    "english": "literature",
+    "category": "Major"
+  },
+  {
+    "id": "37",
+    "japanese": "歴史",
+    "kana": "れきし",
+    "english": "history",
+    "category": "Major"
+  },
+  {
+    "id": "38",
+    "japanese": "医者",
+    "kana": "いしゃ",
+    "english": "doctor",
+    "category": "Occupation"
+  },
+  {
+    "id": "39",
+    "japanese": "会社員",
+    "kana": "かいしゃいん",
+    "english": "office worker",
+    "category": "Occupation"
+  },
+  {
+    "id": "40",
+    "japanese": "看護師",
+    "kana": "かんごし",
+    "english": "nurse",
+    "category": "Occupation"
+  },
+  {
+    "id": "41",
+    "japanese": "高校生",
+    "kana": "こうこうせい",
+    "english": "high school student",
+    "category": "Occupation"
+  },
+  {
+    "id": "42",
+    "japanese": "主婦",
+    "kana": "しゅふ",
+    "english": "housewife",
+    "category": "Occupation"
+  },
+  {
+    "id": "43",
+    "japanese": "大学院生",
+    "kana": "だいがくいんせい",
+    "english": "graduate student",
+    "category": "Occupation"
+  },
+  {
+    "id": "44",
+    "japanese": "弁護士",
+    "kana": "べんごし",
+    "english": "lawyer",
+    "category": "Occupation"
+  },
+  {
+    "id": "45",
+    "japanese": "お母さん",
+    "kana": "おかあさん",
+    "english": "mother",
+    "category": "Family"
+  },
+  {
+    "id": "46",
+    "japanese": "お父さん",
+    "kana": "おとうさん",
+    "english": "father",
+    "category": "Family"
+  },
+  {
+    "id": "47",
+    "japanese": "お姉さん",
+    "kana": "おねえさん",
+    "english": "older sister",
+    "category": "Family"
+  },
+  {
+    "id": "48",
+    "japanese": "お兄さん",
+    "kana": "おにいさん",
+    "english": "older brother",
+    "category": "Family"
+  },
+  {
+    "id": "49",
+    "japanese": "妹",
+    "kana": "いもうと",
+    "english": "younger sister",
+    "category": "Family"
+  },
+  {
+    "id": "50",
+    "japanese": "弟",
+    "kana": "おとうと",
+    "english": "younger brother",
+    "category": "Family"
+  },
+  {
+    "id": "51",
+    "japanese": "魚",
+    "kana": "さかな",
+    "english": "fish",
+    "category": "Food"
+  },
+  {
+    "id": "52",
+    "japanese": "とんかつ",
+    "kana": "とんかつ",
+    "english": "pork cutlet",
+    "category": "Food"
+  },
+  {
+    "id": "53",
+    "japanese": "肉",
+    "kana": "にく",
+    "english": "meat",
+    "category": "Food"
+  },
+  {
+    "id": "54",
+    "japanese": "メニュー",
+    "kana": "メニュー",
+    "english": "menu",
+    "category": "Food"
+  },
+  {
+    "id": "55",
+    "japanese": "野菜",
+    "kana": "やさい",
+    "english": "vegetable",
+    "category": "Food"
+  },
+  {
+    "id": "56",
+    "japanese": "傘",
+    "kana": "かさ",
+    "english": "umbrella",
+    "category": "Thing"
+  },
+  {
+    "id": "57",
+    "japanese": "鞄",
+    "kana": "かばん",
+    "english": "bag",
+    "category": "Thing"
+  },
+  {
+    "id": "58",
+    "japanese": "靴",
+    "kana": "くつ",
+    "english": "shoes",
+    "category": "Thing"
+  },
+  {
+    "id": "59",
+    "japanese": "財布",
+    "kana": "さいふ",
+    "english": "wallet",
+    "category": "Thing"
+  },
+  {
+    "id": "60",
+    "japanese": "ジーンズ",
+    "kana": "ジーンズ",
+    "english": "jeans",
+    "category": "Thing"
+  },
+  {
+    "id": "61",
+    "japanese": "自転車",
+    "kana": "じてんしゃ",
+    "english": "bicycle",
+    "category": "Thing"
+  },
+  {
+    "id": "62",
+    "japanese": "新聞",
+    "kana": "しんぶん",
+    "english": "newspaper",
+    "category": "Thing"
+  },
+  {
+    "id": "63",
+    "japanese": "スマホ",
+    "kana": "スマホ",
+    "english": "smartphone; mobile",
+    "category": "Thing"
+  },
+  {
+    "id": "64",
+    "japanese": "Tシャツ",
+    "kana": "Tシャツ",
+    "english": "T-shirt",
+    "category": "Thing"
+  },
+  {
+    "id": "65",
+    "japanese": "時計",
+    "kana": "とけい",
+    "english": "watch; clock",
+    "category": "Thing"
+  },
+  {
+    "id": "66",
+    "japanese": "ノート",
+    "kana": "ノート",
+    "english": "notebook",
+    "category": "Thing"
+  },
+  {
+    "id": "67",
+    "japanese": "ペン",
+    "kana": "ぺん",
+    "english": "pen",
+    "category": "Thing"
+  },
+  {
+    "id": "68",
+    "japanese": "帽子",
+    "kana": "ぼうし",
+    "english": "hat; cap",
+    "category": "Thing"
+  },
+  {
+    "id": "69",
+    "japanese": "本",
+    "kana": "ほん",
+    "english": "book",
+    "category": "Thing"
+  },
+  {
+    "id": "70",
+    "japanese": "銀行",
+    "kana": "ぎんこう",
+    "english": "bank",
+    "category": "Place"
+  },
+  {
+    "id": "71",
+    "japanese": "コンビニ",
+    "kana": "コンビニ",
+    "english": "convenience store",
+    "category": "Place"
+  },
+  {
+    "id": "72",
+    "japanese": "トイレ",
+    "kana": "トイレ",
+    "english": "toilet; restroom",
+    "category": "Place"
+  },
+  {
+    "id": "73",
+    "japanese": "図書館",
+    "kana": "としょかん",
+    "english": "library",
+    "category": "Place"
+  },
+  {
+    "id": "74",
+    "japanese": "郵便局",
+    "kana": "ゆうびんきょく",
+    "english": "post office",
+    "category": "Place"
+  },
+  {
+    "id": "75",
+    "japanese": "英語",
+    "kana": "えいご",
+    "english": "english (language)",
+    "category": "Major"
+  },
+  {
+    "id": "76",
+    "japanese": "映画",
+    "kana": "えいが",
+    "english": "movie",
+    "category": "Entertainment"
+  },
+  {
+    "id": "77",
+    "japanese": "音楽",
+    "kana": "おんがく",
+    "english": "music",
+    "category": "Entertainment"
+  },
+  {
+    "id": "78",
+    "japanese": "雑誌",
+    "kana": "ざっし",
+    "english": "magazine",
+    "category": "Entertainment"
+  },
+  {
+    "id": "79",
+    "japanese": "スポーツ",
+    "kana": "スポーツ",
+    "english": "sports",
+    "category": "Entertainment"
+  },
+  {
+    "id": "80",
+    "japanese": "デート",
+    "kana": "デート",
+    "english": "date (romantic)",
+    "category": "Entertainment"
+  },
+  {
+    "id": "81",
+    "japanese": "テニス",
+    "kana": "テニス",
+    "english": "tennis",
+    "category": "Entertainment"
+  },
+  {
+    "id": "82",
+    "japanese": "テレビ",
+    "kana": "テレビ",
+    "english": "TV",
+    "category": "Entertainment"
+  },
+  {
+    "id": "83",
+    "japanese": "アイスクリーム",
+    "kana": "アイスクリーム",
+    "english": "ice cream",
+    "category": "Food"
+  },
+  {
+    "id": "84",
+    "japanese": "ハンバーガー",
+    "kana": "ハンバーガー",
+    "english": "hamburger",
+    "category": "Food"
+  },
+  {
+    "id": "85",
+    "japanese": "お酒",
+    "kana": "おさけ",
+    "english": "sake; alcoholic drink",
+    "category": "Food"
+  },
+  {
+    "id": "86",
+    "japanese": "お茶",
+    "kana": "おちゃ",
+    "english": "green tea",
+    "category": "Food"
+  },
+  {
+    "id": "87",
+    "japanese": "コーヒー",
+    "kana": "コーヒー",
+    "english": "coffee",
+    "category": "Food"
+  },
+  {
+    "id": "88",
+    "japanese": "水",
+    "kana": "みず",
+    "english": "water",
+    "category": "Food"
+  },
+  {
+    "id": "89",
+    "japanese": "朝ご飯",
+    "kana": "あさごはん",
+    "english": "breakfast",
+    "category": "Food"
+  },
+  {
+    "id": "90",
+    "japanese": "昼ご飯",
+    "kana": "ひるごはん",
+    "english": "lunch",
+    "category": "Food"
+  },
+  {
+    "id": "91",
+    "japanese": "晩ご飯",
+    "kana": "ばんごはん",
+    "english": "dinner",
+    "category": "Food"
+  },
+  {
+    "id": "92",
+    "japanese": "家",
+    "kana": "いえ",
+    "english": "home; house",
+    "category": "Place"
+  },
+  {
+    "id": "93",
+    "japanese": "うち",
+    "kana": "うち",
+    "english": "home; house; my place",
+    "category": "Place"
+  },
+  {
+    "id": "94",
+    "japanese": "学校",
+    "kana": "がっこう",
+    "english": "school",
+    "category": "Place"
+  },
+  {
+    "id": "95",
+    "japanese": "カフェ",
+    "kana": "カフェ",
+    "english": "cafe",
+    "category": "Place"
+  },
+  {
+    "id": "96",
+    "japanese": "明日",
+    "kana": "あした",
+    "english": "tomorrow",
+    "category": "Time"
+  },
+  {
+    "id": "97",
+    "japanese": "今日",
+    "kana": "きょう",
+    "english": "today",
+    "category": "Time"
+  },
+  {
+    "id": "98",
+    "japanese": "朝",
+    "kana": "あさ",
+    "english": "morning",
+    "category": "Time"
+  },
+  {
+    "id": "99",
+    "japanese": "今晩",
+    "kana": "こんばん",
+    "english": "tonight",
+    "category": "Time"
+  },
+  {
+    "id": "100",
+    "japanese": "毎日",
+    "kana": "まいにち",
+    "english": "every day",
+    "category": "Time"
+  },
+  {
+    "id": "101",
+    "japanese": "毎晩",
+    "kana": "まいばん",
+    "english": "every night",
+    "category": "Time"
+  },
+  {
+    "id": "102",
+    "japanese": "週末",
+    "kana": "しゅうまつ",
+    "english": "weekend",
+    "category": "Time"
+  },
+  {
+    "id": "103",
+    "japanese": "土曜日",
+    "kana": "どようび",
+    "english": "Saturday",
+    "category": "Time"
+  },
+  {
+    "id": "104",
+    "japanese": "日曜日",
+    "kana": "にちようび",
+    "english": "Sunday",
+    "category": "Time"
+  },
+  {
+    "id": "105",
+    "japanese": "ゲーム",
+    "kana": "ゲーム",
+    "english": "game",
+    "category": "Activity"
+  },
+  {
+    "id": "106",
+    "japanese": "アルバイト",
+    "kana": "アルバイト",
+    "english": "part-time job",
+    "category": "Activity"
+  },
+  {
+    "id": "107",
+    "japanese": "買い物",
+    "kana": "かいもの",
+    "english": "shopping",
+    "category": "Activity"
+  },
+  {
+    "id": "108",
+    "japanese": "クラス",
+    "kana": "クラス",
+    "english": "class",
+    "category": "Activity"
+  },
+  {
+    "id": "109",
+    "japanese": "犬",
+    "kana": "いぬ",
+    "english": "dog",
+    "category": "People/Thing"
+  },
+  {
+    "id": "110",
+    "japanese": "猫",
+    "kana": "ねこ",
+    "english": "cat",
+    "category": "People/Thing"
+  },
+  {
+    "id": "111",
+    "japanese": "人",
+    "kana": "ひと",
+    "english": "person",
+    "category": "People/Thing"
+  },
+  {
+    "id": "112",
+    "japanese": "子供",
+    "kana": "こども",
+    "english": "child",
+    "category": "People/Thing"
+  },
+  {
+    "id": "113",
+    "japanese": "あなた",
+    "kana": "あなた",
+    "english": "you",
+    "category": "People/Thing"
+  },
+  {
+    "id": "114",
+    "japanese": "椅子",
+    "kana": "いす",
+    "english": "chair",
+    "category": "People/Thing"
+  },
+  {
+    "id": "115",
+    "japanese": "机",
+    "kana": "つくえ",
+    "english": "desk",
+    "category": "People/Thing"
+  },
+  {
+    "id": "116",
+    "japanese": "写真",
+    "kana": "しゃしん",
+    "english": "picture; photograph",
+    "category": "People/Thing"
+  },
+  {
+    "id": "117",
+    "japanese": "花",
+    "kana": "はな",
+    "english": "flower",
+    "category": "People/Thing"
+  },
+  {
+    "id": "118",
+    "japanese": "レポート",
+    "kana": "レポート",
+    "english": "(term) paper",
+    "category": "People/Thing"
+  },
+  {
+    "id": "119",
+    "japanese": "ご飯",
+    "kana": "ごはん",
+    "english": "rice; meal",
+    "category": "People/Thing"
+  },
+  {
+    "id": "120",
+    "japanese": "パン",
+    "kana": "パン",
+    "english": "bread",
+    "category": "People/Thing"
+  },
+  {
+    "id": "121",
+    "japanese": "お寺",
+    "kana": "おてら",
+    "english": "temple",
+    "category": "Place"
+  },
+  {
+    "id": "122",
+    "japanese": "公園",
+    "kana": "こうえん",
+    "english": "park",
+    "category": "Place"
+  },
+  {
+    "id": "123",
+    "japanese": "スーパー",
+    "kana": "スーパー",
+    "english": "supermarket",
+    "category": "Place"
+  },
+  {
+    "id": "124",
+    "japanese": "バス停",
+    "kana": "バスてい",
+    "english": "bus stop",
+    "category": "Place"
+  },
+  {
+    "id": "125",
+    "japanese": "病院",
+    "kana": "びょういん",
+    "english": "hospital",
+    "category": "Place"
+  },
+  {
+    "id": "126",
+    "japanese": "ホテル",
+    "kana": "ホテル",
+    "english": "hotel",
+    "category": "Place"
+  },
+  {
+    "id": "127",
+    "japanese": "本屋",
+    "kana": "ほんや",
+    "english": "bookstore",
+    "category": "Place"
+  },
+  {
+    "id": "128",
+    "japanese": "町",
+    "kana": "まち",
+    "english": "town; city",
+    "category": "Place"
+  },
+  {
+    "id": "129",
+    "japanese": "レストラン",
+    "kana": "レストラン",
+    "english": "restaurant",
+    "category": "Place"
+  },
+  {
+    "id": "130",
+    "japanese": "昨日",
+    "kana": "きのう",
+    "english": "yesterday",
+    "category": "Time"
+  },
+  {
+    "id": "131",
+    "japanese": "一時間",
+    "kana": "いちじかん",
+    "english": "one hour",
+    "category": "Time"
+  },
+  {
+    "id": "132",
+    "japanese": "先週",
+    "kana": "せんしゅう",
+    "english": "last week",
+    "category": "Time"
+  },
+  {
+    "id": "133",
+    "japanese": "時",
+    "kana": "とき",
+    "english": "when…; at the time of… ",
+    "category": "Time"
+  },
+  {
+    "id": "134",
+    "japanese": "月曜日",
+    "kana": "げつようび",
+    "english": "Monday",
+    "category": "Time"
+  },
+  {
+    "id": "135",
+    "japanese": "火曜日",
+    "kana": "かようび",
+    "english": "Tuesday",
+    "category": "Time"
+  },
+  {
+    "id": "136",
+    "japanese": "水曜日",
+    "kana": "すいようび",
+    "english": "Wednesday",
+    "category": "Time"
+  },
+  {
+    "id": "137",
+    "japanese": "木曜日",
+    "kana": "もくようび",
+    "english": "Thursday",
+    "category": "Time"
+  },
+  {
+    "id": "138",
+    "japanese": "金曜日",
+    "kana": "きんようび",
+    "english": "Friday",
+    "category": "Time"
+  },
+  {
+    "id": "139",
+    "japanese": "右",
+    "kana": "みぎ",
+    "english": "right ",
+    "category": "Location"
+  },
+  {
+    "id": "140",
+    "japanese": "左",
+    "kana": "ひだり",
+    "english": "left ",
+    "category": "Location"
+  },
+  {
+    "id": "141",
+    "japanese": "前",
+    "kana": "まえ",
+    "english": "front",
+    "category": "Location"
+  },
+  {
+    "id": "142",
+    "japanese": "後ろ",
+    "kana": "うしろ",
+    "english": "back(location)",
+    "category": "Location"
+  },
+  {
+    "id": "143",
+    "japanese": "中",
+    "kana": "なか",
+    "english": "inside",
+    "category": "Location"
+  },
+  {
+    "id": "144",
+    "japanese": "上",
+    "kana": "うえ",
+    "english": "on",
+    "category": "Location"
+  },
+  {
+    "id": "145",
+    "japanese": "下",
+    "kana": "した",
+    "english": "under",
+    "category": "Location"
+  },
+  {
+    "id": "146",
+    "japanese": "近く",
+    "kana": "ちかく",
+    "english": "near; nearby",
+    "category": "Location"
+  },
+  {
+    "id": "147",
+    "japanese": "隣",
+    "kana": "となり",
+    "english": "next to",
+    "category": "Location"
+  },
+  {
+    "id": "148",
+    "japanese": "間",
+    "kana": "あいだ",
+    "english": "between",
+    "category": "Location"
+  },
+  {
+    "id": "149",
+    "japanese": "食べ物",
+    "kana": "たべもの",
+    "english": "food",
+    "category": "Noun"
+  },
+  {
+    "id": "150",
+    "japanese": "飲み物",
+    "kana": "のみもの",
+    "english": "drink",
+    "category": "Noun"
+  },
+  {
+    "id": "151",
+    "japanese": "果物",
+    "kana": "くだもの",
+    "english": "fruit",
+    "category": "Noun"
+  },
+  {
+    "id": "152",
+    "japanese": "休み",
+    "kana": "やすみ",
+    "english": "holiday; day off; absence",
+    "category": "Noun"
+  },
+  {
+    "id": "153",
+    "japanese": "旅行",
+    "kana": "りょこう",
+    "english": "travel",
+    "category": "Noun"
+  },
+  {
+    "id": "154",
+    "japanese": "海",
+    "kana": "うみ",
+    "english": "sea",
+    "category": "Noun"
+  },
+  {
+    "id": "155",
+    "japanese": "サーフィン",
+    "kana": "サーフィン",
+    "english": "surfing",
+    "category": "Noun"
+  },
+  {
+    "id": "156",
+    "japanese": "お土産",
+    "kana": "おみやげ",
+    "english": "souvenir",
+    "category": "Noun"
+  },
+  {
+    "id": "157",
+    "japanese": "バス",
+    "kana": "バス",
+    "english": "bus",
+    "category": "Noun"
+  },
+  {
+    "id": "158",
+    "japanese": "天気",
+    "kana": "てんき",
+    "english": "weather",
+    "category": "Noun"
+  },
+  {
+    "id": "159",
+    "japanese": "宿題",
+    "kana": "しゅくだい",
+    "english": "homework",
+    "category": "Noun"
+  },
+  {
+    "id": "160",
+    "japanese": "テスト",
+    "kana": "テスト",
+    "english": "test",
+    "category": "Noun"
+  },
+  {
+    "id": "161",
+    "japanese": "誕生日",
+    "kana": "たんじょうび",
+    "english": "birthday",
+    "category": "Noun"
+  },
+  {
+    "id": "162",
+    "japanese": "部屋",
+    "kana": "へや",
+    "english": "room",
+    "category": "Noun"
+  },
+  {
+    "id": "163",
+    "japanese": "僕",
+    "kana": "ぼく",
+    "english": "I (used by men)",
+    "category": "Noun"
+  },
+  {
+    "id": "164",
+    "japanese": "Lサイズ",
+    "kana": "エルサイズ",
+    "english": "size L",
+    "category": "Noun"
+  },
+  {
+    "id": "165",
+    "japanese": "漢字",
+    "kana": "かんじ",
+    "english": "kanji; Chinese character",
+    "category": "Noun"
+  },
+  {
+    "id": "166",
+    "japanese": "教科書",
+    "kana": "きょうかしょ",
+    "english": "textbook",
+    "category": "Noun"
+  },
+  {
+    "id": "167",
+    "japanese": "ページ",
+    "kana": "ページ",
+    "english": "page",
+    "category": "Noun"
+  },
+  {
+    "id": "168",
+    "japanese": "次",
+    "kana": "つぎ",
+    "english": "next",
+    "category": "Noun"
+  },
+  {
+    "id": "169",
+    "japanese": "お金",
+    "kana": "おかね",
+    "english": "money",
+    "category": "Noun"
+  },
+  {
+    "id": "170",
+    "japanese": "荷物",
+    "kana": "にもつ",
+    "english": "baggage",
+    "category": "Noun"
+  },
+  {
+    "id": "171",
+    "japanese": "パソコン",
+    "kana": "パソコン",
+    "english": "personal computer",
+    "category": "Noun"
+  },
+  {
+    "id": "172",
+    "japanese": "シャワー",
+    "kana": "シャワー",
+    "english": "shower",
+    "category": "Noun"
+  },
+  {
+    "id": "173",
+    "japanese": "エアコン",
+    "kana": "エアコン",
+    "english": "air conditioner",
+    "category": "Noun"
+  },
+  {
+    "id": "174",
+    "japanese": "電気",
+    "kana": "でんき",
+    "english": "electricity; light",
+    "category": "Noun"
+  },
+  {
+    "id": "175",
+    "japanese": "窓",
+    "kana": "まど",
+    "english": "window",
+    "category": "Noun"
+  },
+  {
+    "id": "176",
+    "japanese": "電車",
+    "kana": "でんしゃ",
+    "english": "train",
+    "category": "Noun"
+  },
+  {
+    "id": "177",
+    "japanese": "国",
+    "kana": "くに",
+    "english": "country; place of origin",
+    "category": "Noun"
+  },
+  {
+    "id": "178",
+    "japanese": "今週",
+    "kana": "こんしゅう",
+    "english": "this week",
+    "category": "Time"
+  },
+  {
+    "id": "179",
+    "japanese": "来週",
+    "kana": "らいしゅう",
+    "english": "next week",
+    "category": "Time"
+  },
+  {
+    "id": "180",
+    "japanese": "来年",
+    "kana": "らいねん",
+    "english": "next year",
+    "category": "Time"
+  },
+  {
+    "id": "181",
+    "japanese": "夜",
+    "kana": "よる",
+    "english": "night",
+    "category": "Time"
+  },
+  {
+    "id": "182",
+    "japanese": "家族",
+    "kana": "かぞく",
+    "english": "family",
+    "category": "noun"
+  },
+  {
+    "id": "183",
+    "japanese": "おじいさん",
+    "kana": "おじいさん",
+    "english": "grandfather; old man",
+    "category": "noun"
+  },
+  {
+    "id": "184",
+    "japanese": "おばあさん",
+    "kana": "おばあさん",
+    "english": "grandmother; old woman",
+    "category": "noun"
+  },
+  {
+    "id": "185",
+    "japanese": "父",
+    "kana": "ちち",
+    "english": "(my) father",
+    "category": "noun"
+  },
+  {
+    "id": "186",
+    "japanese": "母",
+    "kana": "はは",
+    "english": "(my) mother",
+    "category": "noun"
+  },
+  {
+    "id": "187",
+    "japanese": "兄",
+    "kana": "あに",
+    "english": "(my) older brother",
+    "category": "noun"
+  },
+  {
+    "id": "188",
+    "japanese": "姉",
+    "kana": "あね",
+    "english": "(my) older sister",
+    "category": "noun"
+  },
+  {
+    "id": "189",
+    "japanese": "兄弟",
+    "kana": "きょうだい",
+    "english": "brothers and sisters",
+    "category": "noun"
+  },
+  {
+    "id": "190",
+    "japanese": "男の人",
+    "kana": "おとこのひと",
+    "english": "man",
+    "category": "noun"
+  },
+  {
+    "id": "191",
+    "japanese": "女の人",
+    "kana": "おんなのひと",
+    "english": "woman",
+    "category": "noun"
+  },
+  {
+    "id": "192",
+    "japanese": "会社",
+    "kana": "かいしゃ",
+    "english": "company",
+    "category": "noun"
+  },
+  {
+    "id": "193",
+    "japanese": "食堂",
+    "kana": "しょくどう",
+    "english": "cafeteria; dining commons",
+    "category": "noun"
+  },
+  {
+    "id": "194",
+    "japanese": "デパート",
+    "kana": "デパート",
+    "english": "department store",
+    "category": "noun"
+  },
+  {
+    "id": "195",
+    "japanese": "髪",
+    "kana": "かみ",
+    "english": "hair",
+    "category": "noun"
+  },
+  {
+    "id": "196",
+    "japanese": "口",
+    "kana": "くち",
+    "english": "mouth",
+    "category": "noun"
+  },
+  {
+    "id": "197",
+    "japanese": "目",
+    "kana": "め",
+    "english": "eye",
+    "category": "noun"
+  },
+  {
+    "id": "198",
+    "japanese": "眼鏡",
+    "kana": "めがね",
+    "english": "glasses",
+    "category": "noun"
+  },
+  {
+    "id": "199",
+    "japanese": "歌",
+    "kana": "うた",
+    "english": "song",
+    "category": "noun"
+  },
+  {
+    "id": "200",
+    "japanese": "サークル",
+    "kana": "サークル",
+    "english": "club activity",
+    "category": "noun"
+  },
+  {
+    "id": "201",
+    "japanese": "車",
+    "kana": "くるま",
+    "english": "car",
+    "category": "noun"
+  },
+  {
+    "id": "202",
+    "japanese": "眉毛",
+    "kana": "まゆげ",
+    "english": "eyebrow",
+    "category": "noun"
+  },
+  {
+    "id": "203",
+    "japanese": "耳",
+    "kana": "みみ",
+    "english": "ear",
+    "category": "noun"
+  },
+  {
+    "id": "204",
+    "japanese": "鼻",
+    "kana": "はな",
+    "english": "nose",
+    "category": "noun"
+  },
+  {
+    "id": "205",
+    "japanese": "歯",
+    "kana": "は",
+    "english": "tooth",
+    "category": "noun"
+  },
+  {
+    "id": "206",
+    "japanese": "首",
+    "kana": "くび",
+    "english": "neck",
+    "category": "noun"
+  },
+  {
+    "id": "207",
+    "japanese": "指",
+    "kana": "ゆび",
+    "english": "finger",
+    "category": "noun"
+  },
+  {
+    "id": "208",
+    "japanese": "手",
+    "kana": "て",
+    "english": "hand",
+    "category": "noun"
+  },
+  {
+    "id": "209",
+    "japanese": "頭",
+    "kana": "あたま",
+    "english": "head",
+    "category": "noun"
+  },
+  {
+    "id": "210",
+    "japanese": "顔",
+    "kana": "かお",
+    "english": "face",
+    "category": "noun"
+  },
+  {
+    "id": "211",
+    "japanese": "肩",
+    "kana": "かた",
+    "english": "shoulder",
+    "category": "noun"
+  },
+  {
+    "id": "212",
+    "japanese": "胸",
+    "kana": "むね",
+    "english": "chest",
+    "category": "noun"
+  },
+  {
+    "id": "213",
+    "japanese": "お腹",
+    "kana": "おなか",
+    "english": "stomach",
+    "category": "noun"
+  },
+  {
+    "id": "214",
+    "japanese": "背中",
+    "kana": "せなか",
+    "english": "back(body part)",
+    "category": "noun"
+  },
+  {
+    "id": "215",
+    "japanese": "お尻",
+    "kana": "おしり",
+    "english": "buttocks",
+    "category": "noun"
+  },
+  {
+    "id": "216",
+    "japanese": "足",
+    "kana": "あし",
+    "english": "leg; foot",
+    "category": "noun"
+  },
+  {
+    "id": "217",
+    "japanese": "腕",
+    "kana": "うで",
+    "english": "arm",
+    "category": "noun"
+  },
+  {
+    "id": "218",
+    "japanese": "膝",
+    "kana": "ひざ",
+    "english": "knee",
+    "category": "noun"
+  },
+  {
+    "id": "219",
+    "japanese": "手首",
+    "kana": "てくび",
+    "english": "wrist",
+    "category": "noun"
+  }
+]

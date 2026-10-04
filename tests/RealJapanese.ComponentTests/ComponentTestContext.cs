@@ -13,6 +13,7 @@ internal sealed class ComponentTestContext : IDisposable
     public BunitContext Context { get; } = new();
     public RepositoryPaths Paths { get; }
     public WordData Words { get; }
+    public NounData Nouns { get; }
     public VerbData Verbs { get; }
     public AdjectiveData Adjectives { get; }
     public KanjiData Kanji { get; }
@@ -21,6 +22,7 @@ internal sealed class ComponentTestContext : IDisposable
     {
         Paths = Workspace.CreatePaths();
         Words = new WordData(Paths);
+        Nouns = new NounData(Paths);
         Verbs = new VerbData(Paths);
         Adjectives = new AdjectiveData(Paths);
         Kanji = new KanjiData(Paths);
@@ -28,6 +30,7 @@ internal sealed class ComponentTestContext : IDisposable
         Context.JSInterop.Mode = JSRuntimeMode.Loose;
         Context.Services.AddSingleton(Paths);
         Context.Services.AddSingleton(Words);
+        Context.Services.AddSingleton(Nouns);
         Context.Services.AddSingleton(Verbs);
         Context.Services.AddSingleton(Adjectives);
         Context.Services.AddSingleton(Kanji);

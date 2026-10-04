@@ -35,7 +35,7 @@ or owner-approved roadmap was not found.
 - The Android application supports API level 24 and later and uses package ID
   `com.realjapanese.mobile`.
 - The canonical catalog remains under `RealJapanese/Data/`. The Android package
-  embeds the five study catalogs and copies them to app-private storage.
+  embeds the six study catalogs and copies them to app-private storage.
 - The extraction utility separately needs external AI-library projects and a local
   model/server. It is not part of either application runtime.
 - There is no CI pipeline. The local xUnit suite covers pure logic, file/process/
