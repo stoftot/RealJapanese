@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <PackageReference Include="WanaKanaSharp" Version="0.2.0" />
+      <EmbeddedResource Include="Sync\WordNounSplit.json" />
     </ItemGroup>
 
     <ItemGroup>

@@ -4,15 +4,20 @@ using DataLoaders.Models;
 
 namespace Repositories.Sync;
 
-// One atomic file is the commit boundary for all five datasets. Legacy saves remain untouched.
+// One atomic file is the commit boundary for all six datasets. Legacy saves remain untouched.
 public sealed class ProgressStore
 {
-    public static readonly string[] DatasetNames = ["Words", "Verbs", "Adjectives", "Kanji/Singel", "Kanji/Combined"];
+    public static readonly string[] DatasetNames = ["Words", "Nouns", "Verbs", "Adjectives", "Kanji/Singel", "Kanji/Combined"];
     private readonly object gate = new();
     private readonly string path;
+    private readonly string catalogRoot;
     private ProgressDocument? document;
 
-    internal ProgressStore(string root) => path = Path.Combine(root, "Progress.json");
+    internal ProgressStore(string root, string catalogRoot)
+    {
+        path = Path.Combine(root, "Progress.json");
+        this.catalogRoot = catalogRoot;
+    }
 
     internal ProgressDocument Read()
     {
@@ -46,13 +51,23 @@ public sealed class ProgressStore
         {
             var loaded = JsonSerializer.Deserialize<ProgressDocument>(File.ReadAllBytes(path))
                 ?? throw new InvalidDataException("The progress file is empty.");
-            if (loaded.Version != 1) throw new InvalidDataException("Unsupported progress version.");
+            if (loaded.Version == 1)
+            {
+                ValidateShape(loaded.Data, includeNouns: false);
+                WordNounMigration.Apply(loaded.Data);
+                WordNounMigration.ApplyRecovery(loaded.Recovery, catalogRoot);
+                loaded.Version = 2;
+            }
+            if (loaded.Version != 2) throw new InvalidDataException("Unsupported progress version.");
             ValidateShape(loaded.Data);
             return document = loaded;
         }
 
         var migrated = new ProgressDocument();
-        foreach (var name in DatasetNames)
+        // The split canonical legacy saves include Nouns/SavedData.json. Older
+        // installations (including Android) only have the original five saves.
+        var includesNouns = File.Exists(Path.Combine(Path.GetDirectoryName(path)!, "Nouns", "SavedData.json"));
+        foreach (var name in DatasetNames.Where(name => includesNouns || name != "Nouns"))
         {
             var folder = Path.Combine(Path.GetDirectoryName(path)!, name);
             var saved = File.Exists(Path.Combine(folder, "SavedData.json"))
@@ -64,6 +79,7 @@ public sealed class ProgressStore
             saved.RehearsingIds = (saved.RehearsingIds ?? []).Except(saved.KnownIds).Except(saved.TrainingIds).Distinct().ToList();
             migrated.Data.Add(name, saved);
         }
+        if (!includesNouns) WordNounMigration.Apply(migrated.Data);
         return document = migrated;
     }
 
@@ -101,10 +117,11 @@ public sealed class ProgressStore
 
     internal static T Clone<T>(T value) => JsonSerializer.Deserialize<T>(JsonSerializer.SerializeToUtf8Bytes(value))!;
 
-    internal static void ValidateShape(Dictionary<string, VocabSaveFile>? data)
+    internal static void ValidateShape(Dictionary<string, VocabSaveFile>? data, bool includeNouns = true)
     {
-        if (data is null || data.Count != DatasetNames.Length || DatasetNames.Any(name => !data.ContainsKey(name)))
-            throw new InvalidDataException("The file must contain all five study datasets.");
+        var names = DatasetNames.Where(name => includeNouns || name != "Nouns").ToArray();
+        if (data is null || data.Count != names.Length || names.Any(name => !data.ContainsKey(name)))
+            throw new InvalidDataException("The file must contain all study datasets for its version.");
         foreach (var saved in data.Values)
         {
             if (saved?.KnownIds is null || saved.TrainingIds is null || saved.RehearsingIds is null)
@@ -118,7 +135,7 @@ public sealed class ProgressStore
 
 internal sealed class ProgressDocument
 {
-    public int Version { get; set; } = 1;
+    public int Version { get; set; } = 2;
     public Guid Revision { get; set; } = Guid.NewGuid();
     public Dictionary<string, VocabSaveFile> Data { get; set; } = [];
     public ProgressSnapshot? Recovery { get; set; }
@@ -126,7 +143,7 @@ internal sealed class ProgressDocument
 
 public sealed class ProgressSnapshot
 {
-    public int Version { get; set; } = 1;
+    public int Version { get; set; } = 2;
     public DateTimeOffset CreatedUtc { get; set; } = DateTimeOffset.UtcNow;
     public Dictionary<string, string> CatalogHashes { get; set; } = [];
     public Dictionary<string, VocabSaveFile> Data { get; set; } = [];

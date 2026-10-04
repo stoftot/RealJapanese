@@ -74,6 +74,7 @@ verify tools, not the app.
 | Shared practice lifecycle | `RealJapanese/RealJapanese.UI/Components/Shared/PracticeBase.cs`, `PracticeShell.razor` |
 | Local sync UI | `RealJapanese/RealJapanese.UI/Components/Pages/Sync.razor` |
 | Storage paths and persistence | `RealJapanese/Repositories/RepositoryPaths.cs`, `Bases/WordDataBase.cs`, `Sync/ProgressStore.cs` |
+| Words-to-nouns ID migration | `RealJapanese/Repositories/Sync/WordNounMigration.cs`, `WordNounSplit.json` in the same folder |
 | Snapshot validation and paired local transport | `RealJapanese/Repositories/Sync/ProgressSyncService.cs`, `LocalProgressTransfer.cs`, `PairingProtocol.cs` |
 | Local sync discovery and host network lifecycle | `RealJapanese/Repositories/Sync/LocalSyncDiscovery.cs`, `ISyncNetworkEnvironment.cs` |
 | Local sync user/protocol documentation | `docs/local-sync.md`, `docs/local-sync-protocol.md` |

@@ -3,6 +3,7 @@ using Bunit;
 using DataLoaders.Models;
 using RealJapanese.Components.Pages.Adjectives;
 using RealJapanese.Components.Pages.Kanji;
+using RealJapanese.Components.Pages.Nouns;
 using RealJapanese.Components.Pages.Verbs;
 using RealJapanese.Components.Pages.Words;
 
@@ -31,6 +32,24 @@ public sealed class SelectorComponentTests
 
         Assert.Contains("No matches in this list.", cut.Markup);
         Assert.Contains(target.Id, test.Words.VocabWordIds);
+    }
+
+    [Fact]
+    public void NounSelectorSearchesAndAssignsNounsToTraining()
+    {
+        using var test = new ComponentTestContext();
+        var target = test.Nouns.Words.First(noun => noun.English.Length >= 5);
+        var cut = test.Context.Render<NounsSelector>();
+
+        cut.FindAll("input[type=search]")[0].Input(target.Kana);
+        Assert.Contains(VisibleKnownItems(cut), item => item.TextContent.Contains(target.Kana, StringComparison.Ordinal));
+
+        cut.FindAll("input[type=search]")[2].Input(target.English);
+        FindItem(ItemsInColumn(cut, 2), target).Click();
+
+        Assert.Contains(target.Id, test.Nouns.TrainingWordIds);
+        Assert.DoesNotContain(target.Id, test.Nouns.VocabWordIds);
+        Assert.DoesNotContain(target.Id, test.Nouns.RehearsingWordIds);
     }
 
     [Fact]
@@ -79,6 +98,7 @@ public sealed class SelectorComponentTests
 
     [Theory]
     [InlineData("verbs")]
+    [InlineData("nouns")]
     [InlineData("adjectives")]
     [InlineData("kanji-combined")]
     [InlineData("kanji-single")]
@@ -97,7 +117,8 @@ public sealed class SelectorComponentTests
         AssertCategory(test, catalog, target.Id, "training");
     }
 
-    private static IReadOnlyList<IElement> VisibleKnownItems(IRenderedComponent<WordsSelector> cut) =>
+    private static IReadOnlyList<IElement> VisibleKnownItems<TComponent>(IRenderedComponent<TComponent> cut)
+        where TComponent : Microsoft.AspNetCore.Components.IComponent =>
         ItemsInColumn(cut, 0);
 
     private static IReadOnlyList<IElement> ItemsInColumn<TComponent>(IRenderedComponent<TComponent> cut, int index)
@@ -112,6 +133,7 @@ public sealed class SelectorComponentTests
         return catalog switch
         {
             "verbs" => (test.Context.Render<VerbsSelector>(), test.Verbs.Words.First()),
+            "nouns" => (test.Context.Render<NounsSelector>(), test.Nouns.Words.First()),
             "adjectives" => (test.Context.Render<AdjectiveSelector>(), test.Adjectives.Words.First()),
             "kanji-combined" => (test.Context.Render<KanjiSelector>(), test.Kanji.Combined.Words.First()),
             "kanji-single" => RenderSingleKanjiSelector(test),
@@ -131,6 +153,7 @@ public sealed class SelectorComponentTests
         var (known, training) = catalog switch
         {
             "verbs" => (test.Verbs.VocabWordIds, test.Verbs.TrainingWordIds),
+            "nouns" => (test.Nouns.VocabWordIds, test.Nouns.TrainingWordIds),
             "adjectives" => (test.Adjectives.VocabWordIds, test.Adjectives.TrainingWordIds),
             "kanji-combined" => (test.Kanji.Combined.VocabWordIds, test.Kanji.Combined.TrainingWordIds),
             "kanji-single" => (test.Kanji.Single.VocabWordIds, test.Kanji.Single.TrainingWordIds),

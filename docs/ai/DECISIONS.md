@@ -194,3 +194,18 @@ The [protocol document](../local-sync-protocol.md) owns exact framing and limits
   or connectivity; the app does not alter firewall/router settings.
 - Existing snapshot validation, local preview/apply and recovery remain mandatory.
 - Both installations need this protocol version; earlier transfers are incompatible.
+
+## Versioned noun catalog split
+
+- **Status:** Accepted
+- **Date:** 2026-10-04
+
+Words and Nouns now have independent compact IDs. Keep a frozen old-to-new ID
+mapping in the repository assembly so installed progress can migrate without the
+old catalog files. Version 2 distinguishes already-migrated unified saves from
+version 1; this prevents repeated remapping after restart. The canonical legacy
+pair includes `Nouns/SavedData.json`, distinguishing it from older legacy saves.
+Nouns remain `Word` records because they use the existing vocabulary exercises.
+Sync requires schema version 2 on both devices to avoid interpreting reassigned
+IDs under an older catalog. The [architecture](ARCHITECTURE.md#data-maintenance)
+owns the migration and recovery details.

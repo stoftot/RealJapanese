@@ -3,6 +3,7 @@ using DataLoaders.Models;
 using Microsoft.AspNetCore.Components;
 using RealJapanese.Components.Pages.Adjectives;
 using RealJapanese.Components.Pages.Kanji;
+using RealJapanese.Components.Pages.Nouns;
 using RealJapanese.Components.Pages.Verbs;
 using RealJapanese.Components.Pages.Words;
 using Repositories.Bases;
@@ -19,6 +20,8 @@ public sealed class PracticeRouteComponentTests
         {
             ("words", 0, "/words/spelling?category={0}"),
             ("words", 1, "/words/flashcards?category={0}"),
+            ("nouns", 0, "/nouns/spelling?category={0}"),
+            ("nouns", 1, "/nouns/flashcards?category={0}"),
             ("verbs", 0, "/verbs/spelling?category={0}"),
             ("verbs", 1, "/verbs/categories?category={0}"),
             ("verbs", 2, "/verbs/ConjugationsAndForms"),
@@ -38,7 +41,7 @@ public sealed class PracticeRouteComponentTests
     {
         var destinations = new[]
         {
-            "word-spelling", "word-flashcards", "verb-spelling", "verb-categories",
+            "word-spelling", "word-flashcards", "noun-spelling", "noun-flashcards", "verb-spelling", "verb-categories",
             "adjective-spelling", "adjective-categories", "kanji-single", "kanji-combined"
         };
         foreach (var destination in destinations)
@@ -76,7 +79,7 @@ public sealed class PracticeRouteComponentTests
 
         var cut = RenderDestination(test, destination);
 
-        var questionSelector = destination == "word-flashcards" ? "p.flash-card-question" : "p.lead";
+        var questionSelector = destination.EndsWith("flashcards", StringComparison.Ordinal) ? "p.flash-card-question" : "p.lead";
         Assert.Equal(expectedQuestion, cut.Find(questionSelector).TextContent.Trim());
         Assert.NotEmpty(cut.FindAll("input[type=range]"));
     }
@@ -106,6 +109,7 @@ public sealed class PracticeRouteComponentTests
         return selector switch
         {
             "words" => test.Context.Render<WordsSelector>(),
+            "nouns" => test.Context.Render<NounsSelector>(),
             "verbs" => test.Context.Render<VerbsSelector>(),
             "adjectives" => test.Context.Render<AdjectiveSelector>(),
             "kanji-combined" => test.Context.Render<KanjiSelector>(),
@@ -117,6 +121,8 @@ public sealed class PracticeRouteComponentTests
     {
         "word-spelling" => test.Context.Render<WordSpelling>(),
         "word-flashcards" => test.Context.Render<WordFlashCards>(),
+        "noun-spelling" => test.Context.Render<NounSpelling>(),
+        "noun-flashcards" => test.Context.Render<NounFlashCards>(),
         "verb-spelling" => test.Context.Render<VerbSpelling>(),
         "verb-categories" => test.Context.Render<CategoriesVerbs>(),
         "adjective-spelling" => test.Context.Render<AdjectiveSpelling>(),
@@ -132,6 +138,11 @@ public sealed class PracticeRouteComponentTests
         {
             var selected = Seed(test.Words, category, word => destination == "word-flashcards" ? word.Kana : word.English);
             return destination == "word-flashcards" ? selected.Kana : selected.English;
+        }
+        if (destination.StartsWith("noun-", StringComparison.Ordinal))
+        {
+            var selected = Seed(test.Nouns, category, noun => destination == "noun-flashcards" ? noun.Kana : noun.English);
+            return destination == "noun-flashcards" ? selected.Kana : selected.English;
         }
         if (destination.StartsWith("verb-", StringComparison.Ordinal))
         {

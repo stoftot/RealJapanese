@@ -17,6 +17,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<Repositories.Genki.GenkiCatalog>();
         builder.Services.AddSingleton<Repositories.Genki.GenkiGenerator>();
         builder.Services.AddSingleton<WordData>();
+        builder.Services.AddSingleton<NounData>();
         builder.Services.AddSingleton<VerbData>();
         builder.Services.AddSingleton<AdjectiveData>();
         builder.Services.AddSingleton<KanjiData>();
