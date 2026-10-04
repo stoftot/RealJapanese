@@ -27,8 +27,7 @@ public sealed class AdjectiveLanguageOracleComponentTests
         Assert.Equal(string.Empty, cut.Find("input[placeholder]").GetAttribute("value"));
     }
 
-    [Fact(Explicit = true)]
-    [Trait("Category", "KnownDefect")]
+    [Fact]
     public void IPresentAffirmativeEndingRetainsItsInitialI()
     {
         using var test = new ComponentTestContext();

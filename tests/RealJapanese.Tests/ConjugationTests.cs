@@ -18,6 +18,7 @@ public sealed class VerbConjugationTests
         { "帰る", "かえる", "u", ["帰ります", "帰りません", "帰りました", "帰りませんでした"], ["かえります", "かえりません", "かえりました", "かえりませんでした"] },
         { "食べる", "たべる", "ru", ["食べます", "食べません", "食べました", "食べませんでした"], ["たべます", "たべません", "たべました", "たべませんでした"] },
         { "する", "する", "irregular", ["します", "しません", "しました", "しませんでした"], ["します", "しません", "しました", "しませんでした"] },
+        { "来る", "くる", "irregular", ["来ます", "来ません", "来ました", "来ませんでした"], ["きます", "きません", "きました", "きませんでした"] },
         { "くる", "くる", "irregular", ["きます", "きません", "きました", "きませんでした"], ["きます", "きません", "きました", "きませんでした"] }
     };
 
@@ -34,6 +35,7 @@ public sealed class VerbConjugationTests
         { "帰る", "かえる", "u", "帰って", "かえって" },
         { "食べる", "たべる", "ru", "食べて", "たべて" },
         { "する", "する", "irregular", "して", "して" },
+        { "来る", "くる", "irregular", "来て", "きて" },
         { "くる", "くる", "irregular", "きて", "きて" }
     };
 
@@ -67,8 +69,7 @@ public sealed class VerbConjugationTests
         Assert.Equal(kanaExpected, verb.Form(Conjugatabel.ToConjugate.Kana, Verb.VerbForm.TE));
     }
 
-    [Fact(Explicit = true)]
-    [Trait("Category", "KnownDefect")]
+    [Fact]
     public void TaForm_RuVerbUsesTaEnding()
     {
         var verb = CreateVerb("食べる", "たべる", "ru");
@@ -76,13 +77,61 @@ public sealed class VerbConjugationTests
         Assert.Equal("食べた", verb.Form(Conjugatabel.ToConjugate.Japanese, Verb.VerbForm.TA));
     }
 
-    [Fact(Explicit = true)]
-    [Trait("Category", "KnownDefect")]
+    [Fact]
     public void TeForm_IkuUsesExceptionalTteEnding()
     {
         var verb = CreateVerb("行く", "いく", "u");
 
         Assert.Equal("行って", verb.Form(Conjugatabel.ToConjugate.Japanese, Verb.VerbForm.TE));
+    }
+
+    [Theory]
+    [InlineData("買う", "かう", "u", "買った", "かった")]
+    [InlineData("待つ", "まつ", "u", "待った", "まった")]
+    [InlineData("帰る", "かえる", "u", "帰った", "かえった")]
+    [InlineData("読む", "よむ", "u", "読んだ", "よんだ")]
+    [InlineData("泳ぐ", "およぐ", "u", "泳いだ", "およいだ")]
+    [InlineData("話す", "はなす", "u", "話した", "はなした")]
+    [InlineData("食べる", "たべる", "ru", "食べた", "たべた")]
+    [InlineData("する", "する", "irregular", "した", "した")]
+    [InlineData("来る", "くる", "irregular", "来た", "きた")]
+    [InlineData("行く", "いく", "u", "行った", "いった")]
+    public void TaForm_MatchesIndependentLiteralJapaneseAndKana(
+        string japanese, string kana, string type, string expected, string kanaExpected)
+    {
+        var verb = CreateVerb(japanese, kana, type);
+
+        Assert.Equal(expected, verb.Form(Conjugatabel.ToConjugate.Japanese, Verb.VerbForm.TA));
+        Assert.Equal(kanaExpected, verb.Form(Conjugatabel.ToConjugate.Kana, Verb.VerbForm.TA));
+    }
+
+    [Theory]
+    [InlineData("買う", "かう", "u")]
+    [InlineData("食べる", "たべる", "ru")]
+    [InlineData("勉強する", "べんきょうする", "irregular")]
+    [InlineData("来る", "くる", "irregular")]
+    public void ShortPresentAffirmative_RetainsDictionaryForm(string japanese, string kana, string type)
+    {
+        var verb = CreateVerb(japanese, kana, type);
+
+        Assert.Equal(japanese, verb.ShortForm(Conjugatabel.ToConjugate.Japanese,
+            Conjugatabel.ConjugationType.PresentAffirmative));
+        Assert.Equal(kana, verb.ShortForm(Conjugatabel.ToConjugate.Kana,
+            Conjugatabel.ConjugationType.PresentAffirmative));
+    }
+
+    [Theory]
+    [InlineData("ある", "ある", "ない", "なかった")]
+    [InlineData("来る", "くる", "来ない", "来なかった")]
+    public void ShortNegativeForms_HandleExistenceAndKanjiKuru(string japanese, string kana,
+        string expectedNegative, string expectedPastNegative)
+    {
+        var verb = CreateVerb(japanese, kana, japanese == "ある" ? "u" : "irregular");
+
+        Assert.Equal(expectedNegative, verb.ShortForm(Conjugatabel.ToConjugate.Japanese,
+            Conjugatabel.ConjugationType.PresentNegative));
+        Assert.Equal(expectedPastNegative, verb.ShortForm(Conjugatabel.ToConjugate.Japanese,
+            Conjugatabel.ConjugationType.PastNegative));
     }
 
     private static string[] ConjugateAll(Verb verb, Conjugatabel.ToConjugate target) =>
@@ -142,9 +191,7 @@ public sealed class AdjectiveConjugationTests
         Assert.Equal(kanaExpected, adjective.Conjugate(Conjugatabel.ToConjugate.Kana, conjugation));
     }
 
-    [Fact(Explicit = true)]
-    [Trait("Category", "KnownDefect")]
-    // The final い is currently removed even for the affirmative present, producing 高です.
+    [Fact]
     public void PresentAffirmative_IAdjectiveRetainsFinalI()
     {
         var adjective = new Adjective
@@ -158,5 +205,33 @@ public sealed class AdjectiveConjugationTests
         Assert.Equal("高いです",
             adjective.Conjugate(Conjugatabel.ToConjugate.Japanese,
                 Conjugatabel.ConjugationType.PresentAffirmative));
+    }
+
+    [Theory]
+    [InlineData("高い", "たかい", "i", "高い", "たかい")]
+    [InlineData("静か", "しずか", "na", "静かだ", "しずかだ")]
+    [InlineData("いい", "いい", "irregular", "いい", "いい")]
+    public void ShortPresentAffirmative_UsesDictionaryFormForIAndIrregularAndDaForNa(string japanese, string kana, string type,
+        string expectedJapanese, string expectedKana)
+    {
+        var adjective = new Adjective { Japanese = japanese, Kana = kana, English = "test", Type = type };
+
+        Assert.Equal(expectedJapanese, adjective.ShortForm(Conjugatabel.ToConjugate.Japanese,
+            Conjugatabel.ConjugationType.PresentAffirmative));
+        Assert.Equal(expectedKana, adjective.ShortForm(Conjugatabel.ToConjugate.Kana,
+            Conjugatabel.ConjugationType.PresentAffirmative));
+    }
+
+    [Theory]
+    [InlineData("高い", "たかい", "i", "高くて", "たかくて")]
+    [InlineData("静か", "しずか", "na", "静かで", "しずかで")]
+    [InlineData("いい", "いい", "irregular", "よくて", "よくて")]
+    public void TeForm_MatchesIndependentLiteralJapaneseAndKana(string japanese, string kana, string type,
+        string expectedJapanese, string expectedKana)
+    {
+        var adjective = new Adjective { Japanese = japanese, Kana = kana, English = "test", Type = type };
+
+        Assert.Equal(expectedJapanese, adjective.TeForm(Conjugatabel.ToConjugate.Japanese));
+        Assert.Equal(expectedKana, adjective.TeForm(Conjugatabel.ToConjugate.Kana));
     }
 }

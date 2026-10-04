@@ -38,7 +38,9 @@ public record Adjective : Conjugatabel
         new (){ Japanese = "いい", Kana = "いい", Type = "irregular", English = "NAN" }
     }.AsReadOnly();
     
-    private string StemI(string str) => str[..^1];
+    private string StemI(string str) => str.EndsWith("い", StringComparison.Ordinal)
+        ? str[..^1]
+        : throw new ArgumentException($"An i-adjective must end in い: {str}", nameof(str));
 
     private string StemIrregular(string str, ConjugationType conjugationType) =>
         conjugationType == ConjugationType.PresentAffirmative ? str : str[..^2] + "よ";
@@ -53,7 +55,7 @@ public record Adjective : Conjugatabel
 
         return CateGoryAsAdjectiveType() switch
         {
-            AdjectiveType.I => StemI(str),
+            AdjectiveType.I => conjugationType == ConjugationType.PresentAffirmative ? str : StemI(str),
             AdjectiveType.NA => str,
             AdjectiveType.IRREGULAR => StemIrregular(str, conjugationType),
         };
@@ -104,18 +106,71 @@ public record Adjective : Conjugatabel
 
         return CateGoryAsAdjectiveType() switch
         {
-            AdjectiveType.I => str[..^1] + "くて",
-            AdjectiveType.NA => str[..^2] + "よくて",
-            AdjectiveType.IRREGULAR => str + "で",
+            AdjectiveType.I => StemI(str) + "くて",
+            AdjectiveType.NA => str.EndsWith("な", StringComparison.Ordinal) ? str[..^1] + "で" : str + "で",
+            AdjectiveType.IRREGULAR => IrregularTeForm(str),
         };
     }
+
+    private static string IrregularTeForm(string str) =>
+        str.EndsWith("いい", StringComparison.Ordinal) ? str[..^2] + "よくて" : throw new ArgumentException(
+            $"Unsupported irregular adjective: {str}", nameof(str));
+
+    /// <summary>Returns the form used directly before a noun.</summary>
+    public string AttributiveForm(ToConjugate toConjugate)
+    {
+        var str = toConjugate switch
+        {
+            ToConjugate.Japanese => Japanese,
+            ToConjugate.Kana => Kana,
+            _ => throw new ArgumentOutOfRangeException(nameof(toConjugate), toConjugate, null)
+        };
+        return CateGoryAsAdjectiveType() == AdjectiveType.NA ? RemoveTrailingNa(str) + "な" : str;
+    }
+
+    /// <summary>Returns the adverbial form used to modify an action or description.</summary>
+    public string AdverbialForm(ToConjugate toConjugate)
+    {
+        var str = toConjugate switch
+        {
+            ToConjugate.Japanese => Japanese,
+            ToConjugate.Kana => Kana,
+            _ => throw new ArgumentOutOfRangeException(nameof(toConjugate), toConjugate, null)
+        };
+        return CateGoryAsAdjectiveType() == AdjectiveType.NA
+            ? RemoveTrailingNa(str) + "に"
+            : AdjectiveStem(str) + "く";
+    }
+
+    /// <summary>Returns the adjective stem used with constructions such as すぎる.</summary>
+    public string AdjectiveStem(ToConjugate toConjugate)
+    {
+        var str = toConjugate switch
+        {
+            ToConjugate.Japanese => Japanese,
+            ToConjugate.Kana => Kana,
+            _ => throw new ArgumentOutOfRangeException(nameof(toConjugate), toConjugate, null)
+        };
+        return AdjectiveStem(str);
+    }
+
+    private string AdjectiveStem(string str) => CateGoryAsAdjectiveType() switch
+    {
+        AdjectiveType.I => StemI(str),
+        AdjectiveType.NA => RemoveTrailingNa(str),
+        AdjectiveType.IRREGULAR when str.EndsWith("いい", StringComparison.Ordinal) => str[..^2] + "よ",
+        _ => throw new ArgumentException($"Unsupported adjective spelling: {str}", nameof(str))
+    };
+
+    private static string RemoveTrailingNa(string str) =>
+        str.EndsWith("な", StringComparison.Ordinal) ? str[..^1] : str;
 
     #endregion
 
     #region Short forms
     private const string Short_I_PresentNegativeEnding = "くない";
     private const string Short_I_PastAffirmativeEnding = "かった";
-    private const string Short_I_PastNegativeEnding = "なかった";
+    private const string Short_I_PastNegativeEnding = "くなかった";
 
     private const string Short_NA_PresentAffirmativeEnding = "だ";
     private const string Short_NA_PresentNegativeEnding = "じゃない";

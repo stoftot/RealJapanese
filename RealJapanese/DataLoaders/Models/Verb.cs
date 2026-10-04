@@ -91,8 +91,9 @@ public record Verb : Conjugatabel
 
     private string StemIrregular(string str)
     {
-        var (firstPart, lastTwoChars) = str.LastTwoChars();
-        return firstPart + irregularConjugations[lastTwoChars];
+        var suffix = str.EndsWith("来る", StringComparison.Ordinal) ? "来る" : str[^2..];
+        var firstPart = str[..^suffix.Length];
+        return firstPart + (suffix == "来る" ? "来" : irregularConjugations[suffix]);
     }
 
     private string Stem(string conjugate)
@@ -144,6 +145,10 @@ public record Verb : Conjugatabel
             ToConjugate.Kana => Kana
         };
 
+        if (Type == "u" && Japanese == "行く")
+            return toConjugate == ToConjugate.Japanese ? (form == VerbForm.TE ? "行って" : "行った")
+                : (form == VerbForm.TE ? "いって" : "いった");
+
         switch (CategoryAsVerbType())
         {
             case VerbType.U:
@@ -170,25 +175,26 @@ public record Verb : Conjugatabel
         kana switch
         {
             "う" or "つ" or "る"
-                => "っ" + (form.Equals(VerbForm.TE) ? "て" : "な"),
+                => "っ" + (form.Equals(VerbForm.TE) ? "て" : "た"),
             "む" or "ぶ" or "ぬ"
                 => "ん" + (form.Equals(VerbForm.TE) ? "で" : "だ"),
             "く"
-                => "い" + (form.Equals(VerbForm.TE) ? "て" : "な"),
+                => "い" + (form.Equals(VerbForm.TE) ? "て" : "た"),
             "ぐ"
                 => "い" + (form.Equals(VerbForm.TE) ? "で" : "だ"),
             "す"
-                => "し" + (form.Equals(VerbForm.TE) ? "て" : "な"),
+                => "し" + (form.Equals(VerbForm.TE) ? "て" : "た"),
             _ => throw new ArgumentOutOfRangeException(nameof(kana), kana, null)
         };
 
-    private static string ruForm(VerbForm form) => form == VerbForm.TE ? "て" : "な";
+    private static string ruForm(VerbForm form) => form == VerbForm.TE ? "て" : "た";
 
     private static string irregularForm(string kana, VerbForm form) =>
         kana switch
         {
-            "する" => "し" + (form.Equals(VerbForm.TE) ? "て" : "な"),
-            "くる" => "き" + (form.Equals(VerbForm.TE) ? "て" : "な")
+            "する" => "し" + (form.Equals(VerbForm.TE) ? "て" : "た"),
+            "くる" => "き" + (form.Equals(VerbForm.TE) ? "て" : "た"),
+            "来る" => "来" + (form.Equals(VerbForm.TE) ? "て" : "た")
         };
 
     #endregion
@@ -249,8 +255,9 @@ public record Verb : Conjugatabel
 
     private string ShortStemIrregular(string str)
     {
-        var (firstPart, lastTwoChars) = str.LastTwoChars();
-        return firstPart + ShortIrregularConjugations[lastTwoChars];
+        var suffix = str.EndsWith("来る", StringComparison.Ordinal) ? "来る" : str[^2..];
+        var firstPart = str[..^suffix.Length];
+        return firstPart + (suffix == "来る" ? "来" : ShortIrregularConjugations[suffix]);
     }
     
     private string ShortStem(string conjugate)
@@ -265,6 +272,9 @@ public record Verb : Conjugatabel
 
     private string ShortFormPastAffirmative(ToConjugate toConjugate)
     {
+        if (Type == "u" && Japanese == "行く")
+            return toConjugate == ToConjugate.Japanese ? "行った" : "いった";
+
         var teForm = Form(toConjugate, VerbForm.TE);
         var(firstPart, lastChar) = teForm.LastChar();
         return lastChar.Equals("て") ? firstPart + "た" : firstPart + "だ";
@@ -280,11 +290,32 @@ public record Verb : Conjugatabel
         
         return conjugationType switch
         {
-            ConjugationType.PresentAffirmative => Stem(str),
+            ConjugationType.PresentAffirmative => str,
             ConjugationType.PresentNegative => (str == "ある" ? "" : ShortStem(str)) + ShortPresentNegativeEnding,
             ConjugationType.PastAffirmative => ShortFormPastAffirmative(toConjugate),
-            ConjugationType.PastNegative => ShortStem(str) + ShortPastNegativeEnding,
+            ConjugationType.PastNegative => (str == "ある" ? "" : ShortStem(str)) + ShortPastNegativeEnding,
         };
     }
+
+    /// <summary>Returns the verb's ます-stem, using its regular or irregular conjugation.</summary>
+    public string MasuStem(ToConjugate toConjugate) =>
+        RemoveEnding(Conjugate(toConjugate, ConjugationType.PresentAffirmative), PresentAffirmativeEnding);
+
+    /// <summary>Returns the short negative stem used before endings such as なければ.</summary>
+    public string NegativeStem(ToConjugate toConjugate) =>
+        RemoveEnding(ShortForm(toConjugate, ConjugationType.PresentNegative), ShortPresentNegativeEnding);
+
+    /// <summary>Conjugates the verb's たい form, which inflects as an i-adjective.</summary>
+    public string DesireForm(ToConjugate toConjugate, ConjugationType conjugationType, bool polite = false)
+    {
+        var stem = MasuStem(toConjugate);
+        var form = stem + "たい";
+        var adjective = new Adjective { Japanese = form, Kana = form, English = English, Type = "i" };
+        return polite ? adjective.Conjugate(toConjugate, conjugationType) : adjective.ShortForm(toConjugate, conjugationType);
+    }
+
+    private static string RemoveEnding(string value, string ending) =>
+        value.EndsWith(ending, StringComparison.Ordinal) ? value[..^ending.Length] :
+        throw new InvalidOperationException($"Expected '{value}' to end in '{ending}'.");
     #endregion
 }
