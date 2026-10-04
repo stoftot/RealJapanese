@@ -9,14 +9,9 @@
 .lesson-number { color: #235ca5; font-weight: 650; }
 .lesson-nav { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.5rem; }
 .practice-settings { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem; background: #eef4fa; border-radius: .75rem; padding: 1rem; margin: 1.5rem 0; }
-.practice-settings select { width: 5rem; }
-.practice-settings span { flex-basis: 100%; font-size: .9rem; }
 .grammar-point { border: 1px solid #d4dde8; border-radius: .65rem; margin: 1rem 0; overflow: hidden; scroll-margin-top: 1rem; }
 .grammar-point > summary { font-weight: 650; font-size: 1.12rem; background: #f5f7fa; padding: 1rem; cursor: pointer; }
 .recap-body { padding: 1rem 1.25rem; }
-.grammar-example { border-left: 3px solid #92afd2; padding: .5rem 1rem; margin: 1rem 0; }
-.grammar-example p { margin: .25rem 0; }
-.grammar-example p[lang=ja]:first-child { font-size: 1.25rem; }
 .prerequisite { display: inline-block; margin: 0 .65rem .25rem 0; }
 .sentence-practice { border: 1px solid #a9bfd9; padding: 1.25rem; border-radius: .8rem; margin: 1.5rem 0; }
 .sentence-practice h3 { font-size: 1.3rem; }

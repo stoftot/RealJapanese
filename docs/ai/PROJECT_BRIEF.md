@@ -19,12 +19,15 @@ or owner-approved roadmap was not found.
 - Practice spelling and flashcards, verb/adjective categories and conjugation,
   single/combined kanji meanings, and generated number questions.
 - Reveal answers and repeat difficult questions during a practice session.
-- Follow GENKI I third-edition lessons with original grammar recaps and generated
-  sentence-production exercises, vocabulary help and model-based self-review.
+- Follow GENKI I third-edition lessons with concise grammar recaps and stored
+  sentence-production questions filtered by known vocabulary, with deterministic
+  accepted-answer comparison and self-review.
 - Use the Android application offline without running the ASP.NET host.
 - Transfer progress directly between two open installations on the same trusted
   Wi-Fi network or personal hotspot, with an explicit merge preview.
 - Maintain datasets with separate duplicate-cleanup and AI-assisted kanji utilities.
+- Run separate local-model workflows to annotate existing vocabulary and generate
+  Genki question banks offline; full generation and publication are explicit actions.
 
 ## Scope and constraints
 
@@ -37,9 +40,11 @@ or owner-approved roadmap was not found.
 - The Android application supports API level 24 and later and uses package ID
   `com.realjapanese.mobile`.
 - The canonical catalog remains under `RealJapanese/Data/`. The Android package
-  embeds the six study catalogs and copies them to app-private storage.
-- The extraction utility separately needs external AI-library projects and a local
-  model/server. It is not part of either application runtime.
+  embeds the six study catalogs plus the published Genki question bank and copies
+  them to app-private storage.
+- Extraction and Genki inference separately need external AiLibrary projects and a
+  local model/server. Neither application runtime depends on them. Genki tools also
+  build without inference support for deterministic inspection and publication.
 - There is no CI pipeline. The local xUnit suite covers pure logic, file/process/
   network integration, rendered Razor components and real Chromium behavior; it
   does not automate Android device behavior. See the [test guide](../testing.md).

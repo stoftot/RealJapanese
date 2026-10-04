@@ -1,6 +1,6 @@
+using DataLoaders.Models;
 using DataLoaders.Models.Genki;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Repositories.Genki;
 
 namespace RealJapanese.Components.Pages.Genki;
@@ -8,29 +8,36 @@ namespace RealJapanese.Components.Pages.Genki;
 public class GenkiBase : ComponentBase
 {
     [Inject] protected GenkiCatalog Catalog { get; set; } = null!;
-    [Inject] protected GenkiGenerator Generator { get; set; } = null!;
+    [Inject] protected GenkiPracticeService Practice { get; set; } = null!;
+    [Inject] protected GenkiVocabulary Vocabulary { get; set; } = null!;
+
     [Parameter] public int? LessonNumber { get; set; }
     protected GenkiLesson? Lesson { get; private set; }
     protected GenkiExercise? Current { get; private set; }
-    protected GenkiGrammarPoint? CurrentPoint => Lesson?.GrammarPoints.FirstOrDefault(x => x.Id == Current?.GrammarId);
+    protected GenkiGrammarPoint? CurrentPoint => Current is null ? null : Catalog.Point(Current.GrammarId);
     protected string? SelectedPoint { get; private set; }
-    protected int VocabularyLesson { get; set; }
     protected string? Input { get; private set; }
     protected bool Revealed { get; private set; }
     protected bool Finished { get; private set; }
     protected string Feedback { get; private set; } = "";
-    protected string? Error { get; private set; }
+    protected string? EmptyMessage { get; private set; }
     protected int Reviewed { get; private set; }
+    protected bool HasPublishedQuestions => Practice.HasPublishedQuestions;
     private readonly Queue<GenkiExercise> pending = new();
     protected ElementReference PracticeHeading;
     private bool focusPractice;
-    protected string ProgressText => $"{Reviewed} reviewed · {pending.Count + 1} remaining";
+
+    protected string ProgressText => $"{Reviewed} reviewed · {pending.Count + (Current is null ? 0 : 1)} remaining";
     protected string VisibleAnswer => Current is null ? "" : string.Join(" / ", Current.ModelAnswers);
+    protected IReadOnlyList<Word> CurrentWords => Current is null
+        ? []
+        : Current.DisplayAnswers.SelectMany(answer => answer.RequiredWords)
+            .Distinct().Select(reference => Vocabulary.Resolve(reference).Word).ToArray();
 
     protected override void OnParametersSet()
     {
         Lesson = LessonNumber.HasValue ? Catalog.FindLesson(LessonNumber.Value) : null;
-        VocabularyLesson = Lesson?.Number ?? 1;
+        SelectedPoint = null;
         Stop();
     }
 
@@ -38,7 +45,6 @@ public class GenkiBase : ComponentBase
     {
         if (!focusPractice || Current is null) return;
         focusPractice = false;
-        // Starting a point near the bottom of a long recap must bring the new prompt into view.
         await PracticeHeading.FocusAsync();
     }
 
@@ -47,29 +53,27 @@ public class GenkiBase : ComponentBase
         if (Lesson is null) return;
         Stop();
         SelectedPoint = pointId;
-        try
+        if (!Practice.HasPublishedQuestions)
         {
-            // Each pattern gets a turn; round-robin across points avoids drilling one form repeatedly.
-            var sets = Lesson.GrammarPoints.Where(p => pointId is null || p.Id == pointId)
-                .Select(p => (Point: p, Schemas: p.Schemas.OrderBy(_ => Random.Shared.Next()).ToArray())).ToArray();
-            for (var index = 0; index < sets.Max(x => x.Schemas.Length); index++)
-                foreach (var set in sets.Where(x => x.Schemas.Length > index))
-                    pending.Enqueue(Generator.Generate(Lesson.Number, set.Point.Id, set.Schemas[index].Id, VocabularyLesson));
-            Advance();
-            focusPractice = Current is not null;
+            EmptyMessage = "The offline question bank has no published questions yet.";
+            return;
         }
-        catch (InvalidOperationException)
+
+        foreach (var exercise in Practice.CreateRound(Lesson.Number, pointId)) pending.Enqueue(exercise);
+        if (pending.Count == 0)
         {
-            pending.Clear();
-            Current = null;
-            Error = "This practice pattern has no compatible vocabulary at this level. Choose another grammar point.";
+            EmptyMessage = "No published questions match this grammar and the words you have marked known.";
+            return;
         }
+
+        Advance();
+        focusPractice = Current is not null;
     }
 
     protected void Stop()
     {
         pending.Clear(); Current = null; Finished = false; Revealed = false;
-        Input = ""; Feedback = ""; Error = null; Reviewed = 0; focusPractice = false;
+        Input = ""; Feedback = ""; EmptyMessage = null; Reviewed = 0; focusPractice = false;
     }
 
     protected void SetInput(string? value)
@@ -84,7 +88,7 @@ public class GenkiBase : ComponentBase
         Revealed = true;
         Feedback = Current.MatchesModel(Input ?? "")
             ? "Your sentence matches a supplied model. Check that you understand the form before continuing."
-            : "Compare your sentence with the models. A different sentence may also be valid; check the grammar, meaning and register.";
+            : "A different sentence may also be valid. Compare the meaning, grammar and register with the approved answers.";
     }
 
     protected void Next()
@@ -104,10 +108,10 @@ public class GenkiBase : ComponentBase
     private void Advance()
     {
         Current = pending.TryDequeue(out var exercise) ? exercise : null;
-        Finished = Current is null; Revealed = false; Input = ""; Feedback = "";
+        Finished = Current is null && Reviewed > 0;
+        Revealed = false; Input = ""; Feedback = "";
     }
 
-    protected string PrerequisiteTitle(string id) => Catalog.Lessons.SelectMany(x => x.GrammarPoints)
-        .First(p => p.Id == id).Title;
-    protected string PrerequisiteLink(string id) => $"genki/{Catalog.Lessons.First(l => l.GrammarPoints.Any(p => p.Id == id)).Number}#{id}";
+    protected string PrerequisiteTitle(string id) => Catalog.Point(id).Title;
+    protected string PrerequisiteLink(string id) => $"genki/{Catalog.LessonNumber(id)}#{id}";
 }

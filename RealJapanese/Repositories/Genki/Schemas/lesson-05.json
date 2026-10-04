@@ -1,0 +1,1321 @@
+[
+  {
+    "id": "g05-01-affirmative",
+    "grammarPointId": "g05-01",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "nonpast",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01"
+    ],
+    "segments": [
+      {
+        "kind": "slot",
+        "name": "topic",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "は"
+      },
+      {
+        "kind": "slot",
+        "name": "quality",
+        "form": "polite"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "topic": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "quality": {
+        "wordTypes": [
+          "adjective"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "The quality must be a natural property of the selected topic in its stated sense."
+    ]
+  },
+  {
+    "id": "g05-01-negative",
+    "grammarPointId": "g05-01",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "nonpast",
+    "polarity": "negative",
+    "prerequisiteGrammarIds": [
+      "g01-01"
+    ],
+    "segments": [
+      {
+        "kind": "slot",
+        "name": "topic",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "は"
+      },
+      {
+        "kind": "slot",
+        "name": "quality",
+        "form": "politeNegative"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "topic": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "quality": {
+        "wordTypes": [
+          "adjective"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "The quality must be a natural property of the selected topic in its stated sense."
+    ]
+  },
+  {
+    "id": "g05-02-affirmative",
+    "grammarPointId": "g05-02",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "past",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g04-03",
+      "g05-01"
+    ],
+    "segments": [
+      {
+        "kind": "slot",
+        "name": "topic",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "は"
+      },
+      {
+        "kind": "slot",
+        "name": "quality",
+        "form": "politePast"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "topic": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "quality": {
+        "wordTypes": [
+          "adjective"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "The quality must be a natural property of the selected topic in its stated sense."
+    ]
+  },
+  {
+    "id": "g05-02-negative",
+    "grammarPointId": "g05-02",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "past",
+    "polarity": "negative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g04-03",
+      "g05-01"
+    ],
+    "segments": [
+      {
+        "kind": "slot",
+        "name": "topic",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "は"
+      },
+      {
+        "kind": "slot",
+        "name": "quality",
+        "form": "politePastNegative"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "topic": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "quality": {
+        "wordTypes": [
+          "adjective"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "The quality must be a natural property of the selected topic in its stated sense."
+    ]
+  },
+  {
+    "id": "g05-01-degree",
+    "grammarPointId": "g05-01",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "nonpast",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01"
+    ],
+    "segments": [
+      {
+        "kind": "slot",
+        "name": "topic",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "は"
+      },
+      {
+        "kind": "fixed",
+        "word": {
+          "wordType": "word",
+          "id": "81"
+        },
+        "form": "base"
+      },
+      {
+        "kind": "slot",
+        "name": "quality",
+        "form": "polite"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "topic": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "quality": {
+        "wordTypes": [
+          "adjective"
+        ],
+        "tags": {
+          "allOf": [
+            "gradable-quality"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure."
+    ]
+  },
+  {
+    "id": "g05-03-attributive",
+    "grammarPointId": "g05-03",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "nonpast",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g05-01"
+    ],
+    "segments": [
+      {
+        "kind": "optional",
+        "children": [
+          {
+            "kind": "slot",
+            "name": "topic",
+            "form": "base"
+          },
+          {
+            "kind": "literal",
+            "text": "は"
+          }
+        ]
+      },
+      {
+        "kind": "slot",
+        "name": "quality",
+        "form": "attributive"
+      },
+      {
+        "kind": "slot",
+        "name": "head",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "です"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "topic": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "quality": {
+        "wordTypes": [
+          "adjective"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "head": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "The adjective must naturally describe the head; な is provided by the adjective form for na-adjectives."
+    ]
+  },
+  {
+    "id": "g05-04-preference",
+    "grammarPointId": "g05-04",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "nonpast",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g04-01",
+      "g05-01",
+      "g05-03"
+    ],
+    "segments": [
+      {
+        "kind": "optional",
+        "children": [
+          {
+            "kind": "slot",
+            "name": "experiencer",
+            "form": "base"
+          },
+          {
+            "kind": "literal",
+            "text": "は"
+          }
+        ]
+      },
+      {
+        "kind": "slot",
+        "name": "thing",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "が"
+      },
+      {
+        "kind": "slot",
+        "name": "preference",
+        "form": "polite"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "experiencer": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [
+            "person"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "thing": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "preference": {
+        "wordTypes": [
+          "adjective"
+        ],
+        "tags": {
+          "allOf": [
+            "preference-quality"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure."
+    ]
+  },
+  {
+    "id": "g05-04-negative",
+    "grammarPointId": "g05-04",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "nonpast",
+    "polarity": "negative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g04-01",
+      "g05-01",
+      "g05-03"
+    ],
+    "segments": [
+      {
+        "kind": "optional",
+        "children": [
+          {
+            "kind": "slot",
+            "name": "experiencer",
+            "form": "base"
+          },
+          {
+            "kind": "literal",
+            "text": "は"
+          }
+        ]
+      },
+      {
+        "kind": "slot",
+        "name": "thing",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "が"
+      },
+      {
+        "kind": "slot",
+        "name": "preference",
+        "form": "politeNegative"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "experiencer": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [
+            "person"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "thing": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "preference": {
+        "wordTypes": [
+          "adjective"
+        ],
+        "tags": {
+          "allOf": [
+            "preference-quality"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure."
+    ]
+  },
+  {
+    "id": "g05-04-preferred-noun",
+    "grammarPointId": "g05-04",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "nonpast",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g05-01",
+      "g05-03"
+    ],
+    "segments": [
+      {
+        "kind": "optional",
+        "children": [
+          {
+            "kind": "slot",
+            "name": "topic",
+            "form": "base"
+          },
+          {
+            "kind": "literal",
+            "text": "は"
+          }
+        ]
+      },
+      {
+        "kind": "slot",
+        "name": "preference",
+        "form": "attributive"
+      },
+      {
+        "kind": "slot",
+        "name": "head",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "です"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "topic": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "preference": {
+        "wordTypes": [
+          "adjective"
+        ],
+        "tags": {
+          "allOf": [
+            "preference-quality"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "head": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "Establish whose preference is meant when omitted."
+    ]
+  },
+  {
+    "id": "g05-05-suggestion",
+    "grammarPointId": "g05-05",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "nonpast",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g02-09",
+      "g03-01",
+      "g03-03"
+    ],
+    "segments": [
+      {
+        "kind": "optional",
+        "children": [
+          {
+            "kind": "slot",
+            "name": "actor",
+            "form": "base"
+          },
+          {
+            "kind": "literal",
+            "text": "は"
+          }
+        ]
+      },
+      {
+        "kind": "slot",
+        "name": "object",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "を"
+      },
+      {
+        "kind": "slot",
+        "name": "action",
+        "form": "stem"
+      },
+      {
+        "kind": "literal",
+        "text": "ましょう"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "actor": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [
+            "person"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "action": {
+        "wordTypes": [
+          "verb"
+        ],
+        "tags": {
+          "allOf": [
+            "voluntary-action",
+            "object-taking-action"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "object": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [
+      {
+        "kind": "compatible-tags",
+        "left": "action",
+        "right": "object",
+        "forbiddenPairs": [
+          {
+            "leftTag": "food-consumption",
+            "rightTag": "beverage"
+          },
+          {
+            "leftTag": "drink-consumption",
+            "rightTag": "food"
+          },
+          {
+            "leftTag": "reading-action",
+            "rightTag": "beverage"
+          },
+          {
+            "leftTag": "reading-action",
+            "rightTag": "food"
+          }
+        ]
+      }
+    ],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "The speaker proposes a voluntary activity including the listener."
+    ]
+  },
+  {
+    "id": "g05-05-suggestion-objectless",
+    "grammarPointId": "g05-05",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "nonpast",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g03-01",
+      "g03-03"
+    ],
+    "segments": [
+      {
+        "kind": "optional",
+        "children": [
+          {
+            "kind": "slot",
+            "name": "actor",
+            "form": "base"
+          },
+          {
+            "kind": "literal",
+            "text": "は"
+          }
+        ]
+      },
+      {
+        "kind": "slot",
+        "name": "action",
+        "form": "stem"
+      },
+      {
+        "kind": "literal",
+        "text": "ましょう"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "actor": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [
+            "person"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "action": {
+        "wordTypes": [
+          "verb"
+        ],
+        "tags": {
+          "allOf": [
+            "voluntary-action",
+            "objectless-action"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "The speaker proposes a voluntary activity including the listener."
+    ]
+  },
+  {
+    "id": "g05-05-suggestion-question",
+    "grammarPointId": "g05-05",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "nonpast",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g01-02",
+      "g02-09",
+      "g03-01",
+      "g03-03"
+    ],
+    "segments": [
+      {
+        "kind": "optional",
+        "children": [
+          {
+            "kind": "slot",
+            "name": "actor",
+            "form": "base"
+          },
+          {
+            "kind": "literal",
+            "text": "は"
+          }
+        ]
+      },
+      {
+        "kind": "slot",
+        "name": "object",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "を"
+      },
+      {
+        "kind": "slot",
+        "name": "action",
+        "form": "stem"
+      },
+      {
+        "kind": "literal",
+        "text": "ましょう"
+      },
+      {
+        "kind": "literal",
+        "text": "か"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "actor": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [
+            "person"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "action": {
+        "wordTypes": [
+          "verb"
+        ],
+        "tags": {
+          "allOf": [
+            "voluntary-action",
+            "object-taking-action"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "object": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [
+      {
+        "kind": "compatible-tags",
+        "left": "action",
+        "right": "object",
+        "forbiddenPairs": [
+          {
+            "leftTag": "food-consumption",
+            "rightTag": "beverage"
+          },
+          {
+            "leftTag": "drink-consumption",
+            "rightTag": "food"
+          },
+          {
+            "leftTag": "reading-action",
+            "rightTag": "beverage"
+          },
+          {
+            "leftTag": "reading-action",
+            "rightTag": "food"
+          }
+        ]
+      }
+    ],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "The speaker proposes a voluntary activity including the listener."
+    ]
+  },
+  {
+    "id": "g05-05-suggestion-question-objectless",
+    "grammarPointId": "g05-05",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "nonpast",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g01-02",
+      "g03-01",
+      "g03-03"
+    ],
+    "segments": [
+      {
+        "kind": "optional",
+        "children": [
+          {
+            "kind": "slot",
+            "name": "actor",
+            "form": "base"
+          },
+          {
+            "kind": "literal",
+            "text": "は"
+          }
+        ]
+      },
+      {
+        "kind": "slot",
+        "name": "action",
+        "form": "stem"
+      },
+      {
+        "kind": "literal",
+        "text": "ましょう"
+      },
+      {
+        "kind": "literal",
+        "text": "か"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "actor": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [
+            "person"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "action": {
+        "wordTypes": [
+          "verb"
+        ],
+        "tags": {
+          "allOf": [
+            "voluntary-action",
+            "objectless-action"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "The speaker proposes a voluntary activity including the listener."
+    ]
+  },
+  {
+    "id": "g05-06-quantity",
+    "grammarPointId": "g05-06",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "past",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g02-09",
+      "g03-03",
+      "g04-04"
+    ],
+    "segments": [
+      {
+        "kind": "slot",
+        "name": "item",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "を"
+      },
+      {
+        "kind": "slot",
+        "name": "number",
+        "form": "base"
+      },
+      {
+        "kind": "fixed",
+        "word": {
+          "wordType": "word",
+          "id": "83"
+        },
+        "form": "counterSuffix"
+      },
+      {
+        "kind": "slot",
+        "name": "action",
+        "form": "politePast"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "item": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [
+            "flat-object"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "action": {
+        "wordTypes": [
+          "verb"
+        ],
+        "tags": {
+          "allOf": [
+            "object-taking-action"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "number": {
+        "wordTypes": [
+          "word",
+          "noun"
+        ],
+        "tags": {
+          "allOf": [
+            "cardinal-number"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [
+      {
+        "kind": "compatible-tags",
+        "left": "action",
+        "right": "item",
+        "forbiddenPairs": [
+          {
+            "leftTag": "food-consumption",
+            "rightTag": "beverage"
+          },
+          {
+            "leftTag": "drink-consumption",
+            "rightTag": "food"
+          },
+          {
+            "leftTag": "reading-action",
+            "rightTag": "beverage"
+          },
+          {
+            "leftTag": "reading-action",
+            "rightTag": "food"
+          }
+        ]
+      }
+    ],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "枚 must count thin flat objects; verify the combined counter reading."
+    ]
+  },
+  {
+    "id": "g05-06-how-many",
+    "grammarPointId": "g05-06",
+    "exerciseType": "translation",
+    "register": "polite",
+    "tense": "past",
+    "polarity": "affirmative",
+    "prerequisiteGrammarIds": [
+      "g01-01",
+      "g01-02",
+      "g02-09",
+      "g03-03",
+      "g04-04"
+    ],
+    "segments": [
+      {
+        "kind": "slot",
+        "name": "item",
+        "form": "base"
+      },
+      {
+        "kind": "literal",
+        "text": "を"
+      },
+      {
+        "kind": "fixed",
+        "word": {
+          "wordType": "word",
+          "id": "26"
+        },
+        "form": "base"
+      },
+      {
+        "kind": "fixed",
+        "word": {
+          "wordType": "word",
+          "id": "83"
+        },
+        "form": "counterSuffix"
+      },
+      {
+        "kind": "slot",
+        "name": "action",
+        "form": "politePast"
+      },
+      {
+        "kind": "literal",
+        "text": "か"
+      },
+      {
+        "kind": "literal",
+        "text": "。"
+      }
+    ],
+    "slots": {
+      "item": {
+        "wordTypes": [
+          "noun"
+        ],
+        "tags": {
+          "allOf": [
+            "flat-object"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      },
+      "action": {
+        "wordTypes": [
+          "verb"
+        ],
+        "tags": {
+          "allOf": [
+            "object-taking-action"
+          ],
+          "anyOf": [],
+          "noneOf": []
+        },
+        "conjugationTypes": []
+      }
+    },
+    "relations": [
+      {
+        "kind": "compatible-tags",
+        "left": "action",
+        "right": "item",
+        "forbiddenPairs": [
+          {
+            "leftTag": "food-consumption",
+            "rightTag": "beverage"
+          },
+          {
+            "leftTag": "drink-consumption",
+            "rightTag": "food"
+          },
+          {
+            "leftTag": "reading-action",
+            "rightTag": "beverage"
+          },
+          {
+            "leftTag": "reading-action",
+            "rightTag": "food"
+          }
+        ]
+      }
+    ],
+    "validationRules": [
+      "Require an ordinary plausible interpretation consistent with the selected entries’ stated meanings; do not invent a fantastical setting to rescue an unsuitable combination.",
+      "Preserve the target construction, register, tense, polarity, and referents. Use only the target grammar and declared prerequisite closure.",
+      "枚 must count thin flat objects; verify the combined counter reading."
+    ]
+  }
+]

@@ -1,0 +1,478 @@
+[
+  {
+    "id": "entity",
+    "name": "Entity",
+    "description": "A person, animal, object, place, event, idea, or category that can be referred to as an entity; not a lexical action or quality.",
+    "parents": []
+  },
+  {
+    "id": "physical-entity",
+    "name": "Physical entity",
+    "description": "An entity that has a physical location or extent.",
+    "parents": [
+      "entity"
+    ]
+  },
+  {
+    "id": "animate",
+    "name": "Animate entity",
+    "description": "A living person or animal whose existence normally uses いる, excluding plants and inanimate representations.",
+    "parents": [
+      "physical-entity"
+    ]
+  },
+  {
+    "id": "person",
+    "name": "Person",
+    "description": "A human being, human role, group of humans, or personal reference.",
+    "parents": [
+      "animate"
+    ]
+  },
+  {
+    "id": "animal",
+    "name": "Animal",
+    "description": "A nonhuman animal, including pets, normally located with いる.",
+    "parents": [
+      "animate"
+    ]
+  },
+  {
+    "id": "physical-object",
+    "name": "Physical object",
+    "description": "A tangible inanimate object; excludes people, animals, events, and abstract properties.",
+    "parents": [
+      "physical-entity"
+    ]
+  },
+  {
+    "id": "portable-object",
+    "name": "Portable object",
+    "description": "An inanimate physical object normally movable or carried by a person.",
+    "parents": [
+      "physical-object"
+    ]
+  },
+  {
+    "id": "flat-object",
+    "name": "Flat object",
+    "description": "A thin flat item naturally counted with 枚, such as paper, tickets, or clothing; not a volume or long cylindrical item.",
+    "parents": [
+      "physical-object"
+    ]
+  },
+  {
+    "id": "food",
+    "name": "Food",
+    "description": "A substance or dish ordinarily eaten as food in this entry’s meaning; excludes beverages.",
+    "parents": [
+      "physical-object"
+    ]
+  },
+  {
+    "id": "beverage",
+    "name": "Beverage",
+    "description": "A liquid ordinarily drunk as a beverage in this entry’s meaning.",
+    "parents": [
+      "physical-object"
+    ]
+  },
+  {
+    "id": "readable-material",
+    "name": "Readable material",
+    "description": "A document, publication, message, or other linguistic material that can naturally be read.",
+    "parents": [
+      "entity"
+    ]
+  },
+  {
+    "id": "writable-content",
+    "name": "Writable content",
+    "description": "Text, a document, a character, or other content that can naturally be written.",
+    "parents": [
+      "entity"
+    ]
+  },
+  {
+    "id": "body-part",
+    "name": "Body part",
+    "description": "A part or bodily feature of a person or animal, including height and hair.",
+    "parents": [
+      "physical-entity"
+    ]
+  },
+  {
+    "id": "place",
+    "name": "Place",
+    "description": "A location, region, building, room, or spatial area usable as an action location or destination.",
+    "parents": [
+      "physical-entity"
+    ]
+  },
+  {
+    "id": "container",
+    "name": "Container",
+    "description": "An object or bounded space with an interior that can hold suitable smaller objects.",
+    "parents": [
+      "physical-entity"
+    ]
+  },
+  {
+    "id": "event",
+    "name": "Event",
+    "description": "An occurrence or organized event located in time, such as a meeting, test, or party.",
+    "parents": [
+      "entity"
+    ]
+  },
+  {
+    "id": "human-role",
+    "name": "Human role",
+    "description": "An occupation, social role, student status, or other identity that can classify a person.",
+    "parents": [
+      "person"
+    ]
+  },
+  {
+    "id": "activity-noun",
+    "name": "Activity noun",
+    "description": "A noun naming an activity or practice, including productive する nouns when applicable.",
+    "parents": [
+      "entity"
+    ]
+  },
+  {
+    "id": "suru-activity",
+    "name": "Suru activity noun",
+    "description": "An activity noun that can form its corresponding activity verb by directly appending する.",
+    "parents": [
+      "activity-noun"
+    ]
+  },
+  {
+    "id": "language",
+    "name": "Language",
+    "description": "A natural language used to communicate, such as Japanese or English.",
+    "parents": [
+      "entity"
+    ]
+  },
+  {
+    "id": "tool",
+    "name": "Tool",
+    "description": "An instrument or device that can be used to perform an action.",
+    "parents": [
+      "physical-object"
+    ]
+  },
+  {
+    "id": "transport",
+    "name": "Transport",
+    "description": "A vehicle or conveyance usable as a means of transport, rather than a destination.",
+    "parents": [
+      "physical-object"
+    ]
+  },
+  {
+    "id": "occasion",
+    "name": "Occasion",
+    "description": "An event or customary occasion, such as a meal or celebration, for which an action can be performed.",
+    "parents": [
+      "event"
+    ]
+  },
+  {
+    "id": "color-noun",
+    "name": "Color noun",
+    "description": "A noun naming a color that modifies another noun with の, rather than an adjective with its own attributive form.",
+    "parents": [
+      "entity"
+    ]
+  },
+  {
+    "id": "time-expression",
+    "name": "Time expression",
+    "description": "An expression locating an event in time or describing temporal extent.",
+    "parents": []
+  },
+  {
+    "id": "specific-time",
+    "name": "Specific time",
+    "description": "A specific clock time, weekday, date, or calendar time that naturally takes に when locating an action.",
+    "parents": [
+      "time-expression"
+    ]
+  },
+  {
+    "id": "relative-time",
+    "name": "Relative time",
+    "description": "An expression such as today, tomorrow, this morning, or every day that normally locates an action without に.",
+    "parents": [
+      "time-expression"
+    ]
+  },
+  {
+    "id": "clock-time",
+    "name": "Clock time",
+    "description": "An already complete clock-time expression including the hour and any minutes, not an unbound counter suffix.",
+    "parents": [
+      "specific-time"
+    ]
+  },
+  {
+    "id": "duration",
+    "name": "Duration",
+    "description": "An already complete length-of-time expression that measures an activity, not a clock time or bare counter suffix.",
+    "parents": [
+      "time-expression"
+    ]
+  },
+  {
+    "id": "cardinal-number",
+    "name": "Cardinal number",
+    "description": "A standalone numeral denoting a cardinal quantity that can combine with an appropriate counter, not a date, rank, or numeral already containing a counter.",
+    "parents": []
+  },
+  {
+    "id": "frequency-positive",
+    "name": "Affirmative frequency adverb",
+    "description": "An adverb such as often, sometimes, or usually that naturally modifies an affirmative habitual predicate.",
+    "parents": []
+  },
+  {
+    "id": "frequency-negative",
+    "name": "Negative frequency adverb",
+    "description": "An adverb such as あまり or 全然 that requires a negative predicate for the intended not-often or not-at-all reading.",
+    "parents": []
+  },
+  {
+    "id": "locative-relation",
+    "name": "Relative location noun",
+    "description": "A spatial relation such as above, below, front, behind, inside, or beside that forms reference noun + の + location noun.",
+    "parents": []
+  },
+  {
+    "id": "deictic-object",
+    "name": "Demonstrative object pronoun",
+    "description": "A standalone object demonstrative equivalent to this one, that one, or that one over there; excludes the interrogative and adnominal series.",
+    "parents": []
+  },
+  {
+    "id": "deictic-adnominal",
+    "name": "Demonstrative noun modifier",
+    "description": "A demonstrative directly preceding a noun, equivalent to this or that; excludes standalone demonstratives and interrogatives.",
+    "parents": []
+  },
+  {
+    "id": "deictic-location",
+    "name": "Demonstrative location",
+    "description": "A standalone locative demonstrative meaning here, there, or over there; excludes the interrogative where.",
+    "parents": []
+  },
+  {
+    "id": "preference-quality",
+    "name": "Preference",
+    "description": "A quality expressing liking or disliking, taking the liked thing or activity with が.",
+    "parents": []
+  },
+  {
+    "id": "skill-quality",
+    "name": "Skill level",
+    "description": "A quality expressing skill or lack of skill at an activity, taking that activity with が.",
+    "parents": []
+  },
+  {
+    "id": "gradable-quality",
+    "name": "Gradable quality",
+    "description": "An adjective whose intended meaning can coherently vary in degree and be compared; excludes strictly categorical qualities.",
+    "parents": []
+  },
+  {
+    "id": "physical-quality",
+    "name": "Physical quality",
+    "description": "An adjective describing a perceivable physical property of objects, places, or bodily features.",
+    "parents": []
+  },
+  {
+    "id": "color-quality",
+    "name": "Adjectival color",
+    "description": "An adjective expressing a color, with the adjective’s normal attributive morphology.",
+    "parents": [
+      "physical-quality"
+    ]
+  },
+  {
+    "id": "temporal-quality",
+    "name": "Temporal quality",
+    "description": "An adjective whose adverbial form can naturally express early or late timing of an action.",
+    "parents": []
+  },
+  {
+    "id": "action",
+    "name": "Action or occurrence",
+    "description": "A verb naming an action, change, state, or occurrence.",
+    "parents": []
+  },
+  {
+    "id": "voluntary-action",
+    "name": "Voluntary action",
+    "description": "An action that an intentional participant can normally choose to perform; suitable for invitations, intentions, requests, or wants.",
+    "parents": [
+      "action"
+    ]
+  },
+  {
+    "id": "object-taking-action",
+    "name": "Object-taking action",
+    "description": "In the entry’s stated meaning, a verb accepts a direct object marked を; excludes motion-path を unless separately modeled.",
+    "parents": [
+      "action"
+    ]
+  },
+  {
+    "id": "objectless-action",
+    "name": "Objectless action",
+    "description": "In the entry’s stated meaning, a verb can form a complete ordinary predicate without an explicit direct object or destination; do not select verbs requiring an omitted complement to make sense.",
+    "parents": [
+      "action"
+    ]
+  },
+  {
+    "id": "destination-motion",
+    "name": "Motion to a destination",
+    "description": "A motion verb that naturally combines with a destination marked に or へ, such as go, come, or return.",
+    "parents": [
+      "voluntary-action"
+    ]
+  },
+  {
+    "id": "durative-action",
+    "name": "Durative activity",
+    "description": "An activity whose te-form + いる ordinarily describes an action in progress, rather than only a resulting state.",
+    "parents": [
+      "action"
+    ]
+  },
+  {
+    "id": "resultant-state-action",
+    "name": "Resulting-state verb",
+    "description": "A verb whose te-form + いる naturally describes a state resulting from an earlier change, such as being married, holding, wearing, or having gone.",
+    "parents": [
+      "action"
+    ]
+  },
+  {
+    "id": "residence-action",
+    "name": "Residence verb",
+    "description": "A verb used with a location marked に to express residing in that location, normally as a resulting or continuing state.",
+    "parents": [
+      "resultant-state-action"
+    ]
+  },
+  {
+    "id": "food-consumption",
+    "name": "Eating action",
+    "description": "A verb meaning to eat or consume solid food in the entry’s stated meaning.",
+    "parents": [
+      "object-taking-action",
+      "voluntary-action"
+    ]
+  },
+  {
+    "id": "drink-consumption",
+    "name": "Drinking action",
+    "description": "A verb meaning to drink a beverage in the entry’s stated meaning.",
+    "parents": [
+      "object-taking-action",
+      "voluntary-action"
+    ]
+  },
+  {
+    "id": "reading-action",
+    "name": "Reading action",
+    "description": "A verb meaning to read linguistic material in the entry’s stated meaning.",
+    "parents": [
+      "object-taking-action",
+      "voluntary-action"
+    ]
+  },
+  {
+    "id": "writing-action",
+    "name": "Writing action",
+    "description": "A verb meaning to write textual content in the entry’s stated meaning.",
+    "parents": [
+      "object-taking-action",
+      "voluntary-action"
+    ]
+  },
+  {
+    "id": "meeting-action",
+    "name": "Meeting action",
+    "description": "A verb meaning meet or see a person, with that person marked に.",
+    "parents": [
+      "voluntary-action"
+    ]
+  },
+  {
+    "id": "communication-action",
+    "name": "Communication action",
+    "description": "A verb meaning communicate or converse and permitting the language to be marked で.",
+    "parents": [
+      "voluntary-action"
+    ]
+  },
+  {
+    "id": "opinion-thinking",
+    "name": "Opinion thinking",
+    "description": "A verb meaning think or believe that accepts a finite proposition marked と as its content; it must fit the Genki opinion construction.",
+    "parents": [
+      "action"
+    ]
+  },
+  {
+    "id": "reporting-speech",
+    "name": "Quoted speech reporting",
+    "description": "A speech verb meaning say or state that accepts a proposition marked と and whose te-form + いました can report the earlier statement.",
+    "parents": [
+      "action"
+    ]
+  },
+  {
+    "id": "become-state",
+    "name": "Becoming a state",
+    "description": "A change-of-state verb equivalent to なる that accepts the resulting noun or na-adjective with に, or an i-adjective with く.",
+    "parents": [
+      "action"
+    ]
+  },
+  {
+    "id": "indefinite-object",
+    "name": "Indefinite thing",
+    "description": "A standalone expression meaning something or anything, equivalent to 何か, without an added case particle.",
+    "parents": []
+  },
+  {
+    "id": "completion-adverb",
+    "name": "Already",
+    "description": "An aspectual adverb equivalent to もう that marks the prior completion of an event, not a degree word or additional quantity.",
+    "parents": []
+  },
+  {
+    "id": "noncompletion-adverb",
+    "name": "Not yet",
+    "description": "An aspectual adverb equivalent to まだ that, with a negative progressive, marks noncompletion with an expectation of completion.",
+    "parents": []
+  },
+  {
+    "id": "superlative-adverb",
+    "name": "Most",
+    "description": "An adverb equivalent to いちばん that marks the maximum degree of a quality within a comparison set.",
+    "parents": []
+  },
+  {
+    "id": "binary-choice-question",
+    "name": "Which of two",
+    "description": "An interrogative equivalent to どちら that asks which of two compared choices satisfies a predicate.",
+    "parents": []
+  }
+]

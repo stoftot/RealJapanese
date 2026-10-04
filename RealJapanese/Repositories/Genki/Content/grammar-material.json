@@ -1,0 +1,250 @@
+[
+  {
+    "text": "、",
+    "grammarPointId": "g01-01"
+  },
+  {
+    "text": "。",
+    "grammarPointId": "g01-01"
+  },
+  {
+    "text": "です",
+    "grammarPointId": "g01-01"
+  },
+  {
+    "text": "は",
+    "grammarPointId": "g01-01"
+  },
+  {
+    "text": "か",
+    "grammarPointId": "g01-02"
+  },
+  {
+    "text": "の",
+    "grammarPointId": "g01-03"
+  },
+  {
+    "text": "も",
+    "grammarPointId": "g02-05"
+  },
+  {
+    "text": "じゃないです",
+    "grammarPointId": "g02-06"
+  },
+  {
+    "text": "ね",
+    "grammarPointId": "g02-07"
+  },
+  {
+    "text": "よ",
+    "grammarPointId": "g02-07"
+  },
+  {
+    "text": "ください",
+    "grammarPointId": "g02-09"
+  },
+  {
+    "text": "を",
+    "grammarPointId": "g02-09"
+  },
+  {
+    "text": "で",
+    "grammarPointId": "g03-03"
+  },
+  {
+    "text": "に",
+    "grammarPointId": "g03-03"
+  },
+  {
+    "text": "へ",
+    "grammarPointId": "g03-03"
+  },
+  {
+    "text": "ごろ",
+    "grammarPointId": "g03-04"
+  },
+  {
+    "text": "が",
+    "grammarPointId": "g04-01"
+  },
+  {
+    "text": "と",
+    "grammarPointId": "g04-02"
+  },
+  {
+    "text": "じゃなかったです",
+    "grammarPointId": "g04-03"
+  },
+  {
+    "text": "でした",
+    "grammarPointId": "g04-03"
+  },
+  {
+    "text": "ぐらい",
+    "grammarPointId": "g04-06"
+  },
+  {
+    "text": "ましょう",
+    "grammarPointId": "g05-05"
+  },
+  {
+    "text": "もいいです",
+    "grammarPointId": "g06-04"
+  },
+  {
+    "text": "はいけません",
+    "grammarPointId": "g06-05"
+  },
+  {
+    "text": "から",
+    "grammarPointId": "g06-06"
+  },
+  {
+    "text": "いました",
+    "grammarPointId": "g07-01"
+  },
+  {
+    "text": "います",
+    "grammarPointId": "g07-01"
+  },
+  {
+    "text": "いません",
+    "grammarPointId": "g07-01"
+  },
+  {
+    "text": "いませんでした",
+    "grammarPointId": "g07-01"
+  },
+  {
+    "text": "いる",
+    "grammarPointId": "g08-01"
+  },
+  {
+    "text": "じゃない",
+    "grammarPointId": "g08-01"
+  },
+  {
+    "text": "だ",
+    "grammarPointId": "g08-01"
+  },
+  {
+    "text": "？",
+    "grammarPointId": "g08-02"
+  },
+  {
+    "text": "でください",
+    "grammarPointId": "g08-05"
+  },
+  {
+    "text": "じゃなかった",
+    "grammarPointId": "g09-01"
+  },
+  {
+    "text": "だった",
+    "grammarPointId": "g09-01"
+  },
+  {
+    "text": "のほうが",
+    "grammarPointId": "g10-01"
+  },
+  {
+    "text": "より",
+    "grammarPointId": "g10-01"
+  },
+  {
+    "text": "つもりでした",
+    "grammarPointId": "g10-04"
+  },
+  {
+    "text": "つもりです",
+    "grammarPointId": "g10-04"
+  },
+  {
+    "text": "かに",
+    "grammarPointId": "g10-06"
+  },
+  {
+    "text": "にも",
+    "grammarPointId": "g10-06"
+  },
+  {
+    "text": "…",
+    "grammarPointId": "g10-10"
+  },
+  {
+    "text": "けど",
+    "grammarPointId": "g10-10"
+  },
+  {
+    "text": "たがっています",
+    "grammarPointId": "g11-01"
+  },
+  {
+    "text": "り",
+    "grammarPointId": "g11-02"
+  },
+  {
+    "text": "ことが",
+    "grammarPointId": "g11-03"
+  },
+  {
+    "text": "や",
+    "grammarPointId": "g11-04"
+  },
+  {
+    "text": "だけ",
+    "grammarPointId": "g11-10"
+  },
+  {
+    "text": "なんです",
+    "grammarPointId": "g12-01"
+  },
+  {
+    "text": "んです",
+    "grammarPointId": "g12-01"
+  },
+  {
+    "text": "すぎました",
+    "grammarPointId": "g12-02"
+  },
+  {
+    "text": "すぎます",
+    "grammarPointId": "g12-02"
+  },
+  {
+    "text": "ほうがいいです",
+    "grammarPointId": "g12-03"
+  },
+  {
+    "text": "なので",
+    "grammarPointId": "g12-04"
+  },
+  {
+    "text": "ので",
+    "grammarPointId": "g12-04"
+  },
+  {
+    "text": "きゃ",
+    "grammarPointId": "g12-05"
+  },
+  {
+    "text": "きゃいけない",
+    "grammarPointId": "g12-05"
+  },
+  {
+    "text": "きゃいけません",
+    "grammarPointId": "g12-05"
+  },
+  {
+    "text": "ければいけません",
+    "grammarPointId": "g12-05"
+  },
+  {
+    "text": "ければいけませんでした",
+    "grammarPointId": "g12-05"
+  },
+  {
+    "text": "でしょう",
+    "grammarPointId": "g12-06"
+  }
+]

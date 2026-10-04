@@ -1,8 +1,37 @@
 # Decisions
 
-## Reviewed Genki frames and learner sentence review
+## Offline Genki generation over existing vocabulary
 
 - **Status:** Accepted
+- **Date:** 2026-10-04
+- **Supersedes:** Reviewed Genki frames and learner sentence review
+
+### Context
+
+Lesson-local lexical pools and finished prompt templates limited reuse and did not
+reflect the learner's existing vocabulary. Semantic naturalness needs offline
+linguistic judgment, while the learner app must work without a model service.
+
+### Decision
+
+Use collection-qualified source WordRefs, a global semantic hierarchy and separate
+word×tag coverage. Structural schemas render through the existing conjugators.
+Enumerate supported products lazily, checkpoint model stages, and explicitly publish
+only completed question groups. Keep vocabulary dependencies per answer. Select
+stored questions through existing Known-word progress and compare stored Japanese
+and kana deterministically. [Genki](../genki.md) owns the detailed contracts.
+
+### Consequences
+
+New vocabulary/annotations can unlock earlier schemas without changing their
+structure. Model uncertainty remains inspectable and excluded. Tool state stays
+separate from catalogs/progress, and learner hosts have no AiLibrary reference.
+Full regeneration after edits requires documented operator reprocessing; stable
+identities and incremental additions do not imply automatic invalidation.
+
+## Reviewed Genki frames and learner sentence review
+
+- **Status:** Superseded by Offline Genki generation over existing vocabulary
 - **Date:** 2026-10-03
 
 ### Context

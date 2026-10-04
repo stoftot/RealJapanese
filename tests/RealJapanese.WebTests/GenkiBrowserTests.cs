@@ -1,5 +1,7 @@
 using Microsoft.Playwright;
-using System.Text.RegularExpressions;
+using DataLoaders.Models.Genki;
+using Repositories;
+using Repositories.Genki;
 using static Microsoft.Playwright.Assertions;
 
 namespace RealJapanese.WebTests;
@@ -12,6 +14,7 @@ public sealed class GenkiBrowserTests : BrowserTest
     [InlineData(1280)]
     public async Task Lesson_navigation_and_sentence_retry_round_work_at_mobile_and_desktop_widths(int width)
     {
+        SeedGenkiQuestion();
         var pageErrors = new List<string>();
         Page.PageError += (_, error) => pageErrors.Add(error);
         await Page.SetViewportSizeAsync(width, 900);
@@ -23,10 +26,8 @@ public sealed class GenkiBrowserTests : BrowserTest
         await Page.Locator(".lesson-grid a[href='genki/1']").ClickAsync();
         await Expect(Page.Locator(".genki-module > h2")).ToContainTextAsync("Lesson 1 ·");
         await AssertFitsViewportAsync("Grammar recap");
-        var advertisedPatterns = await Page.Locator("#g01-03 .small.text-muted").InnerTextAsync();
-        var patternCount = int.Parse(Regex.Match(advertisedPatterns, @"(\d+) patterns").Groups[1].Value);
-        Assert.True(patternCount > 0, "The recap must advertise a nonempty practice round.");
-        await Page.Locator("#g01-03").GetByRole(AriaRole.Button).ClickAsync();
+        await Expect(Page.Locator(".grammar-example")).ToHaveCountAsync(0);
+        await Page.Locator("#g01-01").GetByRole(AriaRole.Button).ClickAsync();
         await Expect(Page.Locator(".sentence-practice h3")).ToBeFocusedAsync();
         // Bootstrap animates the focus scroll; wait for the observable final position.
         await Expect(Page.Locator(".sentence-practice h3")).ToBeInViewportAsync(new() { Ratio = 1 });
@@ -40,7 +41,7 @@ public sealed class GenkiBrowserTests : BrowserTest
         var answers = Page.Locator(".sentence-practice [role=alert]");
         await Expect(input).ToBeVisibleAsync();
         await Expect(next).ToBeDisabledAsync();
-        await Expect(progress).ToHaveTextAsync($"0 reviewed · {patternCount} remaining");
+        await Expect(progress).ToHaveTextAsync("0 reviewed · 1 remaining");
         var originalQuestion = await question.InnerTextAsync();
         await input.FillAsync("別の言い方です。");
         await compare.ClickAsync();
@@ -50,22 +51,15 @@ public sealed class GenkiBrowserTests : BrowserTest
         await AssertFitsViewportAsync("Revealed sentence practice");
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Practise this again", Exact = true }).ClickAsync();
-        await Expect(progress).ToHaveTextAsync($"1 reviewed · {patternCount} remaining");
         await Expect(input).ToHaveValueAsync("");
         await Expect(next).ToBeDisabledAsync();
-        for (var index = 1; index < patternCount; index++)
-        {
-            await compare.ClickAsync();
-            await next.ClickAsync();
-            await Expect(progress).ToHaveTextAsync($"{index + 1} reviewed · {patternCount - index} remaining");
-        }
-        await Expect(progress).ToHaveTextAsync($"{patternCount} reviewed · 1 remaining");
+        await Expect(progress).ToHaveTextAsync("1 reviewed · 1 remaining");
         await Expect(question).ToHaveTextAsync(originalQuestion);
         await compare.ClickAsync();
         await Expect(answers).ToHaveTextAsync(originalModels);
         await next.ClickAsync();
         await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "Round complete", Exact = true })).ToBeVisibleAsync();
-        await Expect(Page.GetByRole(AriaRole.Status)).ToContainTextAsync($"You reviewed {patternCount + 1} sentence prompts");
+        await Expect(Page.GetByRole(AriaRole.Status)).ToContainTextAsync("You reviewed 2 sentence prompts");
         await AssertFitsViewportAsync("Completed practice round");
 
         await Page.GetByRole(AriaRole.Link, new() { Name = "Next lesson", Exact = true }).ClickAsync();
@@ -75,6 +69,17 @@ public sealed class GenkiBrowserTests : BrowserTest
         await Expect(Page.Locator(".lesson-grid a")).ToHaveCountAsync(12);
         await Expect(Page.Locator("#blazor-error-ui")).Not.ToBeVisibleAsync();
         Assert.Empty(pageErrors);
+    }
+
+    [Fact]
+    public async Task Empty_question_bank_explains_why_practice_is_unavailable()
+    {
+        await OpenAsync("/genki/1");
+
+        await Expect(Page.GetByRole(AriaRole.Status)).ToContainTextAsync("no published questions yet");
+        await Expect(Page.GetByRole(AriaRole.Status).GetByRole(AriaRole.Link, new() { Name = "Words" }))
+            .ToHaveAttributeAsync("href", "words");
+        await Expect(Page.GetByRole(AriaRole.Button, new() { Name = "Practise whole lesson" })).ToBeDisabledAsync();
     }
 
     [Theory]
@@ -95,4 +100,35 @@ public sealed class GenkiBrowserTests : BrowserTest
     private async Task AssertFitsViewportAsync(string stage) =>
         Assert.True(await Page.EvaluateAsync<bool>("() => document.documentElement.scrollWidth <= innerWidth"),
             stage + " horizontally overflows the viewport.");
+
+    private void SeedGenkiQuestion()
+    {
+        var paths = Workspace.CreatePaths();
+        var nouns = new NounData(paths);
+        nouns.AddToVocab(nouns.Words.Single(word => word.Id == 0));
+        var catalog = new GenkiCatalog();
+        var schema = catalog.Schemas.Single(item => item.Id == "g01-01-noun-predicate");
+        var question = new GenkiQuestion
+        {
+            Id = "browser-g01-01-noun-predicate",
+            SchemaId = schema.Id,
+            GrammarPointId = schema.GrammarPointId,
+            English = "A university is a university.",
+            Setting = "A simple identification.",
+            Register = schema.Register,
+            RequiredGrammar = catalog.AllowedGrammar(schema).Order(StringComparer.Ordinal).ToArray(),
+            Answers =
+            [
+                new GenkiAnswer
+                {
+                    Japanese = "大学は大学です。",
+                    Kana = "だいがくはだいがくです。",
+                    RequiredWords = [new WordRef("noun", "0")]
+                }
+            ]
+        };
+        var path = Path.Combine(Workspace.CatalogRoot, "Genki", "questions.jsonl");
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        File.WriteAllText(path, System.Text.Json.JsonSerializer.Serialize(question, GenkiJson.Compact));
+    }
 }

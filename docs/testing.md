@@ -44,7 +44,7 @@ are support projects, not additional test frameworks or manual tests.
 
 | Project | Owns |
 | --- | --- |
-| `RealJapanese.Tests` | Pure transformations, categories, chunks, conjugation and number generators |
+| `RealJapanese.Tests` | Pure transformations, categories, chunks, conjugation, Genki forms/pipeline and number generators |
 | `RealJapanese.IntegrationTests` | JSON files, repositories, atomic progress, migration, sync merge/recovery, real socket protocol/discovery, duplicate-cleanup process |
 | `RealJapanese.ComponentTests` | Rendered Razor selectors, routes, answers, retry/chunk state and reusable controls through bUnit |
 | `RealJapanese.WebTests` | Browser JavaScript, keyboard/focus, responsive CSS, persisted selections and two-host sync through Playwright |
@@ -82,10 +82,23 @@ Expect this diagnostic run to fail until the application defects are fixed. Remo
 the explicit marker and trait when a fix makes a regression pass. Do not change
 the expected result to preserve erroneous application output.
 
-Covered defects include adjective/verb forms, counting/age readings, indented JSONL
-round-tripping, the invalid default random-time range, stale retry questions after switching chunks, and interrupted
-legacy cleanup leaving incompatible catalog/progress IDs. Native lifecycle and
-external-model extraction are not established by this suite.
+Covered defects include counting/age readings, indented JSONL round-tripping, the
+invalid default random-time range, stale retry questions after switching chunks,
+and interrupted legacy cleanup leaving incompatible catalog/progress IDs.
+Conjugation and Genki form regressions have independent literal Japanese/kana
+oracles in ordinary tests; they are no longer marked as known defects. Native
+lifecycle and external-model extraction are not established by this suite.
+
+Genki runtime practice reads the stored `RealJapanese/Data/Genki/questions.jsonl`
+bank; the canonical file is intentionally empty. Component and browser practice
+tests create isolated private fixture banks, so their successful practice cases do
+not imply that production questions have been published. `GenkiTests`,
+`GenkiPipelineTests` and `GenkiFormsTests` validate controlled schemas, pipeline
+behavior and form rendering. `GenkiSourceCoverageIntegrationTests` scans fixed
+references and form availability against real catalogs without enumerating sentences.
+Full exhaustive generation is an explicit operator
+workflow documented in [Genki offline generation and practice](genki.md), not part
+of routine test execution.
 
 ## Adding coverage
 

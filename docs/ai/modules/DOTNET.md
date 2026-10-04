@@ -23,6 +23,13 @@ Extraction has absolute references to external AiLibrary projects. Building the
 older aggregate requires those projects; use a focused solution for ordinary app
 work.
 
+`RealJapanese/Genki.Tools/Genki.Tools.csproj` is a separate .NET 10 batch executable
+over `Genki.Generation`. Set `AiLibraryRoot` (or `AI_LIBRARY_ROOT`) to enable its
+external Core/LlamaServer project references. Without them, deterministic tooling
+still compiles and inference fails explicitly. Neither application host references
+these tooling projects. [Genki](../../genki.md) owns configuration and bounded/full
+run commands; compilation does not establish model inference or corpus quality.
+
 ## Canonical CLI targets
 
 From the repository root:

@@ -134,13 +134,13 @@ adds adjective te-form generation; `Verb.ActionOrChangeForm(ToConjugate,
 ConjugationType)` builds a te-form plus conjugated `いる` construction.
 `ToConjugate` selects the model's Japanese or Kana value.
 
-These methods currently have no callers in the study UI and no automated test
-coverage. The verb study page uses polite `Conjugate()` and `Form(..., TE)`;
-the adjective study page uses polite `Conjugate()` only. Existing
-[conjugation tests](../../tests/RealJapanese.Tests/ConjugationTests.cs) cover those
-older APIs, including explicit known-defect cases. The new methods still need
-language-correctness validation and regression coverage before being exposed as
-study features.
+The verb study page uses polite `Conjugate()` and `Form(..., TE)`; the adjective
+study page uses polite `Conjugate()`. Offline Genki rendering also calls the short,
+connective, stem, desire, attributive and adverbial APIs through `GenkiForms`.
+[Conjugation tests](../../tests/RealJapanese.Tests/ConjugationTests.cs) and
+`GenkiFormsTests` use independent Japanese/kana expectations. The action/change
+helper remains outside the Genki form contract. Sentence semantics and vocabulary
+compatibility are separate from inflection correctness.
 
 ### Kana selection and practice
 
@@ -165,19 +165,25 @@ invalid saved IDs and unavailable storage have explicit handling.
 
 ### Genki grammar practice
 
-The shared `/genki` and `/genki/{lesson}` routes use an embedded, versioned JSON
-curriculum in Repositories. DataLoaders owns lesson/schema records and a
-`GenkiLexeme` extension of `Word` carrying reviewed semantic tags and forms.
-The generator enforces typed slots, compatibility relations and separate grammar
-and vocabulary ceilings. It wraps the existing `QuestionAnswerDto` with context,
-kana and model variants; the page reuses `PracticeShell` and `PracticeCard`.
-Both hosts register the same catalog/generator. Embedding delivers the curriculum
-offline without modifying mobile catalog installation or progress/sync formats.
+The shared `/genki` routes read embedded recaps and structural schemas, plus a
+published `Genki/questions.jsonl` beneath the catalog root. DataLoaders owns the
+contracts; `WordRef` combines the existing collection and source ID. No separate
+Genki lexicon exists. Forms delegate to the existing vocabulary/conjugation models.
+The runtime reads stored answers without model inference, reuses the question DTO
+and practice controls, and filters against existing Known-word progress. At least
+one answer must be fully known; every approved stored answer remains acceptable.
+Session/retry state is per page and does not alter vocabulary mastery or sync.
 
-Sentence answers use transparent model comparison and self-review, because exact
-matching cannot judge arbitrary valid Japanese. Session/retry state is per page
-and is not persisted. Reviewed forms avoid the existing conjugators' known defects.
-[Genki](../genki.md) owns the source mapping, authoring contract and extension rules.
+`Genki.Generation` is a separate offline library. It resolves hierarchical semantic
+tags, lazily enumerates supported Cartesian products, and checkpoints tagging and
+question stages in separate atomic files. `Genki.Tools` supplies independent tag
+and generate commands, an optional external AiLibrary adapter and explicit bank
+publication. Models and their dependencies never enter either learner host.
+The bank is installed with Android catalogs; distributing a new bank requires a
+new APK. It is not transferred by progress sync. The source bank initially contains
+no questions; test fixtures stay outside production data.
+[Genki](../genki.md) owns schemas, source mapping, stage contracts, resume, publication
+and manual reprocessing rules.
 
 ### Data maintenance
 

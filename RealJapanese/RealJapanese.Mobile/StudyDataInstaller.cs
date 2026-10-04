@@ -2,13 +2,13 @@ using Repositories;
 
 namespace RealJapanese.Mobile;
 
-/// <summary>Refreshes packaged vocabulary without touching private study progress.</summary>
+/// <summary>Refreshes packaged vocabulary and published questions without touching private study progress.</summary>
 public sealed class StudyDataInstaller(RepositoryPaths paths)
 {
     private static readonly string[] CatalogFiles =
     [
         "Words/Words.json", "Nouns/Nouns.json", "Verbs/Verbs.json", "Adjectives/Adjectives.json",
-        "Kanji/Singel/Singel.json", "Kanji/Combined/Combined.json"
+        "Kanji/Singel/Singel.json", "Kanji/Combined/Combined.json", "Genki/questions.jsonl"
     ];
 
     public async Task InstallAsync()

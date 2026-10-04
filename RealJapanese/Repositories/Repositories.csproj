@@ -16,7 +16,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="Genki/Content/lesson-*.json" />
+      <EmbeddedResource Include="Genki/Content/*.json" />
+      <EmbeddedResource Include="Genki/Schemas/*.json" />
     </ItemGroup>
 
 </Project>

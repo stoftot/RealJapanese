@@ -1,16 +1,17 @@
 using AngleSharp.Dom;
 using Bunit;
+using DataLoaders.Models.Genki;
 using Microsoft.Extensions.DependencyInjection;
 using Repositories.Genki;
 using GenkiPage = RealJapanese.Components.Pages.Genki.Genki;
 
 namespace RealJapanese.ComponentTests;
 
-/// <summary>Checks lesson selection, model comparison, finite practice rounds and retry isolation through rendered Genki controls.</summary>
+/// <summary>Exercises Genki recap and finite practice using a private, test-owned question bank.</summary>
 public sealed class GenkiComponentTests
 {
     [Fact]
-    public void Lesson_index_offers_all_twelve_lessons_in_order()
+    public void Lesson_index_shows_all_twelve_lessons_without_example_banks()
     {
         using var test = CreateTest();
         var cut = test.Context.Render<GenkiPage>();
@@ -19,7 +20,7 @@ public sealed class GenkiComponentTests
         Assert.Equal(Enumerable.Range(1, 12).Select(number => $"genki/{number}"),
             links.Select(link => link.GetAttribute("href")));
         Assert.All(links, link => Assert.Contains("grammar points", link.TextContent));
-        Assert.Empty(cut.FindAll(".sentence-practice"));
+        Assert.Empty(cut.FindAll(".sentence-practice, .grammar-example"));
     }
 
     [Theory]
@@ -30,7 +31,7 @@ public sealed class GenkiComponentTests
         using var test = CreateTest();
         var cut = test.Context.Render<GenkiPage>(parameters => parameters.Add(page => page.LessonNumber, lesson));
 
-        Assert.StartsWith($"Lesson {lesson} ·", cut.Find(".genki-module > h2").TextContent);
+        Assert.StartsWith($"Lesson {lesson} ·", cut.Find(".genki-module > .lesson-title").TextContent);
         Assert.NotEmpty(cut.FindAll(".grammar-point[open]"));
         Assert.Equal(previous, cut.FindAll(".lesson-nav a").Any(link => link.TextContent == "Previous lesson"));
         Assert.Equal(next, cut.FindAll(".lesson-nav a").Any(link => link.TextContent == "Next lesson"));
@@ -51,85 +52,71 @@ public sealed class GenkiComponentTests
     }
 
     [Fact]
-    public void Point_specific_practice_allows_blank_reveal_but_requires_comparison_before_advancing()
+    public void Empty_bank_explains_unavailable_practice_and_links_to_word_study()
     {
-        using var test = CreateTest();
-        var cut = test.Context.Render<GenkiPage>(parameters => parameters.Add(page => page.LessonNumber, 9));
-        var title = cut.Find("#g09-01 summary").TextContent;
+        using var test = CreateTest(withQuestionBank: false);
+        var cut = test.Context.Render<GenkiPage>(parameters => parameters.Add(page => page.LessonNumber, 1));
 
-        cut.Find("#g09-01 button").Click();
-
-        Assert.Equal(title, cut.Find(".sentence-practice h3").TextContent);
-        Assert.NotEmpty(CurrentQuestion(cut));
-        Assert.True(Button(cut, "I understand · next").HasAttribute("disabled"));
-        Assert.Empty(cut.FindAll(".sentence-practice [role=alert]"));
-
-        Button(cut, "Compare with model").Click();
-
-        Assert.NotEmpty(cut.Find(".sentence-practice [role=alert]").TextContent);
-        Assert.False(Button(cut, "I understand · next").HasAttribute("disabled"));
-        Assert.Contains("different sentence may also be valid", Feedback(cut));
-        Button(cut, "I understand · next").Click();
-        Assert.StartsWith("1 reviewed", Progress(cut));
-        Assert.Empty(cut.FindAll(".review-note, .sentence-practice [role=alert]"));
-        Assert.True(Button(cut, "I understand · next").HasAttribute("disabled"));
+        Assert.Contains("no published questions yet", cut.Find("[role=status]").TextContent);
+        Assert.Equal("words", cut.Find("[role=status] a").GetAttribute("href"));
+        Assert.True(Button(cut, "Practise whole lesson").HasAttribute("disabled"));
+        Assert.All(cut.FindAll(".grammar-point button"), button => Assert.True(button.HasAttribute("disabled")));
     }
 
     [Fact]
-    public void Comparison_is_neutral_for_other_answers_and_recognizes_visible_models_and_kana()
+    public void Point_practice_uses_published_question_and_requires_neutral_comparison_before_advancing()
     {
         using var test = CreateTest();
-        var cut = test.Context.Render<GenkiPage>(parameters => parameters.Add(page => page.LessonNumber, 9));
-        cut.Find("#g09-01 button").Click();
-        cut.Find("input[aria-label='Your Japanese sentence']").Input("別の言い方です。");
+        var cut = test.Context.Render<GenkiPage>(parameters => parameters.Add(page => page.LessonNumber, 1));
+        var title = cut.Find("#g01-01 summary").TextContent;
 
+        cut.Find("#g01-01 button").Click();
+
+        Assert.Equal(title, cut.Find(".sentence-practice h3").TextContent);
+        Assert.Equal("A university is a university.", CurrentQuestion(cut));
+        Assert.True(Button(cut, "I understand · next").HasAttribute("disabled"));
+
+        cut.Find("input[aria-label='Your Japanese sentence']").Input("別の言い方です。");
         Button(cut, "Compare with model").Click();
 
         Assert.Contains("different sentence may also be valid", Feedback(cut));
         Assert.DoesNotContain("wrong", Feedback(cut), StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("incorrect", Feedback(cut), StringComparison.OrdinalIgnoreCase);
-        var models = VisibleModels(cut);
-        Assert.True(models.Length >= 2, "This past-form practice should offer both Japanese and kana models.");
-        foreach (var model in models)
-        {
-            cut.Find("input[aria-label='Your Japanese sentence']").Input(model);
-            Assert.Contains("matches a supplied model", Feedback(cut));
-        }
+        Assert.False(Button(cut, "I understand · next").HasAttribute("disabled"));
+        Assert.Contains("大学は大学です。", VisibleModels(cut));
+        Assert.Contains("だいがくはだいがくです。", VisibleModels(cut));
+
+        Button(cut, "I understand · next").Click();
+
+        Assert.Equal("Round complete", cut.Find("[role=status] h3").TextContent);
+        Assert.Contains("You reviewed 1 sentence prompts", cut.Find("[role=status]").TextContent);
+        Assert.Empty(cut.FindAll(".sentence-practice"));
     }
 
     [Fact]
-    public void Retry_replays_the_exact_exercise_once_and_the_round_finishes()
+    public void Retry_replays_the_same_question_once_and_round_finishes()
     {
         using var test = CreateTest();
         var cut = test.Context.Render<GenkiPage>(parameters => parameters.Add(page => page.LessonNumber, 1));
-        var patternCount = test.Context.Services.GetRequiredService<GenkiCatalog>().FindLesson(1)!
-            .GrammarPoints.Single(point => point.Id == "g01-03").Schemas.Count;
-        cut.Find("#g01-03 button").Click();
+        cut.Find("#g01-01 button").Click();
         var originalQuestion = CurrentQuestion(cut);
         var originalContext = cut.Find(".sentence-practice > p").TextContent;
-        Assert.Equal($"0 reviewed · {patternCount} remaining", Progress(cut));
+        Assert.Equal("0 reviewed · 1 remaining", Progress(cut));
         Button(cut, "Compare with model").Click();
         var originalModels = VisibleModels(cut);
 
         Button(cut, "Practise this again").Click();
 
-        Assert.Equal($"1 reviewed · {patternCount} remaining", Progress(cut));
+        Assert.Equal("1 reviewed · 1 remaining", Progress(cut));
         Assert.Empty(cut.FindAll(".review-note"));
         Assert.Equal("", cut.Find("input[aria-label='Your Japanese sentence']").GetAttribute("value"));
-        for (var index = 1; index < patternCount; index++)
-        {
-            Button(cut, "Compare with model").Click();
-            Button(cut, "I understand · next").Click();
-        }
         Assert.Equal(originalQuestion, CurrentQuestion(cut));
         Assert.Equal(originalContext, cut.Find(".sentence-practice > p").TextContent);
-        Assert.Equal($"{patternCount} reviewed · 1 remaining", Progress(cut));
         Button(cut, "Compare with model").Click();
         Assert.Equal(originalModels, VisibleModels(cut));
         Button(cut, "I understand · next").Click();
 
         Assert.Equal("Round complete", cut.Find("[role=status] h3").TextContent);
-        Assert.Contains($"You reviewed {patternCount + 1} sentence prompts", cut.Find("[role=status]").TextContent);
         Assert.Empty(cut.FindAll(".sentence-practice"));
     }
 
@@ -137,36 +124,64 @@ public sealed class GenkiComponentTests
     public void Changing_lesson_discards_previous_input_and_queued_retry()
     {
         using var test = CreateTest();
-        var cut = test.Context.Render<GenkiPage>(parameters => parameters.Add(page => page.LessonNumber, 9));
-        cut.Find("#g09-01 button").Click();
+        var cut = test.Context.Render<GenkiPage>(parameters => parameters.Add(page => page.LessonNumber, 1));
+        cut.Find("#g01-01 button").Click();
         cut.Find("input[aria-label='Your Japanese sentence']").Input("前の答えです。");
         Button(cut, "Compare with model").Click();
         Button(cut, "Practise this again").Click();
         cut.Find("input[aria-label='Your Japanese sentence']").Input("残さない答えです。");
 
-        cut.Render(parameters => parameters.Add(page => page.LessonNumber, 1));
+        cut.Render(parameters => parameters.Add(page => page.LessonNumber, 2));
 
         Assert.Empty(cut.FindAll(".sentence-practice, .review-note"));
-        var patternCount = test.Context.Services.GetRequiredService<GenkiCatalog>().FindLesson(1)!
-            .GrammarPoints.Single(point => point.Id == "g01-03").Schemas.Count;
-        cut.Find("#g01-03 button").Click();
+        cut.Render(parameters => parameters.Add(page => page.LessonNumber, 1));
+        cut.Find("#g01-01 button").Click();
         Assert.Equal("", cut.Find("input[aria-label='Your Japanese sentence']").GetAttribute("value"));
-        Assert.Equal($"0 reviewed · {patternCount} remaining", Progress(cut));
-        for (var index = 0; index < patternCount; index++)
-        {
-            Button(cut, "Compare with model").Click();
-            Button(cut, "I understand · next").Click();
-        }
-        Assert.Contains($"You reviewed {patternCount} sentence prompts", cut.Find("[role=status]").TextContent);
-        Assert.Empty(cut.FindAll(".sentence-practice"));
+        Assert.Equal("0 reviewed · 1 remaining", Progress(cut));
     }
 
-    private static ComponentTestContext CreateTest()
+    private static ComponentTestContext CreateTest(bool withQuestionBank = true)
     {
         var test = new ComponentTestContext();
-        test.Context.Services.AddSingleton<GenkiCatalog>();
-        test.Context.Services.AddSingleton<GenkiGenerator>();
+        var catalog = new GenkiCatalog();
+        var vocabulary = GenkiVocabulary.Load(test.Paths.CatalogRoot);
+        test.Context.Services.AddSingleton(catalog);
+        test.Context.Services.AddSingleton(vocabulary);
+        test.Context.Services.AddSingleton(new GenkiPracticeService(test.Paths, catalog));
+        if (withQuestionBank)
+        {
+            var noun = test.Nouns.Words.Single(word => word.Id == 0);
+            test.Nouns.AddToVocab(noun);
+            WriteQuestionBank(test.Paths.CatalogRoot, catalog);
+        }
         return test;
+    }
+
+    private static void WriteQuestionBank(string catalogRoot, GenkiCatalog catalog)
+    {
+        var schema = catalog.Schemas.Single(item => item.Id == "g01-01-noun-predicate");
+        var question = new GenkiQuestion
+        {
+            Id = "component-g01-01-noun-predicate",
+            SchemaId = schema.Id,
+            GrammarPointId = schema.GrammarPointId,
+            English = "A university is a university.",
+            Setting = "A simple identification.",
+            Register = schema.Register,
+            RequiredGrammar = catalog.AllowedGrammar(schema).Order(StringComparer.Ordinal).ToArray(),
+            Answers =
+            [
+                new GenkiAnswer
+                {
+                    Japanese = "大学は大学です。",
+                    Kana = "だいがくはだいがくです。",
+                    RequiredWords = [new WordRef("noun", "0")]
+                }
+            ]
+        };
+        var path = Path.Combine(catalogRoot, "Genki", "questions.jsonl");
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        File.WriteAllText(path, System.Text.Json.JsonSerializer.Serialize(question, GenkiJson.Compact));
     }
 
     private static IElement Button(IRenderedComponent<GenkiPage> cut, string label) =>
