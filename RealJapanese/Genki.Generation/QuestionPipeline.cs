@@ -59,7 +59,7 @@ public sealed class QuestionPipeline(GenkiCatalog catalog, GenkiVocabulary vocab
     private const string JudgmentShape = " Return {outcome:'valid'|'invalid'|'uncertain',reason:string,grammarIds:[string]}. " +
         "List grammar used, including the target. valid means grammatical, coherent, ordinary and natural, with every requirement satisfied.";
     public async Task<BatchSummary> RunAsync(IEnumerable<GenkiSchema> schemas, BatchOptions options, CancellationToken cancellationToken = default,
-        Action<string>? progress = null)
+        Action<string>? progress = null, Action<BatchSummary>? report = null)
     {
         options.Validate(); var summary = new BatchSummary(); var timer = Stopwatch.StartNew();
         var requestedCancellation = cancellationToken;
@@ -85,13 +85,13 @@ public sealed class QuestionPipeline(GenkiCatalog catalog, GenkiVocabulary vocab
                     if (state.ActiveStage is not null) state.Attempts[state.ActiveStage] = Math.Max(0, state.Attempts.GetValueOrDefault(state.ActiveStage) - 1);
                     state.Status = "pending"; store.Save("questions", candidate.Id, state);
                 }
-                if (state?.Status is "completed" or "rejected" or "needs-review") { summary.Reused++; continue; }
+                if (state?.Status is "completed" or "rejected" or "needs-review") { summary.Reused++; if (summary.Reused % 100 == 0) report?.Invoke(summary); continue; }
                 if (state?.Status == "failed" && state.ActiveStage is not null && state.Attempts.GetValueOrDefault(state.ActiveStage) >= options.MaxAttempts)
                 { summary.Failed++; continue; }
                 if (options.Limit.HasValue && summary.Examined >= options.Limit) { summary.Paused = true; return summary; }
                 summary.Examined++;
                 state ??= new() { CandidateId = candidate.Id, SchemaId = schema.Id, InputFingerprint = candidate.InputFingerprint, Provenance = provenance };
-                await ProcessAsync(candidate, state, options, cancellationToken);
+                await ProcessAsync(candidate, state, options, cancellationToken, progress);
                 switch (state.Status)
                 {
                     case "completed": summary.Completed++; break;
@@ -100,6 +100,7 @@ public sealed class QuestionPipeline(GenkiCatalog catalog, GenkiVocabulary vocab
                     case "failed": summary.Failed++; break;
                 }
                 progress?.Invoke($"{schema.Id} {candidate.Id[..12]}: {state.Status} ({state.ActiveStage ?? "ready for publication"})");
+                report?.Invoke(summary);
                 if (options.DelayMilliseconds > 0) await Task.Delay(options.DelayMilliseconds, cancellationToken);
             }
             progress?.Invoke($"{schema.Id}: visited {candidates} eligible combinations{(candidates == 0 ? " (no compatible vocabulary/forms; no coverage claimed)" : "")}.");
@@ -109,7 +110,7 @@ public sealed class QuestionPipeline(GenkiCatalog catalog, GenkiVocabulary vocab
         catch (OperationCanceledException) when (!requestedCancellation.IsCancellationRequested && deadline.IsCancellationRequested)
         { summary.Paused = true; return summary; }
     }
-    private async Task ProcessAsync(Candidate candidate, QuestionState state, BatchOptions options, CancellationToken cancellationToken)
+    private async Task ProcessAsync(Candidate candidate, QuestionState state, BatchOptions options, CancellationToken cancellationToken, Action<string>? progress)
     {
         var schema = candidate.Schema; var allowed = catalog.AllowedGrammar(schema);
         var grammar = allowed.Order(StringComparer.Ordinal).Select(id => catalog.Point(id)).ToArray();
@@ -125,6 +126,7 @@ public sealed class QuestionPipeline(GenkiCatalog catalog, GenkiVocabulary vocab
             {
                 cancellationToken.ThrowIfCancellationRequested(); state.Status = "in-progress";
                 state.Attempts[name] = state.Attempts.GetValueOrDefault(name) + 1; Save();
+                progress?.Invoke($"{schema.Id} {candidate.Id[..12]}: {name}, attempt {state.Attempts[name]}");
                 try
                 {
                     var result = await work();

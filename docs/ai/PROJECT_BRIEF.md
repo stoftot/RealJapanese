@@ -28,6 +28,8 @@ or owner-approved roadmap was not found.
 - Maintain datasets with separate duplicate-cleanup and AI-assisted kanji utilities.
 - Run separate local-model workflows to annotate existing vocabulary and generate
   Genki question banks offline; full generation and publication are explicit actions.
+- Use the PC-only Genki Studio browser workspace to configure these workflows,
+  select bounded batches, monitor saved jobs, review results and publish a bank.
 
 ## Scope and constraints
 

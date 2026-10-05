@@ -60,3 +60,17 @@ development certificate.
 Use the [ASP.NET skill](../../../.agents/skills/aspnet-web/SKILL.md) for real-browser
 validation. The current Debug build passed; this does not itself establish browser
 behavior.
+
+## Separate PC-only Genki Studio
+
+`RealJapanese/Genki.Studio/Genki.Studio.csproj` is a second ASP.NET Core host for
+offline generation operations. It uses Interactive Server components and binds to
+loopback only (the Windows launcher uses `http://127.0.0.1:5278`). Its middleware
+rejects non-loopback clients and mismatched `Origin` headers. It has its own
+configuration, queue and generated-state paths under `.tooling/` by default, and
+does not register the learner routes. It can run while the learner web app is
+stopped; it does not expose a LAN endpoint or change mobile startup.
+
+Use [the Genki guide](../../genki.md#pc-workspace) for setup and operation. The
+Studio launcher owns its build, readiness check, browser open and shutdown. The
+learner host's `http` profile and port `5287` remain separate.

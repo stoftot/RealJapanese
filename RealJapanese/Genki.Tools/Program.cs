@@ -1,18 +1,10 @@
 using System.Text.Json;
 using DataLoaders.Models.Genki;
 using Genki.Generation;
-using Genki.Tools;
+using Genki.Inference;
 using Repositories.Genki;
 
 return await Cli.RunAsync(args);
-
-internal sealed record ToolConfiguration
-{
-    public required string DataRoot { get; init; }
-    public required string StateRoot { get; init; }
-    public required AiLibraryOptions Models { get; init; }
-    public BatchOptions Batch { get; init; } = new();
-}
 
 internal static class Cli
 {
@@ -44,7 +36,7 @@ internal static class Cli
             var command = args[0]; var flags = Parse(args.Skip(1).ToArray());
             if (!new[] { "inspect", "tag", "generate", "status", "publish", "retry-failed" }.Contains(command)) throw new ArgumentException("Unknown command. Use --help.");
             var configPath = Path.GetFullPath(Required(flags, "config"));
-            var config = JsonSerializer.Deserialize<ToolConfiguration>(File.ReadAllText(configPath), GenkiJson.Options)
+            var config = JsonSerializer.Deserialize<GenkiConfiguration>(File.ReadAllText(configPath), GenkiJson.Options)
                 ?? throw new InvalidDataException("Empty configuration.");
             var basePath = Path.GetDirectoryName(configPath)!;
             var dataRoot = Path.GetFullPath(config.DataRoot, basePath); var stateRoot = Path.GetFullPath(config.StateRoot, basePath);
@@ -59,17 +51,8 @@ internal static class Cli
             if (command == "publish")
             {
                 var output = Path.GetFullPath(Required(flags, "out"));
-                foreach (var state in store.ReadAll<QuestionState>("questions").Where(s => s.Status == "completed"))
-                {
-                    if (state.Question is null) throw new InvalidDataException("Completed state has no question.");
-                    GenkiPracticeService.ValidateQuestion(state.Question, catalog, fullVocabulary);
-                    if (!state.Stages.TryGetValue("A-candidate", out var rendered)) throw new InvalidDataException("Missing canonical provenance.");
-                    var candidate = rendered.Deserialize<Candidate>(GenkiJson.Options)!;
-                    var schema = catalog.Schemas.Single(s => s.Id == state.SchemaId);
-                    var current = GenkiJson.Fingerprint(new { schema, words = candidate.RequiredWords.Select(w => fullVocabulary.Resolve(w).ModelInput) });
-                    if (current != state.InputFingerprint) throw new InvalidDataException($"Stale candidate {state.CandidateId}; reprocess before publication.");
-                }
-                store.ExportBank(output); Console.WriteLine($"Published completed questions to {output}"); return 0;
+                QuestionBankPublisher.Publish(store, catalog, fullVocabulary, output);
+                Console.WriteLine($"Published completed questions to {output}"); return 0;
             }
             var words = Values(flags, "words").Select(ParseWord).ToArray();
             foreach (var word in words) fullVocabulary.Resolve(word);

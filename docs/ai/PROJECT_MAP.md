@@ -11,6 +11,7 @@ the complete automated-test solution is at the repository root:
 | [`RealJapanese.Mobile.sln`](../../RealJapanese/RealJapanese.Mobile.sln) | Android host plus shared UI and data libraries |
 | [`RealJapanese.Shared.sln`](../../RealJapanese/RealJapanese.Shared.sln) | Shared UI/data work plus unit, integration and component tests |
 | [`RealJapanese.sln`](../../RealJapanese/RealJapanese.sln) | Existing web-and-utilities aggregate; intentionally excludes mobile |
+| [`RealJapanese.Genki.slnx`](../../RealJapanese.Genki.slnx) | Offline Genki generation library, CLI and local PC Studio |
 | [`RealJapanese.Tests.slnx`](../../RealJapanese.Tests.slnx) | Complete xUnit suite, including Playwright browser tests |
 
 Choose the smallest solution for the work. See the [development guide](../development.md)
@@ -24,13 +25,13 @@ for commands and prerequisites.
 | `RealJapanese/RealJapanese.Mobile/` | Android-only MAUI Blazor Hybrid host | References RealJapanese.UI; installs packaged catalogs |
 | `RealJapanese/RealJapanese.UI/` | Shared routes, study pages, reusable Razor components and static assets | References Repositories |
 | `RealJapanese/Repositories/` | Vocabulary/progress, local sync transport, question conversion and number generation | Depends on DataLoaders and WanaKanaSharp |
-| `RealJapanese/Genki.Generation/`, `RealJapanese/Genki.Tools/` | Offline semantic tagging, exhaustive sentence generation and explicit question-bank publication | Generation depends on Repositories; only Tools optionally references external AiLibrary |
+| `RealJapanese/Genki.Generation/`, `RealJapanese/Genki.Inference/`, `RealJapanese/Genki.Tools/`, `RealJapanese/Genki.Studio/` | Offline semantic tagging, sentence generation, local PC workspace and explicit question-bank publication | Generation depends on Repositories; Inference owns the optional AiLibrary adapter; Tools and Studio use Inference |
 | `RealJapanese/DataLoaders/` | JSON IO, serialized models and conjugation logic | Shared by repositories and utilities |
 | `RealJapanese/Data/` | Canonical study datasets, web progress and extracted kanji relations | Source for web and packaged mobile catalogs |
 | `tests/RealJapanese.Tests/` | Pure unit tests for study transformations and generators | xUnit v3; references Repositories and Genki.Generation |
 | `tests/RealJapanese.IntegrationTests/` | File, repository, sync, network and cleanup integration tests | Uses isolated workspaces and a child utility host |
 | `tests/RealJapanese.ComponentTests/` | Rendered shared Razor component tests | xUnit v3 and bUnit |
-| `tests/RealJapanese.WebTests/` | Real Chromium behavior against task-owned web hosts | xUnit v3 and Microsoft Playwright |
+| `tests/RealJapanese.WebTests/` | Real Chromium behavior against task-owned learner and Studio hosts | xUnit v3 and Microsoft Playwright |
 | `tests/RealJapanese.TestSupport/`, `tests/RealJapanese.UtilityHost/` | Shared disposable-workspace support and guarded cleanup entry point | Support projects, not test suites |
 | `tests/manual/` | Reusable application and device regression scenarios | Records automated/manual boundaries; [catalog](../../tests/manual/README.md) |
 | `RealJapanese/CheckDataForDuplicates/` | Console cleanup utility | Rewrites word IDs and corresponding progress |
@@ -49,13 +50,15 @@ Paths below are relative to the repository root. All projects target .NET 10.
 | `RealJapanese/Repositories/Repositories.csproj` | Library / `net10.0` | DataLoaders | Unit and integration tests |
 | `RealJapanese/DataLoaders/DataLoaders.csproj` | Library / `net10.0` | None | Unit and integration tests |
 | `RealJapanese/Genki.Generation/Genki.Generation.csproj` | Offline library / `net10.0` | Repositories | Bounded unit fixtures; no live models |
-| `RealJapanese/Genki.Tools/Genki.Tools.csproj` | Offline batch executable / `net10.0` | Genki.Generation; optional external AiLibrary | Controlled CLI/model checks |
+| `RealJapanese/Genki.Inference/Genki.Inference.csproj` | Model configuration/inference library / `net10.0` (external AiLibrary optional) | Genki.Generation | Deterministic checks without the external checkout; model checks require it |
+| `RealJapanese/Genki.Tools/Genki.Tools.csproj` | Offline batch executable / `net10.0` | Genki.Inference | Controlled CLI/model checks |
+| `RealJapanese/Genki.Studio/Genki.Studio.csproj` | Local PC web executable / `net10.0` | Genki.Inference | Playwright Studio browser checks |
 | `RealJapanese/CheckDataForDuplicates/CheckDataForDuplicates.csproj` | Console utility / `net10.0` | DataLoaders | Isolated integration tests through UtilityHost |
 | `RealJapanese/Extract kanji/Extract kanji.csproj` | Console utility / `net10.0` | DataLoaders; external AiLibrary projects | None found |
 | `tests/RealJapanese.Tests/RealJapanese.Tests.csproj` | xUnit executable / `net10.0` | Repositories; Genki.Generation | Unit and isolated pipeline tests |
-| `tests/RealJapanese.IntegrationTests/RealJapanese.IntegrationTests.csproj` | xUnit executable / `net10.0` | TestSupport; UtilityHost (build only) | File/process/network integration |
+| `tests/RealJapanese.IntegrationTests/RealJapanese.IntegrationTests.csproj` | xUnit executable / `net10.0` | TestSupport; Genki.Studio/Generation/Inference; UtilityHost (build only) | File/process/network and Studio queue integration |
 | `tests/RealJapanese.ComponentTests/RealJapanese.ComponentTests.csproj` | Razor xUnit executable / `net10.0` | RealJapanese.UI; TestSupport | bUnit component tests |
-| `tests/RealJapanese.WebTests/RealJapanese.WebTests.csproj` | xUnit executable / `net10.0` | TestSupport; web host (build only) | Playwright Chromium tests |
+| `tests/RealJapanese.WebTests/RealJapanese.WebTests.csproj` | xUnit executable / `net10.0` | TestSupport; learner and Studio hosts (build only) | Playwright Chromium tests |
 
 No CI pipeline was found. The local automated suite and its setup are documented in
 [testing](../testing.md). `tooling/verify-*` and ignored `.tooling/scratch/` fixtures
@@ -73,7 +76,7 @@ verify tools, not the app.
 | Shared routes and navigation | `RealJapanese/RealJapanese.UI/Components/Routes.razor`, `Layout/NavMenu.razor` |
 | Shared study pages | `RealJapanese/RealJapanese.UI/Components/Pages/` |
 | Kana selection, settings and study | `RealJapanese/RealJapanese.UI/Components/Pages/Kana/`; catalog/session in `RealJapanese/Repositories/Kana/` |
-| Genki recaps, stored practice and offline generation | `RealJapanese/RealJapanese.UI/Components/Pages/Genki/`; curriculum/schemas/bank reader in `RealJapanese/Repositories/Genki/`; `Genki.Generation/` and `Genki.Tools/` own offline work; [contracts and commands](../genki.md) |
+| Genki recaps, stored practice and offline generation | `RealJapanese/RealJapanese.UI/Components/Pages/Genki/`; curriculum/schemas/bank reader in `RealJapanese/Repositories/Genki/`; `Genki.Generation/`, `Genki.Inference/`, `Genki.Tools/` and `Genki.Studio/` own offline work; [contracts and commands](../genki.md) |
 | Shared practice lifecycle | `RealJapanese/RealJapanese.UI/Components/Shared/PracticeBase.cs`, `PracticeShell.razor` |
 | Local sync UI | `RealJapanese/RealJapanese.UI/Components/Pages/Sync.razor` |
 | Storage paths and persistence | `RealJapanese/Repositories/RepositoryPaths.cs`, `Bases/WordDataBase.cs`, `Sync/ProgressStore.cs` |

@@ -5,7 +5,7 @@ using Genki.Generation;
 using AiLibrary.LlamaServer;
 #endif
 
-namespace Genki.Tools;
+namespace Genki.Inference;
 
 public sealed record AiLibraryOptions
 {
@@ -24,8 +24,16 @@ public sealed record AiLibraryOptions
     public int MaxConcurrentRequests { get; init; } = 1;
 }
 
-public sealed class AiLibraryModels : IGenkiModels, IAsyncDisposable
+public interface IGenkiModelSession : IGenkiModels, IAsyncDisposable;
+
+public sealed class AiLibraryModels : IGenkiModelSession
 {
+    public static bool IsAvailable =>
+#if AILIBRARY
+        true;
+#else
+        false;
+#endif
     private readonly AiLibraryOptions _options;
     private readonly TimeSpan _timeout;
 
@@ -178,7 +186,7 @@ public sealed class AiLibraryModels : IGenkiModels, IAsyncDisposable
 #endif
     }
 
-    private static void ValidateOptions(AiLibraryOptions options)
+    public static void ValidateOptions(AiLibraryOptions options)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(options.ModelsDirectory);
         if (!Path.IsPathFullyQualified(options.ModelsDirectory))
@@ -218,7 +226,7 @@ public sealed class AiLibraryModels : IGenkiModels, IAsyncDisposable
     private static NotSupportedException MissingAiLibrary()
         => new(
             "Live model support is unavailable because AiLibrary was not included at build time. " +
-            "Set AiLibraryRoot (or AI_LIBRARY_ROOT) to the Ai library checkout and rebuild Genki.Tools.");
+            "Set AiLibraryRoot (or AI_LIBRARY_ROOT) to the Ai library checkout and rebuild Genki.Tools or Genki.Studio.");
 
 #if AILIBRARY
     private AiLibrary.IAiModelService GetService()

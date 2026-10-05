@@ -22,7 +22,9 @@ production run is an explicit operator action after review.
 | `Repositories/Genki/Content/grammar-material.json` | Grammatical literals and the points that introduce them |
 | `Repositories/Genki/Schemas/lesson-*.json` | Structural generation definitions |
 | `Genki.Generation` | Lazy candidate enumeration, tagging, checkpoints and the offline A–H pipeline |
-| `Genki.Tools` | Independently runnable `tag` and `generate` workflows and the isolated AiLibrary adapter |
+| `Genki.Inference` | Shared configuration and optional AiLibrary model adapter used by the offline tools |
+| `Genki.Tools` | Independently runnable `tag`, `generate`, scan/status and publication workflows |
+| `Genki.Studio` | Local PC browser workspace for configuration, scoped jobs, progress, review and explicit publication |
 | `Repositories/Genki/GenkiPracticeService.cs` | Stored-question selection and deterministic comparison |
 
 Paths in this table are below `RealJapanese/`. Existing vocabulary remains in
@@ -40,6 +42,65 @@ and annotations exist. This is not a completed-coverage claim. Fixed references
 must resolve to source entries; no model-created vocabulary is inserted.
 
 ## Build and configuration
+
+### PC workspace
+
+On Windows, double-click [Start Genki Studio.cmd](../Start%20Genki%20Studio.cmd)
+from the repository root. It requires PowerShell 7 and the .NET 10 SDK, builds the Studio, starts
+the local server at `http://127.0.0.1:5278`, and opens the browser when the page is
+ready. Keep its console window open while using the workspace; press Ctrl+C there
+to stop the server. The launcher stops only the server process it started.
+It detects AiLibrary from `AI_LIBRARY_ROOT` or the existing extraction project
+reference. If AiLibrary is unavailable, Studio still opens for setup, coverage
+scans and review, while model tagging and generation are disabled. No job is
+started or resumed automatically at launch.
+
+The default configuration and generation state live under the ignored `.tooling/`
+directory. Open **Configuration → Show and edit configuration** to set the data root,
+state root, question-bank publish path and model settings, then save them. Paths
+are resolved relative to the configuration file. `AI_MODELS_DIRECTORY` or the
+legacy `AI_MODELS_PATH` initializes the model directory when creating a new
+configuration; you can also set it in the workspace. Set `GENKI_STUDIO_CONFIG`
+or pass `-ConfigFile <path>` to the launcher to use another config file. Use
+`-NoBrowser` to keep the server in the console without opening a browser, or
+`-Url http://127.0.0.1:<port>` to use another loopback port when the default is
+already occupied.
+
+A safe first run is:
+
+1. Save the local paths and model settings in Workspace configuration.
+2. Tag only a small selected group of words, then inspect uncertain and failed
+   tag evaluations before relying on semantic filters.
+3. Select a lesson, grammar pattern and a small vocabulary subset. Run **Scan
+   coverage · no models** first. A bounded scan reports visited and unseen
+   combinations; only a completed scan gives an exact count for its recorded
+   scope. The last scan can become stale if the vocabulary, schemas or tags change.
+4. Queue a bounded **Generate questions** run. The job card shows examined
+   candidates and completed, review, rejected and failed counts. You can pause,
+   resume or cancel; successful stages are saved. On application restart, active
+   jobs are paused and require an explicit Resume.
+5. Load and review generated questions. Use **Review publication** to confirm the
+   configured destination, then explicitly publish. Cancelling the confirmation
+   leaves the learner bank untouched. **Regenerate selected scope** first asks
+   for confirmation and archives the old checkpoints; it does not rewrite the
+   learner bank.
+
+The pattern **Queue status** filter describes generation jobs for a schema. A
+coverage scan is recorded as a job and updates scan coverage, but does not mark a
+pattern as queued for generation. Upper bounds are approximate before traversal;
+partial scans never label unvisited candidates complete.
+
+Jobs retain the configuration saved when they were queued. Pause or cancel active
+and queued jobs before changing settings. A larger coverage scan recounts its
+selected scope from the beginning; generation resumes using successful checkpoints.
+Use **Run exhaustive coverage** only when you deliberately want to remove both
+run limits. **Previously queued** records job history, not proof of complete
+candidate coverage.
+
+Studio is a local PC web app separate from the learner-facing web and Android
+hosts. It binds only to loopback and does not add model inference to practice.
+
+### Command line
 
 The app and deterministic tests do not reference AiLibrary. Build the offline tool
 with the external checkout explicitly supplied (PowerShell, repository root):

@@ -29,6 +29,7 @@ dotnet test tests/RealJapanese.Tests/RealJapanese.Tests.csproj
 dotnet test tests/RealJapanese.IntegrationTests/RealJapanese.IntegrationTests.csproj
 dotnet test tests/RealJapanese.ComponentTests/RealJapanese.ComponentTests.csproj
 dotnet test tests/RealJapanese.WebTests/RealJapanese.WebTests.csproj --filter FullyQualifiedName~SyncPreviewBrowserTests
+dotnet test tests/RealJapanese.WebTests/RealJapanese.WebTests.csproj --filter FullyQualifiedName~GenkiStudioBrowserTests
 ```
 
 Run from a built checkout using the normal `bin/<configuration>/net10.0` layout.
@@ -47,7 +48,7 @@ are support projects, not additional test frameworks or manual tests.
 | `RealJapanese.Tests` | Pure transformations, categories, chunks, conjugation, Genki forms/pipeline and number generators |
 | `RealJapanese.IntegrationTests` | JSON files, repositories, atomic progress, migration, sync merge/recovery, real socket protocol/discovery, duplicate-cleanup process |
 | `RealJapanese.ComponentTests` | Rendered Razor selectors, routes, answers, retry/chunk state and reusable controls through bUnit |
-| `RealJapanese.WebTests` | Browser JavaScript, keyboard/focus, responsive CSS, persisted selections and two-host sync through Playwright |
+| `RealJapanese.WebTests` | Browser JavaScript, keyboard/focus, responsive CSS, persisted selections, two-host sync and the isolated Genki Studio workspace through Playwright |
 
 xUnit runs independent test classes in parallel. Each test owns its mutable data,
 component/service context and sockets; TCP and HTTP listeners use OS-assigned
@@ -96,9 +97,11 @@ not imply that production questions have been published. `GenkiTests`,
 `GenkiPipelineTests` and `GenkiFormsTests` validate controlled schemas, pipeline
 behavior and form rendering. `GenkiSourceCoverageIntegrationTests` scans fixed
 references and form availability against real catalogs without enumerating sentences.
-Full exhaustive generation is an explicit operator
-workflow documented in [Genki offline generation and practice](genki.md), not part
-of routine test execution.
+`GenkiStudioTests` and `GenkiStudioBrowserTests` use disposable configuration,
+vocabulary, state and publish paths; their scans do not invoke live models or write
+the canonical bank. Full exhaustive generation is an explicit operator workflow
+documented in [Genki offline generation and practice](genki.md), not part of routine
+test execution.
 
 ## Adding coverage
 

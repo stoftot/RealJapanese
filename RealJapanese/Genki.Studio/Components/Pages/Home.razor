@@ -1,0 +1,405 @@
+@page "/"
+@implements IDisposable
+@inject StudioCoordinator Coordinator
+@inject IJSRuntime JS
+<PageTitle>Genki Studio · generation workspace</PageTitle>
+
+<main class="studio-page">
+    <section class="welcome" id="dashboard">
+        <div>
+            <div class="eyebrow">GENKI I · THIRD EDITION</div>
+            <h1>Your generation workspace</h1>
+            <p>Choose the grammar and vocabulary to work on. Jobs resume from saved checkpoints, and nothing runs until you start it.</p>
+        </div>
+        <div class="welcome-actions"><button class="button button-quiet" @onclick="Refresh" disabled="@BusyUi">↻ <span>Refresh data</span></button><span class="refresh-stamp">@LastRefreshed</span></div>
+    </section>
+
+    @if (snapshot is null)
+    {
+        <section class="loading-card"><span class="spinner"></span><div><strong>Opening local workspace</strong><p>Reading configuration, curriculum and saved generation state.</p></div></section>
+    }
+    else
+    {
+        @if (snapshot.Errors.Length > 0)
+        {
+            <div class="notice notice-error" role="alert"><strong>Workspace needs attention</strong><ul>@foreach (var error in snapshot.Errors) { <li>@error</li> }</ul></div>
+        }
+        @if (!snapshot.InferenceAvailable)
+        {
+            <div class="notice notice-warn" role="status"><strong>Model generation is not available in this build.</strong> Coverage scans and review remain available. Configure the local AiLibrary build to enable vocabulary tagging and question generation.</div>
+        }
+        @if (!string.IsNullOrWhiteSpace(message))
+        {
+            <div class="notice @(messageIsError ? "notice-error" : "notice-success")" role="status">@message<button class="notice-close" @onclick="() => message = null" aria-label="Dismiss">×</button></div>
+        }
+
+        <section class="metric-grid" aria-label="Generation totals">
+            <article class="metric-card"><div class="metric-label">SCHEMAS</div><div class="metric-value">@snapshot.Schemas.Length</div><div class="metric-foot">Across 12 Genki lessons</div><span class="metric-icon purple">文</span></article>
+            <article class="metric-card"><div class="metric-label">RECORDED</div><div class="metric-value">@snapshot.Schemas.Sum(x => x.Recorded).ToString("N0")</div><div class="metric-foot">Candidate checkpoints</div><span class="metric-icon blue">▤</span></article>
+            <article class="metric-card"><div class="metric-label">COMPLETED</div><div class="metric-value">@snapshot.Schemas.Sum(x => x.Completed).ToString("N0")</div><div class="metric-foot">Ready for review</div><span class="metric-icon green">✓</span></article>
+            <article class="metric-card"><div class="metric-label">IN PROGRESS</div><div class="metric-value">@snapshot.Jobs.Count(x => IsActive(x.Status))</div><div class="metric-foot">Local job queue</div><span class="metric-icon amber">◷</span></article>
+        </section>
+
+        <section class="panel" id="generate">
+            <div class="section-heading"><div><div class="eyebrow">PLAN A RUN</div><h2>Choose what to generate</h2><p>Start with a small batch, inspect the results, then expand the scope.</p></div><span class="step-tag"><span>1</span> Select scope</span></div>
+            <div class="selection-layout">
+                <div class="selection-main">
+                    <div class="form-row two-col">
+                        <label class="field"><span>Lesson</span><select @bind="selectedLesson" @bind:after="LessonChanged"><option value="0">All lessons</option>@foreach (var lesson in LessonOptions) { <option value="@lesson.Lesson">Lesson @lesson.Lesson · @lesson.LessonTitle</option> }</select></label>
+                        <label class="field"><span>Grammar point</span><select @bind="selectedGrammar"><option value="">All grammar points</option>@foreach (var point in GrammarOptions) { <option value="@point.GrammarId">@point.GrammarTitle</option> }</select></label>
+                    </div>
+                    <div class="schema-heading"><div><h3>Generation patterns <span class="count-chip">@FilteredSchemas.Length</span></h3><p>Select the patterns to include in this run.</p></div><div class="inline-actions"><button class="text-button" @onclick="SelectVisibleSchemas">Select visible</button><span>·</span><button class="text-button" @onclick="ClearSchemas">Clear</button></div></div>
+                    <div class="schema-filters"><label class="search-field"><span aria-hidden="true">⌕</span><input placeholder="Search pattern, grammar or ID" @bind="schemaSearch" @bind:event="oninput" /></label><label class="field"><span>Queue status</span><select @bind="queueFilter"><option value="">All states</option><option>Not queued</option><option>Queued</option><option>Running</option><option>Paused</option><option>Previously queued</option></select></label></div>
+                    <div class="schema-table-wrap"><table class="data-table schema-table"><thead><tr><th class="check-cell"><span class="sr-only">Select schema</span></th><th>Pattern & grammar</th><th>Shape</th><th>Recorded</th><th>Coverage</th></tr></thead><tbody>
+                    @if (FilteredSchemas.Length == 0) { <tr><td colspan="5" class="empty-cell">No generation patterns match these filters.</td></tr> }
+                    @foreach (var row in FilteredSchemas)
+                    {
+                        var selected = selectedSchemas.Contains(row.Id);
+                        <tr class="@(selected ? "selected-row" : "")">
+                            <td class="check-cell"><input type="checkbox" aria-label="Include @row.Id" checked="@selected" @onchange="e => ToggleSchema(row.Id, e.Value is true)" /></td>
+                            <td><div class="pattern-name">@row.GrammarTitle</div><div class="subtle">L@(row.Lesson) · @row.GrammarId · @row.Id</div></td>
+                            <td><span class="shape-text">@row.Pattern</span></td>
+                            <td><strong>@row.Recorded.ToString("N0")</strong><div class="subtle">@row.Completed complete</div></td>
+                            <td>@CoverageLabel(row)<div class="subtle">Queue: @row.QueueStatus</div><div class="subtle">Scope: @(row.Coverage?.Scope ?? "Not scanned")</div><div class="subtle">Pre-relation upper bound: @row.CandidateUpperBound</div></td>
+                        </tr>
+                    }
+                    </tbody></table></div>
+                    <div class="scope-note"><span class="info-icon">i</span><span><strong>Coverage shows the last scan for its recorded scope.</strong> A bounded scan can be partial. The pre-relation upper bound ignores compatibility rules and is not an exact total.</span></div>
+                </div>
+                <aside class="scope-sidebar">
+                    <div class="side-card">
+                        <div class="side-card-heading"><div><h3>Vocabulary scope</h3><p>Choose words available to the selected patterns.</p></div><span class="mini-icon">あ</span></div>
+                        <label class="search-field"><span aria-hidden="true">⌕</span><input placeholder="Search Japanese or English" @bind="wordSearch" @bind:event="oninput" /></label>
+                        <div class="tag-aggregate" aria-label="Semantic tag coverage summary"><strong>Tag coverage</strong><span>@NeedsTaggingWordCount words need tagging</span><span>@NeedsReviewWordCount need review</span><span>@UncertainWordCount uncertain</span><span>@FailedWordCount failed</span></div>
+                        <label class="field tag-filter"><span>Tag coverage filter</span><select @bind="tagCoverageFilter"><option value="">All words</option><option value="needs-tagging">Needs tagging</option><option value="needs-review">Needs review</option><option value="uncertain">Uncertain</option><option value="failed">Failed</option></select></label>
+                        <label class="check-option all-option"><input type="checkbox" aria-label="Use all vocabulary" checked="@allWords" @onchange="e => SetAllWords(e.Value is true)" /><span><strong>Use all vocabulary</strong><small>Let each pattern apply its word filters</small></span></label>
+                        @if (!allWords)
+                        {
+                            <div class="word-list">
+                                @foreach (var word in FilteredWords.Take(80))
+                                {
+                                    var wordKey = WordKey(word.Reference);
+                                    var tagCoverage = CoverageFor(word);
+                                    <label class="word-option"><input type="checkbox" aria-label="Select @word.Japanese · @word.English" checked="@selectedWords.Contains(wordKey)" @onchange="e => ToggleWord(wordKey, e.Value is true)" /><span class="word-japanese" lang="ja">@word.Japanese</span><span class="word-english">@word.English</span><span class="tag-coverage-chips" aria-label="Semantic tag evaluation counts">@TagCount("Match", tagCoverage.Matches, "tag-match")@TagCount("No match", tagCoverage.DoesNotMatch, "tag-negative")@TagCount("Uncertain", tagCoverage.Uncertain, "tag-uncertain")@TagCount("Failed", tagCoverage.Failed, "tag-failed")@TagCount("Pending", tagCoverage.Pending, "tag-pending")@TagCount("Not evaluated", tagCoverage.NotEvaluated, "tag-unevaluated")@if (tagCoverage.NeedsReview) { <span class="tag-chip tag-review">Review required</span> }</span>@if (!string.IsNullOrWhiteSpace(tagCoverage.Reason)) { <span class="tag-reason">@tagCoverage.Reason</span> }</label>
+                                }
+                                @if (FilteredWords.Length > 80) { <p class="list-hint">Showing 80 of @FilteredWords.Length matches. Refine your search.</p> }
+                                @if (FilteredWords.Length == 0) { <p class="list-hint">No vocabulary matches this search.</p> }
+                            </div>
+                            <div class="selection-count">@selectedWords.Count selected <button class="text-button" @onclick="SelectVisibleWords">Select visible</button></div>
+                        }
+                    </div>
+                </aside>
+            </div>
+            <div class="run-options">
+                <div class="run-options-title"><span class="step-number">2</span><div><h3>Run options</h3><p>Control the work size and how existing checkpoints are handled.</p></div></div>
+                <div class="options-grid">
+                    <label class="field"><span>Action</span><select @bind="runKind" @bind:after="RunKindChanged"><option value="generate">Generate questions</option><option value="scan">Scan coverage · no models</option><option value="tag">Tag vocabulary</option></select></label>
+                    <label class="field"><span>Checkpoint behavior</span><select @bind="runMode" disabled="@(runKind == "scan")"><option value="resume">Resume unfinished work</option><option value="retry-failed">Retry failed work</option>@if (runKind is "generate" or "tag") { <option value="regenerate">Regenerate selected scope</option> }</select></label>
+                    <label class="field"><span>@(runKind == "tag" ? "Request group limit" : "Candidate limit")</span><input type="number" min="1" @bind="limit" disabled="@exhaustive" /></label>
+                    <label class="field"><span>Time limit · minutes</span><input type="number" min="0.1" step="0.5" @bind="minutes" disabled="@exhaustive" /></label>
+                </div>
+                @if (runKind == "tag")
+                {
+                    <div class="tag-select"><strong>Semantic tags</strong><div class="tag-list">@foreach (var tag in snapshot.Tags) { <label><input type="checkbox" checked="@selectedTags.Contains(tag.Id)" @onchange="e => ToggleTag(tag.Id, e.Value is true)" /><span>@tag.Name</span></label> }</div><small>Leave all unchecked to evaluate every configured tag.</small></div>
+                }
+                <label class="check-option exhaustive-option"><input type="checkbox" @bind="exhaustive" /><span><strong>Run exhaustive coverage</strong><small>Removes batch and time limits. Use after reviewing a small sample.</small></span></label>
+                <div class="run-footer"><div class="scope-summary"><strong>@selectedSchemas.Count patterns</strong><span>·</span><span>@(allWords ? "All eligible vocabulary" : $"{selectedWords.Count} selected words")</span><span>·</span><span>@RunDescription</span></div><button class="button button-primary" @onclick="PrepareRun" disabled="@(!CanPrepareRun || BusyUi)">@(runMode == "regenerate" ? "Review regeneration" : "Queue run") <span aria-hidden="true">→</span></button></div>
+            </div>
+        </section>
+
+        @if (pendingRequest is not null)
+        {
+            <section class="confirmation-card" role="alertdialog" aria-labelledby="confirm-title" @ref="confirmationSection">
+        <div class="confirm-symbol">@(pendingRequest.Kind == "publish" ? "⇧" : "↻")</div><div class="confirm-copy"><h2 id="confirm-title" tabindex="-1" @ref="confirmationHeading">@(pendingRequest.Kind == "publish" ? "Confirm publication" : "Confirm regeneration")</h2>
+                    @if (pendingRequest.Kind == "publish") { <p>This will replace the question bank at <code>@pendingPublishPath</code> with all completed output (@CompletedQuestionCount completed questions). The current bank stays unchanged until you confirm.@if (CompletedQuestionCount == 0) { <strong> No completed questions are recorded, so this will publish an empty bank.</strong> }</p> }
+                    else { <p>This archives and resets recorded @(pendingRequest.Kind == "tag" ? "vocabulary tag evaluations" : "question candidates") for @RegenerationScope(pendingRequest). Previously completed results in that scope will be replaced as the run progresses.</p> }
+                    <div class="confirm-actions"><button class="button button-danger" @onclick="ConfirmPending" disabled="@BusyUi">@(pendingRequest.Kind == "publish" ? "Publish completed questions" : "Regenerate selected scope")</button><button class="button button-quiet" @onclick="CancelPending">Cancel</button></div>
+                </div>
+            </section>
+        }
+
+        <section class="panel" id="jobs" @ref="jobsSection">
+            <div class="section-heading compact-heading"><div><div class="eyebrow">LIVE QUEUE</div><h2 @ref="jobsHeading" tabindex="-1">Generation jobs</h2><p>Progress and recent activity update automatically.</p></div><div class="live-status"><span class="pulse-dot"></span> Live</div></div>
+            @if (snapshot.Jobs.Length == 0) { <div class="empty-state"><span class="empty-icon">◷</span><strong>No jobs yet</strong><p>Choose a scope above and queue a run when you are ready.</p></div> }
+            else
+            {
+                <div class="jobs-list">@foreach (var job in snapshot.Jobs.OrderByDescending(x => x.CreatedAt))
+                {
+                    var total = job.Limit;
+                    var hasBudgetProgress = total is > 0;
+                    var pct = hasBudgetProgress ? (int)Math.Clamp(100d * job.Summary.Examined / total!.Value, 0, 100) : 0;
+                    var animateProgress = !hasBudgetProgress && (job.Status is "queued" or "running");
+                    <article class="job-card"><div class="job-top"><div><div class="job-title-row"><h3>@JobTitle(job)</h3><span class="status-pill @StatusClass(job.Status)">@job.Status</span></div><div class="subtle">Started @job.CreatedAt.ToLocalTime().ToString("MMM d · HH:mm") · @job.Scope</div></div><div class="job-controls">
+                        @if (job.Status == "running" && job.Kind != "publish") { <button class="button button-small button-quiet" @onclick="() => RunJobAction(() => Coordinator.PauseAsync(job.Id))">Pause</button> }
+                        @if (job.Status == "paused") { <button class="button button-small button-quiet" @onclick="() => RunJobAction(() => Coordinator.ResumeAsync(job.Id))">Resume</button> }
+                        @if (job.Status == "failed") { <button class="button button-small button-quiet" @onclick="() => RunJobAction(() => Coordinator.ResumeAsync(job.Id))">Retry failed stages</button> }
+                        @if ((job.Status is "queued" or "paused") || job.Status == "running" && job.Kind != "publish") { <button class="button button-small button-quiet" @onclick="() => RunJobAction(() => Coordinator.CancelAsync(job.Id))">Cancel</button> }
+                    </div></div>
+                    <div class="progress-line"><div class="progress-track @(animateProgress ? "indeterminate" : "")"><div class="progress-fill" style="width:@(hasBudgetProgress ? $"{pct}%" : "35%")"></div></div><strong>@JobProgress(job, total)</strong></div>
+                    <div class="job-counts"><span><i class="count-dot complete-dot"></i>@job.Summary.Completed @(job.Kind == "tag" ? "evaluated pairs" : "complete")</span><span><i class="count-dot review-dot"></i>@job.Summary.NeedsReview review</span><span><i class="count-dot rejected-dot"></i>@job.Summary.Rejected rejected</span><span><i class="count-dot failed-dot"></i>@job.Summary.Failed failed</span><span><i class="count-dot pending-dot"></i>@job.Summary.Reused reused</span></div>
+                    <div class="activity-line"><span class="activity-pulse"></span><span>@job.Activity</span><time>@job.UpdatedAt.ToLocalTime().ToString("HH:mm:ss")</time></div>
+                    @if (!string.IsNullOrWhiteSpace(job.Error)) { <div class="job-error">@job.Error</div> }
+                    </article>
+                }</div>
+            }
+        </section>
+
+        <section class="panel" id="review">
+            <div class="section-heading compact-heading"><div><div class="eyebrow">QUALITY GATE</div><h2>Review generated questions</h2><p>Inspect model decisions and completed examples before publishing.</p></div><button class="button button-quiet" @onclick="LoadReview" disabled="@BusyUi">Load questions</button></div>
+            <div class="review-filters"><label class="field"><span>Grammar pattern</span><select @bind="reviewSchema"><option value="">All patterns</option>@foreach (var row in snapshot.Schemas) { <option value="@row.Id">L@(row.Lesson) · @row.GrammarTitle · @row.Id</option> }</select></label><label class="field"><span>Result</span><select @bind="reviewStatus"><option value="">All statuses</option><option value="completed">Completed</option><option value="needs-review">Needs review</option><option value="rejected">Rejected</option><option value="failed">Failed</option></select></label><button class="button button-secondary" @onclick="LoadReview" disabled="@BusyUi">Apply filters</button></div>
+            @if (reviewPage is not null)
+            {
+                @if (reviewPage.Questions.Length == 0) { <div class="empty-state small-empty"><strong>No questions found</strong><p>Try another result filter or generate a small sample first.</p></div> }
+                else
+                {
+                    <div class="review-list">@foreach (var question in reviewPage.Questions)
+                    {
+                        <article class="review-row"><div class="review-main"><div class="review-top"><span class="status-pill @StatusClass(question.Status)">@question.Status</span><span class="subtle">@question.SchemaId · @question.Id</span></div><h3>@(question.English ?? "English prompt not completed")</h3>@if (!string.IsNullOrWhiteSpace(question.Japanese)) { <p class="japanese-answer" lang="ja">@question.Japanese</p> }@if (!string.IsNullOrWhiteSpace(question.Kana)) { <p class="kana-answer" lang="ja">@question.Kana</p> }@if (!string.IsNullOrWhiteSpace(question.Reason)) { <p class="review-reason"><strong>Reason:</strong> @question.Reason</p> }</div>
+                        <button class="text-button details-button" @onclick="() => ShowDetails(question.Id)">@(details.ContainsKey(question.Id) ? "Hide details" : "Stage details")</button>
+                        @if (details.TryGetValue(question.Id, out var json)) { <pre class="details-json">@json</pre> }
+                        </article>
+                    }</div>
+                    <div class="pagination-row"><span>Showing @reviewPage.Questions.Length questions</span><button class="button button-small button-quiet" @onclick="LoadMoreReview" disabled="@(!reviewPage.HasMore || BusyUi)">Load more</button></div>
+                }
+            }
+            else { <div class="review-placeholder"><span>☷</span><p>Load the saved question states to review completed, rejected, failed and review-needed candidates.</p></div> }
+            <div class="publish-callout"><div><span class="publish-icon">⇧</span><span><strong>Publish completed questions</strong><small>Write completed results to the saved learning-app question bank path.</small></span></div><button class="button button-secondary" @onclick="PreparePublish" disabled="@BusyUi">Review publication <span aria-hidden="true">→</span></button></div>
+        </section>
+
+        <section class="panel settings-panel" id="settings">
+            <div class="section-heading compact-heading"><div><div class="eyebrow">LOCAL SETUP</div><h2>Workspace configuration</h2><p>Paths and model settings are stored for this PC.</p></div><span class="config-status">@(snapshot.InferenceAvailable ? "● Model adapter compiled" : "● Inspection & scan only")</span></div>
+            <div class="config-file"><span>Configuration file</span><code>@snapshot.ConfigurationFile</code><button class="text-button" @onclick="ShowConfigPath">Show path</button></div>
+            <details class="settings-details"><summary>Show and edit configuration</summary>
+                <div class="settings-form">
+                    <div class="settings-subhead"><h3>Paths</h3><p>Data and state stay separate from the learner-facing question bank.</p></div>
+                    <div class="options-grid settings-grid"><label class="field"><span>Data root</span><input @bind="settings.DataRoot" /></label><label class="field"><span>State root</span><input @bind="settings.StateRoot" /></label><label class="field full-field"><span>Publish path</span><input @bind="settings.PublishPath" /></label><label class="field"><span>Models directory</span><input @bind="settings.ModelsDirectory" /></label><label class="field"><span>Model server executable · optional</span><input @bind="settings.ServerExecutable" placeholder="Find on PATH" /></label></div>
+                    <div class="settings-subhead"><h3>Models & generation</h3><p>Inference is local. Context sizes should exceed the configured output tokens.</p></div>
+                    <div class="options-grid settings-grid"><label class="field"><span>Qwen model ID</span><input @bind="settings.QwenModelId" /></label><label class="field"><span>Translation model ID</span><input @bind="settings.TranslationModelId" /></label><label class="field"><span>Qwen model file · optional</span><input @bind="settings.QwenModelFile" /></label><label class="field"><span>Translation model file · optional</span><input @bind="settings.TranslationModelFile" /></label><label class="field"><span>Qwen context size</span><input type="number" @bind="settings.QwenContextSize" /></label><label class="field"><span>Translation context size</span><input type="number" @bind="settings.TranslationContextSize" /></label><label class="field"><span>Temperature</span><input type="number" step="0.05" @bind="settings.Temperature" /></label><label class="field"><span>Maximum output tokens</span><input type="number" @bind="settings.MaxTokens" /></label><label class="field"><span>Request timeout · seconds</span><input type="number" @bind="settings.TimeoutSeconds" /></label><label class="field"><span>GPU layers · optional</span><input type="number" @bind="settings.GpuLayers" /></label><label class="field"><span>Retry attempts</span><input type="number" @bind="settings.MaxAttempts" /></label><label class="field"><span>Tag group size</span><input type="number" @bind="settings.TagGroupSize" /></label><label class="field"><span>Alternative answers</span><input type="number" @bind="settings.AlternativeLimit" /></label><label class="field"><span>Delay between requests · ms</span><input type="number" @bind="settings.DelayMilliseconds" /></label></div>
+                    <div class="settings-actions"><button class="button button-primary" @onclick="SaveSettings" disabled="@(BusyUi || snapshot.Busy)">Save configuration</button><button class="button button-quiet" @onclick="Refresh" disabled="@BusyUi">Reload values</button></div>
+                </div>
+            </details>
+        </section>
+        <footer class="studio-footer"><span>GENKI STUDIO <span class="footer-sep">·</span> LOCAL GENERATION WORKSPACE</span><span>Generated questions require review before publication.</span></footer>
+    }
+</main>
+
+@code {
+    private StudioSnapshot? snapshot;
+    private Dictionary<string, StudioTagCoverage> tagCoverageByWord = new(StringComparer.Ordinal);
+    private StudioSettings settings = new();
+    private CancellationTokenSource? polling;
+    private ElementReference confirmationSection;
+    private ElementReference confirmationHeading;
+    private ElementReference jobsSection;
+    private ElementReference jobsHeading;
+    private bool scrollToConfirmation;
+    private bool scrollToJobs;
+    private string? message;
+    private bool messageIsError;
+    private bool BusyUi;
+    private int selectedLesson;
+    private string selectedGrammar = "";
+    private readonly HashSet<string> selectedSchemas = new(StringComparer.Ordinal);
+    private bool allWords = true;
+    private string wordSearch = "";
+    private string tagCoverageFilter = "";
+    private string schemaSearch = "";
+    private string queueFilter = "";
+    private readonly HashSet<string> selectedWords = new(StringComparer.Ordinal);
+    private readonly HashSet<string> selectedTags = new(StringComparer.Ordinal);
+    private string runKind = "generate";
+    private string runMode = "resume";
+    private int? limit = 5;
+    private double? minutes = 5;
+    private bool exhaustive;
+    private StudioRequest? pendingRequest;
+    private string pendingPublishPath = "";
+    private string reviewSchema = "";
+    private string reviewStatus = "";
+    private StudioReviewPage? reviewPage;
+    private int reviewSkip;
+    private readonly Dictionary<string, string> details = new(StringComparer.Ordinal);
+
+    private StudioSchemaRow[] FilteredSchemas => (snapshot?.Schemas ?? []).Where(x => (selectedLesson == 0 || x.Lesson == selectedLesson) && (string.IsNullOrEmpty(selectedGrammar) || x.GrammarId == selectedGrammar) && (string.IsNullOrEmpty(queueFilter) || x.QueueStatus.Equals(queueFilter, StringComparison.OrdinalIgnoreCase)) && (string.IsNullOrWhiteSpace(schemaSearch) || Contains(x.Id, schemaSearch) || Contains(x.GrammarTitle, schemaSearch) || Contains(x.GrammarId, schemaSearch) || Contains(x.Pattern, schemaSearch))).ToArray();
+    private StudioSchemaRow[] LessonOptions => (snapshot?.Schemas ?? []).GroupBy(x => x.Lesson).Select(g => g.First()).OrderBy(x => x.Lesson).ToArray();
+    private StudioSchemaRow[] GrammarOptions => (snapshot?.Schemas ?? []).Where(x => selectedLesson == 0 || x.Lesson == selectedLesson).GroupBy(x => x.GrammarId).Select(g => g.First()).OrderBy(x => x.Lesson).ThenBy(x => x.GrammarTitle, StringComparer.CurrentCulture).ToArray();
+    private StudioWord[] FilteredWords => (snapshot?.Words ?? []).Where(x =>
+        (string.IsNullOrWhiteSpace(wordSearch) || Contains(x.Japanese, wordSearch) || Contains(x.Kana, wordSearch) || Contains(x.English, wordSearch) || Contains(WordKey(x.Reference), wordSearch)) && MatchesTagFilter(CoverageFor(x))).ToArray();
+    private int NeedsTaggingWordCount => (snapshot?.Words ?? []).Count(x => NeedsTagging(CoverageFor(x)));
+    private int NeedsReviewWordCount => (snapshot?.Words ?? []).Count(x => CoverageFor(x).NeedsReview);
+    private int UncertainWordCount => (snapshot?.Words ?? []).Count(x => CoverageFor(x).Uncertain > 0);
+    private int FailedWordCount => (snapshot?.Words ?? []).Count(x => CoverageFor(x).Failed > 0);
+    private long CompletedQuestionCount => (snapshot?.Schemas ?? []).Sum(x => x.Completed);
+    private string LastRefreshed => snapshot?.RefreshedAt is { } value ? $"Updated {value.ToLocalTime():HH:mm:ss}" : "Waiting for first refresh";
+    private string RunDescription => exhaustive ? "Exhaustive" : $"{(limit.HasValue ? $"Up to {limit}" : "No count limit")} · {(minutes.HasValue ? $"{minutes} min" : "No time limit")}";
+    private bool CanPrepareRun => runKind is "tag" or "publish" || selectedSchemas.Count > 0 && (allWords || selectedWords.Count > 0);
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+        polling = new CancellationTokenSource();
+        _ = PollSnapshots(polling.Token);
+    }
+
+    private async Task PollSnapshots(CancellationToken cancellationToken)
+    {
+        using var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+        try
+        {
+            while (await timer.WaitForNextTickAsync(cancellationToken))
+            {
+                var latest = Coordinator.Snapshot();
+                await InvokeAsync(() => { UpdateSnapshot(latest); StateHasChanged(); });
+            }
+        }
+        catch (OperationCanceledException) { }
+    }
+
+    private async Task Refresh()
+    {
+        await Execute(async () => { await Coordinator.RefreshAsync(); UpdateSnapshot(Coordinator.Snapshot()); settings = snapshot!.Settings; });
+    }
+
+    private async Task SaveSettings()
+    {
+        await Execute(async () => { await Coordinator.SaveSettingsAsync(settings); UpdateSnapshot(Coordinator.Snapshot()); settings = snapshot!.Settings; reviewPage = null; });
+    }
+
+    private async Task PrepareRun()
+    {
+        if (runKind == "publish") { await PreparePublish(); return; }
+        var request = BuildRequest();
+        if (runMode == "regenerate") { pendingRequest = request; scrollToConfirmation = true; return; }
+        await Enqueue(request);
+    }
+
+    private StudioRequest BuildRequest() => new()
+    {
+        Kind = runKind, Mode = runMode,
+        SchemaIds = selectedSchemas.Order(StringComparer.Ordinal).ToArray(),
+        Words = allWords ? null : selectedWords.Select(ParseWordKey).ToArray(),
+        TagIds = selectedTags.Count == 0 ? null : selectedTags.Order(StringComparer.Ordinal).ToArray(),
+        Limit = exhaustive ? null : limit, Minutes = exhaustive ? null : minutes, Exhaustive = exhaustive
+    };
+
+    private async Task PreparePublish()
+    {
+        pendingPublishPath = snapshot?.Settings.PublishPath ?? "";
+        if (string.IsNullOrWhiteSpace(pendingPublishPath)) { ShowMessage("Set a publish path in Workspace configuration before publishing.", true); return; }
+        pendingRequest = new StudioRequest { Kind = "publish", Mode = "resume", SchemaIds = [], Words = null, TagIds = null, Limit = null, Minutes = null, Exhaustive = true, ExpectedPublishPath = pendingPublishPath };
+        scrollToConfirmation = true;
+        await Task.CompletedTask;
+    }
+
+    private async Task ConfirmPending()
+    {
+        if (pendingRequest is null) return;
+        var request = pendingRequest with { ConfirmRegeneration = pendingRequest.Kind != "publish", ConfirmPublication = pendingRequest.Kind == "publish" };
+        pendingRequest = null;
+        await Enqueue(request);
+    }
+
+    private void CancelPending() => pendingRequest = null;
+
+    private async Task Enqueue(StudioRequest request)
+    {
+        var queued = false;
+        await Execute(async () => { var id = await Coordinator.EnqueueAsync(request); ShowMessage($"{JobNoun(request)} queued · {id}", false); await Coordinator.RefreshAsync(); UpdateSnapshot(Coordinator.Snapshot()); queued = true; });
+        if (queued) scrollToJobs = true;
+    }
+
+    private async Task LoadReview()
+    {
+        reviewSkip = 0; details.Clear();
+        await Execute(async () => reviewPage = await Coordinator.ReviewAsync(BlankToNull(reviewSchema), BlankToNull(reviewStatus), reviewSkip));
+    }
+
+    private async Task LoadMoreReview()
+    {
+        if (reviewPage is null || !reviewPage.HasMore) return;
+        reviewSkip = reviewPage.Questions.Length;
+        await Execute(async () => { var next = await Coordinator.ReviewAsync(BlankToNull(reviewSchema), BlankToNull(reviewStatus), reviewSkip); reviewPage = new StudioReviewPage(reviewPage.Questions.Concat(next.Questions).ToArray(), next.HasMore); });
+    }
+
+    private async Task ShowDetails(string id)
+    {
+        if (details.ContainsKey(id)) { details.Remove(id); return; }
+        await Execute(async () => details[id] = await Coordinator.DetailsAsync(id));
+    }
+
+    private async Task RunJobAction(Func<Task> action) => await Execute(async () => { await action(); await Coordinator.RefreshAsync(); UpdateSnapshot(Coordinator.Snapshot()); });
+
+    private async Task Execute(Func<Task> action)
+    {
+        BusyUi = true; message = null;
+        try { await action(); }
+        catch (Exception ex) { ShowMessage(ex.Message, true); }
+        finally { BusyUi = false; }
+    }
+
+    private void ShowMessage(string text, bool error) { message = text; messageIsError = error; }
+    private void UpdateSnapshot(StudioSnapshot latest)
+    {
+        snapshot = latest;
+        tagCoverageByWord = latest.TagCoverage.ToDictionary(x => WordKey(x.Word), StringComparer.Ordinal);
+    }
+    private void ToggleSchema(string id, bool value) { if (value) selectedSchemas.Add(id); else selectedSchemas.Remove(id); }
+    private void ToggleWord(string id, bool value) { if (value) selectedWords.Add(id); else selectedWords.Remove(id); }
+    private void ToggleTag(string id, bool value) { if (value) selectedTags.Add(id); else selectedTags.Remove(id); }
+    private void SetAllWords(bool value) { allWords = value; if (value) selectedWords.Clear(); }
+    private void RunKindChanged() { if (runKind == "scan") runMode = "resume"; else if (runMode == "regenerate" && runKind != "generate") runMode = "resume"; }
+    private void LessonChanged() { if (!GrammarOptions.Any(x => x.GrammarId == selectedGrammar)) selectedGrammar = ""; }
+    private void SelectVisibleSchemas() { foreach (var row in FilteredSchemas) selectedSchemas.Add(row.Id); }
+    private void ClearSchemas() { selectedSchemas.Clear(); }
+    private void SelectVisibleWords() { foreach (var word in FilteredWords.Take(80)) selectedWords.Add(WordKey(word.Reference)); }
+    private StudioTagCoverage CoverageFor(StudioWord word) => tagCoverageByWord.TryGetValue(WordKey(word.Reference), out var coverage)
+        ? coverage : new StudioTagCoverage(word.Reference, 0, 0, 0, 0, 0, snapshot?.Tags.Length ?? 0, false, null);
+    private bool MatchesTagFilter(StudioTagCoverage coverage) => tagCoverageFilter switch
+    {
+        "needs-tagging" => NeedsTagging(coverage),
+        "needs-review" => coverage.NeedsReview,
+        "uncertain" => coverage.Uncertain > 0,
+        "failed" => coverage.Failed > 0,
+        _ => true
+    };
+    private static bool NeedsTagging(StudioTagCoverage coverage) => coverage.NotEvaluated > 0 || coverage.Pending > 0 || coverage.Failed > 0;
+    private static MarkupString TagCount(string label, long count, string cssClass) => count <= 0
+        ? new(string.Empty)
+        : new($"<span class='tag-chip {cssClass}'>{label} {count.ToString("N0", CultureInfo.CurrentCulture)}</span>");
+    private string CoverageLabel(StudioSchemaRow row) => row.Coverage is null ? "Not scanned" : row.CoverageStale
+        ? $"Stale · previous scan: {row.Coverage.Enumerated:N0} visited · {row.Coverage.NotStarted:N0} unseen"
+        : row.Coverage.Complete
+            ? $"Exact · {row.Coverage.Enumerated:N0} enumerated · {row.Coverage.NotStarted:N0} unseen"
+            : $"At least {row.Coverage.Enumerated:N0} visited · {row.Coverage.NotStarted:N0} unseen";
+    private static bool IsActive(string status) => status is "queued" or "running" or "paused";
+    private static bool Contains(string value, string search) => value.Contains(search, StringComparison.CurrentCultureIgnoreCase);
+    private static string WordKey(WordRef word) => $"{word.WordType}:{word.Id}";
+    private static WordRef ParseWordKey(string value) { var at = value.IndexOf(':'); return new WordRef(value[..at], value[(at + 1)..]); }
+    private static string? BlankToNull(string value) => string.IsNullOrWhiteSpace(value) ? null : value;
+    private static string StatusClass(string status) => status.ToLowerInvariant().Replace('_', '-').Replace(' ', '-');
+    private static string JobTitle(StudioJobView job) => job.Kind switch { "scan" => "Coverage scan", "tag" => "Vocabulary tagging", "publish" => "Question bank publication", _ => job.Mode == "regenerate" ? "Question regeneration" : "Question generation" };
+    private static string JobNoun(StudioRequest request) => request.Kind switch { "scan" => "Coverage scan", "tag" => "Vocabulary tagging", "publish" => "Publication", _ => request.Mode == "regenerate" ? "Regeneration" : "Generation" };
+    private static string RegenerationScope(StudioRequest request) => $"{(request.Words is null ? "all vocabulary" : $"{request.Words.Length} selected words")}, {(request.TagIds is null ? "all tags" : $"{request.TagIds.Length} selected tags")}, {request.SchemaIds.Length} patterns";
+    private static string JobProgress(StudioJobView job, int? limit) => job.Kind switch
+    {
+        "tag" => limit is > 0 ? $"{job.Summary.Examined:N0} / {limit:N0} request groups" : $"{job.Summary.Examined:N0} request groups · {job.Summary.Completed:N0} word/tag pairs",
+        "scan" => $"{job.Summary.Examined:N0} candidates visited · scan scope only",
+        _ => limit is > 0 ? $"{job.Summary.Examined:N0} / {limit:N0} candidates this run" : job.Status == "completed" ? $"{job.Summary.Examined:N0} candidates · run complete" : $"{job.Summary.Examined:N0} candidates · remaining work unknown"
+    };
+    private void ShowConfigPath() => ShowMessage($"Configuration path: {snapshot?.ConfigurationFile}", false);
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (scrollToConfirmation)
+        {
+            scrollToConfirmation = false;
+            await JS.InvokeVoidAsync("genkiStudio.scrollAndFocus", confirmationSection, confirmationHeading);
+        }
+        else if (scrollToJobs)
+        {
+            scrollToJobs = false;
+            await JS.InvokeVoidAsync("genkiStudio.scrollAndFocus", jobsSection, jobsHeading);
+        }
+    }
+
+    public void Dispose() { polling?.Cancel(); polling?.Dispose(); }
+}

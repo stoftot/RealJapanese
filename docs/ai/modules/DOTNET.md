@@ -11,6 +11,7 @@ All repository projects target .NET 10. The Android project targets
 | `RealJapanese/RealJapanese.Mobile.sln` | Mobile, UI, Repositories, DataLoaders |
 | `RealJapanese/RealJapanese.Shared.sln` | UI, Repositories, DataLoaders plus unit, integration and component tests |
 | `RealJapanese/RealJapanese.sln` | Web, UI, libraries and both data utilities; no Mobile or test projects |
+| `RealJapanese.Genki.slnx` | DataLoaders, Repositories, Genki.Generation, Genki.Inference, Genki.Tools and Genki.Studio |
 | `RealJapanese.Tests.slnx` | Unit, integration, component and Playwright browser tests |
 
 There is no `global.json`, central package management, custom Directory.Build file,
@@ -24,10 +25,14 @@ older aggregate requires those projects; use a focused solution for ordinary app
 work.
 
 `RealJapanese/Genki.Tools/Genki.Tools.csproj` is a separate .NET 10 batch executable
-over `Genki.Generation`. Set `AiLibraryRoot` (or `AI_LIBRARY_ROOT`) to enable its
-external Core/LlamaServer project references. Without them, deterministic tooling
-still compiles and inference fails explicitly. Neither application host references
-these tooling projects. [Genki](../../genki.md) owns configuration and bounded/full
+over `Genki.Inference` and `Genki.Generation`. `RealJapanese/Genki.Studio/` is a
+separate loopback-only .NET 10 PC web host over those same projects. The shared
+`Genki.Inference` project optionally references external AiLibrary Core/LlamaServer
+when `AiLibraryRoot` (or `AI_LIBRARY_ROOT`) identifies that checkout. Without it,
+the Studio and deterministic CLI still build; model inference is unavailable.
+Neither learner host references the Genki tooling projects. On Windows,
+`Start Genki Studio.cmd` invokes `tooling/run-genki-studio.ps1` to build and run the
+local Studio. [Genki](../../genki.md) owns setup, configuration and bounded/full
 run commands; compilation does not establish model inference or corpus quality.
 
 ## Canonical CLI targets

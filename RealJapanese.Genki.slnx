@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Genki/">
+    <Project Path="RealJapanese/DataLoaders/DataLoaders.csproj" />
+    <Project Path="RealJapanese/Repositories/Repositories.csproj" />
+    <Project Path="RealJapanese/Genki.Generation/Genki.Generation.csproj" />
+    <Project Path="RealJapanese/Genki.Inference/Genki.Inference.csproj" />
+    <Project Path="RealJapanese/Genki.Tools/Genki.Tools.csproj" />
+    <Project Path="RealJapanese/Genki.Studio/Genki.Studio.csproj" />
+  </Folder>
+</Solution>

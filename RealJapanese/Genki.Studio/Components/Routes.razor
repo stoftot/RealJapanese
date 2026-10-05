@@ -1,0 +1,11 @@
+<Router AppAssembly="typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.StudioLayout)" />
+        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="typeof(Layout.StudioLayout)">
+            <main class="studio-not-found"><h1>Page not found</h1><a href="/">Return to Genki Studio</a></main>
+        </LayoutView>
+    </NotFound>
+</Router>

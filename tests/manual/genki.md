@@ -56,3 +56,40 @@
   against the source catalogs without generating questions.
   Human language judgment remains necessary for newly authored lexical meanings,
   tags, schemas, recaps and pragmatics.
+
+## GENKI-003 — PC Studio setup and controlled generation
+
+- **Purpose:** protect the local configuration, bounded work controls, visible
+  progress, restart behavior and explicit learner-bank publication in Genki Studio.
+- **Preconditions:** Windows with PowerShell 7, the .NET 10 SDK and a current browser. Use
+  `Start Genki Studio.cmd`; the app binds to loopback at `http://127.0.0.1:5278`.
+  Point Data root at the source vocabulary. Set State root and Publish path to
+  disposable locations outside the source tree. Model tagging and generation
+  additionally require the optional AiLibrary checkout and configured local GGUF
+  models. Without them, setup, coverage scans and review remain available.
+- **Steps:** save the configuration and reload the page to check the paths persist.
+  Select a small word group and bounded tag run when model support is installed;
+  inspect uncertain/failing results. Choose one grammar pattern and two compatible
+  words, set a low limit, and run a coverage scan. Review the partial visited and
+  unseen counts; raise the limit and rescan the scope until it reports exact
+  coverage. Compare the pattern's Not queued and Queued filters. If model support
+  is available, queue a one-candidate generation run, inspect its progress and
+  saved stage results, then exercise pause/resume or cancel. Restart Studio and
+  confirm interrupted work is paused until explicitly resumed. Review publication
+  and cancel; compare the disposable bank before and after. If completed questions
+  are available, confirm publication to the disposable path and inspect the result.
+  Press Ctrl+C in the launcher console to stop its server.
+- **Expected:** startup queues and resumes no work. The configuration remains
+  saved after reload. A partial scan leaves unseen candidates uncounted; completed
+  coverage is exact for its recorded scope, and changes to its inputs make the
+  previous scan stale. Queue status tracks generation work while scan jobs update
+  scan coverage separately. Pausing or cancelling retains completed stages.
+  Publication review names the configured destination, cancellation leaves the
+  bank unchanged, and confirmation writes only to the disposable destination.
+  Studio is reachable only through loopback and stopping the launcher ends its
+  server without stopping an unrelated process.
+- **Automation:** `GenkiStudioTests` covers isolated coordinator/configuration and
+  publication boundaries. `GenkiStudioBrowserTests` covers saved paths, bounded
+  model-free scans, filters, review pagination, cancelled publication and localhost host/origin
+  checks. Live model quality, operating-system browser launch and manual shutdown
+  observation remain host checks.

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AiLibraryRoot Condition="'$(AiLibraryRoot)' == ''">$(AI_LIBRARY_ROOT)</AiLibraryRoot>
+    <AiLibraryCoreProject>$(AiLibraryRoot)\src\AiLibrary.Core\AiLibrary.Core.csproj</AiLibraryCoreProject>
+    <AiLibraryLlamaServerProject>$(AiLibraryRoot)\src\AiLibrary.LlamaServer\AiLibrary.LlamaServer.csproj</AiLibraryLlamaServerProject>
+    <HasAiLibrary Condition="Exists('$(AiLibraryCoreProject)') and Exists('$(AiLibraryLlamaServerProject)')">true</HasAiLibrary>
+    <DefineConstants Condition="'$(HasAiLibrary)' == 'true'">$(DefineConstants);AILIBRARY</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Genki.Generation/Genki.Generation.csproj" /></ItemGroup>
+  <ItemGroup Condition="'$(HasAiLibrary)' == 'true'">
+    <ProjectReference Include="$(AiLibraryCoreProject)" />
+    <ProjectReference Include="$(AiLibraryLlamaServerProject)" />
+  </ItemGroup>
+</Project>

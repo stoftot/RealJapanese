@@ -4,6 +4,8 @@
     <PackageReference Include="Microsoft.Playwright" Version="1.62.0" />
     <ProjectReference Include="../../RealJapanese/RealJapanese/RealJapanese.csproj" ReferenceOutputAssembly="false"
                       AdditionalProperties="OutDir=$(MSBuildThisFileDirectory)bin/$(Configuration)/net10.0/web-host/" />
+    <ProjectReference Include="../../RealJapanese/Genki.Studio/Genki.Studio.csproj" ReferenceOutputAssembly="false"
+                      AdditionalProperties="OutDir=$(MSBuildThisFileDirectory)bin/$(Configuration)/net10.0/studio-host/" />
     <ProjectReference Include="../RealJapanese.TestSupport/RealJapanese.TestSupport.csproj" />
     <None Update="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

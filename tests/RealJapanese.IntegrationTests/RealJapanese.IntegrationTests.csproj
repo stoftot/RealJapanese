@@ -1,7 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../TestProject.props" />
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <ProjectReference Include="../RealJapanese.TestSupport/RealJapanese.TestSupport.csproj" />
+    <ProjectReference Include="../../RealJapanese/Genki.Studio/Genki.Studio.csproj" />
+    <ProjectReference Include="../../RealJapanese/Genki.Generation/Genki.Generation.csproj" />
+    <ProjectReference Include="../../RealJapanese/Genki.Inference/Genki.Inference.csproj" />
     <ProjectReference Include="../RealJapanese.UtilityHost/RealJapanese.UtilityHost.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>

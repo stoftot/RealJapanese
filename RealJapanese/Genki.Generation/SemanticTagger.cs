@@ -33,7 +33,7 @@ public sealed class SemanticTagger(GenkiVocabulary vocabulary, SemanticRegistry 
         "Return strict JSON {ambiguous:bool,reason:string,evaluations:[{tagId:string,outcome:'matches'|'does-not-match'|'uncertain',reason:string}]}. " +
         "Include exactly every requested tag once. A child match implies every ancestor matches. No markdown.";
     public async Task<BatchSummary> RunAsync(BatchOptions options, IEnumerable<WordRef>? words = null,
-        IEnumerable<string>? tagIds = null, CancellationToken cancellationToken = default, Action<string>? progress = null)
+        IEnumerable<string>? tagIds = null, CancellationToken cancellationToken = default, Action<string>? progress = null, Action<BatchSummary>? report = null)
     {
         options.Validate(); var timer = Stopwatch.StartNew(); var summary = new BatchSummary();
         var requestedCancellation = cancellationToken;
@@ -74,6 +74,7 @@ public sealed class SemanticTagger(GenkiVocabulary vocabulary, SemanticRegistry 
                     evaluation.Status = "in-progress"; evaluation.Attempts++; evaluation.ModelProvenance = models.Provenance;
                 }
                 store.Save("tags", reference.ToString(), state); summary.Examined++;
+                progress?.Invoke($"{reference}: evaluating {string.Join(", ", pending)}");
                 try
                 {
                     var input = new { word = word.ModelInput, tags = pending.Select(id => registry.Tags[id]),
@@ -105,6 +106,7 @@ public sealed class SemanticTagger(GenkiVocabulary vocabulary, SemanticRegistry 
                 }
                 ReviewContradictions(state); store.Save("tags", reference.ToString(), state);
                 progress?.Invoke($"{reference}: {string.Join(", ", pending.Select(id => $"{id}={state.Evaluations[id].Status}"))}");
+                report?.Invoke(summary);
                 if (options.DelayMilliseconds > 0) await Task.Delay(options.DelayMilliseconds, cancellationToken);
             }
             ReviewContradictions(state); store.Save("tags", reference.ToString(), state);

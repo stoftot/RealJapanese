@@ -1,4 +1,5 @@
 using System.Text;
+using System.Numerics;
 using DataLoaders.Models.Genki;
 using DataLoaders.Models;
 using Repositories.Genki;
@@ -25,6 +26,23 @@ public sealed class CandidateEnumerator(GenkiCatalog catalog, GenkiVocabulary vo
     private sealed record Shape(IReadOnlyList<GenkiSegment> Segments, SortedDictionary<string,string> Choices);
     public IReadOnlyDictionary<string,int> SemanticPoolSizes(GenkiSchema schema) => schema.Slots.ToDictionary(
         pair => pair.Key, pair => vocabulary.Entries.Count(entry => Eligible(entry, pair.Value)));
+    /// <summary>Counts form-compatible products without visiting candidates; relations can only reduce this upper bound.</summary>
+    public BigInteger UpperBound(GenkiSchema schema)
+    {
+        var allowed = catalog.AllowedGrammar(schema);
+        BigInteger total = 0;
+        foreach (var shape in Shapes(schema.Segments, ""))
+        {
+            if (shape.Segments.Where(s => s.Kind == "fixed").Any(s => !vocabulary.Contains(s.Word!) ||
+                !FormAllowed(vocabulary.Resolve(s.Word!).Word, s.Form, allowed))) continue;
+            BigInteger product = 1;
+            foreach (var name in shape.Segments.Where(s => s.Kind == "slot").Select(s => s.Name!).Distinct())
+                product *= vocabulary.Entries.Count(entry => Eligible(entry, schema.Slots[name]) &&
+                    shape.Segments.Where(s => s.Kind == "slot" && s.Name == name).All(s => FormAllowed(entry.Word, s.Form, allowed)));
+            total += product;
+        }
+        return total;
+    }
     public IEnumerable<Candidate> Enumerate(GenkiSchema schema, CancellationToken cancellationToken = default)
     {
         var allowed = catalog.AllowedGrammar(schema);

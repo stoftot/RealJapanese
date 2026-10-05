@@ -13,6 +13,11 @@ Duplicate-cleanup console -------------------------------> DataLoaders
 Kanji extraction console --------------------------------> DataLoaders
                                                     \----> external AiLibrary
 
+Genki.Studio (local loopback) --\
+                                > Genki.Inference -> Genki.Generation -> Repositories
+Genki.Tools -------------------/          |
+                                          +-> optional external AiLibrary
+
 Automated tests ---> UI / Repositories / DataLoaders / task-owned web hosts
 ```
 
@@ -29,6 +34,11 @@ The [project map](PROJECT_MAP.md) owns paths and project relationships.
 - **DataLoaders:** owns JSON/JSONL IO and serialized domain records. Verb/adjective
   conjugation behavior also lives in these models.
 - **Data utilities:** maintain canonical datasets outside normal app execution.
+- **Genki offline tools:** `Genki.Generation` owns enumeration and durable staged
+  work. `Genki.Inference` owns shared configuration and the optional local
+  AiLibrary adapter. `Genki.Tools` is the batch CLI; `Genki.Studio` is a separate
+  local PC web app bound to loopback. Neither learner host references these
+  projects, and practice never starts inference.
 - **Automated tests:** depend inward on production projects. Unit, integration,
   rendered-component and real-browser projects share disposable workspace support;
   the duplicate-cleanup utility is reached through a guarded child-process host.
@@ -176,9 +186,13 @@ Session/retry state is per page and does not alter vocabulary mastery or sync.
 
 `Genki.Generation` is a separate offline library. It resolves hierarchical semantic
 tags, lazily enumerates supported Cartesian products, and checkpoints tagging and
-question stages in separate atomic files. `Genki.Tools` supplies independent tag
-and generate commands, an optional external AiLibrary adapter and explicit bank
-publication. Models and their dependencies never enter either learner host.
+question stages in separate atomic files. `Genki.Inference` supplies shared model
+configuration and an optional external AiLibrary adapter. `Genki.Tools` supplies
+batch commands; `Genki.Studio` supplies a browser workspace for the same local
+operations. Studio binds only to loopback and persists configuration, queue records,
+coverage and question checkpoints outside the learner bank. Active queue jobs are
+paused at startup and need an explicit resume. Models and their dependencies never
+enter either learner host.
 The bank is installed with Android catalogs; distributing a new bank requires a
 new APK. It is not transferred by progress sync. The source bank initially contains
 no questions; test fixtures stay outside production data.

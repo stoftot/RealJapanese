@@ -11,7 +11,7 @@ Keep run results and unexecuted steps in the current task, not in these files.
 | Domain | Cases |
 | --- | --- |
 | [Kana](kana.md) | KANA-001–003: character selections/settings, answers/review, local persistence, responsive charts and offline fonts |
-| [Genki](genki.md) | GENKI-001–002: lesson recaps, stored-question practice, controlled generation and curriculum/language review |
+| [Genki](genki.md) | GENKI-001–003: lesson recaps, stored-question practice, controlled generation, curriculum/language review and the local Studio workflow |
 | [Local sync](local-sync.md) | SYNC-001–006: Automatic/Manual transfer, cancellation, pairing rejection, merge/recovery and errors across web and Android |
 | [Study selection and practice](study-practice.md) | STUDY-001–008: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout and language oracles |
 | [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–003: offline catalogs, update/restart persistence, IME/Back/lifecycle and controlled startup failure |

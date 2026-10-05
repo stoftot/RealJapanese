@@ -238,3 +238,24 @@ Nouns remain `Word` records because they use the existing vocabulary exercises.
 Sync requires schema version 2 on both devices to avoid interpreting reassigned
 IDs under an older catalog. The [architecture](ARCHITECTURE.md#data-maintenance)
 owns the migration and recovery details.
+
+## Separate local Genki generation workspace
+
+- **Status:** Accepted
+- **Date:** 2026-10-05
+
+Genki Studio is a PC-only Blazor Server host, separate from the learner web/mobile
+hosts. It shares `Genki.Generation` checkpoints and an optional `Genki.Inference`
+model adapter with the CLI. This keeps model dependencies and operator controls
+out of learner practice without duplicating the generation pipeline.
+
+Persist selected batches, not every possible vocabulary combination. Enumerate
+candidates lazily and retain successful stages; interrupted jobs require explicit
+resume after restart. Cheap combinatorial bounds are labelled as bounds. Exact
+coverage requires an explicit model-free scan whose scope and completeness remain
+visible. Regeneration archives selected checkpoints and publication separately
+validates and atomically replaces the completed question bank.
+
+Studio binds to loopback and rejects remote peers and foreign origins. It has no
+network login or remote administration mode. The [Genki guide](../genki.md) owns
+launch, configuration and operator workflows.
