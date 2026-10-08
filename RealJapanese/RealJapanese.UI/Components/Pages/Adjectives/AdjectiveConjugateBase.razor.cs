@@ -15,6 +15,7 @@ public partial class AdjectiveConjugateBaseBase : SingleAnwserBase
     {
         var questions = new List<QuestionAnswerDto>();
         
+        //conjugate
         foreach (var ending in Adjective.possibleEndings)
         {
             foreach (var conjugationType in Enum.GetValues<Conjugatabel.ConjugationType>())
@@ -22,10 +23,34 @@ public partial class AdjectiveConjugateBaseBase : SingleAnwserBase
                 questions.Add(new QuestionAnswerDto
                 {
                     Question = ending.Kana + " - " + conjugationType.ToDisplayString(),
-                    Answer = ending.Conjugate(Conjugatabel.ToConjugate.Japanese, conjugationType).ToRomaji()
+                    Answer = ending.Conjugate(Conjugatabel.ToConjugate.Kana, conjugationType).ToRomaji()
                 });
             }
         }
+        //te form
+        foreach (var ending in Adjective.possibleEndings)
+        {
+
+            questions.Add(new QuestionAnswerDto
+            {
+                Question = ending.Kana + " - Te form",
+                Answer = ending.TeForm(Conjugatabel.ToConjugate.Kana).ToRomaji()
+            });
+        }
+        //short form
+        foreach (var ending in Adjective.possibleEndings)
+        {
+            foreach (var conjugationType in Enum.GetValues<Conjugatabel.ConjugationType>())
+            {
+                questions.Add(new QuestionAnswerDto
+                {
+                    Question = ending.Kana + " - " + conjugationType.ToDisplayString() + " - short",
+                    Answer = ending.Conjugate(Conjugatabel.ToConjugate.Kana, conjugationType).ToRomaji()
+                });
+            }
+        }
+        
+        
         
         OrginalQuestions = questions;
         

@@ -70,7 +70,7 @@ public record Verb : Conjugatabel
             { "る", "" }
         }.ToFrozenDictionary();
 
-    private static readonly FrozenDictionary<string, string> irregularConjugations =
+    private static readonly FrozenDictionary<string, string>  irregularConjugations =
         new Dictionary<string, string>
         {
             { "する", "し" },
@@ -170,25 +170,25 @@ public record Verb : Conjugatabel
         kana switch
         {
             "う" or "つ" or "る"
-                => "っ" + (form.Equals(VerbForm.TE) ? "て" : "な"),
+                => "っ" + (form.Equals(VerbForm.TE) ? "て" : "た"),
             "む" or "ぶ" or "ぬ"
                 => "ん" + (form.Equals(VerbForm.TE) ? "で" : "だ"),
             "く"
-                => "い" + (form.Equals(VerbForm.TE) ? "て" : "な"),
+                => "い" + (form.Equals(VerbForm.TE) ? "て" : "た"),
             "ぐ"
                 => "い" + (form.Equals(VerbForm.TE) ? "で" : "だ"),
             "す"
-                => "し" + (form.Equals(VerbForm.TE) ? "て" : "な"),
+                => "し" + (form.Equals(VerbForm.TE) ? "て" : "た"),
             _ => throw new ArgumentOutOfRangeException(nameof(kana), kana, null)
         };
 
-    private static string ruForm(VerbForm form) => form == VerbForm.TE ? "て" : "な";
+    private static string ruForm(VerbForm form) => form == VerbForm.TE ? "て" : "た";
 
     private static string irregularForm(string kana, VerbForm form) =>
         kana switch
         {
-            "する" => "し" + (form.Equals(VerbForm.TE) ? "て" : "な"),
-            "くる" => "き" + (form.Equals(VerbForm.TE) ? "て" : "な")
+            "する" => "し" + (form.Equals(VerbForm.TE) ? "て" : "た"),
+            "くる" => "き" + (form.Equals(VerbForm.TE) ? "て" : "た")
         };
 
     #endregion
@@ -197,13 +197,14 @@ public record Verb : Conjugatabel
 
     private static readonly Verb actionOrChangeAuxiliary = new()
     {
-        Japanese = "いる", Kana = "いる", English = "to be", Type = "ru"
+        Japanese = "る", Kana = "る", English = "NAN", Type = "ru"
     };
 
     public string ActionOrChangeForm(ToConjugate toConjugate, ConjugationType conjugationType)
     {
         var teForm = Form(toConjugate, VerbForm.TE);
-        return teForm + actionOrChangeAuxiliary.Conjugate(ToConjugate.Kana, conjugationType);
+        //Te form + i + conjugation ending for that time
+        return teForm + "い" + actionOrChangeAuxiliary.Conjugate(ToConjugate.Kana, conjugationType);
     }
 
     #endregion
@@ -287,7 +288,7 @@ public record Verb : Conjugatabel
         {
             ConjugationType.PresentAffirmative => Stem(str),
             ConjugationType.PresentNegative => (str == "ある" ? "" : ShortStem(str)) + ShortPresentNegativeEnding,
-            ConjugationType.PastAffirmative => ShortFormPastAffirmative(toConjugate),
+            ConjugationType.PastAffirmative =>  Form(toConjugate, VerbForm.TA),
             ConjugationType.PastNegative => ShortStem(str) + ShortPastNegativeEnding,
         };
     }
