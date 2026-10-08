@@ -22,6 +22,7 @@ public sealed class PracticeRouteComponentTests
             ("words", 1, "/words/flashcards?category={0}"),
             ("nouns", 0, "/nouns/spelling?category={0}"),
             ("nouns", 1, "/nouns/flashcards?category={0}"),
+            ("nouns", 2, "/nouns/conjugate"),
             ("verbs", 0, "/verbs/spelling?category={0}"),
             ("verbs", 1, "/verbs/categories?category={0}"),
             ("verbs", 2, "/verbs/ConjugationsAndForms"),

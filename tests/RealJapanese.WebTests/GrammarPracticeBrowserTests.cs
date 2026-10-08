@@ -3,12 +3,13 @@ using static Microsoft.Playwright.Assertions;
 
 namespace RealJapanese.WebTests;
 
-/// <summary>Checks that verb and adjective grammar practice load and remain interactive in the real web host.</summary>
+/// <summary>Checks that verb, adjective and noun grammar practice load and remain interactive in the real web host.</summary>
 public sealed class GrammarPracticeBrowserTests : BrowserTest
 {
     [Theory]
     [InlineData("/verbs/ConjugationsAndForms")]
     [InlineData("/adjectives/conjugateBase")]
+    [InlineData("/nouns/conjugate")]
     public async Task Grammar_practice_loads_reveals_and_advances_without_errors(string route)
     {
         var errors = new List<string>();

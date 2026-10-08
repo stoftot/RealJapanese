@@ -5,9 +5,36 @@ using static Microsoft.Playwright.Assertions;
 
 namespace RealJapanese.WebTests;
 
-/// <summary>Exercises noun selection and both noun practice routes through a real browser.</summary>
+/// <summary>Exercises noun selection, vocabulary practice and noun grammar through a real browser.</summary>
 public sealed class NounPracticeBrowserTests : BrowserTest
 {
+    [Fact]
+    public async Task Grammar_practice_starts_without_selected_nouns_and_accepts_an_ending()
+    {
+        await OpenAsync("/nouns");
+        await Page.Locator(".practice-selector .card").Filter(new() { HasText = "Conjugations and forms" })
+            .GetByRole(AriaRole.Button, new() { Name = "Start practice" }).ClickAsync();
+        await Expect(Page).ToHaveURLAsync(App.Url + "/nouns/conjugate");
+
+        var question = Page.Locator("p.lead");
+        const string prompt = "Noun - present affirmative - short";
+        for (var index = 0; index < 9 && (await question.InnerTextAsync()).Trim() != prompt; index++)
+        {
+            var previous = await question.InnerTextAsync();
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Next", Exact = true }).ClickAsync();
+            await Expect(question).Not.ToHaveTextAsync(previous);
+        }
+        await Expect(question).ToHaveTextAsync(prompt);
+        await Page.GetByRole(AriaRole.Button, new() { Name = "Show answer (Enter)", Exact = true }).ClickAsync();
+        await Expect(Page.GetByRole(AriaRole.Alert)).ToHaveTextAsync("Answers: da");
+        var progress = Page.Locator("small.text-muted");
+        var previousProgress = await progress.InnerTextAsync();
+        await Page.GetByPlaceholder("Type your answer…").FillAsync("da");
+        await Expect(progress).Not.ToHaveTextAsync(previousProgress);
+        await Expect(Page.GetByRole(AriaRole.Alert)).ToHaveCountAsync(0);
+        await Expect(Page.GetByPlaceholder("Type your answer…")).ToHaveValueAsync("");
+    }
+
     [Fact]
     public async Task Noun_can_be_assigned_to_training_and_used_for_spelling_and_flashcards()
     {

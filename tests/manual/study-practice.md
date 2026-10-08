@@ -87,6 +87,7 @@ query selection, including an empty category.
    | Words — Flash cards | `/words/flashcards?category=<list>` | All three |
    | Nouns — Learn the nouns | `/nouns/spelling?category=<list>` | All three |
    | Nouns — Flash cards | `/nouns/flashcards?category=<list>` | All three |
+   | Nouns — Conjugations and forms | `/nouns/conjugate` | Category-independent |
    | Verbs — Learn the verbs | `/verbs/spelling?category=<list>` | All three |
    | Verbs — Verb type categorisation | `/verbs/categories?category=<list>` | All three |
    | Verbs — Conjugation and forms | `/verbs/ConjugationsAndForms` | Category-independent |
@@ -109,7 +110,10 @@ query selection, including an empty category.
   host error page, or a disconnected/noninteractive card.
 - Category-dependent practice draws only from the category in its query. The
   category-independent conjugation exercises open without a category query.
-- An empty category shows **Nothing to practise yet** and remains responsive.
+- Noun conjugation practice works with an empty study list and asks for endings
+  in romaji: four polite forms, four short forms and the te-form. Polite and
+  short prompts are distinct, and every question remains accessible with nine chunks.
+- An empty category-dependent exercise shows **Nothing to practise yet** and remains responsive.
 
 ### Cleanup
 

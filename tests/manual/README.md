@@ -44,7 +44,7 @@ assert intended behavior but require explicit execution; see the testing guide.
 | STUDY-005 | `FlashcardComponentTests`; `FlashcardBrowserTests` Space/Backspace and SPA disposal | Android hardware/emulator keyboard behavior |
 | STUDY-006 | `MultipleAnswerPracticeComponentTests` accepted-order/duplicate/reset behavior | Native keyboard/focus integration |
 | STUDY-007 | `SharedPracticeControlTests`; `LayoutBrowserTests` 320/1280 px, column visibility, scale and overflow | Human readability, visible focus quality and screen-reader announcements; browser assertions cannot judge these fully |
-| STUDY-008 | Literal conjugation/number unit oracles and `AdjectiveLanguageOracleComponentTests`, including explicit known-defect cases | Human language review when adding new catalog content or accepted readings |
+| STUDY-008 | Literal conjugation/number unit oracles, `AdjectiveLanguageOracleComponentTests` and `NounGrammarComponentTests`, including explicit known-defect cases | Human language review when adding new catalog content or accepted readings |
 | SYNC-001 | Real loopback transfer and private-interface discovery integration tests; shared web approval/apply flow | Automatic discovery over actual Wi-Fi and Windows/Android cryptographic interoperability, both directions |
 | SYNC-002 | Two-host Playwright sync through Manual mode | Actual web/Android reachability and transfer in both directions |
 | SYNC-003 | `SyncPreviewBrowserTests`: Cancel, close, backdrop and Escape, no-write and fresh transfer; `SyncDialogComponentTests` | Native WebView dialog behavior and other-device dismissal combinations |

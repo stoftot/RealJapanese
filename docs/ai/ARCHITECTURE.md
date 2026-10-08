@@ -139,7 +139,11 @@ The [Noun](../../RealJapanese/DataLoaders/Models/Noun.cs) model exposes the same
 enums. Noun forms append a copula ending to the complete selected text. Nouns
 derive directly from `Word`: they need no verb/adjective `type` field, so existing
 noun catalogs retain their JSON shape. `NounData` loads `Noun` records, and the noun
-selector uses that type; noun practice still offers spelling and flash cards.
+selector uses that type. Noun practice offers spelling, flash cards and the
+category-independent `/nouns/conjugate` endings drill. That drill uses an empty
+noun stem to generate four polite endings, four short endings and the te-form;
+prompts identify the form, and answers use romaji. It shares the existing
+practice controls and limits chunking to its nine questions.
 
 [Conjugation tests](../../tests/RealJapanese.Tests/ConjugationTests.cs) cover the
 older APIs, including explicit known-defect cases. Dedicated unit tests cover
