@@ -134,13 +134,22 @@ adds adjective te-form generation; `Verb.ActionOrChangeForm(ToConjugate,
 ConjugationType)` builds a te-form plus conjugated `いる` construction.
 `ToConjugate` selects the model's Japanese or Kana value.
 
-These methods currently have no callers in the study UI and no automated test
-coverage. The verb study page uses polite `Conjugate()` and `Form(..., TE)`;
-the adjective study page uses polite `Conjugate()` only. Existing
-[conjugation tests](../../tests/RealJapanese.Tests/ConjugationTests.cs) cover those
-older APIs, including explicit known-defect cases. The new methods still need
-language-correctness validation and regression coverage before being exposed as
-study features.
+The [Noun](../../RealJapanese/DataLoaders/Models/Noun.cs) model exposes the same
+`Conjugate`, `ShortForm` and `TeForm` method shapes and reuses the `Conjugatabel`
+enums. Noun forms append a copula ending to the complete selected text. Nouns
+derive directly from `Word`: they need no verb/adjective `type` field, so existing
+noun catalogs retain their JSON shape. `NounData` loads `Noun` records, and the noun
+selector uses that type; noun practice still offers spelling and flash cards.
+
+[Conjugation tests](../../tests/RealJapanese.Tests/ConjugationTests.cs) cover the
+older APIs, including explicit known-defect cases. Dedicated unit tests cover
+[verb action/change forms](../../tests/RealJapanese.Tests/VerbActionOrChangeFormTests.cs),
+[adjective te forms](../../tests/RealJapanese.Tests/AdjectiveTeFormTests.cs), and
+[noun forms and serialization](../../tests/RealJapanese.Tests/NounConjugationTests.cs).
+Verb action/change forms always conjugate the auxiliary `いる` as a ru-verb.
+Verb and adjective short forms still need language-correctness validation and
+regression coverage. Model methods and their exposure in study pages are separate
+concerns; adding a method does not add a practice exercise.
 
 ### Kana selection and practice
 

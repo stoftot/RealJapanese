@@ -6,8 +6,8 @@ using Repositories.Bases;
 
 namespace RealJapanese.Components.Pages.Nouns;
 
-public class NounsSelectorBase : WordComponentBase<Word>
+public class NounsSelectorBase : WordComponentBase<Noun>
 {
     [Inject] private NounData NounDataInjected { get; set; } = null!;
-    protected override WordDataBase<Word> WordData => NounDataInjected;
+    protected override WordDataBase<Noun> WordData => NounDataInjected;
 }

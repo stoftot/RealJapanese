@@ -3,7 +3,7 @@ using Repositories.Bases;
 
 namespace Repositories;
 
-public class NounData : WordDataBase<Word>
+public class NounData : WordDataBase<Noun>
 {
     public NounData() : this(RepositoryPaths.Default) { }
 

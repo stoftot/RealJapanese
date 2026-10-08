@@ -20,7 +20,7 @@
     <div class="row g-3">
         <div class="col-md-6 col-lg-4 category-column @(SelectedCategoryIndex == 0 ? "category-column-active" : "")">
             <WordList
-                TItem="Word"
+                TItem="Noun"
                 Title="Known nouns"
                 AllWords="@AllWords"
                 SelectedIds="@KnownIds"
@@ -31,7 +31,7 @@
 
         <div class="col-md-6 col-lg-4 category-column @(SelectedCategoryIndex == 1 ? "category-column-active" : "")">
             <WordList
-                TItem="Word"
+                TItem="Noun"
                 Title="Currently rehearsing"
                 AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id)).ToList()"
                 SelectedIds="@RehearsingIds"
@@ -42,7 +42,7 @@
 
         <div class="col-md-6 col-lg-4 category-column @(SelectedCategoryIndex == 2 ? "category-column-active" : "")">
             <WordList
-                TItem="Word"
+                TItem="Noun"
                 Title="Currently training"
                 AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id) &&
                                                !RehearsingIds.Contains(w.Id)).ToList()"
