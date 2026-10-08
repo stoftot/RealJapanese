@@ -195,10 +195,15 @@ public record Verb : Conjugatabel
 
     #region Action/change form
 
+    private static readonly Verb actionOrChangeAuxiliary = new()
+    {
+        Japanese = "いる", Kana = "いる", English = "to be", Type = "ru"
+    };
+
     public string ActionOrChangeForm(ToConjugate toConjugate, ConjugationType conjugationType)
     {
         var teForm = Form(toConjugate, VerbForm.TE);
-        return Conjugate(teForm + "いる", conjugationType);
+        return teForm + actionOrChangeAuxiliary.Conjugate(ToConjugate.Kana, conjugationType);
     }
 
     #endregion

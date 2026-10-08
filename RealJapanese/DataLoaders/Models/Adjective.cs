@@ -105,8 +105,8 @@ public record Adjective : Conjugatabel
         return CateGoryAsAdjectiveType() switch
         {
             AdjectiveType.I => str[..^1] + "くて",
-            AdjectiveType.NA => str[..^2] + "よくて",
-            AdjectiveType.IRREGULAR => str + "で",
+            AdjectiveType.NA => str + "で",
+            AdjectiveType.IRREGULAR => str[..^2] + "よくて",
         };
     }
 
