@@ -1,0 +1,378 @@
+[
+  {
+    "id": "0",
+    "japanese": "おはよう",
+    "kana": "おはよう",
+    "english": "Good morning",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "1",
+    "japanese": "おはようございます",
+    "kana": "おはようございます",
+    "english": "Good morning (polite)",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "2",
+    "japanese": "こんにちは",
+    "kana": "こんにちは",
+    "english": "Good afternoon",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "3",
+    "japanese": "こんばんは",
+    "kana": "こんばんは",
+    "english": "Good evening",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "4",
+    "japanese": "左様なら",
+    "kana": "さようなら",
+    "english": "goodbye",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "5",
+    "japanese": "お休みなさい",
+    "kana": "おやすみなさい",
+    "english": "Good night",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "6",
+    "japanese": "ありがとう",
+    "kana": "ありがとう",
+    "english": "Thank you",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "7",
+    "japanese": "ありがとうございます",
+    "kana": "ありがとうございます",
+    "english": "Thank you (polite)",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "8",
+    "japanese": "すみません",
+    "kana": "すみません",
+    "english": "Excuse me; I'm sorry",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "9",
+    "japanese": "いいえ",
+    "kana": "いいえ",
+    "english": "No; not at all",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "10",
+    "japanese": "行ってきます",
+    "kana": "いってきます",
+    "english": "I’ll go and come back",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "11",
+    "japanese": "行ってらっしゃい",
+    "kana": "いってらっしゃい",
+    "english": "Please go and come back",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "12",
+    "japanese": "ただいま",
+    "kana": "ただいま",
+    "english": "I’m home",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "13",
+    "japanese": "お帰りなさい",
+    "kana": "おかえりなさい",
+    "english": "Welcome home",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "14",
+    "japanese": "いただきます",
+    "kana": "いただきます",
+    "english": "Thank you for the meal (before eating)",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "15",
+    "japanese": "ごちそうさまでした",
+    "kana": "ごちそうさまでした",
+    "english": "Thank you for the meal (after eating)",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "16",
+    "japanese": "はじめまして",
+    "kana": "はじめまして",
+    "english": "How do you do?",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "17",
+    "japanese": "〜です",
+    "kana": "〜です",
+    "english": "I am …",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "18",
+    "japanese": "よろしくお願いします",
+    "kana": "よろしくおねがいします",
+    "english": "Nice to meet you",
+    "category": "Expression",
+    "origin": "self added"
+  },
+  {
+    "id": "19",
+    "japanese": "あのう",
+    "kana": "あのう",
+    "english": "um…",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "20",
+    "japanese": "はい",
+    "kana": "はい",
+    "english": "yes(formal)",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "21",
+    "japanese": "そうです",
+    "kana": "そうです",
+    "english": "That's right",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "22",
+    "japanese": "そうですか",
+    "kana": "そうですか",
+    "english": "I see; Is that so?",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "23",
+    "japanese": "いらっしゃいませ",
+    "kana": "いらっしゃいませ",
+    "english": "Welcome (to our store)",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "24",
+    "japanese": "（〜を）お願いします",
+    "kana": "（〜を）おねがいします",
+    "english": ". . . , please.",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "25",
+    "japanese": "（〜を）ください",
+    "kana": "（〜を）ください",
+    "english": "Please give me . . .",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "26",
+    "japanese": "どうぞ",
+    "kana": "どうぞ",
+    "english": "Please; Here it is",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "27",
+    "japanese": "どうも",
+    "kana": "どうも",
+    "english": "Thank you",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "28",
+    "japanese": "そうですね",
+    "kana": "そうですね",
+    "english": "That's right; Let me see",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "29",
+    "japanese": "どうですか",
+    "kana": "どうですか",
+    "english": "How about . . . ?; How is . . . ?",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "30",
+    "japanese": "ええ",
+    "kana": "ええ",
+    "english": "yes;yeah(casual)",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "31",
+    "japanese": "ごめんなさい",
+    "kana": "ごめんなさい",
+    "english": "I'm sorry",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "32",
+    "japanese": "もしもし",
+    "kana": "もしもし",
+    "english": "Hello? (used on the phone)",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "33",
+    "japanese": "結構です",
+    "kana": "けっこうです",
+    "english": "That would be fine.; That wouldn’t be necessary.",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-6"
+  },
+  {
+    "id": "34",
+    "japanese": "本当ですか",
+    "kana": "ほんとうですか",
+    "english": "Really?",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-6"
+  },
+  {
+    "id": "35",
+    "japanese": "よかったら",
+    "kana": "よかったら",
+    "english": "if you like",
+    "category": "Expression",
+    "origin": "GENKI I (3rd edition)-7"
+  },
+  {
+    "id": "36",
+    "japanese": "知っています",
+    "kana": "しっています",
+    "english": "I know",
+    "origin": "GENKI I (3rd edition)-7",
+    "category": "Expression"
+  },
+  {
+    "id": "37",
+    "japanese": "知りません",
+    "kana": "しりません",
+    "english": "I do not know",
+    "origin": "GENKI I (3rd edition)-7",
+    "category": "Expression"
+  },
+  {
+    "id": "38",
+    "japanese": "太っています",
+    "kana": "ふとっています",
+    "english": "to be on the heavy side; overweight",
+    "origin": "GENKI I (3rd edition)-7",
+    "category": "Expression"
+  },
+  {
+    "id": "39",
+    "japanese": "やせています",
+    "kana": "やせています",
+    "english": "to be thin",
+    "origin": "GENKI I (3rd edition)-7",
+    "category": "Expression"
+  },
+  {
+    "id": "40",
+    "japanese": "うん",
+    "kana": "うん",
+    "english": "uh-huh; yes",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Expression"
+  },
+  {
+    "id": "41",
+    "japanese": "ううん",
+    "kana": "ううん",
+    "english": "uh-uh; no",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Expression"
+  },
+  {
+    "id": "42",
+    "japanese": "乾杯",
+    "kana": "かんぱい",
+    "english": "Cheers! (a toast)",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Expression"
+  },
+  {
+    "id": "43",
+    "japanese": "残念ですね",
+    "kana": "ざんねんですね",
+    "english": "That’s too bad",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Expression"
+  },
+  {
+    "id": "44",
+    "japanese": "久しぶり",
+    "kana": "ひさしぶり",
+    "english": "It has been a long time",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Expression"
+  },
+  {
+    "id": "45",
+    "japanese": "お大事に",
+    "kana": "おだいじに",
+    "english": "Get well soon",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Expression"
+  },
+  {
+    "id": "46",
+    "japanese": "元気がない",
+    "kana": "げんきがない",
+    "english": "don’t look well",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Expression"
+  }
+]

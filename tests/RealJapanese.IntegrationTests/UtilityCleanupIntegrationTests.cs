@@ -43,8 +43,8 @@ public sealed class UtilityCleanupIntegrationTests
         var fixture = CreateFixture(workspace, "success",
             """
             [
-              { "id": "10", "japanese": "一", "kana": "いち", "english": "one", "category": "number" },
-              { "id": "11", "japanese": "一", "kana": "いち", "english": "one", "category": "duplicate" },
+              { "id": "10", "japanese": "一", "kana": "いち", "english": "one", "category": "number", "origin": "Book A-1", "additionalOrigins": ["Book A-2"] },
+              { "id": "11", "japanese": "一", "kana": "いち", "english": "one", "category": "duplicate", "origin": "Book B-1" },
               { "id": "20", "japanese": "二", "kana": "に", "english": "two", "category": "number" },
               { "id": "21", "japanese": "三", "kana": "さん", "english": "three", "category": "number" }
             ]
@@ -63,6 +63,8 @@ public sealed class UtilityCleanupIntegrationTests
             $"Cleanup failed. stdout: {result.StandardOutput} stderr: {result.StandardError}");
         var words = Deserialize<List<Word>>(fixture.WordsPath);
         Assert.Equal([0, 1, 2], words.Select(word => word.Id));
+        Assert.Equal("Book A-1", words[0].Origin);
+        Assert.Equal(["Book A-2", "Book B-1"], words[0].AdditionalOrigins);
         Assert.Equal(
             [("一", "いち", "one", "number"), ("二", "に", "two", "number"), ("三", "さん", "three", "number")],
             words.Select(word => (word.Japanese, word.Kana, word.English, word.Category)));

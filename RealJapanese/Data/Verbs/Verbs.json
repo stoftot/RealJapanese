@@ -5,7 +5,7 @@
     "japanese": "行く",
     "kana": "いく",
     "english": "to go",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "u",
@@ -13,15 +13,15 @@
     "japanese": "帰る",
     "kana": "かえる",
     "english": "to go back; to return",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "u",
     "id": "2",
     "japanese": "聞く",
     "kana": "きく",
-    "english": "to ask, to listen; to hear",
-    "category": ""
+    "english": "to listen; to hear",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "u",
@@ -29,7 +29,7 @@
     "japanese": "飲む",
     "kana": "のむ",
     "english": "to drink",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "u",
@@ -37,7 +37,7 @@
     "japanese": "話す",
     "kana": "はなす",
     "english": "to speak; to talk",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "u",
@@ -45,7 +45,7 @@
     "japanese": "読む",
     "kana": "よむ",
     "english": "to read",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "ru",
@@ -53,7 +53,7 @@
     "japanese": "起きる",
     "kana": "おきる",
     "english": "to get up",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "ru",
@@ -61,7 +61,7 @@
     "japanese": "食べる",
     "kana": "たべる",
     "english": "to eat",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "ru",
@@ -69,7 +69,7 @@
     "japanese": "寝る",
     "kana": "ねる",
     "english": "to sleep; to go to sleep",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "ru",
@@ -77,7 +77,7 @@
     "japanese": "見る",
     "kana": "みる",
     "english": "to see; to look at; to watch",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "irregular",
@@ -85,7 +85,7 @@
     "japanese": "来る",
     "kana": "くる",
     "english": "to come",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "irregular",
@@ -93,7 +93,7 @@
     "japanese": "する",
     "kana": "する",
     "english": "to do",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "irregular",
@@ -101,7 +101,7 @@
     "japanese": "勉強する",
     "kana": "べんきょうする",
     "english": "to study",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "type": "u",
@@ -109,7 +109,7 @@
     "japanese": "会う",
     "kana": "あう",
     "english": "to meet; to see (a person)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "type": "u",
@@ -117,7 +117,7 @@
     "japanese": "ある",
     "kana": "ある",
     "english": "there is; to exist (thing)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "type": "u",
@@ -125,7 +125,7 @@
     "japanese": "買う",
     "kana": "かう",
     "english": "to buy",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "type": "u",
@@ -133,7 +133,7 @@
     "japanese": "書く",
     "kana": "かく",
     "english": "to write",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "type": "u",
@@ -141,7 +141,7 @@
     "japanese": "撮る",
     "kana": "とる",
     "english": "to take (a picture)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "type": "u",
@@ -149,7 +149,7 @@
     "japanese": "待つ",
     "kana": "まつ",
     "english": "to wait",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "type": "u",
@@ -157,7 +157,7 @@
     "japanese": "分かる",
     "kana": "わかる",
     "english": "to understand",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "type": "ru",
@@ -165,7 +165,7 @@
     "japanese": "いる",
     "kana": "いる",
     "english": "to be; to exist (living thing)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "type": "u",
@@ -173,7 +173,7 @@
     "japanese": "泳ぐ",
     "kana": "およぐ",
     "english": "to swim",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "u",
@@ -181,7 +181,7 @@
     "japanese": "乗る",
     "kana": "のる",
     "english": "to ride; to board",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "u",
@@ -189,7 +189,7 @@
     "japanese": "やる",
     "kana": "やる",
     "english": "to do; to perform",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "ru",
@@ -197,7 +197,7 @@
     "japanese": "出かける",
     "kana": "でかける",
     "english": "to go out",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "u",
@@ -205,7 +205,7 @@
     "japanese": "遊ぶ",
     "kana": "あそぶ",
     "english": "to play; to spend time pleasantly",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -213,7 +213,7 @@
     "japanese": "急ぐ",
     "kana": "いそぐ",
     "english": "to hurry",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -221,7 +221,7 @@
     "japanese": "返す",
     "kana": "かえす",
     "english": "to return (a thing)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -229,7 +229,7 @@
     "japanese": "消す",
     "kana": "けす",
     "english": "to turn off; to erase",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -237,7 +237,7 @@
     "japanese": "死ぬ",
     "kana": "しぬ",
     "english": "to die",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -245,7 +245,7 @@
     "japanese": "座る",
     "kana": "すわる",
     "english": "to sit down",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -253,7 +253,7 @@
     "japanese": "立つ",
     "kana": "たつ",
     "english": "to stand up",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -261,7 +261,7 @@
     "japanese": "たばこを吸う",
     "kana": "たばこをすう",
     "english": "to smoke",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -269,7 +269,7 @@
     "japanese": "使う",
     "kana": "つかう",
     "english": "to use",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -277,7 +277,7 @@
     "japanese": "手伝う",
     "kana": "てつだう",
     "english": "to help",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -285,7 +285,7 @@
     "japanese": "入る",
     "kana": "はいる",
     "english": "to enter",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -293,7 +293,7 @@
     "japanese": "持つ",
     "kana": "もつ",
     "english": "to carry; to hold",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -301,7 +301,7 @@
     "japanese": "休む",
     "kana": "やすむ",
     "english": "to rest; to be absent",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "ru",
@@ -309,7 +309,7 @@
     "japanese": "開ける",
     "kana": "あける",
     "english": "to open (something)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "ru",
@@ -317,7 +317,7 @@
     "japanese": "閉める",
     "kana": "しめる",
     "english": "to close (something)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "ru",
@@ -325,7 +325,7 @@
     "japanese": "教える",
     "kana": "おしえる",
     "english": "to teach; to instruct",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "ru",
@@ -333,7 +333,7 @@
     "japanese": "忘れる",
     "kana": "わすれる",
     "english": "to forget; to leave behind",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "ru",
@@ -341,7 +341,7 @@
     "japanese": "降りる",
     "kana": "おりる",
     "english": "to get off",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "ru",
@@ -349,7 +349,7 @@
     "japanese": "借りる",
     "kana": "かりる",
     "english": "to borrow",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "ru",
@@ -357,7 +357,7 @@
     "japanese": "シャワーを浴びる",
     "kana": "シャワーをあびる",
     "english": "to take a shower",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "ru",
@@ -365,7 +365,7 @@
     "japanese": "つける",
     "kana": "つける",
     "english": "to turn on",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "irregular",
@@ -373,7 +373,7 @@
     "japanese": "電話する",
     "kana": "でんわする",
     "english": "to call",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "irregular",
@@ -381,7 +381,7 @@
     "japanese": "連れてくる",
     "kana": "つれてくる",
     "english": "to bring (a person)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "irregular",
@@ -389,7 +389,7 @@
     "japanese": "持ってくる",
     "kana": "もってくる",
     "english": "to bring (a thing)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "u",
@@ -397,7 +397,7 @@
     "japanese": "歌う",
     "kana": "うたう",
     "english": "to sing",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "u",
@@ -405,7 +405,7 @@
     "japanese": "かぶる",
     "kana": "かぶる",
     "english": "to put on (a hat)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "u",
@@ -413,7 +413,7 @@
     "japanese": "はく",
     "kana": "はく",
     "english": "to put on (items below your waist)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "u",
@@ -421,7 +421,7 @@
     "japanese": "知る",
     "kana": "しる",
     "english": "to get to know",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "u",
@@ -429,7 +429,7 @@
     "japanese": "住む",
     "kana": "すむ",
     "english": "to live(at a place)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "u",
@@ -437,7 +437,7 @@
     "japanese": "働く",
     "kana": "はたらく",
     "english": "to work",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "u",
@@ -445,7 +445,7 @@
     "japanese": "太る",
     "kana": "ふとる",
     "english": "to gain weight",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "ru",
@@ -453,7 +453,7 @@
     "japanese": "かける",
     "kana": "かける",
     "english": "to put on (glasses)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "ru",
@@ -461,7 +461,7 @@
     "japanese": "着る",
     "kana": "きる",
     "english": "to put on (clothes above your waist)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "ru",
@@ -469,7 +469,7 @@
     "japanese": "やせる",
     "kana": "やせる",
     "english": "to lose weight",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "irregular",
@@ -477,7 +477,7 @@
     "japanese": "結婚する",
     "kana": "けっこんする",
     "english": "to get married",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "u",
@@ -485,6 +485,494 @@
     "japanese": "描く",
     "kana": "かく",
     "english": "to draw; to paint",
-    "category": ""
+    "origin": "self added"
+  },
+  {
+    "id": "61",
+    "japanese": "聞く",
+    "kana": "きく",
+    "english": "to ask",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-5"
+  },
+  {
+    "id": "62",
+    "japanese": "洗う",
+    "kana": "あらう",
+    "english": "to wash",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "63",
+    "japanese": "言う",
+    "kana": "いう",
+    "english": "to say",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "64",
+    "japanese": "いる",
+    "kana": "いる",
+    "english": "to need",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "65",
+    "japanese": "遅くなる",
+    "kana": "おそくなる",
+    "english": "to be late",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "66",
+    "japanese": "お風呂に入る",
+    "kana": "おふろにはいる",
+    "english": "to take a bath",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "67",
+    "japanese": "思う",
+    "kana": "おもう",
+    "english": "to think",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "68",
+    "japanese": "切る",
+    "kana": "きる",
+    "english": "to cut",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "69",
+    "japanese": "作る",
+    "kana": "つくる",
+    "english": "to make",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "70",
+    "japanese": "降る",
+    "kana": "ふる",
+    "english": "(rain; snow) falls",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "71",
+    "japanese": "持っていく",
+    "kana": "もっていく",
+    "english": "to take (a thing)",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "72",
+    "japanese": "捨てる",
+    "kana": "すてる",
+    "english": "to throw away",
+    "type": "ru",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "73",
+    "japanese": "始める",
+    "kana": "はじめる",
+    "english": "to begin",
+    "type": "ru",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "74",
+    "japanese": "運転する",
+    "kana": "うんてんする",
+    "english": "to drive",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "75",
+    "japanese": "洗濯する",
+    "kana": "せんたくする",
+    "english": "to do laundry",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "76",
+    "japanese": "掃除する",
+    "kana": "そうじする",
+    "english": "to clean",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "77",
+    "japanese": "料理する",
+    "kana": "りょうりする",
+    "english": "to cook",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "78",
+    "japanese": "踊る",
+    "kana": "おどる",
+    "english": "to dance",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "79",
+    "japanese": "終わる",
+    "kana": "おわる",
+    "english": "(something) ends",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "80",
+    "japanese": "薬を飲む",
+    "kana": "くすりをのむ",
+    "english": "to take medicine",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "81",
+    "japanese": "人気がある",
+    "kana": "にんきがある",
+    "english": "to be popular",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "82",
+    "japanese": "始まる",
+    "kana": "はじまる",
+    "english": "(something) begins",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "83",
+    "japanese": "弾く",
+    "kana": "ひく",
+    "english": "to play (a string instrument or piano)",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "84",
+    "japanese": "もらう",
+    "kana": "もらう",
+    "english": "to get (from somebody)",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "85",
+    "japanese": "覚える",
+    "kana": "おぼえる",
+    "english": "to memorize",
+    "type": "ru",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "86",
+    "japanese": "出る",
+    "kana": "でる",
+    "english": "to appear; to attend; to exit",
+    "type": "ru",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "87",
+    "japanese": "運動する",
+    "kana": "うんどうする",
+    "english": "to exercise",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "88",
+    "japanese": "散歩する",
+    "kana": "さんぽする",
+    "english": "to take a walk",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "89",
+    "japanese": "かかる",
+    "kana": "かかる",
+    "english": "to take (amount of time; money)",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "90",
+    "japanese": "泊まる",
+    "kana": "とまる",
+    "english": "to stay (at a hotel)",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "91",
+    "japanese": "なる",
+    "kana": "なる",
+    "english": "to become",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "92",
+    "japanese": "決める",
+    "kana": "きめる",
+    "english": "to decide",
+    "type": "ru",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "93",
+    "japanese": "ごろごろする",
+    "kana": "ごろごろする",
+    "english": "to chill out at home; to stay home and do nothing",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "94",
+    "japanese": "旅行する",
+    "kana": "りょこうする",
+    "english": "to travel",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "95",
+    "japanese": "練習する",
+    "kana": "れんしゅうする",
+    "english": "to practice",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "96",
+    "japanese": "うそをつく",
+    "kana": "うそをつく",
+    "english": "to tell a lie",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "97",
+    "japanese": "おなかがすく",
+    "kana": "おなかがすく",
+    "english": "to become hungry",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "98",
+    "japanese": "飼う",
+    "kana": "かう",
+    "english": "to own (a pet)",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "99",
+    "japanese": "サボる",
+    "kana": "サボる",
+    "english": "to cut (classes)",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "100",
+    "japanese": "取る",
+    "kana": "とる",
+    "english": "to take (a class); to get (a grade)",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "101",
+    "japanese": "習う",
+    "kana": "ならう",
+    "english": "to learn",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "102",
+    "japanese": "登る",
+    "kana": "のぼる",
+    "english": "to climb",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "103",
+    "japanese": "走る",
+    "kana": "はしる",
+    "english": "to run",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "104",
+    "japanese": "疲れる",
+    "kana": "つかれる",
+    "english": "to get tired",
+    "type": "ru",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "105",
+    "japanese": "やめる",
+    "kana": "やめる",
+    "english": "to quit",
+    "type": "ru",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "106",
+    "japanese": "けんかする",
+    "kana": "けんかする",
+    "english": "to have a fight; to quarrel",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "107",
+    "japanese": "紹介する",
+    "kana": "しょうかいする",
+    "english": "to introduce",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "108",
+    "japanese": "ダイエットする",
+    "kana": "ダイエットする",
+    "english": "to go on a diet",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "109",
+    "japanese": "遅刻する",
+    "kana": "ちこくする",
+    "english": "to be late (for an appointment)",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "110",
+    "japanese": "留学する",
+    "kana": "りゅうがくする",
+    "english": "to study abroad",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-11"
+  },
+  {
+    "id": "111",
+    "japanese": "歩く",
+    "kana": "あるく",
+    "english": "to walk",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "112",
+    "japanese": "風邪をひく",
+    "kana": "かぜをひく",
+    "english": "to catch a cold",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "113",
+    "japanese": "熱がある",
+    "kana": "ねつがある",
+    "english": "to have a fever",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "114",
+    "japanese": "のどが渇く",
+    "kana": "のどがかわく",
+    "english": "to become thirsty",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "115",
+    "japanese": "払う",
+    "kana": "はらう",
+    "english": "to pay",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "116",
+    "japanese": "なくす",
+    "kana": "なくす",
+    "english": "to lose",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "117",
+    "japanese": "興味がある",
+    "kana": "きょうみがある",
+    "english": "to be interested",
+    "type": "u",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "118",
+    "japanese": "せきが出る",
+    "kana": "せきがでる",
+    "english": "to cough",
+    "type": "ru",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "119",
+    "japanese": "別れる",
+    "kana": "わかれる",
+    "english": "to break up; to separate",
+    "type": "ru",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "120",
+    "japanese": "緊張する",
+    "kana": "きんちょうする",
+    "english": "to get nervous",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "121",
+    "japanese": "心配する",
+    "kana": "しんぱいする",
+    "english": "to worry",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-12"
   }
 ]

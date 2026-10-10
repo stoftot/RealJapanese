@@ -77,6 +77,8 @@ public sealed class ProgressSyncTests
         using var workspace = new TestWorkspace();
         var ids = CatalogIds(Open(workspace, "legacy-catalogs"));
         var progressRoot = Path.Combine(workspace.Root, "legacy");
+        Directory.CreateDirectory(progressRoot);
+        File.WriteAllText(Path.Combine(progressRoot, ProgressStore.LegacyVersionFile), "{\"Version\":3}");
         var legacyFiles = new Dictionary<string, byte[]>();
         var expected = new Dictionary<string, VocabSaveFile>();
         for (var index = 0; index < ProgressStore.DatasetNames.Length; index++)
@@ -96,13 +98,14 @@ public sealed class ProgressSyncTests
                 var values = ids[dataset];
                 saved = new VocabSaveFile
                 {
-                    KnownIds = [values[0], values[0]],
-                    TrainingIds = [values[0], values[1], values[1]],
-                    RehearsingIds = [values[0], values[1], values[2], values[2]]
+                    KnownIds = values.Take(1).Concat(values.Take(1)).ToList(),
+                    TrainingIds = values.Take(2).Concat(values.Take(2)).ToList(),
+                    RehearsingIds = values.Concat(values).ToList()
                 };
                 expected[dataset] = new VocabSaveFile
                 {
-                    KnownIds = [values[0]], TrainingIds = [values[1]], RehearsingIds = [values[2]]
+                    KnownIds = values.Take(1).ToList(), TrainingIds = values.Skip(1).Take(1).ToList(),
+                    RehearsingIds = values.Skip(2).ToList()
                 };
             }
             var bytes = index % 2 == 0 ? JsonSerializer.SerializeToUtf8Bytes(saved) : JsonSerializer.SerializeToUtf8Bytes(new[] { saved });
@@ -121,7 +124,7 @@ public sealed class ProgressSyncTests
     }
 
     [Fact]
-    public void Snapshot_transfers_all_six_datasets_to_live_instances_and_restart()
+    public void Snapshot_transfers_all_study_datasets_to_live_instances_and_restart()
     {
         using var workspace = new TestWorkspace();
         var source = Open(workspace, "all-source");
@@ -131,11 +134,19 @@ public sealed class ProgressSyncTests
         source.Adjectives.AddToRehearsing(source.Adjectives.Words.First());
         source.Kanji.Single.AddToVocab(source.Kanji.Single.Words.First());
         source.Kanji.Combined.AddToTraining(source.Kanji.Combined.Words.First());
+        foreach (var name in VocabularyCatalog.AdditionalDatasets)
+        {
+            var repository = new TestVocabularyData(source.Paths, name);
+            repository.AddToRehearsing(repository.Words.First());
+        }
 
         var target = Open(workspace, "all-target");
         target.Service.Apply(target.Service.PreviewSnapshot(source.Service.ExportSnapshot(), ImportMode.Replace));
         AssertSixAssignments(target);
         AssertSixAssignments(Open(workspace, "all-target"));
+        foreach (var paths in new[] { target.Paths, workspace.CreatePaths("all-target") })
+            foreach (var name in VocabularyCatalog.AdditionalDatasets)
+                Assert.Single(new TestVocabularyData(paths, name).RehearsingWords);
     }
 
     [Theory]
@@ -466,15 +477,11 @@ public sealed class ProgressSyncTests
 
     private static byte[] CaptureData(Fixture fixture) => JsonSerializer.SerializeToUtf8Bytes(Snapshot(fixture).Data);
 
-    private static Dictionary<string, int[]> CatalogIds(Fixture fixture) => new()
-    {
-        ["Words"] = fixture.Words.Words.Take(3).Select(word => word.Id).ToArray(),
-        ["Nouns"] = fixture.Nouns.Words.Take(3).Select(word => word.Id).ToArray(),
-        ["Verbs"] = fixture.Verbs.Words.Take(3).Select(word => word.Id).ToArray(),
-        ["Adjectives"] = fixture.Adjectives.Words.Take(3).Select(word => word.Id).ToArray(),
-        ["Kanji/Singel"] = fixture.Kanji.Single.Words.Take(3).Select(word => word.Id).ToArray(),
-        ["Kanji/Combined"] = fixture.Kanji.Combined.Words.Take(3).Select(word => word.Id).ToArray()
-    };
+    private static Dictionary<string, int[]> CatalogIds(Fixture fixture) => ProgressStore.DatasetNames.ToDictionary(
+        name => name, name => new TestVocabularyData(fixture.Paths, name).Words.Take(3).Select(word => word.Id).ToArray());
+
+    private sealed class TestVocabularyData(RepositoryPaths paths, string name)
+        : Repositories.Bases.WordDataBase<Word>(paths, name, name.Split('/')[^1] + ".json");
 
     private static void AssertSnapshotData(Dictionary<string, VocabSaveFile> actual, Dictionary<string, VocabSaveFile> expected)
     {

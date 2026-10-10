@@ -44,23 +44,51 @@ public abstract class WordDataBase<T> where T : Word
     public void RemoveFromTraining(T word) => progress.Change(dataset, saved => saved.TrainingIds.Remove(word.Id));
     public void RemoveFromRehearsing(T word) => progress.Change(dataset, saved => saved.RehearsingIds.Remove(word.Id));
 
-    private void SetCategory(T word, WordPracticeCategory category)
+    private void SetCategory(T word, WordPracticeCategory category) => SetCategory([word], category);
+
+    public void SetCategory(IEnumerable<T> words, WordPracticeCategory category)
     {
-        if (!Words.Any(candidate => candidate.Id == word.Id))
-            throw new ArgumentException("The word is not in this catalog.", nameof(word));
+        if (!Enum.IsDefined(category)) throw new ArgumentOutOfRangeException(nameof(category));
+        var ids = ValidateIds(words);
+        if (ids.Count == 0) return;
         progress.Change(dataset, saved =>
         {
-            saved.KnownIds.Remove(word.Id);
-            saved.TrainingIds.Remove(word.Id);
-            saved.RehearsingIds.Remove(word.Id);
+            saved.KnownIds.RemoveAll(ids.Contains);
+            saved.TrainingIds.RemoveAll(ids.Contains);
+            saved.RehearsingIds.RemoveAll(ids.Contains);
             var target = category switch
             {
                 WordPracticeCategory.Known => saved.KnownIds,
                 WordPracticeCategory.Training => saved.TrainingIds,
                 _ => saved.RehearsingIds
             };
-            target.Add(word.Id);
+            target.AddRange(ids.Order());
         });
+    }
+
+    public void RemoveFromCategory(IEnumerable<T> words, WordPracticeCategory category)
+    {
+        if (!Enum.IsDefined(category)) throw new ArgumentOutOfRangeException(nameof(category));
+        var ids = ValidateIds(words);
+        if (ids.Count == 0) return;
+        progress.Change(dataset, saved =>
+        {
+            var target = category switch
+            {
+                WordPracticeCategory.Known => saved.KnownIds,
+                WordPracticeCategory.Training => saved.TrainingIds,
+                _ => saved.RehearsingIds
+            };
+            target.RemoveAll(ids.Contains);
+        });
+    }
+
+    private HashSet<int> ValidateIds(IEnumerable<T> words)
+    {
+        var ids = words.Select(word => word.Id).ToHashSet();
+        if (!ids.IsSubsetOf(Words.Select(word => word.Id)))
+            throw new ArgumentException("A word is not in this catalog.", nameof(words));
+        return ids;
     }
 
     public List<T> GetWords(WordPracticeCategory category) => category switch

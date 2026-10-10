@@ -1,0 +1,14 @@
+@page "/suffixes"
+@page "/suffixes/{Exercise}"
+@using DataLoaders.Models
+@using Repositories
+@using RealJapanese.Components.Shared
+@inject SuffixData Repository
+
+<VocabularyStudy TItem="Suffix" Repository="@Repository" Title="Suffixes" RoutePrefix="suffixes"
+                 Exercise="@Exercise" Category="@Category" />
+
+@code {
+    [Parameter] public string? Exercise { get; set; }
+    [SupplyParameterFromQuery(Name = "category")] public string? Category { get; set; }
+}

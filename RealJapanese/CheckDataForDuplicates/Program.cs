@@ -21,16 +21,24 @@ var wordSaveDataSaver = new JsonSaver<VocabSaveFile>(folderPath: basePath+"Words
 var newWordData = new List<Word>();
 foreach (var word in wordData)
 {
-    if (newWordData.Any(w =>
+    var existing = newWordData.FirstOrDefault(w =>
             w.Japanese == word.Japanese &&
             w.English == word.English &&
-            w.Kana == word.Kana))
+            w.Kana == word.Kana);
+    if (existing is not null)
+    {
+        foreach (var origin in new[] { word.Origin }.Concat(word.AdditionalOrigins))
+            if (origin != existing.Origin && !existing.AdditionalOrigins.Contains(origin))
+                existing.AdditionalOrigins.Add(origin);
         continue;
+    }
     
     newWordData.Add(new Word
     {
         Id = word.Id,
         Category =  word.Category,
+        Origin = word.Origin,
+        AdditionalOrigins = word.AdditionalOrigins.ToList(),
         English =  word.English,
         Kana = word.Kana,
         Japanese = word.Japanese

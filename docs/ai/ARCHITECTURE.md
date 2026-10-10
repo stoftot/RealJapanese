@@ -64,21 +64,24 @@ Blazor interop runtime.
 1. A host registers a `RepositoryPaths` value with independent catalog/progress roots.
 2. A repository reads its catalog once. Missing IDs are assigned deterministically
    in memory; startup does not rewrite the source catalog.
-3. Progress is stored for all six datasets in one versioned `Progress.json` file.
+3. Progress is stored for all fourteen datasets in one versioned `Progress.json` file.
    A missing bundle is initialized from legacy `SavedData.json` files; the runtime
-   leaves those files untouched. Version 1 progress is migrated to version 2 in
-   memory and persisted on the next save (see the noun split below).
+   leaves those files untouched. Version 1 and 2 progress migrate to version 3 in
+   memory and persist on the next save (see data maintenance below).
 4. Category changes commit the complete bundle through a temporary file and atomic
    replace. The store serializes in-process changes and refuses a commit if another
    process changed the on-disk revision; repositories do not live-refresh across processes.
 
-On Android, `StudyDataInstaller` first copies these six packaged files to the
-private catalog root, writing a temporary file before replacing each earlier copy:
+On Android, `StudyDataInstaller` copies all packaged files named by
+`ProgressStore.DatasetNames` to the private catalog root, writing a temporary file
+before replacing each earlier copy:
 
 - `Words/Words.json`
 - `Nouns/Nouns.json`
 - `Verbs/Verbs.json`
 - `Adjectives/Adjectives.json`
+- Adverbs, Expressions, Pronouns, Determiners, Counters, Conjunctions, Particles
+  and Suffixes each use `<category>/<category>.json`.
 - `Kanji/Singel/Singel.json`
 - `Kanji/Combined/Combined.json`
 
@@ -121,7 +124,12 @@ The shared page releases these resources on mode changes, completion and navigat
 
 A selector derives from `WordComponentBase<T>` and injects a typed repository.
 Category actions coordinate exclusive known/training/rehearsing membership and
-save progress. Practice links pass `category=known|rehearsing|training`; shared
+save progress. `WordList` groups origins by book and numeric lesson, with separate
+expansion and group-selection controls. A group operation commits once and
+deduplicates words repeated across lessons; search restricts its scope to matches.
+The Words hub links to all vocabulary categories, whose basic spelling/flashcard
+routes share generic `VocabularyStudy` components and typed repositories.
+Practice links pass `category=known|rehearsing|training`; shared
 practice bases select chunks, shuffle, check normalized input and manage retries.
 
 ### Conjugation models and study integration
@@ -178,26 +186,30 @@ invalid saved IDs and unavailable storage have explicit handling.
 
 ### Data maintenance
 
-The noun split moves lexical nouns (including proper, time/location and personal
-pronoun entries) from Words into Nouns, preserving their existing topic labels.
-Demonstratives/interrogatives, counters and suffix patterns, adjectives, adverbs
-and expressions remain in Words. Both catalogs use consecutive zero-based IDs.
-`Repositories/Sync/WordNounSplit.json` freezes the original IDs in new-ID order;
-it is a compatibility input and must not be regenerated from later catalogs.
-The bundled legacy saves and kanji relations use the new IDs, with `NounIds`
-separate from `WordIds` in relations. Extraction loads both catalogs.
+Vocabulary has eleven grammatical categories plus the general Words fallback.
+The [vocabulary contract](../vocabulary.md) owns source scope, origin metadata,
+classification choices and identity rules; its source manifest covers all opening
+GENKI I lesson lists without importing the dictionary. Repeated lesson entries
+share one ID and use additional origins.
 
-`WordNounMigration` preserves known/training/rehearsing membership for old unified
-progress and old legacy saves. Presence of `Nouns/SavedData.json` identifies
-already-split legacy saves; its absence identifies the old five-dataset layout.
-Version 2 unified saves are never remapped again. Compatible old recovery snapshots
-are migrated too; incompatible snapshots are preserved and rejected on preview.
-Sync snapshots now use version 2 and include Nouns, so both peers must be updated.
+`WordNounMigration` and its frozen `WordNounSplit.json` preserve the first noun split
+for version 1 progress. `VocabularyMigration` and frozen `VocabularySplit.json`
+then move version 2 identities to their grammatical catalogs. These compatibility
+manifests must not be regenerated from later catalogs. Retained IDs stay stable;
+new IDs follow the previous maximum. Bundled legacy saves and kanji relation ID
+fields already use the current mappings. Extraction reads all vocabulary catalogs.
+
+Legacy roots carrying `LegacyProgressVersion.json` use current IDs. Without the
+marker, Nouns/SavedData.json distinguishes the old six-dataset layout from the
+five-dataset layout. Current category saves without the marker are rejected.
+Version 3 unified saves never run the migrations again. Compatible old recovery
+snapshots migrate too; incompatible snapshots stay unchanged and are rejected on
+preview. Sync snapshots use version 3, so both peers must be updated.
 
 Duplicate cleanup deduplicates words, assigns replacement IDs and remaps progress.
 It supports legacy saves only and refuses to run if the unified `Progress.json`
 exists, preventing catalog rewrites that would invalidate current progress.
-Kanji extraction reads verbs/adjectives/words/nouns, builds relations, asks a local model
+Kanji extraction reads all vocabulary categories, builds relations, asks a local model
 to fill new records and writes generated datasets. These utilities are not used by
 the web or Android runtime.
 

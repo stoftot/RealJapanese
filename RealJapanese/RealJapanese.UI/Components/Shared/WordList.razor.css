@@ -14,6 +14,77 @@
     font-size: 1rem;
 }
 
+.word-selection-scope {
+    display: block;
+    margin-top: 0.4rem;
+}
+
+.word-group-header {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--bs-border-color);
+    background: var(--bs-tertiary-bg);
+}
+
+.book-header {
+    font-weight: 600;
+}
+
+.lesson-header {
+    padding-left: 0.8rem;
+    background: var(--bs-secondary-bg);
+}
+
+.word-group-select,
+.word-group-expand {
+    min-height: 2.75rem;
+    border: 0;
+    background: transparent;
+    color: var(--bs-body-color);
+}
+
+.word-group-select {
+    flex: 0 0 2.75rem;
+    font-size: 1.35rem;
+}
+
+.word-group-select[aria-checked="true"],
+.word-group-select[aria-checked="mixed"] {
+    color: var(--bs-primary);
+}
+
+.word-group-expand {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex: 1;
+    min-width: 0;
+    padding: 0.55rem 0.7rem 0.55rem 0;
+    text-align: left;
+}
+
+.word-group-label {
+    overflow-wrap: anywhere;
+}
+
+.word-group-count {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-weight: normal;
+    font-size: 0.7rem;
+}
+
+.word-group-select:focus-visible,
+.word-group-expand:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: -2px;
+}
+
+.word-group-select:hover,
+.word-group-expand:hover {
+    background: var(--bs-primary-bg-subtle);
+}
+
 .list-group-item {
     flex: 0 0 auto;
     height: auto;

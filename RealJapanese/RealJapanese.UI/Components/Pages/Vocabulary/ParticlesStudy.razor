@@ -1,0 +1,14 @@
+@page "/particles"
+@page "/particles/{Exercise}"
+@using DataLoaders.Models
+@using Repositories
+@using RealJapanese.Components.Shared
+@inject ParticleData Repository
+
+<VocabularyStudy TItem="Particle" Repository="@Repository" Title="Particles" RoutePrefix="particles"
+                 Exercise="@Exercise" Category="@Category" />
+
+@code {
+    [Parameter] public string? Exercise { get; set; }
+    [SupplyParameterFromQuery(Name = "category")] public string? Category { get; set; }
+}

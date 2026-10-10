@@ -41,6 +41,13 @@ public abstract class WordComponentBase<T> : ComponentBase where T : Word
     protected Task OnRehearsingWordSelected(T word) => UpdateProgress(() => WordData.AddToRehearsing(word));
     protected Task OnRehearsingWordDeSelected(T word) => UpdateProgress(() => WordData.RemoveFromRehearsing(word));
 
+    protected Task OnKnownWordsSelected(List<T> words) => UpdateProgress(() => WordData.SetCategory(words, WordPracticeCategory.Known));
+    protected Task OnKnownWordsDeselected(List<T> words) => UpdateProgress(() => WordData.RemoveFromCategory(words, WordPracticeCategory.Known));
+    protected Task OnTrainingWordsSelected(List<T> words) => UpdateProgress(() => WordData.SetCategory(words, WordPracticeCategory.Training));
+    protected Task OnTrainingWordsDeselected(List<T> words) => UpdateProgress(() => WordData.RemoveFromCategory(words, WordPracticeCategory.Training));
+    protected Task OnRehearsingWordsSelected(List<T> words) => UpdateProgress(() => WordData.SetCategory(words, WordPracticeCategory.Rehearsing));
+    protected Task OnRehearsingWordsDeselected(List<T> words) => UpdateProgress(() => WordData.RemoveFromCategory(words, WordPracticeCategory.Rehearsing));
+
     private Task UpdateProgress(Action persist)
     {
         // The repository changes category membership in one durable commit.

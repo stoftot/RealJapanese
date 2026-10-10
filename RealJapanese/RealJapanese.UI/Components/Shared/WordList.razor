@@ -2,11 +2,15 @@
 @typeparam TItem where TItem : DataLoaders.Models.Word
 @inherits WordListBase<TItem>
 
+@{
+    var groups = VisibleGroups;
+}
+
 <div class="card h-100">
     <div class="card-header d-flex justify-content-between align-items-center">
         <span>@Title</span>
         <small class="text-muted">
-            @($"{SelectedIds?.Count ?? 0} selected / {AllWords?.Count ?? 0} total")
+            @($"{SelectedIds.Count} selected / {AllWords.Count} total")
         </small>
     </div>
 
@@ -17,31 +21,94 @@
                class="form-control"
                placeholder="Search this list"
                autocomplete="off"
+               aria-describedby="@(SearchInputId + "-scope")"
                @bind="SearchText"
                @bind:event="oninput" />
+        <small id="@(SearchInputId + "-scope")" class="text-muted word-selection-scope">
+            @if (IsSearching)
+            {
+                <span>@groups.SelectMany(group => group.Items).DistinctBy(word => word.Id).Count() matches. Group selection affects matching words, including collapsed lessons.</span>
+            }
+            else
+            {
+                <span>Group selection affects all eligible words in this list, including collapsed lessons.</span>
+            }
+        </small>
     </div>
 
     <div class="list-group list-group-flush word-list-scroll">
-        @if (FilteredItems.Any())
+        @if (groups.Count > 0)
         {
-            foreach (var item in FilteredItems)
+            foreach (var book in groups)
             {
-                var isSelected = SelectedIds?.Contains(item.Id) == true;
-
-                <button type="button"
-                        class="list-group-item list-group-item-action @(isSelected ? "active" : "")"
-                        @onclick="() => OnItemClicked(item)">
-                    <div class="fw-bold">@item.English</div>
-                    <div class="small">@item.Japanese</div>
-                    <div class="small text-muted">@item.Kana</div>
-                </button>
+                <section class="word-book" data-book="@book.Label" @key="book.Key">
+                    @GroupHeader(book, false)
+                    <div id="@PanelId(book)" hidden="@(!IsExpanded(book))">
+                        @if (IsExpanded(book))
+                        {
+                            @if (book.Lessons.Count == 0)
+                            {
+                                @WordItems(book.Items)
+                            }
+                            else
+                            {
+                                foreach (var lesson in book.Lessons)
+                                {
+                                    <section class="word-lesson" data-lesson="@lesson.Label" @key="lesson.Key">
+                                        @GroupHeader(lesson, true)
+                                        <div id="@PanelId(lesson)" hidden="@(!IsExpanded(lesson))">
+                                            @if (IsExpanded(lesson))
+                                            {
+                                                @WordItems(lesson.Items)
+                                            }
+                                        </div>
+                                    </section>
+                                }
+                            }
+                        }
+                    </div>
+                </section>
             }
         }
         else
         {
             <div class="list-group-item text-muted small">
-                @((AllWords?.Count ?? 0) == 0 ? "No words loaded." : "No matches in this list.")
+                @(AllWords.Count == 0 ? "No words loaded." : "No matches in this list.")
             </div>
         }
     </div>
 </div>
+
+@code {
+    private RenderFragment GroupHeader(WordGroup group, bool isLesson) => @<div class="word-group-header @(isLesson ? "lesson-header" : "book-header")">
+        <button type="button" class="word-group-select" role="checkbox"
+                aria-checked="@CheckedState(group)" aria-label="@SelectionLabel(group)"
+                title="@SelectionLabel(group)" @onclick="() => OnGroupClicked(group)">
+            <span aria-hidden="true">@SelectionSymbol(group)</span>
+        </button>
+        <button type="button" class="word-group-expand"
+                aria-expanded="@(IsExpanded(group) ? "true" : "false")"
+                aria-controls="@PanelId(group)"
+                aria-label="@($"{(IsExpanded(group) ? "Collapse" : "Expand")} {group.Label}")"
+                @onclick="() => ToggleExpanded(group)">
+            <span aria-hidden="true">@(IsExpanded(group) ? "▾" : "▸")</span>
+            <span class="word-group-label">@group.Label</span>
+            <small class="word-group-count">@SelectedCount(group) / @group.Items.Count @(IsSearching ? "matches" : "selected")</small>
+        </button>
+    </div>;
+
+    private RenderFragment WordItems(List<TItem> items) => @<text>
+        @foreach (var item in items)
+        {
+            var isSelected = IsSelected(item.Id);
+            <button type="button" @key="item.Id"
+                    class="list-group-item list-group-item-action @(isSelected ? "active" : "")"
+                    aria-pressed="@(isSelected ? "true" : "false")"
+                    @onclick="() => OnItemClicked(item)">
+                <div class="fw-bold">@item.English</div>
+                <div class="small">@item.Japanese</div>
+                <div class="small text-muted">@item.Kana</div>
+            </button>
+        }
+    </text>;
+}

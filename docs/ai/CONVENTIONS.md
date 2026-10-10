@@ -34,13 +34,15 @@ owned by project manifests.
 - JSON field names are defined with `JsonPropertyName`. `Word.Id` defaults to `-1`
   and uses `StringToIntConverter`.
 - Each host supplies catalog and progress roots. Preserve the relative dataset
-  layout (`Words`, `Nouns`, `Verbs`, `Adjectives`, `Kanji/Singel`, `Kanji/Combined`) beneath
-  both roots.
-- Current progress is one version 2 `Progress.json` bundle containing all six datasets and
+  layout defined by `ProgressStore.DatasetNames` beneath both roots.
+- Current progress is one version 3 `Progress.json` bundle containing all fourteen datasets and
   their known, rehearsing and training ID collections. Legacy per-dataset
   `SavedData.json` files are migration inputs only and remain untouched at runtime.
   Catalog ID changes must remap these inputs and existing unified saves; see the
-  [noun migration contract](ARCHITECTURE.md#data-maintenance).
+  [vocabulary identity contract](../vocabulary.md#identity-and-compatibility).
+- `Word.Origin` defaults to `self added`; book origins use `<book>-<lesson>`.
+  Repeated lesson entries use `AdditionalOrigins` and share one catalog ID.
+  Keep existing IDs stable and never recycle retired IDs for different words.
 - Sync snapshots are accepted only when their schema, IDs and raw catalog hashes
   match. Keep preview separate from apply so the store revision can reject stale work.
 - Android package assets contain catalogs only. Never package web `SavedData.json`.

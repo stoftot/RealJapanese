@@ -92,7 +92,9 @@ public sealed class NounConjugationTests
         var serialized = JsonSerializer.Serialize(noun);
         Assert.Equal(noun, JsonSerializer.Deserialize<Noun>(serialized));
         using var document = JsonDocument.Parse(serialized);
-        Assert.Equal(new[] { "category", "english", "id", "japanese", "kana" },
+        Assert.Equal("self added", noun.Origin);
+        Assert.Empty(noun.AdditionalOrigins);
+        Assert.Equal(new[] { "additionalOrigins", "category", "english", "id", "japanese", "kana", "origin" },
             document.RootElement.EnumerateObject().Select(property => property.Name).OrderBy(name => name, StringComparer.Ordinal).ToArray());
     }
 

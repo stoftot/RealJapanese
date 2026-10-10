@@ -1,0 +1,14 @@
+@page "/conjunctions"
+@page "/conjunctions/{Exercise}"
+@using DataLoaders.Models
+@using Repositories
+@using RealJapanese.Components.Shared
+@inject ConjunctionData Repository
+
+<VocabularyStudy TItem="Conjunction" Repository="@Repository" Title="Conjunctions" RoutePrefix="conjunctions"
+                 Exercise="@Exercise" Category="@Category" />
+
+@code {
+    [Parameter] public string? Exercise { get; set; }
+    [SupplyParameterFromQuery(Name = "category")] public string? Category { get; set; }
+}

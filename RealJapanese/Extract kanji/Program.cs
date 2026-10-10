@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Text;
 using DataLoaders;
 using DataLoaders.Models;
@@ -52,6 +52,23 @@ var data = new Dictionary<DataType, List<MinimumWordData>>()
             .ToList()
     }
 };
+
+data[DataType.Adverb] = new JsonLoader<Adverb>(baseDataPath + "Adverbs", "Adverbs.json")
+    .Load().Select(word => new MinimumWordData(word.Id, word.Japanese)).ToList();
+data[DataType.Expression] = new JsonLoader<Expression>(baseDataPath + "Expressions", "Expressions.json")
+    .Load().Select(word => new MinimumWordData(word.Id, word.Japanese)).ToList();
+data[DataType.Pronoun] = new JsonLoader<Pronoun>(baseDataPath + "Pronouns", "Pronouns.json")
+    .Load().Select(word => new MinimumWordData(word.Id, word.Japanese)).ToList();
+data[DataType.Determiner] = new JsonLoader<Determiner>(baseDataPath + "Determiners", "Determiners.json")
+    .Load().Select(word => new MinimumWordData(word.Id, word.Japanese)).ToList();
+data[DataType.Counter] = new JsonLoader<Counter>(baseDataPath + "Counters", "Counters.json")
+    .Load().Select(word => new MinimumWordData(word.Id, word.Japanese)).ToList();
+data[DataType.Conjunction] = new JsonLoader<Conjunction>(baseDataPath + "Conjunctions", "Conjunctions.json")
+    .Load().Select(word => new MinimumWordData(word.Id, word.Japanese)).ToList();
+data[DataType.Particle] = new JsonLoader<Particle>(baseDataPath + "Particles", "Particles.json")
+    .Load().Select(word => new MinimumWordData(word.Id, word.Japanese)).ToList();
+data[DataType.Suffix] = new JsonLoader<Suffix>(baseDataPath + "Suffixes", "Suffixes.json")
+    .Load().Select(word => new MinimumWordData(word.Id, word.Japanese)).ToList();
 
 var kanjiDataBasePath = $"{baseDataPath}/Kanji/FromOtherData";
 var currentKanjiData = new JsonLoader<Kanji>(folderPath: kanjiDataBasePath, fileName: "kanji.json").Load().OrderBy(k => k.Id).ToList();
@@ -165,6 +182,30 @@ void PutIntoCorrectCategory (int kanjiId, int valueId, DataType category)
         case DataType.Noun:
             kanjiRelationData[kanjiId].NounIds.Add(valueId);
             break;
+        case DataType.Adverb:
+            kanjiRelationData[kanjiId].AdverbIds.Add(valueId);
+            break;
+        case DataType.Expression:
+            kanjiRelationData[kanjiId].ExpressionIds.Add(valueId);
+            break;
+        case DataType.Pronoun:
+            kanjiRelationData[kanjiId].PronounIds.Add(valueId);
+            break;
+        case DataType.Determiner:
+            kanjiRelationData[kanjiId].DeterminerIds.Add(valueId);
+            break;
+        case DataType.Counter:
+            kanjiRelationData[kanjiId].CounterIds.Add(valueId);
+            break;
+        case DataType.Conjunction:
+            kanjiRelationData[kanjiId].ConjunctionIds.Add(valueId);
+            break;
+        case DataType.Particle:
+            kanjiRelationData[kanjiId].ParticleIds.Add(valueId);
+            break;
+        case DataType.Suffix:
+            kanjiRelationData[kanjiId].SuffixIds.Add(valueId);
+            break;
         default:
             throw new ArgumentOutOfRangeException(nameof(category), category, null);
     }
@@ -190,7 +231,15 @@ internal enum DataType
     Verbs,
     Adjective,
     Word,
-    Noun
+    Noun,
+    Adverb,
+    Expression,
+    Pronoun,
+    Determiner,
+    Counter,
+    Conjunction,
+    Particle,
+    Suffix
 }
 
 public record NewKanji()

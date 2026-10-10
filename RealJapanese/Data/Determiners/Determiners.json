@@ -1,0 +1,42 @@
+[
+  {
+    "id": "0",
+    "japanese": "この",
+    "kana": "この",
+    "english": "this …",
+    "category": "Determiner",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "1",
+    "japanese": "その",
+    "kana": "その",
+    "english": "that …",
+    "category": "Determiner",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "2",
+    "japanese": "あの",
+    "kana": "あの",
+    "english": "that … (over there)",
+    "category": "Determiner",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "3",
+    "japanese": "どの",
+    "kana": "どの",
+    "english": "which …",
+    "category": "Determiner",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "4",
+    "japanese": "どんな",
+    "kana": "どんな",
+    "english": "what kind of …",
+    "category": "Determiner",
+    "origin": "GENKI I (3rd edition)-5"
+  }
+]

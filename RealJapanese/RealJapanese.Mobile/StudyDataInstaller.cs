@@ -5,11 +5,8 @@ namespace RealJapanese.Mobile;
 /// <summary>Refreshes packaged vocabulary without touching private study progress.</summary>
 public sealed class StudyDataInstaller(RepositoryPaths paths)
 {
-    private static readonly string[] CatalogFiles =
-    [
-        "Words/Words.json", "Nouns/Nouns.json", "Verbs/Verbs.json", "Adjectives/Adjectives.json",
-        "Kanji/Singel/Singel.json", "Kanji/Combined/Combined.json"
-    ];
+    private static readonly string[] CatalogFiles = Repositories.Sync.ProgressStore.DatasetNames
+        .Select(name => name + "/" + name.Split('/')[^1] + ".json").ToArray();
 
     public async Task InstallAsync()
     {

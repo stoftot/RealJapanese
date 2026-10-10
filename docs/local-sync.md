@@ -74,11 +74,13 @@ considerations for future public distribution or hosting.
 The transfer exposes no API for arbitrary filesystem paths or remote writes; only
 a validated progress snapshot can be previewed and applied.
 
-Current progress lives in one atomic version 2 `Progress.json`, including Nouns.
-Older progress is migrated automatically: nouns move out of Words and retain
-their learned, training or rehearsing state as IDs are reassigned. An installation
+Current progress lives in one atomic version 3 `Progress.json`, including every
+grammatical vocabulary category. Older local progress is migrated automatically:
+words retain their learned, training or rehearsing state when moved between
+catalogs. An installation
 without a unified file reads its legacy `SavedData.json` files and leaves them
-untouched at runtime. Both devices must use the noun-capable version before syncing;
+untouched at runtime. Bundled legacy saves include a `LegacyProgressVersion.json`
+marker that must stay with them when copied. Both devices must use the current version before syncing;
 older app versions cannot read newly saved progress. Separate running processes
 do not receive live updates; a conflicting
 writer is refused instead of silently overwriting newer disk state.

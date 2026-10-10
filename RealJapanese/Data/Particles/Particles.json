@@ -1,0 +1,74 @@
+[
+  {
+    "id": "0",
+    "japanese": "〜ぐらい",
+    "kana": "〜ぐらい",
+    "english": "about (approximate measurement)",
+    "category": "Particle",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "1",
+    "japanese": "〜と",
+    "kana": "〜と",
+    "english": "together with (a person); and",
+    "category": "Particle",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "2",
+    "japanese": "〜が",
+    "kana": "〜が",
+    "english": "…, but",
+    "category": "Particle",
+    "origin": "GENKI I (3rd edition)-7"
+  },
+  {
+    "id": "3",
+    "japanese": "～について",
+    "kana": "～について",
+    "english": "about; concerning",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Particle"
+  },
+  {
+    "id": "4",
+    "japanese": "～から",
+    "kana": "～から",
+    "english": "from",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Particle"
+  },
+  {
+    "id": "5",
+    "japanese": "～まで",
+    "kana": "～まで",
+    "english": "to (a place; a time)",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Particle"
+  },
+  {
+    "id": "6",
+    "japanese": "～で",
+    "kana": "～で",
+    "english": "by (means of transportation); with (a tool)",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Particle"
+  },
+  {
+    "id": "7",
+    "japanese": "～か～",
+    "kana": "～か～",
+    "english": "or",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Particle"
+  },
+  {
+    "id": "8",
+    "japanese": "～だけ",
+    "kana": "～だけ",
+    "english": "just; only",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Particle"
+  }
+]

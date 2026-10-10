@@ -14,6 +14,8 @@ collection. This audience is inferred from the UI; a separate product specificat
 or owner-approved roadmap was not found.
 
 - Select known, training or rehearsing vocabulary and maintain those collections.
+- Study GENKI I lesson vocabulary by grammatical category, with collapsible book
+  and lesson groups and whole-group selection; retain origins for other sources.
 - Practise hiragana and katakana characters in one Kana module, with saved
   selections/settings, offline font choices, review and local high scores.
 - Practice spelling and flashcards, verb/adjective categories and conjugation,
@@ -35,7 +37,7 @@ or owner-approved roadmap was not found.
 - The Android application supports API level 24 and later and uses package ID
   `com.realjapanese.mobile`.
 - The canonical catalog remains under `RealJapanese/Data/`. The Android package
-  embeds the six study catalogs and copies them to app-private storage.
+  embeds the fourteen study catalogs and copies them to app-private storage.
 - The extraction utility separately needs external AI-library projects and a local
   model/server. It is not part of either application runtime.
 - There is no CI pipeline. The local xUnit suite covers pure logic, file/process/

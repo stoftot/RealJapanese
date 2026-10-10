@@ -1,0 +1,14 @@
+@page "/pronouns"
+@page "/pronouns/{Exercise}"
+@using DataLoaders.Models
+@using Repositories
+@using RealJapanese.Components.Shared
+@inject PronounData Repository
+
+<VocabularyStudy TItem="Pronoun" Repository="@Repository" Title="Pronouns" RoutePrefix="pronouns"
+                 Exercise="@Exercise" Category="@Category" />
+
+@code {
+    [Parameter] public string? Exercise { get; set; }
+    [SupplyParameterFromQuery(Name = "category")] public string? Category { get; set; }
+}

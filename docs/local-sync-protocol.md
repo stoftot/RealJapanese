@@ -76,9 +76,10 @@ not confidentiality or availability. A checksum alone would not provide that
 protection. The receiver verifies the record before schema/catalog validation
 and preview; importing remains a separate local action.
 
-The JSON snapshot schema is version 2 and contains Words, Nouns, Verbs,
-Adjectives, Kanji/Singel and Kanji/Combined with their raw catalog hashes.
-Version 1 snapshots are rejected during preview; update both peers before syncing.
+The JSON snapshot schema is version 3 and contains Words, Nouns, Verbs,
+Adjectives, Adverbs, Expressions, Pronouns, Determiners, Counters, Conjunctions,
+Particles, Suffixes, Kanji/Singel and Kanji/Combined with their raw catalog hashes.
+Version 1 and 2 incoming snapshots are rejected during preview; update both peers before syncing.
 This schema revision does not change the `RJLAN003` transport framing.
 
 ## Lifetime and failure behavior

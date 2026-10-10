@@ -1,0 +1,58 @@
+[
+  {
+    "id": "0",
+    "japanese": "〜年生",
+    "kana": "〜ねんせい",
+    "english": "… year student",
+    "category": "Suffixe",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "1",
+    "japanese": "〜さん",
+    "kana": "〜さん",
+    "english": "Mr./Ms.",
+    "category": "Suffixe",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "2",
+    "japanese": "〜人",
+    "kana": "〜じん",
+    "english": "… people (nationality)",
+    "category": "Suffixe",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "3",
+    "japanese": "〜語",
+    "kana": "〜ご",
+    "english": "… language",
+    "category": "Suffixe",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "4",
+    "japanese": "〜ごろ",
+    "kana": "〜ごろ",
+    "english": "at about…",
+    "category": "Suffixe",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "5",
+    "japanese": "～後",
+    "kana": "～ご",
+    "english": "in (time); after",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Suffixe"
+  },
+  {
+    "id": "6",
+    "japanese": "～代",
+    "kana": "～だい",
+    "english": "charge; fee",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Suffixe"
+  }
+]

@@ -19,26 +19,28 @@ cold restart and a same-signer application update.
 - A disposable device/emulator on a supported Android version with no existing
   data for the test package.
 - An installable build and a second build with the same package ID and signing key
-  that Android accepts as an update. Both builds package the six current catalogs.
+  that Android accepts as an update. The newer build packages all fourteen current catalogs; use an older build for migration checks.
 - Network connectivity can be disabled after installation.
 
 ### Steps
 
 1. Install the first build, disable network connectivity, and launch it cold.
-2. Open Words, Nouns, Verbs, Adjectives, Kanji Combined and Kanji Single. In each dataset,
+2. Open every populated vocabulary category available in the first build, plus Kanji Combined and Kanji Single. In each dataset,
    search for a recorded catalog item and assign it to a recorded study category.
 3. Open at least one practice action for each dataset and confirm its selected item
    can be reached. Keep network connectivity disabled.
 4. Force-stop the app without clearing its data, relaunch it cold, and inspect all
-   six recorded assignments.
+   recorded assignments.
 5. Install the second same-signer build as an update without uninstalling or
-   clearing app data. Launch it cold while still offline and repeat the six
-   assignment and practice checks.
+   clearing app data. Launch it cold while still offline and repeat the
+   assignment and practice checks. Follow moved vocabulary into its current category;
+   use the Words hub to reach the additional categories.
 
 ### Expected result
 
-- First launch completes and all six packaged catalogs are usable offline:
-  Words, Nouns, Verbs, Adjectives, Kanji Combined and Kanji Single.
+- Launch completes and every catalog packaged by that build is usable offline;
+  the updated build includes all fourteen current catalogs.
+  General Words may be empty; its category links remain available.
 - Every recorded assignment survives force-stop/cold restart.
 - The accepted same-signer update refreshes/retains usable packaged catalogs while
   preserving every private progress assignment. No web server or internet

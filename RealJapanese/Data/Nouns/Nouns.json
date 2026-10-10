@@ -4,1539 +4,2845 @@
     "japanese": "大学",
     "kana": "だいがく",
     "english": "college; university",
-    "category": "School"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "1",
     "japanese": "高校",
     "kana": "こうこう",
     "english": "high school",
-    "category": "School"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "2",
     "japanese": "学生",
     "kana": "がくせい",
     "english": "student",
-    "category": "School"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "3",
     "japanese": "大学生",
     "kana": "だいがくせい",
     "english": "college student",
-    "category": "School"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "4",
     "japanese": "留学生",
     "kana": "りゅうがくせい",
     "english": "international student",
-    "category": "School"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "5",
     "japanese": "先生",
     "kana": "せんせい",
     "english": "teacher; professor",
-    "category": "School"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "6",
     "japanese": "一年生",
     "kana": "いちねんせい",
     "english": "first-year student",
-    "category": "School"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "7",
     "japanese": "専攻",
     "kana": "せんこう",
     "english": "major",
-    "category": "School"
-  },
-  {
-    "id": "8",
-    "japanese": "私",
-    "kana": "わたし",
-    "english": "I",
-    "category": "Person"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "9",
     "japanese": "友だち",
     "kana": "ともだち",
     "english": "friend",
-    "category": "Person"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "10",
     "japanese": "日本人",
     "kana": "にほんじん",
     "english": "japanese person",
-    "category": "Person"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "11",
     "japanese": "今",
     "kana": "いま",
     "english": "now",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "12",
     "japanese": "午前",
     "kana": "ごぜん",
     "english": "A.M.",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "13",
     "japanese": "午後",
     "kana": "ごご",
     "english": "P.M.",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "14",
     "japanese": "日本",
     "kana": "にほん",
     "english": "Japan",
-    "category": "Others"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "15",
     "japanese": "アメリカ",
     "kana": "アメリカ",
     "english": "U.S.A.",
-    "category": "Others"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "16",
     "japanese": "日本語",
     "kana": "にほんご",
     "english": "japanese language",
-    "category": "Others"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "17",
     "japanese": "電話",
     "kana": "でんわ",
     "english": "telephone",
-    "category": "Others"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "18",
     "japanese": "番号",
     "kana": "ばんごう",
     "english": "number",
-    "category": "Others"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "19",
     "japanese": "名前",
     "kana": "なまえ",
     "english": "name",
-    "category": "Others"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "20",
     "japanese": "イギリス",
     "kana": "イギリス",
     "english": "Britain",
-    "category": "Country"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-2"
+    ]
   },
   {
     "id": "21",
     "japanese": "オーストラリア",
     "kana": "オーストラリア",
     "english": "Australia",
-    "category": "Country"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-11"
+    ]
   },
   {
     "id": "22",
     "japanese": "韓国",
     "kana": "かんこく",
     "english": "Korea",
-    "category": "Country"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-2"
+    ]
   },
   {
     "id": "23",
     "japanese": "カナダ",
     "kana": "カナダ",
     "english": "Canada",
-    "category": "Country"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "24",
     "japanese": "中国",
     "kana": "ちゅうごく",
     "english": "China",
-    "category": "Country"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-2"
+    ]
   },
   {
     "id": "25",
     "japanese": "インド",
     "kana": "インド",
     "english": "India",
-    "category": "Country"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "26",
     "japanese": "エジプト",
     "kana": "エジプト",
     "english": "Egypt",
-    "category": "Country"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "27",
     "japanese": "フィリピン",
     "kana": "フィリピン",
     "english": "Philippines",
-    "category": "Country"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "28",
     "japanese": "アジア研究",
     "kana": "アジアけんきゅう",
     "english": "Asian studies",
-    "category": "Major"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "29",
     "japanese": "経済",
     "kana": "けいざい",
     "english": "economics",
-    "category": "Major"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-2"
+    ]
   },
   {
     "id": "30",
     "japanese": "工学",
     "kana": "こうがく",
     "english": "engineering",
-    "category": "Major"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "31",
     "japanese": "国際関係",
     "kana": "こくさいかんけい",
     "english": "international relations",
-    "category": "Major"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "32",
     "japanese": "コンピューター",
     "kana": "コンピューター",
     "english": "computer",
-    "category": "Major"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-2"
+    ]
   },
   {
     "id": "33",
     "japanese": "政治",
     "kana": "せいじ",
     "english": "politics",
-    "category": "Major"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-12"
+    ]
   },
   {
     "id": "34",
     "japanese": "生物学",
     "kana": "せいぶつがく",
     "english": "biology",
-    "category": "Major"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "35",
     "japanese": "ビジネス",
     "kana": "ビジネス",
     "english": "business",
-    "category": "Major"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-2"
+    ]
   },
   {
     "id": "36",
     "japanese": "文学",
     "kana": "ぶんがく",
     "english": "literature",
-    "category": "Major"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "37",
     "japanese": "歴史",
     "kana": "れきし",
     "english": "history",
-    "category": "Major"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-2"
+    ]
   },
   {
     "id": "38",
     "japanese": "医者",
     "kana": "いしゃ",
     "english": "doctor",
-    "category": "Occupation"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-10"
+    ]
   },
   {
     "id": "39",
     "japanese": "会社員",
     "kana": "かいしゃいん",
     "english": "office worker",
-    "category": "Occupation"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-8"
+    ]
   },
   {
     "id": "40",
     "japanese": "看護師",
     "kana": "かんごし",
     "english": "nurse",
-    "category": "Occupation"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-11"
+    ]
   },
   {
     "id": "41",
     "japanese": "高校生",
     "kana": "こうこうせい",
     "english": "high school student",
-    "category": "Occupation"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "42",
     "japanese": "主婦",
     "kana": "しゅふ",
     "english": "housewife",
-    "category": "Occupation"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "43",
     "japanese": "大学院生",
     "kana": "だいがくいんせい",
     "english": "graduate student",
-    "category": "Occupation"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "44",
     "japanese": "弁護士",
     "kana": "べんごし",
     "english": "lawyer",
-    "category": "Occupation"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1"
   },
   {
     "id": "45",
     "japanese": "お母さん",
     "kana": "おかあさん",
     "english": "mother",
-    "category": "Family"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-2"
+    ]
   },
   {
     "id": "46",
     "japanese": "お父さん",
     "kana": "おとうさん",
     "english": "father",
-    "category": "Family"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-2"
+    ]
   },
   {
     "id": "47",
     "japanese": "お姉さん",
     "kana": "おねえさん",
     "english": "older sister",
-    "category": "Family"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-7"
+    ]
   },
   {
     "id": "48",
     "japanese": "お兄さん",
     "kana": "おにいさん",
     "english": "older brother",
-    "category": "Family"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-7"
+    ]
   },
   {
     "id": "49",
     "japanese": "妹",
     "kana": "いもうと",
     "english": "younger sister",
-    "category": "Family"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-7"
+    ]
   },
   {
     "id": "50",
     "japanese": "弟",
     "kana": "おとうと",
     "english": "younger brother",
-    "category": "Family"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-1",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-7"
+    ]
   },
   {
     "id": "51",
     "japanese": "魚",
     "kana": "さかな",
     "english": "fish",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "52",
     "japanese": "とんかつ",
     "kana": "とんかつ",
     "english": "pork cutlet",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "53",
     "japanese": "肉",
     "kana": "にく",
     "english": "meat",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "54",
     "japanese": "メニュー",
     "kana": "メニュー",
     "english": "menu",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "55",
     "japanese": "野菜",
     "kana": "やさい",
     "english": "vegetable",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "56",
     "japanese": "傘",
     "kana": "かさ",
     "english": "umbrella",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "57",
     "japanese": "鞄",
     "kana": "かばん",
     "english": "bag",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "58",
     "japanese": "靴",
     "kana": "くつ",
     "english": "shoes",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "59",
     "japanese": "財布",
     "kana": "さいふ",
     "english": "wallet",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "60",
     "japanese": "ジーンズ",
     "kana": "ジーンズ",
     "english": "jeans",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "61",
     "japanese": "自転車",
     "kana": "じてんしゃ",
     "english": "bicycle",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "62",
     "japanese": "新聞",
     "kana": "しんぶん",
     "english": "newspaper",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "63",
     "japanese": "スマホ",
     "kana": "スマホ",
     "english": "smartphone; mobile",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "64",
     "japanese": "Tシャツ",
     "kana": "Tシャツ",
     "english": "T-shirt",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "65",
     "japanese": "時計",
     "kana": "とけい",
     "english": "watch; clock",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "66",
     "japanese": "ノート",
     "kana": "ノート",
     "english": "notebook",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "67",
     "japanese": "ペン",
-    "kana": "ぺん",
+    "kana": "ペン",
     "english": "pen",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "68",
     "japanese": "帽子",
     "kana": "ぼうし",
     "english": "hat; cap",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "69",
     "japanese": "本",
     "kana": "ほん",
     "english": "book",
-    "category": "Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "70",
     "japanese": "銀行",
     "kana": "ぎんこう",
     "english": "bank",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "71",
     "japanese": "コンビニ",
     "kana": "コンビニ",
     "english": "convenience store",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "72",
     "japanese": "トイレ",
     "kana": "トイレ",
     "english": "toilet; restroom",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "73",
     "japanese": "図書館",
     "kana": "としょかん",
     "english": "library",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "74",
     "japanese": "郵便局",
     "kana": "ゆうびんきょく",
     "english": "post office",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "75",
     "japanese": "英語",
     "kana": "えいご",
     "english": "english (language)",
-    "category": "Major"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   },
   {
     "id": "76",
     "japanese": "映画",
     "kana": "えいが",
     "english": "movie",
-    "category": "Entertainment"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "77",
     "japanese": "音楽",
     "kana": "おんがく",
     "english": "music",
-    "category": "Entertainment"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "78",
     "japanese": "雑誌",
     "kana": "ざっし",
     "english": "magazine",
-    "category": "Entertainment"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "79",
     "japanese": "スポーツ",
     "kana": "スポーツ",
     "english": "sports",
-    "category": "Entertainment"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "80",
     "japanese": "デート",
     "kana": "デート",
     "english": "date (romantic)",
-    "category": "Entertainment"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "81",
     "japanese": "テニス",
     "kana": "テニス",
     "english": "tennis",
-    "category": "Entertainment"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "82",
     "japanese": "テレビ",
     "kana": "テレビ",
     "english": "TV",
-    "category": "Entertainment"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "83",
     "japanese": "アイスクリーム",
     "kana": "アイスクリーム",
     "english": "ice cream",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "84",
     "japanese": "ハンバーガー",
     "kana": "ハンバーガー",
     "english": "hamburger",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "85",
     "japanese": "お酒",
     "kana": "おさけ",
     "english": "sake; alcoholic drink",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "86",
     "japanese": "お茶",
     "kana": "おちゃ",
     "english": "green tea",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "87",
     "japanese": "コーヒー",
     "kana": "コーヒー",
     "english": "coffee",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "88",
     "japanese": "水",
     "kana": "みず",
     "english": "water",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "89",
     "japanese": "朝ご飯",
     "kana": "あさごはん",
     "english": "breakfast",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "90",
     "japanese": "昼ご飯",
     "kana": "ひるごはん",
     "english": "lunch",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "91",
     "japanese": "晩ご飯",
     "kana": "ばんごはん",
     "english": "dinner",
-    "category": "Food"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "92",
     "japanese": "家",
     "kana": "いえ",
     "english": "home; house",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "93",
     "japanese": "うち",
     "kana": "うち",
     "english": "home; house; my place",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "94",
     "japanese": "学校",
     "kana": "がっこう",
     "english": "school",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "95",
     "japanese": "カフェ",
     "kana": "カフェ",
     "english": "cafe",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "96",
     "japanese": "明日",
     "kana": "あした",
     "english": "tomorrow",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "97",
     "japanese": "今日",
     "kana": "きょう",
     "english": "today",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "98",
     "japanese": "朝",
     "kana": "あさ",
     "english": "morning",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "99",
     "japanese": "今晩",
     "kana": "こんばん",
     "english": "tonight",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "100",
     "japanese": "毎日",
     "kana": "まいにち",
     "english": "every day",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "101",
     "japanese": "毎晩",
     "kana": "まいばん",
     "english": "every night",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "102",
     "japanese": "週末",
     "kana": "しゅうまつ",
     "english": "weekend",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "103",
     "japanese": "土曜日",
     "kana": "どようび",
     "english": "Saturday",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "104",
     "japanese": "日曜日",
     "kana": "にちようび",
     "english": "Sunday",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-3"
   },
   {
     "id": "105",
     "japanese": "ゲーム",
     "kana": "ゲーム",
     "english": "game",
-    "category": "Activity"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "106",
     "japanese": "アルバイト",
     "kana": "アルバイト",
     "english": "part-time job",
-    "category": "Activity"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "107",
     "japanese": "買い物",
     "kana": "かいもの",
     "english": "shopping",
-    "category": "Activity"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "108",
     "japanese": "クラス",
     "kana": "クラス",
     "english": "class",
-    "category": "Activity"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "109",
     "japanese": "犬",
     "kana": "いぬ",
     "english": "dog",
-    "category": "People/Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "110",
     "japanese": "猫",
     "kana": "ねこ",
     "english": "cat",
-    "category": "People/Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "111",
     "japanese": "人",
     "kana": "ひと",
     "english": "person",
-    "category": "People/Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "112",
     "japanese": "子供",
     "kana": "こども",
     "english": "child",
-    "category": "People/Thing"
-  },
-  {
-    "id": "113",
-    "japanese": "あなた",
-    "kana": "あなた",
-    "english": "you",
-    "category": "People/Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "114",
     "japanese": "椅子",
     "kana": "いす",
     "english": "chair",
-    "category": "People/Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "115",
     "japanese": "机",
     "kana": "つくえ",
     "english": "desk",
-    "category": "People/Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "116",
     "japanese": "写真",
     "kana": "しゃしん",
     "english": "picture; photograph",
-    "category": "People/Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "117",
     "japanese": "花",
     "kana": "はな",
     "english": "flower",
-    "category": "People/Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "118",
     "japanese": "レポート",
     "kana": "レポート",
     "english": "(term) paper",
-    "category": "People/Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "119",
     "japanese": "ご飯",
     "kana": "ごはん",
     "english": "rice; meal",
-    "category": "People/Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "120",
     "japanese": "パン",
     "kana": "パン",
     "english": "bread",
-    "category": "People/Thing"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "121",
     "japanese": "お寺",
     "kana": "おてら",
     "english": "temple",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "122",
     "japanese": "公園",
     "kana": "こうえん",
     "english": "park",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "123",
     "japanese": "スーパー",
     "kana": "スーパー",
     "english": "supermarket",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "124",
     "japanese": "バス停",
     "kana": "バスてい",
     "english": "bus stop",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "125",
     "japanese": "病院",
     "kana": "びょういん",
     "english": "hospital",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "126",
     "japanese": "ホテル",
     "kana": "ホテル",
     "english": "hotel",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "127",
     "japanese": "本屋",
     "kana": "ほんや",
     "english": "bookstore",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "128",
     "japanese": "町",
     "kana": "まち",
     "english": "town; city",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "129",
     "japanese": "レストラン",
     "kana": "レストラン",
     "english": "restaurant",
-    "category": "Place"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "130",
     "japanese": "昨日",
     "kana": "きのう",
     "english": "yesterday",
-    "category": "Time"
-  },
-  {
-    "id": "131",
-    "japanese": "一時間",
-    "kana": "いちじかん",
-    "english": "one hour",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "132",
     "japanese": "先週",
     "kana": "せんしゅう",
     "english": "last week",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "133",
     "japanese": "時",
     "kana": "とき",
     "english": "when…; at the time of… ",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "134",
     "japanese": "月曜日",
     "kana": "げつようび",
     "english": "Monday",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "135",
     "japanese": "火曜日",
     "kana": "かようび",
     "english": "Tuesday",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "136",
     "japanese": "水曜日",
     "kana": "すいようび",
     "english": "Wednesday",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "137",
     "japanese": "木曜日",
     "kana": "もくようび",
     "english": "Thursday",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "138",
     "japanese": "金曜日",
     "kana": "きんようび",
     "english": "Friday",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "139",
     "japanese": "右",
     "kana": "みぎ",
     "english": "right ",
-    "category": "Location"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "140",
     "japanese": "左",
     "kana": "ひだり",
     "english": "left ",
-    "category": "Location"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "141",
     "japanese": "前",
     "kana": "まえ",
     "english": "front",
-    "category": "Location"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "142",
     "japanese": "後ろ",
     "kana": "うしろ",
     "english": "back(location)",
-    "category": "Location"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "143",
     "japanese": "中",
     "kana": "なか",
     "english": "inside",
-    "category": "Location"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "144",
     "japanese": "上",
     "kana": "うえ",
     "english": "on",
-    "category": "Location"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "145",
     "japanese": "下",
     "kana": "した",
     "english": "under",
-    "category": "Location"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "146",
     "japanese": "近く",
     "kana": "ちかく",
     "english": "near; nearby",
-    "category": "Location"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "147",
     "japanese": "隣",
     "kana": "となり",
     "english": "next to",
-    "category": "Location"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "148",
     "japanese": "間",
     "kana": "あいだ",
     "english": "between",
-    "category": "Location"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-4"
   },
   {
     "id": "149",
     "japanese": "食べ物",
     "kana": "たべもの",
     "english": "food",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "150",
     "japanese": "飲み物",
     "kana": "のみもの",
     "english": "drink",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "151",
     "japanese": "果物",
     "kana": "くだもの",
     "english": "fruit",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "152",
     "japanese": "休み",
     "kana": "やすみ",
     "english": "holiday; day off; absence",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "153",
     "japanese": "旅行",
     "kana": "りょこう",
     "english": "travel",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "154",
     "japanese": "海",
     "kana": "うみ",
     "english": "sea",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "155",
     "japanese": "サーフィン",
     "kana": "サーフィン",
     "english": "surfing",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "156",
     "japanese": "お土産",
     "kana": "おみやげ",
     "english": "souvenir",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "157",
     "japanese": "バス",
     "kana": "バス",
     "english": "bus",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "158",
     "japanese": "天気",
     "kana": "てんき",
     "english": "weather",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "159",
     "japanese": "宿題",
     "kana": "しゅくだい",
     "english": "homework",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "160",
     "japanese": "テスト",
     "kana": "テスト",
     "english": "test",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "161",
     "japanese": "誕生日",
     "kana": "たんじょうび",
     "english": "birthday",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "162",
     "japanese": "部屋",
     "kana": "へや",
     "english": "room",
-    "category": "Noun"
-  },
-  {
-    "id": "163",
-    "japanese": "僕",
-    "kana": "ぼく",
-    "english": "I (used by men)",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "164",
     "japanese": "Lサイズ",
     "kana": "エルサイズ",
     "english": "size L",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "165",
     "japanese": "漢字",
     "kana": "かんじ",
     "english": "kanji; Chinese character",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "166",
     "japanese": "教科書",
     "kana": "きょうかしょ",
     "english": "textbook",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "167",
     "japanese": "ページ",
     "kana": "ページ",
     "english": "page",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "168",
     "japanese": "次",
     "kana": "つぎ",
     "english": "next",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "169",
     "japanese": "お金",
     "kana": "おかね",
     "english": "money",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "170",
     "japanese": "荷物",
     "kana": "にもつ",
     "english": "baggage",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "171",
     "japanese": "パソコン",
     "kana": "パソコン",
     "english": "personal computer",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "172",
     "japanese": "シャワー",
     "kana": "シャワー",
     "english": "shower",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "173",
     "japanese": "エアコン",
     "kana": "エアコン",
     "english": "air conditioner",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "174",
     "japanese": "電気",
     "kana": "でんき",
     "english": "electricity; light",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "175",
     "japanese": "窓",
     "kana": "まど",
     "english": "window",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "176",
     "japanese": "電車",
     "kana": "でんしゃ",
     "english": "train",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "177",
     "japanese": "国",
     "kana": "くに",
     "english": "country; place of origin",
-    "category": "Noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "178",
     "japanese": "今週",
     "kana": "こんしゅう",
     "english": "this week",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "179",
     "japanese": "来週",
     "kana": "らいしゅう",
     "english": "next week",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "180",
     "japanese": "来年",
     "kana": "らいねん",
     "english": "next year",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "181",
     "japanese": "夜",
     "kana": "よる",
     "english": "night",
-    "category": "Time"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "id": "182",
     "japanese": "家族",
     "kana": "かぞく",
     "english": "family",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "183",
     "japanese": "おじいさん",
     "kana": "おじいさん",
     "english": "grandfather; old man",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "184",
     "japanese": "おばあさん",
     "kana": "おばあさん",
     "english": "grandmother; old woman",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "185",
     "japanese": "父",
     "kana": "ちち",
     "english": "(my) father",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "186",
     "japanese": "母",
     "kana": "はは",
     "english": "(my) mother",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "187",
     "japanese": "兄",
     "kana": "あに",
     "english": "(my) older brother",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "188",
     "japanese": "姉",
     "kana": "あね",
     "english": "(my) older sister",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "189",
     "japanese": "兄弟",
     "kana": "きょうだい",
     "english": "brothers and sisters",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "190",
     "japanese": "男の人",
     "kana": "おとこのひと",
     "english": "man",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "191",
     "japanese": "女の人",
     "kana": "おんなのひと",
     "english": "woman",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "192",
     "japanese": "会社",
     "kana": "かいしゃ",
     "english": "company",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "193",
     "japanese": "食堂",
     "kana": "しょくどう",
     "english": "cafeteria; dining commons",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "194",
     "japanese": "デパート",
     "kana": "デパート",
     "english": "department store",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "195",
     "japanese": "髪",
     "kana": "かみ",
     "english": "hair",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "196",
     "japanese": "口",
     "kana": "くち",
     "english": "mouth",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "197",
     "japanese": "目",
     "kana": "め",
     "english": "eye",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "198",
     "japanese": "眼鏡",
     "kana": "めがね",
     "english": "glasses",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "199",
     "japanese": "歌",
     "kana": "うた",
     "english": "song",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "200",
     "japanese": "サークル",
     "kana": "サークル",
     "english": "club activity",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "201",
     "japanese": "車",
     "kana": "くるま",
     "english": "car",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "id": "202",
     "japanese": "眉毛",
     "kana": "まゆげ",
     "english": "eyebrow",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "203",
     "japanese": "耳",
     "kana": "みみ",
     "english": "ear",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "204",
     "japanese": "鼻",
     "kana": "はな",
     "english": "nose",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "205",
     "japanese": "歯",
     "kana": "は",
     "english": "tooth",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-12"
   },
   {
     "id": "206",
     "japanese": "首",
     "kana": "くび",
     "english": "neck",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "207",
     "japanese": "指",
     "kana": "ゆび",
     "english": "finger",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "208",
     "japanese": "手",
     "kana": "て",
     "english": "hand",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "209",
     "japanese": "頭",
     "kana": "あたま",
     "english": "head",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "210",
     "japanese": "顔",
     "kana": "かお",
     "english": "face",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-10"
   },
   {
     "id": "211",
     "japanese": "肩",
     "kana": "かた",
     "english": "shoulder",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "212",
     "japanese": "胸",
     "kana": "むね",
     "english": "chest",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "213",
     "japanese": "お腹",
     "kana": "おなか",
     "english": "stomach",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-12"
   },
   {
     "id": "214",
     "japanese": "背中",
     "kana": "せなか",
     "english": "back(body part)",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "215",
     "japanese": "お尻",
     "kana": "おしり",
     "english": "buttocks",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "216",
     "japanese": "足",
     "kana": "あし",
     "english": "leg; foot",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-12"
   },
   {
     "id": "217",
     "japanese": "腕",
     "kana": "うで",
     "english": "arm",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "218",
     "japanese": "膝",
     "kana": "ひざ",
     "english": "knee",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
   },
   {
     "id": "219",
     "japanese": "手首",
     "kana": "てくび",
     "english": "wrist",
-    "category": "noun"
+    "category": "Noun",
+    "origin": "self added"
+  },
+  {
+    "id": "220",
+    "japanese": "半",
+    "kana": "はん",
+    "english": "half",
+    "origin": "GENKI I (3rd edition)-1",
+    "category": "Noun"
+  },
+  {
+    "id": "221",
+    "japanese": "晴れ",
+    "kana": "はれ",
+    "english": "sunny weather",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "222",
+    "japanese": "雨",
+    "kana": "あめ",
+    "english": "rain",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "223",
+    "japanese": "曇り",
+    "kana": "くもり",
+    "english": "cloudy weather",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "224",
+    "japanese": "雪",
+    "kana": "ゆき",
+    "english": "snow",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "225",
+    "japanese": "天気予報",
+    "kana": "てんきよほう",
+    "english": "weather forecast",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "226",
+    "japanese": "気温",
+    "kana": "きおん",
+    "english": "temperature (weather)",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "227",
+    "japanese": "夏",
+    "kana": "なつ",
+    "english": "summer",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "228",
+    "japanese": "冬",
+    "kana": "ふゆ",
+    "english": "winter",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "229",
+    "japanese": "今朝",
+    "kana": "けさ",
+    "english": "this morning",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "230",
+    "japanese": "あさって",
+    "kana": "あさって",
+    "english": "the day after tomorrow",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "231",
+    "japanese": "毎週",
+    "kana": "まいしゅう",
+    "english": "every week",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "232",
+    "japanese": "今月",
+    "kana": "こんげつ",
+    "english": "this month",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "233",
+    "japanese": "来月",
+    "kana": "らいげつ",
+    "english": "next month",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "234",
+    "japanese": "仕事",
+    "kana": "しごと",
+    "english": "job; work; occupation",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "235",
+    "japanese": "カメラ",
+    "kana": "カメラ",
+    "english": "camera",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "236",
+    "japanese": "カラオケ",
+    "kana": "カラオケ",
+    "english": "karaoke",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "237",
+    "japanese": "所",
+    "kana": "ところ",
+    "english": "place",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "238",
+    "japanese": "トマト",
+    "kana": "トマト",
+    "english": "tomato",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "239",
+    "japanese": "はし",
+    "kana": "はし",
+    "english": "chopsticks",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "240",
+    "japanese": "パーティー",
+    "kana": "パーティー",
+    "english": "party",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "241",
+    "japanese": "バーベキュー",
+    "kana": "バーベキュー",
+    "english": "barbecue",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "242",
+    "japanese": "ホームステイ",
+    "kana": "ホームステイ",
+    "english": "homestay; living with a local family",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "243",
+    "japanese": "お風呂",
+    "kana": "おふろ",
+    "english": "bath",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "244",
+    "japanese": "スペイン",
+    "kana": "スペイン",
+    "english": "Spain",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Noun"
+  },
+  {
+    "id": "245",
+    "japanese": "単語",
+    "kana": "たんご",
+    "english": "word; vocabulary",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "246",
+    "japanese": "作文",
+    "kana": "さくぶん",
+    "english": "essay; composition",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "247",
+    "japanese": "試験",
+    "kana": "しけん",
+    "english": "exam",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "248",
+    "japanese": "手紙",
+    "kana": "てがみ",
+    "english": "letter",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "249",
+    "japanese": "メール",
+    "kana": "メール",
+    "english": "e-mail",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "250",
+    "japanese": "ギター",
+    "kana": "ギター",
+    "english": "guitar",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "251",
+    "japanese": "ピアノ",
+    "kana": "ピアノ",
+    "english": "piano",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "252",
+    "japanese": "コンサート",
+    "kana": "コンサート",
+    "english": "concert",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "253",
+    "japanese": "チケット",
+    "kana": "チケット",
+    "english": "ticket",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "254",
+    "japanese": "歌舞伎",
+    "kana": "かぶき",
+    "english": "Kabuki; traditional Japanese theatrical art",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "255",
+    "japanese": "スキー",
+    "kana": "スキー",
+    "english": "ski",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "256",
+    "japanese": "お弁当",
+    "kana": "おべんとう",
+    "english": "boxed lunch",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "257",
+    "japanese": "ピザ",
+    "kana": "ピザ",
+    "english": "pizza",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "258",
+    "japanese": "病気",
+    "kana": "びょうき",
+    "english": "illness; sickness",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "259",
+    "japanese": "薬",
+    "kana": "くすり",
+    "english": "medicine",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "260",
+    "japanese": "いい子",
+    "kana": "いいこ",
+    "english": "good child",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "261",
+    "japanese": "色",
+    "kana": "いろ",
+    "english": "color",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "262",
+    "japanese": "今度",
+    "kana": "こんど",
+    "english": "near future",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "263",
+    "japanese": "先月",
+    "kana": "せんげつ",
+    "english": "last month",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "264",
+    "japanese": "去年",
+    "kana": "きょねん",
+    "english": "last year",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Noun"
+  },
+  {
+    "id": "265",
+    "japanese": "季節",
+    "kana": "きせつ",
+    "english": "season",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "266",
+    "japanese": "春",
+    "kana": "はる",
+    "english": "spring",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "267",
+    "japanese": "秋",
+    "kana": "あき",
+    "english": "fall",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "268",
+    "japanese": "牛乳",
+    "kana": "ぎゅうにゅう",
+    "english": "milk",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "269",
+    "japanese": "ケーキ",
+    "kana": "ケーキ",
+    "english": "cake",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "270",
+    "japanese": "すし",
+    "kana": "すし",
+    "english": "sushi",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "271",
+    "japanese": "天ぷら",
+    "kana": "てんぷら",
+    "english": "tempura",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "272",
+    "japanese": "りんご",
+    "kana": "りんご",
+    "english": "apple",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "273",
+    "japanese": "料理",
+    "kana": "りょうり",
+    "english": "cuisine",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "274",
+    "japanese": "サッカー",
+    "kana": "サッカー",
+    "english": "soccer",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "275",
+    "japanese": "野球",
+    "kana": "やきゅう",
+    "english": "baseball",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "276",
+    "japanese": "お金持ち",
+    "kana": "おかねもち",
+    "english": "rich person",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "277",
+    "japanese": "有名人",
+    "kana": "ゆうめいじん",
+    "english": "celebrity",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "278",
+    "japanese": "年上",
+    "kana": "としうえ",
+    "english": "someone older",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "279",
+    "japanese": "駅",
+    "kana": "えき",
+    "english": "station",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "280",
+    "japanese": "新幹線",
+    "kana": "しんかんせん",
+    "english": "Shinkansen; Bullet Train",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "281",
+    "japanese": "地下鉄",
+    "kana": "ちかてつ",
+    "english": "subway",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "282",
+    "japanese": "船",
+    "kana": "ふね",
+    "english": "ship; boat",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "283",
+    "japanese": "飛行機",
+    "kana": "ひこうき",
+    "english": "airplane",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "284",
+    "japanese": "予約",
+    "kana": "よやく",
+    "english": "reservation",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "285",
+    "japanese": "ツアー",
+    "kana": "ツアー",
+    "english": "tour",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "286",
+    "japanese": "動物園",
+    "kana": "どうぶつえん",
+    "english": "zoo",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "287",
+    "japanese": "時間",
+    "kana": "じかん",
+    "english": "time",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "288",
+    "japanese": "世界",
+    "kana": "せかい",
+    "english": "world",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "289",
+    "japanese": "美容院",
+    "kana": "びよういん",
+    "english": "beauty parlor",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "290",
+    "japanese": "手袋",
+    "kana": "てぶくろ",
+    "english": "gloves",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "291",
+    "japanese": "生活",
+    "kana": "せいかつ",
+    "english": "life; living",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "292",
+    "japanese": "今年",
+    "kana": "ことし",
+    "english": "this year",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Noun"
+  },
+  {
+    "id": "293",
+    "japanese": "外国",
+    "kana": "がいこく",
+    "english": "foreign country",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "294",
+    "japanese": "川",
+    "kana": "かわ",
+    "english": "river",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "295",
+    "japanese": "温泉",
+    "kana": "おんせん",
+    "english": "spa; hot spring",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "296",
+    "japanese": "つり",
+    "kana": "つり",
+    "english": "fishing",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "297",
+    "japanese": "湖",
+    "kana": "みずうみ",
+    "english": "lake",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "298",
+    "japanese": "山",
+    "kana": "やま",
+    "english": "mountain",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "299",
+    "japanese": "キャンプ",
+    "kana": "キャンプ",
+    "english": "camp",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "300",
+    "japanese": "ドライブ",
+    "kana": "ドライブ",
+    "english": "drive",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "301",
+    "japanese": "神社",
+    "kana": "じんじゃ",
+    "english": "shrine",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "302",
+    "japanese": "美術館",
+    "kana": "びじゅつかん",
+    "english": "art museum",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "303",
+    "japanese": "社長",
+    "kana": "しゃちょう",
+    "english": "president of a company",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "304",
+    "japanese": "歌手",
+    "kana": "かしゅ",
+    "english": "singer",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "305",
+    "japanese": "ルームメイト",
+    "kana": "ルームメイト",
+    "english": "roommate",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "306",
+    "japanese": "ホストファミリー",
+    "kana": "ホストファミリー",
+    "english": "host family",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "307",
+    "japanese": "将来",
+    "kana": "しょうらい",
+    "english": "future",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "308",
+    "japanese": "夢",
+    "kana": "ゆめ",
+    "english": "dream",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "309",
+    "japanese": "お祭り",
+    "kana": "おまつり",
+    "english": "festival",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "310",
+    "japanese": "お正月",
+    "kana": "おしょうがつ",
+    "english": "New Year’s",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "311",
+    "japanese": "お菓子",
+    "kana": "おかし",
+    "english": "snack; sweets",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "312",
+    "japanese": "ビール",
+    "kana": "ビール",
+    "english": "beer",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "313",
+    "japanese": "おもちゃ",
+    "kana": "おもちゃ",
+    "english": "toy",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "314",
+    "japanese": "今学期",
+    "kana": "こんがっき",
+    "english": "this semester",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "315",
+    "japanese": "来学期",
+    "kana": "らいがっき",
+    "english": "next semester",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "316",
+    "japanese": "授業",
+    "kana": "じゅぎょう",
+    "english": "class",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "317",
+    "japanese": "出身",
+    "kana": "しゅっしん",
+    "english": "coming from (place)",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "318",
+    "japanese": "後",
+    "kana": "あと",
+    "english": "after (an event)",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "319",
+    "japanese": "作家",
+    "kana": "さっか",
+    "english": "writer",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "320",
+    "japanese": "ジャーナリスト",
+    "kana": "ジャーナリスト",
+    "english": "journalist",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "321",
+    "japanese": "警察官",
+    "kana": "けいさつかん",
+    "english": "police officer",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "322",
+    "japanese": "消防士",
+    "kana": "しょうぼうし",
+    "english": "firefighter",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "323",
+    "japanese": "教師",
+    "kana": "きょうし",
+    "english": "schoolteacher",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "324",
+    "japanese": "研究者",
+    "kana": "けんきゅうしゃ",
+    "english": "researcher",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "325",
+    "japanese": "宇宙飛行士",
+    "kana": "うちゅうひこうし",
+    "english": "astronaut",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "326",
+    "japanese": "スポーツ選手",
+    "kana": "スポーツせんしゅ",
+    "english": "athlete",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "327",
+    "japanese": "大統領",
+    "kana": "だいとうりょう",
+    "english": "president of a country",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "328",
+    "japanese": "俳優",
+    "kana": "はいゆう",
+    "english": "actor; actress",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "329",
+    "japanese": "シェフ",
+    "kana": "シェフ",
+    "english": "chef",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "330",
+    "japanese": "漫画家",
+    "kana": "まんがか",
+    "english": "cartoonist",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Noun"
+  },
+  {
+    "id": "331",
+    "japanese": "のど",
+    "kana": "のど",
+    "english": "throat",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "332",
+    "japanese": "インフルエンザ",
+    "kana": "インフルエンザ",
+    "english": "influenza",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "333",
+    "japanese": "風邪",
+    "kana": "かぜ",
+    "english": "cold",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "334",
+    "japanese": "せき",
+    "kana": "せき",
+    "english": "cough",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "335",
+    "japanese": "二日酔い",
+    "kana": "ふつかよい",
+    "english": "hangover",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "336",
+    "japanese": "ホームシック",
+    "kana": "ホームシック",
+    "english": "homesickness",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "337",
+    "japanese": "アレルギー",
+    "kana": "アレルギー",
+    "english": "allergy",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "338",
+    "japanese": "ジュース",
+    "kana": "ジュース",
+    "english": "juice",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "339",
+    "japanese": "卵",
+    "kana": "たまご",
+    "english": "egg",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "340",
+    "japanese": "服",
+    "kana": "ふく",
+    "english": "clothes",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "341",
+    "japanese": "物",
+    "kana": "もの",
+    "english": "thing (concrete object)",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "342",
+    "japanese": "プレゼント",
+    "kana": "プレゼント",
+    "english": "present",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "343",
+    "japanese": "切符",
+    "kana": "きっぷ",
+    "english": "train ticket",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "344",
+    "japanese": "用事",
+    "kana": "ようじ",
+    "english": "business to take care of",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "345",
+    "japanese": "お手洗い",
+    "kana": "おてあらい",
+    "english": "restroom",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "346",
+    "japanese": "試合",
+    "kana": "しあい",
+    "english": "match; game",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "347",
+    "japanese": "成績",
+    "kana": "せいせき",
+    "english": "grade (on a test)",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "348",
+    "japanese": "彼女",
+    "kana": "かのじょ",
+    "english": "girlfriend",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "349",
+    "japanese": "彼",
+    "kana": "かれ",
+    "english": "boyfriend",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "350",
+    "japanese": "彼氏",
+    "kana": "かれし",
+    "english": "boyfriend",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "351",
+    "japanese": "意味",
+    "kana": "いみ",
+    "english": "meaning",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Noun"
+  },
+  {
+    "id": "352",
+    "japanese": "いくら",
+    "kana": "いくら",
+    "english": "how much",
+    "category": "Noun",
+    "origin": "GENKI I (3rd edition)-2"
   }
 ]

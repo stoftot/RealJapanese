@@ -16,6 +16,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<NumbersQuestionGenerator>();
         builder.Services.AddSingleton<WordData>();
         builder.Services.AddSingleton<NounData>();
+        builder.Services.AddSingleton<AdverbData>();
+        builder.Services.AddSingleton<ExpressionData>();
+        builder.Services.AddSingleton<PronounData>();
+        builder.Services.AddSingleton<DeterminerData>();
+        builder.Services.AddSingleton<CounterData>();
+        builder.Services.AddSingleton<ConjunctionData>();
+        builder.Services.AddSingleton<ParticleData>();
+        builder.Services.AddSingleton<SuffixData>();
         builder.Services.AddSingleton<VerbData>();
         builder.Services.AddSingleton<AdjectiveData>();
         builder.Services.AddSingleton<KanjiData>();

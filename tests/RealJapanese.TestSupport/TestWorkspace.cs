@@ -1,5 +1,7 @@
 using Repositories;
 using Repositories.Sync;
+using DataLoaders.Models;
+using System.Text.Json;
 
 namespace RealJapanese.TestSupport;
 
@@ -10,7 +12,7 @@ public sealed class TestWorkspace : IDisposable
     public string CatalogRoot => Path.Combine(Root, "Catalog");
     public static string RepositoryRoot { get; } = FindRepositoryRoot();
 
-    public TestWorkspace()
+    public TestWorkspace(bool seedGeneralWords = true)
     {
         try
         {
@@ -21,6 +23,20 @@ public sealed class TestWorkspace : IDisposable
                 Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
                 File.Copy(Path.Combine(RepositoryRoot, "RealJapanese", "Data", relative), destination);
             }
+            // The canonical general catalog is empty after grammatical classification.
+            // Practice tests use explicit self-added data, independent of book contents.
+            if (seedGeneralWords)
+                File.WriteAllText(Path.Combine(CatalogRoot, "Words", "Words.json"), JsonSerializer.Serialize(new Word[]
+                {
+                    new() { Id = 1000, Japanese = "あお", Kana = "あお", English = "blue" },
+                    new() { Id = 1001, Japanese = "あか", Kana = "あか", English = "red" },
+                    new() { Id = 1002, Japanese = "しろ", Kana = "しろ", English = "white" },
+                    new() { Id = 1003, Japanese = "くろ", Kana = "くろ", English = "black" },
+                    new() { Id = 1004, Japanese = "みどり", Kana = "みどり", English = "green" },
+                    new() { Id = 1005, Japanese = "むらさき", Kana = "むらさき", English = "purple" },
+                    new() { Id = 1006, Japanese = "ちゃいろ", Kana = "ちゃいろ", English = "brown" },
+                    new() { Id = 1007, Japanese = "きいろ", Kana = "きいろ", English = "yellow" }
+                }));
         }
         catch { Dispose(); throw; }
     }

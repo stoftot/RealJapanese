@@ -1,0 +1,178 @@
+[
+  {
+    "id": "0",
+    "japanese": "何",
+    "kana": "なん",
+    "english": "what",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "1",
+    "japanese": "これ",
+    "kana": "これ",
+    "english": "this one",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "2",
+    "japanese": "それ",
+    "kana": "それ",
+    "english": "that one",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "3",
+    "japanese": "あれ",
+    "kana": "あれ",
+    "english": "that one (over there)",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "4",
+    "japanese": "どれ",
+    "kana": "どれ",
+    "english": "which one",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "5",
+    "japanese": "ここ",
+    "kana": "ここ",
+    "english": "here",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "6",
+    "japanese": "そこ",
+    "kana": "そこ",
+    "english": "there",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "7",
+    "japanese": "あそこ",
+    "kana": "あそこ",
+    "english": "over there",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "8",
+    "japanese": "どこ",
+    "kana": "どこ",
+    "english": "where",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "9",
+    "japanese": "だれ",
+    "kana": "だれ",
+    "english": "who",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "12",
+    "japanese": "私",
+    "kana": "わたし",
+    "english": "I",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "13",
+    "japanese": "あなた",
+    "kana": "あなた",
+    "english": "you",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "14",
+    "japanese": "僕",
+    "kana": "ぼく",
+    "english": "I (used by men)",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-5"
+  },
+  {
+    "id": "15",
+    "japanese": "何",
+    "kana": "なに",
+    "english": "what",
+    "origin": "GENKI I (3rd edition)-1",
+    "category": "Pronoun"
+  },
+  {
+    "id": "16",
+    "japanese": "何か",
+    "kana": "なにか",
+    "english": "something",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Pronoun"
+  },
+  {
+    "id": "17",
+    "japanese": "みんな",
+    "kana": "みんな",
+    "english": "all; everyone",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Pronoun"
+  },
+  {
+    "id": "18",
+    "japanese": "どっち",
+    "kana": "どっち",
+    "english": "which",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Pronoun"
+  },
+  {
+    "id": "19",
+    "japanese": "どちら",
+    "kana": "どちら",
+    "english": "which",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Pronoun"
+  },
+  {
+    "id": "20",
+    "japanese": "こちら",
+    "kana": "こちら",
+    "english": "this person (polite)",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Pronoun"
+  },
+  {
+    "id": "21",
+    "japanese": "彼女",
+    "kana": "かのじょ",
+    "english": "she",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Pronoun"
+  },
+  {
+    "id": "22",
+    "japanese": "彼",
+    "kana": "かれ",
+    "english": "he",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Pronoun"
+  },
+  {
+    "id": "23",
+    "japanese": "いつ",
+    "kana": "いつ",
+    "english": "when",
+    "category": "Pronoun",
+    "origin": "GENKI I (3rd edition)-3"
+  }
+]

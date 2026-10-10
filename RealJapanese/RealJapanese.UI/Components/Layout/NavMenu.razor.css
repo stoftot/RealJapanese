@@ -40,6 +40,10 @@
 }
 
 @media (max-width: 640.98px) {
+    .nav-vocabulary-category {
+        display: none;
+    }
+
     .top-row {
         display: none;
     }

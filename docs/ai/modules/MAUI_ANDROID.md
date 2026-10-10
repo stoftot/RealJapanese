@@ -28,8 +28,9 @@ The observer is detached when the native WebView handler changes.
 
 ## Packaged data and private state
 
-The project packages exactly six catalog inputs: words, nouns, verbs, adjectives, single
-kanji and combined kanji. It does not package any `SavedData.json` file.
+The project packages the fourteen catalog inputs listed by `ProgressStore.DatasetNames`:
+twelve vocabulary categories plus single and combined kanji. It does not package
+any `SavedData.json` file or the legacy progress version marker.
 
 At startup, `StudyDataInstaller` replaces catalog copies under
 `FileSystem.AppDataDirectory/Catalog`. Repositories save under the independent

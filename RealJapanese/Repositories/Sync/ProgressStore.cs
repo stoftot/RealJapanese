@@ -4,10 +4,13 @@ using DataLoaders.Models;
 
 namespace Repositories.Sync;
 
-// One atomic file is the commit boundary for all six datasets. Legacy saves remain untouched.
+// One atomic file is the commit boundary for all datasets. Legacy saves remain untouched.
 public sealed class ProgressStore
 {
-    public static readonly string[] DatasetNames = ["Words", "Nouns", "Verbs", "Adjectives", "Kanji/Singel", "Kanji/Combined"];
+    public const int CurrentVersion = 3;
+    public const string LegacyVersionFile = "LegacyProgressVersion.json";
+    public static readonly string[] Version2DatasetNames = ["Words", "Nouns", "Verbs", "Adjectives", "Kanji/Singel", "Kanji/Combined"];
+    public static readonly string[] DatasetNames = [.. Version2DatasetNames, .. VocabularyCatalog.AdditionalDatasets];
     private readonly object gate = new();
     private readonly string path;
     private readonly string catalogRoot;
@@ -53,21 +56,36 @@ public sealed class ProgressStore
                 ?? throw new InvalidDataException("The progress file is empty.");
             if (loaded.Version == 1)
             {
-                ValidateShape(loaded.Data, includeNouns: false);
+                ValidateShape(loaded.Data, version: 1);
                 WordNounMigration.Apply(loaded.Data);
-                WordNounMigration.ApplyRecovery(loaded.Recovery, catalogRoot);
+                WordNounMigration.ApplyRecovery(loaded.Recovery);
                 loaded.Version = 2;
             }
-            if (loaded.Version != 2) throw new InvalidDataException("Unsupported progress version.");
+            if (loaded.Version == 2)
+            {
+                ValidateShape(loaded.Data, version: 2);
+                VocabularyMigration.Apply(loaded.Data);
+                VocabularyMigration.ApplyRecovery(loaded.Recovery, catalogRoot);
+                loaded.Version = CurrentVersion;
+            }
+            if (loaded.Version != CurrentVersion) throw new InvalidDataException("Unsupported progress version.");
             ValidateShape(loaded.Data);
             return document = loaded;
         }
 
         var migrated = new ProgressDocument();
-        // The split canonical legacy saves include Nouns/SavedData.json. Older
-        // installations (including Android) only have the original five saves.
-        var includesNouns = File.Exists(Path.Combine(Path.GetDirectoryName(path)!, "Nouns", "SavedData.json"));
-        foreach (var name in DatasetNames.Where(name => includesNouns || name != "Nouns"))
+        var root = Path.GetDirectoryName(path)!;
+        var versionPath = Path.Combine(root, LegacyVersionFile);
+        var version = File.Exists(Path.Combine(root, "Nouns", "SavedData.json")) ? 2 : 1;
+        if (File.Exists(versionPath))
+        {
+            using var marker = JsonDocument.Parse(File.ReadAllBytes(versionPath));
+            version = marker.RootElement.GetProperty("Version").GetInt32();
+            if (version != CurrentVersion) throw new InvalidDataException("Unsupported legacy progress version.");
+        }
+        else if (VocabularyCatalog.AdditionalDatasets.Any(name => File.Exists(Path.Combine(root, name, "SavedData.json"))))
+            throw new InvalidDataException("Categorized legacy saves require LegacyProgressVersion.json to identify their IDs safely.");
+        foreach (var name in NamesForVersion(version))
         {
             var folder = Path.Combine(Path.GetDirectoryName(path)!, name);
             var saved = File.Exists(Path.Combine(folder, "SavedData.json"))
@@ -79,7 +97,8 @@ public sealed class ProgressStore
             saved.RehearsingIds = (saved.RehearsingIds ?? []).Except(saved.KnownIds).Except(saved.TrainingIds).Distinct().ToList();
             migrated.Data.Add(name, saved);
         }
-        if (!includesNouns) WordNounMigration.Apply(migrated.Data);
+        if (version == 1) WordNounMigration.Apply(migrated.Data);
+        if (version < CurrentVersion) VocabularyMigration.Apply(migrated.Data);
         return document = migrated;
     }
 
@@ -117,9 +136,17 @@ public sealed class ProgressStore
 
     internal static T Clone<T>(T value) => JsonSerializer.Deserialize<T>(JsonSerializer.SerializeToUtf8Bytes(value))!;
 
-    internal static void ValidateShape(Dictionary<string, VocabSaveFile>? data, bool includeNouns = true)
+    internal static IEnumerable<string> NamesForVersion(int version) => version switch
     {
-        var names = DatasetNames.Where(name => includeNouns || name != "Nouns").ToArray();
+        1 => Version2DatasetNames.Where(name => name != "Nouns"),
+        2 => Version2DatasetNames,
+        CurrentVersion => DatasetNames,
+        _ => throw new InvalidDataException("Unsupported progress version.")
+    };
+
+    internal static void ValidateShape(Dictionary<string, VocabSaveFile>? data, int version = CurrentVersion)
+    {
+        var names = NamesForVersion(version).ToArray();
         if (data is null || data.Count != names.Length || names.Any(name => !data.ContainsKey(name)))
             throw new InvalidDataException("The file must contain all study datasets for its version.");
         foreach (var saved in data.Values)
@@ -135,7 +162,7 @@ public sealed class ProgressStore
 
 internal sealed class ProgressDocument
 {
-    public int Version { get; set; } = 2;
+    public int Version { get; set; } = ProgressStore.CurrentVersion;
     public Guid Revision { get; set; } = Guid.NewGuid();
     public Dictionary<string, VocabSaveFile> Data { get; set; } = [];
     public ProgressSnapshot? Recovery { get; set; }
@@ -143,7 +170,7 @@ internal sealed class ProgressDocument
 
 public sealed class ProgressSnapshot
 {
-    public int Version { get; set; } = 2;
+    public int Version { get; set; } = ProgressStore.CurrentVersion;
     public DateTimeOffset CreatedUtc { get; set; } = DateTimeOffset.UtcNow;
     public Dictionary<string, string> CatalogHashes { get; set; } = [];
     public Dictionary<string, VocabSaveFile> Data { get; set; } = [];

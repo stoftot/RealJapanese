@@ -1,0 +1,35 @@
+@using DataLoaders.Models
+@using Repositories.Bases
+@typeparam TItem where TItem : Word
+
+<PageTitle>@Title</PageTitle>
+
+@if (string.IsNullOrEmpty(Exercise))
+{
+    <VocabularySelector TItem="TItem" Repository="@Repository" Title="@Title" RoutePrefix="@RoutePrefix" />
+}
+else
+{
+    <p><a href="@RoutePrefix">Back to @Title.ToLowerInvariant()</a></p>
+    @switch (Exercise.ToLowerInvariant())
+    {
+        case "spelling":
+            <VocabularySpelling TItem="TItem" Repository="@Repository" Category="@Category" @key="Category" />
+            break;
+        case "flashcards":
+            <VocabularyFlashCards TItem="TItem" Repository="@Repository" Category="@Category" @key="Category" />
+            break;
+        default:
+            <h1>Exercise not found</h1>
+            <p role="alert">This exercise does not exist. Choose an exercise from the study page.</p>
+            break;
+    }
+}
+
+@code {
+    [Parameter, EditorRequired] public WordDataBase<TItem> Repository { get; set; } = null!;
+    [Parameter, EditorRequired] public string Title { get; set; } = "";
+    [Parameter, EditorRequired] public string RoutePrefix { get; set; } = "";
+    [Parameter] public string? Exercise { get; set; }
+    [Parameter] public string? Category { get; set; }
+}

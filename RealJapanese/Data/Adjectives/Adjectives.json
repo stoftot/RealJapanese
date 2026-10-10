@@ -1,11 +1,51 @@
 [
   {
+    "id": "35",
+    "japanese": "おいしい",
+    "kana": "おいしい",
+    "english": "delicious",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "36",
+    "japanese": "高い",
+    "kana": "たかい",
+    "english": "expensive; high",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "37",
+    "japanese": "いい",
+    "kana": "いい",
+    "english": "good",
+    "type": "irregular",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "38",
+    "japanese": "早い",
+    "kana": "はやい",
+    "english": "early",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "39",
+    "japanese": "大丈夫",
+    "kana": "だいじょうぶ",
+    "english": "all right; okay",
+    "type": "na",
+    "origin": "GENKI I (3rd edition)-5"
+  },
+  {
     "type": "i",
     "id": "0",
     "japanese": "新しい",
     "kana": "あたらしい",
     "english": "new",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -13,7 +53,7 @@
     "japanese": "古い",
     "kana": "ふるい",
     "english": "old (thing; not used for people)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -21,7 +61,7 @@
     "japanese": "暑い",
     "kana": "あつい",
     "english": "hot (weather)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -29,7 +69,7 @@
     "japanese": "寒い",
     "kana": "さむい",
     "english": "cold (weather; not used for things)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -37,7 +77,7 @@
     "japanese": "熱い",
     "kana": "あつい",
     "english": "hot (thing)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -45,7 +85,7 @@
     "japanese": "忙しい",
     "kana": "いそがしい",
     "english": "busy (people; days)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -53,7 +93,7 @@
     "japanese": "大きい",
     "kana": "おおきい",
     "english": "large",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -61,7 +101,7 @@
     "japanese": "小さい",
     "kana": "ちいさい",
     "english": "small",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -69,7 +109,7 @@
     "japanese": "面白い",
     "kana": "おもしろい",
     "english": "interesting; funny",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -77,15 +117,15 @@
     "japanese": "つまらない",
     "kana": "つまらない",
     "english": "boring",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
     "id": "10",
     "japanese": "優しい",
     "kana": "やさしい",
-    "english": "easy; kind",
-    "category": ""
+    "english": "kind (person)",
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -93,7 +133,7 @@
     "japanese": "難しい",
     "kana": "むずかしい",
     "english": "difficult",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "irregular",
@@ -101,7 +141,7 @@
     "japanese": "かっこいい",
     "kana": "かっこいい",
     "english": "good-looking",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -109,7 +149,7 @@
     "japanese": "怖い",
     "kana": "こわい",
     "english": "frightening",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -117,7 +157,7 @@
     "japanese": "楽しい",
     "kana": "たのしい",
     "english": "fun",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "i",
@@ -125,7 +165,7 @@
     "japanese": "安い",
     "kana": "やすい",
     "english": "inexpensive; cheap (thing)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "na",
@@ -133,7 +173,7 @@
     "japanese": "好き",
     "kana": "すき",
     "english": "fond of; to like",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "na",
@@ -141,7 +181,7 @@
     "japanese": "嫌い",
     "kana": "きらい",
     "english": "to dislike",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "na",
@@ -149,7 +189,7 @@
     "japanese": "大好き",
     "kana": "だいすき",
     "english": "to love; very fond of",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "na",
@@ -157,7 +197,7 @@
     "japanese": "大嫌い",
     "kana": "だいきらい",
     "english": "to hate",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "na",
@@ -165,7 +205,7 @@
     "japanese": "きれい",
     "kana": "きれい",
     "english": "beautiful; clean",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "na",
@@ -173,7 +213,7 @@
     "japanese": "元気",
     "kana": "げんき",
     "english": "healthy; energetic",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "na",
@@ -181,7 +221,7 @@
     "japanese": "静か",
     "kana": "しずか",
     "english": "quiet",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "na",
@@ -189,7 +229,7 @@
     "japanese": "にぎやか",
     "kana": "にぎやか",
     "english": "lively",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "na",
@@ -197,7 +237,7 @@
     "japanese": "暇",
     "kana": "ひま",
     "english": "not busy; free (time)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "type": "na",
@@ -205,7 +245,7 @@
     "japanese": "大変",
     "kana": "たいへん",
     "english": "tough (situation)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-6"
   },
   {
     "type": "i",
@@ -213,7 +253,7 @@
     "japanese": "長い",
     "kana": "ながい",
     "english": "long",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "i",
@@ -221,7 +261,7 @@
     "japanese": "短い",
     "kana": "みじかい",
     "english": "short (length)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "i",
@@ -229,7 +269,7 @@
     "japanese": "速い",
     "kana": "はやい",
     "english": "fast",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "i",
@@ -237,7 +277,7 @@
     "japanese": "背が高い",
     "kana": "せがたかい",
     "english": "tall (stature)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "i",
@@ -245,15 +285,15 @@
     "japanese": "背が低い",
     "kana": "せがひくい",
     "english": "short (stature)",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
-    "type": "ir",
+    "type": "irregular",
     "id": "31",
     "japanese": "頭がいい",
     "kana": "あたまがいい",
     "english": "bright; smart; clever",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "i",
@@ -261,7 +301,7 @@
     "japanese": "かわいい",
     "kana": "かわいい",
     "english": "cute",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "na",
@@ -269,7 +309,7 @@
     "japanese": "親切",
     "kana": "しんせつ",
     "english": "kind",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
   },
   {
     "type": "na",
@@ -277,6 +317,214 @@
     "japanese": "便利",
     "kana": "べんり",
     "english": "convenient",
-    "category": ""
+    "origin": "GENKI I (3rd edition)-7"
+  },
+  {
+    "id": "40",
+    "japanese": "易しい",
+    "kana": "やさしい",
+    "english": "easy (problem)",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-5"
+  },
+  {
+    "id": "41",
+    "japanese": "上手",
+    "kana": "じょうず",
+    "english": "skillful; good at",
+    "type": "na",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "42",
+    "japanese": "下手",
+    "kana": "へた",
+    "english": "clumsy; poor at",
+    "type": "na",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "43",
+    "japanese": "有名",
+    "kana": "ゆうめい",
+    "english": "famous",
+    "type": "na",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "44",
+    "japanese": "残念",
+    "kana": "ざんねん",
+    "english": "regrettable; disappointing",
+    "type": "na",
+    "origin": "GENKI I (3rd edition)-8"
+  },
+  {
+    "id": "45",
+    "japanese": "青い",
+    "kana": "あおい",
+    "english": "blue",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "46",
+    "japanese": "赤い",
+    "kana": "あかい",
+    "english": "red",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "47",
+    "japanese": "黒い",
+    "kana": "くろい",
+    "english": "black",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "48",
+    "japanese": "白い",
+    "kana": "しろい",
+    "english": "white",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "49",
+    "japanese": "寂しい",
+    "kana": "さびしい",
+    "english": "lonely",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "50",
+    "japanese": "若い",
+    "kana": "わかい",
+    "english": "young",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "51",
+    "japanese": "意地悪",
+    "kana": "いじわる",
+    "english": "mean-spirited",
+    "type": "na",
+    "origin": "GENKI I (3rd edition)-9"
+  },
+  {
+    "id": "52",
+    "japanese": "暖かい",
+    "kana": "あたたかい",
+    "english": "warm",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "53",
+    "japanese": "涼しい",
+    "kana": "すずしい",
+    "english": "cool (weather)",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "54",
+    "japanese": "冷たい",
+    "kana": "つめたい",
+    "english": "cold (things; people)",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "55",
+    "japanese": "遅い",
+    "kana": "おそい",
+    "english": "slow; late",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "56",
+    "japanese": "眠い",
+    "kana": "ねむい",
+    "english": "sleepy",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "57",
+    "japanese": "簡単",
+    "kana": "かんたん",
+    "english": "easy; simple",
+    "type": "na",
+    "origin": "GENKI I (3rd edition)-10"
+  },
+  {
+    "id": "58",
+    "japanese": "狭い",
+    "kana": "せまい",
+    "english": "narrow; not spacious",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "59",
+    "japanese": "広い",
+    "kana": "ひろい",
+    "english": "wide; spacious",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "60",
+    "japanese": "悪い",
+    "kana": "わるい",
+    "english": "bad",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "61",
+    "japanese": "痛い",
+    "kana": "いたい",
+    "english": "hurt; painful",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "62",
+    "japanese": "甘い",
+    "kana": "あまい",
+    "english": "sweet",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "63",
+    "japanese": "多い",
+    "kana": "おおい",
+    "english": "there are many",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "64",
+    "japanese": "素敵",
+    "kana": "すてき",
+    "english": "nice",
+    "type": "na",
+    "origin": "GENKI I (3rd edition)-12"
+  },
+  {
+    "id": "65",
+    "japanese": "同じ",
+    "kana": "おなじ",
+    "english": "same",
+    "type": "na",
+    "origin": "GENKI I (3rd edition)-12"
   }
 ]

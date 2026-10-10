@@ -1,0 +1,314 @@
+[
+  {
+    "id": "1",
+    "japanese": "あまり",
+    "kana": "あまり",
+    "english": "not much",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "2",
+    "japanese": "全然",
+    "kana": "ぜんぜん",
+    "english": "not at all",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "3",
+    "japanese": "たいてい",
+    "kana": "たいてい",
+    "english": "usually",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "4",
+    "japanese": "ちょっと",
+    "kana": "ちょっと",
+    "english": "a little",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "5",
+    "japanese": "時々",
+    "kana": "ときどき",
+    "english": "sometimes",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "6",
+    "japanese": "よく",
+    "kana": "よく",
+    "english": "often; much",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "7",
+    "japanese": "たくさん",
+    "kana": "たくさん",
+    "english": "many; a lot",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "8",
+    "japanese": "どうして",
+    "kana": "どうして",
+    "english": "why",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "9",
+    "japanese": "一人で",
+    "kana": "ひとりで",
+    "english": "alone",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "10",
+    "japanese": "一緒に",
+    "kana": "いっしょに",
+    "english": "together",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-5"
+  },
+  {
+    "id": "11",
+    "japanese": "すごく",
+    "kana": "すごく",
+    "english": "extremely",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-5"
+  },
+  {
+    "id": "12",
+    "japanese": "とても",
+    "kana": "とても",
+    "english": "very",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-5"
+  },
+  {
+    "id": "13",
+    "japanese": "後で",
+    "kana": "あとで",
+    "english": "later on",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-6"
+  },
+  {
+    "id": "14",
+    "japanese": "すぐ",
+    "kana": "すぐ",
+    "english": "right away",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-6"
+  },
+  {
+    "id": "15",
+    "japanese": "ゆっくり",
+    "kana": "ゆっくり",
+    "english": "slowly; leisurely; unhurriedly",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-6"
+  },
+  {
+    "id": "16",
+    "japanese": "別に",
+    "kana": "べつに",
+    "english": "nothing in particular",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-7"
+  },
+  {
+    "id": "17",
+    "japanese": "もちろん",
+    "kana": "もちろん",
+    "english": "of course",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-7"
+  },
+  {
+    "id": "18",
+    "japanese": "いつも",
+    "kana": "いつも",
+    "english": "always",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Adverb"
+  },
+  {
+    "id": "19",
+    "japanese": "遅く",
+    "kana": "おそく",
+    "english": "(do something) late",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Adverb"
+  },
+  {
+    "id": "20",
+    "japanese": "みんなで",
+    "kana": "みんなで",
+    "english": "all (of the people) together",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Adverb"
+  },
+  {
+    "id": "21",
+    "japanese": "まだ",
+    "kana": "まだ",
+    "english": "not yet (with a negative)",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Adverb"
+  },
+  {
+    "id": "22",
+    "japanese": "どう",
+    "kana": "どう",
+    "english": "how",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Adverb"
+  },
+  {
+    "id": "23",
+    "japanese": "そう",
+    "kana": "そう",
+    "english": "(I think) so",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Adverb"
+  },
+  {
+    "id": "24",
+    "japanese": "是非",
+    "kana": "ぜひ",
+    "english": "by all means",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Adverb"
+  },
+  {
+    "id": "25",
+    "japanese": "もう",
+    "kana": "もう",
+    "english": "already",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Adverb"
+  },
+  {
+    "id": "26",
+    "japanese": "一番",
+    "kana": "いちばん",
+    "english": "best",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Adverb"
+  },
+  {
+    "id": "27",
+    "japanese": "早く",
+    "kana": "はやく",
+    "english": "(do something) early",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Adverb"
+  },
+  {
+    "id": "28",
+    "japanese": "速く",
+    "kana": "はやく",
+    "english": "(do something) fast",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Adverb"
+  },
+  {
+    "id": "29",
+    "japanese": "歩いて",
+    "kana": "あるいて",
+    "english": "on foot",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Adverb"
+  },
+  {
+    "id": "30",
+    "japanese": "どうやって",
+    "kana": "どうやって",
+    "english": "how; by what means",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Adverb"
+  },
+  {
+    "id": "31",
+    "japanese": "どのぐらい",
+    "kana": "どのぐらい",
+    "english": "how much; how long",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Adverb"
+  },
+  {
+    "id": "32",
+    "japanese": "このごろ",
+    "kana": "このごろ",
+    "english": "these days",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Adverb"
+  },
+  {
+    "id": "33",
+    "japanese": "まあまあ",
+    "kana": "まあまあ",
+    "english": "okay; so-so",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Adverb"
+  },
+  {
+    "id": "34",
+    "japanese": "もっと",
+    "kana": "もっと",
+    "english": "more",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Adverb"
+  },
+  {
+    "id": "35",
+    "japanese": "できるだけ",
+    "kana": "できるだけ",
+    "english": "as much as possible",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Adverb"
+  },
+  {
+    "id": "36",
+    "japanese": "多分",
+    "kana": "たぶん",
+    "english": "probably; maybe",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Adverb"
+  },
+  {
+    "id": "37",
+    "japanese": "もうすぐ",
+    "kana": "もうすぐ",
+    "english": "very soon; in a few moments; days",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Adverb"
+  },
+  {
+    "id": "38",
+    "japanese": "初めて",
+    "kana": "はじめて",
+    "english": "for the first time",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Adverb"
+  },
+  {
+    "id": "39",
+    "japanese": "何も",
+    "kana": "なにも",
+    "english": "not … anything",
+    "category": "Adverb",
+    "origin": "GENKI I (3rd edition)-7"
+  }
+]

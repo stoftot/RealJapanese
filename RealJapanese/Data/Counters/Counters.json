@@ -1,0 +1,226 @@
+[
+  {
+    "id": "0",
+    "japanese": "〜時",
+    "kana": "〜じ",
+    "english": "o’clock",
+    "category": "Counter",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "1",
+    "japanese": "〜歳",
+    "kana": "〜さい",
+    "english": "… years old",
+    "category": "Counter",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "2",
+    "japanese": "〜番",
+    "kana": "〜ばん",
+    "english": "… number",
+    "category": "Counter",
+    "origin": "GENKI I (3rd edition)-1"
+  },
+  {
+    "id": "3",
+    "japanese": "〜円",
+    "kana": "〜えん",
+    "english": "… yen",
+    "category": "Counter",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "4",
+    "japanese": "〜時間",
+    "kana": "〜じかん",
+    "english": "… hours",
+    "category": "Counter",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "5",
+    "japanese": "〜枚",
+    "kana": "〜まい",
+    "english": "counter for flat objects",
+    "category": "Counter",
+    "origin": "GENKI I (3rd edition)-5"
+  },
+  {
+    "id": "6",
+    "japanese": "〜人",
+    "kana": "〜にん",
+    "english": "counter for people",
+    "category": "Counter",
+    "origin": "GENKI I (3rd edition)-7"
+  },
+  {
+    "id": "7",
+    "japanese": "一人",
+    "kana": "ひとり",
+    "english": "one person",
+    "category": "Counter",
+    "origin": "GENKI I (3rd edition)-7"
+  },
+  {
+    "id": "8",
+    "japanese": "二人",
+    "kana": "ふたり",
+    "english": "two people",
+    "category": "Counter",
+    "origin": "GENKI I (3rd edition)-7"
+  },
+  {
+    "id": "9",
+    "japanese": "一時間",
+    "kana": "いちじかん",
+    "english": "one hour",
+    "category": "Counter",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "10",
+    "japanese": "一時",
+    "kana": "いちじ",
+    "english": "one o’clock",
+    "origin": "GENKI I (3rd edition)-1",
+    "category": "Counter"
+  },
+  {
+    "id": "11",
+    "japanese": "二時半",
+    "kana": "にじはん",
+    "english": "half past two",
+    "origin": "GENKI I (3rd edition)-1",
+    "category": "Counter"
+  },
+  {
+    "id": "12",
+    "japanese": "～度",
+    "kana": "～ど",
+    "english": "degrees (temperature)",
+    "origin": "GENKI I (3rd edition)-8",
+    "category": "Counter"
+  },
+  {
+    "id": "13",
+    "japanese": "一つ",
+    "kana": "ひとつ",
+    "english": "one (small item)",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Counter"
+  },
+  {
+    "id": "14",
+    "japanese": "二つ",
+    "kana": "ふたつ",
+    "english": "two (small items)",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Counter"
+  },
+  {
+    "id": "15",
+    "japanese": "三つ",
+    "kana": "みっつ",
+    "english": "three (small items)",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Counter"
+  },
+  {
+    "id": "16",
+    "japanese": "四つ",
+    "kana": "よっつ",
+    "english": "four (small items)",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Counter"
+  },
+  {
+    "id": "17",
+    "japanese": "五つ",
+    "kana": "いつつ",
+    "english": "five (small items)",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Counter"
+  },
+  {
+    "id": "18",
+    "japanese": "六つ",
+    "kana": "むっつ",
+    "english": "six (small items)",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Counter"
+  },
+  {
+    "id": "19",
+    "japanese": "七つ",
+    "kana": "ななつ",
+    "english": "seven (small items)",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Counter"
+  },
+  {
+    "id": "20",
+    "japanese": "八つ",
+    "kana": "やっつ",
+    "english": "eight (small items)",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Counter"
+  },
+  {
+    "id": "21",
+    "japanese": "九つ",
+    "kana": "ここのつ",
+    "english": "nine (small items)",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Counter"
+  },
+  {
+    "id": "22",
+    "japanese": "十",
+    "kana": "とお",
+    "english": "ten (small items)",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Counter"
+  },
+  {
+    "id": "23",
+    "japanese": "～週間",
+    "kana": "～しゅうかん",
+    "english": "for weeks",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Counter"
+  },
+  {
+    "id": "24",
+    "japanese": "～か月",
+    "kana": "～かげつ",
+    "english": "for months",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Counter"
+  },
+  {
+    "id": "25",
+    "japanese": "～年",
+    "kana": "～ねん",
+    "english": "years",
+    "origin": "GENKI I (3rd edition)-10",
+    "category": "Counter"
+  },
+  {
+    "id": "26",
+    "japanese": "～点",
+    "kana": "～てん",
+    "english": "points",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Counter"
+  },
+  {
+    "id": "27",
+    "japanese": "二三日",
+    "kana": "にさんにち",
+    "english": "for two to three days",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Counter"
+  }
+]

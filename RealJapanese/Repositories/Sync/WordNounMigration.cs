@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using System.Text.Json;
 using DataLoaders.Models;
 
@@ -18,18 +17,17 @@ internal static class WordNounMigration
         data.Add("Nouns", Remap(original, Nouns));
     }
 
-    internal static void ApplyRecovery(ProgressSnapshot? snapshot, string catalogRoot)
+    internal static void ApplyRecovery(ProgressSnapshot? snapshot)
     {
         if (snapshot is null || snapshot.Version != 1 || snapshot.CatalogHashes is null ||
             !Manifest.OldWordsHashes.Contains(snapshot.CatalogHashes.GetValueOrDefault("Words")))
             return; // Preserve incompatible recovery snapshots; normal sync validation rejects them.
 
-        ProgressStore.ValidateShape(snapshot.Data, includeNouns: false);
+        ProgressStore.ValidateShape(snapshot.Data, version: 1);
         Apply(snapshot.Data);
         snapshot.Version = 2;
         foreach (var name in new[] { "Words", "Nouns" })
-            snapshot.CatalogHashes[name] = Convert.ToHexString(SHA256.HashData(
-                File.ReadAllBytes(Path.Combine(catalogRoot, name, name + ".json"))));
+            snapshot.CatalogHashes[name] = VocabularyMigration.PreviousCatalogHash(name);
     }
 
     private static VocabSaveFile Remap(VocabSaveFile saved, Dictionary<int, int> map) => new()

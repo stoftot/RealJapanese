@@ -1,0 +1,58 @@
+[
+  {
+    "id": "0",
+    "japanese": "じゃあ",
+    "kana": "じゃあ",
+    "english": "then . . .; if that is the case . . .",
+    "category": "Conjunction",
+    "origin": "GENKI I (3rd edition)-2"
+  },
+  {
+    "id": "1",
+    "japanese": "でも",
+    "kana": "でも",
+    "english": "but",
+    "category": "Conjunction",
+    "origin": "GENKI I (3rd edition)-3"
+  },
+  {
+    "id": "2",
+    "japanese": "それから",
+    "kana": "それから",
+    "english": "and then",
+    "category": "Conjunction",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "3",
+    "japanese": "だから",
+    "kana": "だから",
+    "english": "so; therefore",
+    "category": "Conjunction",
+    "origin": "GENKI I (3rd edition)-4"
+  },
+  {
+    "id": "4",
+    "japanese": "ところで",
+    "kana": "ところで",
+    "english": "by the way",
+    "origin": "GENKI I (3rd edition)-9",
+    "category": "Conjunction"
+  },
+  {
+    "id": "5",
+    "japanese": "そして",
+    "kana": "そして",
+    "english": "and then",
+    "origin": "GENKI I (3rd edition)-11",
+    "category": "Conjunction"
+  },
+  {
+    "id": "6",
+    "japanese": "それに",
+    "kana": "それに",
+    "english": "moreover",
+    "origin": "GENKI I (3rd edition)-12",
+    "category": "Conjunction"
+  }
+]

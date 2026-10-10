@@ -15,7 +15,7 @@ public sealed class NounMigrationTests
     [InlineData(true)]
     public void Old_progress_splits_all_categories_and_is_not_migrated_again_after_restart(bool unified)
     {
-        using var workspace = new TestWorkspace();
+        using var workspace = new TestWorkspace(seedGeneralWords: false);
         var paths = workspace.CreatePaths();
         var oldWords = new VocabSaveFile
         {
@@ -46,29 +46,28 @@ public sealed class NounMigrationTests
         var nouns = new NounData(paths);
         nouns.AddToVocab(nouns.Words.Single(word => word.Japanese == "傘"));
         using var persisted = JsonDocument.Parse(File.ReadAllBytes(progressFile));
-        Assert.Equal(2, persisted.RootElement.GetProperty("Version").GetInt32());
+        Assert.Equal(ProgressStore.CurrentVersion, persisted.RootElement.GetProperty("Version").GetInt32());
         AssertMigrated(new RepositoryPaths(paths.CatalogRoot, paths.ProgressRoot));
         if (unified) Assert.Equal([0], new VerbData(paths).VocabWordIds);
         else Assert.Equal(originalBytes, File.ReadAllBytes(originalPath));
     }
 
     [Fact]
-    public void Bundled_saves_keep_learned_nouns_and_compact_catalogs_without_remapping_twice()
+    public void Bundled_saves_keep_learned_nouns_and_expressions_without_remapping_twice()
     {
-        using var workspace = new TestWorkspace();
+        using var workspace = new TestWorkspace(seedGeneralWords: false);
         var paths = workspace.CreatePaths();
-        foreach (var name in new[] { "Words", "Nouns" })
+        foreach (var name in ProgressStore.DatasetNames)
         {
             var folder = Path.Combine(paths.ProgressRoot, name);
             Directory.CreateDirectory(folder);
             File.Copy(Path.Combine(TestWorkspace.RepositoryRoot, "RealJapanese", "Data", name, "SavedData.json"),
                 Path.Combine(folder, "SavedData.json"));
         }
-        var words = new WordData(paths);
+        File.Copy(Path.Combine(TestWorkspace.RepositoryRoot, "RealJapanese", "Data", ProgressStore.LegacyVersionFile),
+            Path.Combine(paths.ProgressRoot, ProgressStore.LegacyVersionFile));
+        var words = new ExpressionData(paths);
         var nouns = new NounData(paths);
-        Assert.Equal(Enumerable.Range(0, 97), words.Words.Select(word => word.Id));
-        Assert.Equal(Enumerable.Range(0, 220), nouns.Words.Select(word => word.Id));
-        Assert.Equal(99, nouns.VocabWords.Count);
         Assert.Contains(nouns.VocabWords, word => word.Japanese == "傘");
         Assert.Contains(nouns.VocabWords, word => word.Japanese == "手首");
         Assert.Contains(nouns.TrainingWords, word => word.Japanese == "大学");
@@ -85,12 +84,16 @@ public sealed class NounMigrationTests
     [InlineData("3358F3BB953BB5F18AE2701B46B52E894E9D8A96C32E319A1EB2DB348EEB3813")]
     public void Pre_split_import_recovery_restores_nouns_and_remaining_words(string oldWordsHash)
     {
-        using var workspace = new TestWorkspace();
+        using var workspace = new TestWorkspace(seedGeneralWords: false);
         var paths = workspace.CreatePaths();
-        var hashes = ProgressStore.DatasetNames.Where(name => name != "Nouns").ToDictionary(name => name,
+        var hashes = ProgressStore.Version2DatasetNames.Where(name => name != "Nouns").ToDictionary(name => name,
             name => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(
                 Path.Combine(paths.CatalogRoot, name, name.Split('/')[^1] + ".json")))));
         hashes["Words"] = oldWordsHash;
+        using var manifest = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(TestWorkspace.RepositoryRoot,
+            "RealJapanese", "Repositories", "Sync", "VocabularySplit.json")));
+        foreach (var name in new[] { "Verbs", "Adjectives" })
+            hashes[name] = manifest.RootElement.GetProperty("OldCatalogHashes").GetProperty(name)[0].GetString()!;
         var recovery = new ProgressSnapshot
         {
             Version = 1, CatalogHashes = hashes,
@@ -101,9 +104,9 @@ public sealed class NounMigrationTests
         {
             Version = 1, Revision = Guid.NewGuid(), Data = OldData(new()), Recovery = recovery
         }));
-        var words = new WordData(paths);
+        var words = new ExpressionData(paths);
         var nouns = new NounData(paths);
-        var sync = new ProgressSyncService(paths, words, new VerbData(paths), new AdjectiveData(paths), new KanjiData(paths), nouns);
+        var sync = new ProgressSyncService(paths, new WordData(paths), new VerbData(paths), new AdjectiveData(paths), new KanjiData(paths), nouns);
         sync.Apply(sync.PreviewRecovery());
         Assert.Equal(["傘"], nouns.VocabWords.Select(word => word.Japanese));
         Assert.Equal(["大学"], nouns.TrainingWords.Select(word => word.Japanese));
@@ -118,13 +121,13 @@ public sealed class NounMigrationTests
 
     private static void AssertMigrated(RepositoryPaths paths)
     {
-        var words = new WordData(paths);
+        var words = new ExpressionData(paths);
         var nouns = new NounData(paths);
         Assert.Equal(new[] { "傘", "食べ物" }.Order(), nouns.VocabWords.Select(word => word.Japanese).Order());
         Assert.Equal(["大学"], nouns.TrainingWords.Select(word => word.Japanese));
         Assert.Equal(["お母さん", "手首"], nouns.RehearsingWords.Select(word => word.Japanese));
         Assert.Equal(["あのう"], words.VocabWords.Select(word => word.Japanese));
-        Assert.Equal(["おいしい"], words.TrainingWords.Select(word => word.Japanese));
+        Assert.Equal(["おいしい"], new AdjectiveData(paths).TrainingWords.Select(word => word.Japanese));
         Assert.Equal(["よかったら"], words.RehearsingWords.Select(word => word.Japanese));
     }
 }

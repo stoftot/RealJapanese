@@ -18,14 +18,14 @@ independent single/combined kanji lists.
 ### Preconditions
 
 - A running host with disposable, initially empty progress and the normal catalogs.
-- For Words, Nouns, Verbs and Adjectives, record one item whose English has mixed case and
+- For Expressions, Nouns, Verbs and Adjectives, record one item whose English has mixed case and
   whose Japanese and kana values can each be searched independently.
 - For both Combined and Single kanji, record one item and its three searchable text
   values. Use different items for the two kanji sets.
 
 ### Steps
 
-1. Open **Words**. In the Known list search for the recorded item by a distinctive
+1. Open **Words → Expressions**. In the Known list search for the recorded item by a distinctive
    English substring, then repeat with different letter case and with surrounding
    spaces. Repeat using a distinctive Japanese substring and a kana substring.
 2. Enter a string absent from every English, Japanese and kana value, then clear
@@ -70,7 +70,7 @@ query selection, including an empty category.
 ### Preconditions
 
 - A running host with disposable progress.
-- Put one identifiable item in each of Known, Rehearsing and Training for Words,
+- Put one identifiable item in each of Known, Rehearsing and Training for Expressions,
   Nouns, Verbs and Adjectives. Do the same for both Combined and Single kanji.
 - Keep one additional category empty in a separate disposable dataset or after
   recording enough state to restore this setup.
@@ -85,6 +85,8 @@ query selection, including an empty category.
    | --- | --- | --- |
    | Words — Learn the words | `/words/spelling?category=<list>` | All three |
    | Words — Flash cards | `/words/flashcards?category=<list>` | All three |
+   | Adverbs, Expressions, Pronouns, Determiners, Counters, Conjunctions, Particles, Suffixes — Learn the words | `/<category>/spelling?category=<list>` | All three |
+   | The same eight categories — Flash cards | `/<category>/flashcards?category=<list>` | All three |
    | Nouns — Learn the nouns | `/nouns/spelling?category=<list>` | All three |
    | Nouns — Flash cards | `/nouns/flashcards?category=<list>` | All three |
    | Nouns — Conjugations and forms | `/nouns/conjugate` | Category-independent |
@@ -98,6 +100,8 @@ query selection, including an empty category.
    | Kanji Single — Learn the kanji | `/kanji/single/meaning?category=<list>` | All three |
 
    Replace `<list>` with the lowercase value `known`, `rehearsing` or `training`.
+   Replace `<category>` with the lowercase category name. The general Words catalog
+   starts empty; use an explicit self-added fixture to exercise its nonempty routes.
 2. For category-dependent rows, confirm the question belongs to the chosen list
    and not one of the two other prepared lists.
 3. Open one category-dependent action for the deliberately empty list.
@@ -399,3 +403,46 @@ and [Marugoto counter appendix](https://a1.marugotoweb.jp/en/assets/pdf/grammar/
 plus Tokyo University of Foreign Studies' [number composition](https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/016.html)
 and [counter alternatives](https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/017.html).
 Romanized answers use the application's vowel spelling and omit spaces.
+
+## STUDY-009 — Book and lesson selection
+
+### Purpose
+
+Protect collapsible source groups, selection scope, repeated lesson entries and
+access to every grammatical vocabulary category on web and Android.
+
+### Preconditions
+
+- Disposable progress with current catalogs, plus a fixture containing Book A
+  lessons 1, 2 and 10, Book B lesson 1, and one self-added word.
+- Include one Book A word with origins in both lessons 1 and 2.
+
+### Steps
+
+1. Open Words and follow each category link. Confirm its source groups and practice
+   links are available, including on a narrow screen.
+2. In the fixture selector, collapse and reopen Book A and lesson 2. Confirm no
+   study assignments change and lessons appear in numeric order.
+3. Select Book A lesson 1. Confirm Book B lesson 1 and General remain unchanged,
+   and Book A shows a partial selection. Collapse lesson 2 and select Book A.
+4. Confirm every eligible Book A word is selected, including collapsed descendants,
+   with the repeated word counted once. Deselect Book A and select General.
+5. Search for one Book A word, then select its book header. Confirm only matching
+   words change. Clear the search and verify the earlier collapse state returns.
+6. Reload/restart and confirm assignments persist. Repeat in Training and Rehearsing,
+   respecting their eligible-word exclusions. Start spelling and flashcard exercises.
+7. On Android, use touch to expand/select and inspect controls with a screen reader.
+   Repeat the saved-state checks after an update from an older disposable installation
+   using MOBILE-001; known/training/rehearsing words must follow their new categories.
+
+### Expected result
+
+Expansion never changes assignments. Book and lesson selection has the stated
+scope, partial state is announced, repeated identities stay consistent, and search
+limits bulk actions to matches. General remains independent of book sources.
+All category routes load usable exercises from the chosen study list. Every old
+selected word keeps its category after migration and restart.
+
+### Cleanup
+
+Discard only the disposable fixture/progress or test installation.

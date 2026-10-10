@@ -57,6 +57,7 @@ public sealed class RepositoryPersistenceTests
         var stalePaths = workspace.CreatePaths("stale-legacy-progress");
         var staleProgressPath = Path.Combine(stalePaths.ProgressRoot, "Words", "SavedData.json");
         Directory.CreateDirectory(Path.GetDirectoryName(staleProgressPath)!);
+        File.WriteAllText(Path.Combine(stalePaths.ProgressRoot, Repositories.Sync.ProgressStore.LegacyVersionFile), "{\"Version\":3}");
         File.WriteAllText(staleProgressPath,
             $$"""{ "KnownIds": [{{firstWord.Id}}, 2147483647], "TrainingIds": [], "RehearsingIds": [] }""");
         var withStaleId = new WordData(stalePaths);

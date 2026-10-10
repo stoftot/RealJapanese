@@ -48,7 +48,15 @@ public sealed class ProgressSyncService
             ["Verbs"] = verbs.Words.Select(w => w.Id).ToHashSet(),
             ["Adjectives"] = adjectives.Words.Select(w => w.Id).ToHashSet(),
             ["Kanji/Singel"] = kanji.Single.Words.Select(w => w.Id).ToHashSet(),
-            ["Kanji/Combined"] = kanji.Combined.Words.Select(w => w.Id).ToHashSet()
+            ["Kanji/Combined"] = kanji.Combined.Words.Select(w => w.Id).ToHashSet(),
+            ["Adverbs"] = new AdverbData(paths).Words.Select(w => w.Id).ToHashSet(),
+            ["Expressions"] = new ExpressionData(paths).Words.Select(w => w.Id).ToHashSet(),
+            ["Pronouns"] = new PronounData(paths).Words.Select(w => w.Id).ToHashSet(),
+            ["Determiners"] = new DeterminerData(paths).Words.Select(w => w.Id).ToHashSet(),
+            ["Counters"] = new CounterData(paths).Words.Select(w => w.Id).ToHashSet(),
+            ["Conjunctions"] = new ConjunctionData(paths).Words.Select(w => w.Id).ToHashSet(),
+            ["Particles"] = new ParticleData(paths).Words.Select(w => w.Id).ToHashSet(),
+            ["Suffixes"] = new SuffixData(paths).Words.Select(w => w.Id).ToHashSet()
         };
         hashes = ProgressStore.DatasetNames.ToDictionary(name => name, name =>
             Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(paths.CatalogRoot, name, name.Split('/')[^1] + ".json")))));
@@ -79,9 +87,9 @@ public sealed class ProgressSyncService
     private ImportPreview Preview(ProgressSnapshot incoming, ImportMode mode)
     {
         if (!Enum.IsDefined(mode)) throw new ArgumentOutOfRangeException(nameof(mode));
-        if (incoming.Version != 2) throw new InvalidDataException("Unsupported sync version. Update both applications.");
+        if (incoming.Version != ProgressStore.CurrentVersion) throw new InvalidDataException("Unsupported sync version. Update both applications.");
         if (incoming.Data is null || incoming.Data.Count != validIds.Count)
-            throw new InvalidDataException("The snapshot must contain all six study datasets.");
+            throw new InvalidDataException("The snapshot must contain all study datasets.");
         foreach (var pair in incoming.Data)
         {
             if (!validIds.TryGetValue(pair.Key, out var ids) || pair.Value is null ||
