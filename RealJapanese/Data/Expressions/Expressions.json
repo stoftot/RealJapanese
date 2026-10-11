@@ -5,7 +5,7 @@
     "kana": "おはよう",
     "english": "Good morning",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "1",
@@ -13,7 +13,7 @@
     "kana": "おはようございます",
     "english": "Good morning (polite)",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "2",
@@ -21,7 +21,7 @@
     "kana": "こんにちは",
     "english": "Good afternoon",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "3",
@@ -29,7 +29,7 @@
     "kana": "こんばんは",
     "english": "Good evening",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "4",
@@ -37,7 +37,7 @@
     "kana": "さようなら",
     "english": "goodbye",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "5",
@@ -45,7 +45,7 @@
     "kana": "おやすみなさい",
     "english": "Good night",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "6",
@@ -53,7 +53,7 @@
     "kana": "ありがとう",
     "english": "Thank you",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "7",
@@ -61,7 +61,7 @@
     "kana": "ありがとうございます",
     "english": "Thank you (polite)",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "8",
@@ -69,7 +69,7 @@
     "kana": "すみません",
     "english": "Excuse me; I'm sorry",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "9",
@@ -77,7 +77,7 @@
     "kana": "いいえ",
     "english": "No; not at all",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "10",
@@ -85,7 +85,7 @@
     "kana": "いってきます",
     "english": "I’ll go and come back",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "11",
@@ -93,7 +93,7 @@
     "kana": "いってらっしゃい",
     "english": "Please go and come back",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "12",
@@ -101,7 +101,7 @@
     "kana": "ただいま",
     "english": "I’m home",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "13",
@@ -109,7 +109,7 @@
     "kana": "おかえりなさい",
     "english": "Welcome home",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "14",
@@ -117,7 +117,7 @@
     "kana": "いただきます",
     "english": "Thank you for the meal (before eating)",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "15",
@@ -125,7 +125,7 @@
     "kana": "ごちそうさまでした",
     "english": "Thank you for the meal (after eating)",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "16",
@@ -133,7 +133,7 @@
     "kana": "はじめまして",
     "english": "How do you do?",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "17",
@@ -141,7 +141,7 @@
     "kana": "〜です",
     "english": "I am …",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "18",
@@ -149,7 +149,7 @@
     "kana": "よろしくおねがいします",
     "english": "Nice to meet you",
     "category": "Expression",
-    "origin": "self added"
+    "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions"
   },
   {
     "id": "19",

@@ -10,6 +10,36 @@ namespace RealJapanese.ComponentTests;
 public sealed class WordListGroupingComponentTests
 {
     [Fact]
+    public void IntroductorySectionsSortBeforeLessonsAndKeepIndependentBulkSelection()
+    {
+        using var context = new BunitContext();
+        var words = new List<Word>
+        {
+            Word(1, "Book-A-1"), Word(2, "Book-A-Introduction: Greetings & introductions"),
+            Word(3, "Book-A-Introduction: Greetings & introductions") with { AdditionalOrigins = ["Book-A-2"] },
+            Word(4, "Other book-Introduction: Greetings & introductions"), Word(5, "self added")
+        };
+        List<int> selected = [2];
+        List<List<int>> batches = [];
+        var cut = Render(context, words, selected, batches, []);
+        var book = Book(cut, "Book-A");
+        Assert.Equal(new[] { "Greetings & introductions", "Lesson 1", "Lesson 2" },
+            book.QuerySelectorAll(".word-lesson").Select(section => section.GetAttribute("data-lesson")));
+
+        IElement Introduction() => Lesson(Book(cut, "Book-A"), "Greetings & introductions");
+        Expand(Introduction()).Click();
+        Assert.Equal([2], selected);
+        Select(Introduction()).Click();
+        Assert.Equal(new[] { 2, 3 }, selected.Order());
+        Assert.Equal([3], Assert.Single(batches));
+        Assert.Equal("false", Expand(Introduction()).GetAttribute("aria-expanded"));
+        Assert.Equal("true", Select(Lesson(Book(cut, "Book-A"), "Lesson 2")).GetAttribute("aria-checked"));
+        Assert.Equal("false", Select(Lesson(Book(cut, "Book-A"), "Lesson 1")).GetAttribute("aria-checked"));
+        Select(Book(cut, "Book-A")).Click();
+        Assert.Equal(new[] { 1, 2, 3 }, selected.Order());
+    }
+
+    [Fact]
     public void BooksKeepSameNumberedLessonsSeparateAndSortLessonsNumerically()
     {
         using var context = new BunitContext();

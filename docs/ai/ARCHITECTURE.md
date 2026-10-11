@@ -124,8 +124,8 @@ The shared page releases these resources on mode changes, completion and navigat
 
 A selector derives from `WordComponentBase<T>` and injects a typed repository.
 Category actions coordinate exclusive known/training/rehearsing membership and
-save progress. `WordList` groups origins by book and numeric lesson, with separate
-expansion and group-selection controls. A group operation commits once per backend dataset and
+save progress. `WordList` groups origins by book, introductory section and numeric
+lesson, with separate expansion and group-selection controls. A group operation commits once per backend dataset and
 deduplicates words repeated across lessons; search restricts its scope to matches.
 Nouns, Verbs and Adjectives retain their separate study areas. `SupportingVocabularyStudy`
 combines the other vocabulary categories into Words & expressions. The Words page
@@ -196,8 +196,8 @@ invalid saved IDs and unavailable storage have explicit handling.
 
 Vocabulary has eleven grammatical categories plus the general Words fallback.
 The [vocabulary contract](../vocabulary.md) owns source scope, origin metadata,
-classification choices and identity rules; its source manifest covers all opening
-GENKI I lesson lists without importing the dictionary. Repeated lesson entries
+classification choices and identity rules; its source manifest covers the introductory
+greetings and all opening GENKI I lesson lists without importing the dictionary. Repeated lesson entries
 share one ID and use additional origins.
 
 `WordNounMigration` and its frozen `WordNounSplit.json` preserve the first noun split

@@ -1,7 +1,7 @@
 {
   "sourceTitle": "GENKI I: An Integrated Course in Elementary Japanese (3rd edition)",
   "sourceSha256": "718e84f766f193c916a0268680d9b932603c3a2490ea8d0402cc04353b71b802",
-  "scope": "Opening Vocabulary lists immediately after each lesson dialogue, including contiguous Additional Vocabulary subsections and independently listed indented examples. Excludes end-of-lesson Useful Expressions/Additional Vocabulary panels and the back dictionary.",
+  "scope": "Greetings list on printed page 32 and opening Vocabulary lists immediately after each lesson dialogue, including contiguous Additional Vocabulary subsections and independently listed indented examples. Excludes end-of-lesson Useful Expressions/Additional Vocabulary panels and the back dictionary.",
   "rowSemantics": "One row per printed vocabulary entry. Variant readings or distinct senses have multiple catalog targets. Parenthetical particles and optional phrase text are usage annotations, not extra rows.",
   "lessons": [
     {
@@ -10319,6 +10319,284 @@
             {
               "dataset": "Adjectives",
               "id": 65
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "introductorySections": [
+    {
+      "name": "Greetings & introductions",
+      "origin": "GENKI I (3rd edition)-Introduction: Greetings & introductions",
+      "pdfPages": [
+        41
+      ],
+      "expectedRows": 19,
+      "rows": [
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "おはよう",
+          "english": "Good morning.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 0
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "おはようございます",
+          "english": "Good morning. (polite)",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 1
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "こんにちは",
+          "english": "Good afternoon.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 2
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "こんばんは",
+          "english": "Good evening.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 3
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "さようなら",
+          "english": "Good-bye.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 4
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "おやすみ（なさい）",
+          "english": "Good night.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 5
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "ありがとう",
+          "english": "Thank you.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 6
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "ありがとうございます",
+          "english": "Thank you. (polite)",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 7
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "すみません",
+          "english": "Excuse me; I’m sorry.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 8
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "いいえ",
+          "english": "No.; Not at all.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 9
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "いってきます",
+          "english": "I’ll go and come back.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 10
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "いってらっしゃい",
+          "english": "Please go and come back.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 11
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "ただいま",
+          "english": "I’m home.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 12
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "おかえり（なさい）",
+          "english": "Welcome home.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 13
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "いただきます",
+          "english": "Thank you for the meal. (before eating)",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 14
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "ごちそうさま（でした）",
+          "english": "Thank you for the meal. (after eating)",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 15
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "はじめまして",
+          "english": "How do you do?",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 16
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "〜です",
+          "english": "I am . . . .",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 17
+            }
+          ]
+        },
+        {
+          "pdfPage": 41,
+          "printedPage": 32,
+          "section": "Greetings",
+          "kind": "headword",
+          "kana": "よろしくおねがいします",
+          "english": "Nice to meet you.",
+          "targets": [
+            {
+              "dataset": "Expressions",
+              "id": 18
             }
           ]
         }

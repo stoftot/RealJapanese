@@ -7,11 +7,11 @@ using Repositories.Sync;
 
 namespace RealJapanese.IntegrationTests;
 
-/// <summary>Checks the independently transcribed lesson list manifest, grammatical types and catalog/save/relation ID integrity.</summary>
+/// <summary>Checks the transcribed lesson and introductory lists, grammatical types and catalog/save/relation ID integrity.</summary>
 public sealed class GenkiCatalogTests
 {
     [Fact]
-    public void Every_opening_vocabulary_row_has_a_catalog_entry_in_its_lesson_and_no_unlisted_book_entries()
+    public void Every_vocabulary_row_has_a_catalog_entry_in_its_book_section_and_no_unlisted_book_entries()
     {
         using var workspace = new TestWorkspace(seedGeneralWords: false);
         var catalogs = Catalogs(workspace);
@@ -42,6 +42,25 @@ public sealed class GenkiCatalogTests
                 }
             }
         }
+        var introduction = Assert.Single(source.RootElement.GetProperty("introductorySections").EnumerateArray());
+        const string introductionOrigin = "GENKI I (3rd edition)-Introduction: Greetings & introductions";
+        Assert.Equal(introductionOrigin, introduction.GetProperty("origin").GetString());
+        Assert.Equal("Greetings & introductions", introduction.GetProperty("name").GetString());
+        Assert.Equal(41, Assert.Single(introduction.GetProperty("pdfPages").EnumerateArray()).GetInt32());
+        var introductoryRows = introduction.GetProperty("rows").EnumerateArray().ToArray();
+        Assert.Equal(19, introductoryRows.Length);
+        foreach (var (row, id) in introductoryRows.Select((row, id) => (row, id)))
+        {
+            Assert.Equal(41, row.GetProperty("pdfPage").GetInt32());
+            Assert.Equal(32, row.GetProperty("printedPage").GetInt32());
+            var target = Assert.Single(row.GetProperty("targets").EnumerateArray());
+            Assert.Equal("Expressions", target.GetProperty("dataset").GetString());
+            Assert.Equal(id, target.GetProperty("id").GetInt32());
+            var word = Assert.Single(catalogs["Expressions"], word => word.Id == id);
+            Assert.Equal(introductionOrigin, word.Origin);
+            references.Add(("Expressions", id, introductionOrigin));
+        }
+
         foreach (var (dataset, words) in catalogs)
         foreach (var word in words)
         foreach (var origin in new[] { word.Origin }.Concat(word.AdditionalOrigins))

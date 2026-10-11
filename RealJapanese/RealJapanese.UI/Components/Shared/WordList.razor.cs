@@ -52,10 +52,11 @@ public class WordListBase<TItem> : ComponentBase where TItem : Word
                 {
                     var key = $"{book.Key.IsGeneral}:{book.Key.Book.Length}:{book.Key.Book}";
                     var items = OrderItems(book.Select(entry => entry.Word));
-                    List<WordGroup> lessons = book.Key.IsGeneral ? [] : book.GroupBy(entry => entry.Origin.Lesson)
-                        .OrderBy(lesson => lesson.Key ?? int.MaxValue)
+                    List<WordGroup> lessons = book.Key.IsGeneral ? [] : book.GroupBy(entry => (entry.Origin.Lesson, entry.Origin.Introduction))
+                        .OrderBy(lesson => lesson.Key.Introduction is not null ? -1 : lesson.Key.Lesson ?? int.MaxValue)
+                        .ThenBy(lesson => lesson.Key.Introduction, StringComparer.OrdinalIgnoreCase)
                         .Select(lesson => new WordGroup($"{key}:{lesson.Key}",
-                            lesson.Key is int number ? $"Lesson {number}" : "Other words",
+                            lesson.Key.Introduction ?? (lesson.Key.Lesson is int number ? $"Lesson {number}" : "Other words"),
                             OrderItems(lesson.Select(entry => entry.Word)), [])).ToList();
                     return new WordGroup(key, book.Key.Book, items, lessons);
                 }).ToList();
@@ -70,18 +71,25 @@ public class WordListBase<TItem> : ComponentBase where TItem : Word
             .Where(origin => !string.IsNullOrWhiteSpace(origin))
             .Select(origin => origin.Trim()).Distinct(StringComparer.OrdinalIgnoreCase).DefaultIfEmpty("");
 
-    private static (string Book, int? Lesson, bool IsGeneral) ParseOrigin(string? origin)
+    private static (string Book, int? Lesson, string? Introduction, bool IsGeneral) ParseOrigin(string? origin)
     {
         var value = origin?.Trim();
         if (string.IsNullOrEmpty(value) || value.Equals("self added", StringComparison.OrdinalIgnoreCase))
-            return ("General", null, true);
+            return ("General", null, null, true);
+
+        const string introductionMarker = "-Introduction:";
+        var introduction = value.LastIndexOf(introductionMarker, StringComparison.OrdinalIgnoreCase);
+        if (introduction > 0 && !string.IsNullOrWhiteSpace(value[..introduction]) &&
+            !string.IsNullOrWhiteSpace(value[(introduction + introductionMarker.Length)..]))
+            return (value[..introduction].Trim(), null,
+                value[(introduction + introductionMarker.Length)..].Trim(), false);
 
         var separator = value.LastIndexOf('-');
         if (separator > 0 && int.TryParse(value[(separator + 1)..], NumberStyles.None,
                 CultureInfo.InvariantCulture, out var lesson) && !string.IsNullOrWhiteSpace(value[..separator]))
-            return (value[..separator].Trim(), lesson, false);
+            return (value[..separator].Trim(), lesson, null, false);
 
-        return (value, null, false);
+        return (value, null, null, false);
     }
 
     private bool MatchesSearch(TItem word) => Contains(word.English, SearchText)

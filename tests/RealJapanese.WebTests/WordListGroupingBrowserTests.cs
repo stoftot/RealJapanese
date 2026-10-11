@@ -1,6 +1,7 @@
 using System.Text.Json;
 using DataLoaders.Models;
 using Microsoft.Playwright;
+using Repositories;
 using static Microsoft.Playwright.Assertions;
 
 namespace RealJapanese.WebTests;
@@ -8,6 +9,36 @@ namespace RealJapanese.WebTests;
 /// <summary>Checks keyboard group controls, collapsed bulk scope, search and persisted selection in real Chromium.</summary>
 public sealed class WordListGroupingBrowserTests : BrowserTest
 {
+    [Fact]
+    public async Task GenkiGreetingsAppearBeforeLessonOneAndKeepTheirOriginalSavedIdentities()
+    {
+        var expressions = new ExpressionData(Workspace.CreatePaths());
+        expressions.AddToVocab(expressions.Words.Single(word => word.Id == 0));
+        await Page.SetViewportSizeAsync(411, 850);
+        await OpenAsync("/vocabulary");
+        var known = Page.Locator(".category-column").First;
+        var book = known.Locator(".word-book[data-book='GENKI I (3rd edition)']");
+        var sections = book.Locator(".word-lesson");
+        await Expect(sections.First).ToHaveAttributeAsync("data-lesson", "Greetings & introductions");
+        await Expect(sections.Nth(1)).ToHaveAttributeAsync("data-lesson", "Lesson 1");
+        var introduction = sections.First;
+        await Expect(introduction.Locator("button.list-group-item")).ToHaveCountAsync(19);
+        await Expect(introduction.Locator("button.list-group-item.active")).ToHaveAttributeAsync("data-source-id", "0");
+        await introduction.GetByRole(AriaRole.Button, new() { Name = "Collapse Greetings & introductions", Exact = true }).ClickAsync();
+        await introduction.GetByRole(AriaRole.Checkbox).ClickAsync();
+        await Expect(introduction.GetByRole(AriaRole.Checkbox)).ToHaveAttributeAsync("aria-checked", "true");
+        await Expect(introduction.GetByRole(AriaRole.Button)).ToHaveAttributeAsync("aria-expanded", "false");
+        Assert.Equal(Enumerable.Range(0, 19), new ExpressionData(Workspace.CreatePaths()).VocabWordIds.Order());
+
+        await Page.ReloadAsync();
+        await Expect(introduction.Locator("button.list-group-item.active")).ToHaveCountAsync(19);
+        await Expect(known.Locator(".word-book[data-book='General']")).Not.ToContainTextAsync("Good morning");
+        await OpenAsync("/words?category=known&sources=Expressions");
+        var savedIntroduction = Page.Locator(".category-column").First.Locator(".word-lesson[data-lesson='Greetings & introductions']");
+        await Expect(savedIntroduction.Locator(".list-group-item[data-dataset='Expressions']")).ToHaveCountAsync(19);
+        await Expect(savedIntroduction.GetByRole(AriaRole.Checkbox)).ToHaveCountAsync(0);
+    }
+
     [Fact]
     public async Task GroupSelectionKeepsExpansionStableAndPersistsMatchingWordsOnly()
     {

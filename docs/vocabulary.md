@@ -27,15 +27,16 @@ two catalogs use the same ID. Their temporary display IDs are never saved.
 
 ## Book source and coverage
 
-The bundled GENKI I third-edition vocabulary comes from the opening Vocabulary
-lists immediately after the dialogues in lessons 1–12. Contiguous Additional
+The bundled GENKI I third-edition vocabulary comes from the introductory greetings
+list on printed page 32 and the opening Vocabulary lists immediately after the
+dialogues in lessons 1–12. Contiguous Additional
 Vocabulary sections and individually listed indented examples are included.
 The back dictionary and vocabulary panels elsewhere in lessons are excluded.
 Existing extras remain available with `self added` provenance.
 
 [The source manifest](../tests/fixtures/genki-vocabulary.json) identifies the PDF
 by title and SHA-256 and records the physical/printed page, section, reading and
-catalog target for each of 678 printed rows. A row can have multiple targets when
+catalog target for each of 678 lesson rows and 19 introductory greetings. A row can have multiple targets when
 it lists different readings or grammatical senses. For example, 聞く has listening
 and asking senses; 彼女 has pronoun and girlfriend senses. Inflected examples such
 as 知っています are expressions rather than dictionary-form verbs.
@@ -46,7 +47,7 @@ price-related [いくら as a noun](https://kotobank.jp/word/幾ら-431526), and
 negative-polarity [何も as an adverb](https://kotobank.jp/word/何も-668836).
 These references clarify classification; they do not supply additional vocabulary.
 
-The catalog has 701 records, including 34 retained extras. Category checks cover
+The catalog has 701 records, including 15 retained extras. Category checks cover
 all catalog IDs, conjugation types and source-manifest references. The original
 413 records retain their identities; 101 move to another grammatical category.
 
@@ -56,9 +57,13 @@ all catalog IDs, conjugation types and source-manifest references. The original
 for example `GENKI I (3rd edition)-1`. The final hyphen separates the numeric lesson,
 so book names may contain hyphens. Repeated vocabulary keeps a single catalog ID
 and lists its other lesson origins in `additionalOrigins`.
+Named introductory sections use `<book name>-Introduction: <section name>`.
+The page-32 entries use `GENKI I (3rd edition)-Introduction: Greetings & introductions`,
+retaining their existing Expressions IDs and study assignments.
 
-Selectors group by book and numeric lesson, with self-added or blank origins under
-General. An origin without a numeric lesson appears under that source's Other words.
+Selectors group by book, placing named introductory sections before numbered lessons,
+with self-added or blank origins under General. Other origins without a numeric lesson
+appear under that source's Other words.
 Expansion and selection are separate controls. A book selects its eligible words
 across all lessons, including collapsed lessons; lesson selection stays within
 that book. Repeated words are counted and saved once. A partial group has a mixed
