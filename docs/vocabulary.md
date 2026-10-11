@@ -38,7 +38,7 @@ Existing extras remain available with `self added` provenance.
 by title and SHA-256 and records the physical/printed page, section, reading and
 catalog target for each of 678 lesson rows and 19 introductory greetings. A row can have multiple targets when
 it lists different readings. Identical words combine their English senses:
-彼女 includes “she; girlfriend” under Pronouns, and 聞く combines listening,
+彼女 includes “she; girlfriend” under Nouns, and 聞く combines listening,
 hearing and asking under the earliest entry, Verbs ID 2. Inflected examples such
 as 知っています are expressions rather than dictionary-form verbs.
 
@@ -81,9 +81,10 @@ Catalog IDs connect words to study progress and extracted kanji relations. Keep
 IDs stable when editing entries. Allocate additions above the dataset's previous
 maximum, including retired IDs; never recycle an ID for a different word.
 
-Verbs ID 61 is retired into ID 2 (聞く). Nouns IDs 348 and 349 are retired into
-Pronouns IDs 21 (彼女) and 22 (彼), respectively. Each pronoun/noun pair shared a
-single printed row; its first manifest target (Pronouns) retains the combined entry.
+Verbs ID 61 is retired into ID 2 (聞く). Pronouns IDs 21 and 22 are retired into
+Nouns IDs 348 (彼女) and 349 (彼), respectively. These combined entries belong to
+Nouns and keep their first book appearance in Lesson 12. Their original noun IDs
+are retained, including when loading progress from the earlier pronoun-only merge.
 Loading local or legacy progress remaps these IDs when using the merged catalog;
 the next save persists them. If both entries
 were assigned, Known takes priority over Training, then Rehearsing. History follows

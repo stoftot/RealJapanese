@@ -13,6 +13,10 @@ public sealed class VocabularyDuplicateMigrationTests
     private const string PreviousVerbCatalogHash = "D354931A38118E6D20F1E59E6D8161CB7625F1977C1650B17CCB49C1FCB890D6";
     private const string PreviousNounCatalogHash = "53EB5A93C5B7A46EE27A1A031510BEBCE18FDCDBC1435BEC461996C7A0A03DDF";
     private const string PreviousPronounCatalogHash = "6CB6E79E528E7677706859D7880B7A0D3C315AD3C27F36055F8392C8F6A81D0D";
+    private const string InterimNounCatalogHashLf = "5B252E77F33E6A9007CDCA5CE252DD2A5C3CC650B3A2C5ECE8009D20DDED8DAB";
+    private const string InterimNounCatalogHashCrLf = "4A5067A5C34628A14AE4577F71EE5B686862D682EA9A31E1483B6DC1C9A73D4C";
+    private const string InterimPronounCatalogHashLf = "2813CC5F3F8BB7E93424DB13BB753ACAAD895239A89321443FD11F1983CDA0C4";
+    private const string InterimPronounCatalogHashCrLf = "2673E29C8F438F9D55BF87CC7A57F4429681164B7514D6C022A97B137429F696";
     private static readonly DateOnly PracticeDay = new(2026, 9, 21);
 
     [Theory]
@@ -99,7 +103,7 @@ public sealed class VocabularyDuplicateMigrationTests
     [Theory]
     [InlineData(3)]
     [InlineData(4)]
-    public void Earlier_noun_known_entry_wins_over_pronoun_rehearsal_and_clears_losing_history(int version)
+    public void Noun_known_entry_wins_over_lower_priority_pronoun_rehearsal_and_clears_losing_history(int version)
     {
         using var workspace = new TestWorkspace(seedGeneralWords: false);
         var paths = workspace.CreatePaths();
@@ -112,35 +116,34 @@ public sealed class VocabularyDuplicateMigrationTests
         var nouns = new NounData(paths);
         var pronouns = new PronounData(paths);
 
-        Assert.DoesNotContain(348, nouns.VocabWordIds.Concat(nouns.TrainingWordIds).Concat(nouns.RehearsingWordIds));
-        Assert.Contains(21, pronouns.VocabWordIds);
-        Assert.DoesNotContain(21, pronouns.RehearsingWordIds);
+        Assert.Contains(348, nouns.VocabWordIds);
+        Assert.DoesNotContain(21, pronouns.VocabWordIds.Concat(pronouns.TrainingWordIds).Concat(pronouns.RehearsingWordIds));
         Assert.DoesNotContain(21, Snapshot(paths).Data["Pronouns"].Rehearsal.Keys);
     }
 
     [Theory]
     [InlineData(3)]
     [InlineData(4)]
-    public void Earlier_noun_rehearsal_history_moves_to_canonical_pronoun_id(int version)
+    public void Pronoun_only_rehearsal_history_moves_to_canonical_noun_id(int version)
     {
         using var workspace = new TestWorkspace(seedGeneralWords: false);
         var paths = workspace.CreatePaths();
         var data = EmptyData();
-        data["Nouns"].RehearsingIds = [349];
-        data["Nouns"].Rehearsal[349] = Rehearsal(4);
+        data["Pronouns"].RehearsingIds = [22];
+        data["Pronouns"].Rehearsal[22] = Rehearsal(4);
         WriteProgress(paths, version, data);
 
         var nouns = new NounData(paths);
         var pronouns = new PronounData(paths);
 
-        Assert.DoesNotContain(349, nouns.VocabWordIds.Concat(nouns.TrainingWordIds).Concat(nouns.RehearsingWordIds));
-        Assert.Contains(22, pronouns.RehearsingWordIds);
-        Assert.Equal(Rehearsal(4), Snapshot(paths).Data["Pronouns"].Rehearsal[22]);
-        Assert.DoesNotContain(349, Snapshot(paths).Data["Nouns"].Rehearsal.Keys);
+        Assert.Contains(349, nouns.RehearsingWordIds);
+        Assert.DoesNotContain(22, pronouns.VocabWordIds.Concat(pronouns.TrainingWordIds).Concat(pronouns.RehearsingWordIds));
+        Assert.Equal(Rehearsal(4), Snapshot(paths).Data["Nouns"].Rehearsal[349]);
+        Assert.DoesNotContain(22, Snapshot(paths).Data["Pronouns"].Rehearsal.Keys);
     }
 
     [Fact]
-    public void Cross_category_migrations_survive_save_restart_and_sync_without_retired_noun_ids()
+    public void Cross_category_migrations_survive_save_restart_and_sync_with_canonical_noun_ids()
     {
         using var sourceWorkspace = new TestWorkspace(seedGeneralWords: false);
         using var targetWorkspace = new TestWorkspace(seedGeneralWords: false);
@@ -148,35 +151,33 @@ public sealed class VocabularyDuplicateMigrationTests
         var targetPaths = targetWorkspace.CreatePaths("target");
         var data = EmptyData();
         data["Nouns"].KnownIds = [348];
-        data["Pronouns"].RehearsingIds = [21];
+        data["Pronouns"].RehearsingIds = [21, 22];
         data["Pronouns"].Rehearsal[21] = Rehearsal(2);
-        data["Nouns"].RehearsingIds = [349];
-        data["Nouns"].Rehearsal[349] = Rehearsal(5);
+        data["Pronouns"].Rehearsal[22] = Rehearsal(5);
         WriteProgress(sourcePaths, 4, data);
 
-        var sourcePronouns = new PronounData(sourcePaths);
-        sourcePronouns.AddToTraining(sourcePronouns.Words.First(word => word.Id != 21 && word.Id != 22));
+        var sourceNouns = new NounData(sourcePaths);
+        sourceNouns.AddToTraining(sourceNouns.Words.First(word => word.Id != 348 && word.Id != 349));
         var persisted = Snapshot(sourcePaths);
-        Assert.Empty(persisted.Data["Nouns"].KnownIds);
-        Assert.Empty(persisted.Data["Nouns"].RehearsingIds);
-        Assert.Contains(21, persisted.Data["Pronouns"].KnownIds);
-        Assert.Contains(22, persisted.Data["Pronouns"].RehearsingIds);
-        Assert.Equal(Rehearsal(5), persisted.Data["Pronouns"].Rehearsal[22]);
-        Assert.DoesNotContain(21, persisted.Data["Pronouns"].Rehearsal.Keys);
-        Assert.DoesNotContain(349, persisted.Data["Nouns"].Rehearsal.Keys);
+        Assert.Contains(348, persisted.Data["Nouns"].KnownIds);
+        Assert.Contains(349, persisted.Data["Nouns"].RehearsingIds);
+        Assert.Equal(Rehearsal(5), persisted.Data["Nouns"].Rehearsal[349]);
+        Assert.Empty(persisted.Data["Pronouns"].KnownIds);
+        Assert.Empty(persisted.Data["Pronouns"].RehearsingIds);
+        Assert.Empty(persisted.Data["Pronouns"].Rehearsal);
 
-        var restartedNouns = new NounData(sourceWorkspace.CreatePaths("source"));
-        Assert.DoesNotContain(348, restartedNouns.VocabWordIds.Concat(restartedNouns.TrainingWordIds).Concat(restartedNouns.RehearsingWordIds));
-        Assert.DoesNotContain(349, restartedNouns.VocabWordIds.Concat(restartedNouns.TrainingWordIds).Concat(restartedNouns.RehearsingWordIds));
+        var restartedPronouns = new PronounData(sourceWorkspace.CreatePaths("source"));
+        Assert.DoesNotContain(21, restartedPronouns.VocabWordIds.Concat(restartedPronouns.TrainingWordIds).Concat(restartedPronouns.RehearsingWordIds));
+        Assert.DoesNotContain(22, restartedPronouns.VocabWordIds.Concat(restartedPronouns.TrainingWordIds).Concat(restartedPronouns.RehearsingWordIds));
 
         var target = Sync(targetPaths);
         target.Apply(target.PreviewSnapshot(Sync(sourcePaths).ExportSnapshot(), ImportMode.Replace));
         var imported = Snapshot(targetPaths);
-        Assert.Empty(imported.Data["Nouns"].KnownIds);
-        Assert.Empty(imported.Data["Nouns"].RehearsingIds);
-        Assert.Contains(21, imported.Data["Pronouns"].KnownIds);
-        Assert.Contains(22, imported.Data["Pronouns"].RehearsingIds);
-        Assert.Equal(Rehearsal(5), imported.Data["Pronouns"].Rehearsal[22]);
+        Assert.Contains(348, imported.Data["Nouns"].KnownIds);
+        Assert.Contains(349, imported.Data["Nouns"].RehearsingIds);
+        Assert.Equal(Rehearsal(5), imported.Data["Nouns"].Rehearsal[349]);
+        Assert.Empty(imported.Data["Pronouns"].KnownIds);
+        Assert.Empty(imported.Data["Pronouns"].RehearsingIds);
     }
 
     [Theory]
@@ -192,16 +193,11 @@ public sealed class VocabularyDuplicateMigrationTests
             RehearsingIds = [61],
             Rehearsal = { [61] = Rehearsal(4) }
         };
-        recoveryData["Nouns"] = new VocabSaveFile
-        {
-            KnownIds = [348],
-            RehearsingIds = [349],
-            Rehearsal = { [349] = Rehearsal(5) }
-        };
+        recoveryData["Nouns"] = new VocabSaveFile { KnownIds = [348], RehearsingIds = [349], Rehearsal = { [349] = Rehearsal(5) } };
         recoveryData["Pronouns"] = new VocabSaveFile
         {
-            RehearsingIds = [21],
-            Rehearsal = { [21] = Rehearsal(2) }
+            RehearsingIds = [21, 22],
+            Rehearsal = { [21] = Rehearsal(2), [22] = Rehearsal(3) }
         };
         var hashes = CurrentCatalogHashes(paths);
         hashes["Verbs"] = recognized ? PreviousVerbCatalogHash : "UNKNOWN";
@@ -226,16 +222,56 @@ public sealed class VocabularyDuplicateMigrationTests
             Assert.Equal(Rehearsal(4), Snapshot(paths).Data["Verbs"].Rehearsal[2]);
             Assert.Contains(2, new VerbData(paths).RehearsingWordIds);
             var restored = Snapshot(paths);
-            Assert.Empty(restored.Data["Nouns"].KnownIds);
-            Assert.Empty(restored.Data["Nouns"].RehearsingIds);
-            Assert.Contains(21, restored.Data["Pronouns"].KnownIds);
-            Assert.Contains(22, restored.Data["Pronouns"].RehearsingIds);
-            Assert.Equal(Rehearsal(5), restored.Data["Pronouns"].Rehearsal[22]);
+            Assert.Contains(348, restored.Data["Nouns"].KnownIds);
+            Assert.Contains(349, restored.Data["Nouns"].RehearsingIds);
+            Assert.Equal(Rehearsal(5), restored.Data["Nouns"].Rehearsal[349]);
+            Assert.Empty(restored.Data["Pronouns"].KnownIds);
+            Assert.Empty(restored.Data["Pronouns"].RehearsingIds);
+            Assert.Empty(restored.Data["Pronouns"].Rehearsal);
         }
         else
         {
             Assert.Throws<InvalidDataException>(() => service.PreviewRecovery());
         }
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Recovery_migrates_pronoun_only_progress_saved_with_the_interim_catalog_hashes(bool crlf)
+    {
+        using var workspace = new TestWorkspace(seedGeneralWords: false);
+        var paths = workspace.CreatePaths();
+        var recoveryData = EmptyData();
+        recoveryData["Pronouns"] = new VocabSaveFile
+        {
+            KnownIds = [21],
+            RehearsingIds = [22],
+            Rehearsal = { [22] = Rehearsal(6) }
+        };
+        var hashes = CurrentCatalogHashes(paths);
+        hashes["Nouns"] = crlf ? InterimNounCatalogHashCrLf : InterimNounCatalogHashLf;
+        hashes["Pronouns"] = crlf ? InterimPronounCatalogHashCrLf : InterimPronounCatalogHashLf;
+        var recovery = new ProgressSnapshot { Version = ProgressStore.CurrentVersion, Data = recoveryData, CatalogHashes = hashes };
+        Directory.CreateDirectory(paths.ProgressRoot);
+        File.WriteAllText(Path.Combine(paths.ProgressRoot, "Progress.json"), JsonSerializer.Serialize(new
+        {
+            Version = ProgressStore.CurrentVersion,
+            Revision = Guid.NewGuid(),
+            Data = EmptyData(),
+            Recovery = recovery
+        }));
+
+        var service = Sync(paths);
+        var preview = service.PreviewRecovery();
+        service.Apply(preview);
+
+        var restored = Snapshot(paths);
+        Assert.Contains(348, restored.Data["Nouns"].KnownIds);
+        Assert.Contains(349, restored.Data["Nouns"].RehearsingIds);
+        Assert.Equal(Rehearsal(6), restored.Data["Nouns"].Rehearsal[349]);
+        Assert.Empty(restored.Data["Pronouns"].KnownIds);
+        Assert.Empty(restored.Data["Pronouns"].RehearsingIds);
     }
 
     [Fact]

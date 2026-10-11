@@ -34,10 +34,12 @@ public sealed class GenkiCatalogTests
         Assert.DoesNotContain(verbs, word => word.Id == 61);
         Assert.Contains(verbs, word => word.Id == 20 && word.Type == "ru");
         Assert.Contains(verbs, word => word.Id == 64 && word.Type == "u");
-        var pronouns = new PronounData(workspace.CreatePaths()).Words.ToArray();
-        Assert.Contains(pronouns, word => word.Id == 21 && word.English == "she; girlfriend");
-        Assert.Contains(pronouns, word => word.Id == 22 && word.English == "he; boyfriend");
-        Assert.DoesNotContain(new NounData(workspace.CreatePaths()).Words, word => word.Id is 348 or 349);
+        var nouns = new NounData(workspace.CreatePaths()).Words.ToArray();
+        Assert.Contains(nouns, word => word.Id == 348 && word.English == "she; girlfriend" &&
+            word.Category == "Noun" && word.Origin == "GENKI I (3rd edition)-12");
+        Assert.Contains(nouns, word => word.Id == 349 && word.English == "he; boyfriend" &&
+            word.Category == "Noun" && word.Origin == "GENKI I (3rd edition)-12");
+        Assert.DoesNotContain(new PronounData(workspace.CreatePaths()).Words, word => word.Id is 21 or 22);
     }
 
     [Fact]

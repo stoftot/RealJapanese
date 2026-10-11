@@ -9859,8 +9859,8 @@
           "english": "she; girlfriend",
           "targets": [
             {
-              "dataset": "Pronouns",
-              "id": 21
+              "dataset": "Nouns",
+              "id": 348
             }
           ]
         },
@@ -9874,8 +9874,8 @@
           "english": "he; boyfriend",
           "targets": [
             {
-              "dataset": "Pronouns",
-              "id": 22
+              "dataset": "Nouns",
+              "id": 349
             }
           ]
         },
