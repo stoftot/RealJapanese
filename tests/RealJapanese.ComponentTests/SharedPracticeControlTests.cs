@@ -7,6 +7,27 @@ namespace RealJapanese.ComponentTests;
 /// <summary>Checks component-level scale and numeric control bounds while visual and assistive behavior stays browser-owned.</summary>
 public sealed class SharedPracticeControlTests
 {
+    [Theory]
+    [InlineData(null)]
+    [InlineData("Rehearsing")]
+    public void ToggleSliderExposesExplicitPressedValuesBeforeAndAfterSelection(string? middleText)
+    {
+        using var context = new BunitContext();
+        var cut = context.Render<ToggleSlider>(parameters => parameters
+            .Add(component => component.LeftText, "Known")
+            .Add(component => component.MiddleText, middleText)
+            .Add(component => component.RightText, "Training"));
+
+        var buttons = cut.FindAll("button.toggle-slider-option");
+        Assert.Equal("true", buttons[0].GetAttribute("aria-pressed"));
+        Assert.All(buttons.Skip(1), button => Assert.Equal("false", button.GetAttribute("aria-pressed")));
+
+        buttons[^1].Click();
+        buttons = cut.FindAll("button.toggle-slider-option");
+        Assert.All(buttons.SkipLast(1), button => Assert.Equal("false", button.GetAttribute("aria-pressed")));
+        Assert.Equal("true", buttons[^1].GetAttribute("aria-pressed"));
+    }
+
     [Fact]
     public void PracticeScaleEmitsTheRequestedValueAndUpdatesItsVisiblePercentage()
     {

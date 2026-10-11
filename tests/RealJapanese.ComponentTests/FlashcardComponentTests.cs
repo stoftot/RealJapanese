@@ -11,8 +11,8 @@ public sealed class FlashcardComponentTests
     public void ForgotAndWrongAnswersAreRetriedWhileCorrectCardIsNot()
     {
         using var test = new ComponentTestContext();
-        var words = test.Words.Words.GroupBy(word => word.Kana).Select(group => group.First()).Take(3).ToList();
-        foreach (var word in words) test.Words.AddToVocab(word);
+        var words = test.Adverbs.Words.GroupBy(word => word.Kana).Select(group => group.First()).Take(3).ToList();
+        foreach (var word in words) test.Adverbs.AddToVocab(word);
         test.UseCategory("known");
         var cut = test.Context.Render<WordFlashCards>();
         var retried = new HashSet<string>(StringComparer.Ordinal);
@@ -79,8 +79,8 @@ public sealed class FlashcardComponentTests
     public void RetryQueuedInOneFlashcardChunkDoesNotLeakIntoAnotherChunk()
     {
         using var test = new ComponentTestContext();
-        var words = test.Words.Words.GroupBy(word => word.Kana).Select(group => group.First()).Take(4).ToList();
-        foreach (var word in words) test.Words.AddToVocab(word);
+        var words = test.Adverbs.Words.GroupBy(word => word.Kana).Select(group => group.First()).Take(4).ToList();
+        foreach (var word in words) test.Adverbs.AddToVocab(word);
         test.UseCategory("known");
         var cut = test.Context.Render<WordFlashCards>();
         cut.FindAll("input[type=number]")[0].Change("2");

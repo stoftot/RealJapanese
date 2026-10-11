@@ -1,3 +1,5 @@
+@inject IJSRuntime JS
+
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">RealJapanese</a>
@@ -5,7 +7,7 @@
 </div>
 
 <div class="nav-scrollable">
-    <nav class="nav" aria-label="Main navigation">
+    <nav class="nav" aria-label="Main navigation" @ref="navigationElement">
         <div class="nav-item">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="nav-icon" aria-hidden="true">家</span>
@@ -62,4 +64,14 @@
         </div>
     </nav>
 </div>
+
+@code {
+    private ElementReference navigationElement;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await JS.InvokeVoidAsync("blazorHelpers.setupNavigationFocusScroll", navigationElement);
+    }
+}
 

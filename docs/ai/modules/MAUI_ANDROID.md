@@ -26,6 +26,12 @@ Kana practice also reduces its card height while the keyboard is open, keeping
 the answer field and actions available in the smaller viewport.
 The observer is detached when the native WebView handler changes.
 
+`MainActivity.DispatchKeyEvent` routes a complete Back key press through MAUI once.
+This prevents the BlazorWebView key-down handler and the activity Back callback
+from both navigating. `MainPage` traverses WebView history when available and
+otherwise leaves root Back behavior to Android. The IME receives Back before
+activity key dispatch so its first dismissal preserves the practice route.
+
 ## Packaged data and private state
 
 The project packages the fourteen catalog inputs listed by `ProgressStore.DatasetNames`:
@@ -69,8 +75,10 @@ uses a temporary Debug package; Release compilation is checked separately.
 Automated integration and browser tests additionally cover conflict resolution,
 restart recovery, authenticated-record tampering and cross-session replay on
 desktop .NET/Chromium. They do not add Android runtime evidence.
-Broader practice interaction remains outside these checks. The user's existing
-installation and private progress were preserved.
+Native practice and lifecycle scenarios are defined in the
+[manual regression catalog](../../../tests/manual/README.md), including keyboard,
+rotation, cold restart and same-signer update preservation. Record their actual
+execution and remaining gaps in the current task, not as a durable run log.
 
 Automatic discovery uses an Android Wi-Fi multicast lock and the manifest's
 `CHANGE_WIFI_MULTICAST_STATE` permission, released when finding/announcing ends.

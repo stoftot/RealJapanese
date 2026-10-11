@@ -11,7 +11,8 @@ The original category routes remain aliases for this combined area. This is a
 presentation grouping: backend categories, catalog IDs and saved progress stay separate.
 
 The **Words** page (`/words`) mixes saved vocabulary using a toggle for each of
-the twelve backend categories, including General words. All toggles start enabled
+the eleven grammatical categories. The fallback Words catalog remains in Words &
+expressions and is excluded from the mixer. All toggles start enabled
 unless the URL specifies a selection. Each enabled category contributes only its
 saved Known, Rehearsing and Training entries to the corresponding read-only list.
 Toggling, searching and collapsing never assign or remove saved words. Manage
@@ -19,7 +20,8 @@ assignments in Nouns, Verbs, Adjectives or Words & expressions.
 
 The `sources` query carries the selected dataset names through spelling,
 flashcards, back links and reloads; `none` means no categories. Unknown names are
-ignored. The study-list `category` query still chooses Known, Rehearsing or Training.
+ignored, including the fallback `Words` key in older links. The study-list `category`
+query still chooses Known, Rehearsing or Training.
 The combined views distinguish entries by dataset plus original ID, even when
 two catalogs use the same ID. Their temporary display IDs are never saved.
 

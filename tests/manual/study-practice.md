@@ -101,8 +101,8 @@ query selection, including an empty category.
 
    Replace `<list>` with the lowercase value `known`, `rehearsing` or `training`.
    Words practice links also carry `sources=<dataset names>` from the mixer;
-   only saved words from those backend categories should appear. General Words
-   starts empty; use a self-added fixture when testing that source specifically.
+   only saved words from the eleven grammatical categories should appear. The fallback
+   Words source is excluded from this mixer; test it in Words & expressions instead.
 2. For category-dependent rows, confirm the question belongs to the chosen list
    and not one of the two other prepared lists.
 3. Open one category-dependent action for the deliberately empty list.
@@ -460,11 +460,13 @@ changing progress, and preserve the chosen sources through practice and navigati
 - Disposable catalogs/progress with two categories sharing the same numeric word ID.
 - Saved Known, Rehearsing and Training entries and at least one unsaved entry.
 - A saved noun, verb or adjective to combine with Words & expressions categories.
+- A saved fallback Words entry to confirm it remains editable only in Words & expressions.
 
 ### Steps
 
-1. Open Words. Confirm all twelve backend-category toggles are present and initially
-   enabled. Each study list contains only its saved entries; unsaved words are absent.
+1. Open Words. Confirm all eleven grammatical category toggles are present and initially
+   enabled, with no General words toggle. Each study list contains only its saved entries;
+   unsaved words and fallback Words entries are absent.
 2. Turn one category off and on. Confirm only its words disappear and return in all
    three lists, including entries sharing an ID with another category.
 3. Search and collapse a book/lesson. Confirm there are no item or group assignment
@@ -473,7 +475,10 @@ changing progress, and preserve the chosen sources through practice and navigati
    Confirm both exercises use only the chosen sources' Training words. Return with
    the back link and reload; the chosen sources and returned study list remain active.
 5. Disable all sources and reload. Confirm lists and practice stay empty.
-6. Repeat toggles, practice and back navigation at 320 px and on Android by touch.
+6. Open a mixer or direct exercise link containing `sources=Words`. Confirm it has no
+   saved words. A link containing `sources=Words,Nouns` includes only saved nouns;
+   practice and back links omit the fallback key. Confirm its saved progress is untouched.
+7. Repeat toggles, practice and back navigation at 320 px and on Android by touch.
    Confirm the combined Words & expressions editor remains available in navigation.
 
 ### Expected result

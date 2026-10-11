@@ -7,6 +7,44 @@ namespace RealJapanese.WebTests;
 public sealed class LayoutBrowserTests : BrowserTest
 {
     [Theory]
+    [InlineData(320)]
+    [InlineData(411)]
+    public async Task Phone_navigation_keeps_complete_labels_and_scrolls_each_keyboard_destination_into_view(int width)
+    {
+        await Page.SetViewportSizeAsync(width, 900);
+        await OpenAsync("/");
+        var navigation = Page.GetByRole(AriaRole.Navigation, new() { Name = "Main navigation", Exact = true });
+        var links = navigation.GetByRole(AriaRole.Link);
+        var labels = new[] { "Home", "Kana", "Numbers", "Words", "Nouns", "Verbs", "Adjectives", "Words & expressions", "Kanji" };
+        await Expect(links).ToHaveCountAsync(labels.Length);
+        Assert.True(await navigation.EvaluateAsync<bool>("""
+            nav => nav.parentElement.scrollWidth > nav.parentElement.clientWidth
+                && document.documentElement.scrollWidth <= innerWidth
+            """), "Navigation should scroll within its bar without making the page wider.");
+
+        await links.First.FocusAsync();
+        for (var index = 0; index < labels.Length; index++)
+        {
+            if (index > 0) await Page.Keyboard.PressAsync("Tab");
+            var link = links.Nth(index);
+            await Expect(link).ToHaveAccessibleNameAsync(labels[index]);
+            await Expect(link).ToBeFocusedAsync();
+            // Native focus may leave some link padding clipped while its complete label is visible.
+            await Expect(link.Locator(".nav-label")).ToBeInViewportAsync(new() { Ratio = 1 });
+            Assert.True(await link.Locator(".nav-label").EvaluateAsync<bool>("""
+                label => {
+                    const range = document.createRange();
+                    range.selectNodeContents(label);
+                    return range.getClientRects().length === 1
+                        && parseFloat(getComputedStyle(label).fontSize) >= 12;
+                }
+                """), $"{labels[index]} should remain a readable, complete single-line label.");
+        }
+        Assert.True(await navigation.EvaluateAsync<bool>("nav => nav.parentElement.scrollLeft > 0"),
+            "Keyboard focus should reach destinations beyond the initially visible links.");
+    }
+
+    [Theory]
     [InlineData(320, 1)]
     [InlineData(1280, 3)]
     public async Task Selector_columns_and_scaled_practice_fit_viewport(int width, int visibleColumns)

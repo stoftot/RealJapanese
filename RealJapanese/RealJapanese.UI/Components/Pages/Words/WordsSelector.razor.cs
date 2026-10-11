@@ -12,15 +12,15 @@ public class WordsSelectorBase : ComponentBase
     [SupplyParameterFromQuery(Name = "category")] public string? Category { get; set; }
     protected VocabularyCollection Collection { get; private set; } = null!;
     protected HashSet<string> EnabledSources { get; private set; } = [];
-    protected string SourcesQuery => "&sources=" + Uri.EscapeDataString(Collection.SerializeSources(EnabledSources));
+    protected string SourcesQuery => "&sources=" + Uri.EscapeDataString(Collection.SerializeMixerSources(EnabledSources));
 
     protected override void OnInitialized() => Collection = new(Paths);
-    protected override void OnParametersSet() => EnabledSources = Collection.ParseSources(Sources);
+    protected override void OnParametersSet() => EnabledSources = Collection.ParseMixerSources(Sources);
 
     protected void Toggle(string key)
     {
         if (!EnabledSources.Add(key)) EnabledSources.Remove(key);
-        Sources = Collection.SerializeSources(EnabledSources);
+        Sources = Collection.SerializeMixerSources(EnabledSources);
         Navigation.NavigateTo(Navigation.GetUriWithQueryParameter("sources", Sources), replace: true);
     }
 }

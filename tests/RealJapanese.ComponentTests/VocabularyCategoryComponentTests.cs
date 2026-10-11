@@ -21,10 +21,11 @@ public sealed class VocabularyCategoryComponentTests
         using var test = Fixture();
         var known = test.Adverbs.Words.Single(word => word.Id == 0);
         var training = test.Expressions.Words.Single(word => word.Id == 1);
-        var rehearsing = test.Words.Words.Single(word => word.Id == 1002);
+        var rehearsing = test.Expressions.Words.Single(word => word.Id == 0);
         test.Adverbs.AddToVocab(known);
         test.Expressions.AddToTraining(training);
-        test.Words.AddToRehearsing(rehearsing);
+        test.Expressions.AddToRehearsing(rehearsing);
+        test.Words.AddToRehearsing(test.Words.Words.Single(word => word.Id == 1002));
         var persisted = File.ReadAllBytes(ProgressFile(test));
         var cut = test.Context.Render<WordsSelector>();
 
@@ -32,14 +33,15 @@ public sealed class VocabularyCategoryComponentTests
         Assert.Equal(new[]
         {
             "Adjectives", "Adverbs", "Conjunctions", "Counters", "Determiners", "Expressions", "Nouns", "Particles",
-            "Pronouns", "Suffixes", "Verbs", "Words"
+            "Pronouns", "Suffixes", "Verbs"
         }, cut.FindAll("button[data-source]").Select(button => button.GetAttribute("data-source")).Order());
         Assert.All(cut.FindAll("button[data-source]"), button => Assert.Equal("true", button.GetAttribute("aria-pressed")));
         Assert.Equal(["Adverbs:0"], Keys(cut, 0));
-        Assert.Equal(["Words:1002"], Keys(cut, 1));
+        Assert.Equal(["Expressions:0"], Keys(cut, 1));
         Assert.Equal(["Expressions:1"], Keys(cut, 2));
         Assert.Empty(cut.FindAll("button.list-group-item"));
         Assert.Empty(cut.FindAll("button[role=checkbox]"));
+        Assert.Empty(cut.FindAll("button[data-source='Words'], .list-group-item[data-dataset='Words']"));
 
         cut.FindAll("input[type=search]")[0].Input(known.Kana);
         Assert.Equal(["Adverbs:0"], Keys(cut, 0));
@@ -54,7 +56,7 @@ public sealed class VocabularyCategoryComponentTests
     }
 
     [Fact]
-    public void MixerCombinesSavedGrammarListsWithSupportingAndGeneralVocabulary()
+    public void MixerCombinesSavedGrammarListsWithSupportingVocabularyAndExcludesFallbackWords()
     {
         using var test = Fixture();
         var noun = test.Nouns.Words.First();
@@ -68,9 +70,11 @@ public sealed class VocabularyCategoryComponentTests
 
         var cut = test.Context.Render<WordsSelector>();
 
-        Assert.Equal(new[] { $"Adjectives:{adjective.Id}", "Adverbs:0", "Words:1000" }.Order(), Keys(cut, 0));
+        Assert.Equal(new[] { $"Adjectives:{adjective.Id}", "Adverbs:0" }.Order(), Keys(cut, 0));
         Assert.Equal([$"Verbs:{verb.Id}"], Keys(cut, 1));
         Assert.Equal([$"Nouns:{noun.Id}"], Keys(cut, 2));
+        Assert.Empty(cut.FindAll(".list-group-item[data-dataset='Words']"));
+        Assert.Equal([1000], test.Words.VocabWordIds);
     }
 
     [Fact]
@@ -96,6 +100,9 @@ public sealed class VocabularyCategoryComponentTests
     [Theory]
     [InlineData("none")]
     [InlineData("unknown-source")]
+    [InlineData("Words")]
+    [InlineData("Words,unknown-source")]
+    [InlineData("none,Words")]
     public void EmptyOrUnknownSourceQueryShowsNoSavedWordsAndOffersEmptyPractice(string sources)
     {
         using var test = Fixture();
@@ -117,20 +124,20 @@ public sealed class VocabularyCategoryComponentTests
     {
         using var test = Fixture();
         test.Expressions.AddToTraining(test.Expressions.Words.Single(word => word.Id == 1));
-        Navigate(test, "/words?category=training&sources=Expressions,Words,unknown-source");
+        Navigate(test, "/words?category=training&sources=Expressions,Adverbs,Words,unknown-source");
         var cut = test.Context.Render<WordsSelector>();
-        Assert.Equal(new[] { "Expressions", "Words" }, cut.FindAll("button[data-source][aria-pressed=true]")
+        Assert.Equal(new[] { "Adverbs", "Expressions" }, cut.FindAll("button[data-source][aria-pressed=true]")
             .Select(button => button.GetAttribute("data-source")).Order());
         Assert.Equal(["Expressions:1"], Keys(cut, 2));
         cut.FindAll("button").Last(button => button.TextContent.Trim() == "Start practice").Click();
         Assert.Equal("training", Query(test)["category"]);
-        Assert.Equal(new[] { "Expressions", "Words" }, (Query(test)["sources"] ?? "").Split(',').Order());
+        Assert.Equal(new[] { "Adverbs", "Expressions" }, (Query(test)["sources"] ?? "").Split(',').Order());
         var flashcards = test.Context.Render<WordFlashCards>();
         var back = flashcards.FindAll("a").Single(link =>
             Uri.TryCreate(new Uri("http://localhost/"), link.GetAttribute("href"), out var uri) && uri.AbsolutePath == "/words");
         var backQuery = HttpUtility.ParseQueryString(new Uri(new Uri("http://localhost/"), back.GetAttribute("href")).Query);
         Assert.Equal("training", backQuery["category"]);
-        Assert.Equal(new[] { "Expressions", "Words" }, (backQuery["sources"] ?? "").Split(',').Order());
+        Assert.Equal(new[] { "Adverbs", "Expressions" }, (backQuery["sources"] ?? "").Split(',').Order());
         Assert.Equal(test.Expressions.Words.Single(word => word.Id == 1).Kana, flashcards.Find("p.flash-card-question").TextContent.Trim());
     }
 
@@ -195,6 +202,39 @@ public sealed class VocabularyCategoryComponentTests
         Assert.Equal([0], test.Adverbs.VocabWordIds);
         Assert.Equal([1], test.Adverbs.RehearsingWordIds);
         Assert.Equal([2], test.Adverbs.TrainingWordIds);
+    }
+
+    [Theory]
+    [InlineData("spelling", null)]
+    [InlineData("flashcards", null)]
+    [InlineData("spelling", "Words")]
+    [InlineData("flashcards", "Words")]
+    [InlineData("spelling", "Words,Adverbs,unknown-source")]
+    [InlineData("flashcards", "Words,Adverbs,unknown-source")]
+    public void MixerPracticeExcludesFallbackWordsForDefaultAndExplicitQueries(string exercise, string? sources)
+    {
+        using var test = Fixture();
+        var fallback = test.Words.Words.First();
+        var adverb = test.Adverbs.Words.First();
+        test.Words.AddToVocab(fallback);
+        test.Adverbs.AddToVocab(adverb);
+        var persisted = File.ReadAllBytes(ProgressFile(test));
+        var sourceQuery = sources is null ? "" : "&sources=" + Uri.EscapeDataString(sources);
+        Navigate(test, $"/words/{exercise}?category=known{sourceQuery}");
+
+        var cut = RenderPractice(test, exercise);
+
+        if (sources == "Words")
+            Assert.Contains("Nothing to practise yet", cut.Markup);
+        else
+            Assert.Equal(exercise == "spelling" ? adverb.English : adverb.Kana,
+                cut.Find(exercise == "spelling" ? "p.lead" : "p.flash-card-question").TextContent.Trim());
+        Assert.DoesNotContain(fallback.English, cut.Markup);
+        var back = cut.FindAll("a").Single(link =>
+            Uri.TryCreate(new Uri("http://localhost/"), link.GetAttribute("href"), out var uri) && uri.AbsolutePath == "/words");
+        var backQuery = HttpUtility.ParseQueryString(new Uri(new Uri("http://localhost/"), back.GetAttribute("href")).Query);
+        Assert.DoesNotContain("Words", (backQuery["sources"] ?? "").Split(','));
+        Assert.Equal(persisted, File.ReadAllBytes(ProgressFile(test)));
     }
 
     [Theory]

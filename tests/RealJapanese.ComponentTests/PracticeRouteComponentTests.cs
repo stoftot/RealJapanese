@@ -18,8 +18,8 @@ public sealed class PracticeRouteComponentTests
         var categories = new[] { "known", "rehearsing", "training" };
         var actions = new[]
         {
-            ("words", 0, "/words/spelling?category={0}&sources=Words"),
-            ("words", 1, "/words/flashcards?category={0}&sources=Words"),
+            ("words", 0, "/words/spelling?category={0}&sources=Adverbs"),
+            ("words", 1, "/words/flashcards?category={0}&sources=Adverbs"),
             ("nouns", 0, "/nouns/spelling?category={0}"),
             ("nouns", 1, "/nouns/flashcards?category={0}"),
             ("nouns", 2, "/nouns/conjugate"),
@@ -102,7 +102,7 @@ public sealed class PracticeRouteComponentTests
     {
         if (selector == "words")
         {
-            test.Context.Services.GetService<NavigationManager>()!.NavigateTo("/words?sources=Words");
+            test.Context.Services.GetService<NavigationManager>()!.NavigateTo("/words?sources=Adverbs");
             return test.Context.Render<WordsSelector>();
         }
         if (selector == "kanji-single")
@@ -141,7 +141,7 @@ public sealed class PracticeRouteComponentTests
     {
         if (destination.StartsWith("word-", StringComparison.Ordinal))
         {
-            var selected = Seed(test.Words, category, word => destination == "word-flashcards" ? word.Kana : word.English);
+            var selected = Seed(test.Adverbs, category, word => destination == "word-flashcards" ? word.Kana : word.English);
             return destination == "word-flashcards" ? selected.Kana : selected.English;
         }
         if (destination.StartsWith("noun-", StringComparison.Ordinal))

@@ -129,8 +129,9 @@ expansion and group-selection controls. A group operation commits once per backe
 deduplicates words repeated across lessons; search restricts its scope to matches.
 Nouns, Verbs and Adjectives retain their separate study areas. `SupportingVocabularyStudy`
 combines the other vocabulary categories into Words & expressions. The Words page
-is a read-only mixer: one toggle per backend category includes only that category's
-saved words in each study list. `VocabularyCollection` is a UI adapter over typed
+is a read-only mixer: eleven grammatical category toggles include only those categories'
+saved words in each study list. The fallback Words catalog remains in the combined
+editor and is excluded from mixer controls and source-query parsing. `VocabularyCollection` is a UI adapter over typed
 repositories; it retains dataset/original-ID identity and uses temporary display
 IDs only for shared list rendering. Combined editing delegates each dataset's
 changes to its existing repository. Mixer actions never write progress, and the

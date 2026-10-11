@@ -11,7 +11,7 @@
 </header>
 
 <div class="d-flex flex-wrap gap-2 my-3" role="group" aria-label="Vocabulary categories">
-    @foreach (var source in Collection.Sources)
+    @foreach (var source in Collection.MixerSources)
     {
         <button type="button" data-source="@source.Key" class="btn @(EnabledSources.Contains(source.Key) ? "btn-primary" : "btn-outline-primary")"
                 aria-pressed="@(EnabledSources.Contains(source.Key) ? "true" : "false")" @onclick="() => Toggle(source.Key)">@source.Label</button>

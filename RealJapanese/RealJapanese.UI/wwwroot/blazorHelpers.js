@@ -2,6 +2,18 @@ window.blazorHelpers = {
   _spaceShortcutHandlers: new Map(),
   _flashCardShortcutHandlers: new Map(),
 
+  setupNavigationFocusScroll: function (navigation) {
+    if (!navigation) return;
+    // The listener belongs to this navigation element and is collected with it.
+    navigation.addEventListener("focusin", function (event) {
+      const link = event.target.closest?.("a.nav-link");
+      const scroller = navigation.parentElement;
+      if (link && scroller && scroller.scrollWidth > scroller.clientWidth) {
+        link.scrollIntoView({ block: "nearest", inline: "nearest" });
+      }
+    });
+  },
+
   setValueAndFocus: function (el, val) {
     if (!el) return;
     try {

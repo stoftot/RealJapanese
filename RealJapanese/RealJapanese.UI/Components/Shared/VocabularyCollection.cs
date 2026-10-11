@@ -8,6 +8,7 @@ namespace RealJapanese.Components.Shared;
 public sealed class VocabularyCollection
 {
     public IReadOnlyList<VocabularySource> Sources { get; }
+    public IEnumerable<VocabularySource> MixerSources => Sources.Where(source => source.Key != "Words");
     public List<VocabularyEntry> Entries { get; }
     public IEnumerable<string> SupportingSources => Sources.Where(source => source.Key is not ("Nouns" or "Verbs" or "Adjectives"))
         .Select(source => source.Key);
@@ -37,15 +38,15 @@ public sealed class VocabularyCollection
             }).ToList();
     }
 
-    public HashSet<string> ParseSources(string? query) => query is null
-        ? Sources.Select(source => source.Key).ToHashSet(StringComparer.OrdinalIgnoreCase)
-        : Sources.Where(source => query.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+    public HashSet<string> ParseMixerSources(string? query) => query is null
+        ? MixerSources.Select(source => source.Key).ToHashSet(StringComparer.OrdinalIgnoreCase)
+        : MixerSources.Where(source => query.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
             .Contains(source.Key, StringComparer.OrdinalIgnoreCase)).Select(source => source.Key).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-    public string SerializeSources(IEnumerable<string> keys)
+    public string SerializeMixerSources(IEnumerable<string> keys)
     {
         var selected = keys.ToHashSet(StringComparer.OrdinalIgnoreCase);
-        var value = string.Join(',', Sources.Where(source => selected.Contains(source.Key)).Select(source => source.Key));
+        var value = string.Join(',', MixerSources.Where(source => selected.Contains(source.Key)).Select(source => source.Key));
         return value.Length == 0 ? "none" : value;
     }
 

@@ -6,7 +6,7 @@
         {
             <button type="button"
                     class="toggle-slider-option @(option.Index == CurrentIndex ? "active" : "")"
-                    aria-pressed="@(option.Index == CurrentIndex)"
+                    aria-pressed="@(option.Index == CurrentIndex ? "true" : "false")"
                     @key="option.Index"
                     @onclick="@(() => OnOptionClicked(option.Index))">
                 @option.Text

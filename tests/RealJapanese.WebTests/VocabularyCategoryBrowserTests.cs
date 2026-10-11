@@ -72,16 +72,17 @@ public sealed class VocabularyCategoryBrowserTests : BrowserTest
         var errors = ObserveBrowserErrors();
         await OpenAsync("/words");
         await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "Words", Exact = true })).ToBeVisibleAsync();
-        await Expect(Page.Locator("button[data-source]")).ToHaveCountAsync(12);
-        await Expect(Page.Locator("button[data-source][aria-pressed='true']")).ToHaveCountAsync(12);
-        await Expect(Source("Words")).ToContainTextAsync("General words");
+        await Expect(Page.Locator("button[data-source]")).ToHaveCountAsync(11);
+        await Expect(Page.Locator("button[data-source][aria-pressed='true']")).ToHaveCountAsync(11);
+        await Expect(Source("Words")).ToHaveCountAsync(0);
+        await Expect(Page.Locator(".list-group-item[data-dataset='Words']")).ToHaveCountAsync(0);
         await Expect(Page.Locator(".word-group-select, button.list-group-item")).ToHaveCountAsync(0);
-        await Expect(SavedItems(Column(0))).ToHaveCountAsync(4);
+        await Expect(SavedItems(Column(0))).ToHaveCountAsync(3);
         await Expect(SavedItems(Column(1))).ToHaveCountAsync(1);
         await Expect(SavedItems(Column(2))).ToHaveCountAsync(1);
 
         // Identical original IDs are distinct entries when their datasets differ.
-        foreach (var dataset in new[] { "Words", "Adverbs", "Expressions", "Nouns" })
+        foreach (var dataset in new[] { "Adverbs", "Expressions", "Nouns" })
             await Expect(SavedItem(Column(0), dataset, 7)).ToHaveCountAsync(1);
         await Expect(Page.Locator(".list-group-item[data-source-id='10']")).ToHaveCountAsync(0);
         await Expect(SavedItem(Column(0), "Adverbs", 8)).ToHaveCountAsync(0);
@@ -90,13 +91,13 @@ public sealed class VocabularyCategoryBrowserTests : BrowserTest
 
         await Source("Adverbs").ClickAsync();
         await Expect(Source("Adverbs")).ToHaveAttributeAsync("aria-pressed", "false");
-        await Expect(SavedItems(Column(0))).ToHaveCountAsync(3);
+        await Expect(SavedItems(Column(0))).ToHaveCountAsync(2);
         await Expect(SavedItems(Column(1))).ToHaveCountAsync(0);
         await Expect(SavedItems(Column(2))).ToHaveCountAsync(0);
         Assert.DoesNotContain("Adverbs", SelectedSources());
         Assert.Equal(progressBefore, await ReadProgressAsync());
         await Source("Adverbs").ClickAsync();
-        await Expect(SavedItems(Column(0))).ToHaveCountAsync(4);
+        await Expect(SavedItems(Column(0))).ToHaveCountAsync(3);
         await Expect(SavedItems(Column(1))).ToHaveCountAsync(1);
         await Expect(SavedItems(Column(2))).ToHaveCountAsync(1);
 
@@ -104,7 +105,7 @@ public sealed class VocabularyCategoryBrowserTests : BrowserTest
         await Expect(SavedItems(Column(0))).ToHaveCountAsync(1);
         await Expect(SavedItem(Column(0), "Adverbs", 7)).ToBeVisibleAsync();
         await Column(0).GetByRole(AriaRole.Searchbox).FillAsync("");
-        await Expect(SavedItems(Column(0))).ToHaveCountAsync(4);
+        await Expect(SavedItems(Column(0))).ToHaveCountAsync(3);
         foreach (var key in SourceKeys)
             await Source(key).ClickAsync();
         await Expect(Page.Locator("button[data-source][aria-pressed='true']")).ToHaveCountAsync(0);
@@ -128,7 +129,7 @@ public sealed class VocabularyCategoryBrowserTests : BrowserTest
         await Expect(Page.Locator("button[data-source][aria-pressed='true']")).ToHaveCountAsync(2);
         await Expect(Source("Nouns")).ToHaveAttributeAsync("aria-pressed", "true");
         await Expect(Source("Adverbs")).ToHaveAttributeAsync("aria-pressed", "true");
-        await Expect(Source("Words")).ToHaveAttributeAsync("aria-pressed", "false");
+        await Expect(Source("Words")).ToHaveCountAsync(0);
         await Expect(SavedItems(Column(0))).ToHaveCountAsync(2);
         await Expect(SavedItems(Column(1))).ToHaveCountAsync(1);
         await Expect(SavedItems(Column(2))).ToHaveCountAsync(1);
@@ -161,7 +162,8 @@ public sealed class VocabularyCategoryBrowserTests : BrowserTest
         await Page.SetViewportSizeAsync(320, 800);
         await Expect(Page.Locator(".category-column:visible")).ToHaveCountAsync(1);
         await Expect(Page.Locator(".category-column-active")).ToContainTextAsync("adverb training");
-        await Expect(Source("Words")).ToBeVisibleAsync();
+        await Expect(Source("Words")).ToHaveCountAsync(0);
+        await Expect(Source("Nouns")).ToBeVisibleAsync();
         await Expect(Source("Adverbs")).ToBeVisibleAsync();
         Assert.True(await Page.EvaluateAsync<bool>("() => document.documentElement.scrollWidth <= innerWidth + 1"));
 
@@ -173,8 +175,37 @@ public sealed class VocabularyCategoryBrowserTests : BrowserTest
         Assert.Empty(errors);
     }
 
+    [Fact]
+    public async Task Mixer_ignores_fallback_words_in_legacy_queries_without_changing_saved_progress()
+    {
+        await SeedFixtureAsync(saveProgress: true);
+        var progressBefore = await ReadProgressAsync();
+        var errors = ObserveBrowserErrors();
+        await OpenAsync("/words?category=known&sources=Words%2CNouns%2Cunknown-source");
+        await Expect(Page.Locator("button[data-source]")).ToHaveCountAsync(11);
+        await Expect(Page.Locator("button[data-source][aria-pressed='true']")).ToHaveCountAsync(1);
+        await Expect(Source("Nouns")).ToHaveAttributeAsync("aria-pressed", "true");
+        await Expect(Source("Words")).ToHaveCountAsync(0);
+        await Expect(SavedItems(Column(0))).ToHaveCountAsync(1);
+        await Expect(SavedItem(Column(0), "Nouns", 7)).ToBeVisibleAsync();
+        await Expect(Page.Locator(".list-group-item[data-dataset='Words']")).ToHaveCountAsync(0);
+        await Practice("Learn the words").ClickAsync();
+        await Expect(Page.Locator("p.lead")).ToHaveTextAsync("noun known");
+        Assert.Equal(new[] { "Nouns" }, SelectedSources());
+        await Page.GetByRole(AriaRole.Link, new() { Name = "Back to words", Exact = true }).ClickAsync();
+        Assert.Equal(new[] { "Nouns" }, SelectedSources());
+
+        await OpenAsync("/words/flashcards?category=known&sources=Words");
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "Nothing to practise yet", Exact = true })).ToBeVisibleAsync();
+        await Page.GetByRole(AriaRole.Link, new() { Name = "Back to words", Exact = true }).ClickAsync();
+        Assert.Equal(new[] { "none" }, SelectedSources());
+        await Expect(Page.Locator("button[data-source][aria-pressed='true']")).ToHaveCountAsync(0);
+        Assert.Equal(progressBefore, await ReadProgressAsync());
+        Assert.Empty(errors);
+    }
+
     private static readonly string[] SourceKeys =
-        ["Words", "Nouns", "Verbs", "Adjectives", "Adverbs", "Expressions", "Pronouns", "Determiners", "Counters", "Conjunctions", "Particles", "Suffixes"];
+        ["Nouns", "Verbs", "Adjectives", "Adverbs", "Expressions", "Pronouns", "Determiners", "Counters", "Conjunctions", "Particles", "Suffixes"];
 
     private List<string> ObserveBrowserErrors()
     {

@@ -27,9 +27,9 @@ public abstract class BrowserTest : IAsyncLifetime
         catch { await DisposeAsync(); throw; }
     }
 
-    protected WordData SeedWords(int count = 3)
+    protected AdverbData SeedWords(int count = 3)
     {
-        var data = new WordData(Workspace.CreatePaths());
+        var data = new AdverbData(Workspace.CreatePaths());
         var selected = data.Words.DistinctBy(word => word.English).DistinctBy(word => word.Kana).Take(count).ToArray();
         Assert.Equal(count, selected.Length);
         foreach (var word in selected) data.AddToVocab(word);

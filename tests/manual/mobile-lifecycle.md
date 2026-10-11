@@ -40,7 +40,8 @@ cold restart and a same-signer application update.
 
 - Launch completes and every catalog packaged by that build is usable offline;
   the updated build includes all fourteen current catalogs.
-  General Words may be empty; the mixer source toggles remain available.
+  The fallback Words catalog remains available in Words & expressions; the mixer
+  offers eleven grammatical category toggles.
 - Every recorded assignment survives force-stop/cold restart.
 - The accepted same-signer update refreshes/retains usable packaged catalogs while
   preserving every private progress assignment. No web server or internet
@@ -69,14 +70,18 @@ progress while Android changes configuration or app visibility.
 1. Navigate Home → a selector → a typed practice route. Focus the answer field and
    enter a partial answer so the IME is visible.
 2. Press Android Back once. Inspect the route, partial answer and navigation layout.
-3. With the IME closed, press Android Back again and inspect the destination.
-   Navigate forward to the same practice route once more.
+3. With the IME closed, press Android Back again and inspect the destination after
+   navigation settles (a briefly visible selector is not sufficient). Navigate
+   forward to the same practice route once more.
 4. Focus the answer field. Rotate portrait → landscape → portrait while observing
    the WebView, active route, current question and input.
 5. Background the app from the practice route, wait for it to be fully nonvisible,
    then foreground it. Complete one answer and inspect the saved assignment.
 6. Press Android Back through practice → selector → Home, one level at a time.
 7. Cold restart without clearing data and inspect the recorded assignment.
+8. Repeat Back navigation using a hardware/emulated Back key and, when enabled on
+   the device, an edge Back gesture. At a fresh Home with no navigation history,
+   Back should return to Android; reopen the app and confirm it remains usable.
 
 ### Expected result
 
@@ -127,7 +132,7 @@ opened, without risking user progress or canonical data.
   files could not be opened and saved progress was not reset, stops the spinner,
   and exposes **Try again**.
 - After the condition is restored, retry creates one working study WebView and all
-  six catalogs open. Repeated retry taps do not create duplicate content.
+  fourteen catalogs open. Repeated retry taps do not create duplicate content.
 - The seeded private progress remains unchanged.
 
 ### Cleanup

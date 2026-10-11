@@ -118,9 +118,9 @@ public sealed class ChunkingPracticeComponentTests
 
     private static List<Word> SeedKnownWords(ComponentTestContext test, int count)
     {
-        var words = test.Words.Words.GroupBy(word => word.English).Select(group => group.First()).Take(count).ToList();
-        foreach (var word in words) test.Words.AddToVocab(word);
-        return words;
+        var words = test.Adverbs.Words.GroupBy(word => word.English).Select(group => group.First()).Take(count).ToList();
+        foreach (var word in words) test.Adverbs.AddToVocab(word);
+        return words.Cast<Word>().ToList();
     }
 
     private static IRenderedComponent<WordSpelling> Render(ComponentTestContext test)
