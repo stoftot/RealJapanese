@@ -13,19 +13,19 @@
         <div class="word-move-actions" role="group" aria-label="Move selected from @Category">
             @if (Category == WordPracticeCategory.Rehearsing)
             {
-                @MoveButton(WordPracticeCategory.Known, false, "success")
+                @MoveButton(WordPracticeCategory.Known, false)
             }
             @if (Category == WordPracticeCategory.Training)
             {
-                @MoveButton(WordPracticeCategory.Rehearsing, false, "primary")
+                @MoveButton(WordPracticeCategory.Rehearsing, false)
             }
             @if (Category == WordPracticeCategory.Known)
             {
-                @MoveButton(WordPracticeCategory.Rehearsing, true, "primary")
+                @MoveButton(WordPracticeCategory.Rehearsing, true)
             }
             @if (Category == WordPracticeCategory.Rehearsing)
             {
-                @MoveButton(WordPracticeCategory.Training, true, "secondary")
+                @MoveButton(WordPracticeCategory.Training, true)
             }
         </div>
     }
@@ -108,8 +108,8 @@
 </div>
 
 @code {
-    private RenderFragment MoveButton(WordPracticeCategory destination, bool right, string color) => @<button
-        type="button" class="btn btn-outline-@color word-move-button @(right ? "word-move-right" : "word-move-left")"
+    private RenderFragment MoveButton(WordPracticeCategory destination, bool right) => @<button
+        type="button" class="btn btn-outline-secondary word-move-button @(right ? "word-move-right" : "word-move-left")"
         disabled="@(SelectedIds.Count == 0)"
         title="Move all @SelectedIds.Count selected items to @destination, including hidden items"
         @onclick="() => MoveSelected.InvokeAsync(destination)">
