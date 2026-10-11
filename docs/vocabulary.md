@@ -37,8 +37,9 @@ Existing extras remain available with `self added` provenance.
 [The source manifest](../tests/fixtures/genki-vocabulary.json) identifies the PDF
 by title and SHA-256 and records the physical/printed page, section, reading and
 catalog target for each of 678 lesson rows and 19 introductory greetings. A row can have multiple targets when
-it lists different readings or grammatical senses. For example, 聞く has listening
-and asking senses; 彼女 has pronoun and girlfriend senses. Inflected examples such
+it lists different readings. Identical words combine their English senses:
+彼女 includes “she; girlfriend” under Pronouns, and 聞く combines listening,
+hearing and asking under the earliest entry, Verbs ID 2. Inflected examples such
 as 知っています are expressions rather than dictionary-form verbs.
 
 Categories follow the sense used in the lesson. In particular, the publisher's
@@ -47,7 +48,7 @@ price-related [いくら as a noun](https://kotobank.jp/word/幾ら-431526), and
 negative-polarity [何も as an adverb](https://kotobank.jp/word/何も-668836).
 These references clarify classification; they do not supply additional vocabulary.
 
-The catalog has 701 records, including 15 retained extras. Category checks cover
+The catalog has 698 records, including 15 retained extras. Category checks cover
 all catalog IDs, conjugation types and source-manifest references. The original
 413 records retain their identities; 101 move to another grammatical category.
 
@@ -79,6 +80,18 @@ Read-only mixer groups allow expansion and search but have no assignment control
 Catalog IDs connect words to study progress and extracted kanji relations. Keep
 IDs stable when editing entries. Allocate additions above the dataset's previous
 maximum, including retired IDs; never recycle an ID for a different word.
+
+Verbs ID 61 is retired into ID 2 (聞く). Nouns IDs 348 and 349 are retired into
+Pronouns IDs 21 (彼女) and 22 (彼), respectively. Each pronoun/noun pair shared a
+single printed row; its first manifest target (Pronouns) retains the combined entry.
+Loading local or legacy progress remaps these IDs when using the merged catalog;
+the next save persists them. If both entries
+were assigned, Known takes priority over Training, then Rehearsing. History follows
+the winning category, preferring the retained ID's history when both entries had that category.
+Recognized previous catalog recovery snapshots receive the same remapping;
+unknown catalog hashes remain incompatible. The frozen earlier split manifests
+are unchanged. Matching kana alone does not identify duplicates: for example,
+いる meaning “to exist” and いる meaning “to need” have different conjugations.
 
 Progress and sync snapshots use schema version 4 with fourteen datasets (twelve
 vocabulary catalogs and two kanji catalogs). Version 1 local progress first uses

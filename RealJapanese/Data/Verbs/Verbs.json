@@ -20,8 +20,11 @@
     "id": "2",
     "japanese": "聞く",
     "kana": "きく",
-    "english": "to listen; to hear",
-    "origin": "GENKI I (3rd edition)-3"
+    "english": "to listen; to hear; to ask",
+    "origin": "GENKI I (3rd edition)-3",
+    "additionalOrigins": [
+      "GENKI I (3rd edition)-5"
+    ]
   },
   {
     "type": "u",
@@ -486,14 +489,6 @@
     "kana": "かく",
     "english": "to draw; to paint",
     "origin": "self added"
-  },
-  {
-    "id": "61",
-    "japanese": "聞く",
-    "kana": "きく",
-    "english": "to ask",
-    "type": "u",
-    "origin": "GENKI I (3rd edition)-5"
   },
   {
     "id": "62",

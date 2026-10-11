@@ -2,7 +2,7 @@
   "sourceTitle": "GENKI I: An Integrated Course in Elementary Japanese (3rd edition)",
   "sourceSha256": "718e84f766f193c916a0268680d9b932603c3a2490ea8d0402cc04353b71b802",
   "scope": "Greetings list on printed page 32 and opening Vocabulary lists immediately after each lesson dialogue, including contiguous Additional Vocabulary subsections and independently listed indented examples. Excludes end-of-lesson Useful Expressions/Additional Vocabulary panels and the back dictionary.",
-  "rowSemantics": "One row per printed vocabulary entry. Variant readings or distinct senses have multiple catalog targets. Parenthetical particles and optional phrase text are usage annotations, not extra rows.",
+  "rowSemantics": "One row per printed vocabulary entry. Variant readings can have multiple catalog targets; repeated senses of the same word share one target. Parenthetical particles and optional phrase text are usage annotations, not extra rows.",
   "lessons": [
     {
       "lesson": 1,
@@ -4318,7 +4318,7 @@
           "targets": [
             {
               "dataset": "Verbs",
-              "id": 61
+              "id": 2
             }
           ]
         },
@@ -9861,10 +9861,6 @@
             {
               "dataset": "Pronouns",
               "id": 21
-            },
-            {
-              "dataset": "Nouns",
-              "id": 348
             }
           ]
         },
@@ -9880,10 +9876,6 @@
             {
               "dataset": "Pronouns",
               "id": 22
-            },
-            {
-              "dataset": "Nouns",
-              "id": 349
             }
           ]
         },

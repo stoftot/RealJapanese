@@ -11,6 +11,36 @@ namespace RealJapanese.IntegrationTests;
 public sealed class GenkiCatalogTests
 {
     [Fact]
+    public void Repeated_word_senses_share_the_earliest_entry_but_homophones_remain_distinct()
+    {
+        using var workspace = new TestWorkspace(seedGeneralWords: false);
+        var seen = new HashSet<(string?, string?, string?)>();
+        foreach (var dataset in ProgressStore.DatasetNames.Where(name => !name.StartsWith("Kanji/")))
+        {
+            using var catalog = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(workspace.CatalogRoot, dataset, dataset + ".json")));
+            var entries = catalog.RootElement.EnumerateArray().ToArray();
+            var identities = entries.Select(word => (word.GetProperty("japanese").GetString(),
+                word.GetProperty("kana").GetString(),
+                Type: word.TryGetProperty("type", out var type) ? type.GetString() : null)).ToArray();
+            Assert.Equal(identities.Length, identities.Distinct().Count());
+            Assert.All(identities, identity => Assert.True(seen.Add(identity), $"Repeated word: {identity}"));
+        }
+        var verbs = new VerbData(workspace.CreatePaths()).Words.ToArray();
+        var kiku = Assert.Single(verbs, word => word.Japanese == "聞く");
+        Assert.Equal(2, kiku.Id);
+        Assert.Equal("to listen; to hear; to ask", kiku.English);
+        Assert.Equal("GENKI I (3rd edition)-3", kiku.Origin);
+        Assert.Contains("GENKI I (3rd edition)-5", kiku.AdditionalOrigins);
+        Assert.DoesNotContain(verbs, word => word.Id == 61);
+        Assert.Contains(verbs, word => word.Id == 20 && word.Type == "ru");
+        Assert.Contains(verbs, word => word.Id == 64 && word.Type == "u");
+        var pronouns = new PronounData(workspace.CreatePaths()).Words.ToArray();
+        Assert.Contains(pronouns, word => word.Id == 21 && word.English == "she; girlfriend");
+        Assert.Contains(pronouns, word => word.Id == 22 && word.English == "he; boyfriend");
+        Assert.DoesNotContain(new NounData(workspace.CreatePaths()).Words, word => word.Id is 348 or 349);
+    }
+
+    [Fact]
     public void Every_vocabulary_row_has_a_catalog_entry_in_its_book_section_and_no_unlisted_book_entries()
     {
         using var workspace = new TestWorkspace(seedGeneralWords: false);

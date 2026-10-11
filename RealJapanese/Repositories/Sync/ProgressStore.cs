@@ -74,6 +74,7 @@ public sealed class ProgressStore
             if (loaded.Recovery?.Version == 3) loaded.Recovery.Version = CurrentVersion;
             if (loaded.Version != CurrentVersion) throw new InvalidDataException("Unsupported progress version.");
             ValidateShape(loaded.Data);
+            VocabularyDuplicateMigration.Apply(loaded.Data, loaded.Recovery, catalogRoot);
             return document = loaded;
         }
 
@@ -103,6 +104,7 @@ public sealed class ProgressStore
         }
         if (version == 1) WordNounMigration.Apply(migrated.Data);
         if (version < 3) VocabularyMigration.Apply(migrated.Data);
+        VocabularyDuplicateMigration.Apply(migrated.Data, null, catalogRoot);
         return document = migrated;
     }
 
