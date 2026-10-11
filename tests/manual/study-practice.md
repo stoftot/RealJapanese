@@ -40,6 +40,15 @@ independent single/combined kanji lists.
    item. Switch to Single and repeat with the recorded single item.
 7. Switch between Combined and Single several times and inspect the recorded item
    in each set.
+8. On an editable selector, select two items in Known and a different item in
+   Rehearsing. Collapse a group or search so one selected Known item is hidden.
+   Press **Move selected to Rehearsing** above Known. Clear the search and inspect
+   both lists, then reload. Move the Rehearsing selection to Training, back to
+   Rehearsing, and finally to Known using the corresponding arrow buttons.
+9. Confirm empty source lists have disabled move buttons. Open **Words** and
+   confirm its saved-word mixer has no move buttons. At desktop and phone widths,
+   check the left/right placement above each editable list and room for two group
+   headers and five ordinary word entries inside the scrolling list.
 
 ### Expected result
 
@@ -54,6 +63,12 @@ independent single/combined kanji lists.
 - Nouns are available in their own selector and retain independent Known,
   Rehearsing and Training assignments.
 - Combined and Single kanji retain independent category assignments.
+- Moves include every selected source item, including hidden items, and keep them
+  selected in the destination alongside its existing selections. Unselected items
+  and other categories remain unchanged. The saved result survives reload/restart.
+- Known has a right arrow to Rehearsing; Rehearsing has a left arrow to Known and
+  a right arrow to Training; Training has a left arrow to Rehearsing. Buttons have
+  complete readable labels without overlapping at phone widths.
 
 ### Cleanup
 

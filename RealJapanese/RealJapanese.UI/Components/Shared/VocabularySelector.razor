@@ -17,12 +17,14 @@
     <div class="row g-3">
         <div class="col-md-6 col-lg-4 category-column @(SelectedCategoryIndex == 0 ? "category-column-active" : "")">
             <WordList TItem="TItem" Title="Known vocabulary" AllWords="@AllWords" SelectedIds="@KnownIds"
+                      Category="WordPracticeCategory.Known" MoveSelected="@(destination => MoveSelected(WordPracticeCategory.Known, destination))"
                       WordSelected="OnKnownWordSelected" WordDeselected="OnKnownWordDeSelected"
                       WordsSelected="OnKnownWordsSelected" WordsDeselected="OnKnownWordsDeselected" />
         </div>
         <div class="col-md-6 col-lg-4 category-column @(SelectedCategoryIndex == 1 ? "category-column-active" : "")">
             <WordList TItem="TItem" Title="Currently rehearsing"
                       AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id)).ToList()" SelectedIds="@RehearsingIds"
+                      Category="WordPracticeCategory.Rehearsing" MoveSelected="@(destination => MoveSelected(WordPracticeCategory.Rehearsing, destination))"
                       WordSelected="OnRehearsingWordSelected" WordDeselected="OnRehearsingWordDeSelected"
                       WordsSelected="OnRehearsingWordsSelected" WordsDeselected="OnRehearsingWordsDeselected" />
         </div>
@@ -30,6 +32,7 @@
             <WordList TItem="TItem" Title="Currently training"
                       AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id) && !RehearsingIds.Contains(w.Id)).ToList()"
                       SelectedIds="@TrainingIds"
+                      Category="WordPracticeCategory.Training" MoveSelected="@(destination => MoveSelected(WordPracticeCategory.Training, destination))"
                       WordSelected="OnTrainingWordSelected" WordDeselected="OnTrainingWordDeSelected"
                       WordsSelected="OnTrainingWordsSelected" WordsDeselected="OnTrainingWordsDeselected" />
         </div>

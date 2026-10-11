@@ -128,6 +128,10 @@ Category actions coordinate exclusive known/training/rehearsing membership and
 save progress. `WordList` groups origins by book, introductory section and numeric
 lesson, with separate expansion and group-selection controls. A group operation commits once per backend dataset and
 deduplicates words repeated across lessons; search restricts its scope to matches.
+The directional buttons above editable lists move the entire saved source selection
+between adjacent study categories, including items hidden by search or collapsed
+groups, and retain existing destination selections. They use the same category
+persistence path; the read-only Words mixer has no move controls.
 Nouns, Verbs and Adjectives retain their separate study areas. `SupportingVocabularyStudy`
 combines the other vocabulary categories into Words & expressions. The Words page
 is a read-only mixer: eleven grammatical category toggles include only those categories'

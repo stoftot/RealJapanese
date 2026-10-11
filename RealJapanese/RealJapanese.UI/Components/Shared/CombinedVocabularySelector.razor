@@ -12,6 +12,7 @@
             <div class="col-md-6 col-lg-4 category-column @(SelectedIndex == (int)category ? "category-column-active" : "")" @key="category">
                 <WordList TItem="VocabularyEntry" Title="@Title(category)" AllWords="@VisibleWords(category)"
                           SelectedIds="@Saved[category].Select(word => word.Id).ToList()" ReadOnly="@ReadOnly"
+                          Category="@category" MoveSelected="@(destination => MoveSelected(category, destination))"
                           WordSelected="@(word => Update([word], category, true))" WordDeselected="@(word => Update([word], category, false))"
                           WordsSelected="@(words => Update(words, category, true))" WordsDeselected="@(words => Update(words, category, false))" />
             </div>
@@ -59,6 +60,9 @@
         try { Collection.SetCategory(words, category, selected); }
         finally { Refresh(); }
     }
+
+    private void MoveSelected(WordPracticeCategory source, WordPracticeCategory destination) =>
+        Update(Collection.SavedWords(Sources, source), destination, true);
 
     private static string Title(WordPracticeCategory category) => category switch
     {

@@ -17,6 +17,8 @@ public class WordListBase<TItem> : ComponentBase where TItem : Word
     [Parameter] public List<TItem> AllWords { get; set; } = [];
     [Parameter] public List<int> SelectedIds { get; set; } = [];
     [Parameter] public bool ReadOnly { get; set; }
+    [Parameter] public WordPracticeCategory? Category { get; set; }
+    [Parameter] public EventCallback<WordPracticeCategory> MoveSelected { get; set; }
     [Parameter] public EventCallback<TItem> WordSelected { get; set; }
     [Parameter] public EventCallback<TItem> WordDeselected { get; set; }
     [Parameter] public EventCallback<List<TItem>> WordsSelected { get; set; }

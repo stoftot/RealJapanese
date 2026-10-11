@@ -24,6 +24,7 @@
                 Title="Known nouns"
                 AllWords="@AllWords"
                 SelectedIds="@KnownIds"
+                Category="WordPracticeCategory.Known" MoveSelected="@(destination => MoveSelected(WordPracticeCategory.Known, destination))"
                 WordSelected="@OnKnownWordSelected"
                 WordDeselected="@OnKnownWordDeSelected"
                 WordsSelected="@OnKnownWordsSelected"
@@ -37,6 +38,7 @@
                 Title="Currently rehearsing"
                 AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id)).ToList()"
                 SelectedIds="@RehearsingIds"
+                Category="WordPracticeCategory.Rehearsing" MoveSelected="@(destination => MoveSelected(WordPracticeCategory.Rehearsing, destination))"
                 WordSelected="@OnRehearsingWordSelected"
                 WordDeselected="@OnRehearsingWordDeSelected"
                 WordsSelected="@OnRehearsingWordsSelected"
@@ -51,6 +53,7 @@
                 AllWords="@AllWords.Where(w => !KnownIds.Contains(w.Id) &&
                                                !RehearsingIds.Contains(w.Id)).ToList()"
                 SelectedIds="@TrainingIds"
+                Category="WordPracticeCategory.Training" MoveSelected="@(destination => MoveSelected(WordPracticeCategory.Training, destination))"
                 WordSelected="@OnTrainingWordSelected"
                 WordDeselected="@OnTrainingWordDeSelected"
                 WordsSelected="@OnTrainingWordsSelected"

@@ -1,4 +1,5 @@
 @namespace RealJapanese.Components.Shared
+@using DataLoaders.Models
 @typeparam TItem where TItem : DataLoaders.Models.Word
 @inherits WordListBase<TItem>
 
@@ -6,7 +7,29 @@
     var groups = VisibleGroups;
 }
 
-<div class="card h-100">
+<div class="word-list h-100">
+    @if (!ReadOnly && Category is not null && MoveSelected.HasDelegate)
+    {
+        <div class="word-move-actions" role="group" aria-label="Move selected from @Category">
+            @if (Category == WordPracticeCategory.Rehearsing)
+            {
+                @MoveButton(WordPracticeCategory.Known, false, "success")
+            }
+            @if (Category == WordPracticeCategory.Training)
+            {
+                @MoveButton(WordPracticeCategory.Rehearsing, false, "primary")
+            }
+            @if (Category == WordPracticeCategory.Known)
+            {
+                @MoveButton(WordPracticeCategory.Rehearsing, true, "primary")
+            }
+            @if (Category == WordPracticeCategory.Rehearsing)
+            {
+                @MoveButton(WordPracticeCategory.Training, true, "secondary")
+            }
+        </div>
+    }
+<div class="card flex-grow-1">
     <div class="card-header d-flex justify-content-between align-items-center">
         <span>@Title</span>
         <small class="text-muted">
@@ -40,7 +63,7 @@
         </small>
     </div>
 
-    <div class="list-group list-group-flush word-list-scroll">
+    <div class="list-group list-group-flush word-list-scroll @(typeof(TItem) == typeof(VocabularyEntry) ? "word-list-with-sources" : "")">
         @if (groups.Count > 0)
         {
             foreach (var book in groups)
@@ -82,8 +105,25 @@
         }
     </div>
 </div>
+</div>
 
 @code {
+    private RenderFragment MoveButton(WordPracticeCategory destination, bool right, string color) => @<button
+        type="button" class="btn btn-outline-@color word-move-button @(right ? "word-move-right" : "word-move-left")"
+        disabled="@(SelectedIds.Count == 0)"
+        title="Move all @SelectedIds.Count selected items to @destination, including hidden items"
+        @onclick="() => MoveSelected.InvokeAsync(destination)">
+        @if (!right)
+        {
+            <span aria-hidden="true">←</span>
+        }
+        <span>Move selected to @destination</span>
+        @if (right)
+        {
+            <span aria-hidden="true">→</span>
+        }
+    </button>;
+
     private RenderFragment GroupHeader(WordGroup group, bool isLesson) => @<div class="word-group-header @(isLesson ? "lesson-header" : "book-header")">
         @if (!ReadOnly)
         {
