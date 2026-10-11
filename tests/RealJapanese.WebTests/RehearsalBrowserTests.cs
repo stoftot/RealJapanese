@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.Playwright;
 using Repositories;
 using Repositories.Exstensions;
@@ -53,7 +54,7 @@ public sealed class RehearsalBrowserTests : BrowserTest
     }
 
     [Fact]
-    public async Task Missed_known_word_moves_after_retry_and_stays_rehearsing_after_restart()
+    public async Task Missed_known_word_moves_immediately_and_stays_rehearsing_after_retry_and_restart()
     {
         var word = SeedWords(1).VocabWords.Single();
         await OpenAsync("/words/spelling?category=known&sources=Adverbs");
@@ -61,11 +62,12 @@ public sealed class RehearsalBrowserTests : BrowserTest
         await input.FillAsync("incorrect");
         await input.PressAsync("Enter");
         await Expect(Page.GetByRole(AriaRole.Alert)).ToBeVisibleAsync();
-        Assert.Contains(word.Id, new AdverbData(Workspace.CreatePaths()).VocabWordIds);
+        Assert.DoesNotContain(word.Id, new AdverbData(Workspace.CreatePaths()).VocabWordIds);
+        Assert.Contains(word.Id, new AdverbData(Workspace.CreatePaths()).RehearsingWordIds);
         await input.FillAsync(word.Kana.ToRomaji()); // Copying the revealed answer enters the retry.
         await Expect(Page.GetByRole(AriaRole.Alert)).Not.ToBeVisibleAsync();
         await Expect(input).ToHaveValueAsync("");
-        Assert.Contains(word.Id, new AdverbData(Workspace.CreatePaths()).VocabWordIds);
+        Assert.DoesNotContain(word.Id, new AdverbData(Workspace.CreatePaths()).VocabWordIds);
         await input.FillAsync(word.Kana.ToRomaji());
         await Expect(Page.GetByText("Nothing to practise yet", new() { Exact = true })).ToBeVisibleAsync();
         Assert.Contains(word.Id, new AdverbData(Workspace.CreatePaths()).RehearsingWordIds);
@@ -76,6 +78,44 @@ public sealed class RehearsalBrowserTests : BrowserTest
         var item = Page.Locator($".list-group-item[data-dataset='Adverbs'][data-source-id='{word.Id}']");
         await Expect(Page.Locator(".category-column").Nth(0).Locator(item)).ToHaveCountAsync(0);
         await Expect(Page.Locator(".category-column").Nth(1).Locator(item)).ToHaveCountAsync(1);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Immediate_known_move_persists_across_navigation_or_restart_before_retry(bool restart)
+    {
+        var word = SeedWords(1).VocabWords.Single();
+        await OpenAsync("/words/spelling?category=known&sources=Adverbs");
+        var input = Page.GetByPlaceholder("Type your answer…");
+        await input.FillAsync("incorrect");
+        await input.PressAsync("Enter");
+        await Expect(Page.GetByRole(AriaRole.Alert)).ToBeVisibleAsync();
+
+        var data = new AdverbData(Workspace.CreatePaths());
+        Assert.DoesNotContain(word.Id, data.VocabWordIds);
+        Assert.Contains(word.Id, data.RehearsingWordIds);
+        Assert.Equal(0, SavedCorrectDays(word.Id));
+
+        if (restart)
+        {
+            await App.DisposeAsync();
+            await App.StartAsync();
+            await OpenAsync("/words?category=rehearsing&sources=Adverbs");
+        }
+        else
+        {
+            await Page.GetByRole(AriaRole.Link, new() { Name = "Back to words", Exact = true }).ClickAsync();
+        }
+
+        var item = $".list-group-item[data-dataset='Adverbs'][data-source-id='{word.Id}']";
+        await Expect(Page.Locator(".category-column").Nth(0).Locator(item)).ToHaveCountAsync(0);
+        await Expect(Page.Locator(".category-column").Nth(1).Locator(item)).ToHaveCountAsync(1);
+        await OpenAsync("/words/spelling?category=known&sources=Adverbs");
+        await Expect(Page.GetByText("Nothing to practise yet", new() { Exact = true })).ToBeVisibleAsync();
+        await OpenAsync("/words/spelling?category=rehearsing&sources=Adverbs");
+        await Expect(Page.Locator("p.lead")).ToHaveTextAsync(word.English);
+        Assert.Equal(0, SavedCorrectDays(word.Id));
     }
 
     [Fact]
@@ -99,6 +139,13 @@ public sealed class RehearsalBrowserTests : BrowserTest
         var item = $".list-group-item[data-dataset='Adverbs'][data-source-id='{word.Id}']";
         await Expect(Page.Locator(".category-column").Nth(0).Locator(item)).ToHaveCountAsync(1);
         await Expect(Page.Locator(".category-column").Nth(1).Locator(item)).ToHaveCountAsync(0);
+    }
+
+    private int SavedCorrectDays(int wordId)
+    {
+        using var saved = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(Workspace.CreatePaths().ProgressRoot, "Progress.json")));
+        return saved.RootElement.GetProperty("Data").GetProperty("Adverbs").GetProperty("Rehearsal")
+            .GetProperty(wordId.ToString()).GetProperty("CorrectDays").GetInt32();
     }
 
     private sealed class StudyClock(DateTimeOffset now) : TimeProvider

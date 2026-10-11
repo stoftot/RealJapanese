@@ -67,23 +67,53 @@ public sealed class RehearsalProgressTests
     }
 
     [Fact]
-    public void Known_miss_persists_retry_and_next_unassisted_success_demotes()
+    public void Known_miss_demotes_immediately_and_persists_without_a_retry()
     {
         using var workspace = new TestWorkspace();
         var clock = new MutableClock(new DateTimeOffset(2026, 3, 1, 12, 0, 0, TimeSpan.Zero), TimeZoneInfo.Utc);
         var fixture = Open(workspace, "known-retry", clock);
         var word = fixture.Words.Words.First();
         fixture.Words.AddToVocab(word);
-        fixture.Words.RecordPracticeAnswer(word.Id, false);
+        Assert.True(fixture.Words.RecordPracticeAnswer(word.Id, false));
         fixture = Open(workspace, "known-retry", clock);
-        Assert.True(State(fixture, word.Id).AwaitingRetry);
-        Assert.Contains(word.Id, fixture.Words.VocabWordIds);
-        Assert.DoesNotContain(word.Id, fixture.Words.RehearsingWordIds);
-        fixture.Words.RecordPracticeAnswer(word.Id, true);
+        Assert.DoesNotContain(word.Id, fixture.Words.VocabWordIds);
         Assert.Contains(word.Id, fixture.Words.RehearsingWordIds);
         Assert.False(State(fixture, word.Id).AwaitingRetry);
         Assert.Equal(0, State(fixture, word.Id).CorrectDays);
-        fixture.Words.RecordPracticeAnswer(word.Id, true);
+        Assert.Equal(new DateOnly(2026, 3, 1), State(fixture, word.Id).LastResetDay);
+        Assert.False(fixture.Words.RecordPracticeAnswer(word.Id, false));
+        Assert.False(fixture.Words.RecordPracticeAnswer(word.Id, true));
+        Assert.Equal(0, State(fixture, word.Id).CorrectDays);
+
+        clock.Set(clock.GetUtcNow().AddDays(1));
+        fixture = Open(workspace, "known-retry", clock);
+        Assert.False(fixture.Words.RecordPracticeAnswer(word.Id, true));
+        Assert.Equal(1, State(fixture, word.Id).CorrectDays);
+        Assert.Contains(word.Id, fixture.Words.RehearsingWordIds);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Older_saved_pending_known_miss_still_demotes_on_the_next_answer(bool correct)
+    {
+        using var workspace = new TestWorkspace();
+        var clock = new MutableClock(new DateTimeOffset(2026, 3, 1, 12, 0, 0, TimeSpan.Zero), TimeZoneInfo.Utc);
+        var fixture = Open(workspace, "legacy-retry", clock);
+        var word = fixture.Words.Words.First();
+        fixture.Words.AddToVocab(word);
+        var path = Path.Combine(fixture.Paths.ProgressRoot, "Progress.json");
+        var saved = JsonNode.Parse(File.ReadAllBytes(path))!;
+        saved["Data"]!["Words"]!["Rehearsal"]![word.Id.ToString()] = JsonSerializer.SerializeToNode(
+            new RehearsalProgress { LastResetDay = new DateOnly(2026, 3, 1), AwaitingRetry = true });
+        File.WriteAllBytes(path, JsonSerializer.SerializeToUtf8Bytes(saved));
+
+        fixture = Open(workspace, "legacy-retry", clock);
+        Assert.True(fixture.Words.RecordPracticeAnswer(word.Id, correct));
+        fixture = Open(workspace, "legacy-retry", clock);
+        Assert.DoesNotContain(word.Id, fixture.Words.VocabWordIds);
+        Assert.Contains(word.Id, fixture.Words.RehearsingWordIds);
+        Assert.False(State(fixture, word.Id).AwaitingRetry);
         Assert.Equal(0, State(fixture, word.Id).CorrectDays);
     }
 
@@ -109,7 +139,7 @@ public sealed class RehearsalProgressTests
     }
 
     [Fact]
-    public void Category_assignment_preserves_only_same_category_and_known_miss_retry_demotes()
+    public void Category_assignment_preserves_only_same_category_and_promoted_item_demotes_immediately_on_miss()
     {
         using var workspace = new TestWorkspace();
         var clock = new MutableClock(new DateTimeOffset(2026, 5, 1, 12, 0, 0, TimeSpan.Zero), TimeZoneInfo.Utc);
@@ -135,12 +165,11 @@ public sealed class RehearsalProgressTests
         Assert.Contains(word.Id, fixture.Words.VocabWordIds);
         fixture.Words.RecordPracticeAnswer(word.Id, false);
         fixture = Open(workspace, "category-history", clock);
-        Assert.True(State(fixture, word.Id).AwaitingRetry);
-        Assert.Contains(word.Id, fixture.Words.VocabWordIds);
-        Assert.DoesNotContain(word.Id, fixture.Words.RehearsingWordIds);
-        fixture.Words.RecordPracticeAnswer(word.Id, true);
+        Assert.DoesNotContain(word.Id, fixture.Words.VocabWordIds);
         Assert.Contains(word.Id, fixture.Words.RehearsingWordIds);
         Assert.False(State(fixture, word.Id).AwaitingRetry);
+        fixture.Words.RecordPracticeAnswer(word.Id, true);
+        Assert.Equal(0, State(fixture, word.Id).CorrectDays);
     }
 
     [Fact]

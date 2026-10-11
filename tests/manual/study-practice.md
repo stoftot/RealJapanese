@@ -549,9 +549,13 @@ exercises and confirm that each host uses its own local calendar day.
 
 1. On each host, open each Learn the X route: Words, Nouns, Verbs, Adjectives,
    Single kanji and Combined kanji. Select the Known item. Reveal the answer or
-   submit a wrong answer, then confirm it remains Known.
-2. Reach that same item in its retry round and answer correctly without revealing.
-   Confirm it moves from Known to Rehearsing and has zero earned correct days.
+   submit a wrong answer, then inspect disposable progress and confirm it has
+   immediately moved to Rehearsing with zero earned correct days. With one item,
+   navigate away or close/reopen the app before retrying; confirm it is still
+   Rehearsing and absent from a freshly opened Known practice session.
+2. With another Known item, miss its answer and stay in the session. Reach that
+   same item in its retry round and answer correctly without revealing. Confirm
+   it stays Rehearsing with zero earned correct days on the reset date.
    Finish all outstanding retries; confirm the next full round excludes the moved
    item. With no remaining items, confirm the empty-practice state appears.
 3. On one Rehearsing item, answer correctly twice on the same local date. Confirm
@@ -573,8 +577,10 @@ exercises and confirm that each host uses its own local calendar day.
 
 ### Expected result
 
-- A wrong or revealed Known answer remains Known until its next unassisted correct
-  retry, which moves it to Rehearsing without daily credit.
+- A wrong or revealed Known answer immediately moves to Rehearsing and persists
+  the reset. Leaving the page or restarting before retrying does not undo it.
+  Staying in the session preserves its retry; a correct retry on the reset date
+  earns no daily credit.
 - Rehearsing progress counts at most one correct day per local date; the dates need
   not be consecutive. A miss resets credit and blocks later same-day credit. Seven
   distinct correct dates promote to Known.

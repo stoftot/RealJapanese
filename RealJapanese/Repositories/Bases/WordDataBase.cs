@@ -60,13 +60,20 @@ public abstract class WordDataBase<T> where T : Word
             var state = saved.Rehearsal.GetValueOrDefault(wordId) ?? new RehearsalProgress();
             if (!correct)
             {
-                var reset = state with { CorrectDays = 0, LastResetDay = today, AwaitingRetry = known };
-                if (reset == state) return false;
+                var reset = state with { CorrectDays = 0, LastResetDay = today, AwaitingRetry = false };
+                if (!known && reset == state) return false;
+                if (known)
+                {
+                    saved.KnownIds.Remove(wordId);
+                    saved.RehearsingIds.Add(wordId);
+                    moved = true;
+                }
                 saved.Rehearsal[wordId] = reset;
                 return true;
             }
             if (known)
             {
+                // Older saves can still contain a Known item awaiting its retry.
                 if (!state.AwaitingRetry) return false;
                 saved.KnownIds.Remove(wordId);
                 saved.RehearsingIds.Add(wordId);

@@ -70,10 +70,12 @@ public abstract class PracticeBase : ComponentBase
         if (Questions.Count > 0
             && !ReferenceEquals(_currentRetryQuestion, Questions[currentQuestionIndex]))
         {
-            Questions[currentQuestionIndex].RecordAnswer?.Invoke(false);
+            var question = Questions[currentQuestionIndex];
+            if (question.RecordAnswer?.Invoke(false) == true)
+                _movedQuestions.Add(question);
             if (RepeatQuestionsWithRevealedAnswers)
-                _retryQuestions.Add(Questions[currentQuestionIndex]);
-            _currentRetryQuestion = Questions[currentQuestionIndex];
+                _retryQuestions.Add(question);
+            _currentRetryQuestion = question;
         }
     }
     

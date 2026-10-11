@@ -99,7 +99,7 @@ public sealed class RehearsalPracticeComponentTests
     }
 
     [Fact]
-    public void Known_word_moves_only_after_an_unassisted_retry()
+    public void Revealed_known_word_moves_immediately_while_its_retry_remains_active()
     {
         using var test = new ComponentTestContext();
         var word = test.Words.Words.First();
@@ -110,12 +110,16 @@ public sealed class RehearsalPracticeComponentTests
 
         cut.Find("input[placeholder]").Input("wrong");
         cut.Find("input[placeholder]").KeyDown(new Microsoft.AspNetCore.Components.Web.KeyboardEventArgs { Key = "Enter" });
-        Assert.Contains(word.Id, test.Words.VocabWordIds);
+        Assert.DoesNotContain(word.Id, test.Words.VocabWordIds);
+        Assert.Contains(word.Id, test.Words.RehearsingWordIds);
         cut.Find("input[placeholder]").Input(word.Kana.ToRomaji());
-        Assert.Contains(word.Id, test.Words.VocabWordIds); // Copying the shown answer starts the retry.
+        Assert.DoesNotContain(word.Id, test.Words.VocabWordIds);
+        Assert.Contains(word.Id, test.Words.RehearsingWordIds);
+        Assert.Equal(0, Saved(test, "Words").Rehearsal[word.Id].CorrectDays);
+        Assert.Contains("1/1", cut.Markup); // The original question remains queued for retry.
         Button(cut, "Show answer (Enter)").Click();
         Button(cut, "Next").Click();
-        Assert.Contains(word.Id, test.Words.VocabWordIds); // The retry itself was missed too.
+        Assert.DoesNotContain(word.Id, test.Words.VocabWordIds);
         cut.Find("input[placeholder]").Input(word.Kana.ToRomaji());
         Assert.DoesNotContain(word.Id, test.Words.VocabWordIds);
         Assert.Contains(word.Id, test.Words.RehearsingWordIds);
@@ -165,6 +169,9 @@ public sealed class RehearsalPracticeComponentTests
         var failed = cut.Find("p.lead").TextContent.Trim();
         Button(cut, "Show answer (Enter)").Click();
         Button(cut, "Next").Click();
+        Assert.Equal(failed == "blue", test.Adverbs.RehearsingWordIds.Contains(0));
+        Assert.Equal(failed == "red", test.Expressions.RehearsingWordIds.Contains(0));
+        Assert.Contains("2/2", cut.Markup); // Persisting the move does not shrink the active round.
         var other = cut.Find("p.lead").TextContent.Trim();
         cut.Find("input[placeholder]").Input(other == "blue" ? "ao" : "aka");
         Assert.Equal(failed, cut.Find("p.lead").TextContent.Trim());
@@ -176,6 +183,8 @@ public sealed class RehearsalPracticeComponentTests
         Assert.Equal(failed != "red", test.Expressions.VocabWordIds.Contains(0));
         Assert.Equal(other, cut.Find("p.lead").TextContent.Trim());
         Assert.Contains("1/1", cut.Markup);
+        var nextFullRound = test.Context.Render<WordSpelling>();
+        Assert.NotEqual(failed, nextFullRound.Find("p.lead").TextContent.Trim());
     }
 
     [Fact]
@@ -206,7 +215,7 @@ public sealed class RehearsalPracticeComponentTests
     [InlineData("Adjectives")]
     [InlineData("Kanji/Singel")]
     [InlineData("Kanji/Combined")]
-    public void Each_learn_exercise_demotes_only_after_all_retry_answers_are_correct(string dataset)
+    public void Each_learn_exercise_moves_on_reveal_and_keeps_all_retry_answers_active(string dataset)
     {
         using var test = new ComponentTestContext();
         test.UseCategory("known");
@@ -249,13 +258,18 @@ public sealed class RehearsalPracticeComponentTests
             "Verbs" or "Adjectives" => new[] { word.Kana.ToRomaji(), ((Conjugatabel)word).TypeShortForm() },
             _ => new[] { word.Kana.ToRomaji() }
         };
+        Assert.DoesNotContain(word.Id, Saved(test, dataset).KnownIds);
+        Assert.Contains(word.Id, Saved(test, dataset).RehearsingIds);
+        Assert.Equal(0, Saved(test, dataset).Rehearsal[word.Id].CorrectDays);
+        Assert.Contains("1/1", cut.Markup); // Retry remains in the active Learn session.
         foreach (var answer in answers)
         {
-            Assert.Contains(word.Id, Saved(test, dataset).KnownIds);
+            Assert.DoesNotContain(word.Id, Saved(test, dataset).KnownIds);
             cut.Find("input[placeholder]").Input(answer);
         }
         Assert.DoesNotContain(word.Id, Saved(test, dataset).KnownIds);
         Assert.Contains(word.Id, Saved(test, dataset).RehearsingIds);
+        Assert.Equal(0, Saved(test, dataset).Rehearsal[word.Id].CorrectDays);
         Assert.Contains("Nothing to practise yet", cut.Markup);
     }
 

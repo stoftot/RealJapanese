@@ -37,12 +37,14 @@ public sealed class ChunkingPracticeComponentTests
         cut.Find("input[placeholder]").Input("wrong");
         FindButton(cut, "Show answer (Enter)").Click();
         Assert.Contains("Answers:", cut.Markup);
+        Assert.Equal(3, test.Adverbs.VocabWordIds.Count());
+        Assert.Single(test.Adverbs.RehearsingWordIds);
 
         SetSelectedChunk(cut, 2);
 
         Assert.DoesNotContain("Answers:", cut.Markup);
         Assert.Equal(string.Empty, cut.Find("input[placeholder]").GetAttribute("value"));
-        Assert.Contains("1/2", cut.Markup);
+        Assert.Contains("1/1", cut.Markup); // One of four Known items moved; three remain and split 2 + 1.
     }
 
     [Fact]
@@ -72,6 +74,12 @@ public sealed class ChunkingPracticeComponentTests
         SetChunkCount(cut, 2);
         var oldChunkQuestion = CurrentQuestion(cut);
         FindButton(cut, "Show answer (Enter)").Click();
+        FindButton(cut, "Next").Click();
+        FindButton(cut, "Next").Click();
+        Assert.Equal(oldChunkQuestion, CurrentQuestion(cut));
+        Assert.Contains("1/1", cut.Markup);
+        Assert.Equal(3, test.Adverbs.VocabWordIds.Count());
+        Assert.Single(test.Adverbs.RehearsingWordIds);
 
         SetSelectedChunk(cut, 2);
         var total = CurrentTotal(cut);

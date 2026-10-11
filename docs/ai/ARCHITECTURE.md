@@ -153,9 +153,12 @@ the split count starts at chunk one; an automatic move preserves the chosen chun
 even if it becomes empty.
 Daily rehearsal tracking applies only to Learn the words, nouns, verbs, adjectives
 and kanji exercises. Training answers, flashcards, type categorisation and
-conjugation drills do not change rehearsal progress. A wrong or revealed known
-answer remains Known with a pending retry; its next unassisted correct retry moves
-it to Rehearsing. A Rehearsing item earns at most one correct day per local
+conjugation drills do not change rehearsal progress. A wrong or revealed Known
+answer immediately moves the item to Rehearsing and persists its reset, even if
+the user leaves before retrying. The active session still includes it in retries;
+the stored move and the in-memory question pool have separate lifecycles.
+`AwaitingRetry` remains readable for pending Known misses from older saves; new
+misses do not set it. A Rehearsing item earns at most one correct day per local
 calendar date; the dates need not be consecutive. A wrong/revealed answer resets
 its count and blocks further credit that date. Seven distinct correct dates
 promote it to Known. Web dates use the server's local time zone; Android dates
