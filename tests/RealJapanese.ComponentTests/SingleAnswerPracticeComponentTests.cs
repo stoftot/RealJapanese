@@ -27,7 +27,7 @@ public sealed class SingleAnswerPracticeComponentTests
     }
 
     [Fact]
-    public void RevealedQuestionAppearsOnceInRetryThenTheFullRoundResumes()
+    public void RevealedQuestionAppearsOnceInRetryThenTheRemainingKnownRoundResumes()
     {
         using var test = new ComponentTestContext();
         var words = SeedKnownWords(test, 2);
@@ -49,8 +49,8 @@ public sealed class SingleAnswerPracticeComponentTests
         AnswerInput(cut).Input(answers[revealedQuestion]);
         cut.WaitForAssertion(() =>
         {
-            Assert.Contains(CurrentQuestion(cut), answers.Keys);
-            Assert.Contains("/2", cut.Markup);
+            Assert.Equal(remainingOriginalQuestion, CurrentQuestion(cut));
+            Assert.Contains("1/1", cut.Markup);
         });
     }
 

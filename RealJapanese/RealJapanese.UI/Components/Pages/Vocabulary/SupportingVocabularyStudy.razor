@@ -38,7 +38,7 @@ else
     [SupplyParameterFromQuery(Name = "category")] public string? Category { get; set; }
     private VocabularyCollection Collection { get; set; } = null!;
     private List<VocabularyEntry> PracticeWords { get; set; } = [];
-    private void RecordPracticeAnswer(Word word, bool correct) => Collection.RecordPracticeAnswer(word, correct);
+    private bool RecordPracticeAnswer(Word word, bool correct) => Collection.RecordPracticeAnswer(word, correct);
     protected override void OnInitialized() => Collection = new(Paths);
     protected override void OnParametersSet()
     {

@@ -83,7 +83,7 @@ the explicit marker and trait when a fix makes a regression pass. Do not change
 the expected result to preserve erroneous application output.
 
 Covered defects include adjective/verb forms, counting/age readings, indented JSONL
-round-tripping, the invalid default random-time range, stale retry questions after switching chunks, and interrupted
+round-tripping, the invalid default random-time range, and interrupted
 legacy cleanup leaving incompatible catalog/progress IDs. Native lifecycle and
 external-model extraction are not established by this suite.
 

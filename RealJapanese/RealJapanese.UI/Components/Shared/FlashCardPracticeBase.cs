@@ -11,6 +11,7 @@ public abstract class FlashCardPracticeBase : PracticeBase
 
     protected override void UpdateQuestions()
     {
+        RefreshQuestionPool();
         Questions = OrginalQuestions
             .GetChunk(splitDataInto, selectedDataChunkIndex);
         RefreshQuestions();
@@ -20,9 +21,8 @@ public abstract class FlashCardPracticeBase : PracticeBase
     {
         Questions.Shuffle();
 
-        currentQuestionIndex = 0;
+        ResetRoundState();
         OnQuestionsUpdated();
-        HideAnswer();
     }
 
     protected virtual void OnQuestionsUpdated()

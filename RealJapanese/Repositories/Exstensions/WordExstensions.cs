@@ -34,7 +34,7 @@ public static class WordExstensions
         repository.RecordPracticeAnswer(word.Id, correct));
 
     public static IEnumerable<QuestionAnswerDto> TrackProgress(this IEnumerable<QuestionAnswerDto> questions,
-        Action<Word, bool> recordAnswer) => questions.Select(question =>
+        Func<Word, bool, bool> recordAnswer) => questions.Select(question =>
     {
         if (question.SourceWord is { } sourceWord)
             question.RecordAnswer = correct => recordAnswer(sourceWord, correct);

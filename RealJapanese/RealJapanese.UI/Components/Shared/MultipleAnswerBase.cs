@@ -30,7 +30,8 @@ public abstract class MultipleAnswerBase : SingleAnwserBase
 
         GivenAnswers.Add(matchingAnswer);
         MissingAnswers.Remove(matchingAnswer);
-        UserInput = string.Empty;
+        // Do not re-enter answer checking while the last accepted answer is being processed.
+        ClearUserInput();
 
         if (MissingAnswers.Count > 0)
         {

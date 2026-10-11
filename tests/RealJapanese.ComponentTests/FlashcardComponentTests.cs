@@ -74,8 +74,7 @@ public sealed class FlashcardComponentTests
         Assert.Equal(1, wrong);
     }
 
-    [Fact(Explicit = true)]
-    [Trait("Category", "KnownDefect")]
+    [Fact]
     public void RetryQueuedInOneFlashcardChunkDoesNotLeakIntoAnotherChunk()
     {
         using var test = new ComponentTestContext();
@@ -95,7 +94,6 @@ public sealed class FlashcardComponentTests
             Button(cut, "Next question").Click();
         }
 
-        // A retry from the abandoned chunk must not replace the selected chunk's next complete round.
         Assert.NotEqual(oldChunkQuestion, CurrentQuestion(cut));
     }
 

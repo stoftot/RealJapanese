@@ -46,12 +46,13 @@ public abstract class WordDataBase<T> where T : Word
     public void RemoveFromTraining(T word) => RemoveFromCategory([word], WordPracticeCategory.Training);
     public void RemoveFromRehearsing(T word) => RemoveFromCategory([word], WordPracticeCategory.Rehearsing);
 
-    /// <summary>Records an unassisted completion or a wrong/revealed answer for a catalog item.</summary>
-    public void RecordPracticeAnswer(int wordId, bool correct)
+    /// <summary>Records an answer and returns whether the item moved to another study list.</summary>
+    public bool RecordPracticeAnswer(int wordId, bool correct)
     {
         if (!Words.Any(word => word.Id == wordId))
             throw new ArgumentException("A word is not in this catalog.", nameof(wordId));
         var today = DateOnly.FromDateTime(clock.GetLocalNow().DateTime);
+        var moved = false;
         progress.ChangeIf(dataset, saved =>
         {
             var known = saved.KnownIds.Contains(wordId);
@@ -70,6 +71,7 @@ public abstract class WordDataBase<T> where T : Word
                 saved.KnownIds.Remove(wordId);
                 saved.RehearsingIds.Add(wordId);
                 saved.Rehearsal[wordId] = state with { AwaitingRetry = false };
+                moved = true;
                 return true;
             }
             // A miss wins over any success that day; repeated practice earns no extra credit.
@@ -80,11 +82,13 @@ public abstract class WordDataBase<T> where T : Word
                 saved.RehearsingIds.Remove(wordId);
                 saved.KnownIds.Add(wordId);
                 saved.Rehearsal.Remove(wordId);
+                moved = true;
             }
             else
                 saved.Rehearsal[wordId] = state with { CorrectDays = days, LastCorrectDay = today };
             return true;
         });
+        return moved;
     }
 
     private void SetCategory(T word, WordPracticeCategory category) => SetCategory([word], category);

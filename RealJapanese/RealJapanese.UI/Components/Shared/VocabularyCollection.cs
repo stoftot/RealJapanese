@@ -65,11 +65,11 @@ public sealed class VocabularyCollection
             Sources.Single(source => source.Key == group.Key).Update(group.Select(entry => entry.SourceId).ToHashSet(), category, selected);
     }
 
-    public void RecordPracticeAnswer(Word word, bool correct)
+    public bool RecordPracticeAnswer(Word word, bool correct)
     {
         if (word is not VocabularyEntry entry || !Entries.Contains(entry))
             throw new ArgumentException("Unknown vocabulary entry.", nameof(word));
-        Sources.Single(source => source.Key == entry.Dataset).RecordAnswer(entry.SourceId, correct);
+        return Sources.Single(source => source.Key == entry.Dataset).RecordAnswer(entry.SourceId, correct);
     }
 
     private static VocabularySource Source<T>(string key, string label, WordDataBase<T> repository) where T : Word =>
@@ -84,7 +84,7 @@ public sealed class VocabularyCollection
 }
 
 public sealed record VocabularySource(string Key, string Label, IReadOnlyList<Word> Words,
-    Func<WordPracticeCategory, List<Word>> SavedWords, Action<int, bool> RecordAnswer,
+    Func<WordPracticeCategory, List<Word>> SavedWords, Func<int, bool, bool> RecordAnswer,
     Action<HashSet<int>, WordPracticeCategory, bool> Update);
 
 public sealed record VocabularyEntry : Word

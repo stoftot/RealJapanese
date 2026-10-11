@@ -8,11 +8,17 @@ namespace RealJapanese.Components.Shared;
 public abstract class PracticeBase : ComponentBase
 {
     // Data each derived class sets in OnInitialized
-    protected IEnumerable<QuestionAnswerDto> OrginalQuestions { get; set; }
+    private List<QuestionAnswerDto> _originalQuestions = [];
+    protected IEnumerable<QuestionAnswerDto> OrginalQuestions
+    {
+        get => _originalQuestions;
+        set => _originalQuestions = value.ToList();
+    }
     protected IList<QuestionAnswerDto> Questions { get; set; } = [];
     protected int currentQuestionIndex = 0;
     private readonly List<QuestionAnswerDto> _retryQuestions = [];
     private QuestionAnswerDto? _currentRetryQuestion;
+    private readonly HashSet<QuestionAnswerDto> _movedQuestions = [];
 
     // UI
     protected double UiScale { get; set; } = 1.0;
@@ -40,6 +46,8 @@ public abstract class PracticeBase : ComponentBase
         // default behavior: just set; derived classes can add extras
         _userInput = value;
     }
+
+    protected void ClearUserInput() => _userInput = string.Empty;
 
     protected virtual void OnEnterPressed()
     {
@@ -82,7 +90,11 @@ public abstract class PracticeBase : ComponentBase
     {
         // Copying a revealed answer only finishes the failed attempt; its retry must succeed unaided.
         if (Questions.Count > 0 && !ReferenceEquals(_currentRetryQuestion, Questions[currentQuestionIndex]))
-            Questions[currentQuestionIndex].RecordAnswer?.Invoke(true);
+        {
+            var question = Questions[currentQuestionIndex];
+            if (question.RecordAnswer?.Invoke(true) == true)
+                _movedQuestions.Add(question);
+        }
         return GoToNextQuestionAsync();
     }
 
@@ -116,10 +128,22 @@ public abstract class PracticeBase : ComponentBase
         }
     }
 
-    private void StartRound(IEnumerable<QuestionAnswerDto> questions)
+    // Keep the active round and retries stable. Repartition only when starting a full round
+    // or explicitly selecting a different chunk, and only change the pool after a move.
+    protected void RefreshQuestionPool()
     {
-        Questions = questions.ToList();
-        
+        if (_movedQuestions.Count == 0) return;
+        _originalQuestions.RemoveAll(_movedQuestions.Contains);
+        _movedQuestions.Clear();
+    }
+
+    protected void ResetRoundState()
+    {
+        _retryQuestions.Clear();
+        _currentRetryQuestion = null;
+        currentQuestionIndex = 0;
+        _userInput = string.Empty;
+        showAnswer = false;
     }
 
     // Normalize: trim + remove all whitespace + case-insensitive

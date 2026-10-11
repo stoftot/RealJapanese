@@ -144,6 +144,13 @@ changes to its existing repository. Mixer actions never write progress, and the
 reuse generic spelling/flashcard components, recreated when the query changes.
 Practice links pass `category=known|rehearsing|training`; shared
 practice bases select chunks, shuffle, check normalized input and manage retries.
+The original question pool is materialized once per practice component. Answer
+callbacks report category moves; moved questions leave that pool after the active
+round and all retries finish, before re-chunking at the same selected chunk number.
+No repository reload is needed. Explicit chunk/split changes also apply pending
+removals and clear abandoned retries, revealed answers and partial input. Changing
+the split count starts at chunk one; an automatic move preserves the chosen chunk,
+even if it becomes empty.
 Daily rehearsal tracking applies only to Learn the words, nouns, verbs, adjectives
 and kanji exercises. Training answers, flashcards, type categorisation and
 conjugation drills do not change rehearsal progress. A wrong or revealed known

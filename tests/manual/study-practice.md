@@ -175,7 +175,9 @@ retry round for revealed answers.
 - Each revealed question occurs exactly once in the retry round even when reveal
   is requested repeatedly. Questions answered correctly without reveal are absent
   from that retry round.
-- After the retry round, practice resumes with the complete original question set.
+- After the retry round, practice resumes with the remaining question set. Items
+  automatically moved to another study list are excluded; when no items moved,
+  the full original set remains available.
 
 ### Cleanup
 
@@ -209,6 +211,14 @@ than items, and isolation of per-chunk answer/retry state.
 5. Inspect the progress indicator, answer visibility and input, then finish the new
    chunk far enough to reach any retry round.
 6. Switch back to the original chunk and start a fresh round there.
+7. Without switching chunks, reveal one question repeatedly, finish the original
+   round, reveal it again in its retry, and finish that retry. Answer it correctly
+   on the next retry. Repeat with split counts from 1 through 10 in Training.
+8. In Known Words spelling, prepare five words, split into two chunks and select chunk two.
+   Miss one question and finish the original round. Answer its retry correctly.
+   Record the next complete round and both chunk controls.
+9. With three Known words, split into three chunks and select chunk three. Miss
+   its only question and answer the retry correctly, then select chunk one.
 
 ### Expected result
 
@@ -220,6 +230,16 @@ than items, and isolation of per-chunk answer/retry state.
 - Changing chunk resets progress to the start, clears input, and hides the prior
   answer. A retry queued in the old chunk does not appear in the new chunk.
 - Returning to the original chunk begins a coherent round for that chunk.
+- Repeated reveals queue a question only once per retry round. Another miss keeps
+  it in the next retry. Finishing retries in Training restores the original chunk
+  membership and size; retry counts do not redefine the full chunk.
+- Automatic moves leave the active round and outstanding retries intact. Once all
+  retries finish, the remaining pool is divided again using the same split count
+  and selected chunk number. In step 8, the next chunk has two remaining words,
+  including one drawn from the former first chunk, and excludes the moved word.
+- Step 9 keeps chunk three selected with the empty-practice state. Selecting chunk
+  one still opens its remaining question. Changing the split count resets the
+  selection to chunk one and clears abandoned retry/answer state.
 
 ### Cleanup
 
@@ -532,6 +552,8 @@ exercises and confirm that each host uses its own local calendar day.
    submit a wrong answer, then confirm it remains Known.
 2. Reach that same item in its retry round and answer correctly without revealing.
    Confirm it moves from Known to Rehearsing and has zero earned correct days.
+   Finish all outstanding retries; confirm the next full round excludes the moved
+   item. With no remaining items, confirm the empty-practice state appears.
 3. On one Rehearsing item, answer correctly twice on the same local date. Confirm
    the history counts one correct day. Advance the host clock across a local
    midnight that does not coincide with UTC midnight, answer again, and confirm
@@ -541,7 +563,7 @@ exercises and confirm that each host uses its own local calendar day.
    resets the count and blocks credit for the rest of that local date.
 5. Continue one Rehearsing item across seven distinct, not necessarily consecutive,
    local dates, confirming repeated answers on a date count once. Confirm it moves
-   to Known after the seventh date.
+   to Known after the seventh date and is absent from the next full Rehearsing round.
 6. In Training, use a Learn the X route and confirm answers do not change category
    or create rehearsal history. Repeat with flashcards, type categorisation and
    conjugation drills for Known/Rehearsing items; confirm those exercises do not

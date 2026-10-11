@@ -11,6 +11,7 @@ public abstract class SingleAnwserBase : PracticeBase
 
     protected override void UpdateQuestions()
     {
+        RefreshQuestionPool();
         Questions = OrginalQuestions
             .GetChunk(splitDataInto, selectedDataChunkIndex);
         RefreshQuestions();
@@ -20,10 +21,9 @@ public abstract class SingleAnwserBase : PracticeBase
     {
         Questions.Shuffle();
 
-        currentQuestionIndex = 0;
+        ResetRoundState();
+        _oldUserInput = string.Empty;
         OnQuestionsUpdated();
-        UserInput = string.Empty;
-        showAnswer = false;
     }
 
     protected virtual void OnQuestionsUpdated()

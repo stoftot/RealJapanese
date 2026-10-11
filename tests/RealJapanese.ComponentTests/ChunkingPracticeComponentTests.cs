@@ -5,7 +5,7 @@ using RealJapanese.Components.Pages.Words;
 
 namespace RealJapanese.ComponentTests;
 
-/// <summary>Checks chunk coverage, empty chunks, reset behavior, and the documented retry-isolation defect.</summary>
+/// <summary>Checks chunk coverage, empty chunks, reset behavior, and retry isolation.</summary>
 public sealed class ChunkingPracticeComponentTests
 {
     [Fact]
@@ -63,8 +63,7 @@ public sealed class ChunkingPracticeComponentTests
         Assert.Equal(expected.Order(), CollectAcrossKanjiChunks(cut, 10).Order());
     }
 
-    [Fact(Explicit = true)]
-    [Trait("Category", "KnownDefect")]
+    [Fact]
     public void RetryQueuedInOneChunkDoesNotLeakIntoAnotherChunk()
     {
         using var test = new ComponentTestContext();
@@ -78,7 +77,6 @@ public sealed class ChunkingPracticeComponentTests
         var total = CurrentTotal(cut);
         for (var index = 0; index < total; index++) FindButton(cut, "Next").Click();
 
-        // This assertion defines the intended isolation and currently exposes the shared retry queue leak.
         Assert.NotEqual(oldChunkQuestion, CurrentQuestion(cut));
     }
 

@@ -16,6 +16,89 @@ namespace RealJapanese.ComponentTests;
 public sealed class RehearsalPracticeComponentTests
 {
     [Fact]
+    public void Finishing_retries_removes_moved_words_and_rechunks_the_pool_at_the_selected_chunk()
+    {
+        using var test = new ComponentTestContext();
+        var words = test.Words.Words.Take(5).ToList();
+        test.Words.SetCategory(words, WordPracticeCategory.Known);
+        var cut = test.Context.Render<VocabularySpelling<Word>>(parameters => parameters
+            .Add(component => component.Repository, test.Words)
+            .Add(component => component.Category, "known"));
+        cut.FindAll("input[type=number]")[0].Change("2");
+        cut.FindAll("input[type=number]")[1].Change("2");
+        var missed = words.Single(word => word.English == cut.Find("p.lead").TextContent.Trim());
+        Button(cut, "Show answer (Enter)").Click();
+        Button(cut, "Next").Click();
+        Button(cut, "Next").Click(); // Finish the original two-item chunk.
+        Assert.Equal(missed.English, cut.Find("p.lead").TextContent.Trim());
+        Assert.Contains("1/1", cut.Markup);
+        cut.Find("input[placeholder]").Input(missed.Kana.ToRomaji());
+
+        Assert.Equal("2", cut.FindAll("input[type=number]")[0].GetAttribute("value"));
+        Assert.Equal("2", cut.FindAll("input[type=number]")[1].GetAttribute("value"));
+        var remaining = words.Where(word => word.Id != missed.Id).ToList();
+        var seen = new HashSet<string>();
+        for (var index = 0; index < 2; index++)
+        {
+            Assert.Contains("/2", cut.Markup);
+            Assert.True(seen.Add(cut.Find("p.lead").TextContent.Trim()));
+            Button(cut, "Next").Click();
+        }
+        Assert.Equal(remaining.Skip(2).Select(word => word.English).Order(), seen.Order());
+        Assert.DoesNotContain(missed.English, seen);
+    }
+
+    [Fact]
+    public void Removing_last_item_in_selected_chunk_keeps_that_chunk_empty_and_other_chunks_available()
+    {
+        using var test = new ComponentTestContext();
+        var words = test.Words.Words.Take(3).ToList();
+        test.Words.SetCategory(words, WordPracticeCategory.Known);
+        var cut = test.Context.Render<VocabularySpelling<Word>>(parameters => parameters
+            .Add(component => component.Repository, test.Words)
+            .Add(component => component.Category, "known"));
+        cut.FindAll("input[type=number]")[0].Change("3");
+        cut.FindAll("input[type=number]")[1].Change("3");
+        Button(cut, "Show answer (Enter)").Click();
+        Button(cut, "Next").Click();
+        cut.Find("input[placeholder]").Input(words[2].Kana.ToRomaji());
+        Assert.Contains("Nothing to practise yet", cut.Markup);
+        Assert.Equal("3", cut.FindAll("input[type=number]")[1].GetAttribute("value"));
+        cut.FindAll("input[type=number]")[1].Change("1");
+        Assert.Equal(words[0].English, cut.Find("p.lead").TextContent.Trim());
+        Assert.Contains("1/1", cut.Markup);
+    }
+
+    [Fact]
+    public void Moved_question_does_not_interrupt_other_retries_before_the_pool_is_rechunked()
+    {
+        using var test = new ComponentTestContext();
+        var words = test.Words.Words.Take(3).ToDictionary(word => word.English);
+        test.Words.SetCategory(words.Values, WordPracticeCategory.Known);
+        var cut = test.Context.Render<VocabularySpelling<Word>>(parameters => parameters
+            .Add(component => component.Repository, test.Words)
+            .Add(component => component.Category, "known"));
+        for (var index = 0; index < 3; index++)
+        {
+            Button(cut, "Show answer (Enter)").Click();
+            Button(cut, "Next").Click();
+        }
+        var first = words[cut.Find("p.lead").TextContent.Trim()];
+        cut.Find("input[placeholder]").Input(first.Kana.ToRomaji());
+        Assert.Contains("2/3", cut.Markup);
+        var stillMissed = words[cut.Find("p.lead").TextContent.Trim()];
+        Button(cut, "Show answer (Enter)").Click();
+        Button(cut, "Next").Click();
+        var third = words[cut.Find("p.lead").TextContent.Trim()];
+        cut.Find("input[placeholder]").Input(third.Kana.ToRomaji());
+        Assert.Contains("1/1", cut.Markup);
+        Assert.Equal(stillMissed.English, cut.Find("p.lead").TextContent.Trim());
+        cut.Find("input[placeholder]").Input(stillMissed.Kana.ToRomaji());
+        Assert.Contains("Nothing to practise yet", cut.Markup);
+        Assert.Empty(test.Words.VocabWordIds);
+    }
+
+    [Fact]
     public void Known_word_moves_only_after_an_unassisted_retry()
     {
         using var test = new ComponentTestContext();
@@ -37,6 +120,7 @@ public sealed class RehearsalPracticeComponentTests
         Assert.DoesNotContain(word.Id, test.Words.VocabWordIds);
         Assert.Contains(word.Id, test.Words.RehearsingWordIds);
         Assert.Equal(0, Saved(test, "Words").Rehearsal[word.Id].CorrectDays);
+        Assert.Contains("Nothing to practise yet", cut.Markup);
     }
 
     [Fact]
@@ -90,6 +174,8 @@ public sealed class RehearsalPracticeComponentTests
         Assert.Equal(failed == "red", test.Expressions.RehearsingWordIds.Contains(0));
         Assert.Equal(failed != "blue", test.Adverbs.VocabWordIds.Contains(0));
         Assert.Equal(failed != "red", test.Expressions.VocabWordIds.Contains(0));
+        Assert.Equal(other, cut.Find("p.lead").TextContent.Trim());
+        Assert.Contains("1/1", cut.Markup);
     }
 
     [Fact]
@@ -170,6 +256,7 @@ public sealed class RehearsalPracticeComponentTests
         }
         Assert.DoesNotContain(word.Id, Saved(test, dataset).KnownIds);
         Assert.Contains(word.Id, Saved(test, dataset).RehearsingIds);
+        Assert.Contains("Nothing to practise yet", cut.Markup);
     }
 
     private static VocabSaveFile Saved(ComponentTestContext test, string dataset)

@@ -40,15 +40,15 @@ public class KanjiCombinedMeaningBase : PracticeBase
     
     protected override void UpdateQuestions()
     {
+        RefreshQuestionPool();
         Questions = OrginalQuestions
             .Skip(selectedDataChunkIndex * DataChunkSize)
             .Take(selectedDataChunk == splitDataInto ? int.MaxValue : DataChunkSize)
             .OrderBy(_ => Guid.NewGuid())
             .ToList();
         
-        currentQuestionIndex = 0;
-        UserInput = string.Empty;
-        showAnswer = false;
+        ResetRoundState();
+        _oldUserInput = string.Empty;
     }
 
     protected override Task FocusAnswerInputAsync()
