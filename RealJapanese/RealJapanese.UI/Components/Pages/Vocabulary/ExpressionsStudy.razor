@@ -1,14 +1,8 @@
 @page "/expressions"
 @page "/expressions/{Exercise}"
-@using DataLoaders.Models
-@using Repositories
-@using RealJapanese.Components.Shared
-@inject ExpressionData Repository
 
-<VocabularyStudy TItem="Expression" Repository="@Repository" Title="Expressions" RoutePrefix="expressions"
-                 Exercise="@Exercise" Category="@Category" />
+<SupportingVocabularyStudy Exercise="@Exercise" />
 
 @code {
     [Parameter] public string? Exercise { get; set; }
-    [SupplyParameterFromQuery(Name = "category")] public string? Category { get; set; }
 }

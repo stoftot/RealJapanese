@@ -5,7 +5,7 @@ using RealJapanese.Components.Pages.Adjectives;
 using RealJapanese.Components.Pages.Kanji;
 using RealJapanese.Components.Pages.Nouns;
 using RealJapanese.Components.Pages.Verbs;
-using RealJapanese.Components.Pages.Words;
+using RealJapanese.Components.Pages.Vocabulary;
 
 namespace RealJapanese.ComponentTests;
 
@@ -17,7 +17,7 @@ public sealed class SelectorComponentTests
     {
         using var test = new ComponentTestContext();
         var target = test.Words.Words.First(word => word.English.Length >= 5);
-        var cut = test.Context.Render<WordsSelector>();
+        var cut = test.Context.Render<SupportingVocabularyStudy>();
         cut.FindAll("input[type=search]")[0].Input($"  {target.English.ToUpperInvariant()}  ");
         Assert.Contains(VisibleKnownItems(cut), item => item.TextContent.Contains(target.English, StringComparison.Ordinal));
 
@@ -57,7 +57,7 @@ public sealed class SelectorComponentTests
     {
         using var test = new ComponentTestContext();
         var target = test.Words.Words.First();
-        var cut = test.Context.Render<WordsSelector>();
+        var cut = test.Context.Render<SupportingVocabularyStudy>();
 
         FindItem(ItemsInColumn(cut, 0), target).Click();
         Assert.Contains(target.Id, test.Words.VocabWordIds);

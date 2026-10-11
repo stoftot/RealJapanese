@@ -18,8 +18,8 @@ public sealed class PracticeRouteComponentTests
         var categories = new[] { "known", "rehearsing", "training" };
         var actions = new[]
         {
-            ("words", 0, "/words/spelling?category={0}"),
-            ("words", 1, "/words/flashcards?category={0}"),
+            ("words", 0, "/words/spelling?category={0}&sources=Words"),
+            ("words", 1, "/words/flashcards?category={0}&sources=Words"),
             ("nouns", 0, "/nouns/spelling?category={0}"),
             ("nouns", 1, "/nouns/flashcards?category={0}"),
             ("nouns", 2, "/nouns/conjugate"),
@@ -100,6 +100,11 @@ public sealed class PracticeRouteComponentTests
 
     private static IRenderedComponent<IComponent> RenderSelector(ComponentTestContext test, string selector)
     {
+        if (selector == "words")
+        {
+            test.Context.Services.GetService<NavigationManager>()!.NavigateTo("/words?sources=Words");
+            return test.Context.Render<WordsSelector>();
+        }
         if (selector == "kanji-single")
         {
             var kanji = test.Context.Render<KanjiSelector>();
@@ -109,7 +114,6 @@ public sealed class PracticeRouteComponentTests
 
         return selector switch
         {
-            "words" => test.Context.Render<WordsSelector>(),
             "nouns" => test.Context.Render<NounsSelector>(),
             "verbs" => test.Context.Render<VerbsSelector>(),
             "adjectives" => test.Context.Render<AdjectiveSelector>(),

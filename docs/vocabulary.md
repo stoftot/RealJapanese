@@ -4,7 +4,24 @@ The application separates nouns, verbs, adjectives, adverbs, expressions,
 pronouns, determiners, counters, conjunctions, particles and suffixes. Each has
 a `Word` subclass, typed repository, JSON catalog and independent study progress.
 `Words/Words.json` is the general fallback; the bundled entries have all been
-classified, so it starts empty. The Words page links to every vocabulary category.
+classified, so it starts empty. The frontend keeps Nouns, Verbs and Adjectives as
+separate study areas. **Words & expressions** (`/vocabulary`) combines the other
+eight grammatical categories and general Words in one editor and practice area.
+The original category routes remain aliases for this combined area. This is a
+presentation grouping: backend categories, catalog IDs and saved progress stay separate.
+
+The **Words** page (`/words`) mixes saved vocabulary using a toggle for each of
+the twelve backend categories, including General words. All toggles start enabled
+unless the URL specifies a selection. Each enabled category contributes only its
+saved Known, Rehearsing and Training entries to the corresponding read-only list.
+Toggling, searching and collapsing never assign or remove saved words. Manage
+assignments in Nouns, Verbs, Adjectives or Words & expressions.
+
+The `sources` query carries the selected dataset names through spelling,
+flashcards, back links and reloads; `none` means no categories. Unknown names are
+ignored. The study-list `category` query still chooses Known, Rehearsing or Training.
+The combined views distinguish entries by dataset plus original ID, even when
+two catalogs use the same ID. Their temporary display IDs are never saved.
 
 ## Book source and coverage
 
@@ -45,8 +62,10 @@ across all lessons, including collapsed lessons; lesson selection stays within
 that book. Repeated words are counted and saved once. A partial group has a mixed
 selection state. During search, group actions affect matching words only.
 
-Group changes use a single atomic progress update. Known, Rehearsing and Training
+Editable group changes use a single atomic progress update per backend dataset.
+Known, Rehearsing and Training
 remain exclusive; each list continues to exclude words already assigned above it.
+Read-only mixer groups allow expansion and search but have no assignment controls.
 
 ## Identity and compatibility
 

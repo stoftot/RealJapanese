@@ -1,0 +1,75 @@
+@using DataLoaders.Models
+
+<div class="selector-toolbar">
+    <span class="fw-semibold">Study list</span>
+    <ToggleSlider LeftText="Known" MiddleText="Rehearsing" RightText="Training" @bind-SelectedIndex="SelectedIndex" />
+</div>
+
+<div class="container-fluid px-0 my-3">
+    <div class="row g-3">
+        @foreach (var category in Enum.GetValues<WordPracticeCategory>())
+        {
+            <div class="col-md-6 col-lg-4 category-column @(SelectedIndex == (int)category ? "category-column-active" : "")" @key="category">
+                <WordList TItem="VocabularyEntry" Title="@Title(category)" AllWords="@VisibleWords(category)"
+                          SelectedIds="@Saved[category].Select(word => word.Id).ToList()" ReadOnly="@ReadOnly"
+                          WordSelected="@(word => Update([word], category, true))" WordDeselected="@(word => Update([word], category, false))"
+                          WordsSelected="@(words => Update(words, category, true))" WordsDeselected="@(words => Update(words, category, false))" />
+            </div>
+        }
+    </div>
+</div>
+
+<PraticeSelector MainUrl="@RoutePrefix" Pages="@PracticePages" />
+
+@code {
+    [Parameter, EditorRequired] public VocabularyCollection Collection { get; set; } = null!;
+    [Parameter, EditorRequired] public IEnumerable<string> Sources { get; set; } = [];
+    [Parameter] public bool ReadOnly { get; set; }
+    [Parameter] public string RoutePrefix { get; set; } = "vocabulary";
+    [Parameter] public string? Category { get; set; }
+    [Parameter] public string ExtraQuery { get; set; } = "";
+    private int SelectedIndex { get; set; }
+    private string? previousCategory;
+    private Dictionary<WordPracticeCategory, List<VocabularyEntry>> Saved { get; set; } = [];
+
+    protected override void OnParametersSet()
+    {
+        if (Category != previousCategory)
+        {
+            SelectedIndex = Category is null ? 0 : (int)WordPracticeCategoryExtensions.ParseQueryValue(Category);
+            previousCategory = Category;
+        }
+        Refresh();
+    }
+
+    private void Refresh() => Saved = Enum.GetValues<WordPracticeCategory>()
+        .ToDictionary(category => category, category => Collection.SavedWords(Sources, category));
+
+    private List<VocabularyEntry> VisibleWords(WordPracticeCategory category)
+    {
+        if (ReadOnly) return Saved[category];
+        var keys = Sources.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var excluded = Saved.Where(pair => (int)pair.Key < (int)category).SelectMany(pair => pair.Value).Select(word => word.Id).ToHashSet();
+        return Collection.Entries.Where(word => keys.Contains(word.Dataset) && !excluded.Contains(word.Id)).ToList();
+    }
+
+    private void Update(List<VocabularyEntry> words, WordPracticeCategory category, bool selected)
+    {
+        if (ReadOnly) return;
+        try { Collection.SetCategory(words, category, selected); }
+        finally { Refresh(); }
+    }
+
+    private static string Title(WordPracticeCategory category) => category switch
+    {
+        WordPracticeCategory.Known => "Known vocabulary",
+        WordPracticeCategory.Rehearsing => "Currently rehearsing",
+        _ => "Currently training"
+    };
+
+    private List<PraticeSelectorBase.PageDescreption> PracticePages =>
+    [
+        new() { Title = "Learn the words", Description = "Practice the spelling of the words", Url = $"spelling?category={((WordPracticeCategory)SelectedIndex).ToQueryValue()}{ExtraQuery}" },
+        new() { Title = "Flash cards", Description = "Reveal the answer, then move to the next word", Url = $"flashcards?category={((WordPracticeCategory)SelectedIndex).ToQueryValue()}{ExtraQuery}" }
+    ];
+}

@@ -1,14 +1,8 @@
 @page "/determiners"
 @page "/determiners/{Exercise}"
-@using DataLoaders.Models
-@using Repositories
-@using RealJapanese.Components.Shared
-@inject DeterminerData Repository
 
-<VocabularyStudy TItem="Determiner" Repository="@Repository" Title="Determiners" RoutePrefix="determiners"
-                 Exercise="@Exercise" Category="@Category" />
+<SupportingVocabularyStudy Exercise="@Exercise" />
 
 @code {
     [Parameter] public string? Exercise { get; set; }
-    [SupplyParameterFromQuery(Name = "category")] public string? Category { get; set; }
 }

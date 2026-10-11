@@ -7,13 +7,14 @@ namespace RealJapanese.Components.Shared;
 
 public class VocabularyFlashCardsBase<TItem> : FlashCardPracticeBase where TItem : Word
 {
-    [Parameter, EditorRequired] public WordDataBase<TItem> Repository { get; set; } = null!;
+    [Parameter] public WordDataBase<TItem>? Repository { get; set; }
+    [Parameter] public List<TItem>? Words { get; set; }
     [Parameter] public string? Category { get; set; }
     protected FlashPracticeCard? cardRef;
 
     protected override void OnInitialized()
     {
-        OrginalQuestions = Repository.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
+        OrginalQuestions = (Words ?? Repository!.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category)))
             .KanaToEnglishQuestions();
         UpdateQuestions();
     }

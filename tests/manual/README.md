@@ -12,7 +12,7 @@ Keep run results and unexecuted steps in the current task, not in these files.
 | --- | --- |
 | [Kana](kana.md) | KANA-001–003: character selections/settings, answers/review, local persistence, responsive charts and offline fonts |
 | [Local sync](local-sync.md) | SYNC-001–006: Automatic/Manual transfer, cancellation, pairing rejection, merge/recovery and errors across web and Android |
-| [Study selection and practice](study-practice.md) | STUDY-001–009: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout, language oracles and book/lesson selection |
+| [Study selection and practice](study-practice.md) | STUDY-001–010: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout, language oracles, book/lesson selection and saved-word mixing |
 | [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–003: offline catalogs, update/restart persistence, IME/Back/lifecycle and controlled startup failure |
 | [Data maintenance](data-maintenance.md) | DATA-001–002: controlled extraction/model validation and interrupted legacy cleanup |
 
@@ -37,7 +37,7 @@ assert intended behavior but require explicit execution; see the testing guide.
 | Case | Automated coverage | Remaining manual scope / reason |
 | --- | --- | --- |
 | KANA-001–003 | `KanaCatalogTests`, `KanaSessionTests`; `KanaBrowserTests` persistence/isolation, answers/review, options, storage errors, 320/1280 px and local font loading | Android WebView persistence, native IME/Back, offline cold start and human font/readability assessment |
-| STUDY-001 | `SelectorComponentTests`; `RepositoryPersistenceTests`; `StudyBrowserTests` selection/reload/restart; `NounPracticeBrowserTests` noun assignment | Android UI/save integration; browser restart check samples Words while shared repositories cover all datasets |
+| STUDY-001 | `SelectorComponentTests`; `RepositoryPersistenceTests`; `StudyBrowserTests` selection/reload/restart; `NounPracticeBrowserTests` noun assignment | Android UI/save integration; browser restart check samples Words & expressions while shared repositories cover all datasets |
 | STUDY-002 | `PracticeRouteComponentTests` selector routes, category data and empty states; `NounPracticeBrowserTests` noun spelling and flashcards; `VerbGrammarComponentTests` and `GrammarPracticeBrowserTests` grammar page loading/reveal/advance | Android navigation integration; component rendering alone does not establish the native host |
 | STUDY-003 | `SingleAnswerPracticeComponentTests`; `StudyBrowserTests` real Enter/focus | Android IME and soft-keyboard behavior |
 | STUDY-004 | `ChunkingPracticeComponentTests`; unit chunk contracts; explicit retry-leak regression | Repeat on Android after a shared fix; known defects are not passing coverage |
@@ -46,6 +46,7 @@ assert intended behavior but require explicit execution; see the testing guide.
 | STUDY-007 | `SharedPracticeControlTests`; `LayoutBrowserTests` 320/1280 px, column visibility, scale and overflow | Human readability, visible focus quality and screen-reader announcements; browser assertions cannot judge these fully |
 | STUDY-008 | Literal conjugation/number unit oracles, `AdjectiveLanguageOracleComponentTests` and `NounGrammarComponentTests`, including explicit known-defect cases | Human language review when adding new catalog content or accepted readings |
 | STUDY-009 | `WordListGroupingComponentTests`, `WordListGroupingBrowserTests`, `VocabularyCategoryComponentTests`, `VocabularyCategoryBrowserTests`; `GenkiCatalogTests` and `VocabularyMigrationTests` for source/identity/progress | Android touch and screen-reader usability; native update with old progress uses MOBILE-001 |
+| STUDY-010 | `VocabularyCategoryComponentTests`, `VocabularyCategoryBrowserTests`: source toggles, saved-only read-only lists, colliding IDs, unchanged progress, practice/back/reload and 320 px layout | Android touch and screen-reader usability |
 | SYNC-001 | Real loopback transfer and private-interface discovery integration tests; shared web approval/apply flow | Automatic discovery over actual Wi-Fi and Windows/Android cryptographic interoperability, both directions |
 | SYNC-002 | Two-host Playwright sync through Manual mode | Actual web/Android reachability and transfer in both directions |
 | SYNC-003 | `SyncPreviewBrowserTests`: Cancel, close, backdrop and Escape, no-write and fresh transfer; `SyncDialogComponentTests` | Native WebView dialog behavior and other-device dismissal combinations |

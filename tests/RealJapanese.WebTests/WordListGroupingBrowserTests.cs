@@ -21,7 +21,7 @@ public sealed class WordListGroupingBrowserTests : BrowserTest
         await App.StartAsync();
         List<string> errors = [];
         Page.PageError += (_, message) => errors.Add(message);
-        await OpenAsync("/words");
+        await OpenAsync("/vocabulary");
         var known = Page.Locator(".category-column").First;
         var book = known.Locator(".word-book[data-book='Book-A']");
         var lesson1 = book.Locator(".word-lesson[data-lesson='Lesson 1']");

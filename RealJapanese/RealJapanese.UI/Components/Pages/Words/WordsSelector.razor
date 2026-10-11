@@ -4,12 +4,19 @@
 @inherits WordsSelectorBase
 
 <PageTitle>Words</PageTitle>
-
 <header class="selector-heading">
-    <h1>Vocabulary categories</h1>
-    <p>Choose a word category to study. Each category has its own saved study lists.</p>
+    <h1>Words</h1>
+    <p>Mix your saved vocabulary from any categories. Toggle categories to include their Known, Rehearsing and Training words.</p>
+    <p>Manage your saved lists in <a href="nouns">Nouns</a>, <a href="verbs">Verbs</a>, <a href="adjectives">Adjectives</a> or <a href="vocabulary">Words &amp; expressions</a>.</p>
 </header>
 
-<VocabularyCategoryLinks />
+<div class="d-flex flex-wrap gap-2 my-3" role="group" aria-label="Vocabulary categories">
+    @foreach (var source in Collection.Sources)
+    {
+        <button type="button" data-source="@source.Key" class="btn @(EnabledSources.Contains(source.Key) ? "btn-primary" : "btn-outline-primary")"
+                aria-pressed="@(EnabledSources.Contains(source.Key) ? "true" : "false")" @onclick="() => Toggle(source.Key)">@source.Label</button>
+    }
+</div>
 
-<VocabularySelector TItem="Word" Repository="@WordData" Title="General words" RoutePrefix="words" />
+<CombinedVocabularySelector Collection="@Collection" Sources="@EnabledSources" ReadOnly="true" RoutePrefix="words"
+                            Category="@Category" ExtraQuery="@SourcesQuery" />

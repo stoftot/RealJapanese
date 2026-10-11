@@ -16,6 +16,8 @@ or owner-approved roadmap was not found.
 - Select known, training or rehearsing vocabulary and maintain those collections.
 - Study GENKI I lesson vocabulary by grammatical category, with collapsible book
   and lesson groups and whole-group selection; retain origins for other sources.
+- Practise the smaller categories together in Words & expressions, or mix saved
+  vocabulary from any backend categories using the read-only Words page.
 - Practise hiragana and katakana characters in one Kana module, with saved
   selections/settings, offline font choices, review and local high scores.
 - Practice spelling and flashcards, verb/adjective categories and conjugation,

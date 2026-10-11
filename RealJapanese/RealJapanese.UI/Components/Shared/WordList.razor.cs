@@ -16,6 +16,7 @@ public class WordListBase<TItem> : ComponentBase where TItem : Word
     [Parameter] public string Title { get; set; } = string.Empty;
     [Parameter] public List<TItem> AllWords { get; set; } = [];
     [Parameter] public List<int> SelectedIds { get; set; } = [];
+    [Parameter] public bool ReadOnly { get; set; }
     [Parameter] public EventCallback<TItem> WordSelected { get; set; }
     [Parameter] public EventCallback<TItem> WordDeselected { get; set; }
     [Parameter] public EventCallback<List<TItem>> WordsSelected { get; set; }
@@ -129,6 +130,7 @@ public class WordListBase<TItem> : ComponentBase where TItem : Word
 
     protected async Task OnGroupClicked(WordGroup group)
     {
+        if (ReadOnly) return;
         var deselect = CheckedState(group) == "true";
         var changed = group.Items.Where(word => IsSelected(word.Id) == deselect).DistinctBy(word => word.Id).ToList();
         var bulkCallback = deselect ? WordsDeselected : WordsSelected;
@@ -142,6 +144,7 @@ public class WordListBase<TItem> : ComponentBase where TItem : Word
 
     protected async Task OnItemClicked(TItem item)
     {
+        if (ReadOnly) return;
         if (SelectedIds.Contains(item.Id))
         {
             if (WordDeselected.HasDelegate)

@@ -10,7 +10,7 @@
     <div class="card-header d-flex justify-content-between align-items-center">
         <span>@Title</span>
         <small class="text-muted">
-            @($"{SelectedIds.Count} selected / {AllWords.Count} total")
+            @(ReadOnly ? $"{AllWords.Count} saved words" : $"{SelectedIds.Count} selected / {AllWords.Count} total")
         </small>
     </div>
 
@@ -25,7 +25,11 @@
                @bind="SearchText"
                @bind:event="oninput" />
         <small id="@(SearchInputId + "-scope")" class="text-muted word-selection-scope">
-            @if (IsSearching)
+            @if (ReadOnly)
+            {
+                <span>Saved vocabulary from the enabled categories. This list is read-only.</span>
+            }
+            else if (IsSearching)
             {
                 <span>@groups.SelectMany(group => group.Items).DistinctBy(word => word.Id).Count() matches. Group selection affects matching words, including collapsed lessons.</span>
             }
@@ -73,7 +77,7 @@
         else
         {
             <div class="list-group-item text-muted small">
-                @(AllWords.Count == 0 ? "No words loaded." : "No matches in this list.")
+                @(AllWords.Count == 0 ? (ReadOnly ? "No saved words in the enabled categories." : "No words loaded.") : "No matches in this list.")
             </div>
         }
     </div>
@@ -81,11 +85,14 @@
 
 @code {
     private RenderFragment GroupHeader(WordGroup group, bool isLesson) => @<div class="word-group-header @(isLesson ? "lesson-header" : "book-header")">
-        <button type="button" class="word-group-select" role="checkbox"
+        @if (!ReadOnly)
+        {
+            <button type="button" class="word-group-select" role="checkbox"
                 aria-checked="@CheckedState(group)" aria-label="@SelectionLabel(group)"
                 title="@SelectionLabel(group)" @onclick="() => OnGroupClicked(group)">
-            <span aria-hidden="true">@SelectionSymbol(group)</span>
-        </button>
+                <span aria-hidden="true">@SelectionSymbol(group)</span>
+            </button>
+        }
         <button type="button" class="word-group-expand"
                 aria-expanded="@(IsExpanded(group) ? "true" : "false")"
                 aria-controls="@PanelId(group)"
@@ -93,7 +100,7 @@
                 @onclick="() => ToggleExpanded(group)">
             <span aria-hidden="true">@(IsExpanded(group) ? "▾" : "▸")</span>
             <span class="word-group-label">@group.Label</span>
-            <small class="word-group-count">@SelectedCount(group) / @group.Items.Count @(IsSearching ? "matches" : "selected")</small>
+            <small class="word-group-count">@(ReadOnly ? $"{group.Items.Count} words" : $"{SelectedCount(group)} / {group.Items.Count} {(IsSearching ? "matches" : "selected")}")</small>
         </button>
     </div>;
 
@@ -101,14 +108,32 @@
         @foreach (var item in items)
         {
             var isSelected = IsSelected(item.Id);
-            <button type="button" @key="item.Id"
+            var entry = item as VocabularyEntry;
+            @if (ReadOnly)
+            {
+                <div class="list-group-item" data-dataset="@entry?.Dataset" data-source-id="@entry?.SourceId" @key="item.Id">
+                    @WordContents(item)
+                </div>
+            }
+            else
+            {
+                <button type="button" @key="item.Id" data-dataset="@entry?.Dataset" data-source-id="@entry?.SourceId"
                     class="list-group-item list-group-item-action @(isSelected ? "active" : "")"
                     aria-pressed="@(isSelected ? "true" : "false")"
                     @onclick="() => OnItemClicked(item)">
-                <div class="fw-bold">@item.English</div>
-                <div class="small">@item.Japanese</div>
-                <div class="small text-muted">@item.Kana</div>
-            </button>
+                    @WordContents(item)
+                </button>
+            }
+        }
+    </text>;
+
+    private RenderFragment WordContents(TItem item) => @<text>
+        <div class="fw-bold">@item.English</div>
+        <div class="small">@item.Japanese</div>
+        <div class="small text-muted">@item.Kana</div>
+        @if (item is VocabularyEntry entry)
+        {
+            <small class="badge text-bg-secondary">@entry.SourceLabel</small>
         }
     </text>;
 }

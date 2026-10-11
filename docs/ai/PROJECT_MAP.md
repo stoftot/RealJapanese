@@ -76,7 +76,7 @@ verify tools, not the app.
 | Words-to-nouns ID migration | `RealJapanese/Repositories/Sync/WordNounMigration.cs`, `WordNounSplit.json` in the same folder |
 | Grammatical vocabulary split and book provenance | `RealJapanese/Repositories/Sync/VocabularyMigration.cs`, frozen `VocabularySplit.json`; [vocabulary contract](../vocabulary.md) |
 | GENKI opening-list coverage | `tests/fixtures/genki-vocabulary.json`, `tests/RealJapanese.IntegrationTests/GenkiCatalogTests.cs` |
-| Additional vocabulary selectors and practice | `RealJapanese/RealJapanese.UI/Components/Pages/Vocabulary/`; shared `VocabularyStudy`, `VocabularySelector`, `WordList` |
+| Combined vocabulary editor and saved-word mixer | `RealJapanese/RealJapanese.UI/Components/Pages/Vocabulary/SupportingVocabularyStudy.razor`, `Pages/Words/`; shared `VocabularyCollection`, `CombinedVocabularySelector`, `WordList` |
 | Snapshot validation and paired local transport | `RealJapanese/Repositories/Sync/ProgressSyncService.cs`, `LocalProgressTransfer.cs`, `PairingProtocol.cs` |
 | Local sync discovery and host network lifecycle | `RealJapanese/Repositories/Sync/LocalSyncDiscovery.cs`, `ISyncNetworkEnvironment.cs` |
 | Local sync user/protocol documentation | `docs/local-sync.md`, `docs/local-sync-protocol.md` |

@@ -34,13 +34,13 @@ cold restart and a same-signer application update.
 5. Install the second same-signer build as an update without uninstalling or
    clearing app data. Launch it cold while still offline and repeat the
    assignment and practice checks. Follow moved vocabulary into its current category;
-   use the Words hub to reach the additional categories.
+   use Words & expressions for the smaller categories and Words to mix saved lists.
 
 ### Expected result
 
 - Launch completes and every catalog packaged by that build is usable offline;
   the updated build includes all fourteen current catalogs.
-  General Words may be empty; its category links remain available.
+  General Words may be empty; the mixer source toggles remain available.
 - Every recorded assignment survives force-stop/cold restart.
 - The accepted same-signer update refreshes/retains usable packaged catalogs while
   preserving every private progress assignment. No web server or internet

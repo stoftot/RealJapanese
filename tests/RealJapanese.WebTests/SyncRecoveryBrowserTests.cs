@@ -34,10 +34,10 @@ public sealed class SyncRecoveryBrowserTests : SyncBrowserTest
 
         // A second circuit changes progress after the first circuit's preview was created.
         var otherTab = await Browser.NewPageAsync();
-        await NavigateAsync(otherTab, App.Url + "/words");
+        await NavigateAsync(otherTab, App.Url + "/vocabulary");
         var training = otherTab.Locator(".category-column").Nth(2);
         await training.GetByRole(AriaRole.Searchbox).FillAsync(words[3].English);
-        await training.Locator("button.list-group-item").Filter(new() { Has = otherTab.Locator(".fw-bold").GetByText(words[3].English, new() { Exact = true }) }).ClickAsync();
+        await training.Locator(".word-book[data-book='General'] button.list-group-item").Filter(new() { Has = otherTab.Locator(".fw-bold").GetByText(words[3].English, new() { Exact = true }) }).ClickAsync();
         await Expect(training.Locator("button.active")).ToHaveCountAsync(1);
         await dialog.GetByRole(AriaRole.Button, new() { Name = "Apply this preview" }).ClickAsync();
         await Expect(dialog.GetByRole(AriaRole.Alert)).ToContainTextAsync("changed");

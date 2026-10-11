@@ -11,22 +11,26 @@ public sealed class StudyBrowserTests : BrowserTest
     [Fact]
     public async Task Selection_survives_page_reload_and_app_restart()
     {
-        await OpenAsync("/words");
+        await OpenAsync("/vocabulary");
         var list = Page.Locator(".category-column").First;
         var search = list.GetByRole(AriaRole.Searchbox);
         await search.FillAsync("___not_present___");
         await Expect(list).ToContainTextAsync("No matches in this list");
         await search.FillAsync("");
-        var item = list.Locator("button.list-group-item").First;
-        var selected = await item.InnerTextAsync();
+        var item = list.Locator("button.list-group-item[data-dataset='Words']").First;
+        var sourceId = await item.GetAttributeAsync("data-source-id");
+        var english = await item.Locator(".fw-bold").InnerTextAsync();
+        var savedItem = list.Locator($"button.list-group-item[data-dataset='Words'][data-source-id='{sourceId}']");
         await item.ClickAsync();
-        await Expect(item).ToHaveClassAsync(new System.Text.RegularExpressions.Regex("active"));
+        await Expect(savedItem).ToHaveAttributeAsync("aria-pressed", "true");
         await Page.ReloadAsync();
-        await Expect(list.Locator("button.active")).ToHaveTextAsync(selected);
+        await Expect(savedItem).ToHaveAttributeAsync("aria-pressed", "true");
+        await Expect(savedItem.Locator(".fw-bold")).ToHaveTextAsync(english);
         await App.DisposeAsync();
         await App.StartAsync();
-        await OpenAsync("/words");
-        await Expect(list.Locator("button.active")).ToHaveTextAsync(selected);
+        await OpenAsync("/vocabulary");
+        await Expect(savedItem).ToHaveAttributeAsync("aria-pressed", "true");
+        await Expect(savedItem.Locator(".fw-bold")).ToHaveTextAsync(english);
     }
 
     [Fact]

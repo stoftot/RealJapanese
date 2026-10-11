@@ -18,14 +18,14 @@ independent single/combined kanji lists.
 ### Preconditions
 
 - A running host with disposable, initially empty progress and the normal catalogs.
-- For Expressions, Nouns, Verbs and Adjectives, record one item whose English has mixed case and
+- For Words & expressions, Nouns, Verbs and Adjectives, record one item whose English has mixed case and
   whose Japanese and kana values can each be searched independently.
 - For both Combined and Single kanji, record one item and its three searchable text
   values. Use different items for the two kanji sets.
 
 ### Steps
 
-1. Open **Words → Expressions**. In the Known list search for the recorded item by a distinctive
+1. Open **Words & expressions**. In the Known list search for the recorded item by a distinctive
    English substring, then repeat with different letter case and with surrounding
    spaces. Repeat using a distinctive Japanese substring and a kana substring.
 2. Enter a string absent from every English, Japanese and kana value, then clear
@@ -70,7 +70,7 @@ query selection, including an empty category.
 ### Preconditions
 
 - A running host with disposable progress.
-- Put one identifiable item in each of Known, Rehearsing and Training for Expressions,
+- Put one identifiable item in each of Known, Rehearsing and Training for Words & expressions,
   Nouns, Verbs and Adjectives. Do the same for both Combined and Single kanji.
 - Keep one additional category empty in a separate disposable dataset or after
   recording enough state to restore this setup.
@@ -85,8 +85,8 @@ query selection, including an empty category.
    | --- | --- | --- |
    | Words — Learn the words | `/words/spelling?category=<list>` | All three |
    | Words — Flash cards | `/words/flashcards?category=<list>` | All three |
-   | Adverbs, Expressions, Pronouns, Determiners, Counters, Conjunctions, Particles, Suffixes — Learn the words | `/<category>/spelling?category=<list>` | All three |
-   | The same eight categories — Flash cards | `/<category>/flashcards?category=<list>` | All three |
+   | Words & expressions — Learn the words | `/vocabulary/spelling?category=<list>` | All three |
+   | Words & expressions — Flash cards | `/vocabulary/flashcards?category=<list>` | All three |
    | Nouns — Learn the nouns | `/nouns/spelling?category=<list>` | All three |
    | Nouns — Flash cards | `/nouns/flashcards?category=<list>` | All three |
    | Nouns — Conjugations and forms | `/nouns/conjugate` | Category-independent |
@@ -100,8 +100,9 @@ query selection, including an empty category.
    | Kanji Single — Learn the kanji | `/kanji/single/meaning?category=<list>` | All three |
 
    Replace `<list>` with the lowercase value `known`, `rehearsing` or `training`.
-   Replace `<category>` with the lowercase category name. The general Words catalog
-   starts empty; use an explicit self-added fixture to exercise its nonempty routes.
+   Words practice links also carry `sources=<dataset names>` from the mixer;
+   only saved words from those backend categories should appear. General Words
+   starts empty; use a self-added fixture when testing that source specifically.
 2. For category-dependent rows, confirm the question belongs to the chosen list
    and not one of the two other prepared lists.
 3. Open one category-dependent action for the deliberately empty list.
@@ -419,8 +420,8 @@ access to every grammatical vocabulary category on web and Android.
 
 ### Steps
 
-1. Open Words and follow each category link. Confirm its source groups and practice
-   links are available, including on a narrow screen.
+1. Open Words & expressions, Nouns, Verbs and Adjectives. Confirm their source groups
+   and practice links are available, including on a narrow screen.
 2. In the fixture selector, collapse and reopen Book A and lesson 2. Confirm no
    study assignments change and lessons appear in numeric order.
 3. Select Book A lesson 1. Confirm Book B lesson 1 and General remain unchanged,
@@ -442,6 +443,44 @@ scope, partial state is announced, repeated identities stay consistent, and sear
 limits bulk actions to matches. General remains independent of book sources.
 All category routes load usable exercises from the chosen study list. Every old
 selected word keeps its category after migration and restart.
+
+### Cleanup
+
+Discard only the disposable fixture/progress or test installation.
+
+## STUDY-010 — Saved vocabulary mixer
+
+### Purpose
+
+Verify independent backend-category toggles combine saved study lists without
+changing progress, and preserve the chosen sources through practice and navigation.
+
+### Preconditions
+
+- Disposable catalogs/progress with two categories sharing the same numeric word ID.
+- Saved Known, Rehearsing and Training entries and at least one unsaved entry.
+- A saved noun, verb or adjective to combine with Words & expressions categories.
+
+### Steps
+
+1. Open Words. Confirm all twelve backend-category toggles are present and initially
+   enabled. Each study list contains only its saved entries; unsaved words are absent.
+2. Turn one category off and on. Confirm only its words disappear and return in all
+   three lists, including entries sharing an ID with another category.
+3. Search and collapse a book/lesson. Confirm there are no item or group assignment
+   controls. Compare saved progress before and after these mixer actions.
+4. Enable two categories, select Training and start spelling, then flashcards.
+   Confirm both exercises use only the chosen sources' Training words. Return with
+   the back link and reload; the chosen sources and returned study list remain active.
+5. Disable all sources and reload. Confirm lists and practice stay empty.
+6. Repeat toggles, practice and back navigation at 320 px and on Android by touch.
+   Confirm the combined Words & expressions editor remains available in navigation.
+
+### Expected result
+
+Backend categories and IDs stay separate. Mixer actions never write progress.
+Toggles are keyboard-operable and announce their pressed state. Practice includes
+only the saved words in the enabled categories and selected study list.
 
 ### Cleanup
 

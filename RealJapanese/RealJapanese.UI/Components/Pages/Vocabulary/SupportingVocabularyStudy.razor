@@ -1,0 +1,47 @@
+@page "/vocabulary"
+@page "/vocabulary/{Exercise}"
+@using DataLoaders.Models
+@using Repositories
+@using RealJapanese.Components.Shared
+@inject RepositoryPaths Paths
+
+<PageTitle>Words &amp; expressions</PageTitle>
+@if (string.IsNullOrEmpty(Exercise))
+{
+    <header class="selector-heading">
+        <h1>Words &amp; expressions</h1>
+        <p>Study adverbs, expressions, pronouns, determiners, counters, conjunctions, particles, suffixes and general words together.</p>
+        <p>Choose your saved words individually or by book and lesson. Each word keeps its own category.</p>
+    </header>
+    <CombinedVocabularySelector Collection="@Collection" Sources="@Collection.SupportingSources" Category="@Category" />
+}
+else
+{
+    <p><a href="@($"vocabulary?category={Category}")">Back to words &amp; expressions</a></p>
+    @switch (Exercise.ToLowerInvariant())
+    {
+        case "spelling":
+            <VocabularySpelling TItem="VocabularyEntry" Words="@PracticeWords" @key="Category" />
+            break;
+        case "flashcards":
+            <VocabularyFlashCards TItem="VocabularyEntry" Words="@PracticeWords" @key="Category" />
+            break;
+        default:
+            <h1>Exercise not found</h1>
+            <p role="alert">This exercise does not exist. Choose an exercise from the study page.</p>
+            break;
+    }
+}
+
+@code {
+    [Parameter] public string? Exercise { get; set; }
+    [SupplyParameterFromQuery(Name = "category")] public string? Category { get; set; }
+    private VocabularyCollection Collection { get; set; } = null!;
+    private List<VocabularyEntry> PracticeWords { get; set; } = [];
+    protected override void OnInitialized() => Collection = new(Paths);
+    protected override void OnParametersSet()
+    {
+        if (Exercise?.ToLowerInvariant() is "spelling" or "flashcards")
+            PracticeWords = Collection.SavedWords(Collection.SupportingSources, WordPracticeCategoryExtensions.ParseQueryValue(Category));
+    }
+}

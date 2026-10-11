@@ -125,10 +125,17 @@ The shared page releases these resources on mode changes, completion and navigat
 A selector derives from `WordComponentBase<T>` and injects a typed repository.
 Category actions coordinate exclusive known/training/rehearsing membership and
 save progress. `WordList` groups origins by book and numeric lesson, with separate
-expansion and group-selection controls. A group operation commits once and
+expansion and group-selection controls. A group operation commits once per backend dataset and
 deduplicates words repeated across lessons; search restricts its scope to matches.
-The Words hub links to all vocabulary categories, whose basic spelling/flashcard
-routes share generic `VocabularyStudy` components and typed repositories.
+Nouns, Verbs and Adjectives retain their separate study areas. `SupportingVocabularyStudy`
+combines the other vocabulary categories into Words & expressions. The Words page
+is a read-only mixer: one toggle per backend category includes only that category's
+saved words in each study list. `VocabularyCollection` is a UI adapter over typed
+repositories; it retains dataset/original-ID identity and uses temporary display
+IDs only for shared list rendering. Combined editing delegates each dataset's
+changes to its existing repository. Mixer actions never write progress, and the
+`sources` query preserves the mix through practice/navigation. Basic exercises
+reuse generic spelling/flashcard components, recreated when the query changes.
 Practice links pass `category=known|rehearsing|training`; shared
 practice bases select chunks, shuffle, check normalized input and manage retries.
 
