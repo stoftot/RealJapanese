@@ -44,7 +44,7 @@ public abstract class PracticeBase : ComponentBase
     protected virtual void OnEnterPressed()
     {
         // default: advance only if correct
-        if (IsCorrect()) _ = GoToNextQuestionAsync();
+        if (IsCorrect()) _ = CompleteQuestionAsync();
     }
 
     // ---- events from the UI ----
@@ -59,11 +59,12 @@ public abstract class PracticeBase : ComponentBase
     protected void RevealAnswer()
     {
         ShowAnswer();
-        if (RepeatQuestionsWithRevealedAnswers
-            && Questions.Count > 0
+        if (Questions.Count > 0
             && !ReferenceEquals(_currentRetryQuestion, Questions[currentQuestionIndex]))
         {
-            _retryQuestions.Add(Questions[currentQuestionIndex]);
+            Questions[currentQuestionIndex].RecordAnswer?.Invoke(false);
+            if (RepeatQuestionsWithRevealedAnswers)
+                _retryQuestions.Add(Questions[currentQuestionIndex]);
             _currentRetryQuestion = Questions[currentQuestionIndex];
         }
     }
@@ -76,6 +77,15 @@ public abstract class PracticeBase : ComponentBase
     protected virtual Task FocusAnswerInputAsync() => Task.CompletedTask;
 
     protected abstract void UpdateQuestions();
+
+    protected Task CompleteQuestionAsync()
+    {
+        // Copying a revealed answer only finishes the failed attempt; its retry must succeed unaided.
+        if (Questions.Count > 0 && !ReferenceEquals(_currentRetryQuestion, Questions[currentQuestionIndex]))
+            Questions[currentQuestionIndex].RecordAnswer?.Invoke(true);
+        return GoToNextQuestionAsync();
+    }
+
     protected async Task GoToNextQuestionAsync()
     {
         NextQuestion();               // reshuffles at end & wraps

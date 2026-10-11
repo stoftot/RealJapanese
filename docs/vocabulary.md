@@ -80,19 +80,25 @@ Catalog IDs connect words to study progress and extracted kanji relations. Keep
 IDs stable when editing entries. Allocate additions above the dataset's previous
 maximum, including retired IDs; never recycle an ID for a different word.
 
-Progress and sync snapshots use schema version 3 with fourteen datasets (twelve
+Progress and sync snapshots use schema version 4 with fourteen datasets (twelve
 vocabulary catalogs and two kanji catalogs). Version 1 local progress first uses
 the frozen noun-split manifest, then version 2 uses the frozen
 [`VocabularySplit.json`](../RealJapanese/Repositories/Sync/VocabularySplit.json)
-mapping. Current saves never run either migration again. Loading performs these
-steps in memory; the next edit/import persists the current version atomically.
+mapping. Current saves never run either ID migration again. Versions 1, 2 and 3
+are read as version 4 and the current version is persisted atomically on the next
+change or import. Version 3 had no rehearsal history, so its history starts empty.
 
 Bundled legacy `SavedData.json` files already contain the new IDs. Their root
-`LegacyProgressVersion.json` marker identifies version 3. Keep the marker with
+`LegacyProgressVersion.json` marker identifies version 3. This legacy marker stays
+at version 3 when unified progress moves to schema 4. Keep the marker with
 those files when copying them. Older legacy layouts are recognized by the absence
 of that marker and the presence/absence of the Nouns save. New category saves
 without the marker are rejected rather than interpreted with the wrong IDs.
 Runtime migration leaves legacy files untouched.
+
+Per-word `Rehearsal` history is persisted with progress. The [architecture
+contract](ai/ARCHITECTURE.md#vocabulary-selection-and-practice) owns which routes
+update it and the calendar-day rules.
 
 Recognized older recovery snapshots migrate too; unknown catalog hashes remain
 unchanged and cannot be restored into an incompatible catalog. Both devices must

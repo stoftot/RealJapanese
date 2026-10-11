@@ -20,7 +20,7 @@ public class AdjectiveSpellingBase : MultipleAnswerBase
     {
         OrderedAnswers = true;
         OrginalQuestions = AdjectiveData.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
-            .EnglishToRomajiAndTypeQuestion();
+            .EnglishToRomajiAndTypeQuestion().TrackProgress(AdjectiveData);
         
         UpdateQuestions();
     }

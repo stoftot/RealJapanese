@@ -74,10 +74,14 @@ considerations for future public distribution or hosting.
 The transfer exposes no API for arbitrary filesystem paths or remote writes; only
 a validated progress snapshot can be previewed and applied.
 
-Current progress lives in one atomic version 3 `Progress.json`, including every
-grammatical vocabulary category. Older local progress is migrated automatically:
+Current progress lives in one atomic version 4 `Progress.json`, including every
+grammatical vocabulary category and per-word rehearsal history. Older local progress is
+migrated automatically:
 words retain their learned, training or rehearsing state when moved between
-catalogs. An installation
+catalogs. Versions 1, 2 and 3 are read as version 4 and persisted on the next
+change; version 3 has no rehearsal history, so it starts empty. The legacy
+`LegacyProgressVersion.json` marker remains version 3 because it identifies the
+legacy ID layout. An installation
 without a unified file reads its legacy `SavedData.json` files and leaves them
 untouched at runtime. Bundled legacy saves include a `LegacyProgressVersion.json`
 marker that must stay with them when copied. Both devices must use the current version before syncing;

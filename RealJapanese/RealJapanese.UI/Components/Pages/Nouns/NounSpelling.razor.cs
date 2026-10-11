@@ -21,7 +21,7 @@ public class NounSpellingBase : SingleAnwserBase
     protected override void OnInitialized()
     {
         OrginalQuestions = NounData.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
-            .EnglishToRomajiQuestions();
+            .EnglishToRomajiQuestions().TrackProgress(NounData);
 
         UpdateQuestions();
     }

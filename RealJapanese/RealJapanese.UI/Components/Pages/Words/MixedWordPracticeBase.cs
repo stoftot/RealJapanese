@@ -18,4 +18,6 @@ public class MixedWordPracticeBase : ComponentBase
     protected override void OnInitialized() => collection = new(Paths);
     protected override void OnParametersSet() => PracticeWords = collection.SavedWords(collection.ParseMixerSources(Sources),
         WordPracticeCategoryExtensions.ParseQueryValue(Category));
+
+    protected void RecordPracticeAnswer(Word word, bool correct) => collection.RecordPracticeAnswer(word, correct);
 }

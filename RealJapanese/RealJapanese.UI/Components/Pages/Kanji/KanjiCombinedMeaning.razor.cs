@@ -30,7 +30,7 @@ public class KanjiCombinedMeaningBase : PracticeBase
     {
         WordDataBase<Word> data = KanjiData.Combined;
         OrginalQuestions = data.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
-            .JapaneseToEnglishQuestions();
+            .JapaneseToEnglishQuestions().TrackProgress(data);
         
         UpdateQuestions();
     }
@@ -59,7 +59,7 @@ public class KanjiCombinedMeaningBase : PracticeBase
         base.OnUserInputChanged(value);
 
         if (Questions.Count > 0 && IsCorrect())
-            _ = GoToNextQuestionAsync();
+            _ = CompleteQuestionAsync();
     }
 
     protected override void OnEnterPressed()
@@ -74,7 +74,7 @@ public class KanjiCombinedMeaningBase : PracticeBase
         else
         {
             if (IsCorrect())
-                _ = GoToNextQuestionAsync();
+                _ = CompleteQuestionAsync();
             else
                 RevealAnswer();
 

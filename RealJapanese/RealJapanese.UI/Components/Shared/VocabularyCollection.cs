@@ -65,8 +65,16 @@ public sealed class VocabularyCollection
             Sources.Single(source => source.Key == group.Key).Update(group.Select(entry => entry.SourceId).ToHashSet(), category, selected);
     }
 
+    public void RecordPracticeAnswer(Word word, bool correct)
+    {
+        if (word is not VocabularyEntry entry || !Entries.Contains(entry))
+            throw new ArgumentException("Unknown vocabulary entry.", nameof(word));
+        Sources.Single(source => source.Key == entry.Dataset).RecordAnswer(entry.SourceId, correct);
+    }
+
     private static VocabularySource Source<T>(string key, string label, WordDataBase<T> repository) where T : Word =>
         new(key, label, repository.Words.Cast<Word>().ToList(), category => repository.GetWords(category).Cast<Word>().ToList(),
+            (id, correct) => repository.RecordPracticeAnswer(id, correct),
             (ids, category, selected) =>
             {
                 var words = repository.Words.Where(word => ids.Contains(word.Id)).ToList();
@@ -76,7 +84,8 @@ public sealed class VocabularyCollection
 }
 
 public sealed record VocabularySource(string Key, string Label, IReadOnlyList<Word> Words,
-    Func<WordPracticeCategory, List<Word>> SavedWords, Action<HashSet<int>, WordPracticeCategory, bool> Update);
+    Func<WordPracticeCategory, List<Word>> SavedWords, Action<int, bool> RecordAnswer,
+    Action<HashSet<int>, WordPracticeCategory, bool> Update);
 
 public sealed record VocabularyEntry : Word
 {

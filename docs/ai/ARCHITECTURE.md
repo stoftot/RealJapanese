@@ -66,8 +66,9 @@ Blazor interop runtime.
    in memory; startup does not rewrite the source catalog.
 3. Progress is stored for all fourteen datasets in one versioned `Progress.json` file.
    A missing bundle is initialized from legacy `SavedData.json` files; the runtime
-   leaves those files untouched. Version 1 and 2 progress migrate to version 3 in
-   memory and persist on the next save (see data maintenance below).
+   leaves those files untouched. Version 1, 2 and 3 progress migrate to version 4
+   in memory and persist on the next save; rehearsal history starts empty when
+   migrating version 3 (see data maintenance below).
 4. Category changes commit the complete bundle through a temporary file and atomic
    replace. The store serializes in-process changes and refuses a commit if another
    process changed the on-disk revision; repositories do not live-refresh across processes.
@@ -139,6 +140,15 @@ changes to its existing repository. Mixer actions never write progress, and the
 reuse generic spelling/flashcard components, recreated when the query changes.
 Practice links pass `category=known|rehearsing|training`; shared
 practice bases select chunks, shuffle, check normalized input and manage retries.
+Daily rehearsal tracking applies only to Learn the words, nouns, verbs, adjectives
+and kanji exercises. Training answers, flashcards, type categorisation and
+conjugation drills do not change rehearsal progress. A wrong or revealed known
+answer remains Known with a pending retry; its next unassisted correct retry moves
+it to Rehearsing. A Rehearsing item earns at most one correct day per local
+calendar date; the dates need not be consecutive. A wrong/revealed answer resets
+its count and blocks further credit that date. Seven distinct correct dates
+promote it to Known. Web dates use the server's local time zone; Android dates
+use the device's local time zone.
 
 ### Conjugation models and study integration
 
@@ -210,9 +220,14 @@ fields already use the current mappings. Extraction reads all vocabulary catalog
 Legacy roots carrying `LegacyProgressVersion.json` use current IDs. Without the
 marker, Nouns/SavedData.json distinguishes the old six-dataset layout from the
 five-dataset layout. Current category saves without the marker are rejected.
-Version 3 unified saves never run the migrations again. Compatible old recovery
-snapshots migrate too; incompatible snapshots stay unchanged and are rejected on
-preview. Sync snapshots use version 3, so both peers must be updated.
+Version 4 unified saves never run the ID migrations again. Versions 1–3 migrate
+in memory and persist as version 4 on the next write; migration from version 3
+starts with empty rehearsal history. Compatible recovery snapshots migrate too;
+the legacy `LegacyProgressVersion.json` marker remains version 3 because it
+identifies the legacy ID layout, not the unified schema. Recovery snapshots that
+cannot undergo the legacy ID migration remain unchanged; sync preview separately
+rejects catalog hashes that do not match. Sync snapshots use version 4, so both
+peers must be updated.
 
 Duplicate cleanup deduplicates words, assigns replacement IDs and remaps progress.
 It supports legacy saves only and refuses to run if the unified `Progress.json`

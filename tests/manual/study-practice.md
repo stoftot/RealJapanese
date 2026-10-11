@@ -490,3 +490,64 @@ only the saved words in the enabled categories and selected study list.
 ### Cleanup
 
 Discard only the disposable fixture/progress or test installation.
+
+## STUDY-011 — Daily rehearsal and host-local date boundary
+
+### Purpose
+
+Protect automatic progress from Learn the words/nouns/verbs/adjectives/kanji
+exercises and confirm that each host uses its own local calendar day.
+
+### Preconditions
+
+- Disposable progress with an identifiable Known and Rehearsing item in Words,
+  Nouns, Verbs, Adjectives, Single kanji and Combined kanji.
+- A web host whose server time zone can be controlled and an Android device whose
+  device time zone can be controlled. Use different zones from UTC and record both.
+- Read-only access to the task-owned `Progress.json` in the disposable progress
+  root (or an exported snapshot) to inspect each item's `Rehearsal` fields; the UI
+  does not display the correct-day count.
+- Do not use user progress or change catalog files. Automated repository coverage
+  is in `RehearsalProgressTests`; this case checks app and host integration.
+
+### Steps
+
+1. On each host, open each Learn the X route: Words, Nouns, Verbs, Adjectives,
+   Single kanji and Combined kanji. Select the Known item. Reveal the answer or
+   submit a wrong answer, then confirm it remains Known.
+2. Reach that same item in its retry round and answer correctly without revealing.
+   Confirm it moves from Known to Rehearsing and has zero earned correct days.
+3. On one Rehearsing item, answer correctly twice on the same local date. Confirm
+   the history counts one correct day. Advance the host clock across a local
+   midnight that does not coincide with UTC midnight, answer again, and confirm
+   the second day is credited according to the host's local date.
+4. On another Rehearsing item, earn a correct day, then submit a wrong or revealed
+   answer on the same local date and later answer correctly. Confirm the miss
+   resets the count and blocks credit for the rest of that local date.
+5. Continue one Rehearsing item across seven distinct, not necessarily consecutive,
+   local dates, confirming repeated answers on a date count once. Confirm it moves
+   to Known after the seventh date.
+6. In Training, use a Learn the X route and confirm answers do not change category
+   or create rehearsal history. Repeat with flashcards, type categorisation and
+   conjugation drills for Known/Rehearsing items; confirm those exercises do not
+   change rehearsal history.
+7. Compare the web dates with the web server's local timezone and Android dates
+   with the device's local timezone. Restore the original clock/timezone settings.
+
+### Expected result
+
+- A wrong or revealed Known answer remains Known until its next unassisted correct
+  retry, which moves it to Rehearsing without daily credit.
+- Rehearsing progress counts at most one correct day per local date; the dates need
+  not be consecutive. A miss resets credit and blocks later same-day credit. Seven
+  distinct correct dates promote to Known.
+- The web uses server local time and Android uses device local time. Training,
+  flashcards, type categorisation and conjugation drills do not affect this progress.
+- Automated `RehearsalProgressTests` cover repository calendar, reset, migration
+  and sync/recovery behavior. A passing automated test does not establish the web
+  server or Android device timezone boundary; record those host observations
+  separately, and mark Android unexecuted when no device run was performed.
+
+### Cleanup
+
+Restore disposable progress and the original host/device time and timezone settings.

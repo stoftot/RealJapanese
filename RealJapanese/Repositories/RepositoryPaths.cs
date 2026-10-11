@@ -11,14 +11,16 @@ public sealed class RepositoryPaths
 
     public string CatalogRoot { get; }
     public string ProgressRoot { get; }
+    public TimeProvider Clock { get; }
 
-    public RepositoryPaths(string catalogRoot, string progressRoot)
+    public RepositoryPaths(string catalogRoot, string progressRoot, TimeProvider? clock = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(catalogRoot);
         ArgumentException.ThrowIfNullOrWhiteSpace(progressRoot);
 
         CatalogRoot = catalogRoot;
         ProgressRoot = progressRoot;
+        Clock = clock ?? TimeProvider.System;
         progress = new(() => new Sync.ProgressStore(ProgressRoot, CatalogRoot));
     }
 

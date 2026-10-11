@@ -35,7 +35,7 @@ public abstract class SingleAnwserBase : PracticeBase
         base.OnUserInputChanged(value);
 
         if (Questions.Count > 0 && IsCorrect())
-            _ = GoToNextQuestionAsync();
+            _ = CompleteQuestionAsync();
     }
 
     protected override void OnEnterPressed()
@@ -50,7 +50,7 @@ public abstract class SingleAnwserBase : PracticeBase
         else
         {
             if (IsCorrect())
-                _ = GoToNextQuestionAsync();
+                _ = CompleteQuestionAsync();
             else
                 RevealAnswer();
 

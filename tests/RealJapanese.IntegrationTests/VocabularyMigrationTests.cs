@@ -35,7 +35,7 @@ public sealed class VocabularyMigrationTests
         var original = Directory.GetFiles(paths.ProgressRoot, "*.json", SearchOption.AllDirectories).ToDictionary(file => file, File.ReadAllBytes);
 
         var migrated = Snapshot(paths);
-        Assert.Equal(3, migrated.Version);
+        Assert.Equal(ProgressStore.CurrentVersion, migrated.Version);
         Assert.Equal(413, entries.Length);
         Assert.Equal(414, migrated.Data.Values.Sum(saved => saved.KnownIds.Count + saved.TrainingIds.Count + saved.RehearsingIds.Count));
         foreach (var entry in entries)
@@ -51,7 +51,7 @@ public sealed class VocabularyMigrationTests
         var restarted = Snapshot(new RepositoryPaths(paths.CatalogRoot, paths.ProgressRoot));
         Assert.Equal(JsonSerializer.Serialize(migrated.Data), JsonSerializer.Serialize(restarted.Data));
         using var persisted = JsonDocument.Parse(File.ReadAllBytes(progressFile));
-        Assert.Equal(3, persisted.RootElement.GetProperty("Version").GetInt32());
+        Assert.Equal(ProgressStore.CurrentVersion, persisted.RootElement.GetProperty("Version").GetInt32());
         if (!unified)
             foreach (var (file, bytes) in original) Assert.Equal(bytes, File.ReadAllBytes(file));
     }

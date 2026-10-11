@@ -22,7 +22,7 @@ public class KanjiSingleMeaningBase : MultipleAnswerBase
     {
         WordDataBase<Word> data = KanjiData.Single;
         OrginalQuestions = data.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
-            .JapaneseToEnglishQuestions();
+            .JapaneseToEnglishQuestions().TrackProgress(data);
         
         UpdateQuestions();
     }

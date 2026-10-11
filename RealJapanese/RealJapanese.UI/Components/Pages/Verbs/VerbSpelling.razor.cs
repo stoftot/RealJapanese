@@ -20,7 +20,7 @@ public class VerbSpellingBase : MultipleAnswerBase
     {
         OrderedAnswers = true;
         OrginalQuestions = VerbData.GetWords(WordPracticeCategoryExtensions.ParseQueryValue(Category))
-            .EnglishToRomajiAndTypeQuestion();
+            .EnglishToRomajiAndTypeQuestion().TrackProgress(VerbData);
         
         UpdateQuestions();
     }

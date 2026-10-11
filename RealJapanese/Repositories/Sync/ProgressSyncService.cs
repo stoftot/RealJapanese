@@ -29,7 +29,8 @@ public sealed class ProgressSyncService
         {
             Modifiers = { type =>
             {
-                if (type.Type == typeof(ProgressSnapshot) || type.Type == typeof(VocabSaveFile))
+                if (type.Type == typeof(ProgressSnapshot) || type.Type == typeof(VocabSaveFile) ||
+                    type.Type == typeof(RehearsalProgress))
                     foreach (var property in type.Properties) property.IsRequired = true;
             } }
         }
@@ -117,12 +118,22 @@ public sealed class ProgressSyncService
             if (mode != ImportMode.Replace)
                 foreach (var pair in remote)
                     if (mode == ImportMode.MergeUseIncoming || !combined.ContainsKey(pair.Key)) combined[pair.Key] = pair.Value;
+            var merged = FromCategories(combined);
+            foreach (var id in combined.Keys)
+            {
+                var useIncoming = mode == ImportMode.Replace ||
+                    (remote.ContainsKey(id) && (mode == ImportMode.MergeUseIncoming || !local.ContainsKey(id)));
+                var source = useIncoming ? incoming.Data[name] : backup.Data[name];
+                if (source.Rehearsal.TryGetValue(id, out var state)) merged.Rehearsal[id] = state;
+            }
             summary.Add(new(name,
                 combined.Keys.Count(id => !local.ContainsKey(id)),
-                combined.Count(pair => local.TryGetValue(pair.Key, out var old) && old != pair.Value),
+                combined.Count(pair => local.TryGetValue(pair.Key, out var old) &&
+                    (old != pair.Value || merged.Rehearsal.GetValueOrDefault(pair.Key) != backup.Data[name].Rehearsal.GetValueOrDefault(pair.Key))),
                 local.Keys.Count(id => !combined.ContainsKey(id)),
-                remote.Count(pair => local.TryGetValue(pair.Key, out var old) && old != pair.Value)));
-            result[name] = FromCategories(combined);
+                remote.Count(pair => local.TryGetValue(pair.Key, out var old) &&
+                    (old != pair.Value || incoming.Data[name].Rehearsal.GetValueOrDefault(pair.Key) != backup.Data[name].Rehearsal.GetValueOrDefault(pair.Key)))));
+            result[name] = merged;
         }
         return new ImportPreview { Revision = current.Revision, Result = result, Backup = backup,
             CreatedUtc = incoming.CreatedUtc, Summary = summary.AsReadOnly() };
@@ -131,8 +142,13 @@ public sealed class ProgressSyncService
     private ProgressSnapshot Snapshot(Dictionary<string, VocabSaveFile> data) => new()
     {
         CatalogHashes = new(hashes),
-        Data = data.ToDictionary(pair => pair.Key,
-            pair => FromCategories(Categories(pair.Value).Where(entry => validIds[pair.Key].Contains(entry.Key)).ToDictionary()))
+        Data = data.ToDictionary(pair => pair.Key, pair =>
+        {
+            var categories = Categories(pair.Value).Where(entry => validIds[pair.Key].Contains(entry.Key)).ToDictionary();
+            var saved = FromCategories(categories);
+            saved.Rehearsal = pair.Value.Rehearsal.Where(entry => categories.ContainsKey(entry.Key)).ToDictionary();
+            return saved;
+        })
     };
 
     private static Dictionary<int, int> Categories(VocabSaveFile saved) =>

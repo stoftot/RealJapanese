@@ -35,11 +35,15 @@ owned by project manifests.
   and uses `StringToIntConverter`.
 - Each host supplies catalog and progress roots. Preserve the relative dataset
   layout defined by `ProgressStore.DatasetNames` beneath both roots.
-- Current progress is one version 3 `Progress.json` bundle containing all fourteen datasets and
-  their known, rehearsing and training ID collections. Legacy per-dataset
+- Current progress is one version 4 `Progress.json` bundle containing all fourteen datasets,
+  their known, rehearsing and training ID collections, and per-word rehearsal history.
+  `VocabSaveFile.Rehearsal` stores `CorrectDays`, `LastCorrectDay`, `LastResetDay` and
+  `AwaitingRetry`. Legacy per-dataset
   `SavedData.json` files are migration inputs only and remain untouched at runtime.
   Catalog ID changes must remap these inputs and existing unified saves; see the
   [vocabulary identity contract](../vocabulary.md#identity-and-compatibility).
+- Which practice routes update rehearsal history and their calendar-day rules are
+  owned by [the architecture contract](ARCHITECTURE.md#vocabulary-selection-and-practice).
 - `Word.Origin` defaults to `self added`; book origins use `<book>-<lesson>`.
   Repeated lesson entries use `AdditionalOrigins` and share one catalog ID.
   Keep existing IDs stable and never recycle retired IDs for different words.

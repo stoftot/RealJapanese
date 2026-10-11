@@ -8,12 +8,14 @@ public abstract class WordDataBase<T> where T : Word
 {
     private readonly ProgressStore progress;
     private readonly string dataset;
+    private readonly TimeProvider clock;
     public IEnumerable<T> Words { get; }
 
     protected WordDataBase(RepositoryPaths paths, string dataset, string dataFileName)
     {
         this.dataset = dataset;
         progress = paths.Progress;
+        clock = paths.Clock;
         var words = new JsonLoader<T>(Path.Combine(paths.CatalogRoot, dataset), dataFileName).Load().ToList();
         var nextId = words.Where(w => w.Id >= 0).Select(w => w.Id).DefaultIfEmpty(-1).Max() + 1;
         foreach (var word in words.Where(w => w.Id == -1)) word.Id = nextId++;
@@ -40,9 +42,50 @@ public abstract class WordDataBase<T> where T : Word
     public void AddToVocab(T word) => SetCategory(word, WordPracticeCategory.Known);
     public void AddToTraining(T word) => SetCategory(word, WordPracticeCategory.Training);
     public void AddToRehearsing(T word) => SetCategory(word, WordPracticeCategory.Rehearsing);
-    public void RemoveFromVocab(T word) => progress.Change(dataset, saved => saved.KnownIds.Remove(word.Id));
-    public void RemoveFromTraining(T word) => progress.Change(dataset, saved => saved.TrainingIds.Remove(word.Id));
-    public void RemoveFromRehearsing(T word) => progress.Change(dataset, saved => saved.RehearsingIds.Remove(word.Id));
+    public void RemoveFromVocab(T word) => RemoveFromCategory([word], WordPracticeCategory.Known);
+    public void RemoveFromTraining(T word) => RemoveFromCategory([word], WordPracticeCategory.Training);
+    public void RemoveFromRehearsing(T word) => RemoveFromCategory([word], WordPracticeCategory.Rehearsing);
+
+    /// <summary>Records an unassisted completion or a wrong/revealed answer for a catalog item.</summary>
+    public void RecordPracticeAnswer(int wordId, bool correct)
+    {
+        if (!Words.Any(word => word.Id == wordId))
+            throw new ArgumentException("A word is not in this catalog.", nameof(wordId));
+        var today = DateOnly.FromDateTime(clock.GetLocalNow().DateTime);
+        progress.ChangeIf(dataset, saved =>
+        {
+            var known = saved.KnownIds.Contains(wordId);
+            if (!known && !saved.RehearsingIds.Contains(wordId)) return false;
+            var state = saved.Rehearsal.GetValueOrDefault(wordId) ?? new RehearsalProgress();
+            if (!correct)
+            {
+                var reset = state with { CorrectDays = 0, LastResetDay = today, AwaitingRetry = known };
+                if (reset == state) return false;
+                saved.Rehearsal[wordId] = reset;
+                return true;
+            }
+            if (known)
+            {
+                if (!state.AwaitingRetry) return false;
+                saved.KnownIds.Remove(wordId);
+                saved.RehearsingIds.Add(wordId);
+                saved.Rehearsal[wordId] = state with { AwaitingRetry = false };
+                return true;
+            }
+            // A miss wins over any success that day; repeated practice earns no extra credit.
+            if (state.LastResetDay >= today || state.LastCorrectDay >= today) return false;
+            var days = state.CorrectDays + 1;
+            if (days == 7)
+            {
+                saved.RehearsingIds.Remove(wordId);
+                saved.KnownIds.Add(wordId);
+                saved.Rehearsal.Remove(wordId);
+            }
+            else
+                saved.Rehearsal[wordId] = state with { CorrectDays = days, LastCorrectDay = today };
+            return true;
+        });
+    }
 
     private void SetCategory(T word, WordPracticeCategory category) => SetCategory([word], category);
 
@@ -53,6 +96,8 @@ public abstract class WordDataBase<T> where T : Word
         if (ids.Count == 0) return;
         progress.Change(dataset, saved =>
         {
+            var existing = GetCategoryIds(saved, category).ToHashSet();
+            foreach (var id in ids.Except(existing)) saved.Rehearsal.Remove(id);
             saved.KnownIds.RemoveAll(ids.Contains);
             saved.TrainingIds.RemoveAll(ids.Contains);
             saved.RehearsingIds.RemoveAll(ids.Contains);
@@ -79,9 +124,17 @@ public abstract class WordDataBase<T> where T : Word
                 WordPracticeCategory.Training => saved.TrainingIds,
                 _ => saved.RehearsingIds
             };
+            foreach (var id in target.Where(ids.Contains)) saved.Rehearsal.Remove(id);
             target.RemoveAll(ids.Contains);
         });
     }
+
+    private static List<int> GetCategoryIds(VocabSaveFile saved, WordPracticeCategory category) => category switch
+    {
+        WordPracticeCategory.Known => saved.KnownIds,
+        WordPracticeCategory.Training => saved.TrainingIds,
+        _ => saved.RehearsingIds
+    };
 
     private HashSet<int> ValidateIds(IEnumerable<T> words)
     {

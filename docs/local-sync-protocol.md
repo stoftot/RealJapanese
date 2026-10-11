@@ -76,11 +76,20 @@ not confidentiality or availability. A checksum alone would not provide that
 protection. The receiver verifies the record before schema/catalog validation
 and preview; importing remains a separate local action.
 
-The JSON snapshot schema is version 3 and contains Words, Nouns, Verbs,
+The JSON snapshot schema is version 4 and contains Words, Nouns, Verbs,
 Adjectives, Adverbs, Expressions, Pronouns, Determiners, Counters, Conjunctions,
-Particles, Suffixes, Kanji/Singel and Kanji/Combined with their raw catalog hashes.
-Version 1 and 2 incoming snapshots are rejected during preview; update both peers before syncing.
+Particles, Suffixes, Kanji/Singel and Kanji/Combined with their raw catalog hashes
+and each item's rehearsal history. The `Rehearsal` object stores `CorrectDays`,
+`LastCorrectDay`, `LastResetDay` and `AwaitingRetry`. Schema validation is strict;
+version 1, 2 and 3 incoming snapshots are rejected during preview. Update both
+peers before syncing.
 This schema revision does not change the `RJLAN003` transport framing.
+
+For each item, a merge selects category and rehearsal history from the same winning
+source. `MergeKeepLocal` keeps the local pair when the item is already saved;
+`MergeUseIncoming` selects the incoming pair; `Replace` uses the incoming pair and
+removals. A conflict includes either a category difference or different rehearsal
+history under the same category. Recovery snapshots preserve that history too.
 
 ## Lifetime and failure behavior
 

@@ -21,7 +21,7 @@ else
     @switch (Exercise.ToLowerInvariant())
     {
         case "spelling":
-            <VocabularySpelling TItem="VocabularyEntry" Words="@PracticeWords" @key="Category" />
+            <VocabularySpelling TItem="VocabularyEntry" Words="@PracticeWords" RecordAnswer="RecordPracticeAnswer" @key="Category" />
             break;
         case "flashcards":
             <VocabularyFlashCards TItem="VocabularyEntry" Words="@PracticeWords" @key="Category" />
@@ -38,6 +38,7 @@ else
     [SupplyParameterFromQuery(Name = "category")] public string? Category { get; set; }
     private VocabularyCollection Collection { get; set; } = null!;
     private List<VocabularyEntry> PracticeWords { get; set; } = [];
+    private void RecordPracticeAnswer(Word word, bool correct) => Collection.RecordPracticeAnswer(word, correct);
     protected override void OnInitialized() => Collection = new(Paths);
     protected override void OnParametersSet()
     {

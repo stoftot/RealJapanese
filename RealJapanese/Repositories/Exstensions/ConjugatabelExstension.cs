@@ -16,6 +16,7 @@ public static class ConjugatabelExstension
         => data.Select(c => new QuestionAnswerDto
         {
             Question = c.English,
-            Answer = $"{c.Kana.ToRomaji()};{c.TypeShortForm()}"
+            Answer = $"{c.Kana.ToRomaji()};{c.TypeShortForm()}",
+            SourceWord = c
         });
 }

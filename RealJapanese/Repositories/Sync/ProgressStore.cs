@@ -7,7 +7,7 @@ namespace Repositories.Sync;
 // One atomic file is the commit boundary for all datasets. Legacy saves remain untouched.
 public sealed class ProgressStore
 {
-    public const int CurrentVersion = 3;
+    public const int CurrentVersion = 4;
     public const string LegacyVersionFile = "LegacyProgressVersion.json";
     public static readonly string[] Version2DatasetNames = ["Words", "Nouns", "Verbs", "Adjectives", "Kanji/Singel", "Kanji/Combined"];
     public static readonly string[] DatasetNames = [.. Version2DatasetNames, .. VocabularyCatalog.AdditionalDatasets];
@@ -28,12 +28,14 @@ public sealed class ProgressStore
     }
 
     internal void Change(string dataset, Action<VocabSaveFile> update)
+        => ChangeIf(dataset, saved => { update(saved); return true; });
+
+    internal void ChangeIf(string dataset, Func<VocabSaveFile, bool> update)
     {
         lock (gate)
         {
             var next = Clone(Load());
-            update(next.Data[dataset]);
-            Commit(next);
+            if (update(next.Data[dataset])) Commit(next);
         }
     }
 
@@ -66,8 +68,10 @@ public sealed class ProgressStore
                 ValidateShape(loaded.Data, version: 2);
                 VocabularyMigration.Apply(loaded.Data);
                 VocabularyMigration.ApplyRecovery(loaded.Recovery, catalogRoot);
-                loaded.Version = CurrentVersion;
+                loaded.Version = 3;
             }
+            if (loaded.Version == 3) loaded.Version = CurrentVersion;
+            if (loaded.Recovery?.Version == 3) loaded.Recovery.Version = CurrentVersion;
             if (loaded.Version != CurrentVersion) throw new InvalidDataException("Unsupported progress version.");
             ValidateShape(loaded.Data);
             return document = loaded;
@@ -81,7 +85,7 @@ public sealed class ProgressStore
         {
             using var marker = JsonDocument.Parse(File.ReadAllBytes(versionPath));
             version = marker.RootElement.GetProperty("Version").GetInt32();
-            if (version != CurrentVersion) throw new InvalidDataException("Unsupported legacy progress version.");
+            if (version != 3) throw new InvalidDataException("Unsupported legacy progress version.");
         }
         else if (VocabularyCatalog.AdditionalDatasets.Any(name => File.Exists(Path.Combine(root, name, "SavedData.json"))))
             throw new InvalidDataException("Categorized legacy saves require LegacyProgressVersion.json to identify their IDs safely.");
@@ -98,7 +102,7 @@ public sealed class ProgressStore
             migrated.Data.Add(name, saved);
         }
         if (version == 1) WordNounMigration.Apply(migrated.Data);
-        if (version < CurrentVersion) VocabularyMigration.Apply(migrated.Data);
+        if (version < 3) VocabularyMigration.Apply(migrated.Data);
         return document = migrated;
     }
 
@@ -140,6 +144,7 @@ public sealed class ProgressStore
     {
         1 => Version2DatasetNames.Where(name => name != "Nouns"),
         2 => Version2DatasetNames,
+        3 => DatasetNames,
         CurrentVersion => DatasetNames,
         _ => throw new InvalidDataException("Unsupported progress version.")
     };
@@ -156,6 +161,13 @@ public sealed class ProgressStore
             var ids = saved.KnownIds.Concat(saved.TrainingIds).Concat(saved.RehearsingIds).ToArray();
             if (ids.Any(id => id < 0) || ids.Distinct().Count() != ids.Length)
                 throw new InvalidDataException("Progress contains invalid IDs or overlapping categories.");
+            if (saved.Rehearsal is null || saved.Rehearsal.Any(pair =>
+                    pair.Value is null || pair.Value.CorrectDays is < 0 or > 6 ||
+                    (pair.Value.CorrectDays > 0 && pair.Value.LastCorrectDay is null) ||
+                    (saved.KnownIds.Contains(pair.Key)
+                        ? !pair.Value.AwaitingRetry || pair.Value.CorrectDays != 0 || pair.Value.LastResetDay is null
+                        : !saved.RehearsingIds.Contains(pair.Key) || pair.Value.AwaitingRetry)))
+                throw new InvalidDataException("Progress contains invalid rehearsal history.");
         }
     }
 }
