@@ -89,6 +89,14 @@ external-model extraction are not established by this suite.
 
 ## Adding coverage
 
+Android device testing follows the [shared Android testing guide](android-testing.md).
+This repository opts into the central runner but has no Android Appium suite or
+External-session adapter yet. Existing .NET and Chromium test projects do not read
+its context or prove BlazorWebView/device behavior. Keep the lifecycle/IME/OEM cases
+in the manual catalog until a project harness makes real app assertions and verifies
+diagnostics and cleanup on an existing authorized device. No Settings smoke run or
+placeholder configuration counts as application coverage.
+
 Every test class has a short XML summary stating its behavioral scope. Prefer
 descriptive test names; add case summaries/comments when setup, an independent
 oracle, a known defect or an unusual boundary needs explanation. Use the lowest

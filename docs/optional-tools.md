@@ -45,22 +45,21 @@ screenshot or logging calls actually needed, set output caps, then verify on a
 device. It does not replace source debugging with NetCoreDbg. Remove its MCP entry
 before uninstalling its CLI and any explicitly added application instrumentation.
 
-## Android emulator
+## Shared Android emulator and Appium
 
-An emulator or system image is not required by the base module. A physical device and adb are sufficient
-for the base module. To opt in, use the SDK manager to install `emulator` and a
-compatible `system-images;android-36;google_apis;x86_64` image, accept its license,
-create an AVD with `avdmanager`, and verify hardware acceleration and `adb devices`.
-Use `sdkmanager --help`, `avdmanager --help`, and `emulator -help` for installed-version
-syntax. Google's current Android CLI documents Windows emulator-command limitations,
-so use the emulator executable directly where necessary.
-[Official emulator documentation](https://developer.android.com/studio/run/emulator-commandline).
-Remove the AVD, then uninstall its system-image and emulator packages if unused.
+RealJapanese explicitly opts into the existing shared environment through
+[AGENTS.md](../AGENTS.md). Use [Android testing](android-testing.md) for portable
+discovery, revision review and reserved runs against existing devices. Do not
+install a project-local emulator, image, Appium server or UiAutomator2 driver,
+automatically create an AVD, or remove shared tools/data during cleanup.
+Physical devices remain usable through the separate explicit-serial workflow;
+the shared runner supports emulators only. Its Nothing display preset does not
+establish Nothing OS coverage. DevFlow remains optional and independent.
 
 ## Rejected additions
 
 Do not add OpenHands, Prompt Master, Playwright MCP, Android Studio, Selenium,
-Appium, dotnet-monitor, dedicated security suites, another formatter/browser stack,
+duplicate Appium installations, dotnet-monitor, dedicated security suites, another formatter/browser stack,
 or another debugger. No Headroom proxy/wrapper/interception/learning, Playwright
 agent skills, Firefox, or WebKit are enabled by this template.
 

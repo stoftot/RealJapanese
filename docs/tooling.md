@@ -16,11 +16,28 @@ Select only needed modules; tool availability is verified on the destination.
 | .NET | .NET 10 SDK, SDK formatter, NetCoreDbg and its Python MCP controller |
 | Rider | Optional IDE semantic/project integration |
 | Web | Node.js, Microsoft Playwright CLI and Chromium |
-| MAUI/Android | Workload, shared JDK 21, Android SDK and adb |
+| MAUI/Android | Existing workload, JDK 21, SDK/adb and shared AndroidTesting/Appium environment |
 
 Installed package receipts belong in ignored local tooling directories. Do not
 store machine-specific acceptance results or installed-version snapshots in this
 reusable template. See [verification](verification.md) for repeatable checks.
+
+## RealJapanese Android opt-in
+
+This existing project uses the shared AndroidTesting installation. Follow
+[Android testing](android-testing.md) for discovery through `ANDROID_TESTING_HOME`
+or `C:\Users\chris\DevTools\AndroidTesting`, current README/version/changelog
+review, existing device selection and the runner's session/port contracts.
+The single reviewed-revision marker is in repository [AGENTS.md](../AGENTS.md).
+No Android runtime, server, driver or implementation is copied into this checkout.
+
+The retained template provisioners `tooling/setup.ps1 -Modules maui`,
+`tooling/modules/maui.ps1` and `tooling/update-android.ps1` are **not** the setup,
+repair or verification route for this opted-in project. They install/update shared
+dependencies, and the updater can stop ADB. Do not invoke them during project
+maintenance. Report missing/broken external tools to their owner without changing
+the shared scripts, configuration, presets, version, documentation or dependencies.
+Normal project builds continue using `tooling/build-android.ps1` and `enter-env.ps1`.
 
 ## Project configuration and machine configuration
 
@@ -41,13 +58,14 @@ Dot-source `tooling/enter-env.ps1` to set the current shell environment. It read
 configured `JAVA_HOME` and `ANDROID_HOME` values and detects shared installations.
 The default Android SDK location is `%LOCALAPPDATA%/Android/Sdk`; JDK discovery
 checks `%ProgramFiles%/Microsoft` and `%LOCALAPPDATA%/Programs/Microsoft` for JDK 21.
-The MAUI installer reuses a configured JDK 21 or provisions one in the per-user
-program location. These shared SDK/JDK installations are outside the checkout.
+These shared SDK/JDK installations are outside the checkout. Use configured
+existing paths; do not provision Android dependencies through this project.
 
 Configure Rider's Android SDK and Java Development Kit locations to those shared
 folders. Start a fresh shell or IDE after changing user environment settings.
 Repository relocation does not change the shared folders. Moving to another
-computer requires checking/provisioning that computer's toolchain.
+computer requires checking that computer's existing toolchain and supplying its
+own AndroidTesting path. A missing installation is a reported setup gap.
 
 ## Exact MCP policy
 
@@ -163,6 +181,10 @@ from the source machine do not prove the destination works.
 
 ## Install, update and reuse
 
+The following template provisioners apply only to separately authorized tooling
+work. For this project's Android environment, use the opt-in procedure above;
+neither relocation nor an Android test task authorizes shared installation changes.
+
 1. Inspect `Get-Command` results, `dotnet --info`, `dotnet workload list`, existing
    JDK/Android paths and Rider version first.
 2. Run selected module scripts through `tooling/setup.ps1`. Downloaded tools stay
@@ -177,9 +199,9 @@ from the source machine do not prove the destination works.
    metadata at execution time, then installs a specific version. JDK and SDK
    downloads verify vendor checksums. Re-run discovery and acceptance after updates.
    Keep package receipts local; installation alone is not acceptance.
-4. `tooling/update-android.ps1` updates command-line and platform tools only. Keep
-   platform/build-tools aligned with the workload. Google now delegates `sdkmanager`
-   to `android sdk`; this is bundled SDK tooling, not an additional agent stack.
+4. The retained `tooling/update-android.ps1` mutates shared command-line/platform
+   tools and stops ADB. Do not run it for this project's shared AndroidTesting setup.
+   Report compatibility problems; tool-owner maintenance is separate.
 5. Rider updates use JetBrains' updater. For Android support, close Rider then run
    `rider64.exe installPlugins com.jetbrains.rider.android`; reopen and check Plugins.
    [Official installation instructions](https://www.jetbrains.com/help/rider/Managing_Plugins.html).
@@ -203,7 +225,7 @@ tools, so no stale required MCP entry breaks startup.
 | Remove | Keep/configuration action | Installation cleanup |
 |---|---|---|
 | .NET and all technology layers | `configure.ps1 -Modules core` | Remove selected local tool environments; preserve shared SDK/JDK installations |
-| MAUI only | MCP config unchanged | Remove project-specific support; uninstall shared workload/SDK/JDK or Rider support only if unused by all projects |
+| MAUI only | MCP config unchanged | Remove only project-specific support; preserve AndroidTesting, shared devices, workload/SDK/JDK, Appium and Rider support |
 | Web only | MCP config unchanged | Remove `.tooling/web`; no application npm manifest was created |
 | Rider integration | Configure `core,dotnet` | Disable Rider MCP in IDE settings if no other projects use it; no global Codex registration to remove |
 | Debugger only | Configure `core,rider` | Remove `.tooling/dotnet`; keep the shared SDK/Rider |

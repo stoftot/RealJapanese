@@ -109,6 +109,38 @@
   facts and procedures only as needed. The core remains technology-neutral.
 - Removing a module must not require installing its tools to use the core.
 
+## Shared Android testing (repository opt-in)
+
+This repository opts into the shared Windows AndroidTesting environment for its
+MAUI Blazor Hybrid app. Before Android build, deployment or device/UI testing,
+resolve `ANDROID_TESTING_HOME` (process, then persisted user value), or the known
+host path `C:\Users\chris\DevTools\AndroidTesting`. Read its `README.md`,
+`version.json` and relevant `CHANGELOG.md` entries. Follow the project-specific
+[Android testing guide](docs/android-testing.md) and [module facts](docs/ai/modules/MAUI_ANDROID.md).
+This opt-in is repository-scoped; other hosts must supply their own verified path.
+
+AndroidTestingReviewedRevision: UNREVIEWED
+
+Keep this as the single review marker. No prior review is claimed. Use
+`Get-AndroidTestingChanges.ps1` for the current revision; with a valid recorded
+integer use `-SinceRevision` with that actual value. For UNREVIEWED, read the full
+baseline with `-SinceRevision 0`. Investigate invalid/future values and path or
+metadata discrepancies; never lower a marker to hide them. Consider relevant
+improvements even when existing commands work. Advance only after relevant review
+and appropriate validation, rechecking the current revision immediately before
+completion. Preserve the prior value if required validation remains incomplete.
+The RealJapanese Appium/WebView harness and device execution are still outstanding.
+
+Reuse existing devices through `Invoke-AndroidTests.ps1` and its reservations,
+session ownership and allocated ports. With no project device config, select
+`MAUI_Shared_Android`; never borrow another project's dedicated AVD. Do not create
+devices automatically, erase data, bypass reservations or stop shared services as
+routine cleanup. Keep app tests/settings/results in this repository. Do not
+install duplicate tooling or modify, upgrade, repair, relocate or copy the shared
+tool, its dependencies, configuration, presets or documentation; report external
+problems. Documentation maintenance uses static inspection and read-only revision
+checks, without starting services or mutating shared state.
+
 ## Report completion precisely
 
 - Summarize what changed, why, and what was actually executed and observed.

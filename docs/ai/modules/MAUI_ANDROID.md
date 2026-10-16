@@ -48,7 +48,30 @@ The manifest disables Android backup with `android:allowBackup="false"`.
 
 ## Build, install and validation status
 
-The machine currently has .NET 10, the `maui-android` workload 10.0.20 and an
+RealJapanese opts into the shared AndroidTesting environment via the repository
+[AGENTS.md](../../../AGENTS.md). [Android testing](../../android-testing.md) owns
+portable discovery, revision review, coordinated runs, diagnostics and cleanup.
+Reuse existing SDK/JDK/Appium installations; do not run the legacy Android setup
+or updater to validate this integration.
+
+No `android-testing.json`, RealJapanese device registration or Android Appium
+harness currently exists. Use the existing `MAUI_Shared_Android` fallback for
+future authorized emulator runs with an implemented app suite. Its configured
+image is API 36 Google APIs x86_64; build `android-x64` with the repository helper.
+RID-targeted Debug output is
+`.tooling/android-artifacts/bin/RealJapanese.Mobile/debug_android-x64/com.realjapanese.mobile-Signed.apk`;
+verify it belongs to the successful current build. The runner can reserve ports
+and deploy an APK, but actual BlazorWebView interaction remains unverified.
+The xUnit/bUnit/Chromium suites do not consume an Android runner context.
+
+The shared runner supports emulators only; physical phone checks require the
+explicit-serial workflow and an ARM64-compatible build. The shared AVD's Nothing
+Phone (3a) display settings and revision-2 preset do not provide Nothing OS or
+physical-device/OEM coverage. No additional device creation is required.
+
+### Existing build and device evidence
+
+Prior project validation used .NET 10, the `maui-android` workload 10.0.20 and an
 Android SDK path. The canonical `tooling/build-android.ps1` Debug build passed and
 produced `.tooling/android-artifacts/bin/RealJapanese.Mobile/debug/com.realjapanese.mobile-Signed.apk`.
 The project embeds managed assemblies in the APK so it can be sideloaded without
@@ -91,5 +114,7 @@ exercising the app on an API-24-or-newer device or emulator.
 
 Debug APKs use development signing and are suitable for local testing, not store
 release. Installing an update with `adb install -r` preserves app data only when
-the package ID and signer match. A signer mismatch requires uninstalling the old
-package, which also removes local progress.
+the package ID and signer match. On a mismatch, stop and preserve progress; use
+the matching signer or an explicitly authorized disposable test identity.
+Uninstalling the existing package removes local progress and is not an automatic
+test recovery step. Historical evidence above does not validate the shared runner.
