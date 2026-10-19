@@ -18,6 +18,7 @@ public sealed class Report(Options options, Settings settings, IReadOnlyList<Ver
     public List<Sample> Samples { get; } = [];
     public List<string> Notes { get; } = ["BERT uses a fixed speaker, not voice cloning. Listening is required to assess pronunciation, pitch accent, naturalness and similarity."];
     public string Status { get; set; } = "running";
+    public string WorkerLifecycle { get; } = "Keep each engine loaded for its batch; dispose after the batch or cancellation.";
     public Dictionary<string, string> LibrarySha256 { get; } = Directory.GetFiles(AppContext.BaseDirectory, "AiLibrary.*.dll")
         .ToDictionary(p => Path.GetFileName(p)!, p => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(p))));
 

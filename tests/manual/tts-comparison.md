@@ -13,7 +13,10 @@ Keep the AI library checkout read-only to this consumer. Use a fresh run directo
 
 1. Run `--dry-run`; confirm IDs 0–10, 11 unique verbs and 33 expected recordings.
    Confirm no new output directory, model process, or catalog/progress write.
-2. Run generation with all engines and no fallback flag. Open `index.html`.
+2. Run generation with all engines and no fallback flag. Confirm the same owned
+   worker remains loaded between healthy requests within an engine batch and is
+   disposed at the end of that batch. A failed worker may be replaced.
+   Open `index.html`.
 3. Compare each processed clip to its raw recording. Confirm exactly the named
    dictionary-form word, the displayed kana reading, audible initial/final sounds,
    natural Japanese accent, no repeated word/carrier sentence, and no intrusive

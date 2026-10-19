@@ -46,7 +46,10 @@ public static class Synthesis
 
     public static IAiModelService Create(string engine, Settings settings)
     {
-        var builder = AiLibraryBuilder.Create().UseModelsDirectory(settings.ModelsDirectory);
+        var builder = AiLibraryBuilder.Create().UseModelsDirectory(settings.ModelsDirectory)
+            .Configure(o => o.Lifecycle.ShutdownWhenQueueIsEmpty = false);
+        // The caller disposes this service after the engine batch, including on cancellation.
+        // The library's default would unload between every awaited single-word request.
         SpeechGpuOptions? Gpu(SpeechGpuProfile profile) => settings.UseGpu ? new() { Profile = profile } : null;
         switch (engine)
         {

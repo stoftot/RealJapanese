@@ -62,6 +62,11 @@ Exit 0 means every requested audio file was generated; exit 1 means partial or
 failed generation; exit 130 means cancellation. It does not certify pronunciation
 or similarity to the reference.
 
+If Fish reports invalid/negative audio-code values, retain the failed run and
+retry only the affected IDs in a new directory. An intermittent Windows AMD
+failure has been observed even with valid short-word inputs; a successful retry
+does not establish its cause or a permanent runtime fix.
+
 ## Single-word settings and limits
 
 - **BERT:** original Japanese text plus the catalog kana reading; fixed M1 voice
@@ -71,15 +76,20 @@ or similarity to the reference.
   measured best match to the recording.
 - **Fish:** kana alone to disambiguate reading, cropped reference plus transcript,
   128 maximum generated tokens, temperature 0.65, top-p 0.7 and repetition penalty
-  1.2. These conservative starting settings are not a guarantee against extra
-  speech. A token cap is a safety bound, not an exact duration target.
+  1.2. The pinned Fish decoder currently ignores the forwarded repetition penalty;
+  changing this option does not alter its fixed repetition handling. These settings are not a
+  guarantee against extra speech. A token cap is a safety bound, not an exact
+  duration target.
 - **Irodori:** kana alone, cropped reference and a separate Japanese caption
   requesting clear, calm, natural one-word delivery. Predicted duration is kept
   at scale 1 and bounded to 0.5–2.5 seconds; checkpoint default sampling steps
   remain in use. Listen for a clipped ending if the upper bound is reached.
 - **All:** seed 41 (configurable), one request per verb, no sentence/carrier phrase,
   no appended punctuation or spoken instruction. Models run sequentially to
-  avoid unnecessary GPU reloads and memory contention. GPU budgets are Desktop
+  avoid memory contention. `ShutdownWhenQueueIsEmpty = false` keeps each model
+  loaded between words; the service is disposed after its engine batch or on
+  cancellation. The library otherwise unloads after each awaited request.
+  GPU budgets are Desktop
   for BERT/Irodori and Generation for Fish; `UseGpu: false` explicitly uses CPU.
   A fixed seed improves repeatability but is not a guarantee across runtimes/devices;
   the library's Windows AMD checks specifically found Fish output could vary with
