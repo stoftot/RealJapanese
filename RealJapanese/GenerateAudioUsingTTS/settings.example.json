@@ -1,0 +1,17 @@
+{
+  "LibraryRoot": "E:\\path\\to\\Ai library",
+  "ModelsDirectory": "E:\\path\\to\\Models",
+  "BertPython": "E:\\path\\to\\Ai library\\.tooling\\style-bert-vits2-gpu\\Scripts\\python.exe",
+  "FishPython": "E:\\path\\to\\Ai library\\.tooling\\fish-gpu\\Scripts\\python.exe",
+  "IrodoriPython": "E:\\path\\to\\Ai library\\.tooling\\irodori-gpu\\Scripts\\python.exe",
+  "Ffmpeg": "C:\\path\\to\\ffmpeg.exe",
+  "ReferenceAudio": "C:\\path\\to\\reference.webm",
+  "ReferenceStartSeconds": 38.35,
+  "ReferenceDurationSeconds": 9.8,
+  "ReferenceTranscript": null,
+  "ReferenceTranscriptSource": "Supply the exact transcript of this excerpt; record whether it was human verified or automatic",
+  "BertVoice": "M1",
+  "UseGpu": true,
+  "Seed": 41,
+  "VoiceDescription": "自然で落ち着いた会話調の声。日本語の辞書形の単語を一語だけ、明瞭に、普通の速さで発音する。語尾を伸ばさず、説明や他の言葉を付け加えない。"
+}

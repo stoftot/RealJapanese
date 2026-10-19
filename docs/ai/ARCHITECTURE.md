@@ -29,6 +29,10 @@ The [project map](PROJECT_MAP.md) owns paths and project relationships.
 - **DataLoaders:** owns JSON/JSONL IO and serialized domain records. Verb/adjective
   conjugation behavior also lives in these models.
 - **Data utilities:** maintain canonical datasets outside normal app execution.
+- **Standalone TTS comparison:** reads the verb catalog and consumes copied
+  AiLibrary speech binaries. It writes only isolated `.tooling/tts-runs` artifacts,
+  never hooks audio into either host, and treats the library checkout as read-only.
+  [TTS setup](../tts-comparison.md) owns the model and reference-audio contract.
 - **Automated tests:** depend inward on production projects. Unit, integration,
   rendered-component and real-browser projects share disposable workspace support;
   the duplicate-cleanup utility is reached through a guarded child-process host.

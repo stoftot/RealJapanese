@@ -2,5 +2,8 @@
   <Import Project="../TestProject.props" />
   <ItemGroup>
     <ProjectReference Include="../../RealJapanese/Repositories/Repositories.csproj" />
+    <!-- Pure standalone-tool contracts; tests do not require external TTS binaries. -->
+    <Compile Include="../../RealJapanese/GenerateAudioUsingTTS/Audio.cs" Link="TtsTool/Audio.cs" />
+    <Compile Include="../../RealJapanese/GenerateAudioUsingTTS/Configuration.cs" Link="TtsTool/Configuration.cs" />
   </ItemGroup>
 </Project>

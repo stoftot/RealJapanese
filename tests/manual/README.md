@@ -15,6 +15,7 @@ Keep run results and unexecuted steps in the current task, not in these files.
 | [Study selection and practice](study-practice.md) | STUDY-001–011: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout, language oracles, book/lesson selection, saved-word mixing and daily rehearsal |
 | [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–003: offline catalogs, update/restart persistence, IME/Back/lifecycle and controlled startup failure |
 | [Data maintenance](data-maintenance.md) | DATA-001–002: controlled extraction/model validation and interrupted legacy cleanup |
+| [Standalone TTS comparison](tts-comparison.md) | TTS-001: single-word audio, pronunciation, reference voice comparison and output isolation |
 
 The initial cases reuse behavior documented in the [sync guide](../../docs/local-sync.md).
 That guide remains the owner of user instructions and network/compatibility limits.

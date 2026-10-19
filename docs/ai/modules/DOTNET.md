@@ -23,6 +23,10 @@ Extraction has absolute references to external AiLibrary projects. Building the
 older aggregate requires those projects; use a focused solution for ordinary app
 work.
 
+The standalone `GenerateAudioUsingTTS` console instead consumes copied AiLibrary
+DLLs from `.tooling/tts-ai-library`; build its project directly to avoid touching
+external projects. [TTS setup](../../tts-comparison.md) owns preparation and usage.
+
 ## Canonical CLI targets
 
 From the repository root:

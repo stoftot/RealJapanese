@@ -17,6 +17,9 @@ The older aggregate intentionally excludes mobile. Its extraction project has
 machine-specific external project references, so it is not the normal solution
 for app development.
 
+For standalone voice experiments, use the [verb TTS comparison tool](tts-comparison.md).
+It has its own focused build and writes audio outside application data.
+
 ## Prerequisites
 
 - .NET 10 SDK.
