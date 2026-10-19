@@ -64,6 +64,32 @@ the Playwright browser project for the complete suite. See the
 [automated test guide](testing.md) for setup, commands, test ownership, isolation,
 parallelism and explicit known-defect cases.
 
+## Synchronize personal progress through Git
+
+`RealJapanese/Data/Progress.json` is intentionally tracked for the owner's personal
+study progress. The web host uses this save by default. Stop the app before
+switching devices, committing the save, or pulling a newer save: running instances
+cache progress and may reject changes made by another process.
+
+Pull before studying on a device. After studying, stop the app, then commit and
+push the save:
+
+```powershell
+git add -- RealJapanese/Data/Progress.json
+git commit -m "Save study progress"
+git push
+```
+
+Git synchronization is manual. Study on one device at a time; concurrent saves
+can conflict, and the JSON should not be merged blindly. For independent device
+progress, use the app's merge preview through local sync instead. Android keeps
+its save in app-private storage: transfer it to the default web instance through
+local sync before committing, and transfer it back after pulling on another device.
+Custom `StudyData__ProgressRoot` directories are outside this tracked-save workflow.
+
+The save contains personal study history. Revisit tracking it before sharing the
+repository or publishing source; removing it later does not remove Git history.
+
 ## Transfer progress locally
 
 Open **Sync progress** from Home in both running apps and follow the sharing and

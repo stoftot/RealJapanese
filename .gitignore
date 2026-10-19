@@ -14,7 +14,6 @@ __pycache__/
 *.pyc
 TestResults/
 
-# Private unified progress and interrupted atomic writes
-RealJapanese/Data/Progress.json
+# Unified progress is tracked for personal Git sync; ignore transient writes
 RealJapanese/Data/Progress.json.lock
 RealJapanese/Data/Progress.json.*.tmp

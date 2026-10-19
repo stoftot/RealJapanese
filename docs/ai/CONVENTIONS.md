@@ -5,6 +5,10 @@ owned by project manifests.
 
 ## Organization and components
 
+- The default web `RealJapanese/Data/Progress.json` is intentionally tracked for
+  personal Git synchronization. Preserve this save during development; lock and
+  temporary files stay ignored. See the [Git progress workflow](../development.md#synchronize-personal-progress-through-git).
+
 - Open `RealJapanese.Web.sln`, `RealJapanese.Mobile.sln` or
   `RealJapanese.Shared.sln` for focused application work. The shared solution also
   carries unit, integration and component tests; open root `RealJapanese.Tests.slnx`

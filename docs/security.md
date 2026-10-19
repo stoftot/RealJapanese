@@ -32,6 +32,11 @@ The web host uses configurable filesystem roots and registers its repositories
 as process-wide singletons. There are no accounts, cloud storage, analytics, or
 background synchronization in the current application architecture.
 
+The default web save, `RealJapanese/Data/Progress.json`, is intentionally tracked
+in Git for personal device synchronization. Its study history travels with the
+repository and remains in commit history. Review this before sharing source;
+see the [manual Git workflow](development.md#synchronize-personal-progress-through-git).
+
 Progress writes use a temporary file and replacement, serialize in-process
 changes, check the stored revision before committing, and retain one recovery
 snapshot for imports. Incoming sync data is size-bounded, parsed into a fixed
