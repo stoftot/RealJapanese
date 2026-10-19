@@ -8,6 +8,7 @@ from dataclasses import asdict
 import json
 import os
 import stat
+import sys
 from pathlib import Path
 
 
@@ -19,6 +20,8 @@ def reject_links(path):
 
 
 def main():
+    # Windows redirected terminals may default to a code page without Japanese.
+    sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("audio", type=Path)
     parser.add_argument("--output", required=True, type=Path)
