@@ -79,10 +79,10 @@ storage.
 
 **Expected result:** The user-entered 3-second crop is retained after metadata
 loads and is locally converted to mono 24 kHz PCM WAV; it can be played. The
-machine transcript is visibly identified as not human-verified;
-after editing, its source is shown as “User edited”. The full source attribution
-appears both in the reference card and generation selection. No recording is sent
-to a remote service.
+machine transcript is visibly identified as `AI library Whisper small; not
+human-verified`; after editing, its source is shown as “User edited”. The full
+source attribution appears both in the reference card and generation selection.
+No recording is sent to a remote service.
 
 ## AUDIO-004 — Engine and output-format matrix
 
@@ -90,7 +90,7 @@ to a remote service.
 including raw and processed audio.
 
 **Preconditions:** Follow the setup guide with the three model environments, model
-files, local Whisper small model, FFmpeg and a prepared reference available. Use
+files, configured shared `whisper-small` model, FFmpeg and a prepared reference. Use
 two to four representative words, including at least one longer expression. Use
 disposable work and export roots; model generation may take substantial time.
 
@@ -107,7 +107,8 @@ disposable work and export roots; model generation may take substantial time.
 
 **Expected result:** Each selected engine returns a playable clip or a visible
 failure. The engines run in sequential batches, with each worker held for its
-batch; validation processes the batch in one local Whisper pass. Processed outputs
+batch; generated files are checked sequentially through one local Whisper worker.
+Whisper uses the configured shared model without downloading it. Processed outputs
 use edge trimming and peak normalization, while raw model audio remains available
 in the run. WAV, MP3 and Opus exports have the requested encoding. ASR checks text
 only and do not establish pronunciation, pitch accent or reference similarity.
@@ -115,7 +116,7 @@ only and do not establish pronunciation, pitch accent or reference similarity.
 ## AUDIO-005 — Cancellation and interrupted-run recovery
 
 **Purpose:** Ensure cancellation or application restart preserves completed work
-without falsely resuming a run.
+and exposes interrupted runs for explicit resume.
 
 **Preconditions:** Use disposable work/export roots and a run long enough to observe
 at least one generated clip. Do not use a user's normal export directory.
@@ -127,12 +128,14 @@ at least one generated clip. Do not use a user's normal export directory.
    until the run reaches a terminal cancelled state. Inspect its retained clips.
 2. Start another bounded run. Stop the Audio Studio process while it is active,
    then launch the app again using the same work root.
-3. Open Runs, inspect the interrupted run, and start a new run for any retry.
+3. Open Runs, inspect the interrupted run and resume it. Confirm the run uses its
+   original settings and reference snapshot and does not replace completed outputs.
 
 **Expected result:** Cancellation remains visibly pending while the active
 operation stops; polling does not freeze at “Cancelling”. Completed outputs are
-preserved. Startup marks an active run as interrupted and retains completed
-clips; generation does not resume automatically. A retry is a separate new run.
+preserved. Startup marks an active run as interrupted and retains completed clips;
+it does not resume automatically, but the user can explicitly resume the run. A
+cancelled run cannot be resumed.
 No cleanup touches study progress, catalogs, another project, or the external
 speech-library checkout.
 
@@ -162,3 +165,38 @@ to judge Japanese pronunciation.
 the reason. Passing text recognition or producing a valid waveform alone is not
 evidence of correct pitch accent, naturalness or voice identity. Stored BERT
 profiles are machine estimates, not approved learning references.
+
+## AUDIO-007 — Pause, resume and persisted checkpoints
+
+**Purpose:** Verify safe pause points during generation and transcription,
+checkpoint preservation across resume/restart, and terminal cancellation.
+
+**Preconditions:** Use disposable work/export roots and a bounded run with several
+words and at least one engine. Ensure there are pending clips and checks. Use a
+local model setup that takes long enough to pause during each phase.
+
+**Steps:**
+
+1. Start the run and request Pause while a clip is generating. Wait for the current
+   clip operation, conversion and save to finish and for the status to become
+   Paused. Record hashes of completed clip files and their completed check state.
+2. While paused, confirm another run or reference operation can start. Confirm
+   Export is unavailable for the paused run. Finish or cancel that other work,
+   then resume the paused run.
+3. Let generation finish and request Pause while the status is Checking. Wait for
+   the current Whisper file to finish and the status to become Paused. Record the
+   completed check files/state and verify export remains unavailable.
+4. Stop and restart Audio Studio with the same work root. Confirm the run remains
+   Paused and resumable; resume it and let it finish. Compare earlier clip hashes
+   and completed-check records with the values recorded before each pause.
+5. Pause another bounded run, cancel the paused run, and inspect its terminal
+   status and resume control.
+
+**Expected result:** Pause completes the in-flight generation clip including
+conversion/save, or the in-flight Whisper file, then unloads the model and releases
+generation capacity. No subsequent model request starts until resume. A paused run
+retains settings, its reference snapshot, completed outputs and checks; resume
+skips the saved work, including after application restart. Previously completed
+clip hashes remain unchanged. Paused and Interrupted runs cannot be exported.
+Cancelling a paused run marks it terminal `Cancelled` and removes its resume
+action. This case is a manual acceptance specification, not an execution claim.

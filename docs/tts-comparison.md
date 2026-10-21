@@ -124,27 +124,16 @@ On this Windows host, restricted process execution can cause MSBuild discovery
 or AMD MIOpen failures; use ordinary local execution with the same paths rather
 than editing the library or silently switching engines.
 
-## Optional local transcription
+## Local reference transcription
 
-The [Faster Whisper project](https://github.com/SYSTRAN/faster-whisper) provides
-local speech recognition. This helper uses CPU int8 inference, leaving GPU memory
-for TTS. It does not send audio to a service. Installation/model downloads require
-network access and are separate from the offline TTS tool:
-
-```powershell
-python -m venv .tooling/tts-transcriber
-.\.tooling\tts-transcriber\Scripts\python.exe -m pip install -r tooling/tts-transcriber-requirements.txt
-.\.tooling\tts-transcriber\Scripts\python.exe tooling/transcribe-tts-reference.py 'C:\path\reference.webm' --start 25 --seconds 55 --output .tooling/tts-reference/candidates.json --download
-```
-
-The first `--download` fetches the multilingual Whisper small model into
-`.tooling/tts-asr-models`. Later runs omit it and require cached files. The helper
-writes timestamped Japanese segments, word probabilities and `humanVerified:
-false`. Select a complete short phrase with silence around its boundaries, then
-transcribe the exact crop again to check boundary consistency. Copy its text and
-timestamps into the TTS settings. This checks ASR consistency, not correctness by
-listening. PyAV 16.0.1 is pinned because PyAV 19 removed an API used by this
-Faster Whisper version. Keep ASR environments, model files and recordings out of Git.
+The comparison console has no ASR stage: it consumes the exact transcript entered
+in its TTS settings and does not transcribe or verify it. To prepare an uploaded,
+cropped recording with a locally generated transcript, use Audio Studio's
+References view. It invokes the copied AiLibrary `IAiModelService.TranscribeAsync`
+API with the configured local Whisper small model; see the
+[Audio Studio reference workflow](audio-studio.md#references). Review and edit
+the transcript there before using it for Fish conditioning. Machine recognition
+does not verify transcript correctness, pronunciation or pitch accent.
 
 ## Regression checks
 

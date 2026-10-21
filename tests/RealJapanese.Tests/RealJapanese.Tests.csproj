@@ -8,6 +8,7 @@
     <Compile Include="../../RealJapanese/AudioStudio/Models.cs" Link="AudioStudio/Models.cs" />
     <Compile Include="../../RealJapanese/AudioStudio/WordCatalog.cs" Link="AudioStudio/WordCatalog.cs" />
     <Compile Include="../../RealJapanese/AudioStudio/StudioStore.cs" Link="AudioStudio/StudioStore.cs" />
-    <Compile Include="../../RealJapanese/AudioStudio/MediaTools.cs" Link="AudioStudio/MediaTools.cs" />
+    <Compile Include="../../RealJapanese/AudioStudio/GenerationBackend.cs" Link="AudioStudio/GenerationBackend.cs" />
+    <Compile Include="../../RealJapanese/AudioStudio/GenerationService.cs" Link="AudioStudio/GenerationService.cs" />
   </ItemGroup>
 </Project>

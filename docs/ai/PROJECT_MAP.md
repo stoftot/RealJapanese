@@ -52,7 +52,7 @@ Paths below are relative to the repository root. All projects target .NET 10.
 | `RealJapanese/CheckDataForDuplicates/CheckDataForDuplicates.csproj` | Console utility / `net10.0` | DataLoaders | Isolated integration tests through UtilityHost |
 | `RealJapanese/Extract kanji/Extract kanji.csproj` | Console utility / `net10.0` | DataLoaders; external AiLibrary projects | None found |
 | `RealJapanese/GenerateAudioUsingTTS/GenerateAudioUsingTTS.csproj` | Standalone console / `net10.0` | Copied AiLibrary speech DLLs; no project references | TtsAudioTests, TtsConfigurationTests; TTS-001 listening |
-| `RealJapanese/AudioStudio/AudioStudio.csproj` | Standalone ASP.NET executable / `net10.0` | GenerateAudioUsingTTS; copied AiLibrary speech DLLs | AudioStudioTests, AudioTranscriptionProtocolTests; AUDIO-001–006 |
+| `RealJapanese/AudioStudio/AudioStudio.csproj` | Standalone ASP.NET executable / `net10.0` | GenerateAudioUsingTTS; copied AiLibrary generation and transcription DLLs | AudioStudioTests, GenerationCheckpointTests; AUDIO-001–007 |
 | `tests/RealJapanese.Tests/RealJapanese.Tests.csproj` | xUnit executable / `net10.0` | Repositories | Pure unit tests |
 | `tests/RealJapanese.IntegrationTests/RealJapanese.IntegrationTests.csproj` | xUnit executable / `net10.0` | TestSupport; UtilityHost (build only) | File/process/network integration |
 | `tests/RealJapanese.ComponentTests/RealJapanese.ComponentTests.csproj` | Razor xUnit executable / `net10.0` | RealJapanese.UI; TestSupport | bUnit component tests |

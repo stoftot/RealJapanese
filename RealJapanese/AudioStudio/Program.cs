@@ -36,8 +36,9 @@ builder.Services.AddSingleton(catalog);
 builder.Services.AddSingleton(store);
 builder.Services.AddSingleton(media);
 builder.Services.AddSingleton(pitch);
+builder.Services.AddSingleton<IGenerationBackend, LibraryGenerationBackend>();
 builder.Services.AddSingleton<GenerationService>();
-builder.Services.AddHostedService(s => s.GetRequiredService<GenerationService>());
+builder.Services.AddHostedService<GenerationHost>();
 var app = builder.Build();
 app.Use(async (context, next) =>
 {
@@ -76,9 +77,11 @@ app.MapGet("/api/catalog", () =>
         hasAudio = exported.TryGetValue(w.Key, out var e) && e.Word == w && File.Exists(store.ExportAudio(w.Key)),
         pitchStatus = pitch.For(w)?.Profile is not null ? "Stored BERT estimate" : "Model-inferred" });
 });
-app.MapGet("/api/runs", () => store.Runs().Select(r => new { r.Id, r.CreatedAt, r.Status, r.WordCount, r.Engines, r.OutputQuality, r.ReferenceName, r.Progress }));
+app.MapGet("/api/runs", () => store.Runs().Select(r => new { r.Id, r.CreatedAt, r.Status, r.WordCount, r.Engines, r.OutputQuality, r.ReferenceName, r.Progress, r.IsActive, r.CanResume }));
 app.MapGet("/api/runs/{id}", (string id) => store.GetRun(id));
 app.MapPost("/api/runs", (GenerationInput input, GenerationService jobs) => jobs.StartAsync(input));
+app.MapPost("/api/runs/{id}/pause", (string id, GenerationService jobs) => { jobs.Pause(id); return Results.Ok(); });
+app.MapPost("/api/runs/{id}/resume", (string id, GenerationService jobs) => jobs.ResumeAsync(id));
 app.MapPost("/api/runs/{id}/cancel", (string id, GenerationService jobs) => { jobs.Cancel(id); return Results.Ok(); });
 app.MapPut("/api/runs/{id}/selections", (string id, SelectionInput input) => store.Select(id, input.Choices));
 app.MapPost("/api/runs/{id}/export", (string id, ExportInput input) => store.Export(id, input.AcknowledgeUnselected));
@@ -124,14 +127,10 @@ app.MapPost("/api/references", async (HttpRequest request, GenerationService job
         {
             await using (var stream = new FileStream(upload, FileMode.CreateNew)) await file.CopyToAsync(stream, ct);
             double seconds = await media.CreateReferenceAsync(upload, store.ReferenceAudio(id), start, duration, ct);
-            string transcript = "";
-            await media.TranscribeAsync([new(id, store.ReferenceAudio(id), true)], result =>
-            {
-                if (result.Error is not null) throw new StudioException("Reference transcription failed: " + result.Error);
-                transcript = result.Text ?? "";
-                return Task.CompletedTask;
-            }, ct);
-            var reference = new ReferenceItem(id, name, transcript, "Local Whisper small; not human-verified", seconds,
+            await using var transcriber = options.CreateTranscriber();
+            var result = await transcriber.TranscribeOneAsync(id, store.ReferenceAudio(id), true, ct);
+            if (result.Error is not null) throw new StudioException("Reference transcription failed: " + result.Error);
+            var reference = new ReferenceItem(id, name, result.Text ?? "", "AI library Whisper small; not human-verified", seconds,
                 Path.GetFileName(file.FileName) + $" ({start:0.##}–{start + seconds:0.##}s)", DateTimeOffset.UtcNow);
             store.SaveReference(reference);
             saved = true;

@@ -1,42 +1,19 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
-using System.Text.Json;
 using GenerateAudioUsingTTS;
 
 namespace AudioStudio;
 
-public sealed record TranscriptionInput(string Id, string Path, bool IsReference = false);
-
-public sealed record TranscriptionOutput(string Id, string? Text, string? Error);
-
-/// <summary>Runs bounded FFmpeg media operations and a single local Faster Whisper batch worker.</summary>
+/// <summary>Runs bounded local FFmpeg media operations.</summary>
 public sealed class MediaTools
 {
     private static readonly TimeSpan MediaTimeout = TimeSpan.FromMinutes(10);
-    private static readonly TimeSpan AsrStartupTimeout = TimeSpan.FromMinutes(10);
-    private static readonly TimeSpan AsrPerInputTimeout = TimeSpan.FromMinutes(2);
-    private static readonly TimeSpan MaximumAsrTimeout = TimeSpan.FromDays(30);
     private const int MaxDiagnosticCharacters = 16 * 1024;
-    private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web);
 
     private readonly string _ffmpeg;
-    private readonly string _asrPython;
-    private readonly string _asrModels;
-    private readonly string _asrCache;
-    private readonly string _transcriptionScript;
-    private readonly string _runtimeRoot;
 
-    public MediaTools(string ffmpeg, string asrPython, string asrModels, string asrCache,
-        string transcriptionScript, string runtimeRoot)
-    {
-        _ffmpeg = RequirePath(ffmpeg, nameof(ffmpeg));
-        _asrPython = RequirePath(asrPython, nameof(asrPython));
-        _asrModels = RequirePath(asrModels, nameof(asrModels));
-        _asrCache = RequirePath(asrCache, nameof(asrCache));
-        _transcriptionScript = RequirePath(transcriptionScript, nameof(transcriptionScript));
-        _runtimeRoot = RequirePath(runtimeRoot, nameof(runtimeRoot));
-    }
+    public MediaTools(string ffmpeg) => _ffmpeg = RequirePath(ffmpeg, nameof(ffmpeg));
 
     public async Task<double> CreateReferenceAsync(string source, string destination, double startSeconds,
         double durationSeconds, CancellationToken cancellationToken)
@@ -134,106 +111,6 @@ public sealed class MediaTools
             TryDelete(intermediate);
             TryDelete(encoded);
         }
-    }
-
-    public async Task TranscribeAsync(IReadOnlyList<TranscriptionInput> inputs,
-        Func<TranscriptionOutput, Task> onResult, CancellationToken cancellationToken)
-    {
-        ArgumentNullException.ThrowIfNull(inputs);
-        ArgumentNullException.ThrowIfNull(onResult);
-        if (inputs.Count == 0) return;
-        foreach (TranscriptionInput input in inputs)
-        {
-            if (input is null) throw new ArgumentException("Transcription inputs cannot contain null.", nameof(inputs));
-            if (string.IsNullOrWhiteSpace(input.Id)) throw new ArgumentException("Each transcription input needs an ID.", nameof(inputs));
-            _ = RequirePath(input.Path, nameof(inputs));
-        }
-
-        Directory.CreateDirectory(_runtimeRoot);
-        Directory.CreateDirectory(_asrCache);
-        var info = NewProcess(_asrPython, _runtimeRoot);
-        AddArguments(info, _transcriptionScript, "--models", _asrModels, "--cache", _asrCache, "--runtime", _runtimeRoot);
-        info.Environment["PYTHONDONTWRITEBYTECODE"] = "1";
-        info.Environment["PYTHONUTF8"] = "1";
-        info.Environment["HF_HOME"] = _asrCache;
-        info.Environment["HF_HUB_OFFLINE"] = "1";
-        info.Environment["TRANSFORMERS_OFFLINE"] = "1";
-        info.Environment["TEMP"] = _runtimeRoot;
-        info.Environment["TMP"] = _runtimeRoot;
-        info.Environment["TMPDIR"] = _runtimeRoot;
-
-        using Process process = Process.Start(info) ?? throw new InvalidOperationException("Could not start the local transcription worker.");
-        using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        TimeSpan asrTimeout = AsrTimeoutFor(inputs.Count);
-        timeout.CancelAfter(asrTimeout);
-        Task<string> diagnosticTask = ReadBoundedAsync(process.StandardError, MaxDiagnosticCharacters);
-        Task outputTask = PumpTranscriptionOutputAsync(process.StandardOutput, inputs.Select(input => input.Id).ToArray(), onResult, timeout.Token);
-        try
-        {
-            foreach (TranscriptionInput input in inputs)
-            {
-                string line = JsonSerializer.Serialize(new WorkerInput(input.Id, Path.GetFullPath(input.Path), input.IsReference), JsonOptions);
-                await process.StandardInput.WriteLineAsync(line.AsMemory(), timeout.Token).ConfigureAwait(false);
-            }
-            process.StandardInput.Close();
-            Task waitTask = process.WaitForExitAsync(timeout.Token);
-            Task first = await Task.WhenAny(waitTask, outputTask).ConfigureAwait(false);
-            if (first == outputTask) await outputTask.ConfigureAwait(false);
-            await waitTask.ConfigureAwait(false);
-            await outputTask.ConfigureAwait(false);
-            string diagnostics = await diagnosticTask.ConfigureAwait(false);
-            if (process.ExitCode != 0)
-                throw new InvalidOperationException("Local transcription worker failed to initialize or finish: " + diagnostics.Trim());
-        }
-        catch (OperationCanceledException) when (!cancellationToken.IsCancellationRequested)
-        {
-            Kill(process);
-            await ObserveAsync(outputTask).ConfigureAwait(false);
-            string diagnostics = await diagnosticTask.ConfigureAwait(false);
-            throw new TimeoutException($"Local transcription batch exceeded its {asrTimeout.TotalMinutes:0}-minute timeout " + diagnostics.Trim());
-        }
-        catch
-        {
-            Kill(process);
-            await ObserveAsync(outputTask).ConfigureAwait(false);
-            await ObserveAsync(diagnosticTask).ConfigureAwait(false);
-            throw;
-        }
-    }
-
-    internal static async Task PumpTranscriptionOutputAsync(TextReader reader, IReadOnlyCollection<string> expectedIds,
-        Func<TranscriptionOutput, Task> onResult, CancellationToken cancellationToken)
-    {
-        ArgumentNullException.ThrowIfNull(reader);
-        ArgumentNullException.ThrowIfNull(expectedIds);
-        ArgumentNullException.ThrowIfNull(onResult);
-        var expected = new HashSet<string>(StringComparer.Ordinal);
-        foreach (string? id in expectedIds)
-        {
-            if (string.IsNullOrWhiteSpace(id)) throw new ArgumentException("Expected transcription IDs must not be empty.", nameof(expectedIds));
-            if (!expected.Add(id)) throw new ArgumentException($"Expected transcription ID '{id}' is duplicated.", nameof(expectedIds));
-        }
-
-        var received = new HashSet<string>(StringComparer.Ordinal);
-        while (await reader.ReadLineAsync(cancellationToken).ConfigureAwait(false) is { } line)
-        {
-            if (string.IsNullOrWhiteSpace(line)) continue;
-            TranscriptionOutput output = JsonSerializer.Deserialize<TranscriptionOutput>(line, JsonOptions)
-                ?? throw new InvalidDataException("Transcription worker emitted an empty JSON result.");
-            if (string.IsNullOrWhiteSpace(output.Id))
-                throw new InvalidDataException("Transcription worker emitted a result with an empty ID.");
-            if (!expected.Contains(output.Id))
-                throw new InvalidDataException($"Transcription worker emitted unexpected ID '{output.Id}'.");
-            if (!received.Add(output.Id))
-                throw new InvalidDataException($"Transcription worker emitted duplicate ID '{output.Id}'.");
-            if (output.Text is null && output.Error is null)
-                throw new InvalidDataException($"Transcription worker emitted neither text nor an error for '{output.Id}'.");
-            await onResult(output).ConfigureAwait(false);
-        }
-
-        string[] missing = expected.Except(received, StringComparer.Ordinal).ToArray();
-        if (missing.Length > 0)
-            throw new InvalidDataException($"Transcription worker omitted {missing.Length} result(s): {string.Join(", ", missing)}.");
     }
 
     private static async Task RunProcessAsync(ProcessStartInfo info, TimeSpan duration,
@@ -348,11 +225,4 @@ public sealed class MediaTools
 
     private static string Number(double value) => value.ToString("0.#########", CultureInfo.InvariantCulture);
 
-    private static TimeSpan AsrTimeoutFor(int inputCount)
-    {
-        double requestedMinutes = AsrStartupTimeout.TotalMinutes + inputCount * AsrPerInputTimeout.TotalMinutes;
-        return TimeSpan.FromMinutes(Math.Min(requestedMinutes, MaximumAsrTimeout.TotalMinutes));
-    }
-
-    private sealed record WorkerInput(string Id, string Path, bool IsReference);
 }

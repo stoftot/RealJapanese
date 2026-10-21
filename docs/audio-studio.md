@@ -17,23 +17,21 @@ speech SDK bundle copied by the repository's TTS preparation script:
 
 The bundle must include the speech SDK DLLs expected by that script and the
 Japanese pronunciation-profile APIs (`JapanesePronunciationGenerator` and
-`SpeechSynthesisRequest.PronunciationProfile`). Audio Studio
-references the standalone `GenerateAudioUsingTTS` project and those copied
-binaries; it does not build or modify the external AI library. Create
-`.tooling/tts-settings.json` from
+`SpeechSynthesisRequest.PronunciationProfile`). Audio Studio references the
+standalone `GenerateAudioUsingTTS` project and those copied binaries; it does not
+build or modify the external AI library. The copied binaries already contain the
+transcription API used by Audio Studio, so the library checkout stays read-only.
+Create `.tooling/tts-settings.json` from
 [`settings.example.json`](../RealJapanese/GenerateAudioUsingTTS/settings.example.json)
 and set the local library, model, engine Python, FFmpeg and reference-recording
-paths. Keep machine-specific settings and model files out of Git.
-
-The project-local transcription helper is
-[`tooling/audio-studio-transcribe.py`](../tooling/audio-studio-transcribe.py).
-It is intentionally retained in place while a requested migration is on hold.
-The app invokes it with
-`.tooling/tts-transcriber/Scripts/python.exe`; install the pinned packages from
-[`tooling/tts-transcriber-requirements.txt`](../tooling/tts-transcriber-requirements.txt)
-and make the Faster Whisper `small` model available under
-`.tooling/tts-asr-models` before use. The helper runs locally with downloads
-disabled; it does not send recordings to a remote transcription service.
+paths. Keep machine-specific settings and model files out of Git. Audio Studio
+uses the copied AiLibrary `IAiModelService.TranscribeAsync` API through
+`LibraryTranscriber`; it does not install or run a project-private transcription
+helper. The default Whisper Python path is
+`{LibraryRoot}/.tooling/whisper/Scripts/python.exe`; override it with
+`AudioStudio__WhisperPython` when needed. The existing `small` Whisper model must
+be present under `{ModelsDirectory}/whisper-small`. Audio Studio does not download
+models implicitly.
 
 Start the local host:
 
@@ -77,8 +75,8 @@ export manifest.
 Choose words, one or more of BERT, Fish and Irodori, an optional reference and one
 output format to start a run. Runs and their progress are saved. The app keeps a
 model worker loaded for its whole engine batch, processes engines sequentially,
-then validates all generated clips in a single local Whisper batch. A second run
-or reference operation cannot start while generation is active.
+then checks generated clips serially through one local Whisper worker. A second
+run or reference operation cannot start while generation is active.
 
 Each clip's automatic transcript is a conservative text check against the
 catalog's Japanese or kana text. A match does not establish correct speech,
@@ -91,11 +89,16 @@ When no saved reference exists, first startup attempts to prepare the configured
 default Podcast 41 excerpt at 38.35 seconds for 9.8 seconds. Its transcript is an
 automatic candidate, not a human-verified transcript. A reference can also be
 uploaded and cropped to 1–30 seconds in References. Audio is converted locally to
-mono 24 kHz PCM WAV, played back in the reference list and transcribed locally.
-Review or replace its transcript there before using it with Fish. The reference
-list and generation selector display the transcript source, including whether it
-is user edited or machine transcribed; editing a reference marks its source as
-`User edited`.
+mono 24 kHz PCM WAV, played back in the reference list and transcribed locally by
+the copied AiLibrary `IAiModelService.TranscribeAsync` API. The Whisper small
+model runs on CPU with int8 inference, six CPU threads, Japanese language,
+beam size 5, temperature 0, no word timestamps, and VAD enabled for references
+but disabled for generated clips. There is no expected-word prompt or implicit
+model download. Review or replace the transcript before using it with Fish. The
+reference list and generation selector show full transcript provenance; new
+uploads are marked `AI library Whisper small; not human-verified`, historic
+`Local Whisper small; not human-verified` entries retain their label, and editing
+a reference marks it `User edited`.
 
 BERT uses its fixed voice. Fish requires a transcript when a reference is selected.
 Fish and Irodori can condition on the chosen reference; that is not a guarantee of
@@ -126,10 +129,17 @@ and 150 ms after detected speech, targets a −3 dBFS peak with at most 3× gain
 rejects silent audio. Listen to both raw and processed clips when a quiet consonant
 or word ending may have been trimmed.
 
-Cancelling a run preserves completed clips. If the app process stops while a run
-is active, the next startup marks it `Interrupted` and retains its completed
-outputs. Runs cannot resume; start a new run for retry words. Study-host catalogs
-and progress remain untouched.
+Pause requests take effect at a safe checkpoint: after the current clip, including
+its conversion and save, or after the current Whisper file finishes. The app then
+unloads the model worker, marks the run `Paused`, and releases generation so other
+work can start. Paused runs retain their settings, reference snapshot and outputs.
+Resume continues the same run, skipping clips and transcript checks already saved.
+This also works after restarting the app: an active run is marked `Interrupted`
+on shutdown and can be resumed from its persisted checkpoints. Paused or
+Interrupted runs cannot be exported; resume and finish them, or cancel them first.
+Cancelling an active run cancels its current operation and retains completed
+clips. Cancelling a paused or interrupted run marks it terminal `Cancelled`.
+Study-host catalogs and progress remain untouched.
 
 ## Pitch profiles and spoken forms
 

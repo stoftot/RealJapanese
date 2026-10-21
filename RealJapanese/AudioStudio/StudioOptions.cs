@@ -10,6 +10,7 @@ public sealed record StudioOptions(string RepositoryRoot, string WorkRoot, strin
     public string ReferencesRoot => Path.Combine(WorkRoot, "references");
     public string RuntimeRoot => Path.Combine(WorkRoot, "runtime");
     public string PitchRoot => Path.Combine(RepositoryRoot, "tooling", "audio-studio", "pitch");
+    public string WhisperPython { get; init; } = Path.Combine(Speech.LibraryRoot, ".tooling", "whisper", "Scripts", "python.exe");
     public static StudioOptions Load(IConfiguration config)
     {
         string root = Paths.RepositoryRoot();
@@ -19,7 +20,10 @@ public sealed record StudioOptions(string RepositoryRoot, string WorkRoot, strin
         settings.Validate();
         var options = new StudioOptions(root,
             Path.GetFullPath(config["AudioStudio:WorkRoot"] ?? Path.Combine(root, ".tooling", "audio-studio")),
-            Path.GetFullPath(config["AudioStudio:ExportRoot"] ?? Path.Combine(root, "RealJapanese", "Data", "Audio")), settings);
+            Path.GetFullPath(config["AudioStudio:ExportRoot"] ?? Path.Combine(root, "RealJapanese", "Data", "Audio")), settings)
+        {
+            WhisperPython = config["AudioStudio:WhisperPython"] ?? Path.Combine(settings.LibraryRoot, ".tooling", "whisper", "Scripts", "python.exe")
+        };
         foreach (string path in new[] { options.WorkRoot, options.ExportRoot })
         {
             Paths.RequireOutsideLibrary(path, settings.LibraryRoot);
@@ -27,9 +31,6 @@ public sealed record StudioOptions(string RepositoryRoot, string WorkRoot, strin
         }
         return options;
     }
-    public MediaTools CreateMedia() => new(Speech.Ffmpeg,
-        Path.Combine(RepositoryRoot, ".tooling", "tts-transcriber", "Scripts", "python.exe"),
-        Path.Combine(RepositoryRoot, ".tooling", "tts-asr-models"),
-        Path.Combine(RepositoryRoot, ".tooling", "tts-asr-cache"),
-        Path.Combine(RepositoryRoot, "tooling", "audio-studio-transcribe.py"), RuntimeRoot);
+    public MediaTools CreateMedia() => new(Speech.Ffmpeg);
+    public LibraryTranscriber CreateTranscriber() => LibraryTranscriber.Create(WhisperPython, Speech.ModelsDirectory, RuntimeRoot);
 }

@@ -1,29 +1,33 @@
-using AiLibrary;
-using GenerateAudioUsingTTS;
-
 namespace AudioStudio;
 
-public sealed class GenerationService(StudioOptions options, StudioStore store, WordCatalog catalog, MediaTools media, PitchProfiles pitch) : IHostedService
+/// <summary>Persists each completed request before starting another; paused runs hold no model.</summary>
+public sealed class GenerationService(StudioStore store, WordCatalog catalog, IGenerationBackend backend)
 {
     public static readonly string[] Engines = ["bert", "fish", "irodori"];
     public static readonly string[] Qualities = ["OriginalWav", "Wav24000Hz16BitMono", "Mp3Mono64Kbps", "OpusMono32Kbps"];
     private readonly SemaphoreSlim work = new(1);
     private readonly object gate = new();
-    private CancellationTokenSource? currentCancellation;
-    private string? currentId;
-    private Task? currentTask;
     private readonly CancellationTokenSource shutdown = new();
+    private Execution? active;
 
-    public Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
-    public async Task StopAsync(CancellationToken cancellationToken)
+    private sealed class Execution(string id, CancellationToken shutdownToken) : IDisposable
+    {
+        public string Id { get; } = id;
+        public CancellationTokenSource Cancellation { get; } = CancellationTokenSource.CreateLinkedTokenSource(shutdownToken);
+        public bool PauseRequested { get; set; }
+        public Task Task { get; set; } = Task.CompletedTask;
+        public void Dispose() => Cancellation.Dispose();
+    }
+    private sealed class PauseCheckpoint : Exception;
+
+    public string? ActiveId { get { lock (gate) return active?.Id; } }
+    public async Task StopAsync(CancellationToken token)
     {
         shutdown.Cancel();
         Task? task;
-        lock (gate) { currentCancellation?.Cancel(); task = currentTask; }
-        if (task is not null) await task.WaitAsync(cancellationToken);
+        lock (gate) task = active?.Task;
+        if (task is not null) await task.WaitAsync(token);
     }
-    public string? ActiveId { get { lock (gate) return currentId; } }
-
     public async Task<StudioRun> StartAsync(GenerationInput input)
     {
         if (input.WordKeys is null || input.WordKeys.Length == 0 || input.WordKeys.Length > catalog.Words.Count)
@@ -36,7 +40,8 @@ public sealed class GenerationService(StudioOptions options, StudioStore store, 
         var reference = input.ReferenceId is null ? null : store.Reference(input.ReferenceId);
         if (input.Engines.Contains("fish") && reference is not null && string.IsNullOrWhiteSpace(reference.Transcript))
             throw new StudioException("Fish needs a transcript for the reference. Edit it in References first.");
-        if (!await work.WaitAsync(0)) throw new StudioException("Another generation or reference operation is running.", 409);
+        await AcquireAsync();
+        bool launched = false;
         try
         {
             var run = new StudioRun
@@ -48,34 +53,70 @@ public sealed class GenerationService(StudioOptions options, StudioStore store, 
             };
             foreach (string engine in run.Engines)
                 foreach (var word in words) run.Clips.Add(new() { Key = word.Key, Engine = engine });
+            backend.Prepare(run);
             store.AddRun(run);
-            var cancel = CancellationTokenSource.CreateLinkedTokenSource(shutdown.Token);
-            lock (gate)
-            {
-                currentId = run.Id;
-                currentCancellation = cancel;
-                currentTask = Task.Run(async () =>
-                {
-                    try { await GenerateAsync(run, cancel.Token); }
-                    finally
-                    {
-                        lock (gate) { currentId = null; currentCancellation = null; }
-                        cancel.Dispose();
-                        work.Release();
-                    }
-                });
-            }
+            Launch(run);
+            launched = true;
             return store.GetRun(run.Id);
         }
-        catch { work.Release(); throw; }
+        catch { if (!launched) work.Release(); throw; }
     }
-
+    public async Task<StudioRun> ResumeAsync(string id)
+    {
+        await AcquireAsync();
+        bool launched = false;
+        try
+        {
+            lock (gate)
+            {
+                var run = store.GetRun(id);
+                if (!run.CanResume) throw new StudioException("Only paused or interrupted runs can continue.", 409);
+                foreach (var word in run.Words) catalog.VerifyCurrent(word);
+                foreach (var clip in run.Clips.Where(c => c.File is not null))
+                {
+                    string file = StudioStore.SafePath(store.RunFolder(id), clip.File!);
+                    if (!File.Exists(file) || StudioStore.Hash(file) != clip.Sha256)
+                        throw new StudioException("A completed clip is missing or changed. Restore it or start a new run.", 409);
+                }
+                backend.Prepare(run);
+                store.UpdateRun(id, r => { r.SpeechSettings = run.SpeechSettings; r.Status = "Queued"; r.Phase = "Continuing from saved checkpoints"; });
+                Launch(store.GetRun(id));
+                launched = true;
+                return store.GetRun(id);
+            }
+        }
+        catch { if (!launched) work.Release(); throw; }
+    }
+    private async Task AcquireAsync()
+    {
+        if (shutdown.IsCancellationRequested) throw new StudioException("The studio is shutting down.", 409);
+        if (!await work.WaitAsync(0)) throw new StudioException("Another generation or reference operation is running.", 409);
+    }
+    private void Launch(StudioRun run)
+    {
+        lock (gate)
+        {
+            var execution = new Execution(run.Id, shutdown.Token);
+            active = execution;
+            execution.Task = Task.Run(() => ExecuteAsync(run, execution));
+        }
+    }
+    public void Pause(string id)
+    {
+        lock (gate)
+        {
+            if (active?.Id != id || !store.GetRun(id).IsActive) throw new StudioException("This run is not active.", 409);
+            active.PauseRequested = true;
+            store.UpdateRun(id, r => { r.Status = "Pausing"; r.Phase = "Pausing after the current request is saved"; });
+        }
+    }
     public void Cancel(string id)
     {
         lock (gate)
         {
-            if (currentId != id) throw new StudioException("This run is not active.", 409);
-            currentCancellation!.Cancel();
+            if (active?.Id == id && store.GetRun(id).IsActive) { active.Cancellation.Cancel(); return; }
+            if (!store.GetRun(id).CanResume) throw new StudioException("This run cannot be cancelled.", 409);
+            store.UpdateRun(id, r => { r.Status = "Cancelled"; r.Phase = "Cancelled; completed clips are preserved"; });
         }
     }
     public async Task<T> ReferenceOperation<T>(Func<CancellationToken, Task<T>> operation, CancellationToken requestCancellation)
@@ -85,32 +126,38 @@ public sealed class GenerationService(StudioOptions options, StudioStore store, 
         try { return await operation(cancel.Token); }
         finally { work.Release(); }
     }
-
-    private async Task GenerateAsync(StudioRun run, CancellationToken token)
+    private void Checkpoint(Execution execution)
     {
+        lock (gate)
+        {
+            execution.Cancellation.Token.ThrowIfCancellationRequested();
+            if (execution.PauseRequested) throw new PauseCheckpoint();
+        }
+    }
+    private void Phase(Execution execution, string status, string phase)
+    {
+        lock (gate)
+            if (!execution.PauseRequested) store.UpdateRun(execution.Id, r => { r.Status = status; r.Phase = phase; });
+    }
+    private async Task ExecuteAsync(StudioRun run, Execution execution)
+    {
+        string endStatus = "Failed", endPhase = "Stopped";
+        var token = execution.Cancellation.Token;
         try
         {
-            string runFolder = store.RunFolder(run.Id);
-            string? reference = null;
-            if (run.ReferenceId is not null)
-            {
-                reference = Path.Combine(runFolder, "reference.wav");
-                File.Copy(store.ReferenceAudio(run.ReferenceId), reference, false);
-            }
-            var settings = options.Speech with { ReferenceTranscript = run.ReferenceSnapshot?.Transcript };
-            store.UpdateRun(run.Id, r => r.Status = "Generating");
             foreach (string engine in run.Engines)
             {
-                token.ThrowIfCancellationRequested();
-                store.UpdateRun(run.Id, r => r.Phase = $"Generating with {engine}");
-                // The documented library batch pattern keeps one engine/reference cache warm.
-                await using var service = Synthesis.Create(engine, settings);
-                int consecutiveFailures = 0;
-                foreach (var word in run.Words)
+                var pending = run.Clips.Where(c => c.Engine == engine && c.File is null && c.Status != "Failed").ToArray();
+                if (pending.Length == 0) continue;
+                Checkpoint(execution);
+                Phase(execution, "Generating", $"Generating with {engine}");
+                await using var voice = backend.OpenVoice(run, engine);
+                int failures = 0;
+                foreach (var clip in pending)
                 {
-                    token.ThrowIfCancellationRequested();
-                    void Update(Action<StudioClip> update) => store.UpdateRun(run.Id, r => update(r.Clips.Single(c => c.Key == word.Key && c.Engine == engine)));
-                    if (consecutiveFailures >= 3)
+                    Checkpoint(execution);
+                    void Update(Action<StudioClip> update) => store.UpdateRun(run.Id, r => update(r.Clips.Single(c => c.Key == clip.Key && c.Engine == engine)));
+                    if (failures >= 3)
                     {
                         Update(c => { c.Status = "Failed"; c.Error = "Model stopped after three consecutive failures. See earlier errors and retry in a new run."; });
                         continue;
@@ -118,93 +165,66 @@ public sealed class GenerationService(StudioOptions options, StudioStore store, 
                     Update(c => c.Status = "Generating");
                     try
                     {
-                        string relativeRoot = $"{engine}/{word.Dataset}/{word.Id}";
-                        string folder = StudioStore.SafePath(runFolder, relativeRoot);
-                        string rawFolder = Path.Combine(folder, "raw");
-                        Directory.CreateDirectory(rawFolder);
-                        var request = Synthesis.Request(engine, new Verb(word.Id, word.SpokenJapanese, word.SpokenKana, word.English), settings, rawFolder,
-                            engine == "bert" ? null : reference);
-                        var pronunciation = engine == "bert" ? pitch.For(word)?.Profile : null;
-                        if (pronunciation is not null)
-                        {
-                            request = request with { PronunciationProfile = pronunciation.Validate(), SplitLines = false };
-                            StudioStore.AtomicWrite(Path.Combine(folder, "pitch-profile.json"), pronunciation);
-                        }
-                        // Expressions can be longer than dictionary words; never impose the old
-                        // fixed 2.5-second limit on the complete catalog.
-                        if (engine == "irodori") request = request with
-                        {
-                            IrodoriOptions = new IrodoriSpeechOptions { MinSeconds = 0.5, MaxSeconds = Math.Clamp(word.Kana.Length * 0.22 + 1.5, 2.5, 20), DurationScale = 1 },
-                            VoiceDescription = "自然で落ち着いた声。指定された日本語だけを明瞭に、普通の速さで発音する。説明や他の言葉を付け加えない。"
-                        };
-                        if (engine == "fish") request = request with
-                        {
-                            FishOptions = new FishSpeechOptions { MaxNewTokens = Math.Clamp(word.Kana.Length * 20, 128, 1024), Temperature = 0.65, TopP = 0.7, RepetitionPenalty = 1.2 }
-                        };
-                        StudioStore.AtomicWrite(Path.Combine(folder, "request.json"), request);
-                        await service.SynthesizeSpeechAsync(request, token);
-                        string extension = run.OutputQuality switch { "Mp3Mono64Kbps" => ".mp3", "OpusMono32Kbps" => ".opus", _ => ".wav" };
-                        string file = relativeRoot + "/clip" + extension;
-                        string output = StudioStore.SafePath(runFolder, file);
-                        double seconds = await media.ProcessWordAsync(request.OutputFilePath, output, run.OutputQuality, token);
+                        var audio = await voice.GenerateAsync(run.Words.Single(w => w.Key == clip.Key), token);
                         Update(c =>
                         {
-                            c.Status = "Generated"; c.File = file; c.RawFile = Path.GetRelativePath(runFolder, request.OutputFilePath);
-                            c.Seconds = seconds; c.Sha256 = StudioStore.Hash(output);
-                            c.PitchSource = pronunciation is not null ? "Stored BERT profile · machine estimate" : "Model-inferred accent";
-                            string url = $"/api/runs/{run.Id}/audio?key={Uri.EscapeDataString(word.Key)}&engine={engine}";
-                            c.AudioUrl = url; c.RawUrl = url + "&raw=true";
+                            c.Status = "Generated"; c.File = audio.File; c.RawFile = audio.RawFile; c.Seconds = audio.Seconds;
+                            c.Sha256 = audio.Sha256; c.PitchSource = audio.PitchSource; c.Error = null;
+                            c.AudioUrl = $"/api/runs/{run.Id}/audio?key={Uri.EscapeDataString(clip.Key)}&engine={engine}";
+                            c.RawUrl = c.AudioUrl + "&raw=true";
                         });
-                        consecutiveFailures = 0;
+                        failures = 0;
                     }
                     catch (Exception e) when (e is not OperationCanceledException)
-                    {
-                        consecutiveFailures++;
-                        Update(c => { c.Status = "Failed"; c.Error = e.Message; });
-                    }
+                    { failures++; Update(c => { c.Status = "Failed"; c.Error = e.Message; }); }
+                    Checkpoint(execution);
                 }
             }
-            token.ThrowIfCancellationRequested();
-            store.UpdateRun(run.Id, r => { r.Status = "Checking"; r.Phase = "Transcribing generated clips"; });
-            var finished = store.GetRun(run.Id);
-            var checks = finished.Clips.Where(c => c.File is not null)
-                .Select(c => new TranscriptionInput(c.Engine + ":" + c.Key, StudioStore.SafePath(runFolder, c.File!))).ToArray();
-            try
+            var checks = store.GetRun(run.Id).Clips.Where(c => c.File is not null && c.Validation == "Pending").ToArray();
+            if (checks.Length > 0)
             {
-                await media.TranscribeAsync(checks, result =>
+                Checkpoint(execution);
+                Phase(execution, "Checking", "Transcribing generated clips with AI library Whisper");
+                await using var checker = backend.OpenChecks(run);
+                foreach (var clip in checks)
                 {
+                    Checkpoint(execution);
+                    CheckedAudio result;
+                    try { result = await checker.CheckAsync(clip, token); }
+                    catch (Exception e) when (e is not OperationCanceledException) { result = new(null, e.Message, "AI library Whisper small"); }
                     store.UpdateRun(run.Id, r =>
                     {
-                        var clip = r.Clips.Single(c => c.Engine + ":" + c.Key == result.Id);
-                        clip.Transcript = result.Text;
-                        clip.Validation = WordCatalog.ValidateTranscript(r.Words.Single(w => w.Key == clip.Key), result.Text, result.Error);
-                        if (result.Error is not null) clip.Error = result.Error;
+                        var saved = r.Clips.Single(c => c.Key == clip.Key && c.Engine == clip.Engine);
+                        saved.Transcript = result.Text; saved.Error = result.Error;
+                        saved.TranscriptSource = result.Source; saved.TranscriptionDiagnostics = result.Diagnostics;
+                        saved.Validation = WordCatalog.ValidateTranscript(r.Words.Single(w => w.Key == clip.Key), result.Text, result.Error);
                     });
-                    return Task.CompletedTask;
-                }, token);
+                    Checkpoint(execution);
+                }
             }
-            catch (Exception e) when (e is not OperationCanceledException)
-            {
-                store.UpdateRun(run.Id, r =>
-                {
-                    r.Notes.Add("Transcription failed: " + e.Message);
-                    foreach (var c in r.Clips.Where(c => c.File is not null && c.Validation == "Pending"))
-                    { c.Validation = "Check failed"; c.Error = e.Message; }
-                });
-            }
-            store.UpdateRun(run.Id, r =>
-            {
-                r.Status = r.Clips.Any(c => c.File is null || c.Validation == "Check failed") ? "Partial" : "Completed";
-                r.Phase = "Ready for listening and selection";
-            });
+            endStatus = store.GetRun(run.Id).Clips.Any(c => c.File is null || c.Validation is "Pending" or "Check failed") ? "Partial" : "Completed";
+            endPhase = "Ready for listening and selection";
         }
+        catch (PauseCheckpoint) { endStatus = "Paused"; endPhase = "Paused; completed clips and checks are saved"; }
         catch (OperationCanceledException)
         {
-            store.UpdateRun(run.Id, r => { r.Status = "Cancelled"; r.Phase = "Cancelled; completed clips are preserved"; });
+            endStatus = shutdown.IsCancellationRequested ? "Interrupted" : "Cancelled";
+            endPhase = shutdown.IsCancellationRequested ? "Interrupted by application shutdown" : "Cancelled; completed clips are preserved";
         }
-        catch (Exception e)
+        catch (Exception e) { store.UpdateRun(run.Id, r => r.Notes.Add(e.Message)); }
+        finally
         {
-            store.UpdateRun(run.Id, r => { r.Status = "Failed"; r.Phase = "Stopped"; r.Notes.Add(e.Message); });
+            // Models have been disposed before advertising a resumable, idle state.
+            lock (gate)
+            {
+                try { store.UpdateRun(run.Id, r => { r.Status = endStatus; r.Phase = endPhase; }); }
+                finally
+                {
+                    active = null;
+                    execution.Dispose();
+                    work.Release();
+                }
+            }
         }
     }
 }

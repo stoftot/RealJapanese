@@ -28,6 +28,8 @@ public sealed class StudioClip
     public string? Error { get; set; }
     public string? PitchSource { get; set; }
     public string? Sha256 { get; set; }
+    public string? TranscriptSource { get; set; }
+    public IReadOnlyDictionary<string, string>? TranscriptionDiagnostics { get; set; }
 }
 
 public sealed class StudioRun
@@ -41,6 +43,7 @@ public sealed class StudioRun
     public string? ReferenceId { get; init; }
     public string? ReferenceName { get; init; }
     public ReferenceItem? ReferenceSnapshot { get; init; }
+    public GenerateAudioUsingTTS.Settings? SpeechSettings { get; set; }
     public List<StudioClip> Clips { get; init; } = [];
     public Dictionary<string, string> Selections { get; init; } = [];
     public List<string> Notes { get; init; } = [];
@@ -55,7 +58,8 @@ public sealed class StudioRun
         Remaining = Clips.Count(c => c.Status is "Pending" or "Generating"),
         Phase
     };
-    public bool IsActive => Status is "Queued" or "Generating" or "Checking";
+    public bool IsActive => Status is "Queued" or "Generating" or "Checking" or "Pausing";
+    public bool CanResume => Status is "Paused" or "Interrupted";
 }
 
 public sealed record ReferenceItem(string Id, string Name, string Transcript, string TranscriptSource,

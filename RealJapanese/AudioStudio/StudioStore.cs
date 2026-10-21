@@ -32,8 +32,9 @@ public sealed class StudioStore
             ValidateId(run.Id);
             if (run.IsActive)
             {
-                run.Status = "Interrupted";
-                run.Phase = "Interrupted by application shutdown";
+                bool wasPausing = run.Status == "Pausing";
+                run.Status = wasPausing ? "Paused" : "Interrupted";
+                run.Phase = wasPausing ? "Paused; ready to continue" : "Interrupted by application shutdown";
                 foreach (var clip in run.Clips.Where(c => c.Status == "Generating")) clip.Status = "Pending";
                 AtomicWrite(file, run);
             }
@@ -139,7 +140,7 @@ public sealed class StudioStore
         lock (exportGate)
         {
             StudioRun run = GetRun(id);
-            if (run.IsActive) throw new StudioException("Wait for generation and checks to finish before exporting.", 409);
+            if (run.IsActive || run.CanResume) throw new StudioException("Finish or cancel this run before exporting.", 409);
             int unselected = run.Words.Count(w => !run.Selections.ContainsKey(w.Key));
             if (unselected > 0 && !acknowledgeUnselected)
                 throw new StudioException($"{unselected} words have no choice. Export only the selected clips?", 409, unselected);

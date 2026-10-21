@@ -39,12 +39,13 @@ The [project map](PROJECT_MAP.md) owns paths and project relationships.
 - **Standalone Audio Studio:** a separate ASP.NET .NET 10 host, loopback-bound at
   `127.0.0.1:5291`, outside the study-host solutions. It reads all twelve
   vocabulary catalogs and uses the copied speech SDK through the standalone TTS
-  helper; it never changes catalogs or study progress. Reference and clip
-  transcription continue to use the existing local Faster Whisper helper; no
-  transcription-tool migration is part of Audio Studio. Runs, references and runtime
-  state live under `.tooling/audio-studio/`. The default `RealJapanese/Data/Audio/`
-  export manifest and immutable audio payloads are not read by the web or Android
-  study hosts. `tooling/audio-studio/pitch/profiles.json` stores word-linked
+  helper; it never changes catalogs or study progress. The copied AiLibrary
+  speech binaries provide `IAiModelService.TranscribeAsync` for local Whisper
+  transcription; Audio Studio uses the configured Python executable and shared
+  `whisper-small` model without downloading or modifying the library. Runs,
+  references and runtime state live under `.tooling/audio-studio/`. The default
+  `RealJapanese/Data/Audio/` export manifest and immutable audio payloads are not
+  read by the web or Android study hosts. `tooling/audio-studio/pitch/profiles.json` stores word-linked
   machine-estimated pronunciation profiles used for BERT generation, separately
   from the catalogs; estimates are not human-verified pronunciation guidance.
   [Audio Studio setup](../audio-studio.md) owns local configuration and operation.
@@ -114,8 +115,13 @@ not touch the private progress root.
    `dataset/id` identities, grouped into Nouns, Verbs, Adjectives and Words &
    expressions. Catalogs and study progress are read-only inputs.
 2. Runs, retained clips, references and local runtime state are stored below
-   `.tooling/audio-studio/`. Runs persist model choices; process startup marks
-   previously active runs interrupted while preserving completed clips.
+   `.tooling/audio-studio/`. Runs persist settings, reference snapshots, clip
+   outputs, checks and model choices. Pause waits for the current generation clip
+   (including conversion and save) or current ASR file to finish, unloads the
+   model, then releases generation capacity. Resume continues the same run and
+   skips saved clips/checks. Process startup marks previously active runs
+   interrupted and resumable while preserving completed outputs; paused and
+   interrupted runs cannot export until finished or cancelled.
 3. Selected exports write immutable payload files and replace a manifest under
    `RealJapanese/Data/Audio/`. Neither the web study host nor Android loads this
    directory, so exports do not become study content or progress.
