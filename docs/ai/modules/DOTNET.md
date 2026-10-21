@@ -13,6 +13,12 @@ All repository projects target .NET 10. The Android project targets
 | `RealJapanese/RealJapanese.sln` | Web, UI, libraries and both data utilities; no Mobile or test projects |
 | `RealJapanese.Tests.slnx` | Unit, integration, component and Playwright browser tests |
 
+`RealJapanese/AudioStudio/AudioStudio.csproj` is an additional standalone
+`net10.0` ASP.NET project and is not included in the study-host solutions. It
+references `GenerateAudioUsingTTS` and uses the copied AiLibrary speech binaries;
+build or launch that project directly. The [Audio Studio guide](../../audio-studio.md)
+owns its settings and local workflow.
+
 There is no `global.json`, central package management, custom Directory.Build file,
 repository NuGet configuration or package lock file. Project manifests pin package
 versions. The mobile project pins MAUI Controls and MAUI Blazor WebView to 10.0.20.

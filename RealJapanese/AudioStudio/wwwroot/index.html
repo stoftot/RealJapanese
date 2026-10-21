@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f6f2">
+  <link rel="icon" href="data:,">
+  <title>Koto — Japanese audio studio</title>
+  <link rel="stylesheet" href="studio.css">
+  <script src="studio.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#generate" aria-label="Koto home">
+        <span class="brand-mark" aria-hidden="true">言</span><span><strong>Koto</strong><small>Japanese audio studio</small></span>
+      </a>
+      <nav class="nav-list" aria-label="Studio sections">
+        <button class="nav-item active" data-view="generate"><span class="nav-icon" aria-hidden="true">＋</span>Generate</button>
+        <button class="nav-item" data-view="runs"><span class="nav-icon" aria-hidden="true">◷</span>Runs</button>
+        <button class="nav-item" data-view="exported"><span class="nav-icon" aria-hidden="true">♫</span>Exported audio</button>
+        <button class="nav-item" data-view="references"><span class="nav-icon" aria-hidden="true">◉</span>References</button>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot" id="health-dot"></span><span id="health-label">Connecting to studio…</span></div>
+    </aside>
+    <main id="main" class="main-area" tabindex="-1">
+      <header class="mobile-header"><a class="brand" href="#generate"><span class="brand-mark" aria-hidden="true">言</span><strong>Koto</strong></a><button class="icon-button" id="mobile-menu" aria-label="Toggle navigation" aria-expanded="false">☰</button></header>
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <section id="view-generate" class="view"></section>
+      <section id="view-runs" class="view" hidden></section>
+      <section id="view-exported" class="view" hidden></section>
+      <section id="view-references" class="view" hidden></section>
+    </main>
+  </div>
+  <dialog id="confirm-dialog" class="dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button><p class="eyebrow">One more step</p><h2>Some words have no model selected</h2><p id="confirm-copy">They will be left out of the export.</p><div class="dialog-actions"><button class="button secondary" value="cancel">Go back</button><button class="button primary" id="confirm-export" value="confirm">Export selected audio</button></div></form></dialog>
+</body>
+</html>

@@ -21,6 +21,13 @@ dotnet run --project RealJapanese/RealJapanese/RealJapanese.csproj --no-build --
 The browser needs this local ASP.NET process while the application is in use.
 Study features do not require internet access or a remote backend.
 
+`RealJapanese/AudioStudio/AudioStudio.csproj` is a separate .NET 10 local web
+tool, not a study-host route or service. It binds to loopback at
+`http://127.0.0.1:5291` by default, reads catalogs without changing progress, and
+does not serve exports to either study host. Its operational contract is in the
+[Audio Studio guide](../../audio-studio.md); browser regressions are tracked by
+[AUDIO-001–006](../../../tests/manual/audio-studio.md).
+
 ## UI and route ownership
 
 The web project owns the HTML document in `Components/App.razor` and the web error

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AiLibraryBin>$(MSBuildThisFileDirectory)..\..\.tooling\tts-ai-library</AiLibraryBin>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../GenerateAudioUsingTTS/GenerateAudioUsingTTS.csproj" />
+    <Reference Include="AiLibrary.Core" HintPath="$(AiLibraryBin)\AiLibrary.Core.dll" />
+    <Reference Include="AiLibrary.Speech" HintPath="$(AiLibraryBin)\AiLibrary.Speech.dll" />
+    <Reference Include="AiLibrary.StyleBertVits2" HintPath="$(AiLibraryBin)\AiLibrary.StyleBertVits2.dll" />
+  </ItemGroup>
+</Project>

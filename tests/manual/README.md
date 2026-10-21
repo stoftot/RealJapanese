@@ -16,9 +16,11 @@ Keep run results and unexecuted steps in the current task, not in these files.
 | [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–003: offline catalogs, update/restart persistence, IME/Back/lifecycle and controlled startup failure |
 | [Data maintenance](data-maintenance.md) | DATA-001–002: controlled extraction/model validation and interrupted legacy cleanup |
 | [Standalone TTS comparison](tts-comparison.md) | TTS-001: single-word audio, pronunciation, reference voice comparison and output isolation |
+| [Audio Studio](audio-studio.md) | AUDIO-001–006: catalog selection, run choices/exports, references, model/format combinations, cancellation and human audio review |
 
 The initial cases reuse behavior documented in the [sync guide](../../docs/local-sync.md).
 That guide remains the owner of user instructions and network/compatibility limits.
+Audio Studio setup and local operation are owned by the [Audio Studio guide](../../docs/audio-studio.md).
 This catalog is selective, not a claim of complete application regression coverage.
 
 Automated coverage lives in the xUnit unit/integration projects, bUnit component
@@ -60,6 +62,7 @@ assert intended behavior but require explicit execution; see the testing guide.
 | MOBILE-003 | No native fault-injection automation | Needs a disposable package or controllable packaged-file provider; current installer directly uses MAUI FileSystem |
 | DATA-001 | No portable external-model extraction automation | External AiLibrary projects/model/server and controlled responses are required; current utility has no isolated provider seam |
 | DATA-002 | `UtilityCleanupIntegrationTests` explicit Windows file-lock consistency regression | Optional fault-injection confirmation on other supported filesystems; normal cleanup/guard/remap is already automated |
+| AUDIO-001–006 | Audio Studio catalog/store unit tests cover catalog identity, choices, exports and interrupted runs | Actual browser workflow, model and format combinations, playback quality, local references and human pronunciation/pitch review; see [Audio Studio cases](audio-studio.md) |
 
 Classes are in the corresponding [`tests/`](../) projects. Keep full procedures
 for the residual host combinations and for diagnosis; prioritize the unautomated

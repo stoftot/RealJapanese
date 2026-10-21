@@ -5,5 +5,9 @@
     <!-- Pure standalone-tool contracts; tests do not require external TTS binaries. -->
     <Compile Include="../../RealJapanese/GenerateAudioUsingTTS/Audio.cs" Link="TtsTool/Audio.cs" />
     <Compile Include="../../RealJapanese/GenerateAudioUsingTTS/Configuration.cs" Link="TtsTool/Configuration.cs" />
+    <Compile Include="../../RealJapanese/AudioStudio/Models.cs" Link="AudioStudio/Models.cs" />
+    <Compile Include="../../RealJapanese/AudioStudio/WordCatalog.cs" Link="AudioStudio/WordCatalog.cs" />
+    <Compile Include="../../RealJapanese/AudioStudio/StudioStore.cs" Link="AudioStudio/StudioStore.cs" />
+    <Compile Include="../../RealJapanese/AudioStudio/MediaTools.cs" Link="AudioStudio/MediaTools.cs" />
   </ItemGroup>
 </Project>

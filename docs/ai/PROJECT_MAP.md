@@ -35,6 +35,7 @@ for commands and prerequisites.
 | `RealJapanese/CheckDataForDuplicates/` | Console cleanup utility | Rewrites word IDs and corresponding progress |
 | `RealJapanese/Extract kanji/` | Console extraction/enrichment utility | Uses DataLoaders and external AiLibrary projects |
 | `RealJapanese/GenerateAudioUsingTTS/` | Standalone verb audio comparison console | Reads verbs; consumes copied AiLibrary DLLs; [setup](../tts-comparison.md) |
+| `RealJapanese/AudioStudio/` | Standalone local vocabulary-audio web app | Reads all twelve vocabulary catalogs; stores runs/references and exports separately from study progress; [setup](../audio-studio.md) |
 | `docs/ai/`, `.agents/skills/` | Project facts and workflows | Ownership in [README](README.md) |
 
 ## Projects and checks
@@ -51,6 +52,7 @@ Paths below are relative to the repository root. All projects target .NET 10.
 | `RealJapanese/CheckDataForDuplicates/CheckDataForDuplicates.csproj` | Console utility / `net10.0` | DataLoaders | Isolated integration tests through UtilityHost |
 | `RealJapanese/Extract kanji/Extract kanji.csproj` | Console utility / `net10.0` | DataLoaders; external AiLibrary projects | None found |
 | `RealJapanese/GenerateAudioUsingTTS/GenerateAudioUsingTTS.csproj` | Standalone console / `net10.0` | Copied AiLibrary speech DLLs; no project references | TtsAudioTests, TtsConfigurationTests; TTS-001 listening |
+| `RealJapanese/AudioStudio/AudioStudio.csproj` | Standalone ASP.NET executable / `net10.0` | GenerateAudioUsingTTS; copied AiLibrary speech DLLs | AudioStudioTests, AudioTranscriptionProtocolTests; AUDIO-001–006 |
 | `tests/RealJapanese.Tests/RealJapanese.Tests.csproj` | xUnit executable / `net10.0` | Repositories | Pure unit tests |
 | `tests/RealJapanese.IntegrationTests/RealJapanese.IntegrationTests.csproj` | xUnit executable / `net10.0` | TestSupport; UtilityHost (build only) | File/process/network integration |
 | `tests/RealJapanese.ComponentTests/RealJapanese.ComponentTests.csproj` | Razor xUnit executable / `net10.0` | RealJapanese.UI; TestSupport | bUnit component tests |
@@ -86,6 +88,7 @@ verify tools, not the app.
 | Serialization and conjugation | `RealJapanese/DataLoaders/JsonLoader.cs`, `JsonSaver.cs`, `Models/` |
 | Automated test setup and ownership | `docs/testing.md`, `RealJapanese.Tests.slnx`, `tests/` |
 | Standalone TTS setup, reference preparation and comparison outputs | `docs/tts-comparison.md`, `tooling/prepare-tts.ps1`, `RealJapanese/GenerateAudioUsingTTS/` |
+| Standalone catalog-wide audio generation, runs, references and exports | `docs/audio-studio.md`, `RealJapanese/AudioStudio/`, `tests/manual/audio-studio.md` |
 
 ## Important flows
 

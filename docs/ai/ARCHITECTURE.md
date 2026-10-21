@@ -13,6 +13,9 @@ Duplicate-cleanup console -------------------------------> DataLoaders
 Kanji extraction console --------------------------------> DataLoaders
                                                     \----> external AiLibrary
 
+Standalone Audio Studio -> catalogs (read-only) -> copied speech SDK / local engines
+                       -> .tooling/audio-studio -> RealJapanese/Data/Audio exports
+
 Automated tests ---> UI / Repositories / DataLoaders / task-owned web hosts
 ```
 
@@ -33,6 +36,18 @@ The [project map](PROJECT_MAP.md) owns paths and project relationships.
   AiLibrary speech binaries. It writes only isolated `.tooling/tts-runs` artifacts,
   never hooks audio into either host, and treats the library checkout as read-only.
   [TTS setup](../tts-comparison.md) owns the model and reference-audio contract.
+- **Standalone Audio Studio:** a separate ASP.NET .NET 10 host, loopback-bound at
+  `127.0.0.1:5291`, outside the study-host solutions. It reads all twelve
+  vocabulary catalogs and uses the copied speech SDK through the standalone TTS
+  helper; it never changes catalogs or study progress. Reference and clip
+  transcription continue to use the existing local Faster Whisper helper; no
+  transcription-tool migration is part of Audio Studio. Runs, references and runtime
+  state live under `.tooling/audio-studio/`. The default `RealJapanese/Data/Audio/`
+  export manifest and immutable audio payloads are not read by the web or Android
+  study hosts. `tooling/audio-studio/pitch/profiles.json` stores word-linked
+  machine-estimated pronunciation profiles used for BERT generation, separately
+  from the catalogs; estimates are not human-verified pronunciation guidance.
+  [Audio Studio setup](../audio-studio.md) owns local configuration and operation.
 - **Automated tests:** depend inward on production projects. Unit, integration,
   rendered-component and real-browser projects share disposable workspace support;
   the duplicate-cleanup utility is reached through a guarded child-process host.
@@ -92,6 +107,25 @@ before replacing each earlier copy:
 
 Packaged assets never include web `SavedData.json` files, and catalog refreshes do
 not touch the private progress root.
+
+### Standalone audio generation and export
+
+1. Audio Studio reads all twelve source vocabulary catalogs into composite
+   `dataset/id` identities, grouped into Nouns, Verbs, Adjectives and Words &
+   expressions. Catalogs and study progress are read-only inputs.
+2. Runs, retained clips, references and local runtime state are stored below
+   `.tooling/audio-studio/`. Runs persist model choices; process startup marks
+   previously active runs interrupted while preserving completed clips.
+3. Selected exports write immutable payload files and replace a manifest under
+   `RealJapanese/Data/Audio/`. Neither the web study host nor Android loads this
+   directory, so exports do not become study content or progress.
+4. The separate `tooling/audio-studio/pitch/profiles.json` links machine-estimated
+   pronunciation profiles to catalog words and supplies BERT generation. This
+   metadata is not stored in or treated as verified study catalog data.
+
+The [Audio Studio guide](../audio-studio.md) owns preparation, configuration and
+operation details. It is a standalone tool rather than a route or service of either
+study host.
 
 ### Local progress transfer
 

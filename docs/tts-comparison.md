@@ -6,6 +6,10 @@ Fish S2 Pro and Irodori. The default is **IDs 0–10 inclusive: 11 verbs, 33 cli
 Use `--last-id 9` for exactly ten verbs. It does not connect audio to either host,
 edit the catalog/progress, or write into the AI library checkout.
 
+For catalog-wide selection, saved runs, references and reviewed exports, use the
+separate [Audio Studio](audio-studio.md). The comparison console remains a focused
+verb experiment with isolated run artifacts.
+
 ## Prepare the library binaries
 
 Requires .NET 10, installed engine Python environments, downloaded models, and an
