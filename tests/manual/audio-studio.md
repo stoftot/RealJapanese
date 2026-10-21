@@ -24,12 +24,17 @@ Have at least one exported word and at least one word without exported audio.
 4. After generation completes, choose a generated model for a word and choose
    “Don't export this word” for another. Click rapidly between model choices for
    one word, wait for saves to finish, then reload the run.
+5. Inspect a run containing a mismatched transcript, no recognized speech or a
+   failed transcription. Compare those clips with a matching or pending check.
 
 **Expected result:** Only the four user-facing groups appear as word categories.
 An active run is visible after reload and blocks a duplicate generation. The last
 rapidly selected model choice is saved; model choices unavailable from a missing
 audio URL or failed clip cannot be selected. The deliberate “Don't export” choice
-is retained.
+is retained. Unsuccessful checks display a prominent red-tinted banner above the
+audio player, with a warning icon, a large bold “Check failed” heading and the
+specific reason. Matching and pending checks have no failure banner. Transcripts,
+audio controls and export choices remain available as before.
 
 ## AUDIO-002 — Export confirmation, model filter and missing-audio refresh
 
