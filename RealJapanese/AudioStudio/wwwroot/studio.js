@@ -2,10 +2,11 @@
   'use strict';
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
-  const state = { catalog: [], references: [], runs: [], exports: [], view: 'generate', filter: '', selected: new Set(), groups: new Set(), activeRun: null, activeRunId: null, generatingRunId: null, cancelRequestedRunId: null, runActionBusyId: null, runTimer: null, pollingRunId: null, exportingRun: null, pollBusy: false, pendingChoiceSaves: new Map(), referenceFilter: '', exportFilter: '', exportEngine: 'all', runFilter: '', activeAudio: null, previewFile: null, cropStartEdited: false, cropDurationEdited: false };
+  const state = { catalog: [], references: [], runs: [], exports: [], view: 'generate', filter: '', selected: new Set(), groups: new Set(), activeRun: null, activeRunId: null, generatingRunId: null, cancelRequestedRunId: null, runActionBusyId: null, runTimer: null, pollingRunId: null, exportingRun: null, pollBusy: false, pendingChoiceSaves: new Map(), optimisticChoices: new Map(), optimisticQualities: new Map(), referenceFilter: '', exportFilter: '', exportEngine: 'all', runFilter: '', activeAudio: null, previewFile: null, cropStartEdited: false, cropDurationEdited: false };
   const groups = ['Nouns', 'Verbs', 'Adjectives', 'Words & expressions'];
   const engines = [{ id: 'bert', name: 'BERT', detail: 'Fixed voice · steady baseline' }, { id: 'fish', name: 'Fish', detail: 'Reference conditioned · natural variation' }, { id: 'irodori', name: 'Irodori', detail: 'Reference conditioned · expressive delivery' }];
   const quality = [{ id: 'OriginalWav', name: 'Original WAV', detail: 'Native sample rate, uncompressed WAV' }, { id: 'Wav24000Hz16BitMono', name: 'WAV · 24 kHz', detail: '16-bit mono, ready for editing' }, { id: 'Mp3Mono64Kbps', name: 'MP3 · 64 kbps', detail: 'Compact mono audio' }, { id: 'OpusMono32Kbps', name: 'Opus · 32 kbps', detail: 'Small files for web and apps' }];
+  const clipQualities = ['OpusMono32Kbps','Mp3Mono64Kbps','Wav24000Hz16BitMono','OriginalWav'];
   const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const safeUrl = raw => { if (!raw) return ''; try { const u = new URL(raw, location.href); return ['http:', 'https:'].includes(u.protocol) ? u.href : ''; } catch { return ''; } };
   const wordKey = w => w.key ?? `${w.dataset}:${w.id}`;
@@ -49,7 +50,7 @@
       <div class="model-grid">${engines.map(e => `<label class="check-card"><input type="checkbox" data-engine="${e.id}" ${state.engines?.includes(e.id) ? 'checked' : ''}><span><strong>${e.name}</strong><small>${e.detail}</small></span></label>`).join('')}</div></div></div>
       <div class="panel"><div class="panel-inner">${panelHead('3', 'Voice reference', 'Use one of your prepared references, or generate without a reference.')}
       ${referenceRadios()}</div></div>
-      <div class="panel"><div class="panel-inner">${panelHead('4', 'Audio format', 'Choose the format saved with this run and its exports.')}
+      <div class="panel"><div class="panel-inner">${panelHead('4', 'Default audio format', 'Choose the default listening and export format. All four qualities are saved for each model clip.')}
       <div class="quality-row">${quality.map((q,i) => `<label class="radio-tile"><input type="radio" name="quality" value="${q.id}" ${(state.quality || 'OriginalWav') === q.id ? 'checked' : ''}><span><strong>${q.name}${i===0?' · Default':''}</strong><small>${q.detail}</small></span></label>`).join('')}</div>
       <div class="form-actions"><span class="muted" id="submit-hint">${state.generatingRunId ? 'A generation run is already active.' : 'Select at least one word and model.'}</span><button id="start-run" class="button primary" ${selectedCount && state.engines?.length && !state.generatingRunId ? '' : 'disabled'}>Generate ${selectedCount ? `${selectedCount} word${selectedCount===1?'':'s'}` : 'audio'} <span aria-hidden="true">→</span></button></div></div></div>`;
     $('#word-search').addEventListener('input', e => { state.filter = e.target.value; const pos = e.target.selectionStart; renderGenerate(); $('#word-search').focus(); $('#word-search').setSelectionRange(pos,pos); });
@@ -98,59 +99,155 @@
   }
   function date(raw) { if (!raw) return 'Date unavailable'; const d = new Date(raw); return Number.isNaN(+d) ? String(raw) : d.toLocaleString(); }
   async function showRun(id) {
-    try { const data = await api(`/api/runs/${encodeURIComponent(id)}`); state.activeRun = data; if (isActiveRun(data)) { state.generatingRunId = data.id; pollRun(data.id); } else if(String(state.generatingRunId)===String(data.id)) state.generatingRunId=null; const host = $('#run-detail'); if (!host) return; host.innerHTML = runDetailMarkup(data); bindRunDetail(data); }
+    try { const data = applyPendingEdits(await api(`/api/runs/${encodeURIComponent(id)}`)); state.activeRun = data; if (isActiveRun(data)) { state.generatingRunId = data.id; pollRun(data.id); } else if(String(state.generatingRunId)===String(data.id)) state.generatingRunId=null; const host = $('#run-detail'); if (!host) return; host.innerHTML = runDetailMarkup(data); bindRunDetail(data); }
     catch (e) { notice(e.message); }
   }
   function runDetailMarkup(r) {
     const p = r.progress || {}, pct = progressPercent(r);
-    const checksRemaining = Math.max(0, (p.generated || 0) - (p.checksCompleted || 0));
+    const checksTotal = p.checksTotal ?? p.generated ?? 0;
+    const checksRemaining = Math.max(0, checksTotal - (p.checksCompleted || 0));
     const progressText = String(r.status).toLowerCase() === 'checking'
-      ? `${p.checksCompleted || 0}/${p.generated || 0} checks completed · ${checksRemaining} remaining`
+      ? `${p.checksCompleted || 0}/${checksTotal} checks completed · ${checksRemaining} remaining`
       : `${p.generated||0} generated · ${p.failed||0} failed · ${p.remaining ?? '…'} remaining`;
     const notes=(r.notes||[]).filter(Boolean);
     const running=isActiveRun(r), paused=String(r.status).toLowerCase()==='paused', pausing=String(r.status).toLowerCase()==='pausing', busy=String(state.runActionBusyId)===String(r.id);
-    const progressMeta=canExportRun(r) ? `<div class="progress-meta"><span>Generation finished · ${p.generated||0} clips generated · ${p.failed||0} failed</span><span>${p.checksCompleted||0}/${p.generated||0} checks completed</span></div>` : `<div class="progress-meta"><span>${paused?'Paused':pausing?'Pausing after the current operation…':esc(p.phase || 'Preparing models…')}</span><span>${progressText}</span></div><div class="run-progress" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><span style="width:${pct}%"></span></div>`;
+    const progressMeta=canExportRun(r)&&!isActiveRun(r) ? `<div class="progress-meta"><span>Generation finished · ${p.generated||0} clips generated · ${p.failed||0} failed</span><span>${p.checksCompleted||0}/${p.checksTotal??p.generated??0} checks completed</span></div>` : `<div class="progress-meta"><span>${paused?'Paused':pausing?'Pausing after the current operation…':esc(p.phase || 'Preparing models…')}</span><span>${progressText}</span></div><div class="run-progress" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><span style="width:${pct}%"></span></div>`;
     const controls=running||r.canResume===true ? `<div class="toolbar">${running&&!pausing?`<button class="button secondary small" id="pause-current" ${busy?'disabled':''}>${busy?'Working…':'Pause generation'}</button>`:''}${r.canResume===true&&!running?`<button class="button secondary small" id="resume-current" ${busy||!!state.generatingRunId?'disabled':''}>${busy?'Working…':'Resume generation'}</button>`:''}${pausing?'<span class="subtle">Pause requested. The current clip or transcript check will finish first.</span>':''}<button class="button secondary small danger" id="cancel-current" ${busy||String(state.cancelRequestedRunId)===String(r.id)?'disabled':''}>${String(state.cancelRequestedRunId)===String(r.id)?'Cancelling…':'Cancel run'}</button><span class="subtle">Progress is saved as it proceeds.</span></div>` : '';
-    return `<div class="panel"><div class="panel-inner"><div class="panel-head"><div><p class="eyebrow">Selected run</p><h2>${esc(r.referenceName || 'No reference')} · ${esc(date(r.createdAt))}</h2><p>${(r.engines||[]).map(engineName).map(esc).join(' · ')} · ${esc(qualityName(r.outputQuality))}</p></div><span class="pill ${statusClass(r.status)}">${esc(statusText(r.status))}</span></div>${notes.length?`<div class="clip-detail"><strong>Run notes</strong><ul>${notes.map(note=>`<li>${esc(note)}</li>`).join('')}</ul></div>`:''}${progressMeta}${controls}</div></div>${r.words?.length ? `<div class="section-title"><h2>Compare and choose audio</h2><span class="subtle">Choose one model per word, or leave it out of the export.</span></div><div class="panel comparison">${comparisonTable(r)}</div><div class="form-actions"><span class="muted">Your choices save automatically.</span><button class="button primary" id="export-run" ${canExportRun(r) && !hasPendingChoiceSaves(r.id) ? '' : 'disabled'}>Export selected audio →</button></div>` : ''}`;
+    const prepareFormats = canExportRun(r) && !isActiveRun(r) && (r.clips||[]).some(c=>clipHasFile(c)&&availableClipQualities(c,r).length<clipQualities.length);
+    return `<div class="panel"><div class="panel-inner"><div class="panel-head"><div><p class="eyebrow">Selected run</p><h2>${esc(r.referenceName || 'No reference')} · ${esc(date(r.createdAt))}</h2><p>${(r.engines||[]).map(engineName).map(esc).join(' · ')} · Default: ${esc(qualityName(r.outputQuality))}</p></div><span class="pill ${statusClass(r.status)}">${esc(statusText(r.status))}</span></div>${notes.length?`<div class="clip-detail"><strong>Run notes</strong><ul>${notes.map(note=>`<li>${esc(note)}</li>`).join('')}</ul></div>`:''}${progressMeta}${controls}${prepareFormats?`<div class="toolbar format-preparation"><button class="button secondary small" id="prepare-formats" ${state.generatingRunId?'disabled':''}>Prepare all qualities</button><span class="subtle">Generate the missing listening formats for completed clips.</span></div>`:''}</div></div>${r.words?.length ? `<div class="section-title"><h2>Compare and choose audio</h2><span class="subtle">Choose a model and listening quality per word, or leave it out of the export.</span></div><div class="panel comparison">${comparisonTable(r)}</div><div class="form-actions"><span class="muted">Your choices save automatically.</span><button class="button primary" id="export-run" ${isRunExportReady(r) && !hasPendingRunSaves(r.id) ? '' : 'disabled'}>Export selected audio →</button></div>` : ''}`;
   }
   function progressPercent(run) {
     const p=run.progress||{};
-    if(canExportRun(run)) return 100;
+    if(canExportRun(run)&&!isActiveRun(run)) return 100;
     if(['paused','interrupted'].includes(String(run.status).toLowerCase())) return p.total ? Math.min(90,Math.round(((p.generated||0)+(p.failed||0))/p.total*90)) : 0;
-    if(String(run.status).toLowerCase()==='checking') return 90+Math.round(10*Math.min(1,(p.checksCompleted||0)/Math.max(1,p.generated||0)));
+    if(String(run.status).toLowerCase()==='checking') return 90+Math.round(10*Math.min(1,(p.checksCompleted||0)/Math.max(1,p.checksTotal??p.generated??0)));
     return p.total ? Math.min(90,Math.round(((p.generated||0)+(p.failed||0))/p.total*90)) : 0;
   }
   function comparisonTable(r, exportedMode = false) {
     const clips = r.clips || [], words = r.words || [], models = r.engines || [...new Set(clips.map(c => c.engine))];
-    return `<table class="compare-table"><thead><tr><th>Word</th>${models.map(m=>`<th>${esc(engineName(m))}</th>`).join('')}<th>${exportedMode?'Exported':'Export choice'}</th></tr></thead><tbody>${words.map(w=>{ const k=wordKey(w), selected=r.selections?.[k] || null; return `<tr><td class="compare-word"><div class="word-jp">${esc(w.japanese)}</div><div class="word-reading">${esc(w.kana)}${w.spokenKana && w.spokenKana !== w.kana ? `<div class="word-source">Spoken as ${esc(w.spokenKana)}</div>` : ''}</div><div class="word-meaning">${esc(w.english)}</div><div class="word-source">${esc(w.group)}</div>${w.speechNote?`<div class="clip-detail">${esc(w.speechNote)}</div>`:''}</td>${models.map(m=>{const c=clips.find(x=>x.key===k&&x.engine===m);return `<td class="clip-cell">${clipMarkup(c)}</td>`}).join('')}<td>${exportedMode ? `<span class="pill success">${esc(engineName(selected))}</span>` : `<div class="choice-row">${models.map(m=>{const c=clips.find(x=>x.key===k&&x.engine===m), disabled=!terminal(r.status)||!canChooseClip(c);return `<label class="choice"><input type="radio" name="choice-${esc(k)}" data-choice-key="${esc(k)}" value="${esc(m)}" ${selected===m?'checked':''} ${disabled?'disabled':''}>Use ${esc(engineName(m))}</label>`}).join('')}<label class="choice"><input type="radio" name="choice-${esc(k)}" data-choice-key="${esc(k)}" value="dont-use" ${selected==='dont-use'?'checked':''} ${!terminal(r.status)?'disabled':''}>Don’t export this word</label></div>`}</td></tr>`;}).join('')}</tbody></table>`;
+    return `<table class="compare-table"><thead><tr><th>Word</th>${models.map(m=>`<th>${esc(engineName(m))}</th>`).join('')}<th>${exportedMode?'Exported':'Export choice'}</th></tr></thead><tbody>${words.map(w=>{ const k=wordKey(w), selected=r.selections?.[k] || null; return `<tr><td class="compare-word"><div class="word-jp">${esc(w.japanese)}</div><div class="word-reading">${esc(w.kana)}${w.spokenKana && w.spokenKana !== w.kana ? `<div class="word-source">Spoken as ${esc(w.spokenKana)}</div>` : ''}</div><div class="word-meaning">${esc(w.english)}</div><div class="word-source">${esc(w.group)}</div>${w.speechNote?`<div class="clip-detail">${esc(w.speechNote)}</div>`:''}</td>${models.map(m=>{const c=clips.find(x=>x.key===k&&x.engine===m);return `<td class="clip-cell" data-clip-cell-key="${esc(k)}" data-clip-cell-engine="${esc(m)}">${clipMarkup(c,r,m)}</td>`}).join('')}<td>${exportedMode ? `<span class="pill success">${esc(engineName(selected))}</span>` : `<div class="choice-row">${models.map(m=>{const c=clips.find(x=>x.key===k&&x.engine===m), disabled=!terminal(r.status)||!canChooseClip(c);return `<label class="choice"><input type="radio" name="choice-${esc(k)}" data-choice-key="${esc(k)}" value="${esc(m)}" ${selected===m?'checked':''} ${disabled?'disabled':''}>Use ${esc(engineName(m))}</label>`}).join('')}<label class="choice"><input type="radio" name="choice-${esc(k)}" data-choice-key="${esc(k)}" value="dont-use" ${selected==='dont-use'?'checked':''} ${!terminal(r.status)?'disabled':''}>Don’t export this word</label></div>`}</td></tr>`;}).join('')}</tbody></table>`;
   }
   function canChooseClip(clip) { return !!clip && !!safeUrl(clip.audioUrl) && !/fail|error|cancel|pending|generating/i.test(String(clip.status || '')); }
-  function clipMarkup(c) {
+  function variantsFor(c) { return c?.variants && typeof c.variants === 'object' ? c.variants : null; }
+  function availableClipQualities(c, run) {
+    const variants=variantsFor(c);
+    if(!variants||!Object.keys(variants).length) return c?.file ? [run?.outputQuality].filter(Boolean) : [];
+    const available=clipQualities.filter(q=>Object.prototype.hasOwnProperty.call(variants,q)&&!!variants[q]?.file);
+    if(c?.file&&run?.outputQuality&&!available.includes(run.outputQuality))available.push(run.outputQuality);
+    return clipQualities.filter(q=>available.includes(q));
+  }
+  function clipHasFile(c) { return !!c?.file || Object.values(variantsFor(c)||{}).some(v=>!!v?.file); }
+  function selectedClipQuality(c,run) {
+    const available=availableClipQualities(c,run), wanted=c?.selectedQuality||run?.outputQuality;
+    return available.includes(wanted)?wanted:(available[0]||run?.outputQuality);
+  }
+  function effectiveClip(c,run,engine) {
+    const selected=selectedClipQuality(c,run), variant=variantsFor(c)?.[selected];
+    const clip={...c,...(variant||{}),selectedQuality:selected};
+    clip.audioUrl=`/api/runs/${encodeURIComponent(run.id)}/audio?key=${encodeURIComponent(c.key)}&engine=${encodeURIComponent(engine)}&quality=${encodeURIComponent(selected)}`;
+    return clip;
+  }
+  function clipMarkup(c, run, engine) {
     if (!c) return '<span class="subtle">No clip returned</span>';
     if (c.status && !/complete|success|ready|generated/i.test(c.status)) return `<span class="pill ${statusClass(c.status)}">${esc(statusText(c.status))}</span>${c.error?`<div class="clip-detail">${esc(c.error)}</div>`:''}`;
-    const audio = safeUrl(c.audioUrl), raw = safeUrl(c.rawUrl);
-    const failedCheck = ['Review reading','No speech recognized','Check failed'].includes(c.validation);
-    const warning = failedCheck ? `<div class="check-warning"><span class="check-warning-icon" aria-hidden="true">!</span><div><strong>Check failed</strong><span>${esc(c.validation === 'Check failed' ? 'Transcription could not be completed' : c.validation)}</span></div></div>` : '';
-    return `${warning}${audio?`<audio controls preload="none" src="${esc(audio)}" aria-label="Generated audio"></audio>`:'<span class="subtle">Audio unavailable</span>'}<div class="clip-actions">${raw?`<a href="${esc(raw)}" target="_blank" rel="noopener">Raw audio</a>`:''}${c.seconds?`<span>${Number(c.seconds).toFixed(1)} sec</span>`:''}${c.pitchSource?`<span class="pitch-mark">${esc(c.pitchSource)}</span>`:''}</div>${c.transcript?`<div class="clip-detail"><strong>Transcript</strong><br>${esc(c.transcript)}</div>`:''}${c.validation&&!failedCheck?`<div class="clip-detail"><strong>Check</strong><br>${esc(typeof c.validation==='string'?c.validation:JSON.stringify(c.validation))}</div>`:''}${c.error?`<div class="clip-detail">${esc(c.error)}</div>`:''}`;
+    const shown=effectiveClip(c,run,engine), audio=safeUrl(shown.audioUrl), raw=safeUrl(c.rawUrl), selected=shown.selectedQuality;
+    const failedCheck=['Review reading','No speech recognized','Check failed'].includes(shown.validation);
+    const warning=failedCheck?`<div class="check-warning"><span class="check-warning-icon" aria-hidden="true">!</span><div><strong>Check failed · ${esc(qualityName(selected))}</strong><span>${esc(shown.validation==='Check failed'?'Transcription could not be completed':shown.validation)}</span></div></div>`:'';
+    const qualities=availableClipQualities(c,run);
+    const selector=qualities.length?`<label class="clip-quality-wrap"><span>Playback quality</span><select class="select clip-quality" data-clip-quality-key="${esc(c.key)}" data-clip-quality-engine="${esc(engine)}" aria-label="Playback quality for ${esc(engineName(engine))}" ${isActiveRun(run)?'disabled':''}>${clipQualities.filter(q=>qualities.includes(q)).map(q=>`<option value="${q}" ${q===selected?'selected':''}>${esc(qualityName(q))}</option>`).join('')}</select></label>`:'';
+    return `${selector}${warning}${audio?`<audio controls preload="none" src="${esc(audio)}" aria-label="Generated ${esc(qualityName(selected))} audio"></audio>`:'<span class="subtle">Audio unavailable</span>'}<div class="clip-actions"><span>${esc(qualityName(selected))}</span>${raw?`<a href="${esc(raw)}" target="_blank" rel="noopener">Raw audio</a>`:''}${shown.seconds?`<span>${Number(shown.seconds).toFixed(1)} sec</span>`:''}${shown.pitchSource?`<span class="pitch-mark">${esc(shown.pitchSource)}</span>`:''}</div>${shown.transcript?`<div class="clip-detail"><strong>Transcript · ${esc(qualityName(selected))}</strong><br>${esc(shown.transcript)}${shown.transcriptSource?`<div class="word-source">${esc(transcriptSourceLabel(shown.transcriptSource))}</div>`:''}</div>`:''}${shown.validation&&!failedCheck?`<div class="clip-detail"><strong>Check · ${esc(qualityName(selected))}</strong><br>${esc(typeof shown.validation==='string'?shown.validation:JSON.stringify(shown.validation))}</div>`:''}${shown.error?`<div class="clip-detail">${esc(shown.error)}</div>`:''}`;
   }
   function bindRunDetail(r) {
     $('#cancel-current')?.addEventListener('click', () => cancelRun(r.id));
     $('#pause-current')?.addEventListener('click', () => runAction(r.id,'pause'));
     $('#resume-current')?.addEventListener('click', () => runAction(r.id,'resume'));
     $$('[data-choice-key]').forEach(el => el.addEventListener('change', () => saveChoice(r.id, el.dataset.choiceKey, el.value)));
+    $$('.clip-quality').forEach(el => el.addEventListener('change', () => changeClipQuality(el,r)));
+    $('#prepare-formats')?.addEventListener('click', () => prepareAllQualities(r.id));
     $('#export-run')?.addEventListener('click', () => exportRun(r.id, false));
   }
-  function hasPendingChoiceSaves(id) { return [...state.pendingChoiceSaves.keys()].some(k => k.startsWith(`${id}:`)); }
-  function syncExportButton(id) { const button=$('#export-run'); if(button) button.disabled=!canExportRun(state.activeRun)||hasPendingChoiceSaves(id)||!!state.exportingRun; }
+  function hasPendingRunSaves(id) { return [...state.pendingChoiceSaves.keys()].some(k => k.startsWith(`${id}:`)); }
+  function isRunExportReady(run) { return canExportRun(run)&&!isActiveRun(run); }
+  function syncExportButton() {
+    const button=$('#export-run'), displayedId=state.activeRun?.id;
+    if(button) button.disabled=!isRunExportReady(state.activeRun)||!!displayedId&&hasPendingRunSaves(displayedId)||!!state.exportingRun;
+  }
+  function applyPendingEdits(run) {
+    if(!run)return run;
+    run.selections={...(run.selections||{})};
+    for(const [queueKey,edit] of state.optimisticChoices) if(edit.id===run.id)run.selections[edit.key]=edit.value;
+    for(const [queueKey,edit] of state.optimisticQualities) if(edit.id===run.id){const clip=run.clips?.find(c=>c.key===edit.key&&c.engine===edit.engine);if(clip)clip.selectedQuality=edit.value;}
+    return run;
+  }
   function saveChoice(id, key, value) {
     const queueKey=`${id}:${key}`, previous=state.pendingChoiceSaves.get(queueKey)||Promise.resolve();
+    state.optimisticChoices.set(queueKey,{id,key,value});
+    if(state.activeRun?.id===id){state.activeRun.selections??={};state.activeRun.selections[key]=value;}
     const save=previous.catch(()=>{}).then(()=>api(`/api/runs/${encodeURIComponent(id)}/selections`, { method:'PUT', headers:{...studioHeaders,'Content-Type':'application/json'}, body:JSON.stringify({ choices:{ [key]: value === 'dont-use' ? 'dont-use' : value } }) }));
     state.pendingChoiceSaves.set(queueKey,save); syncExportButton(id);
-    save.catch(e=>{if(state.pendingChoiceSaves.get(queueKey)===save){notice(`Could not save choice: ${e.message}`);showRun(id);}}).finally(()=>{
+    save.then(run=>{
+      if(state.pendingChoiceSaves.get(queueKey)!==save)return;
+      state.optimisticChoices.delete(queueKey);
+      if(String(state.activeRunId)===String(id)&&state.view==='runs'&&run?.id)state.activeRun=applyPendingEdits(run);
+    }).catch(e=>{
+      if(state.pendingChoiceSaves.get(queueKey)!==save)return;
+      state.optimisticChoices.delete(queueKey);
+      if(String(state.activeRunId)===String(id)&&state.view==='runs'){notice(`Could not save choice: ${e.message}`);showRun(id);}
+    }).finally(()=>{
       if(state.pendingChoiceSaves.get(queueKey)===save) state.pendingChoiceSaves.delete(queueKey);
-      syncExportButton(id);
+      syncExportButton();
     });
     return save;
+  }
+  function changeClipQuality(el,run) {
+    const {clipQualityKey:key,clipQualityEngine:engine}=el.dataset, selected=el.value;
+    const current=state.activeRun?.clips?.find(c=>c.key===key&&c.engine===engine);
+    if(!current)return;
+    current.selectedQuality=selected;
+    state.optimisticQualities.set(`${run.id}:quality:${key}:${engine}`,{id:run.id,key,engine,value:selected});
+    const cell=el.closest('.clip-cell');
+    if(cell){cell.innerHTML=clipMarkup(current,state.activeRun,engine);bindClipQualitySelectors(cell,state.activeRun);}
+    saveClipQuality(run.id,key,engine,selected);
+  }
+  function bindClipQualitySelectors(root,run) { $$('.clip-quality',root).forEach(el=>el.addEventListener('change',()=>changeClipQuality(el,run))); }
+  function refreshClipCell(run,key,engine) {
+    const cell=$$('.clip-cell').find(el=>el.dataset.clipCellKey===key&&el.dataset.clipCellEngine===engine);
+    const clip=run?.clips?.find(c=>c.key===key&&c.engine===engine);
+    if(cell&&clip){cell.innerHTML=clipMarkup(clip,run,engine);bindClipQualitySelectors(cell,run);}
+  }
+  function saveClipQuality(id,key,engine,selected) {
+    const queueKey=`${id}:quality:${key}:${engine}`, previous=state.pendingChoiceSaves.get(queueKey)||Promise.resolve();
+    const save=previous.catch(()=>{}).then(()=>api(`/api/runs/${encodeURIComponent(id)}/quality`,{method:'PUT',headers:{...studioHeaders,'Content-Type':'application/json'},body:JSON.stringify({key,engine,quality:selected})}));
+    state.pendingChoiceSaves.set(queueKey,save);syncExportButton(id);
+    save.then(run=>{
+      if(state.pendingChoiceSaves.get(queueKey)!==save)return;
+      state.optimisticQualities.delete(queueKey);
+      if(String(state.activeRunId)===String(id)&&state.view==='runs'){
+        if(run?.id)state.activeRun=applyPendingEdits(run);
+        refreshClipCell(state.activeRun,key,engine);
+      }
+    }).catch(e=>{
+      if(state.pendingChoiceSaves.get(queueKey)!==save)return;
+      state.optimisticQualities.delete(queueKey);
+      if(String(state.activeRunId)===String(id)&&state.view==='runs'){notice(`Could not save playback quality: ${e.message}`);showRun(id);}
+    }).finally(()=>{
+      if(state.pendingChoiceSaves.get(queueKey)===save)state.pendingChoiceSaves.delete(queueKey);
+      syncExportButton();
+    });
+    return save;
+  }
+  async function prepareAllQualities(id) {
+    if(state.runActionBusyId||state.generatingRunId)return;
+    state.runActionBusyId=id;state.generatingRunId=id;
+    const button=$('#prepare-formats');if(button){button.disabled=true;button.textContent='Preparing qualities…';}
+    try {
+      await api(`/api/runs/${encodeURIComponent(id)}/formats`,{method:'POST',headers:studioHeaders});
+      state.activeRunId=id;
+      await showRun(id);
+      if(isActiveRun(state.activeRun)){state.generatingRunId=id;pollRun(id);}
+      notice('Preparing all playback qualities for this run.',true);
+    } catch(e) { state.generatingRunId=null;notice(e.message);await showRun(id); }
+    finally { state.runActionBusyId=null;syncExportButton(id);if(state.view==='runs'&&String(state.activeRunId)===String(id))await showRun(id); }
   }
   async function cancelRun(id) {
     if(String(state.cancelRequestedRunId)===String(id)||String(state.runActionBusyId)===String(id))return;
@@ -195,14 +292,14 @@
       if (state.pollBusy) return; state.pollBusy=true;
       try {
         const d=await api(`/api/runs/${encodeURIComponent(state.pollingRunId)}`); state.activeRun=d;
-        if (terminal(d.status) || String(d.status).toLowerCase()==='paused') { if(String(state.generatingRunId)===String(d.id))state.generatingRunId=null; if(String(state.cancelRequestedRunId)===String(d.id))state.cancelRequestedRunId=null; clearInterval(state.runTimer); state.runTimer=null; state.pollingRunId=null; await loadRuns(); if(String(state.activeRunId)===String(d.id)) await showRun(d.id); if(state.view==='generate') renderGenerate(); }
+        if ((terminal(d.status)&&!isActiveRun(d)) || String(d.status).toLowerCase()==='paused') { if(String(state.generatingRunId)===String(d.id))state.generatingRunId=null; if(String(state.cancelRequestedRunId)===String(d.id))state.cancelRequestedRunId=null; clearInterval(state.runTimer); state.runTimer=null; state.pollingRunId=null; await loadRuns(); if(String(state.activeRunId)===String(d.id)) await showRun(d.id); if(state.view==='generate') renderGenerate(); }
         else {
           if(isActiveRun(d))state.generatingRunId=d.id;else if(String(state.generatingRunId)===String(d.id))state.generatingRunId=null;
           if(state.view==='runs' && String(state.activeRunId)===String(d.id)) {
             const box=$('#run-detail');
             if(box) {
               const current=$('.progress-meta',box), p=d.progress||{};
-              if(current) { const spans=$$('span',current); if(spans[0]) spans[0].textContent=String(d.status).toLowerCase()==='pausing'?'Pausing after the current operation…':p.phase||'Generating audio…'; if(spans[1]) spans[1].textContent=String(d.status).toLowerCase()==='checking' ? `${p.checksCompleted||0}/${p.generated||0} checks completed · ${Math.max(0,(p.generated||0)-(p.checksCompleted||0))} remaining` : `${p.generated||0} generated · ${p.failed||0} failed · ${p.remaining??'…'} remaining`; }
+              if(current) { const spans=$$('span',current), checksTotal=p.checksTotal??p.generated??0; if(spans[0]) spans[0].textContent=String(d.status).toLowerCase()==='pausing'?'Pausing after the current operation…':p.phase||'Generating audio…'; if(spans[1]) spans[1].textContent=String(d.status).toLowerCase()==='checking' ? `${p.checksCompleted||0}/${checksTotal} checks completed · ${Math.max(0,checksTotal-(p.checksCompleted||0))} remaining` : `${p.generated||0} generated · ${p.failed||0} failed · ${p.remaining??'…'} remaining`; }
               const bar=$('.run-progress span',box); if(bar) bar.style.width=`${progressPercent(d)}%`;
               if(String(d.status).toLowerCase()==='pausing') await showRun(d.id);
             }
@@ -213,7 +310,7 @@
     }, 2000);
   }
   async function exportRun(id, acknowledged) {
-    const button=$('#export-run'); if(state.exportingRun || hasPendingChoiceSaves(id)) return;
+    const button=$('#export-run'); if(state.exportingRun || !isRunExportReady(state.activeRun) || hasPendingRunSaves(id)) return;
     state.exportingRun=id; syncExportButton(id);
     try {
       const r=await api(`/api/runs/${encodeURIComponent(id)}/export`,json({acknowledgeUnselected:acknowledged}));

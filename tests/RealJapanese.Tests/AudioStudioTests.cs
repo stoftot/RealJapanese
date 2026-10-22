@@ -195,6 +195,103 @@ public sealed class AudioStudioTests
     }
 
     [Fact]
+    public void SetQuality_PersistsIndependentlyForEachWordAndVoice()
+    {
+        using var temp = new TempDirectory();
+        var catalog = CreateCatalog(Path.Combine(temp.Path, "data"));
+        var store = CreateStore(temp.Path, catalog);
+        var run = CreateMultiFormatRun(store, [catalog.Get("Nouns/7"), catalog.Get("Verbs/7")], ["bert", "fish"]);
+
+        store.SetQuality(run.Id, "Nouns/7", "bert", "Mp3Mono64Kbps");
+        store.SetQuality(run.Id, "Nouns/7", "fish", "OpusMono32Kbps");
+        store.SetQuality(run.Id, "Verbs/7", "bert", "Wav24000Hz16BitMono");
+
+        var reopened = CreateStore(temp.Path, catalog).GetRun(run.Id);
+        Assert.Equal("Mp3Mono64Kbps", reopened.Clips.Single(c => c.Key == "Nouns/7" && c.Engine == "bert").SelectedQuality);
+        Assert.Equal("OpusMono32Kbps", reopened.Clips.Single(c => c.Key == "Nouns/7" && c.Engine == "fish").SelectedQuality);
+        Assert.Equal("Wav24000Hz16BitMono", reopened.Clips.Single(c => c.Key == "Verbs/7" && c.Engine == "bert").SelectedQuality);
+        Assert.Null(reopened.Clips.Single(c => c.Key == "Verbs/7" && c.Engine == "fish").SelectedQuality);
+    }
+
+    [Fact]
+    public void Export_UsesSelectedVoiceQualityBytesAndVariantMetadata()
+    {
+        using var temp = new TempDirectory();
+        var catalog = CreateCatalog(Path.Combine(temp.Path, "data"));
+        var store = CreateStore(temp.Path, catalog);
+        var run = CreateMultiFormatRun(store, [catalog.Get("Nouns/7")], ["bert", "fish"]);
+        store.SetQuality(run.Id, "Nouns/7", "fish", "Mp3Mono64Kbps");
+        store.Select(run.Id, new() { ["Nouns/7"] = "fish" });
+
+        var result = store.Export(run.Id, acknowledgeUnselected: false);
+
+        var exported = Assert.Single(store.Exports());
+        Assert.Equal(1, result.ExportedCount);
+        Assert.Equal("fish", exported.Engine);
+        Assert.Equal("Mp3Mono64Kbps", exported.OutputQuality);
+        Assert.Equal("transcript-fish-Mp3Mono64Kbps", exported.Transcript);
+        Assert.Equal("Text matches", exported.Validation);
+        Assert.Equal("bytes-fish-Nouns-7-Mp3Mono64Kbps", File.ReadAllText(store.ExportAudio("Nouns/7")));
+    }
+
+    [Fact]
+    public void SetQuality_RejectsUnknownOrUnavailableQualityWithoutChangingSelection()
+    {
+        using var temp = new TempDirectory();
+        var catalog = CreateCatalog(Path.Combine(temp.Path, "data"));
+        var store = CreateStore(temp.Path, catalog);
+        var run = CreateRun(store, [catalog.Get("Nouns/7")], ["bert"]); // Legacy run has only its original quality.
+
+        Assert.Throws<StudioException>(() => store.SetQuality(run.Id, "Nouns/7", "bert", "wav"));
+        Assert.Throws<StudioException>(() => store.SetQuality(run.Id, "Nouns/7", "bert", "Mp3Mono64Kbps"));
+
+        Assert.Null(store.GetRun(run.Id).Clips.Single().SelectedQuality);
+    }
+
+    [Fact]
+    public void SetQuality_IgnoresTamperedNonselectedFormatAndExportUsesSelectedFormat()
+    {
+        using var temp = new TempDirectory();
+        var catalog = CreateCatalog(Path.Combine(temp.Path, "data"));
+        var store = CreateStore(temp.Path, catalog);
+        var run = CreateMultiFormatRun(store, [catalog.Get("Nouns/7")], ["bert"]);
+        store.SetQuality(run.Id, "Nouns/7", "bert", "Mp3Mono64Kbps");
+        store.Select(run.Id, new() { ["Nouns/7"] = "bert" });
+        var clip = store.GetRun(run.Id).Clips.Single();
+        string nonselected = StudioStore.SafePath(store.RunFolder(run.Id), clip.Variants["OriginalWav"].File);
+        File.WriteAllText(nonselected, "modified unselected format");
+
+        var updated = store.SetQuality(run.Id, "Nouns/7", "bert", "Mp3Mono64Kbps");
+        store.Export(run.Id, acknowledgeUnselected: false);
+
+        Assert.Equal("Mp3Mono64Kbps", updated.Clips.Single().SelectedQuality);
+        Assert.Equal("bytes-bert-Nouns-7-Mp3Mono64Kbps", File.ReadAllText(store.ExportAudio("Nouns/7")));
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Export_RejectsMissingOrTamperedSelectedQualityBeforeWritingAnything(bool tamper)
+    {
+        using var temp = new TempDirectory();
+        var catalog = CreateCatalog(Path.Combine(temp.Path, "data"));
+        var store = CreateStore(temp.Path, catalog);
+        var run = CreateMultiFormatRun(store, [catalog.Get("Nouns/7")], ["bert"]);
+        store.SetQuality(run.Id, "Nouns/7", "bert", "Mp3Mono64Kbps");
+        store.Select(run.Id, new() { ["Nouns/7"] = "bert" });
+        var variant = store.GetRun(run.Id).Clips.Single().Variants["Mp3Mono64Kbps"];
+        string path = StudioStore.SafePath(store.RunFolder(run.Id), variant.File);
+        if (tamper) File.WriteAllText(path, "modified selected format"); else File.Delete(path);
+
+        var error = Assert.Throws<StudioException>(() => store.Export(run.Id, acknowledgeUnselected: false));
+
+        Assert.Equal(409, error.Status);
+        Assert.False(File.Exists(Path.Combine(temp.Path, "exports", "manifest.json")));
+        string exportRoot = Path.Combine(temp.Path, "exports");
+        Assert.True(!Directory.Exists(exportRoot) || !Directory.EnumerateFiles(exportRoot, "*", SearchOption.AllDirectories).Any());
+    }
+
+    [Fact]
     public void Select_RejectsInvalidChoiceWithoutPartiallyChangingBatch()
     {
         using var temp = new TempDirectory();
@@ -325,6 +422,38 @@ public sealed class AudioStudioTests
         };
         store.AddRun(run);
         return run;
+    }
+
+    private static StudioRun CreateMultiFormatRun(StudioStore store, List<CatalogWord> words, string[] engines)
+    {
+        var run = CreateRun(store, words, engines);
+        store.UpdateRun(run.Id, saved =>
+        {
+            foreach (var clip in saved.Clips)
+            {
+                var variants = new Dictionary<string, AudioVariant>();
+                foreach (string quality in ClipFormats.Qualities)
+                {
+                    string relative = Path.Combine("formats", clip.Engine, clip.Key.Replace('/', '-'), quality + ClipFormats.Extension(quality));
+                    string path = StudioStore.SafePath(store.RunFolder(run.Id), relative);
+                    Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+                    string bytes = $"bytes-{clip.Engine}-{clip.Key.Replace('/', '-')}-{quality}";
+                    File.WriteAllText(path, bytes);
+                    variants[quality] = new AudioVariant
+                    {
+                        File = relative,
+                        Sha256 = StudioStore.Hash(path),
+                        Seconds = 2.5,
+                        Transcript = $"transcript-{clip.Engine}-{quality}",
+                        Validation = "Text matches",
+                        TranscriptSource = "fixture transcript"
+                    };
+                }
+                clip.Variants = variants;
+                clip.SelectedQuality = null;
+            }
+        });
+        return store.GetRun(run.Id);
     }
 
     private sealed class TempDirectory : IDisposable

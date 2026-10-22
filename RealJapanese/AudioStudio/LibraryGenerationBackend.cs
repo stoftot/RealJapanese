@@ -18,6 +18,48 @@ public sealed class LibraryGenerationBackend(StudioOptions options, StudioStore 
     public IVoiceBatch OpenVoice(StudioRun run, string engine) => new VoiceBatch(options, store, media, pitch, run, engine);
     public ICheckBatch OpenChecks(StudioRun run) => new CheckBatch(options.CreateTranscriber(), store.RunFolder(run.Id));
 
+    public async Task<Dictionary<string, AudioVariant>> ConvertFormatsAsync(StudioRun run, StudioClip clip, CancellationToken token)
+    {
+        string root = store.RunFolder(run.Id);
+        var variants = ClipFormats.Available(run, clip);
+        foreach (var variant in variants.Values)
+        {
+            string existing = StudioStore.SafePath(root, variant.File);
+            if (!File.Exists(existing) || StudioStore.Hash(existing) != variant.Sha256)
+                throw new StudioException("A saved clip is missing or changed. Restore it before preparing qualities.", 409);
+        }
+        var missing = ClipFormats.Qualities.Where(q => !variants.ContainsKey(q)).ToArray();
+        if (missing.Length == 0) return variants;
+        if (clip.RawFile is null) throw new StudioException("The raw recording is missing; qualities cannot be prepared.", 409);
+        string raw = StudioStore.SafePath(root, clip.RawFile);
+        if (!File.Exists(raw)) throw new StudioException("The raw recording is missing; qualities cannot be prepared.", 409);
+        string relative = $"formats/{clip.Engine}/{clip.Key}/{Guid.NewGuid():N}";
+        string folder = StudioStore.SafePath(root, relative);
+        Directory.CreateDirectory(folder);
+        bool completed = false;
+        try
+        {
+            foreach (string quality in missing)
+            {
+                token.ThrowIfCancellationRequested();
+                string file = relative + "/" + quality + ClipFormats.Extension(quality);
+                string output = StudioStore.SafePath(root, file);
+                double seconds = await media.ProcessWordAsync(raw, output, quality, token);
+                variants.Add(quality, new() { File = file, Sha256 = StudioStore.Hash(output), Seconds = seconds });
+            }
+            completed = true;
+            return variants;
+        }
+        finally
+        {
+            if (!completed)
+            {
+                Paths.RequireChild(folder, root);
+                if (Directory.Exists(folder)) Directory.Delete(folder, true);
+            }
+        }
+    }
+
     private sealed class CheckBatch(LibraryTranscriber transcriber, string runFolder) : ICheckBatch
     {
         public async Task<CheckedAudio> CheckAsync(StudioClip clip, CancellationToken token)

@@ -89,34 +89,51 @@ human-verified`; after editing, its source is shown as “User edited”. The fu
 source attribution appears both in the reference card and generation selection.
 No recording is sent to a remote service.
 
-## AUDIO-004 — Engine and output-format matrix
+## AUDIO-004 — Engine and per-clip output-quality matrix
 
-**Purpose:** Exercise every engine and output format on a bounded set of words,
-including raw and processed audio.
+**Purpose:** Exercise all four stored output qualities for each selected engine
+and word, per-clip quality selection, export fidelity and legacy-run backfill.
 
 **Preconditions:** Follow the setup guide with the three model environments, model
 files, configured shared `whisper-small` model, FFmpeg and a prepared reference. Use
 two to four representative words, including at least one longer expression. Use
-disposable work and export roots; model generation may take substantial time.
+disposable work and export roots; model generation may take substantial time. Have
+a disposable run from the earlier single-format behavior with retained raw clips
+for the backfill portion.
 
 **Steps:**
 
-1. For each of the four formats (Original WAV, WAV 24 kHz, MP3 64 kbps and Opus
-   32 kbps), generate a bounded run using BERT, Fish and Irodori. Use a reviewed
-   reference for Fish and Irodori. Keep the same two-to-four-word sample across
-   runs so outputs can be compared.
-2. Listen to each generated clip and compare its processed audio with its raw run
-   audio. Inspect the automatic transcript check and any error or warning.
-3. Select one available clip per word and export it from at least one run. Confirm
-   the selected format and model in Exported.
+1. Start one bounded run with all three models and the four-word sample. Use a
+   reviewed reference for Fish and Irodori. Confirm every generated model clip
+   stores Opus 32 kbps mono, MP3 64 kbps mono, WAV 24 kHz/16-bit mono and Original
+   WAV, and that each variant has its own transcript/check result.
+2. For a word with multiple models, choose different playback qualities per
+   model. Use the clip dropdown order Opus, MP3, WAV, Original WAV. Reload the run
+   and confirm each word/model quality choice is retained independently. Play each
+   selected variant and compare it with the raw run audio.
+3. Choose a model for each word and export. Compare the exported payload bytes
+   with the exact selected run variant; inspect the manifest's output quality,
+   hash, transcript and validation metadata. Change a clip's playback quality,
+   reload, and confirm the new choice is used by export.
+4. Open the disposable earlier single-format run and click **Prepare all
+   qualities**. Confirm it uses saved raw recordings without generating speech
+   again, preserves existing variant files, checks and model/quality choices, and
+   creates only missing formats. Pause during conversion and confirm the current
+   clip's missing formats are checkpointed together before Paused; a conversion
+   failure should leave saved artifacts intact, show a run note and leave the run
+   Partial for retry.
 
 **Expected result:** Each selected engine returns a playable clip or a visible
-failure. The engines run in sequential batches, with each worker held for its
-batch; generated files are checked sequentially through one local Whisper worker.
-Whisper uses the configured shared model without downloading it. Processed outputs
-use edge trimming and peak normalization, while raw model audio remains available
-in the run. WAV, MP3 and Opus exports have the requested encoding. ASR checks text
-only and do not establish pronunciation, pitch accent or reference similarity.
+failure, and every available model clip contains all four variants with separate
+transcripts and validation. The engines run in sequential batches; variants are
+checked sequentially through one local Whisper worker. Whisper uses the configured
+shared model without downloading it. Processed outputs use edge trimming and peak
+normalization, while raw model audio remains available in the run. Quality choices
+persist independently for each word/model pair, and export payload bytes and
+manifest metadata match that exact selected variant. Backfill calls no TTS model;
+missing formats for one clip are checkpointed atomically, while failures remain
+visible in run notes and leave a Partial run. ASR checks text only and do not
+establish pronunciation, pitch accent or reference similarity.
 
 ## AUDIO-005 — Cancellation and interrupted-run recovery
 

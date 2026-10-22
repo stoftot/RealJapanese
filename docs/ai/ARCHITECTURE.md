@@ -116,12 +116,21 @@ not touch the private progress root.
    expressions. Catalogs and study progress are read-only inputs.
 2. Runs, retained clips, references and local runtime state are stored below
    `.tooling/audio-studio/`. Runs persist settings, reference snapshots, clip
-   outputs, checks and model choices. Pause waits for the current generation clip
-   (including conversion and save) or current ASR file to finish, unloads the
-   model, then releases generation capacity. Resume continues the same run and
-   skips saved clips/checks. Process startup marks previously active runs
-   interrupted and resumable while preserving completed outputs; paused and
-   interrupted runs cannot export until finished or cancelled.
+   outputs, checks, model choices and a selected output quality for each word/model
+   clip. Each generated clip has four persisted variants: Opus 32 kbps mono, MP3
+   64 kbps mono, WAV 24 kHz/16-bit mono and Original WAV. Each variant is
+   transcribed and validated separately after TTS; playback and export resolve
+   the per-clip selected quality, while the run's output quality supplies the
+   initial default. The default is Original WAV; the chooser lists Opus, MP3, WAV,
+   then Original WAV. Pause waits for the current generation clip (including
+   conversion and save) or current ASR file to finish, unloads the model, then
+   releases generation capacity. Conversion of missing qualities is atomic per
+   clip. Resume continues the same run and skips saved clips/checks. Process
+   startup marks previously active runs interrupted and resumable while preserving
+   completed outputs; paused and interrupted runs cannot export until finished or
+   cancelled. Existing single-format runs can prepare missing variants from raw
+   recordings without TTS generation; existing files, checks and choices are
+   preserved, and conversion errors leave a visible Partial run note.
 3. Selected exports write immutable payload files and replace a manifest under
    `RealJapanese/Data/Audio/`. Neither the web study host nor Android loads this
    directory, so exports do not become study content or progress.

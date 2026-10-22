@@ -82,13 +82,16 @@ app.MapGet("/api/runs/{id}", (string id) => store.GetRun(id));
 app.MapPost("/api/runs", (GenerationInput input, GenerationService jobs) => jobs.StartAsync(input));
 app.MapPost("/api/runs/{id}/pause", (string id, GenerationService jobs) => { jobs.Pause(id); return Results.Ok(); });
 app.MapPost("/api/runs/{id}/resume", (string id, GenerationService jobs) => jobs.ResumeAsync(id));
+app.MapPost("/api/runs/{id}/formats", (string id, GenerationService jobs) => jobs.PrepareFormatsAsync(id));
 app.MapPost("/api/runs/{id}/cancel", (string id, GenerationService jobs) => { jobs.Cancel(id); return Results.Ok(); });
 app.MapPut("/api/runs/{id}/selections", (string id, SelectionInput input) => store.Select(id, input.Choices));
+app.MapPut("/api/runs/{id}/quality", (string id, ClipQualityInput input) => store.SetQuality(id, input.Key, input.Engine, input.Quality));
 app.MapPost("/api/runs/{id}/export", (string id, ExportInput input) => store.Export(id, input.AcknowledgeUnselected));
-app.MapGet("/api/runs/{id}/audio", (string id, string key, string engine, bool? raw) =>
+app.MapGet("/api/runs/{id}/audio", (string id, string key, string engine, bool? raw, string? quality) =>
 {
-    var clip = store.GetRun(id).Clips.SingleOrDefault(c => c.Key == key && c.Engine == engine) ?? throw new StudioException("Clip not found.", 404);
-    string? relative = raw == true ? clip.RawFile : clip.File;
+    var run = store.GetRun(id);
+    var clip = run.Clips.SingleOrDefault(c => c.Key == key && c.Engine == engine) ?? throw new StudioException("Clip not found.", 404);
+    string? relative = raw == true ? clip.RawFile : ClipFormats.Resolve(run, clip, quality).File;
     return AudioFile(relative is null ? throw new StudioException("Clip is not ready.", 404) : StudioStore.SafePath(store.RunFolder(id), relative));
 });
 app.MapGet("/api/exports", () => store.Exports());

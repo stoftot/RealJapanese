@@ -9,6 +9,7 @@ public interface IGenerationBackend
     void Prepare(StudioRun run);
     IVoiceBatch OpenVoice(StudioRun run, string engine);
     ICheckBatch OpenChecks(StudioRun run);
+    Task<Dictionary<string, AudioVariant>> ConvertFormatsAsync(StudioRun run, StudioClip clip, CancellationToken token);
 }
 public interface IVoiceBatch : IAsyncDisposable
 {

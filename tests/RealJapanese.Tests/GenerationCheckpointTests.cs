@@ -57,9 +57,13 @@ public sealed class GenerationCheckpointTests
 
         Assert.DoesNotContain(resumeBackend.Events, e => e == "generate bert Nouns/1");
         Assert.Equal(
-            new[] { "open bert", "generate bert Verbs/1", "dispose bert", "open fish", "generate fish Nouns/1", "generate fish Verbs/1", "dispose fish",
-                "open checks", "check bert Nouns/1", "check bert Verbs/1", "check fish Nouns/1", "check fish Verbs/1", "dispose checks" },
-            resumeBackend.Events);
+            new[] { "open bert", "generate bert Verbs/1", "dispose bert", "open fish", "generate fish Nouns/1", "generate fish Verbs/1", "dispose fish" },
+            resumeBackend.Events.Where(e => e.StartsWith("open ", StringComparison.Ordinal) && e != "open checks"
+                || e.StartsWith("generate ", StringComparison.Ordinal) || e.StartsWith("dispose ", StringComparison.Ordinal) && e != "dispose checks"));
+        Assert.Equal(4, resumeBackend.Events.Count(e => e.StartsWith("convert ", StringComparison.Ordinal)));
+        Assert.Equal(16, resumeBackend.Events.Count(e => e.StartsWith("check ", StringComparison.Ordinal)));
+        Assert.Equal("open checks", resumeBackend.Events.First(e => e == "open checks"));
+        Assert.Equal("dispose checks", resumeBackend.Events.Last(e => e == "dispose checks"));
         Assert.All(reopenedStore.GetRun(started.Id).Clips, clip => Assert.Equal("Text matches", clip.Validation));
     }
 
@@ -92,7 +96,10 @@ public sealed class GenerationCheckpointTests
 
         Assert.DoesNotContain(resumeBackend.Events, e => e.StartsWith("open ", StringComparison.Ordinal) && e != "open checks");
         Assert.DoesNotContain(resumeBackend.Events, e => e.StartsWith("generate ", StringComparison.Ordinal));
-        Assert.Equal(new[] { "open checks", "check bert Nouns/2", "dispose checks" }, resumeBackend.Events);
+        Assert.Equal("open checks", resumeBackend.Events.First());
+        Assert.Equal("dispose checks", resumeBackend.Events.Last());
+        Assert.Equal(7, resumeBackend.Events.Count(e => e.StartsWith("check ", StringComparison.Ordinal)));
+        Assert.DoesNotContain(resumeBackend.Events, e => e.StartsWith("convert ", StringComparison.Ordinal));
     }
 
     [Fact]
@@ -226,6 +233,73 @@ public sealed class GenerationCheckpointTests
         Assert.Empty(afterRestart.Exports());
     }
 
+    [Fact]
+    public async Task FormatUpgrade_PauseAfterConversionResumesRemainingClipsAndChecksEachVariantWithoutOpeningVoice()
+    {
+        using var temp = new TempDirectory();
+        var catalog = CreateCatalog(Path.Combine(temp.Path, "data"));
+        var store = CreateStore(temp.Path, catalog);
+        var run = CreateTerminalRun(store, [catalog.Get("Nouns/1"), catalog.Get("Verbs/1")], ["bert"]);
+        var firstBackend = new FakeBackend(store);
+        var gate = firstBackend.BlockConversion("bert", "Nouns/1");
+        var firstService = new GenerationService(store, catalog, firstBackend);
+
+        await firstService.PrepareFormatsAsync(run.Id);
+        await gate.Entered.Task.WaitAsync(TimeSpan.FromSeconds(10), TestContext.Current.CancellationToken);
+        firstService.Pause(run.Id);
+        gate.Release.TrySetResult(true);
+        await WaitForStatus(store, run.Id, "Paused");
+
+        var paused = store.GetRun(run.Id);
+        Assert.True(paused.FormatUpgrade);
+        Assert.Equal(4, paused.Clips.Single(c => c.Key == "Nouns/1").Variants.Count);
+        Assert.Empty(paused.Clips.Single(c => c.Key == "Verbs/1").Variants);
+        Assert.DoesNotContain(firstBackend.Events, e => e.StartsWith("open bert", StringComparison.Ordinal));
+        Assert.DoesNotContain(firstBackend.Events, e => e.StartsWith("check ", StringComparison.Ordinal));
+
+        var reopened = CreateStore(temp.Path, catalog);
+        var resumeBackend = new FakeBackend(reopened);
+        resumeBackend.ThrowOnPrepare = true;
+        await new GenerationService(reopened, catalog, resumeBackend).ResumeAsync(run.Id);
+        await WaitForStatus(reopened, run.Id, "Completed");
+
+        Assert.DoesNotContain(resumeBackend.Events, e => e.StartsWith("open bert", StringComparison.Ordinal));
+        Assert.Equal(new[] { "convert bert Verbs/1" }, resumeBackend.Events.Where(e => e.StartsWith("convert ", StringComparison.Ordinal)));
+        Assert.Equal(6, resumeBackend.Events.Count(e => e.StartsWith("check ", StringComparison.Ordinal)));
+        Assert.False(reopened.GetRun(run.Id).FormatUpgrade);
+        Assert.All(reopened.GetRun(run.Id).Clips, clip => Assert.Equal(4, clip.Variants.Count));
+    }
+
+    [Fact]
+    public async Task FormatUpgrade_PauseDuringVariantCheckResumesOnlyUncheckedFormats()
+    {
+        using var temp = new TempDirectory();
+        var catalog = CreateCatalog(Path.Combine(temp.Path, "data"));
+        var store = CreateStore(temp.Path, catalog);
+        var run = CreateTerminalRun(store, [catalog.Get("Nouns/1")], ["bert"]);
+        PopulateVariants(store, run.Id, "bert", "Nouns/1", validationsPending: true);
+        var firstBackend = new FakeBackend(store);
+        var gate = firstBackend.BlockCheck("bert", "Nouns/1");
+        var firstService = new GenerationService(store, catalog, firstBackend);
+
+        await firstService.PrepareFormatsAsync(run.Id);
+        await gate.Entered.Task.WaitAsync(TimeSpan.FromSeconds(10), TestContext.Current.CancellationToken);
+        firstService.Pause(run.Id);
+        gate.Release.TrySetResult(true);
+        await WaitForStatus(store, run.Id, "Paused");
+
+        Assert.Equal(2, store.GetRun(run.Id).Clips.Single().Variants.Values.Count(v => v.Validation != "Pending"));
+        var reopened = CreateStore(temp.Path, catalog);
+        var resumeBackend = new FakeBackend(reopened);
+        await new GenerationService(reopened, catalog, resumeBackend).ResumeAsync(run.Id);
+        await WaitForStatus(reopened, run.Id, "Completed");
+
+        Assert.Equal(2, resumeBackend.Events.Count(e => e.StartsWith("check ", StringComparison.Ordinal)));
+        Assert.DoesNotContain(resumeBackend.Events, e => e.StartsWith("convert ", StringComparison.Ordinal));
+        Assert.DoesNotContain(resumeBackend.Events, e => e.StartsWith("open bert", StringComparison.Ordinal));
+        Assert.All(reopened.GetRun(run.Id).Clips.Single().Variants.Values, v => Assert.Equal("Text matches", v.Validation));
+    }
+
     private static async Task<StudioRun> Start(GenerationService service, string[] wordKeys, string[] engines) =>
         await service.StartAsync(new(wordKeys, engines, null));
 
@@ -260,20 +334,68 @@ public sealed class GenerationCheckpointTests
     private static StudioStore CreateStore(string root, WordCatalog catalog) =>
         new(Path.Combine(root, "work"), Path.Combine(root, "exports"), catalog);
 
+    private static StudioRun CreateTerminalRun(StudioStore store, List<CatalogWord> words, string[] engines)
+    {
+        string id = Guid.NewGuid().ToString("N");
+        string runFolder = store.RunFolder(id);
+        var clips = new List<StudioClip>();
+        foreach (var word in words)
+        foreach (string engine in engines)
+        {
+            string relative = Path.Combine(engine, word.Dataset + "-" + word.Id + ".wav");
+            string rawRelative = Path.Combine(engine, "raw", word.Dataset + "-" + word.Id + ".wav");
+            string path = StudioStore.SafePath(runFolder, relative);
+            string rawPath = StudioStore.SafePath(runFolder, rawRelative);
+            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            Directory.CreateDirectory(Path.GetDirectoryName(rawPath)!);
+            File.WriteAllText(path, $"audio:{engine}:{word.Key}");
+            File.WriteAllText(rawPath, $"raw:{engine}:{word.Key}");
+            clips.Add(new StudioClip
+            {
+                Key = word.Key, Engine = engine, Status = "Completed", File = relative, RawFile = rawRelative,
+                Sha256 = StudioStore.Hash(path), Seconds = 1, Validation = "Text matches", Transcript = word.Kana
+            });
+        }
+        var run = new StudioRun
+        {
+            Id = id, Status = "Completed", Phase = "Complete", Words = words, Engines = engines,
+            OutputQuality = "OriginalWav", Clips = clips
+        };
+        store.AddRun(run);
+        return run;
+    }
+
     private sealed class FakeBackend(StudioStore store) : IGenerationBackend
     {
         private readonly StudioStore runStore = store;
         private readonly ConcurrentQueue<string> events = new();
         private readonly ConcurrentDictionary<(string Engine, string Key), RequestGate> generationGates = new();
         private readonly ConcurrentDictionary<(string Engine, string Key), RequestGate> checkGates = new();
+        private readonly ConcurrentDictionary<(string Engine, string Key), RequestGate> conversionGates = new();
         private int voiceOpens;
         private int voiceDisposals;
         public string[] Events => events.ToArray();
         public int VoiceOpens => Volatile.Read(ref voiceOpens);
         public int VoiceDisposals => Volatile.Read(ref voiceDisposals);
-        public void Prepare(StudioRun run) { }
+        public bool ThrowOnPrepare { get; set; }
+        public void Prepare(StudioRun run)
+        {
+            if (ThrowOnPrepare) throw new InvalidOperationException("TTS preparation is not expected for a format-only upgrade.");
+        }
         public RequestGate BlockGeneration(string engine, string key) => generationGates.GetOrAdd((engine, key), _ => new());
         public RequestGate BlockCheck(string engine, string key) => checkGates.GetOrAdd((engine, key), _ => new());
+        public RequestGate BlockConversion(string engine, string key) => conversionGates.GetOrAdd((engine, key), _ => new());
+        public async Task<Dictionary<string, AudioVariant>> ConvertFormatsAsync(StudioRun run, StudioClip clip, CancellationToken token)
+        {
+            events.Enqueue($"convert {clip.Engine} {clip.Key}");
+            if (conversionGates.TryGetValue((clip.Engine, clip.Key), out var gate))
+            {
+                gate.Token = token;
+                gate.Entered.TrySetResult(true);
+                await gate.Release.Task.WaitAsync(token);
+            }
+            return PopulateVariants(runStore, run.Id, clip.Engine, clip.Key, validationsPending: true);
+        }
         public IVoiceBatch OpenVoice(StudioRun run, string engine)
         {
             Interlocked.Increment(ref voiceOpens);
@@ -317,7 +439,7 @@ public sealed class GenerationCheckpointTests
         {
             public async Task<CheckedAudio> CheckAsync(StudioClip clip, CancellationToken token)
             {
-                owner.events.Enqueue($"check {clip.Engine} {clip.Key}");
+                owner.events.Enqueue($"check {clip.Engine} {clip.Key} {Path.GetFileName(clip.File)}");
                 if (owner.checkGates.TryGetValue((clip.Engine, clip.Key), out var gate))
                 {
                     gate.Token = token;
@@ -340,6 +462,30 @@ public sealed class GenerationCheckpointTests
         public TaskCompletionSource<bool> Entered { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         public TaskCompletionSource<bool> Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         public CancellationToken Token { get; set; }
+    }
+
+    private static Dictionary<string, AudioVariant> PopulateVariants(StudioStore store, string runId, string engine, string key, bool validationsPending)
+    {
+        var run = store.GetRun(runId);
+        var clip = run.Clips.Single(c => c.Key == key && c.Engine == engine);
+        var variants = ClipFormats.Available(run, clip);
+        foreach (string quality in ClipFormats.Qualities.Where(q => !variants.ContainsKey(q)))
+        {
+            string relative = Path.Combine("formats", engine, key.Replace('/', '-'), quality + ClipFormats.Extension(quality));
+            string path = StudioStore.SafePath(store.RunFolder(runId), relative);
+            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            File.WriteAllText(path, $"format:{engine}:{key}:{quality}");
+            variants[quality] = new AudioVariant
+            {
+                File = relative,
+                Sha256 = StudioStore.Hash(path),
+                Seconds = 1,
+                Validation = validationsPending ? "Pending" : "Text matches"
+            };
+        }
+        if (!validationsPending)
+            foreach (var variant in variants.Values) variant.Validation = "Text matches";
+        return variants;
     }
 
     private sealed class TempDirectory : IDisposable

@@ -30,6 +30,20 @@ public sealed class StudioClip
     public string? Sha256 { get; set; }
     public string? TranscriptSource { get; set; }
     public IReadOnlyDictionary<string, string>? TranscriptionDiagnostics { get; set; }
+    public Dictionary<string, AudioVariant> Variants { get; set; } = [];
+    public string? SelectedQuality { get; set; }
+}
+
+public sealed class AudioVariant
+{
+    public required string File { get; init; }
+    public required string Sha256 { get; init; }
+    public double? Seconds { get; init; }
+    public string? Transcript { get; set; }
+    public string Validation { get; set; } = "Pending";
+    public string? Error { get; set; }
+    public string? TranscriptSource { get; set; }
+    public IReadOnlyDictionary<string, string>? TranscriptionDiagnostics { get; set; }
 }
 
 public sealed class StudioRun
@@ -40,6 +54,8 @@ public sealed class StudioRun
     public required List<CatalogWord> Words { get; init; }
     public required string[] Engines { get; init; }
     public required string OutputQuality { get; init; }
+    public bool AllQualities { get; set; }
+    public bool FormatUpgrade { get; set; }
     public string? ReferenceId { get; init; }
     public string? ReferenceName { get; init; }
     public ReferenceItem? ReferenceSnapshot { get; init; }
@@ -54,7 +70,8 @@ public sealed class StudioRun
         Total = Clips.Count,
         Generated = Clips.Count(c => c.File is not null),
         Failed = Clips.Count(c => c.Status == "Failed"),
-        ChecksCompleted = Clips.Count(c => c.Validation != "Pending" && c.File is not null),
+        ChecksCompleted = Clips.Sum(c => c.Variants.Count > 0 ? c.Variants.Values.Count(v => v.Validation != "Pending") : c.File is not null && c.Validation != "Pending" ? 1 : 0),
+        ChecksTotal = AllQualities ? Clips.Count * 4 : Clips.Count(c => c.File is not null),
         Remaining = Clips.Count(c => c.Status is "Pending" or "Generating"),
         Phase
     };
@@ -76,6 +93,7 @@ public sealed record ExportedClip(CatalogWord Word, string Engine, string RunId,
 
 public sealed record GenerationInput(string[] WordKeys, string[] Engines, string? ReferenceId, string OutputQuality = "OriginalWav");
 public sealed record SelectionInput(Dictionary<string, string?> Choices);
+public sealed record ClipQualityInput(string Key, string Engine, string Quality);
 public sealed record ExportInput(bool AcknowledgeUnselected = false);
 public sealed record ReferenceEdit(string Name, string Transcript);
 public sealed record ExportResult(int ExportedCount, int UnselectedCount);

@@ -111,6 +111,21 @@ public sealed class StudioStore
         });
         return GetRun(id);
     }
+    public StudioRun SetQuality(string id, string key, string engine, string quality)
+    {
+        if (!ClipFormats.Qualities.Contains(quality)) throw new StudioException("Unknown output quality.");
+        UpdateRun(id, run =>
+        {
+            var clip = run.Clips.SingleOrDefault(c => c.Key == key && c.Engine == engine)
+                ?? throw new StudioException("Clip not found.", 404);
+            var variant = ClipFormats.Resolve(run, clip, quality);
+            string file = SafePath(RunFolder(id), variant.File);
+            if (!File.Exists(file) || Hash(file) != variant.Sha256)
+                throw new StudioException("The selected quality is missing or changed.", 409);
+            clip.SelectedQuality = quality;
+        });
+        return GetRun(id);
+    }
     public IReadOnlyList<ReferenceItem> References()
     {
         lock (referenceGate) return Directory.EnumerateFiles(ReferencesRoot, "reference.json", SearchOption.AllDirectories)
@@ -145,28 +160,31 @@ public sealed class StudioStore
             if (unselected > 0 && !acknowledgeUnselected)
                 throw new StudioException($"{unselected} words have no choice. Export only the selected clips?", 409, unselected);
             var selected = run.Words.Where(w => run.Selections.TryGetValue(w.Key, out var choice) && choice != "dont-use")
-                .Select(w => (word: w, clip: run.Clips.Single(c => c.Key == w.Key && c.Engine == run.Selections[w.Key]))).ToArray();
-            foreach (var (word, clip) in selected)
+                .Select(w =>
+                {
+                    var clip = run.Clips.Single(c => c.Key == w.Key && c.Engine == run.Selections[w.Key]);
+                    return (word: w, clip, quality: clip.SelectedQuality ?? run.OutputQuality, audio: ClipFormats.Resolve(run, clip));
+                }).ToArray();
+            foreach (var (word, clip, quality, audio) in selected)
             {
                 catalog.VerifyCurrent(word);
-                if (clip.File is null || clip.Sha256 is null) throw new StudioException("A selected clip is unavailable.", 409);
-                string source = SafePath(RunFolder(id), clip.File);
-                if (!File.Exists(source) || Hash(source) != clip.Sha256) throw new StudioException("A selected clip is missing or changed. Generate it again.", 409);
+                string source = SafePath(RunFolder(id), audio.File);
+                if (!File.Exists(source) || Hash(source) != audio.Sha256) throw new StudioException("A selected clip is missing or changed. Generate it again.", 409);
             }
             var entries = Exports().ToDictionary(e => e.Word.Key);
             var created = new List<string>();
             try
             {
-                foreach (var (word, clip) in selected)
+                foreach (var (word, clip, quality, audio) in selected)
                 {
-                    string source = SafePath(RunFolder(id), clip.File!);
+                    string source = SafePath(RunFolder(id), audio.File);
                     // Immutable payload names make the manifest replacement the commit point.
                     string relative = $"{word.Dataset}/{word.Id}/{Guid.NewGuid():N}{Path.GetExtension(source)}";
                     string target = SafePath(exportRoot, relative);
                     Directory.CreateDirectory(Path.GetDirectoryName(target)!);
                     File.Copy(source, target, false);
                     created.Add(target);
-                    entries[word.Key] = new(word, clip.Engine, id, run.OutputQuality, relative, clip.Sha256!, DateTimeOffset.UtcNow, clip.Transcript, clip.Validation);
+                    entries[word.Key] = new(word, clip.Engine, id, quality, relative, audio.Sha256, DateTimeOffset.UtcNow, audio.Transcript, audio.Validation);
                 }
                 if (selected.Length > 0) AtomicWrite(Path.Combine(exportRoot, "manifest.json"), entries.Values.OrderBy(e => e.Word.Key).ToArray());
             }

@@ -72,11 +72,15 @@ as a category in per-word views. Search and category selection work across the
 catalog. The “Only words without exported audio” filter is based on the current
 export manifest.
 
-Choose words, one or more of BERT, Fish and Irodori, an optional reference and one
-output format to start a run. Runs and their progress are saved. The app keeps a
-model worker loaded for its whole engine batch, processes engines sequentially,
-then checks generated clips serially through one local Whisper worker. A second
-run or reference operation cannot start while generation is active.
+Choose words, one or more of BERT, Fish and Irodori, an optional reference and a
+default output format to start a run. The default is Original WAV. Every generated
+model clip is stored in all four qualities: Opus 32 kbps mono, MP3 64 kbps mono,
+WAV 24 kHz/16-bit mono, and Original WAV. After generation and format conversion,
+each available quality is transcribed and checked separately. Runs and their
+progress are saved. The app keeps a model worker loaded for its whole engine
+batch, processes engines sequentially, then checks generated clips serially
+through one local Whisper worker. A second run or reference operation cannot
+start while generation is active.
 
 Each clip's automatic transcript is a conservative text check against the
 catalog's Japanese or kana text. A match does not establish correct speech,
@@ -106,11 +110,17 @@ speaker identity or voice quality.
 
 ## Choices, exports and files
 
-After generation and checks complete, select one available model clip for each
-word or choose “Don't export this word”. Choices are persisted by the run. Export
-requires an explicit confirmation when any words have no choice; those words are
-skipped. Successful exports refresh the catalog's missing-audio state. The
-Exported view can be searched and filtered to All, BERT, Fish or Irodori.
+After generation and checks complete, use each clip's quality dropdown to choose
+its playback quality. The dropdown order is Opus 32 kbps mono, MP3 64 kbps mono,
+WAV 24 kHz/16-bit mono, then Original WAV. This choice is saved independently for
+each word and model, including across reloads. Choose one available model clip
+for each word or choose “Don't export this word”. Export uses the saved quality
+for the selected model clip and records that exact variant's bytes, hash,
+transcript and validation metadata. Model choices and quality choices are
+persisted by the run. Export requires an explicit confirmation when any words
+have no choice; those words are skipped. Successful exports refresh the catalog's
+missing-audio state. The Exported view can be searched and filtered to All, BERT,
+Fish or Irodori.
 
 Run manifests and retained clips are stored under
 `.tooling/audio-studio/runs/`; prepared references are under
@@ -128,6 +138,16 @@ Opus at 32 kbps mono. Processing preserves internal pauses, retains 100 ms befor
 and 150 ms after detected speech, targets a −3 dBFS peak with at most 3× gain, and
 rejects silent audio. Listen to both raw and processed clips when a quiet consonant
 or word ending may have been trimmed.
+
+Runs created with the earlier single-format behavior can be upgraded in Runs with
+**Prepare all qualities**. The operation converts each completed clip's preserved
+raw recording into any missing qualities; it does not call a speech model again.
+Existing variant files, checks and per-word model/quality choices are preserved.
+The button is available for an upgradeable run with raw recordings. Conversion
+checkpoints are atomic per clip: all missing formats for the current clip are
+prepared together before the run pauses or saves that clip's new variants. A
+conversion failure leaves that clip's saved artifacts and choices intact, adds a
+visible run note, and leaves the run Partial so the missing formats can be retried.
 
 Pause requests take effect at a safe checkpoint: after the current clip, including
 its conversion and save, or after the current Whisper file finishes. The app then
