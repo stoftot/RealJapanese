@@ -129,7 +129,8 @@ public sealed class VocabularyCategoryComponentTests
         Assert.Equal(new[] { "Adverbs", "Expressions" }, cut.FindAll("button[data-source][aria-pressed=true]")
             .Select(button => button.GetAttribute("data-source")).Order());
         Assert.Equal(["Expressions:1"], Keys(cut, 2));
-        cut.FindAll("button").Last(button => button.TextContent.Trim() == "Start practice").Click();
+        cut.FindAll(".practice-selector .card").Single(card => card.TextContent.Contains("Flash cards", StringComparison.Ordinal))
+            .QuerySelector("button")!.Click();
         Assert.Equal("training", Query(test)["category"]);
         Assert.Equal(new[] { "Adverbs", "Expressions" }, (Query(test)["sources"] ?? "").Split(',').Order());
         var flashcards = test.Context.Render<WordFlashCards>();

@@ -12,7 +12,7 @@ Keep run results and unexecuted steps in the current task, not in these files.
 | --- | --- |
 | [Kana](kana.md) | KANA-001–003: character selections/settings, answers/review, local persistence, responsive charts and offline fonts |
 | [Local sync](local-sync.md) | SYNC-001–006: Automatic/Manual transfer, cancellation, pairing rejection, merge/recovery and errors across web and Android |
-| [Study selection and practice](study-practice.md) | STUDY-001–011: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout, language oracles, book/lesson selection, saved-word mixing and daily rehearsal |
+| [Study selection and practice](study-practice.md) | STUDY-001–012: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout, language oracles, book/lesson selection, saved-word mixing, daily rehearsal and audio listening |
 | [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–003: offline catalogs, update/restart persistence, IME/Back/lifecycle and controlled startup failure |
 | [Data maintenance](data-maintenance.md) | DATA-001–002: controlled extraction/model validation and interrupted legacy cleanup |
 | [Standalone TTS comparison](tts-comparison.md) | TTS-001: single-word audio, pronunciation, reference voice comparison and output isolation |
@@ -52,6 +52,7 @@ assert intended behavior but require explicit execution; see the testing guide.
 | STUDY-010 | `VocabularyCategoryComponentTests`, `VocabularyCategoryBrowserTests`: source toggles, saved-only read-only lists, colliding IDs, unchanged progress, practice/back/reload and 320 px layout | Android touch and screen-reader usability |
 | STUDY-011 | `RehearsalProgressTests`: immediate demotion, calendar rules, migration and sync/recovery; `RehearsalPracticeComponentTests`: Learn routes, partial/revealed answers, excluded exercises and remaining question pools; `RehearsalBrowserTests`: retry retention, seventh-day promotion, re-chunking and leaving/restarting before retry | Actual host timezone rollover; Android WebView practice and device-local dates |
 | SYNC-001 | Real loopback transfer and private-interface discovery integration tests; shared web approval/apply flow | Automatic discovery over actual Wi-Fi and Windows/Android cryptographic interoperability, both directions |
+| STUDY-012 | `StudyAudioCatalogTests`, `ListeningPracticeComponentTests`, `ListeningBrowserTests`: manifest matching, choices, chunks/retries, unchanged progress, real MP3/Opus playback and autoplay recovery | Android offline playback, audio output/quality and native lifecycle |
 | SYNC-002 | Two-host Playwright sync through Manual mode | Actual web/Android reachability and transfer in both directions |
 | SYNC-003 | `SyncPreviewBrowserTests`: Cancel, close, backdrop and Escape, no-write and fresh transfer; `SyncDialogComponentTests` | Native WebView dialog behavior and other-device dismissal combinations |
 | SYNC-004 | `SyncPairingBrowserTests`: one approval, denial, dismissal, navigation stops listener, renewed transfer; socket cancellation tests | Android navigation/background and peer combinations |

@@ -23,6 +23,8 @@ or owner-approved roadmap was not found.
 - Practice spelling and flashcards, verb/adjective categories and conjugation,
   single/combined kanji meanings, and generated number questions.
 - Reveal answers and repeat difficult questions during a practice session.
+- Listen to exported vocabulary clips and choose from three English meanings,
+  with chunking and retries independent of automatic study-list moves.
 - Use the Android application offline without running the ASP.NET host.
 - Transfer progress directly between two open installations on the same trusted
   Wi-Fi network or personal hotspot, with an explicit merge preview.

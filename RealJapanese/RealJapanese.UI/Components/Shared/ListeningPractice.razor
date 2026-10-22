@@ -1,0 +1,59 @@
+@inherits ListeningPracticeBase
+
+<PracticeShell @bind-UiScale="UiScale">
+    <div class="practice-settings">
+        <div class="row g-3">
+            <div class="col-12 col-md-6">
+                <NumberStepper Label="Number of chunks" Value="@splitDataInto" ValueChanged="OnSplitDataIntoChanged" Min="1" Max="10" />
+            </div>
+            <div class="col-12 col-md-6">
+                <NumberStepper Label="Selected chunk" Value="@selectedDataChunk" ValueChanged="OnSelectedDataChunkIndexChanged" Min="1" Max="@splitDataInto" />
+            </div>
+        </div>
+    </div>
+    <div class="practice-wrap w-100 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h1 class="h5 mb-0">Listening practice</h1>
+                    <small class="text-muted">@(Questions.Count == 0 ? "0/0" : $"{currentQuestionIndex + 1}/{Questions.Count}")</small>
+                </div>
+                <p class="text-muted">Listen and choose the English meaning. This practice does not move words between study lists.</p>
+                @if (Audio.Error is not null)
+                {
+                    <p role="alert">@Audio.Error</p>
+                }
+                @if (Questions.Count == 0)
+                {
+                    <h2 class="h5">Nothing to listen to yet</h2>
+                    <p class="mb-0">@EmptyMessage</p>
+                }
+                else
+                {
+                    @if (UnavailableCount > 0)
+                    {
+                        <p class="text-muted">@UnavailableCount selected words are unavailable. Listening needs an exported clip and two distinct alternative meanings.</p>
+                    }
+                    <ListeningAudioPlayer Catalog="@Audio" Clip="@CurrentClip" @key="Attempt" />
+                    <div class="d-grid gap-2 mt-3" role="group" aria-label="English meanings">
+                        @foreach (var choice in Choices)
+                        {
+                            <button type="button" class="btn @ChoiceClass(choice) text-start" disabled="@showAnswer"
+                                    @onclick="() => Choose(choice)">@choice</button>
+                        }
+                    </div>
+                    @if (showAnswer)
+                    {
+                        <p class="alert @(WasCorrect ? "alert-success" : "alert-info") mt-3" role="status">
+                            @if (WasCorrect) { <strong>Correct!</strong> }
+                            else { <strong>Not quite. Correct answer: @CurrentAnswer. This clip will repeat.</strong> }
+                        </p>
+                    }
+                    <div class="practice-actions mt-3">
+                        <button type="button" class="btn btn-primary ms-auto" disabled="@(!showAnswer)" @onclick="AdvanceAsync">Next question</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</PracticeShell>

@@ -1,0 +1,61 @@
+@page "/words/listening"
+@page "/nouns/listening"
+@page "/verbs/listening"
+@page "/adjectives/listening"
+@page "/vocabulary/listening"
+@using DataLoaders.Models
+@using Repositories
+@using Repositories.Audio
+@using RealJapanese.Components.Shared
+@inject RepositoryPaths Paths
+@inject NavigationManager Navigation
+
+<PageTitle>Listening practice</PageTitle>
+@if (BackLabel is null)
+{
+    <h1>Exercise not found</h1>
+}
+else
+{
+    <p><a href="@BackUrl">Back to @BackLabel</a></p>
+    <ListeningPractice Words="@Words" ChoiceWords="@ChoiceWords" Audio="@Audio" @key="PracticeKey" />
+}
+
+@code {
+    private string Area => Navigation.ToBaseRelativePath(Navigation.Uri).Split('?')[0].Split('/')[0].ToLowerInvariant();
+    [SupplyParameterFromQuery(Name = "category")] public string? Category { get; set; }
+    [SupplyParameterFromQuery(Name = "sources")] public string? Sources { get; set; }
+    private VocabularyCollection Collection { get; set; } = null!;
+    private StudyAudioCatalog Audio { get; set; } = null!;
+    private List<VocabularyEntry> Words { get; set; } = [];
+    private List<VocabularyEntry> ChoiceWords { get; set; } = [];
+    private string? BackLabel => Area.ToLowerInvariant() switch
+    {
+        "words" => "words", "nouns" => "nouns", "verbs" => "verbs",
+        "adjectives" => "adjectives", "vocabulary" => "words & expressions", _ => null
+    };
+    private string MixerSources => Collection.SerializeMixerSources(Collection.ParseMixerSources(Sources));
+    private (string, string?, string) PracticeKey => (Area, Category, MixerSources);
+    private string BackUrl => $"{Area.ToLowerInvariant()}?category={Uri.EscapeDataString(Category ?? "")}" +
+        (Area.Equals("words", StringComparison.OrdinalIgnoreCase) ? $"&sources={Uri.EscapeDataString(MixerSources)}" : "");
+
+    protected override void OnInitialized()
+    {
+        Collection = new(Paths);
+        Audio = new(Paths);
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (BackLabel is null) return;
+        IEnumerable<string> sources = Area.ToLowerInvariant() switch
+        {
+            "words" => Collection.ParseMixerSources(Sources),
+            "vocabulary" => Collection.SupportingSources,
+            "nouns" => ["Nouns"], "verbs" => ["Verbs"], _ => ["Adjectives"]
+        };
+        var keys = sources.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        Words = Collection.SavedWords(keys, WordPracticeCategoryExtensions.ParseQueryValue(Category));
+        ChoiceWords = Collection.Entries.Where(word => keys.Contains(word.Dataset)).ToList();
+    }
+}

@@ -100,15 +100,20 @@ query selection, including an empty category.
    | --- | --- | --- |
    | Words — Learn the words | `/words/spelling?category=<list>` | All three |
    | Words — Flash cards | `/words/flashcards?category=<list>` | All three |
+   | Words — Listening | `/words/listening?category=<list>` | All three |
    | Words & expressions — Learn the words | `/vocabulary/spelling?category=<list>` | All three |
    | Words & expressions — Flash cards | `/vocabulary/flashcards?category=<list>` | All three |
+   | Words & expressions — Listening | `/vocabulary/listening?category=<list>` | All three |
    | Nouns — Learn the nouns | `/nouns/spelling?category=<list>` | All three |
    | Nouns — Flash cards | `/nouns/flashcards?category=<list>` | All three |
+   | Nouns — Listening | `/nouns/listening?category=<list>` | All three |
    | Nouns — Conjugations and forms | `/nouns/conjugate` | Category-independent |
    | Verbs — Learn the verbs | `/verbs/spelling?category=<list>` | All three |
+   | Verbs — Listening | `/verbs/listening?category=<list>` | All three |
    | Verbs — Verb type categorisation | `/verbs/categories?category=<list>` | All three |
    | Verbs — Conjugation and forms | `/verbs/ConjugationsAndForms` | Category-independent |
    | Adjectives — Learn the adjectives | `/adjectives/spelling?category=<list>` | All three |
+   | Adjectives — Listening | `/adjectives/listening?category=<list>` | All three |
    | Adjectives — Type categorisation | `/adjectives/categories?category=<list>` | All three |
    | Adjectives — Type conjugation | `/adjectives/conjugateBase` | Category-independent |
    | Kanji Combined — Learn the kanji | `/kanji/combined/meaning?category=<list>` | All three |
@@ -133,7 +138,9 @@ query selection, including an empty category.
 - Noun conjugation practice works with an empty study list and asks for endings
   in romaji: four polite forms, four short forms and the te-form. Polite and
   short prompts are distinct, and every question remains accessible with nine chunks.
-- An empty category-dependent exercise shows **Nothing to practise yet** and remains responsive.
+- An empty category-dependent exercise shows **Nothing to practise yet** (or
+  **Nothing to listen to yet** for Listening) and remains responsive. Listening
+  requires matching exports; use STUDY-012 for audio-specific acceptance.
 
 ### Cleanup
 
@@ -594,3 +601,60 @@ exercises and confirm that each host uses its own local calendar day.
 ### Cleanup
 
 Restore disposable progress and the original host/device time and timezone settings.
+
+## STUDY-012 — Listening practice and reviewed audio assets
+
+### Purpose
+
+Protect manifest-to-vocabulary matching, distractor construction, audio playback,
+retry/chunk behavior and the no-progress-write boundary on both hosts.
+
+### Preconditions
+
+- At least three saved Known words in one supported category have reviewed audio
+  entries whose dataset/id, Japanese and kana snapshots match current vocabulary.
+- The selected vocabulary area contains at least three distinct English meanings
+  suitable as distractors. Include recordings in MP3 and Opus where available.
+- On Android, install a package built with those audio exports and then disable
+  network access. Keep all progress disposable.
+
+### Steps
+
+1. Record the selected words' saved progress. Open the category's Listening route,
+   for example `/adjectives/listening?category=known`; repeat for Words, Nouns and
+   Verbs where matching exports exist. On Words, enable saved mixer categories and
+   follow the Listening link with the same source selection.
+2. Confirm each question starts one automatic playback attempt. Use **Play clip**
+   to replay it directly. Submit an incorrect answer, finish the round and confirm
+   the missed word returns in retry; answer it correctly there.
+3. Change to another chunk and back. Confirm each chunk starts with reset answer
+   state and the selected clip can play again.
+4. Try categories/items with no usable matching audio. If the host allows the
+   export manifest to be varied in a disposable setup, include a missing file and
+   a Japanese/kana snapshot mismatch; confirm neither becomes a question.
+5. Repeat playback and retry steps on Android offline, using both MP3 and Opus
+   entries when available. Observe startup, automatic playback policy, replay,
+   audio-load feedback and sound through the device speaker/headphones.
+6. Compare saved progress with the initial snapshot. Navigate away and reopen the
+   route to confirm no answer result or rehearsal history was recorded.
+
+### Expected result
+
+- Questions come only from the selected saved list and require a current audio
+  snapshot match. Missing, unreadable, empty, oversized or unsupported payloads
+  are unavailable. Repeated numeric IDs in different datasets remain distinct.
+- Three English choices include the answer and two distinct alternative meanings
+  from the selected vocabulary area. Alternatives with the same Japanese or kana,
+  or overlapping English meanings, are excluded. Meaning variants split on comma,
+  semicolon or slash.
+- Audio attempts once per question; **Play clip** replays without changing the
+  question. Browser playback-policy or load failures show visible recovery
+  feedback. A wrong answer enters the normal retry lifecycle; chunk changes reset
+  the round.
+- Listening does not call progress recording or change saved category/rehearsal
+  data. Android plays packaged audio offline. Verify MP3 and Opus sound and
+  quality on the device; browser playback does not establish Android behavior.
+
+### Cleanup
+
+Restore disposable progress and remove any temporary manifest/payload fixture.

@@ -24,7 +24,9 @@ Study features do not require internet access or a remote backend.
 `RealJapanese/AudioStudio/AudioStudio.csproj` is a separate .NET 10 local web
 tool, not a study-host route or service. It binds to loopback at
 `http://127.0.0.1:5291` by default, reads catalogs without changing progress, and
-does not serve exports to either study host. Its operational contract is in the
+is not run by either study host. The web study host reads reviewed audio from
+`StudyData:CatalogRoot/Audio`; Listening loads one matching payload on demand.
+Its operational contract is in the
 [Audio Studio guide](../../audio-studio.md); browser regressions are tracked by
 [AUDIO-001–006](../../../tests/manual/audio-studio.md).
 
@@ -38,6 +40,10 @@ and exposes its static assets through `_content/RealJapanese.UI/`.
 Vocabulary practice routes require `?category=known|rehearsing|training`, normally
 supplied by selectors. Offered study actions and their expected routes are listed
 in [STUDY-002](../../../tests/manual/study-practice.md#study-002--offered-practice-routes-use-the-selected-list).
+Shared Listening routes use the same selected study category; Words
+also follows the saved-category mixer. `ListeningBrowserTests` exercise exported MP3
+and Opus playback through the browser audio path; Android sound and format
+verification remain device work.
 
 ## Services, data and environment
 

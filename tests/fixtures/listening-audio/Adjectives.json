@@ -1,0 +1,26 @@
+[
+  {
+    "type": "i",
+    "id": "0",
+    "japanese": "新しい",
+    "kana": "あたらしい",
+    "english": "new",
+    "origin": "GENKI I (3rd edition)-5"
+  },
+  {
+    "type": "i",
+    "id": "10",
+    "japanese": "優しい",
+    "kana": "やさしい",
+    "english": "kind (person)",
+    "origin": "GENKI I (3rd edition)-5"
+  },
+  {
+    "id": "35",
+    "japanese": "おいしい",
+    "kana": "おいしい",
+    "english": "delicious",
+    "type": "i",
+    "origin": "GENKI I (3rd edition)-2"
+  }
+]

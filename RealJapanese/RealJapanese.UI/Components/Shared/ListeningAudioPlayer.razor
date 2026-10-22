@@ -1,0 +1,55 @@
+@using Microsoft.JSInterop
+@using Repositories.Audio
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<div class="listening-player">
+    <audio @ref="audioElement" preload="auto"></audio>
+    <button type="button" class="btn btn-outline-primary" @ref="playButton" disabled="@(!ready)">Play clip</button>
+    <p class="text-muted mt-2 mb-0" role="status" @ref="statusElement">@message</p>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public StudyAudioCatalog Catalog { get; set; } = null!;
+    [Parameter, EditorRequired] public StudyAudioClip Clip { get; set; } = null!;
+    private ElementReference audioElement, playButton, statusElement;
+    private IJSObjectReference? module, player;
+    private bool disposed, ready;
+    private string message = "Loading audio…";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        try
+        {
+            var source = await Catalog.GetDataUrlAsync(Clip);
+            if (disposed) return;
+            if (source is null) throw new IOException("Audio payload is unavailable.");
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/RealJapanese.UI/js/listening-audio.js");
+            if (disposed) { await module.DisposeAsync(); return; }
+            message = "";
+            ready = true;
+            StateHasChanged();
+            player = await module.InvokeAsync<IJSObjectReference>("createPlayer", audioElement, playButton, statusElement, source);
+            if (disposed && player is not null) await player.InvokeVoidAsync("dispose");
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or JSException)
+        {
+            if (disposed) return;
+            ready = false;
+            message = "This clip could not be loaded. Reopen the practice after checking the Audio Studio export.";
+            StateHasChanged();
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        disposed = true;
+        try
+        {
+            if (player is not null) { await player.InvokeVoidAsync("dispose"); await player.DisposeAsync(); }
+            if (module is not null) await module.DisposeAsync();
+        }
+        catch (JSDisconnectedException) { }
+    }
+}

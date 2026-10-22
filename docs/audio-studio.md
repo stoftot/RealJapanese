@@ -3,8 +3,8 @@
 Audio Studio is a standalone local ASP.NET application for generating, reviewing
 and exporting Japanese vocabulary recordings. It reads the twelve catalogs under
 `RealJapanese/Data/` (698 entries in total) without changing study data or study
-progress. The regular web and Android study hosts do not consume Audio Studio
-exports.
+progress. Reviewed exports are consumed by the shared Listening practice in both
+study hosts; neither host runs Audio Studio or its generation services.
 
 ## Prepare and launch
 
@@ -129,6 +129,16 @@ Run manifests and retained clips are stored under
 payload, then atomically replaces the export manifest. These folders are Audio
 Studio state; do not treat them as study progress or edit the vocabulary source
 files to manage them.
+
+The study hosts read this manifest as the source of available clips. A clip is
+eligible only when its composite `dataset/id` and trimmed Japanese/kana snapshot
+match the current vocabulary item and its supported payload exists, is readable,
+and is no larger than 16 MiB. Web reads from its configured catalog root. Android
+packages the manifest and referenced Opus, MP3 and WAV files, then copies payloads
+into private `Catalog/Audio` before replacing its local manifest. Rebuild and
+install Android after adding exports. Playback reads only the current clip into a
+data URL on demand; it does not alter study progress. See the [reviewed audio
+contract](../RealJapanese/Data/Audio/README.md).
 
 Every output choice receives edge trimming and constant-volume peak normalization.
 `Original WAV` keeps the processed WAV at the model's sample rate; it does not

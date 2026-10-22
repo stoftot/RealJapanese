@@ -44,8 +44,12 @@ The [project map](PROJECT_MAP.md) owns paths and project relationships.
   transcription; Audio Studio uses the configured Python executable and shared
   `whisper-small` model without downloading or modifying the library. Runs,
   references and runtime state live under `.tooling/audio-studio/`. The default
-  `RealJapanese/Data/Audio/` export manifest and immutable audio payloads are not
-  read by the web or Android study hosts. `tooling/audio-studio/pitch/profiles.json` stores word-linked
+  `RealJapanese/Data/Audio/` export manifest and immutable audio payloads are read
+  by Listening practice: web uses its configured catalog root; Android packages
+  the manifest and referenced payloads and copies them into private `Catalog/Audio`.
+  The shared `StudyAudioCatalog` validates manifest paths and current vocabulary
+  snapshots, while shared UI loads one usable clip on demand. Neither study host
+  runs Audio Studio generation services. `tooling/audio-studio/pitch/profiles.json` stores word-linked
   machine-estimated pronunciation profiles used for BERT generation, separately
   from the catalogs; estimates are not human-verified pronunciation guidance.
   [Audio Studio setup](../audio-studio.md) owns local configuration and operation.
@@ -109,6 +113,23 @@ before replacing each earlier copy:
 Packaged assets never include web `SavedData.json` files, and catalog refreshes do
 not touch the private progress root.
 
+### Reviewed audio and Listening practice
+
+The shared Listening routes use selected saved study lists; the Words mixer uses
+the currently enabled saved categories. `StudyAudioCatalog` reads the
+`CatalogRoot/Audio/manifest.json` snapshot and exposes only clips whose composite
+`dataset/id`, Japanese and kana still match the current word. It rejects unsafe or
+unsupported paths, and excludes missing, empty, unreadable or over-16-MiB payloads.
+The shared UI reads a single clip on demand into a data URL for HTML audio; replay
+and automatic playback use the shared JavaScript player. Misses use the normal
+practice retry lifecycle, while Listening never records answers to progress.
+
+The web host reads export files from its configured catalog root. The Android
+package contains the manifest and referenced immutable payloads; its installer
+copies payloads into private `Catalog/Audio`, then replaces the manifest. New
+exports are available on Android after rebuilding and installing the package.
+Neither host launches Audio Studio at runtime.
+
 ### Standalone audio generation and export
 
 1. Audio Studio reads all twelve source vocabulary catalogs into composite
@@ -132,8 +153,8 @@ not touch the private progress root.
    recordings without TTS generation; existing files, checks and choices are
    preserved, and conversion errors leave a visible Partial run note.
 3. Selected exports write immutable payload files and replace a manifest under
-   `RealJapanese/Data/Audio/`. Neither the web study host nor Android loads this
-   directory, so exports do not become study content or progress.
+   `RealJapanese/Data/Audio/`. Listening practice consumes matching reviewed
+   exports as media; they do not become vocabulary catalog records or progress.
 4. The separate `tooling/audio-studio/pitch/profiles.json` links machine-estimated
    pronunciation profiles to catalog words and supplies BERT generation. This
    metadata is not stored in or treated as verified study catalog data.

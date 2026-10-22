@@ -22,7 +22,9 @@
   <ItemGroup>
     <MauiIcon Include="Resources/AppIcon/appicon.svg" ForegroundFile="Resources/AppIcon/appiconfg.svg" Color="#052767" />
     <MauiSplashScreen Include="Resources/Splash/splash.svg" Color="#052767" BaseSize="128,128" />
-    <!-- Only vocabulary is packaged; never include web SavedData.json files. -->
+    <!-- Study catalogs and exported audio only; never include web progress. -->
+    <MauiAsset Include="../Data/Audio/manifest.json" LogicalName="Data/Audio/manifest.json" Condition="Exists('../Data/Audio/manifest.json')" />
+    <MauiAsset Include="../Data/Audio/**/*.opus;../Data/Audio/**/*.mp3;../Data/Audio/**/*.wav" LogicalName="Data/Audio/%(RecursiveDir)%(Filename)%(Extension)" />
     <MauiAsset Include="../Data/Words/Words.json" LogicalName="Data/Words/Words.json" />
     <MauiAsset Include="../Data/Nouns/Nouns.json" LogicalName="Data/Nouns/Nouns.json" />
     <MauiAsset Include="../Data/Verbs/Verbs.json" LogicalName="Data/Verbs/Verbs.json" />

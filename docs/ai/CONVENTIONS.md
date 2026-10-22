@@ -53,7 +53,9 @@ owned by project manifests.
   Keep existing IDs stable and never recycle retired IDs for different words.
 - Sync snapshots are accepted only when their schema, IDs and raw catalog hashes
   match. Keep preview separate from apply so the store revision can reject stale work.
-- Android package assets contain catalogs only. Never package web `SavedData.json`.
+- Android packages vocabulary catalogs and reviewed Audio Studio manifest/payloads;
+  never package web `SavedData.json`. Audio payloads install under the independent
+  private `Catalog/Audio` tree, not progress.
 - Category query values come from `WordPracticeCategoryExtensions`; unknown or
   missing category values are rejected.
 - JSON saving preserves readable Japanese text. Preserve unrelated vocabulary and

@@ -23,7 +23,7 @@ for commands and prerequisites.
 | `RealJapanese/RealJapanese/` | ASP.NET Core Blazor host | References RealJapanese.UI |
 | `RealJapanese/RealJapanese.Mobile/` | Android-only MAUI Blazor Hybrid host | References RealJapanese.UI; installs packaged catalogs |
 | `RealJapanese/RealJapanese.UI/` | Shared routes, study pages, reusable Razor components and static assets | References Repositories |
-| `RealJapanese/Repositories/` | Vocabulary/progress, local sync transport, question conversion and number generation | Depends on DataLoaders and WanaKanaSharp |
+| `RealJapanese/Repositories/` | Vocabulary/progress, local sync transport, question conversion, number generation and reviewed audio catalog | Depends on DataLoaders and WanaKanaSharp |
 | `RealJapanese/DataLoaders/` | JSON IO, serialized models and conjugation logic | Shared by repositories and utilities |
 | `RealJapanese/Data/` | Canonical study datasets, web progress and extracted kanji relations | Source for web and packaged mobile catalogs |
 | `tests/RealJapanese.Tests/` | Pure unit tests for study transformations and generators | xUnit v3; references Repositories |
@@ -89,6 +89,7 @@ verify tools, not the app.
 | Automated test setup and ownership | `docs/testing.md`, `RealJapanese.Tests.slnx`, `tests/` |
 | Standalone TTS setup, reference preparation and comparison outputs | `docs/tts-comparison.md`, `tooling/prepare-tts.ps1`, `RealJapanese/GenerateAudioUsingTTS/` |
 | Standalone catalog-wide audio generation, runs, references and exports | `docs/audio-studio.md`, `RealJapanese/AudioStudio/`, `tests/manual/audio-studio.md` |
+| Shared audio listening practice and manifest catalog | `RealJapanese/Repositories/Audio/StudyAudioCatalog.cs`, `RealJapanese/RealJapanese.UI/Components/Pages/Vocabulary/ListeningStudy.razor`, `tests/manual/study-practice.md` |
 
 ## Important flows
 
@@ -98,6 +99,9 @@ verify tools, not the app.
   independent progress load; construction does not rewrite the catalog.
 - Packaged mobile catalog → app-private `Catalog/`; progress remains under the
   separate app-private `Progress/` tree.
+- Listening practice → reviewed `CatalogRoot/Audio/manifest.json` snapshot →
+  composite identity and Japanese/kana validation → one bounded payload data URL;
+  Android installs packaged audio under private `Catalog/Audio`.
 - `/sync` automatic mode → app-specific UDP multicast discovery → selected private
   IPv4 endpoint; manual mode → entered private IPv4 endpoint. Both continue through
   ephemeral paired transport → matching six-digit confirmation on both devices →

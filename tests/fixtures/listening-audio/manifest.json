@@ -1,0 +1,48 @@
+[
+  {
+    "word": {
+      "dataset": "Adjectives",
+      "id": 10,
+      "group": "Adjectives",
+      "japanese": "優しい",
+      "kana": "やさしい",
+      "english": "kind (person)",
+      "key": "Adjectives/10",
+      "spokenJapanese": "優しい",
+      "spokenKana": "やさしい",
+      "speechNote": null
+    },
+    "engine": "fish",
+    "runId": "5e3f0284e59d4cc6bba18ac002a84413",
+    "outputQuality": "Mp3Mono64Kbps",
+    "file": "Adjectives/10/26a1fcc0fb0d420280bbb7582bfbf95f.mp3",
+    "sha256": "252FDBA9504D559F8A788EAB839E65C08AC53BCD16834974AFF3B8CDD7A54F9D",
+    "exportedAt": "2026-10-22T17:09:43.4515199+02:00",
+    "transcript": "やさしい",
+    "validation": "Text matches",
+    "audioUrl": "/api/exports/audio?key=Adjectives%2F10"
+  },
+  {
+    "word": {
+      "dataset": "Adjectives",
+      "id": 0,
+      "group": "Adjectives",
+      "japanese": "新しい",
+      "kana": "あたらしい",
+      "english": "new",
+      "key": "Adjectives/0",
+      "spokenJapanese": "新しい",
+      "spokenKana": "あたらしい",
+      "speechNote": null
+    },
+    "engine": "fish",
+    "runId": "5e3f0284e59d4cc6bba18ac002a84413",
+    "outputQuality": "OpusMono32Kbps",
+    "file": "Adjectives/0/00862d3871dd4aa28cde591a8abbb206.opus",
+    "sha256": "D19442C038AC0F4834FBB2C9E2734E1DE81B9BD5ECC3657843084206C9AD063D",
+    "exportedAt": "2026-10-22T17:09:43.431307+02:00",
+    "transcript": "新しい",
+    "validation": "Text matches",
+    "audioUrl": "/api/exports/audio?key=Adjectives%2F0"
+  }
+]

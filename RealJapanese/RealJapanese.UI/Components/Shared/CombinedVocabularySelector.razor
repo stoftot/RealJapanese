@@ -74,6 +74,7 @@
     private List<PraticeSelectorBase.PageDescreption> PracticePages =>
     [
         new() { Title = "Learn the words", Description = "Practice the spelling of the words", Url = $"spelling?category={((WordPracticeCategory)SelectedIndex).ToQueryValue()}{ExtraQuery}" },
-        new() { Title = "Flash cards", Description = "Reveal the answer, then move to the next word", Url = $"flashcards?category={((WordPracticeCategory)SelectedIndex).ToQueryValue()}{ExtraQuery}" }
+        new() { Title = "Flash cards", Description = "Reveal the answer, then move to the next word", Url = $"flashcards?category={((WordPracticeCategory)SelectedIndex).ToQueryValue()}{ExtraQuery}" },
+        new() { Title = "Listening", Description = "Listen to an audio clip and choose its English meaning. Does not move words between lists.", Url = $"listening?category={((WordPracticeCategory)SelectedIndex).ToQueryValue()}{ExtraQuery}" }
     ];
 }
