@@ -69,26 +69,48 @@ commands in [Android testing](android-testing.md#discover-and-review-without-sta
 Do not run the broad acceptance commands above, start ADB/emulators/Appium, invoke
 `Test-AndroidEnvironment.ps1`, or change shared state just to validate documentation.
 
-1. Resolve the tool root and read README, version and relevant changelog entries.
+1. Resolve the tool root and read README, version, queue README/config example and
+   relevant changelog entries. Inspect helpers before executing them; inventory
+   and status operations can initialize shared state.
    Inspect the actual project/manifest, build helper, output layout, tests and saved
    device configuration. Existing APKs or old reports do not establish a fresh build.
 2. Check changed Markdown links, command parameters against the installed scripts,
    PowerShell example syntax, and any JSON configuration. Validate suite/project
    paths relative to the configuration, actual package ID, AVD ownership and APK
    ABI/output selection without invoking a run. Do not invent IDs or suites.
-3. Check that root AGENTS has exactly one review marker and no conflicting copy.
+3. Parse `.codex/modules/core.toml` and generated `.codex/config.toml`. Verify the
+   optional queue entry uses an existing Node.js 24+ executable, the resolved
+   `queue/mcp.mjs`, at least a 60-second tool timeout and its actual tool allowlist.
+   Regenerate with `configure -Modules core,dotnet,rider`, confirming the queue and
+   all unrelated entries survive. The v1 composer loads only those three modules;
+   an arbitrary extra fragment is ignored. Do not alter the shared composer.
+   Initialize/list tools through the configured command/arguments using an MCP
+   client; `discover-mcp -Server android_device_queue` is unsupported. Discovery
+   alone starts no coordinator and is distinct from live queue/device verification.
+4. Check that root AGENTS has exactly one review marker and no conflicting copy.
    Use `Get-AndroidTestingChanges.ps1 -SinceRevision` with a valid recorded integer;
    UNREVIEWED uses the baseline query. Investigate invalid/future values.
-4. Confirm that guidance preserves reservations, shared services/data, allocated
+5. Confirm that guidance preserves reservations, shared services/data, allocated
    ports and Managed/External ownership, and distinguishes physical/OEM coverage.
    Recheck the current revision immediately before completion. Keep the old marker
    when relevant integration validation remains outstanding.
 
-For a separately authorized application/device test, build once with the existing
-helper and run an implemented RealJapanese suite using the shared reserved runner.
-Check concrete app assertions, diagnostics and teardown in its results; a Settings
-or tool-counter smoke pass is environment evidence only. The current project still
-needs its Android Hybrid UI harness. Select device scenarios from
+For an authorized application/device test, build once with the existing helper
+and build any External UI-test project before requesting capacity. Privately save
+a random UUID before `request_device`, reuse it on uncertain retries, maintain
+liveness using bounded `wait_for_device` calls, explicitly claim the current offer
+and wait for active. Run an implemented RealJapanese suite with exactly one
+claimed `-AvdName` and its `-ReservationId`; delegate the token to helpers. Separate
+independent workers need separate tickets/invocations; never hold one lease while
+waiting for another required lease. End workers/sessions, release and verify
+`released` in teardown, including failure paths. Cancel abandoned queued/unclaimed
+requests. Blocked cleanup retains capacity, and silent/restarted clients do not
+release active leases. There are no callbacks to wake an ended chat.
+Check concrete app assertions, diagnostics and cleanup in its results; a Settings
+or tool-counter smoke pass is environment evidence only. Run the configured
+`study-navigation` suite for the bounded `MOBILE-004` app assertions. Inspect
+`study-navigation.json`, sources/screenshots, worker result/summary and
+`CleanupVerified`; then independently verify queue `released`. Select broader scenarios from
 [mobile lifecycle](../tests/manual/mobile-lifecycle.md) and the
 [manual catalog](../tests/manual/README.md); report unperformed steps. Do not treat
 desktop tests, static checks or the shared tool's published results as Android

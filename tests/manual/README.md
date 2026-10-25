@@ -13,7 +13,7 @@ Keep run results and unexecuted steps in the current task, not in these files.
 | [Kana](kana.md) | KANA-001–003: character selections/settings, answers/review, local persistence, responsive charts and offline fonts |
 | [Local sync](local-sync.md) | SYNC-001–006: Automatic/Manual transfer, cancellation, pairing rejection, merge/recovery and errors across web and Android |
 | [Study selection and practice](study-practice.md) | STUDY-001–012: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout, language oracles, book/lesson selection, saved-word mixing, daily rehearsal and audio listening |
-| [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–003: offline catalogs, update/restart persistence, IME/Back/lifecycle and controlled startup failure |
+| [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–004: offline catalogs, update/restart persistence, IME/Back/lifecycle, controlled startup failure and shared-queue catalog/navigation smoke |
 | [Data maintenance](data-maintenance.md) | DATA-001–002: controlled extraction/model validation and interrupted legacy cleanup |
 | [Standalone TTS comparison](tts-comparison.md) | TTS-001: single-word audio, pronunciation, reference voice comparison and output isolation |
 | [Audio Studio](audio-studio.md) | AUDIO-001–007: catalog selection, choices/exports, references, model/format combinations, cancellation, pause/resume and human audio review |
@@ -59,8 +59,9 @@ assert intended behavior but require explicit execution; see the testing guide.
 | SYNC-005 | `SyncRecoveryBrowserTests`: all mode counts, second-circuit stale preview, refresh/apply, cancel and recovery after restart; storage merge/recovery matrix | Android dialog and cold-start integration |
 | SYNC-006 | `SyncErrorBrowserTests`: invalid/public addresses, port zero, mismatched catalog bytes and corrected retry | Android network error presentation/recovery |
 | MOBILE-001 | Shared catalog/progress restart contracts covered in integration tests | Native packaging, first install, offline operation and same-signer update require disposable Android installation |
-| MOBILE-002 | Shared practice state covered at component/browser levels | IME, Back, rotation and foreground lifecycle require native device automation or observation; no device automation runner is configured |
+| MOBILE-002 | Shared practice state covered at component/browser levels | Full IME, Back, rotation and foreground lifecycle require native device automation or observation beyond the bounded Managed smoke |
 | MOBILE-003 | No native fault-injection automation | Needs a disposable package or controllable packaged-file provider; current installer directly uses MAUI FileSystem |
+| MOBILE-004 | `tests/android/StudyNavigation.ps1`: initial Japanese catalog entry, filtered count and navigation, through a claimed shared AVD | Inspect `filtered.png` for filtered-row text omitted by native accessibility; actual queue/device execution required; does not replace MOBILE-001/002 |
 | DATA-001 | No portable external-model extraction automation | External AiLibrary projects/model/server and controlled responses are required; current utility has no isolated provider seam |
 | DATA-002 | `UtilityCleanupIntegrationTests` explicit Windows file-lock consistency regression | Optional fault-injection confirmation on other supported filesystems; normal cleanup/guard/remap is already automated |
 | AUDIO-001–007 | Audio Studio catalog/store unit tests cover catalog identity, choices and exports; GenerationCheckpointTests cover pause/resume, cancellation, restart recovery and saved clip integrity | Actual browser workflow, model and format combinations, playback quality, local references and human pronunciation/pitch review; see [Audio Studio cases](audio-studio.md) |

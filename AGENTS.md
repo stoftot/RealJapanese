@@ -115,13 +115,14 @@ This repository opts into the shared Windows AndroidTesting environment for its
 MAUI Blazor Hybrid app. Before Android build, deployment or device/UI testing,
 resolve `ANDROID_TESTING_HOME` (process, then persisted user value), or the known
 host path `C:\Users\chris\DevTools\AndroidTesting`. Read its `README.md`,
-`version.json` and relevant `CHANGELOG.md` entries. Follow the project-specific
+`version.json`, `queue/README.md`, `queue/mcp-config.example.json` and relevant
+`CHANGELOG.md` entries. Follow the project-specific
 [Android testing guide](docs/android-testing.md) and [module facts](docs/ai/modules/MAUI_ANDROID.md).
 This opt-in is repository-scoped; other hosts must supply their own verified path.
 
-AndroidTestingReviewedRevision: UNREVIEWED
+AndroidTestingReviewedRevision: 4
 
-Keep this as the single review marker. No prior review is claimed. Use
+Keep this as the single review marker. Use
 `Get-AndroidTestingChanges.ps1` for the current revision; with a valid recorded
 integer use `-SinceRevision` with that actual value. For UNREVIEWED, read the full
 baseline with `-SinceRevision 0`. Investigate invalid/future values and path or
@@ -129,12 +130,24 @@ metadata discrepancies; never lower a marker to hide them. Consider relevant
 improvements even when existing commands work. Advance only after relevant review
 and appropriate validation, rechecking the current revision immediately before
 completion. Preserve the prior value if required validation remains incomplete.
-The RealJapanese Appium/WebView harness and device execution are still outstanding.
+The configured Managed smoke covers bounded catalog/search/navigation through
+native accessibility, with a separate filtered-screenshot visual check. Direct
+WebView DOM/External .NET harness and full mobile lifecycle coverage remain separate.
 
-Reuse existing devices through `Invoke-AndroidTests.ps1` and its reservations,
-session ownership and allocated ports. With no project device config, select
-`MAUI_Shared_Android`; never borrow another project's dedicated AVD. Do not create
-devices automatically, erase data, bypass reservations or stop shared services as
+Build app/test artifacts before requesting capacity. Privately save a random UUID
+request ID, request one existing device through the MCP queue, maintain liveness
+with bounded waits, claim the current offer and wait for active. Pass exactly one
+claimed `-AvdName` and its `-ReservationId` to each `Invoke-AndroidTests.ps1` call;
+delegate the token to install/screenshot/log helpers. Preserve session ownership
+and allocated ports. End workers/sessions, release and verify `released` in
+teardown, including failures; cancel abandoned queued/unclaimed tickets. Blocked
+cleanup retains capacity; silence and coordinator restarts do not release leases.
+No callback wakes a finished chat. Independent workers need separate tickets and
+runner invocations; never hold one lease while waiting for another required lease.
+With no project device config, select `MAUI_Shared_Android`; never borrow another
+project's dedicated AVD. The optional queue stanza is owned by
+`.codex/modules/core.toml` and retained by `configure -Modules core,dotnet,rider`.
+Do not create devices automatically, erase data, bypass reservations or stop shared services as
 routine cleanup. Keep app tests/settings/results in this repository. Do not
 install duplicate tooling or modify, upgrade, repair, relocate or copy the shared
 tool, its dependencies, configuration, presets or documentation; report external

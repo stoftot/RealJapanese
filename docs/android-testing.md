@@ -2,7 +2,7 @@
 
 The repository opts into the centrally installed AndroidTesting environment through
 [AGENTS.md](../AGENTS.md), which owns the single reviewed-revision marker. This
-guide owns discovery, runner usage and the remaining integration work. The
+guide owns discovery, queue acquisition, runner usage and integration limits. The
 [MAUI module](ai/modules/MAUI_ANDROID.md) owns application facts; the external
 README owns the shared tool's commands and contracts.
 
@@ -19,16 +19,26 @@ if ([string]::IsNullOrWhiteSpace($androidTestingRoot)) {
 if ([string]::IsNullOrWhiteSpace($androidTestingRoot)) {
     $androidTestingRoot = 'C:\Users\chris\DevTools\AndroidTesting'
 }
-foreach ($file in @('README.md', 'version.json', 'CHANGELOG.md', 'Get-AndroidTestingChanges.ps1', 'Invoke-AndroidTests.ps1')) {
+foreach ($file in @('README.md', 'version.json', 'CHANGELOG.md', 'queue/README.md', 'queue/mcp-config.example.json', 'queue/mcp.mjs', 'Get-AndroidTestingChanges.ps1', 'Invoke-AndroidTests.ps1')) {
     if (!(Test-Path -LiteralPath (Join-Path $androidTestingRoot $file) -PathType Leaf)) {
         throw "AndroidTesting is missing $file at $androidTestingRoot; report the setup gap."
     }
 }
 Get-Content -LiteralPath (Join-Path $androidTestingRoot 'README.md')
 Get-Content -LiteralPath (Join-Path $androidTestingRoot 'version.json')
-& (Join-Path $androidTestingRoot 'Get-AndroidTestingChanges.ps1')
-# UNREVIEWED only: explicitly include the baseline, without inventing prior review.
-& (Join-Path $androidTestingRoot 'Get-AndroidTestingChanges.ps1') -SinceRevision 0
+Get-Content -LiteralPath (Join-Path $androidTestingRoot 'queue/README.md')
+Get-Content -LiteralPath (Join-Path $androidTestingRoot 'queue/mcp-config.example.json')
+& (Join-Path $androidTestingRoot 'Get-AndroidTestingChanges.ps1') -AsObject
+$reviewMarkers = [regex]::Matches((Get-Content -LiteralPath ./AGENTS.md -Raw), '(?m)^AndroidTestingReviewedRevision: (.+)$')
+if ($reviewMarkers.Count -ne 1) { throw 'Expected one root AndroidTesting review marker.' }
+$reviewMarker = $reviewMarkers[0].Groups[1].Value.Trim()
+if ($reviewMarker -eq 'UNREVIEWED') {
+    # Explicit baseline query; no earlier review is assumed.
+    & (Join-Path $androidTestingRoot 'Get-AndroidTestingChanges.ps1') -SinceRevision 0
+} else {
+    # The checker rejects invalid/future markers; do not substitute a lower value.
+    & (Join-Path $androidTestingRoot 'Get-AndroidTestingChanges.ps1') -SinceRevision $reviewMarker
+}
 ```
 
 An explicit but invalid environment path is an error, not permission to silently
@@ -52,32 +62,103 @@ discovery helpers that initialize runtime state, fresh-process transcript helper
 ADB (which can start its server), the runner, or service start/stop commands merely
 to validate prose. Report external defects; never repair the central installation.
 
+## Optional MCP queue and configuration ownership
+
+The optional `android_device_queue` server is retained in
+`.codex/modules/core.toml` and generated into `.codex/config.toml` by:
+
+```powershell
+./tooling/project-tools.ps1 configure -Modules core,dotnet,rider
+```
+
+The host paths are the verified Node.js 24 executable
+`C:\Program Files\nodejs\node.exe` and the resolved installation's
+`queue/mcp.mjs`. Another host must verify and update those paths in the fragment.
+The server uses stdio, `required=false`, a 90-second tool timeout, and the ten
+advertised tools: `list_devices`, `request_device`, `get_status`, `check_in`,
+`wait_for_device`, `claim_device`, `release_device`, `cancel_request`,
+`reconcile_device`, `queue_status`. Reconnect/start a fresh chat to load changed
+client configuration. This queue remains optional for unrelated workflows.
+
+The shared v1 composer accepts only `core`, `dotnet`, `rider`; an extra Android
+fragment would not load. Keep the queue in the retained project fragment and
+preserve the other MCP entries. Do not patch the external composer. Its
+`discover-mcp` command does not support this server: initialize/list tools through
+an MCP client using the actual configured command/arguments, then compare with
+the allowlist. Listing tools alone does not start the coordinator. Tool operations,
+including inventory/status, can start it and initialize shared state.
+
+If the chat has no queue tools, the installed `node queue/cli.mjs METHOD INPUT.json`
+uses the same protocol. Keep credential JSON in ignored project storage, outside
+shell history and reports. Missing runtime/client access is a validation gap;
+never bypass the queue with direct emulator starts.
+
+## Acquire and release one existing device
+
+Build the app and any External UI-test project before requesting capacity.
+Select one existing saved AVD using `list_devices`; with no saved selection use
+`MAUI_Shared_Android`. Then:
+
+1. Generate and privately save a random UUID `request_id` **before**
+   `request_device`. Pass that ID, `avd_name` and any `headless`/`cold_boot`
+   preferences. Reuse the same ID on uncertain retries to recover the same ticket.
+   Keep `ticket_id`, `owner_token`, `offer_token` and reservation tokens private.
+2. Use `wait_for_device` with the ticket credentials while queued/starting. Each
+   call waits at most 25 seconds and maintains queued liveness; reissue while
+   waiting. `get_status`/`check_in` are alternatives. Waiting never claims an offer.
+3. On `offered`, explicitly `claim_device` with the **current** offer token, then
+   wait for `active`. Use only its returned `device.avd_name`, `device.serial`,
+   `device.reservation_id` and allocated ports. Retrying the same claim is safe;
+   rotated offer tokens are invalid. Never reuse a serial from a previous run.
+4. Each `Invoke-AndroidTests.ps1` invocation receives exactly one claimed
+   `-AvdName` and its `-ReservationId`, including when config lists several
+   devices. Delegate that token to install, screenshot and log helpers.
+5. In teardown, including failure paths, end owned workers and Appium sessions,
+   call `release_device`, and wait until **released**. Cancel abandoned queued or
+   unclaimed requests with `cancel_request`. A blocked cleanup retains capacity:
+   inspect it and use the external recovery procedure; never delete locks/state.
+
+The queue has two global slots and strict FIFO. A busy AVD at the head delays
+later requests. Booting, active work, cleanup and blocked recovery consume slots.
+Parallel independent workers require separate tickets and separate runner
+invocations; `-ThrottleLimit` grants no extra capacity. Do not hold one lease while
+waiting for another required lease; atomic multi-device acquisition is unsupported.
+
+Current offers are exclusive for two minutes; solitary offers expire ten minutes
+after the original offer, and disconnected queued tickets expire after ten minutes.
+Check-ins do not extend offer deadlines. Active leases survive silence and
+coordinator restarts. Release stops only the leased emulator, preserving its data;
+the shared Appium server stays available. No callback can wake a finished chat.
+Finish release/cancellation before ending the task.
+
 ## Existing project and device selection
 
 - The Android app is `RealJapanese/RealJapanese.Mobile/RealJapanese.Mobile.csproj`,
   `net10.0-android`, package `com.realjapanese.mobile`, minimum API 24. It embeds
   managed assemblies and fourteen catalogs in a standalone APK and renders the
   shared Razor UI in `BlazorWebView`.
-- There is no project `android-testing.json`, registered RealJapanese project/device
-  identity, or Android Appium suite. Existing xUnit/bUnit/Playwright tests cover
-  desktop/shared behavior; they are not an External Android harness.
+- Project [`android-testing.json`](../android-testing.json) selects the saved
+  shared AVD and the Managed [`StudyNavigation.ps1`](../tests/android/StudyNavigation.ps1)
+  suite (`MOBILE-004`). No RealJapanese project/device GUID is needed for the
+  shared-only selection. Existing xUnit/bUnit/Playwright tests cover desktop/shared
+  behavior; they are not an External Android harness.
 - The existing shared fallback is `MAUI_Shared_Android`: Google APIs API 36,
   x86_64, 1080 x 2392, density setting 387, VSYNC 120 Hz, 4 cores and 4096 MB RAM.
   These are configured values, not observations of a running device. The retained
   `AndroidTestingValidation` compact device belongs to the tool's validation project.
   Do not select it for RealJapanese.
 
-Before an authorized device run, inspect current `Get-AndroidDevices.ps1`,
-`Get-AndroidReservations.ps1` and `Get-AndroidResources.ps1` output through the
-resolved tool root. Reuse the fallback, or devices explicitly registered to this
-project if configuration is added later. Resolve the current ADB serial each run;
-never assume `emulator-5554`. The runner reserves before starting/reusing devices
-and Appium. Its resource checks and reservation failures must be respected; do not
+For an authorized device run, use the queue inventory and acquisition above.
+Inspect shared helper scripts before calling them: inventory/resource helpers can
+initialize runtime state. Reuse the fallback, or devices explicitly registered to
+this project if configuration is added later. The queue reserves before boot;
+the runner borrows the claimed reservation and owns its test sessions. Its
+resource checks and reservation failures must be respected; do not
 bypass them with raw ADB, manual sessions, lock deletion or memory-pressure overrides.
 Do not automatically register/create devices, download images, reset/delete data,
 change shared presets, or install duplicate SDK/Appium/driver tooling.
 
-An eventual `android-testing.json` should select existing `Devices` by `Profile`
+The `android-testing.json` selects existing `Devices` by `Profile`
 and `AvdName`, `DefaultDevices`, implemented `Suites` (`Name`, `Script`, `Parameters`),
 `DefaultSuites`, and `Application` (`ApkPath`, `PackageName`). Use a real registered
 `ProjectId` for project-owned devices; never invent a GUID or copy the validation
@@ -93,24 +174,41 @@ drive alias works around the Unicode checkout path and always removes that alias
 Do not replace it with the external README's generic `bin/Debug/...` example.
 Build once before device concurrency; do not share concurrent writes to bin/obj.
 
-For a future emulator run, after implementing and reviewing a Managed suite, set
-`$suite` to its actual project-local path. This example is a handoff, not an
-available/passing test suite. It stops if the suite or fresh build output is absent:
+The configured Managed suite checks Home, a nonempty packaged Nouns catalog,
+`college; university / 大学 / だいがく`, search filtering and return to Home through
+the native accessibility tree. It asserts the initial Japanese row and the
+filtered count; with the IME open, the installed WebView can omit the dynamically
+filtered row from native source. Inspect `filtered.png` for that row and report visual review
+separately from automated assertions. It types only into the transient search field and
+never assigns/moves vocabulary or resets data. It needs no .NET UI-test build,
+Chromedriver download or production instrumentation. It does not establish all
+fourteen catalogs, offline network state, practice answers, update/persistence,
+IME/Back lifecycle or physical/OEM coverage.
+
+Build before requesting capacity; stop on failure before reading an APK:
 
 ```powershell
-if (!$suite -or !(Test-Path -LiteralPath $suite -PathType Leaf)) {
-    throw 'An implemented RealJapanese suite is required before device testing.'
-}
-$suite = (Resolve-Path -LiteralPath $suite).Path
 # Invoke in a child process so the helper's failure exit cannot be overlooked.
 & pwsh -NoProfile -File .\tooling\build-android.ps1 -Configuration Debug -RuntimeIdentifier android-x64
 if ($LASTEXITCODE -ne 0) { throw 'Build failed; do not deploy an older APK.' }
 $apk = (Resolve-Path -LiteralPath '.tooling/android-artifacts/bin/RealJapanese.Mobile/debug_android-x64/com.realjapanese.mobile-Signed.apk' -ErrorAction Stop).Path
+```
+
+Then acquire/claim as above and set `$device` to the **active ticket's** returned
+device object. Keep the ticket credentials for release even if the runner fails:
+
+```powershell
 $runOutput = Join-Path (Get-Location).Path ('.tooling/android-tests/' + [guid]::NewGuid().ToString('N'))
 & (Join-Path $androidTestingRoot 'Invoke-AndroidTests.ps1') `
-    -AvdName MAUI_Shared_Android -ApkPath $apk -PackageName com.realjapanese.mobile `
-    -SuiteScript $suite -SessionMode Managed -ThrottleLimit 1 -OutputDirectory $runOutput
+    -ConfigPath ./android-testing.json `
+    -AvdName $device.avd_name -ReservationId $device.reservation_id `
+    -ApkPath $apk -PackageName com.realjapanese.mobile `
+    -SuiteName study-navigation -SessionMode Managed -ThrottleLimit 1 -OutputDirectory $runOutput
 ```
+
+In `finally`/client teardown, end workers/sessions, release this ticket and wait for
+`released`; the runner leaves queue release to its caller. See the lifecycle above
+for cancellation and blocked cleanup. Do not paste live credentials into examples.
 
 Confirm the output of that successful build; the helper also lists older APKs, so
 do not select the newest arbitrary file from its listing. An untargeted Debug build
@@ -180,8 +278,8 @@ Capture unfiltered logcat after a crash (the package PID may be gone), without
 clearing the device log. Record build, device/API, actual assertion and cleanup
 results separately from shared environment health.
 
-The worker/External harness closes its own session, and the coordinator releases
-reservations only after verified cleanup. A crash or unknown cleanup leaves a
+The worker/External harness closes its own session; the caller then releases the
+queue ticket and waits for verified `released`. A crash or unknown cleanup leaves a
 blocked reservation: inspect its owner/process/session and report it. Never delete
 locks or force takeover. Recovery is an explicit, separately justified action
 under the external README, not automatic startup/cleanup. Leave reused Appium,
@@ -204,10 +302,10 @@ not establish support across the app's entire API-24-and-later range.
 
 ## Validation still required
 
-The guidance is usable, but Android runner integration remains unverified until a
-RealJapanese suite/harness implements the selected contract, can interact with the
-Hybrid UI, and runs meaningful app assertions with diagnostics and clean teardown
-on an existing authorized device. No active config or placeholder suite is supplied.
-The root marker stays UNREVIEWED until that relevant validation completes. Existing
-manual cases remain the device coverage source; application compilation, test
-execution and shared-tool sample results must never be inferred from this document.
+The bounded Managed smoke suite covers actual Hybrid accessibility interaction.
+The broader mobile cases remain the source for offline all-catalog practice,
+saved progress/update preservation, IME/Back/rotation and paired Wi-Fi sync.
+Direct WebView DOM/Chromedriver and External .NET harness compatibility remain
+unverified. Update the root review marker only after relevant integration checks,
+app assertions and verified queue release succeed and the current revision is
+rechecked. Record run results in the current task and ignored output, not here.

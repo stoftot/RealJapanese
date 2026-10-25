@@ -45,7 +45,7 @@ Paths below are relative to the repository root. All projects target .NET 10.
 | Project | Type / TFM | Direct project dependencies | Checks |
 | --- | --- | --- | --- |
 | `RealJapanese/RealJapanese/RealJapanese.csproj` | Web executable / `net10.0` | RealJapanese.UI | RealJapanese.WebTests |
-| `RealJapanese/RealJapanese.Mobile/RealJapanese.Mobile.csproj` | MAUI executable / `net10.0-android` | RealJapanese.UI | Build/manual device checks |
+| `RealJapanese/RealJapanese.Mobile/RealJapanese.Mobile.csproj` | MAUI executable / `net10.0-android` | RealJapanese.UI | Build; Managed Android catalog/navigation smoke; manual lifecycle checks |
 | `RealJapanese/RealJapanese.UI/RealJapanese.UI.csproj` | Razor class library / `net10.0` | Repositories | Component and browser tests |
 | `RealJapanese/Repositories/Repositories.csproj` | Library / `net10.0` | DataLoaders | Unit and integration tests |
 | `RealJapanese/DataLoaders/DataLoaders.csproj` | Library / `net10.0` | None | Unit and integration tests |
@@ -89,6 +89,7 @@ here; [tooling](../tooling.md) owns the external layout and command contracts.
 | Security boundaries and public-release considerations | `docs/security.md` |
 | Serialization and conjugation | `RealJapanese/DataLoaders/JsonLoader.cs`, `JsonSaver.cs`, `Models/` |
 | Automated test setup and ownership | `docs/testing.md`, `RealJapanese.Tests.slnx`, `tests/` |
+| Android queue, configured Managed smoke and manual lifecycle | `docs/android-testing.md`, `android-testing.json`, `tests/android/StudyNavigation.ps1`, `tests/manual/mobile-lifecycle.md` |
 | Standalone TTS setup, reference preparation and comparison outputs | `docs/tts-comparison.md`, `tooling/prepare-tts.ps1`, `RealJapanese/GenerateAudioUsingTTS/` |
 | Standalone catalog-wide audio generation, runs, references and exports | `docs/audio-studio.md`, `RealJapanese/AudioStudio/`, `tests/manual/audio-studio.md` |
 | Shared audio listening practice and manifest catalog | `RealJapanese/Repositories/Audio/StudyAudioCatalog.cs`, `RealJapanese/RealJapanese.UI/Components/Pages/Vocabulary/ListeningStudy.razor`, `tests/manual/study-practice.md` |

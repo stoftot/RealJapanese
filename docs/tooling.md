@@ -67,7 +67,9 @@ the `-CliArguments` array, including session names and paths:
 project's fragments and refuses an unmanaged config. Inspect and manually merge
 unmanaged or customized configuration without losing unrelated settings; there
 are no implicit TOML includes. Select `core,dotnet,rider` when regenerating this
-project's current three-server profile. Discovery uses the actual project config
+project's current profile. The optional Android queue stanza lives in the retained
+`core.toml` fragment: v1 accepts only core/dotnet/rider and loads no arbitrary
+Android fragment. Preserve it when regenerating. Discovery uses the actual project config
 and writes under `.tooling/`. `configure-rider` updates only the project fragment;
 review its discovered allowlist before regenerating, preserving customizations
 and deliberately disabled servers.
@@ -94,6 +96,12 @@ passing server in both its fragment and effective config. Leave a failing server
 disabled and report its exact failure. Optional Rider retains `required=false` and
 the endpoint from Settings → Tools → MCP Server; a closed IDE does not prevent
 CLI work. An interpreter executable or old discovery file does not prove startup.
+
+The Android queue uses its installed Node.js stdio entry directly, has
+`required=false` and a 90-second timeout, and needs separate MCP initialize/list
+tools discovery; the shared `discover-mcp` task supports only the original three
+servers. [Android testing](android-testing.md#optional-mcp-queue-and-configuration-ownership)
+owns its host paths, advertised tools and queue lifecycle.
 
 ## Environment and Android integration
 

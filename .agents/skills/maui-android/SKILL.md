@@ -14,7 +14,8 @@ This repository opts into shared AndroidTesting through the root
 [AGENTS.md](../../../AGENTS.md). Follow its single revision marker and the
 [project Android testing guide](../../../docs/android-testing.md): resolve
 `ANDROID_TESTING_HOME` or the documented host fallback, read the current external
-README/version/changelog and use `Get-AndroidTestingChanges.ps1`. Review relevant
+README/version/changelog, queue README/config example and source contracts, and use
+`Get-AndroidTestingChanges.ps1 -AsObject`. Review relevant
 improvements even if old commands work. Never lower an invalid/future marker;
 advance only after appropriate validation and a final current-revision recheck.
 For documentation maintenance, use static inspection and read-only revision checks;
@@ -32,7 +33,7 @@ required. Test design and manual-case selection remain in the core skills.
 | --- | --- |
 | `dotnet` / MAUI workload | Build/restore using actual project targets |
 | Android SDK / `adb` | Device, package, process, log and platform operations |
-| Shared AndroidTesting / Appium | Reserved emulator orchestration, allocated ports, session ownership and UI evidence through a project suite |
+| Shared AndroidTesting MCP queue / Appium | Explicit device request/claim/release, allocated ports, session ownership and UI evidence through a project suite |
 | `netcoredbg-mcp` | C# source debugger, subject to actual runtime compatibility |
 | Rider MCP / MAUI integration | IDE semantics, project/configuration information |
 | DevFlow, if enabled | Running MAUI application/UI interaction |
@@ -56,8 +57,9 @@ to diagnose toolchain configuration; its presence is not a reason to add Java co
    device workers, selecting `android-x64` for the shared emulator or ARM64 for
    a compatible phone. Stop on build failure; never deploy an older APK. A build
    establishes compilation, not device execution.
-3. Before an authorized device workflow, inspect devices, resources and reservations
-   through the shared tools; use `adb devices -l` for physical-device authorization
+3. Before an authorized device workflow, use queue `list_devices`; inspect helper
+   scripts before calling inventory/resource operations that can initialize state.
+   Use `adb devices -l` for physical-device authorization
    and state. Read any project `android-testing.json`; reuse its actual owned AVDs,
    otherwise select `MAUI_Shared_Android`. Do not borrow dedicated validation devices
    or infer a current serial from an old report.
@@ -65,8 +67,17 @@ to diagnose toolchain configuration; its presence is not a reason to add Java co
    otherwise resolve the ambiguity before deployment. Use the chosen serial with
    `adb -s` on subsequent target-specific operations. Report offline/unauthorized
    targets as unavailable until resolved.
-5. Use PowerShell 7 `Invoke-AndroidTests.ps1` to reserve existing emulators and
-   start/reuse their services for authorized tests. Never automatically create
+5. Build any UI-test project before requesting capacity. Privately save a random
+   UUID request ID before `request_device`; reuse it on uncertain retries. Use
+   `wait_for_device` (at most 25 seconds per call) to maintain queued liveness,
+   explicitly claim the current offer, and wait for active. Obtain the serial and
+   reservation from that ticket. The optional stdio server and its ten-tool
+   allowlist live in `.codex/modules/core.toml`; preserve it through config
+   generation. Discover the actual tools; `discover-mcp` does not support queue.
+6. Use PowerShell 7 `Invoke-AndroidTests.ps1` with exactly one claimed `-AvdName`
+   and its `-ReservationId`, even when configuration lists multiple devices.
+   Independent workers need separate tickets/invocations within FIFO capacity;
+   never hold one lease while waiting for another required lease. Never create
    devices, reset/delete data, bypass a reservation or install duplicate tools.
    Physical devices need their own explicit-serial harness/manual workflow; the
    shared runner and reservations currently support emulators only.
@@ -80,13 +91,16 @@ and dispose it in teardown. Use the allocated system/MJPEG/Chromedriver/WebView
 ports and exact serial; disable test-framework parallelism within each worker.
 Pass the delegated reservation ID to shared utilities called from a suite.
 
-RealJapanese has no Android Appium harness yet. Implement meaningful Hybrid UI
-assertions before claiming runner integration: catalog-backed practice and saved
-progress, IME/Back behavior and lifecycle cases from the manual catalog. Inspect
-actual UI/page source; neither a native counter sample nor allocated WebView ports
-proves Blazor DOM access. Hybrid context/Chromedriver compatibility and physical
-OEM behavior remain separate validation. Do not instrument the app or install
-drivers merely to complete documentation maintenance.
+RealJapanese's Managed `tests/android/StudyNavigation.ps1` suite and
+`android-testing.json` cover a bounded `MOBILE-004` catalog/search/navigation smoke.
+It checks the initial Japanese catalog item and filtered count in the native
+accessibility tree; inspect `filtered.png` for the rendered filtered row, which can
+be omitted from native source with the IME open. Report this visual step separately.
+Catalog-backed practice/saved progress and full IME/Back/lifecycle cases remain
+in the manual catalog. Inspect actual UI/page source; neither a counter sample
+nor allocated WebView ports proves DOM access. Direct context/Chromedriver and
+External .NET harness compatibility, plus physical/OEM behavior, remain separate
+validation. Do not instrument production code or install drivers merely for prose.
 
 ## Deploy and collect platform/runtime evidence
 
@@ -144,8 +158,11 @@ report any UI verification that could not be performed.
 
 ## Complete the evidence handoff
 
-Let the worker/External harness close its own session and the coordinator release
-verified reservations. Report blocked cleanup; never delete locks or automatically
+Let the worker/External harness close its own session, then release the queue
+ticket and wait for `released`, including on failure. Cancel abandoned queued or
+unclaimed requests. Blocked cleanup retains capacity; active leases survive silence
+and coordinator restarts. Bounded waits cannot wake a finished chat; finish cleanup
+before ending. Report blocked cleanup; never delete locks/state or automatically
 repair reservations. Preserve reused Appium/emulators, snapshots and user data;
 coordinate before any authorized targeted service stop. Tool errors are reported
 to the owner, not repaired in the external installation. Record physical-device

@@ -13,3 +13,14 @@ output_token_limit = 6000
 output_token_limit = 12000
 [mcp_servers.headroom.tools.headroom_stats]
 output_token_limit = 2000
+
+# Project-owned optional Android integration. The v1 composer loads core/dotnet/rider
+# only, so keep this entry in core rather than an undiscovered Android fragment.
+[mcp_servers.android_device_queue]
+command = "C:\\Program Files\\nodejs\\node.exe"
+args = ["C:\\Users\\chris\\DevTools\\AndroidTesting\\queue\\mcp.mjs"]
+required = false
+enabled = true
+startup_timeout_sec = 45
+tool_timeout_sec = 90
+enabled_tools = ["list_devices", "request_device", "get_status", "check_in", "wait_for_device", "claim_device", "release_device", "cancel_request", "reconcile_device", "queue_status"]

@@ -5,7 +5,8 @@ or disposable installation and record the Android version, package version,
 signing identity and device form factor in the current task. A browser result does
 not substitute for native lifecycle, WebView, packaged-file or IME evidence. The
 [coverage catalog](README.md#automation-and-remaining-manual-scope) identifies shared
-logic covered automatically; these native lifecycle procedures remain manual.
+logic covered automatically. MOBILE-004 has a bounded Managed suite; the full
+lifecycle procedures remain manual.
 
 ## MOBILE-001 — Offline install and progress preservation
 
@@ -139,3 +140,52 @@ opened, without risking user progress or canonical data.
 
 Remove the deliberately incomplete test package or reset the test-only provider.
 Discard only the disposable installation and its data.
+
+## MOBILE-004 — Shared-queue catalog and navigation smoke
+
+### Purpose
+
+Protect the real APK's packaged catalog and Hybrid UI interaction through the
+claimed-device runner without changing saved study assignments.
+
+### Preconditions
+
+- Build the current `android-x64` Debug APK with `tooling/build-android.ps1` before
+  requesting capacity. Use the existing shared AVD selected by `android-testing.json`.
+- Follow [Android testing](../../docs/android-testing.md) to privately retain a
+  request UUID, request/wait/claim and reach active. Preserve existing app data;
+  stop on signing mismatch. No reset, uninstall, new AVD or network change is needed.
+
+### Steps
+
+1. Run `study-navigation` in Managed mode using `android-testing.json`, exactly one
+   claimed `-AvdName` and its `-ReservationId`, with a fresh ignored output folder.
+2. Observe Home → Nouns, a nonzero catalog count and the literal
+   `college; university / 大学 / だいがく` entry.
+3. Search `college; university`; verify one matching Japanese entry, clear the
+   transient search and return Home. Do not press vocabulary toggles or move buttons.
+   The suite checks the filtered count automatically. Inspect `filtered.png` for
+   the Japanese result: with the IME open, that dynamically filtered row can be
+   omitted from native accessibility source. This visual step is required for a full
+   case pass; a successful suite alone is partial evidence.
+4. Inspect the assertion JSON, sources/screenshots and worker result/summary.
+   End workers/sessions, then release the ticket and wait for `released` even on
+   test failure. Cancel any abandoned unclaimed request.
+
+### Expected result
+
+- Actual app content renders and the catalog search/navigation works through the
+  Hybrid UI; worker results identify the claimed serial and allocated ports.
+- The Managed suite uses the worker session without creating/deleting a second
+  one. Worker `CleanupVerified` is true and the caller independently verifies the
+  queue ticket is released. A blocked cleanup retains capacity and is reported.
+- Sources/screenshots, results and logs remain in the ignored project output.
+  Settings smoke results cannot substitute for these app assertions.
+
+This case does not establish full MOBILE-001/002 coverage, offline network state,
+all fourteen catalogs, saved progress/update preservation or physical/OEM behavior.
+
+### Cleanup
+
+Preserve study assignments, installed app data and shared Appium. Queue release
+stops only the leased emulator; do not stop unrelated services or delete lock/state.

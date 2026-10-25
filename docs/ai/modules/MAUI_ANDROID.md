@@ -56,17 +56,43 @@ The manifest disables Android backup with `android:allowBackup="false"`.
 RealJapanese opts into the shared AndroidTesting environment via the repository
 [AGENTS.md](../../../AGENTS.md). [Android testing](../../android-testing.md) owns
 portable discovery, revision review, coordinated runs, diagnostics and cleanup.
+The optional queue server uses the existing Node.js 24+
+`C:\Program Files\nodejs\node.exe` and installed
+`C:\Users\chris\DevTools\AndroidTesting\queue\mcp.mjs` over stdio, with a
+90-second tool timeout. `.codex/modules/core.toml` owns this project entry;
+`configure -Modules core,dotnet,rider` retains it in `.codex/config.toml` alongside
+the other servers. The v1 composer cannot load a separate Android fragment.
+Queue absence must not block unrelated work. Verify paths on another host.
+
+Build first, privately retain a random request UUID, then request/wait/claim one
+existing AVD through MCP and wait for active. Every runner invocation takes that
+single `-AvdName` plus `-ReservationId`; helper calls inherit the token. Independent
+workers require separate tickets/invocations under strict FIFO and global resource
+limits. Never hold a lease while waiting for another required lease. End owned
+workers/sessions, release and verify `released` even on failure; cancel unclaimed
+requests. Blocked cleanup retains capacity; silence/restarts never release active
+leases. The queue cannot wake a finished chat.
+
 Reuse existing SDK/JDK/Appium installations; do not run the legacy Android setup
 or updater to validate this integration.
 
-No `android-testing.json`, RealJapanese device registration or Android Appium
-harness currently exists. Use the existing `MAUI_Shared_Android` fallback for
-future authorized emulator runs with an implemented app suite. Its configured
+[`android-testing.json`](../../../android-testing.json) selects the existing
+`MAUI_Shared_Android` AVD and Managed `tests/android/StudyNavigation.ps1` suite.
+No dedicated device registration or External .NET Android harness exists.
+The suite reads the packaged Nouns catalog, filters one known Japanese item and
+returns Home through native accessibility, without changing study assignments.
+With the IME open, the dynamically filtered row can be absent from native source;
+the suite asserts the filtered count and captures `filtered.png` for
+visual review. It does not claim automated filtered-row text verification.
+Its scope is `MOBILE-004`; full offline/persistence/lifecycle cases remain separate.
+The AVD's configured
 image is API 36 Google APIs x86_64; build `android-x64` with the repository helper.
 RID-targeted Debug output is
 `.tooling/android-artifacts/bin/RealJapanese.Mobile/debug_android-x64/com.realjapanese.mobile-Signed.apk`;
-verify it belongs to the successful current build. The runner can reserve ports
-and deploy an APK, but actual BlazorWebView interaction remains unverified.
+verify it belongs to the successful current build. The queue allocates ports;
+the runner borrows that reservation and deploys the APK. The Managed suite uses
+the real WebView's native accessibility tree; direct DOM/Chromedriver context
+switching remains unverified.
 The xUnit/bUnit/Chromium suites do not consume an Android runner context.
 
 The shared runner supports emulators only; physical phone checks require the

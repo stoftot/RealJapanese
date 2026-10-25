@@ -90,12 +90,14 @@ external-model extraction are not established by this suite.
 ## Adding coverage
 
 Android device testing follows the [shared Android testing guide](android-testing.md).
-This repository opts into the central runner but has no Android Appium suite or
-External-session adapter yet. Existing .NET and Chromium test projects do not read
-its context or prove BlazorWebView/device behavior. Keep the lifecycle/IME/OEM cases
-in the manual catalog until a project harness makes real app assertions and verifies
-diagnostics and cleanup on an existing authorized device. No Settings smoke run or
-placeholder configuration counts as application coverage.
+`android-testing.json` selects the Managed `tests/android/StudyNavigation.ps1`
+suite for `MOBILE-004`: packaged Nouns, catalog search and navigation through native
+Hybrid accessibility. Build the APK before requesting/claiming a device; pass its
+one AVD and reservation to the runner, then end sessions and verify ticket release.
+No External .NET adapter exists. Existing .NET and Chromium projects do not consume
+Android context or prove device behavior. Full lifecycle/IME/OEM and offline
+update/persistence cases remain in the manual catalog. Settings smoke results
+cannot substitute for application coverage.
 
 Every test class has a short XML summary stating its behavioral scope. Prefer
 descriptive test names; add case summaries/comments when setup, an independent

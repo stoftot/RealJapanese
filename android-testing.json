@@ -1,0 +1,14 @@
+{
+  "Devices": [
+    { "Profile": "shared", "AvdName": "MAUI_Shared_Android" }
+  ],
+  "DefaultDevices": ["shared"],
+  "Suites": [
+    { "Name": "study-navigation", "Script": "tests/android/StudyNavigation.ps1", "Parameters": {} }
+  ],
+  "DefaultSuites": ["study-navigation"],
+  "Application": {
+    "ApkPath": ".tooling/android-artifacts/bin/RealJapanese.Mobile/debug_android-x64/com.realjapanese.mobile-Signed.apk",
+    "PackageName": "com.realjapanese.mobile"
+  }
+}

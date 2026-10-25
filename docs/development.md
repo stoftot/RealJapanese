@@ -106,7 +106,10 @@ Follow [shared Android testing](android-testing.md) for tool discovery, revision
 review and reserved emulator execution. It reuses `MAUI_Shared_Android` until this
 project has its own saved device configuration. Build the existing app with the
 helper below; no SDK/emulator/Appium installation or device creation is required.
-The project still needs an Android Appium suite capable of driving its Hybrid UI.
+`android-testing.json` selects the read-only Managed catalog/search/navigation
+suite. Build before requesting/claiming capacity; each runner call takes exactly
+one claimed AVD and its reservation ID. End sessions, release the ticket and
+verify released even on failure. The Android guide owns the complete queue flow.
 
 For an authorized physical-phone test, first confirm that adb can see the target:
 
