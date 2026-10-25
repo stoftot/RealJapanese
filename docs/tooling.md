@@ -1,242 +1,182 @@
 # External tooling
 
-This is the tooling half of the [AI-assisted development template](ai/README.md).
-It owns installation, configuration and tool acceptance. The repository guidance
-and skills define how agents select these capabilities during development.
+RealJapanese owns its MCP configuration, application scripts, tests and evidence.
+MCP environments, the native debugger and reusable tooling implementations live
+outside this checkout. Existing application context stays in [docs/ai](ai/README.md);
+tooling migration or relocation does not initialize it again.
 
-## Scope
+## Project and shared ownership
 
-These scripts target Windows x64 and require PowerShell 7, Python 3.11+ and an
-installed Codex client. Inspect compatible existing tools before provisioning.
-Select only needed modules; tool availability is verified on the destination.
-
-| Module | Components |
+| Location | Responsibility |
 | --- | --- |
-| Core | Headroom MCP in a local Python environment |
-| .NET | .NET 10 SDK, SDK formatter, NetCoreDbg and its Python MCP controller |
-| Rider | Optional IDE semantic/project integration |
-| Web | Node.js, Microsoft Playwright CLI and Chromium |
-| MAUI/Android | Existing workload, JDK 21, SDK/adb and shared AndroidTesting/Appium environment |
+| `tooling/project-tools.ps1` | Supplies this checkout's root and pins fixed `project-tools/v1` |
+| `.codex/config.toml` | Effective MCP servers, endpoints, allowlists, timeouts and output caps |
+| `.codex/modules/{core,dotnet,rider}.toml` | Project-owned source fragments for the generated profile |
+| `tooling/build-android.ps1` | Application Android build and temporary ASCII drive alias |
+| `tooling/prepare-tts.ps1`, `tooling/audio-studio/` | Application speech-library preparation and word-linked pitch profiles |
+| `.tooling/` (ignored) | Application working data, scratch scripts, discovery and acceptance artifacts |
 
-Installed package receipts belong in ignored local tooling directories. Do not
-store machine-specific acceptance results or installed-version snapshots in this
-reusable template. See [verification](verification.md) for repeatable checks.
+Generic setup, environment, launch, discovery and infrastructure verification
+implementations are external. Keep application scripts and tests here so they can
+evolve with RealJapanese. Never replace the entire `tooling/` or `.tooling/` tree.
+The host layout targets Windows x64, PowerShell 7 and Python 3.11+. MCP launch also
+supports `powershell.exe`, as used by this project's config.
 
-## RealJapanese Android opt-in
+| Environment override | Default root | Contents |
+| --- | --- | --- |
+| `AI_MCP_ROOT` | `E:\AI\MCP` | `headroom/venv`, `netcoredbg/venv` and pinned `installed.txt` receipts |
+| `AI_SHARED_TOOLING_ROOT` | `E:\AI\Template shared tooling` | Fixed `project-tools/v1`, versioned native `netcoredbg/` and `engine-version.txt`, Playwright/Chromium and any shared Node runtime in `web/` |
 
-This existing project uses the shared AndroidTesting installation. Follow
-[Android testing](android-testing.md) for discovery through `ANDROID_TESTING_HOME`
-or `C:\Users\chris\DevTools\AndroidTesting`, current README/version/changelog
-review, existing device selection and the runner's session/port contracts.
-The single reviewed-revision marker is in repository [AGENTS.md](../AGENTS.md).
-No Android runtime, server, driver or implementation is copied into this checkout.
+Overrides must be absolute. Set them before starting Codex, shells or Rider so
+child processes inherit them. Paths containing spaces are supported. The entry
+point pins `project-tools/v1`; keep that profile fixed during project work.
 
-The retained template provisioners `tooling/setup.ps1 -Modules maui`,
-`tooling/modules/maui.ps1` and `tooling/update-android.ps1` are **not** the setup,
-repair or verification route for this opted-in project. They install/update shared
-dependencies, and the updater can stop ADB. Do not invoke them during project
-maintenance. Report missing/broken external tools to their owner without changing
-the shared scripts, configuration, presets, version, documentation or dependencies.
-Normal project builds continue using `tooling/build-android.ps1` and `enter-env.ps1`.
+Shared installations, profiles and receipts are read-only to project tasks. Do not
+install, upgrade, repair, move, delete or overwrite them. No project command calls
+host SDK/workload/plugin installers or shared-browser updates. Report missing
+dependencies with their exact required paths; owner provisioning is a separate
+external operation. Do not recreate copied tool environments or redirect application
+Python blindly to an MCP environment. Audio workflows retain their independently
+configured AiLibrary/Whisper environment and dependencies; see
+[Audio Studio](audio-studio.md) and [TTS comparison](tts-comparison.md).
 
-## Project configuration and machine configuration
+## Project commands
 
-`.codex/config.toml` is generated by `tooling/configure.ps1` from independent
-`tooling/modules/{core,dotnet,rider}.toml` fragments. Codex reads project config for
-trusted projects. Review and trust the repository through Codex's normal trust
-flow; trust is a user-level decision, not something committed by this template.
-Start Codex at the repository root (`codex -C <repository>`), because stdio launcher
-arguments are relative to that root. Restart the Codex task after topology changes.
+Run from the repository root in PowerShell 7:
 
-`required=true` makes missing Headroom or debugger servers fail startup.
-Rider uses `required=false`, so a closed IDE produces a visible connection failure
-without preventing shell/.NET work. Its HTTP Stream endpoint is loopback-only;
-if your Rider uses a different port, copy its HTTP Stream URL from Settings →
-Tools → MCP Server and pass it to `configure-rider.py`.
+```powershell
+./tooling/project-tools.ps1 check -Modules core,dotnet,web,maui
+./tooling/project-tools.ps1 configure -Modules core,dotnet,rider
+. ./tooling/project-tools.ps1 enter-env
+./tooling/project-tools.ps1 discover-mcp -Server headroom
+./tooling/project-tools.ps1 discover-mcp -Server netcoredbg
+./tooling/project-tools.ps1 playwright -CliArguments @('--help')
+```
 
-Dot-source `tooling/enter-env.ps1` to set the current shell environment. It reads
-configured `JAVA_HOME` and `ANDROID_HOME` values and detects shared installations.
-The default Android SDK location is `%LOCALAPPDATA%/Android/Sdk`; JDK discovery
-checks `%ProgramFiles%/Microsoft` and `%LOCALAPPDATA%/Programs/Microsoft` for JDK 21.
-These shared SDK/JDK installations are outside the checkout. Use configured
-existing paths; do not provision Android dependencies through this project.
+Dot-source `enter-env` to affect the current shell. Pass browser CLI arguments as
+the `-CliArguments` array, including session names and paths:
 
-Configure Rider's Android SDK and Java Development Kit locations to those shared
-folders. Start a fresh shell or IDE after changing user environment settings.
-Repository relocation does not change the shared folders. Moving to another
-computer requires checking that computer's existing toolchain and supplying its
-own AndroidTesting path. A missing installation is a reported setup gap.
+```powershell
+./tooling/project-tools.ps1 playwright -CliArguments @('-s=realjapanese-check', 'snapshot')
+./tooling/project-tools.ps1 configure-rider -Url 'http://127.0.0.1:64342/stream'
+./tooling/project-tools.ps1 configure -Modules core,dotnet,rider
+./tooling/project-tools.ps1 start-rider -RiderPath 'C:\path\to\Rider' -Project '.\RealJapanese\RealJapanese.Web.sln'
+```
+
+`check` validates dependencies without provisioning. `configure` composes this
+project's fragments and refuses an unmanaged config. Inspect and manually merge
+unmanaged or customized configuration without losing unrelated settings; there
+are no implicit TOML includes. Select `core,dotnet,rider` when regenerating this
+project's current three-server profile. Discovery uses the actual project config
+and writes under `.tooling/`. `configure-rider` updates only the project fragment;
+review its discovered allowlist before regenerating, preserving customizations
+and deliberately disabled servers.
+
+The old `setup.ps1` maps to read-only `check`, not an installation flow. The old
+configure, enter-env, mcp-launch, playwright, discover-mcp, configure-rider,
+prepare-verification, verify-codex-evidence, verify-config, verify-browser,
+clean-verification and start-rider helpers map to corresponding entry-point tasks
+(`mcp-launch` becomes `mcp -Server <name>`). Read the reusable acceptance prompt
+with `verification-prompt`.
+[Verification](verification.md) owns acceptance arguments and cleanup boundaries.
+
+Codex reads trusted project config. Start at the repository root
+(`codex -C <repository>`), since stdio arguments are relative to that root. Use the
+normal user-level trust flow and start a fresh chat after MCP configuration or
+inherited environment changes. The launcher calls
+`tooling/project-tools.ps1 mcp -Server <name>` and binds NetCoreDbg's `--project`
+to this checkout, including its spaces and Unicode characters.
+
+Headroom and NetCoreDbg retain `required=true`. Temporary bootstrap `enabled=false`
+is not module removal: test initialize/list_tools through each migrated project
+launcher using the external Python MCP client, then re-enable only the intended,
+passing server in both its fragment and effective config. Leave a failing server
+disabled and report its exact failure. Optional Rider retains `required=false` and
+the endpoint from Settings → Tools → MCP Server; a closed IDE does not prevent
+CLI work. An interpreter executable or old discovery file does not prove startup.
+
+## Environment and Android integration
+
+`enter-env` selects external MCP/browser paths and detects existing `JAVA_HOME`
+and `ANDROID_HOME`. Android defaults to `%LOCALAPPDATA%/Android/Sdk`; JDK 21
+discovery checks `%ProgramFiles%/Microsoft` and `%LOCALAPPDATA%/Programs/Microsoft`.
+Configure Rider's SDK/JDK locations to the selected folders. `start-rider` requires
+a closed IDE to inherit that environment. Restart shells/IDE after inherited
+setting changes.
+
+RealJapanese opts into shared AndroidTesting. Follow [Android testing](android-testing.md)
+for `ANDROID_TESTING_HOME` or the documented host fallback, README/version/changelog
+review, existing device selection, reservations and session/port ownership. The
+single review marker stays in [AGENTS.md](../AGENTS.md). No Android runtime,
+Appium implementation or device is copied here. Report external problems to the
+owner without mutating shared tools or stopping services. Normal builds use
+`tooling/build-android.ps1`, which dot-sources the entry point's `enter-env` task.
+The old template Android installer/updater is retired; no replacement project task
+installs workloads, updates Android packages or stops shared ADB.
 
 ## Exact MCP policy
 
 **Headroom (3):** `headroom_compress`, `headroom_retrieve`, `headroom_stats`.
-Use compression explicitly. Retrieve the original when detail matters. The store
-is session-local and expires; it is not a durable backup. Retrieval output is
-capped at 12,000 tokens, compression at 6,000, stats at 2,000. An oversized original
-can be truncated by Codex: compress smaller chunks when complete retrieval matters.
-The upstream CLI probes its default localhost proxy for stats and can warn when
-none exists. This template starts no proxy, wrapper, interception, or learning job.
+Use compression explicitly and retrieve the original when detail matters. Its
+session-local expiring store is not a durable backup. Compression output is capped
+at 6,000 tokens, retrieval at 12,000 and stats at 2,000. Chunk oversized originals
+when complete retrieval matters. The upstream CLI can warn about an absent default
+localhost proxy; this project starts no proxy, interception or learning job.
 
-**NetCoreDbg controller capability categories:**
+**NetCoreDbg controller:**
 
 | Capability | Allowed tools |
-|---|---|
+| --- | --- |
 | Session | `start_debug`, `attach_debug`, `stop_debug`, `terminate_debug`, `get_debug_state` |
 | Source breakpoints | `add_breakpoint`, `remove_breakpoint`, `list_breakpoints` |
 | Execution | `continue_execution`, `pause_execution`, `step_over`, `step_into`, `step_out` |
 | Inspection | `get_threads`, `get_call_stack`, `get_scopes`, `get_variables`, `evaluate_expression` |
 
-The launcher pins the debugger to this repository using `--project`, and selects
-the native engine through `NETCOREDBG_PATH`. There is one session per MCP server.
-Inspection output caps are 2,000–4,000 tokens; execution/step output is capped at
-3,000. Page variables with `start`/`count` and limit stack `levels` when needed.
-Expressions execute in the target process, so consider their side effects.
-Normal Codex approval policy remains in effect; for unattended acceptance use
-`--approve-for-me`, not the default noninteractive rejection of approval requests.
+The launcher sets `NETCOREDBG_PATH` to the selected shared engine and passes this
+project's root through `--project`. Each MCP process owns its session. Inspection
+caps stay 2,000–4,000 tokens and execution/step caps 3,000. Page variables with
+`start`/`count` and bound stack `levels`. Evaluation can execute target code. Normal
+Codex approval policy applies; unattended acceptance uses `--approve-for-me`.
+Desktop CoreCLR evidence does not establish Android debugger compatibility.
 
-**Rider semantic capability selection:** `analyze_calls`,
-`build_solution_start`, `build_solution_state`, `execute_run_configuration`,
-`get_file_problems`, `get_project_dependencies`, `get_run_configurations`,
-`get_solution_projects`, `get_symbol_info`, `search_symbol`. All outputs are capped
-at 4,000 tokens. Always pass the intended `rootFolder` and confirm the returned
-project identity before acting. No shell, file editing, router, formatter,
-database, profiler, or debugger tools are exposed.
-
-Rider semantic tools do not establish C# debugger capability. The selected
-source-debugging route is Codex through `netcoredbg-mcp` to NetCoreDbg. Verify
-compatibility with the actual runtime; desktop CoreCLR acceptance does not prove
-Android debugging.
+**Rider semantics:** `analyze_calls`, `build_solution_start`, `build_solution_state`,
+`execute_run_configuration`, `get_file_problems`, `get_project_dependencies`,
+`get_run_configurations`, `get_solution_projects`, `get_symbol_info`, `search_symbol`.
+Outputs retain 4,000-token caps. Pass the intended `rootFolder` and confirm identity.
+No shell, file editing, router, formatter, database, profiler or debugger tools are
+exposed. Rider semantics do not establish source debugging.
 
 ## Copying or moving the template
 
-The repository source, documentation links and launchers resolve paths relative
-to the checkout or script location. Installed tools have a different lifecycle.
-Headroom and the NetCoreDbg MCP controller are Python packages, isolated in
-`.tooling/core/venv` and `.tooling/dotnet/venv` to avoid dependency conflicts.
-These environments contain generated interpreter/command-launcher paths.
-[Python documents virtual environments as non-portable](https://docs.python.org/3/library/venv.html#how-venvs-work):
-recreate them at the destination rather than editing `pyvenv.cfg` or embedded
-launcher paths. They contain tool dependencies, not application source.
+Preserve established application context and declared dependencies. Copy source,
+project config/fragments and the small entry point; omit generated `.tooling/`,
+`.idea/`, `.playwright-cli/`, Python caches and build output. Preserve any needed
+application working data separately. Do not copy shared code/runtimes into the
+destination. On the same host external paths and the profile stay fixed; the
+entry point supplies the new checkout root.
 
-**For a clean copy:** copy the template source and omit ignored `.tooling/`,
-`.idea/`, `.playwright-cli/`, build outputs and Python caches. Inspect/reuse compatible
-machine installations, then provision only the selected tools through the existing
-setup flow. A new machine still needs the documented host prerequisites. If exact
-Python package versions matter, retain the relevant `installed.txt` receipts
-separately and restore from them instead of selecting new versions.
+On another host, have the owner provision the selected external roots/profile and
+set absolute overrides. Verify launcher interpreter paths, actual MCP startup,
+NetCoreDbg project scope and browser behavior. Refresh machine-local IDE settings
+and validate Rider's endpoint without assuming its port. Old launchers, receipts
+or acceptance artifacts do not prove the new host works. Use the relocation
+preflight in [initialize-project](../.agents/skills/initialize-project/SKILL.md)
+only when adopting or relocating; migration does not repopulate existing context.
 
-**For a whole-folder move/copy:** run the shared relocation preflight in
-[initialize-project](../.agents/skills/initialize-project/SKILL.md). For each retained
-Python tool environment:
-
-1. Identify the new root and inspect `pyvenv.cfg`, the base interpreter and installed
-   command launchers for old paths. Treat a known moved/copied venv as requiring
-   recreation even if its `python.exe` runs; a launcher can still invoke the old
-   checkout when that checkout remains on disk. Detect a working compatible base
-   Python outside the affected environment before attempting repair.
-2. Preserve `.tooling/core/installed.txt` or `.tooling/dotnet/installed.txt` when
-   present. These package receipts are outside `venv`. Stop the affected tool
-   sessions before replacing their files. Do not modify an active/shared install.
-3. Verify the resolved environment path is exactly the intended `venv` under this
-   checkout's `.tooling/core` or `.tooling/dotnet`, with no junction/symlink escaping
-   the checkout. Move that disposable environment aside to a unique sibling backup
-   using native PowerShell and a checked destination; never move/delete the entire
-   `.tooling` tree, SDK, JDK, package receipt or unrelated environment.
-4. Create a new venv **at its final path**, using the detected compatible base Python.
-   Do not create elsewhere then rename it. For example, from the checkout root,
-   with `python` resolved to that base interpreter and the old venv moved aside:
-
-   ```powershell
-   python -m venv .tooling/core/venv
-   ./.tooling/core/venv/Scripts/python.exe -m pip install -r .tooling/core/installed.txt
-   ./.tooling/core/venv/Scripts/python.exe -m pip check
-   ./.tooling/core/venv/Scripts/headroom.exe --help
-   ```
-
-   Stop on any failing command. For the debugger controller use `.tooling/dotnet`
-   and `netcoredbg-mcp.exe --help` instead. The native NetCoreDbg engine is separate
-   from its Python controller and is not removed by this repair. If a receipt is
-   missing/unusable or pins cannot install on the destination, report that precisely;
-   use the existing module installer only when selecting current versions is in
-   scope. Those installers resolve current releases and are not a pinned restore.
-5. Verify the interpreter and command launchers now resolve under the destination;
-   run package checks and the relevant functional acceptance from
-   [verification](verification.md). Remove only the checked disposable backup after
-   success; on failure retain it and report the incomplete repair. Neither editing
-   `pyvenv.cfg` nor merely rerunning current setup repairs all embedded launchers:
-   the existing installers reuse a venv when its interpreter file exists.
-
-Then open a fresh shell and dot-source `tooling/enter-env.ps1` for retained modules
-so stale PATH/SDK values from the old shell are not carried forward. If using Rider,
-refresh its Android SDK/JDK locations as described above and confirm its MCP URL on
-this machine. These are local settings, not paths to commit into the template.
-Regenerate the managed MCP profile from retained fragments as needed; merge an
-unmanaged profile rather than overwriting unrelated settings.
-
-A missing required MCP server can block client startup before an agent can run a
-skill. In that case perform the shell repair first, or temporarily omit only the
-unavailable server from the selected profile and restore it after repair. Restart
-Codex from the destination root when ready. Local verification receipts/transcripts
-from the source machine do not prove the destination works.
-
-## Install, update and reuse
-
-The following template provisioners apply only to separately authorized tooling
-work. For this project's Android environment, use the opt-in procedure above;
-neither relocation nor an Android test task authorizes shared installation changes.
-
-1. Inspect `Get-Command` results, `dotnet --info`, `dotnet workload list`, existing
-   JDK/Android paths and Rider version first.
-2. Run selected module scripts through `tooling/setup.ps1`. Downloaded tools stay
-   in ignored `.tooling/` directories or the shared SDK/JDK locations. The module scripts
-   reuse their existing environments; SDK setup skips the already-current SDK.
-   On a different machine with compatible global MCP/browser/JDK tools, configure
-   launchers to use those before installing isolated copies. The inspection output
-   is not an automatic adoption of arbitrary existing installations.
-   If supported Node LTS is missing, the web installer downloads a checksum-verified
-   official Windows x64 LTS ZIP into its own module; it does not create a Node app.
-3. Re-run the corresponding module script to update. It resolves official stable
-   metadata at execution time, then installs a specific version. JDK and SDK
-   downloads verify vendor checksums. Re-run discovery and acceptance after updates.
-   Keep package receipts local; installation alone is not acceptance.
-4. The retained `tooling/update-android.ps1` mutates shared command-line/platform
-   tools and stops ADB. Do not run it for this project's shared AndroidTesting setup.
-   Report compatibility problems; tool-owner maintenance is separate.
-5. Rider updates use JetBrains' updater. For Android support, close Rider then run
-   `rider64.exe installPlugins com.jetbrains.rider.android`; reopen and check Plugins.
-   [Official installation instructions](https://www.jetbrains.com/help/rider/Managing_Plugins.html).
-   The default MAUI setup also invokes `modules/rider-android.ps1` and fails clearly
-   if Rider is still open. It does not force-close the IDE.
-6. Discover Rider again with
-   `.tooling/dotnet/venv/Scripts/python.exe tooling/configure-rider.py`, then regenerate
-   the project configuration. Unexpected new tool names remain excluded.
-
-The generator refuses to overwrite an unmanaged Codex configuration. In an existing
-application repository, merge these MCP fragments into its config instead of
-replacing unrelated settings. There are no implicit TOML includes: the generator
-actually composes the selected fragments.
+Retire copied generic scripts/local tool environments only after checking tracked
+and ignored consumers and verifying replacements. Preserve application scripts,
+tests, configuration, dependencies and unrelated scratch. Do not edit binary
+launchers or reinstall local environments as a substitute for the external layout.
 
 ## Clean removal
 
-First stop only this project's browser/debugger sessions and close any relevant
-IDE project. Run `configure.ps1` with the modules you are keeping **before** deleting
-tools, so no stale required MCP entry breaks startup.
+Stop only task-owned browser/debugger sessions. Configure retained modules before
+removing project support; preserve unrelated config. Removing project support
+never uninstalls shared profiles, environments, receipts, SDK/JDK/workloads, IDE
+plugins, browsers or Android devices.
 
-| Remove | Keep/configuration action | Installation cleanup |
-|---|---|---|
-| .NET and all technology layers | `configure.ps1 -Modules core` | Remove selected local tool environments; preserve shared SDK/JDK installations |
-| MAUI only | MCP config unchanged | Remove only project-specific support; preserve AndroidTesting, shared devices, workload/SDK/JDK, Appium and Rider support |
-| Web only | MCP config unchanged | Remove `.tooling/web`; no application npm manifest was created |
-| Rider integration | Configure `core,dotnet` | Disable Rider MCP in IDE settings if no other projects use it; no global Codex registration to remove |
-| Debugger only | Configure `core,rider` | Remove `.tooling/dotnet`; keep the shared SDK/Rider |
-| Core | Configure only remaining modules | Remove `.tooling/core`; remove Headroom-owned session data from its user data directory if no other installation uses it |
-
-Use PowerShell `Remove-Item -LiteralPath` only after resolving and checking the exact
-directory. Do not delete shared machine SDKs, Python, Node or Rider merely to remove
-this template. If deliberately removing .NET 10 machine-wide, use Windows Installed
-apps. Preserve other installed SDK versions. Remove user environment variables or
-Rider paths only when the corresponding shared installations are actually removed.
-
-`tooling/clean-verification.ps1` removes only this template's scratch fixtures and
-browser artifacts after checking paths. Local receipts and transient verification artifacts stay in ignored storage; do
-not populate this template with machine-specific result reports.
+`./tooling/project-tools.ps1 clean-verification` removes checked project-local
+`.tooling/scratch` and `.playwright-cli` trees and refuses linked cleanup targets.
+These trees can contain application work: do not run broad cleanup over it. Use
+isolated disposable fixtures and clean only task-owned paths. Keep discovery and
+acceptance transcripts in ignored project storage, outside durable context/releases.

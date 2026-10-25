@@ -45,7 +45,8 @@ to diagnose toolchain configuration; its presence is not a reason to add Java co
 
 1. Detect the SDK, installed MAUI Android workload, JDK and Android SDK configuration.
    Read installed help and actual target configuration as needed. Use the existing
-   [environment helper](../../../tooling/enter-env.ps1) and
+   [project entry point](../../../tooling/project-tools.ps1), dot-sourcing
+   `. ./tooling/project-tools.ps1 enter-env -Modules maui`, and the
    [tooling guide](../../../docs/tooling.md) for local path/setup details. Reuse the
    central installation; report external problems instead of installing, updating,
    repairing or copying its implementation/configuration into this repository.

@@ -1,6 +1,6 @@
 ---
 name: initialize-project
-description: Initialize durable AI context for an existing repository or new application, including checking and repairing local tooling after copying or moving the template. Use for initialization or relocation, not routine feature work or context maintenance alone.
+description: Initialize durable AI context for an existing repository or new application, including resolving fixed external tooling paths after copying or moving the template. Use for initialization or relocation, not routine feature work or context maintenance alone.
 ---
 
 # Initialize project
@@ -33,24 +33,27 @@ handoff without redefining established project goals or architecture.
    wants to retain. Core project definition can proceed without installing tools.
 2. If this template's tooling is present, follow the canonical
    [copy/move procedure](../../../docs/tooling.md#copying-or-moving-the-template).
-   Inspect local environment configuration and actual launch behavior. An existing
-   executable or a successful interpreter launch alone does not prove a copied
-   environment's command launchers point into the new checkout.
-3. For relocated/stale local Python environments, recreate only affected retained
-   environments at their final destination, reinstalling from usable package
-   receipts when available. Preserve receipts and validate exact local paths before
-   moving any disposable directory. Do not repair generated environments with
-   blanket path replacement or silently upgrade tools as a relocation fix.
+   Resolve absolute `AI_MCP_ROOT` and `AI_SHARED_TOOLING_ROOT` overrides or the
+   documented defaults. Keep the entry point pinned to `project-tools/v1`. Inspect
+   actual launcher paths and behavior; an interpreter alone does not prove startup.
+3. Migrate legacy local tool consumers to the selected external installations.
+   Preserve application scripts, declared dependencies, receipts and unrelated
+   configuration/work. Do not recreate local MCP environments or install, upgrade,
+   repair, move or modify shared scripts, environments, browsers or receipts.
+   Report missing dependencies with their exact required paths for separate owner
+   provisioning. Retire old generic copies only after checking all consumers and
+   verifying replacements. Application Python must use a compatible declared
+   environment based on its imports, not an arbitrary MCP environment.
 4. Refresh process-local environment variables and relevant machine-local IDE paths.
    Regenerate/merge the retained MCP profile if needed, preserving unrelated client
    configuration. Detect the current Rider endpoint; do not assume the old port.
-5. Verify repaired tools with the applicable existing acceptance checks. Separate
+5. Verify selected tools with the applicable existing acceptance checks. Separate
    environment/package checks from functional MCP/browser/device evidence. If a
    dependency, download, IDE setting or restart is unavailable, report the exact
    remaining step while continuing independent context initialization.
 
 Keep machine paths out of durable project context. The tooling guide owns detailed
-repair steps; if tooling was removed, skip its preflight rather than requiring it.
+path/configuration steps; if tooling was removed, skip its preflight rather than requiring it.
 This is a setup check, not permission to reinstall shared machine SDKs or optional
 modules. Do not repeat initialization merely to rephrase unchanged facts.
 

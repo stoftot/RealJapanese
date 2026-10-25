@@ -2,26 +2,46 @@
 
 Run applicable checks on the target machine. Installation, configuration validity,
 compilation and actual runtime behavior are separate evidence. Report results in
-the current conversation; do not populate this template with machine-specific
-results, session history or acceptance dates.
+the current conversation; keep machine-specific results, transcripts and acceptance
+artifacts in ignored project storage, outside durable application context.
 
 ## Repeat the tests
 
-Run from the repository root. Keep configuration trusted in Codex and Rider open
-for IDE checks. Do not start another verification over existing scratch fixtures.
+Run `./tooling/project-tools.ps1 check -Modules core,dotnet,web,maui` and dot-source
+`. ./tooling/project-tools.ps1 enter-env`. Confirm interpreter, debugger and browser
+paths resolve under the selected external roots and fixed `project-tools/v1`.
+Keep shared scripts, runtimes and receipts unchanged. Run from the repository root;
+keep configuration trusted in Codex and Rider open for IDE checks.
+
+Do not start verification over existing scratch fixtures. This checkout's ignored
+`.tooling/scratch/` can contain application work. Use an isolated project-local
+disposable fixture with its own entry point/fragments when that tree is occupied;
+never clean existing application fixtures to run generic acceptance.
 
 ```powershell
-./tooling/prepare-verification.ps1
-Get-Content tooling/verify-codex.md -Raw |
+./tooling/project-tools.ps1 prepare-verification
+./tooling/project-tools.ps1 verification-prompt |
   codex exec --ephemeral --skip-git-repo-check --strict-config --approve-for-me --json `
     -o .tooling/codex-verification.md - > .tooling/codex-verification.jsonl
-python tooling/verify-codex-evidence.py
-python tooling/verify-config.py
-python tooling/verify-browser.py
+./tooling/project-tools.ps1 verify-codex-evidence
+./tooling/project-tools.ps1 verify-config
+./tooling/project-tools.ps1 verify-browser
 ```
 
+`discover-mcp -Server headroom` and `discover-mcp -Server netcoredbg` use the external
+Python MCP client to initialize/list_tools through actual project launchers, even
+during bootstrap when these tools are absent from the current chat. Check a real
+Headroom compression/retrieval round-trip and debugger launch, breakpoint, stepping
+and variable inspection against disposable source. Confirm the debugger child
+receives this checkout's full `--project` argument. Discovery does not apply Codex's
+allowlist; compare advertised names with preserved project policy. After successful
+startup, re-enable intended servers in both `.codex/modules/` and `.codex/config.toml`,
+retaining required policy, caps and timeouts. Leave failures disabled with their
+exact error and start a fresh chat after configuration changes. A subprocess MCP
+probe is distinct from the Codex transcript checked by `verify-codex-evidence`.
+
 For this project's Android integration, follow the bounded checks below instead
-of provisioning a scratch MAUI app or invoking the legacy MAUI installer/updater.
+of provisioning a scratch MAUI app or invoking an Android installer/updater.
 
 For Rider, open the scratch **solution**, confirm its identity with
 `get_solution_projects(rootFolder=...)`, then call `get_file_problems`,
@@ -35,8 +55,12 @@ the scratch project paths. Include the MAUI project only when verifying that mod
 After stopping test sessions and closing the scratch solution:
 
 ```powershell
-./tooling/clean-verification.ps1
+./tooling/project-tools.ps1 clean-verification
 ```
+
+Run broad cleanup only in a disposable verification fixture or after confirming
+the cleanup trees contain no unrelated work. Stop owned sessions first; preserve
+existing scratch scripts/data and user-owned browser sessions.
 
 ## Shared Android guidance and configuration
 

@@ -1,7 +1,8 @@
 [mcp_servers.headroom]
 command = "powershell.exe"
-args = ["-NoProfile", "-File", "tooling/mcp-launch.ps1", "-Server", "headroom"]
+args = ["-NoProfile", "-File", "tooling/project-tools.ps1", "mcp", "-Server", "headroom"]
 required = true
+enabled = true
 startup_timeout_sec = 45
 tool_timeout_sec = 90
 enabled_tools = ["headroom_compress", "headroom_retrieve", "headroom_stats"]

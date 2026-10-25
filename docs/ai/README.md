@@ -5,7 +5,7 @@ development, primarily with Codex, initialized for the existing RealJapanese
 application. It retains the reusable template's optional tooling and workflows:
 tooling provides capabilities; this layer guides their use.
 Start orientation at [PROJECT_MAP](PROJECT_MAP.md). The existing
-[tooling guide](../tooling.md) owns installation and machine setup.
+[tooling guide](../tooling.md) owns external dependency paths and project configuration.
 The [development guide](../development.md) explains solution selection and normal
 web, shared and Android build/run commands.
 
@@ -52,10 +52,10 @@ can read the same instructions directly. See [official skill documentation](http
 
 `initialize-project` includes a shared local-tooling preflight for both modes and
 relocation-only requests. It follows the [tooling copy/move procedure](../tooling.md#copying-or-moving-the-template)
-to recreate relocated Python tool environments, refresh shell/IDE paths and check
-retained capabilities. A clean source copy omits machine-generated ignored folders;
-a whole-folder copy may need local repairs. Established application context is
-preserved unless facts changed.
+to resolve fixed external tool environments, refresh shell/IDE paths and check
+retained capabilities. A clean copy omits machine-generated ignored folders;
+legacy copied consumers migrate without repairing shared installations.
+Established application context is preserved unless facts changed.
 
 ## Technology modules
 
@@ -85,7 +85,7 @@ by core workflows. Missing tools produce bounded fallbacks and explicit gaps.
    Regenerate MCP configuration before deleting required servers; preserve shared
    machine installations. Removing documentation alone does not uninstall tools.
 
-The existing external `web` installer supports standalone browser tooling; that
+The external `web` toolchain supports standalone browser tooling; that
 does not change the ASP.NET adapter's conceptual dependency on .NET. The supplied
 MCP configuration requires some selected servers at startup; this is a toolchain
 profile choice, not a core skill dependency. Configure only retained servers when

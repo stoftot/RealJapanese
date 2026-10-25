@@ -111,7 +111,7 @@ The project still needs an Android Appium suite capable of driving its Hybrid UI
 For an authorized physical-phone test, first confirm that adb can see the target:
 
 ```powershell
-. .\tooling\enter-env.ps1 -Modules maui
+. .\tooling\project-tools.ps1 enter-env -Modules maui
 adb devices -l
 ```
 

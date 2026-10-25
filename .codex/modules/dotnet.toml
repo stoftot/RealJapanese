@@ -1,7 +1,8 @@
 [mcp_servers.netcoredbg]
 command = "powershell.exe"
-args = ["-NoProfile", "-File", "tooling/mcp-launch.ps1", "-Server", "netcoredbg"]
+args = ["-NoProfile", "-File", "tooling/project-tools.ps1", "mcp", "-Server", "netcoredbg"]
 required = true
+enabled = true
 startup_timeout_sec = 45
 tool_timeout_sec = 120
 enabled_tools = ["start_debug", "attach_debug", "stop_debug", "terminate_debug", "add_breakpoint", "remove_breakpoint", "list_breakpoints", "continue_execution", "pause_execution", "step_over", "step_into", "step_out", "get_debug_state", "get_threads", "get_call_stack", "get_scopes", "get_variables", "evaluate_expression"]

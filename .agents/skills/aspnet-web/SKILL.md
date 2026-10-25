@@ -21,10 +21,12 @@ reliable automation is possible and identify remaining human checks.
 1. Detect .NET and the actual project; use the .NET adapter for build/test/run.
    Confirm launch profile, environment and required local services from config.
    Do not guess ports or substitute a sample page for the actual app.
-2. Detect Node.js, Microsoft Playwright CLI and Chromium. This template's wrapper
-   is [tooling/playwright.ps1](../../../tooling/playwright.ps1); inspect its installed
-   `--help` or the available CLI's help for current commands. Exact installation
-   details belong to [tooling](../../../docs/tooling.md).
+2. Detect Node.js, Microsoft Playwright CLI and Chromium. Use the pinned external
+   profile through [project-tools](../../../tooling/project-tools.ps1):
+   `./tooling/project-tools.ps1 playwright -CliArguments @('--help')`. Pass CLI
+   arguments with `-CliArguments @(...)`. Inspect installed help for commands;
+   [tooling](../../../docs/tooling.md) owns external paths. Do not install or update
+   shared browser/runtime packages during project work.
 3. Node.js is browser-tooling infrastructure. Do not add an application npm
    manifest, JavaScript build pipeline or another browser stack merely to use it.
    Only Chromium belongs to the default browser profile; do not assume Firefox/

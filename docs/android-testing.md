@@ -34,8 +34,8 @@ Get-Content -LiteralPath (Join-Path $androidTestingRoot 'version.json')
 An explicit but invalid environment path is an error, not permission to silently
 fall back. The absolute fallback is specific to this host; another machine must
 provide its own verified installation. Use absolute script invocations through
-the resolved root even if the current shell has stale PATH entries. The existing
-`tooling/enter-env.ps1 -Modules maui` reads SDK/JDK environment settings for builds;
+the resolved root even if the current shell has stale PATH entries. Dot-source
+`tooling/project-tools.ps1 enter-env -Modules maui` to read SDK/JDK settings for builds;
 it does not install AndroidTesting or opt other repositories in.
 
 When the marker is a valid integer, pass that actual integer as `-SinceRevision`

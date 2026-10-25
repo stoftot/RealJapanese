@@ -5,7 +5,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
-. (Join-Path $PSScriptRoot 'enter-env.ps1') -Modules dotnet,maui
+. (Join-Path $PSScriptRoot 'project-tools.ps1') enter-env -Modules dotnet,maui
 
 # aapt2 cannot reliably consume Unicode paths. An alias keeps this checkout in
 # place and gives every intermediate/output file a short ASCII path.

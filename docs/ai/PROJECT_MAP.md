@@ -59,8 +59,10 @@ Paths below are relative to the repository root. All projects target .NET 10.
 | `tests/RealJapanese.WebTests/RealJapanese.WebTests.csproj` | xUnit executable / `net10.0` | TestSupport; web host (build only) | Playwright Chromium tests |
 
 No CI pipeline was found. The local automated suite and its setup are documented in
-[testing](../testing.md). `tooling/verify-*` and ignored `.tooling/scratch/` fixtures
-verify tools, not the app.
+[testing](../testing.md). `tooling/project-tools.ps1` pins external `project-tools/v1`
+infrastructure helpers; `.codex/modules/` owns project MCP policy. Disposable ignored
+fixtures test tools, not the app. Application build/audio helpers and tests stay
+here; [tooling](../tooling.md) owns the external layout and command contracts.
 
 ## Entry points and investigation anchors
 
