@@ -16,7 +16,7 @@ Keep run results and unexecuted steps in the current task, not in these files.
 | [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–004: offline catalogs, update/restart persistence, IME/Back/lifecycle, controlled startup failure and shared-queue catalog/navigation smoke |
 | [Data maintenance](data-maintenance.md) | DATA-001–002: controlled extraction/model validation and interrupted legacy cleanup |
 | [Standalone TTS comparison](tts-comparison.md) | TTS-001: single-word audio, pronunciation, reference voice comparison and output isolation |
-| [Audio Studio](audio-studio.md) | AUDIO-001–007: catalog selection, choices/exports, references, model/format combinations, cancellation, pause/resume and human audio review |
+| [Audio Studio](audio-studio.md) | AUDIO-001–008: catalog selection, choices/exports, independent model references, model/format combinations, cancellation, pause/resume and human audio review |
 
 The initial cases reuse behavior documented in the [sync guide](../../docs/local-sync.md).
 That guide remains the owner of user instructions and network/compatibility limits.

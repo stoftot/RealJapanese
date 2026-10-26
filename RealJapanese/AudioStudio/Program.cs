@@ -77,7 +77,7 @@ app.MapGet("/api/catalog", () =>
         hasAudio = exported.TryGetValue(w.Key, out var e) && e.Word == w && File.Exists(store.ExportAudio(w.Key)),
         pitchStatus = pitch.For(w)?.Profile is not null ? "Stored BERT estimate" : "Model-inferred" });
 });
-app.MapGet("/api/runs", () => store.Runs().Select(r => new { r.Id, r.CreatedAt, r.Status, r.WordCount, r.Engines, r.OutputQuality, r.ReferenceName, r.Progress, r.IsActive, r.CanResume }));
+app.MapGet("/api/runs", () => store.Runs().Select(r => new { r.Id, r.CreatedAt, r.Status, r.WordCount, r.Engines, r.OutputQuality, r.ReferenceName, r.EngineReferences, r.Progress, r.IsActive, r.CanResume }));
 app.MapGet("/api/runs/{id}", (string id) => store.GetRun(id));
 app.MapPost("/api/runs", (GenerationInput input, GenerationService jobs) => jobs.StartAsync(input));
 app.MapPost("/api/runs/{id}/pause", (string id, GenerationService jobs) => { jobs.Pause(id); return Results.Ok(); });

@@ -68,6 +68,119 @@ public sealed class GenerationCheckpointTests
     }
 
     [Fact]
+    public async Task Resume_PreservesIndependentEngineReferencesAfterSourceReferencesChange()
+    {
+        using var temp = new TempDirectory();
+        var catalog = CreateCatalog(Path.Combine(temp.Path, "data"));
+        var store = CreateStore(temp.Path, catalog);
+        var fishReference = CreateReference(store, "Fish A", "transcript A");
+        var irodoriReference = CreateReference(store, "Irodori B", "transcript B");
+        var firstBackend = new FakeBackend(store);
+        var gate = firstBackend.BlockGeneration("fish", "Nouns/1");
+        var service = new GenerationService(store, catalog, firstBackend);
+        var started = await service.StartAsync(new(
+            ["Nouns/1", "Nouns/2"], ["fish", "irodori"],
+            ReferenceIds: new() { ["fish"] = fishReference.Id, ["irodori"] = irodoriReference.Id }));
+        await gate.Entered.Task.WaitAsync(TimeSpan.FromSeconds(10), TestContext.Current.CancellationToken);
+        service.Pause(started.Id);
+        gate.Release.TrySetResult(true);
+        await WaitForStatus(store, started.Id, "Paused");
+
+        var paused = store.GetRun(started.Id);
+        Assert.Equal(fishReference.Id, paused.EngineReferences!["fish"]!.Id);
+        Assert.Equal("transcript A", paused.EngineReferences["fish"]!.Transcript);
+        Assert.Equal(irodoriReference.Id, paused.EngineReferences["irodori"]!.Id);
+        Assert.Equal("transcript B", paused.EngineReferences["irodori"]!.Transcript);
+        Assert.Equal(fishReference.Id, firstBackend.ReferencesAtOpen["fish"]);
+
+        store.SaveReference(fishReference with { Name = "Changed Fish", Transcript = "changed transcript A" });
+        store.SaveReference(irodoriReference with { Name = "Changed Irodori", Transcript = "changed transcript B" });
+        var reopenedStore = CreateStore(temp.Path, catalog);
+        var resumeBackend = new FakeBackend(reopenedStore);
+        await new GenerationService(reopenedStore, catalog, resumeBackend).ResumeAsync(started.Id);
+        await WaitForStatus(reopenedStore, started.Id, "Completed");
+
+        var resumed = reopenedStore.GetRun(started.Id);
+        Assert.Equal(fishReference.Id, resumed.EngineReferences!["fish"]!.Id);
+        Assert.Equal("Fish A", resumed.EngineReferences["fish"]!.Name);
+        Assert.Equal("transcript A", resumed.EngineReferences["fish"]!.Transcript);
+        Assert.Equal(irodoriReference.Id, resumed.EngineReferences["irodori"]!.Id);
+        Assert.Equal("Irodori B", resumed.EngineReferences["irodori"]!.Name);
+        Assert.Equal("transcript B", resumed.EngineReferences["irodori"]!.Transcript);
+        Assert.Equal(irodoriReference.Id, resumeBackend.ReferencesAtOpen["irodori"]);
+        Assert.Equal(fishReference.Id, resumeBackend.ReferencesAtOpen["fish"]);
+        Assert.DoesNotContain(resumeBackend.Events, e => e == "generate fish Nouns/1");
+    }
+
+    [Fact]
+    public async Task Start_AllowsBlankTranscriptForIrodoriButRejectsItForFishReference()
+    {
+        using var temp = new TempDirectory();
+        var catalog = CreateCatalog(Path.Combine(temp.Path, "data"));
+        var store = CreateStore(temp.Path, catalog);
+        var blankReference = CreateReference(store, "Blank transcript", "");
+        var backend = new FakeBackend(store);
+        var service = new GenerationService(store, catalog, backend);
+
+        var started = await service.StartAsync(new(
+            ["Nouns/1"], ["fish", "irodori"],
+            ReferenceIds: new() { ["fish"] = null, ["irodori"] = blankReference.Id }));
+        await WaitForStatus(store, started.Id, "Completed");
+
+        Assert.Null(store.GetRun(started.Id).ReferenceFor("fish"));
+        Assert.Equal(blankReference.Id, store.GetRun(started.Id).ReferenceFor("irodori")!.Id);
+        Assert.Equal("none", backend.ReferencesAtOpen["fish"]);
+        Assert.Equal(blankReference.Id, backend.ReferencesAtOpen["irodori"]);
+
+        var error = await Assert.ThrowsAsync<StudioException>(() => service.StartAsync(new(
+            ["Nouns/1"], ["fish", "irodori"],
+            ReferenceIds: new() { ["fish"] = blankReference.Id, ["irodori"] = null })));
+        Assert.Contains("Fish needs a transcript", error.Message);
+        Assert.Single(store.Runs());
+    }
+
+    [Theory]
+    [InlineData("bert", true)]
+    [InlineData("fish", false)]
+    public async Task Start_RejectsReferenceMappingForBertOrUnselectedEngine(string mappedEngine, bool selectFish)
+    {
+        using var temp = new TempDirectory();
+        var catalog = CreateCatalog(Path.Combine(temp.Path, "data"));
+        var store = CreateStore(temp.Path, catalog);
+        var backend = new FakeBackend(store);
+        var service = new GenerationService(store, catalog, backend);
+        var engines = selectFish ? new[] { "fish", "irodori" } : new[] { "irodori" };
+
+        var error = await Assert.ThrowsAsync<StudioException>(() => service.StartAsync(new(
+            ["Nouns/1"], engines, ReferenceIds: new() { [mappedEngine] = null })));
+
+        Assert.Contains("only for selected Fish or Irodori", error.Message);
+        Assert.Empty(store.Runs());
+        Assert.Empty(backend.Events);
+    }
+
+    [Fact]
+    public async Task Start_LegacySharedReferenceAppliesToFishAndIrodori()
+    {
+        using var temp = new TempDirectory();
+        var catalog = CreateCatalog(Path.Combine(temp.Path, "data"));
+        var store = CreateStore(temp.Path, catalog);
+        var reference = CreateReference(store, "Shared reference", "shared transcript");
+        var backend = new FakeBackend(store);
+        var service = new GenerationService(store, catalog, backend);
+
+        var started = await service.StartAsync(new(["Nouns/1"], ["fish", "irodori"], reference.Id));
+        await WaitForStatus(store, started.Id, "Completed");
+
+        var run = store.GetRun(started.Id);
+        Assert.NotNull(run.EngineReferences);
+        Assert.Equal(reference.Id, run.ReferenceFor("fish")!.Id);
+        Assert.Equal(reference.Id, run.ReferenceFor("irodori")!.Id);
+        Assert.Equal(reference.Id, backend.ReferencesAtOpen["fish"]);
+        Assert.Equal(reference.Id, backend.ReferencesAtOpen["irodori"]);
+    }
+
+    [Fact]
     public async Task PauseDuringFirstCheck_SavesItAndResumeChecksOnlyTheRemainingClip()
     {
         using var temp = new TempDirectory();
@@ -334,6 +447,16 @@ public sealed class GenerationCheckpointTests
     private static StudioStore CreateStore(string root, WordCatalog catalog) =>
         new(Path.Combine(root, "work"), Path.Combine(root, "exports"), catalog);
 
+    private static ReferenceItem CreateReference(StudioStore store, string name, string transcript)
+    {
+        string id = Guid.NewGuid().ToString("N");
+        var reference = new ReferenceItem(id, name, transcript, "User edited", 2, name + ".wav", DateTimeOffset.UtcNow);
+        store.SaveReference(reference);
+        Directory.CreateDirectory(store.ReferenceFolder(id));
+        File.WriteAllText(store.ReferenceAudio(id), "reference audio " + id);
+        return reference;
+    }
+
     private static StudioRun CreateTerminalRun(StudioStore store, List<CatalogWord> words, string[] engines)
     {
         string id = Guid.NewGuid().ToString("N");
@@ -372,9 +495,11 @@ public sealed class GenerationCheckpointTests
         private readonly ConcurrentDictionary<(string Engine, string Key), RequestGate> generationGates = new();
         private readonly ConcurrentDictionary<(string Engine, string Key), RequestGate> checkGates = new();
         private readonly ConcurrentDictionary<(string Engine, string Key), RequestGate> conversionGates = new();
+        private readonly ConcurrentDictionary<string, string> referencesAtOpen = new(StringComparer.Ordinal);
         private int voiceOpens;
         private int voiceDisposals;
         public string[] Events => events.ToArray();
+        public IReadOnlyDictionary<string, string> ReferencesAtOpen => referencesAtOpen;
         public int VoiceOpens => Volatile.Read(ref voiceOpens);
         public int VoiceDisposals => Volatile.Read(ref voiceDisposals);
         public bool ThrowOnPrepare { get; set; }
@@ -399,6 +524,7 @@ public sealed class GenerationCheckpointTests
         public IVoiceBatch OpenVoice(StudioRun run, string engine)
         {
             Interlocked.Increment(ref voiceOpens);
+            referencesAtOpen[engine] = run.ReferenceFor(engine)?.Id ?? "none";
             events.Enqueue("open " + engine);
             return new VoiceBatch(this, run, engine);
         }

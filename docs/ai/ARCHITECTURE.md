@@ -136,7 +136,8 @@ Neither host launches Audio Studio at runtime.
    `dataset/id` identities, grouped into Nouns, Verbs, Adjectives and Words &
    expressions. Catalogs and study progress are read-only inputs.
 2. Runs, retained clips, references and local runtime state are stored below
-   `.tooling/audio-studio/`. Runs persist settings, reference snapshots, clip
+   `.tooling/audio-studio/`. Runs persist settings, per-engine reference snapshots
+   and copied audio for Fish/Irodori (including independent no-reference choices), clip
    outputs, checks, model choices and a selected output quality for each word/model
    clip. Each generated clip has four persisted variants: Opus 32 kbps mono, MP3
    64 kbps mono, WAV 24 kHz/16-bit mono and Original WAV. Each variant is

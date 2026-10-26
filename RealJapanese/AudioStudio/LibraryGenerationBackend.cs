@@ -7,13 +7,11 @@ public sealed class LibraryGenerationBackend(StudioOptions options, StudioStore 
 {
     public void Prepare(StudioRun run)
     {
-        run.SpeechSettings ??= options.Speech with { ReferenceTranscript = run.ReferenceSnapshot?.Transcript };
+        run.SpeechSettings ??= options.Speech with { ReferenceTranscript = null };
         run.SpeechSettings.Validate();
         string root = store.RunFolder(run.Id);
         Directory.CreateDirectory(root);
-        string reference = Path.Combine(root, "reference.wav");
-        if (run.ReferenceId is not null && !File.Exists(reference))
-            File.Copy(store.ReferenceAudio(run.ReferenceId), reference, false);
+        RunReferences.Prepare(run, store);
     }
     public IVoiceBatch OpenVoice(StudioRun run, string engine) => new VoiceBatch(options, store, media, pitch, run, engine);
     public ICheckBatch OpenChecks(StudioRun run) => new CheckBatch(options.CreateTranscriber(), store.RunFolder(run.Id));
@@ -83,7 +81,7 @@ public sealed class LibraryGenerationBackend(StudioOptions options, StudioStore 
         public VoiceBatch(StudioOptions options, StudioStore store, MediaTools media, PitchProfiles pitch, StudioRun run, string engine)
         {
             this.store = store; this.media = media; this.pitch = pitch; this.run = run; this.engine = engine;
-            settings = run.SpeechSettings ?? options.Speech;
+            settings = RunReferences.SettingsFor(run, engine, options.Speech);
             service = Synthesis.Create(engine, settings);
         }
         public async Task<GeneratedAudio> GenerateAsync(CatalogWord word, CancellationToken token)
@@ -97,7 +95,8 @@ public sealed class LibraryGenerationBackend(StudioOptions options, StudioStore 
             bool completed = false;
             try
             {
-                string? reference = run.ReferenceId is not null && engine != "bert" ? Path.Combine(runFolder, "reference.wav") : null;
+                string? reference = RunReferences.AudioFile(run, engine) is { } referenceFile
+                    ? StudioStore.SafePath(runFolder, referenceFile) : null;
                 var request = Synthesis.Request(engine, new Verb(word.Id, word.SpokenJapanese, word.SpokenKana, word.English), settings, rawFolder, reference);
                 var pronunciation = engine == "bert" ? pitch.For(word)?.Profile : null;
                 if (pronunciation is not null)

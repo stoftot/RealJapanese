@@ -79,8 +79,8 @@ storage.
    reference.
 2. Play the saved crop and inspect its transcript and source label. Edit the
    transcript, save it and inspect the source label again.
-3. Select this reference in Generate, then inspect its transcript-source label in
-   the reference selection.
+3. Select Fish or Irodori in Generate, select this reference in that model's
+   reference selector, then inspect its transcript-source label.
 
 **Expected result:** The user-entered 3-second crop is retained after metadata
 loads and is locally converted to mono 24 kHz PCM WAV; it can be played. The
@@ -176,8 +176,8 @@ to judge Japanese pronunciation.
 1. Listen to every selected raw and processed clip. Compare the spoken word with
    its Japanese text and kana. Check for extra speech, repetition, clipped
    consonants/endings, clicks, silence, clipping and unnatural timing.
-2. Compare Fish and Irodori with the reference for perceived voice, pacing and
-   tone. Assess BERT as a fixed-voice baseline, not as reference cloning.
+2. Compare Fish and Irodori with each model's chosen reference for perceived voice,
+   pacing and tone. Assess BERT as a fixed-voice baseline, not as reference cloning.
 3. Judge pitch accent by listening and appropriate Japanese-language expertise;
    do not infer correctness from the ASR transcript or the displayed model pitch
    label. For BERT, confirm a stored-profile clip identifies its source as a
@@ -217,8 +217,44 @@ local model setup that takes long enough to pause during each phase.
 **Expected result:** Pause completes the in-flight generation clip including
 conversion/save, or the in-flight Whisper file, then unloads the model and releases
 generation capacity. No subsequent model request starts until resume. A paused run
-retains settings, its reference snapshot, completed outputs and checks; resume
-skips the saved work, including after application restart. Previously completed
+retains settings, its per-model reference snapshots, completed outputs and checks;
+resume skips the saved work, including after application restart. Previously completed
 clip hashes remain unchanged. Paused and Interrupted runs cannot be exported.
 Cancelling a paused run marks it terminal `Cancelled` and removes its resume
 action. This case is a manual acceptance specification, not an execution claim.
+
+## AUDIO-008 — Independent model references
+
+**Purpose:** Verify independent reference choices in one generation run, including
+saved reference audio/transcripts and compatibility with earlier shared references.
+
+**Preconditions:** Use disposable work/export roots and two prepared references A
+and B with distinct names and transcripts. Fish's reference must have a nonblank,
+reviewed transcript. Use one word and the Fish and Irodori models for generation.
+
+**Steps:**
+
+1. Select Fish and Irodori. Choose A for Fish and B for Irodori. Search vocabulary,
+   toggle a model off and on, and visit References then return. Confirm both
+   choices remain. Select No reference for Fish and confirm Irodori still uses B;
+   restore A. Select BERT and confirm it has no reference selector.
+2. Start the run. In Runs and the selected-run view, confirm the Fish/A and
+   Irodori/B names appear. Inspect the saved run's engine reference snapshots and
+   copied `references/fish.wav` and `references/irodori.wav` against A and B.
+   Inspect each generated `request.json`: Fish's reference path and transcript
+   must both refer to A; Irodori's reference path must refer to B. BERT has none.
+3. Pause with pending work. Edit the source reference names/transcripts, restart
+   the app, and resume. Confirm the original names, transcripts and copied audio
+   remain in use. Completed clip files stay unchanged.
+4. Repeat with Fish using No reference and Irodori using B. Confirm Fish's request
+   contains no reference audio/text and Irodori retains B. Check a disposable older
+   saved run: its shared reference remains displayed and used after resume.
+5. Listen to both outputs against their corresponding references using AUDIO-006.
+
+**Expected result:** Each conditioned model uses its own saved reference choice,
+including No reference. One choice never alters another model's choice. Resume
+retains the original reference snapshots and audio. Older runs retain their shared
+reference; BERT keeps its fixed voice. `GenerationCheckpointTests` and
+`RunReferenceTests` cover service validation, persistence, saved media/transcript
+pairing and legacy resolution without loading speech models. Browser interaction,
+real model request integration and human listening remain separate checks.

@@ -37,8 +37,15 @@ public sealed class GenerationService(StudioStore store, WordCatalog catalog, IG
             || input.Engines.Any(e => !Engines.Contains(e))) throw new StudioException("Select one to three available models.");
         if (!Qualities.Contains(input.OutputQuality)) throw new StudioException("Unknown output quality.");
         var words = input.WordKeys.Select(catalog.Get).ToList();
-        var reference = input.ReferenceId is null ? null : store.Reference(input.ReferenceId);
-        if (input.Engines.Contains("fish") && reference is not null && string.IsNullOrWhiteSpace(reference.Transcript))
+        if (input.ReferenceIds is not null && input.ReferenceIds.Keys.Any(e => e is not ("fish" or "irodori") || !input.Engines.Contains(e)))
+            throw new StudioException("Choose references only for selected Fish or Irodori models.");
+        var references = new Dictionary<string, ReferenceItem?>();
+        foreach (string engine in input.Engines.Where(e => e is "fish" or "irodori"))
+        {
+            string? id = input.ReferenceIds is null ? input.ReferenceId : input.ReferenceIds.GetValueOrDefault(engine);
+            references[engine] = string.IsNullOrEmpty(id) ? null : store.Reference(id);
+        }
+        if (references.GetValueOrDefault("fish") is { } fishReference && string.IsNullOrWhiteSpace(fishReference.Transcript))
             throw new StudioException("Fish needs a transcript for the reference. Edit it in References first.");
         await AcquireAsync();
         bool launched = false;
@@ -47,9 +54,9 @@ public sealed class GenerationService(StudioStore store, WordCatalog catalog, IG
             var run = new StudioRun
             {
                 Words = words, Engines = Engines.Where(input.Engines.Contains).ToArray(), OutputQuality = input.OutputQuality, AllQualities = true,
-                ReferenceId = reference?.Id, ReferenceName = reference?.Name, ReferenceSnapshot = reference,
+                EngineReferences = references,
                 Notes = ["Automatic transcripts screen recognition, not pitch accent or voice similarity. Listen before exporting.",
-                    "BERT uses a fixed voice. Fish and Irodori can use the reference."]
+                    "BERT uses a fixed voice. Fish and Irodori each use their own selected reference, if any."]
             };
             foreach (string engine in run.Engines)
                 foreach (var word in words) run.Clips.Add(new() { Key = word.Key, Engine = engine });

@@ -59,6 +59,8 @@ public sealed class StudioRun
     public string? ReferenceId { get; init; }
     public string? ReferenceName { get; init; }
     public ReferenceItem? ReferenceSnapshot { get; init; }
+    // Null identifies older runs with one shared reference. An empty map means no references.
+    public Dictionary<string, ReferenceItem?>? EngineReferences { get; init; }
     public GenerateAudioUsingTTS.Settings? SpeechSettings { get; set; }
     public List<StudioClip> Clips { get; init; } = [];
     public Dictionary<string, string> Selections { get; init; } = [];
@@ -77,6 +79,9 @@ public sealed class StudioRun
     };
     public bool IsActive => Status is "Queued" or "Generating" or "Checking" or "Pausing";
     public bool CanResume => Status is "Paused" or "Interrupted";
+
+    public ReferenceItem? ReferenceFor(string engine) => engine is not ("fish" or "irodori") ? null
+        : EngineReferences is null ? ReferenceSnapshot : EngineReferences.GetValueOrDefault(engine);
 }
 
 public sealed record ReferenceItem(string Id, string Name, string Transcript, string TranscriptSource,
@@ -91,7 +96,8 @@ public sealed record ExportedClip(CatalogWord Word, string Engine, string RunId,
     public string AudioUrl => $"/api/exports/audio?key={Uri.EscapeDataString(Word.Key)}";
 }
 
-public sealed record GenerationInput(string[] WordKeys, string[] Engines, string? ReferenceId, string OutputQuality = "OriginalWav");
+public sealed record GenerationInput(string[] WordKeys, string[] Engines, string? ReferenceId = null,
+    string OutputQuality = "OriginalWav", Dictionary<string, string?>? ReferenceIds = null);
 public sealed record SelectionInput(Dictionary<string, string?> Choices);
 public sealed record ClipQualityInput(string Key, string Engine, string Quality);
 public sealed record ExportInput(bool AcknowledgeUnselected = false);

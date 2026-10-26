@@ -72,9 +72,12 @@ as a category in per-word views. Search and category selection work across the
 catalog. The “Only words without exported audio” filter is based on the current
 export manifest.
 
-Choose words, one or more of BERT, Fish and Irodori, an optional reference and a
-default output format to start a run. The default is Original WAV. Every generated
-model clip is stored in all four qualities: Opus 32 kbps mono, MP3 64 kbps mono,
+Choose words, one or more of BERT, Fish and Irodori, an optional reference for each
+selected Fish or Irodori model, and a default output format to start a run. Each
+model has its own reference selector, including No reference; choosing or clearing
+one does not change the other. BERT always uses its fixed voice. The default is
+Original WAV. Every generated model clip is stored in all four qualities:
+Opus 32 kbps mono, MP3 64 kbps mono,
 WAV 24 kHz/16-bit mono, and Original WAV. After generation and format conversion,
 each available quality is transcribed and checked separately. Runs and their
 progress are saved. The app keeps a model worker loaded for its whole engine
@@ -105,8 +108,13 @@ uploads are marked `AI library Whisper small; not human-verified`, historic
 a reference marks it `User edited`.
 
 BERT uses its fixed voice. Fish requires a transcript when a reference is selected.
-Fish and Irodori can condition on the chosen reference; that is not a guarantee of
-speaker identity or voice quality.
+Fish and Irodori can condition on their independently chosen references; that is
+not a guarantee of speaker identity or voice quality.
+
+Runs retain each model's reference name, transcript snapshot and copied audio.
+Runs and the selected-run view show the reference for each model. Resuming uses
+those saved copies, even if a reference is edited later. Older saved runs keep
+their original shared reference for Fish and Irodori.
 
 ## Choices, exports and files
 
@@ -162,8 +170,8 @@ visible run note, and leaves the run Partial so the missing formats can be retri
 Pause requests take effect at a safe checkpoint: after the current clip, including
 its conversion and save, or after the current Whisper file finishes. The app then
 unloads the model worker, marks the run `Paused`, and releases generation so other
-work can start. Paused runs retain their settings, reference snapshot and outputs.
-Resume continues the same run, skipping clips and transcript checks already saved.
+work can start. Paused runs retain their settings, per-model reference snapshots
+and outputs. Resume continues the same run, skipping clips and transcript checks already saved.
 This also works after restarting the app: an active run is marked `Interrupted`
 on shutdown and can be resumed from its persisted checkpoints. Paused or
 Interrupted runs cannot be exported; resume and finish them, or cancel them first.
