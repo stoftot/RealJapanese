@@ -64,26 +64,31 @@ study catalogs and progress are unchanged.
 
 ## AUDIO-003 — Reference upload, transcript source and playback
 
-**Purpose:** Verify local crop preparation, transcript attribution and reference
-playback.
+**Purpose:** Verify local crop preparation, longer reference duration, transcript
+attribution and reference playback.
 
-**Preconditions:** Have a disposable work root, a short local recording with clear
-speech and a configured FFmpeg executable. Keep the recording within local test
-storage.
+**Preconditions:** Have a disposable work root, a local recording longer than 30
+seconds with clear speech, a short local recording and a configured FFmpeg
+executable. Keep recordings within local test storage.
 
 **Steps:**
 
-1. Open References and select the recording. Before its preview finishes loading,
-   set the crop length to exactly 3 seconds, then wait for preview metadata and
-   confirm the field still reads 3 seconds. Set the start time and prepare the
-   reference.
-2. Play the saved crop and inspect its transcript and source label. Edit the
+1. Open References and select the longer recording. After preview metadata loads,
+   confirm the crop length can cover the complete recording. Leave the crop at the
+   auto-filled full duration and prepare it. Play the saved reference and confirm
+   its end matches the source recording's end.
+2. Select the short recording. Before its preview finishes loading, set the crop
+   length to exactly 3 seconds, then wait for preview metadata and confirm the
+   field still reads 3 seconds. Set the start time and prepare the reference.
+3. Play the saved crop and inspect its transcript and source label. Edit the
    transcript, save it and inspect the source label again.
-3. Select Fish or Irodori in Generate, select this reference in that model's
+4. Select Fish or Irodori in Generate, select this reference in that model's
    reference selector, then inspect its transcript-source label.
 
-**Expected result:** The user-entered 3-second crop is retained after metadata
-loads and is locally converted to mono 24 kHz PCM WAV; it can be played. The
+**Expected result:** A recording longer than 30 seconds can be prepared through
+its full duration up to 120 seconds, with the saved crop retaining the source
+ending. The user-entered 3-second crop is retained after metadata loads and is
+locally converted to mono 24 kHz PCM WAV; both references can be played. The
 machine transcript is visibly identified as `AI library Whisper small; not
 human-verified`; after editing, its source is shown as “User edited”. The full
 source attribution appears both in the reference card and generation selection.

@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.ComponentModel;
 using System.Text.Json;
 using AudioStudio;
 
@@ -7,6 +8,32 @@ namespace RealJapanese.Tests;
 /// <summary>Verifies standalone audio catalog identity and export persistence without loading a TTS engine.</summary>
 public sealed class AudioStudioTests
 {
+    [Theory]
+    [InlineData(31, true)]
+    [InlineData(120, true)]
+    [InlineData(120.1, false)]
+    public async Task CreateReference_EnforcesOneTo120SecondDuration(double duration, bool accepted)
+    {
+        using var temp = new TempDirectory();
+        string source = Path.Combine(temp.Path, "source.wav");
+        File.WriteAllText(source, "placeholder input");
+        var media = new MediaTools(Path.Combine(temp.Path, "missing-ffmpeg.exe"));
+
+        if (accepted)
+        {
+            // Reaching process startup proves the duration passed validation. FFmpeg is
+            // deliberately absent so the test remains independent of external binaries.
+            await Assert.ThrowsAsync<Win32Exception>(() => media.CreateReferenceAsync(
+                source, Path.Combine(temp.Path, "reference.wav"), 0, duration, CancellationToken.None));
+        }
+        else
+        {
+            var error = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => media.CreateReferenceAsync(
+                source, Path.Combine(temp.Path, "reference.wav"), 0, duration, CancellationToken.None));
+            Assert.Equal("durationSeconds", error.ParamName);
+        }
+    }
+
     [Theory]
     [InlineData("～か～", "～か～", "か", "か")]
     [InlineData("〜時間", "〜じかん", "時間", "じかん")]

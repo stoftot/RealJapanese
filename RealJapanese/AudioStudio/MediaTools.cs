@@ -22,8 +22,8 @@ public sealed class MediaTools
         string output = DestinationPath(destination);
         if (!double.IsFinite(startSeconds) || startSeconds < 0)
             throw new ArgumentOutOfRangeException(nameof(startSeconds), "Start time must be finite and nonnegative.");
-        if (!double.IsFinite(durationSeconds) || durationSeconds < 1 || durationSeconds > 30)
-            throw new ArgumentOutOfRangeException(nameof(durationSeconds), "Reference duration must be between 1 and 30 seconds.");
+        if (!double.IsFinite(durationSeconds) || durationSeconds < 1 || durationSeconds > 120)
+            throw new ArgumentOutOfRangeException(nameof(durationSeconds), "Reference duration must be between 1 and 120 seconds.");
         EnsureDoesNotExist(output);
 
         string temporary = TemporarySibling(output, ".wav");

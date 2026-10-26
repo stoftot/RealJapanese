@@ -12,5 +12,6 @@
     <Compile Include="../../RealJapanese/AudioStudio/ClipFormats.cs" Link="AudioStudio/ClipFormats.cs" />
     <Compile Include="../../RealJapanese/AudioStudio/GenerationService.cs" Link="AudioStudio/GenerationService.cs" />
     <Compile Include="../../RealJapanese/AudioStudio/RunReferences.cs" Link="AudioStudio/RunReferences.cs" />
+    <Compile Include="../../RealJapanese/AudioStudio/MediaTools.cs" Link="AudioStudio/MediaTools.cs" />
   </ItemGroup>
 </Project>

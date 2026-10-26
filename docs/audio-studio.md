@@ -95,7 +95,7 @@ listen to every clip before exporting it.
 When no saved reference exists, first startup attempts to prepare the configured
 default Podcast 41 excerpt at 38.35 seconds for 9.8 seconds. Its transcript is an
 automatic candidate, not a human-verified transcript. A reference can also be
-uploaded and cropped to 1–30 seconds in References. Audio is converted locally to
+uploaded and cropped to 1–120 seconds in References. Audio is converted locally to
 mono 24 kHz PCM WAV, played back in the reference list and transcribed locally by
 the copied AiLibrary `IAiModelService.TranscribeAsync` API. The Whisper small
 model runs on CPU with int8 inference, six CPU threads, Japanese language,
