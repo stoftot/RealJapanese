@@ -91,6 +91,14 @@ public sealed class ExploreAudioBrowserTests : BrowserTest
         await Page.SetViewportSizeAsync(320, 900);
         await OpenAsync("/explore/audio");
         await Expect(Row("Nouns", 0)).ToBeVisibleAsync();
+        await AssertBottomGapAsync();
+        var initialListHeight = (await Page.Locator(".explore-audio-scroll").BoundingBoxAsync())!.Height;
+        await Page.SetViewportSizeAsync(320, 1100);
+        await AssertBottomGapAsync();
+        Assert.InRange((await Page.Locator(".explore-audio-scroll").BoundingBoxAsync())!.Height - initialListHeight, 199, 201);
+        await Page.SetViewportSizeAsync(1280, 1100);
+        await AssertBottomGapAsync();
+        await Page.SetViewportSizeAsync(320, 900);
         Assert.InRange(await Rows.CountAsync(), 1, 39);
         Assert.True(await Page.EvaluateAsync<bool>("() => document.documentElement.scrollWidth <= innerWidth"));
         Assert.True(await Rows.EvaluateAllAsync<bool>("""
@@ -187,6 +195,14 @@ public sealed class ExploreAudioBrowserTests : BrowserTest
     private async Task ReleasedAsync()
     {
         await Page.WaitForFunctionAsync("window.previousAudio.paused && !window.previousAudio.hasAttribute('src')");
+    }
+
+    private async Task AssertBottomGapAsync()
+    {
+        var table = Page.GetByRole(AriaRole.Table, new() { Name = "Word audio" });
+        await Expect(table).ToBeVisibleAsync();
+        var bounds = (await table.BoundingBoxAsync())!;
+        Assert.InRange(Page.ViewportSize!.Height - bounds.Y - bounds.Height, 99, 101);
     }
 
     private void Seed(Clip[] clips)

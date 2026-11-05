@@ -1,9 +1,21 @@
 .explore-audio {
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh - 1.75rem - 100px - env(safe-area-inset-bottom, 0px));
+    min-height: 360px;
     max-width: 1100px;
     margin: 0 auto;
 }
 
+.explore-audio > * {
+    flex-shrink: 0;
+}
+
 .audio-table {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
     overflow: hidden;
     border: 1px solid #dce2eb;
     border-radius: 1rem;
@@ -16,6 +28,7 @@
 }
 
 .audio-header {
+    flex-shrink: 0;
     padding: 1rem 1.25rem;
     border-bottom: 1px solid #dce2eb;
     background: #f1f4f8;
@@ -27,7 +40,8 @@
 }
 
 .explore-audio-scroll {
-    height: min(65vh, 700px);
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -65,6 +79,12 @@
 .audio-english { margin-top: 0.35rem; }
 .audio-category { font-size: 0.85rem; }
 .audio-clip { min-width: 0; padding-top: 0.2rem; }
+
+@media (max-width: 640.98px) {
+    .explore-audio {
+        height: calc(100dvh - 1rem - 100px - env(safe-area-inset-bottom, 0px));
+    }
+}
 
 @media (max-width: 575.98px) {
     .audio-columns { grid-template-columns: minmax(0, 43%) minmax(0, 57%); }
