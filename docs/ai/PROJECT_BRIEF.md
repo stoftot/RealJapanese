@@ -25,6 +25,8 @@ or owner-approved roadmap was not found.
 - Reveal answers and repeat difficult questions during a practice session.
 - Listen to exported vocabulary clips and choose from three English meanings,
   with chunking and retries independent of automatic study-list moves.
+- Browse all exported word audio in Explore audio, with category filters and
+  live Japanese, kana and English prefix search, independently of saved lists.
 - Use the Android application offline without running the ASP.NET host.
 - Transfer progress directly between two open installations on the same trusted
   Wi-Fi network or personal hotspot, with an explicit merge preview.

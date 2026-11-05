@@ -15,7 +15,7 @@ public sealed class LayoutBrowserTests : BrowserTest
         await OpenAsync("/");
         var navigation = Page.GetByRole(AriaRole.Navigation, new() { Name = "Main navigation", Exact = true });
         var links = navigation.GetByRole(AriaRole.Link);
-        var labels = new[] { "Home", "Kana", "Numbers", "Words", "Nouns", "Verbs", "Adjectives", "Words & expressions", "Kanji" };
+        var labels = new[] { "Home", "Kana", "Numbers", "Words", "Nouns", "Verbs", "Adjectives", "Words & expressions", "Kanji", "Explore audio" };
         await Expect(links).ToHaveCountAsync(labels.Length);
         Assert.True(await navigation.EvaluateAsync<bool>("""
             nav => nav.parentElement.scrollWidth > nav.parentElement.clientWidth

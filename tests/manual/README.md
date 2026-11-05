@@ -12,7 +12,7 @@ Keep run results and unexecuted steps in the current task, not in these files.
 | --- | --- |
 | [Kana](kana.md) | KANA-001–003: character selections/settings, answers/review, local persistence, responsive charts and offline fonts |
 | [Local sync](local-sync.md) | SYNC-001–006: Automatic/Manual transfer, cancellation, pairing rejection, merge/recovery and errors across web and Android |
-| [Study selection and practice](study-practice.md) | STUDY-001–012: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout, language oracles, book/lesson selection, saved-word mixing, daily rehearsal and audio listening |
+| [Study selection and practice](study-practice.md) | STUDY-001–013: search, categories, routes, answers/retries, chunks, flashcards, multiple answers, layout, language oracles, book/lesson selection, saved-word mixing, daily rehearsal, audio listening and audio browsing |
 | [Android lifecycle](mobile-lifecycle.md) | MOBILE-001–004: offline catalogs, update/restart persistence, IME/Back/lifecycle, controlled startup failure and shared-queue catalog/navigation smoke |
 | [Data maintenance](data-maintenance.md) | DATA-001–002: controlled extraction/model validation and interrupted legacy cleanup |
 | [Standalone TTS comparison](tts-comparison.md) | TTS-001: single-word audio, pronunciation, reference voice comparison and output isolation |
@@ -53,6 +53,7 @@ assert intended behavior but require explicit execution; see the testing guide.
 | STUDY-011 | `RehearsalProgressTests`: immediate demotion, calendar rules, migration and sync/recovery; `RehearsalPracticeComponentTests`: Learn routes, partial/revealed answers, excluded exercises and remaining question pools; `RehearsalBrowserTests`: retry retention, seventh-day promotion, re-chunking and leaving/restarting before retry | Actual host timezone rollover; Android WebView practice and device-local dates |
 | SYNC-001 | Real loopback transfer and private-interface discovery integration tests; shared web approval/apply flow | Automatic discovery over actual Wi-Fi and Windows/Android cryptographic interoperability, both directions |
 | STUDY-012 | `StudyAudioCatalogTests`, `ListeningPracticeComponentTests`, `ListeningBrowserTests`: manifest matching, choices, chunks/retries, unchanged progress, real MP3/Opus playback and autoplay recovery | Android offline playback, audio output/quality and native lifecycle |
+| STUDY-013 | `ExploreAudioBrowserTests`: catalog order/identity, prefix/category filtering, unchanged progress, empty states, real MP3/Opus native playback, disposal, virtualized scrolling and 320 px layout | Android offline sound/output and native lifecycle; human control/readability and screen-reader usability |
 | SYNC-002 | Two-host Playwright sync through Manual mode | Actual web/Android reachability and transfer in both directions |
 | SYNC-003 | `SyncPreviewBrowserTests`: Cancel, close, backdrop and Escape, no-write and fresh transfer; `SyncDialogComponentTests` | Native WebView dialog behavior and other-device dismissal combinations |
 | SYNC-004 | `SyncPairingBrowserTests`: one approval, denial, dismissal, navigation stops listener, renewed transfer; socket cancellation tests | Android navigation/background and peer combinations |

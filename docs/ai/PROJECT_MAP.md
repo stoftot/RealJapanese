@@ -93,6 +93,7 @@ here; [tooling](../tooling.md) owns the external layout and command contracts.
 | Standalone TTS setup, reference preparation and comparison outputs | `docs/tts-comparison.md`, `tooling/prepare-tts.ps1`, `RealJapanese/GenerateAudioUsingTTS/` |
 | Standalone catalog-wide audio generation, runs, references and exports | `docs/audio-studio.md`, `RealJapanese/AudioStudio/`, `tests/manual/audio-studio.md` |
 | Shared audio listening practice and manifest catalog | `RealJapanese/Repositories/Audio/StudyAudioCatalog.cs`, `RealJapanese/RealJapanese.UI/Components/Pages/Vocabulary/ListeningStudy.razor`, `tests/manual/study-practice.md` |
+| Catalog-wide audio browsing | `RealJapanese/RealJapanese.UI/Components/Pages/Vocabulary/ExploreAudio.razor`, `Components/Shared/ExploreAudioPlayer.razor` in the same UI project; `ExploreAudioBrowserTests`, STUDY-013 |
 
 ## Important flows
 

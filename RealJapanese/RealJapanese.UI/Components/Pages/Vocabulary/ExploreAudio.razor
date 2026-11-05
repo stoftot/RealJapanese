@@ -1,0 +1,107 @@
+@page "/explore/audio"
+@using RealJapanese.Components.Shared
+@using Repositories
+@using Repositories.Audio
+@inject RepositoryPaths Paths
+
+<PageTitle>Explore audio</PageTitle>
+
+<section class="explore-audio">
+    <div class="selector-heading">
+        <h1>Explore audio</h1>
+        <p>Listen to the words in each category.</p>
+    </div>
+
+    <div class="audio-categories d-flex flex-wrap gap-2 mb-3" role="group" aria-label="Audio categories">
+        @foreach (var category in Categories)
+        {
+            <button type="button" class="btn @(selectedCategory == category ? "btn-primary" : "btn-outline-primary")"
+                    aria-pressed="@(selectedCategory == category ? "true" : "false")"
+                    @onclick="() => SelectCategory(category)">@category</button>
+        }
+    </div>
+
+    <label for="audio-search" class="form-label">Search audio</label>
+    <input id="audio-search" type="search" class="form-control mb-3" placeholder="Search Japanese, kana or English"
+           @bind="search" @bind:event="oninput" @bind:after="Filter" />
+
+    @if (catalog.Error is not null)
+    {
+        <p role="alert">@catalog.Error</p>
+    }
+    @if (filtered.Count == 0)
+    {
+        <p role="status">@EmptyMessage</p>
+    }
+    else
+    {
+        <div class="audio-table" role="table" aria-label="Word audio">
+            <div class="audio-columns audio-header" role="row">
+                <div role="columnheader">Word</div>
+                <div role="columnheader">Audio</div>
+            </div>
+            <div class="explore-audio-scroll" role="rowgroup" tabindex="0" aria-label="Audio list" @key="(selectedCategory, search)">
+                <Virtualize Items="filtered" Context="entry" ItemSize="164" OverscanCount="2">
+                    <div class="audio-columns explore-audio-row" role="row" data-dataset="@entry.Word.Dataset" data-word-id="@entry.Word.SourceId" @key="entry">
+                        <div class="audio-word" role="cell">
+                            <div class="audio-japanese" lang="ja">@entry.Word.Japanese</div>
+                            <div class="audio-kana" lang="ja">@entry.Word.Kana</div>
+                            <div class="audio-english">@entry.Word.English</div>
+                            <div class="audio-category">@entry.Category</div>
+                        </div>
+                        <div class="audio-clip" role="cell">
+                            <ExploreAudioPlayer Catalog="catalog" Clip="entry.Clip" />
+                        </div>
+                    </div>
+                </Virtualize>
+            </div>
+        </div>
+    }
+</section>
+
+@code {
+    private static readonly string[] Categories = ["All", "Nouns", "Verbs", "Adjectives", "Words & expressions"];
+    private StudyAudioCatalog catalog = null!;
+    private List<AudioEntry> entries = [];
+    private List<AudioEntry> filtered = [];
+    private string selectedCategory = "All", search = "";
+    private bool categoryHasAudio;
+
+    private string EmptyMessage => categoryHasAudio ? "No matching audio."
+        : selectedCategory == "All" ? "No audio." : "No audio for this category.";
+
+    protected override void OnInitialized()
+    {
+        catalog = new(Paths);
+        var collection = new VocabularyCollection(Paths);
+        entries = collection.Entries.Select(word => (Word: word,
+                Clip: catalog.Find(word.Dataset, word.SourceId, word.Japanese, word.Kana)))
+            .Where(item => item.Clip is not null)
+            .Select(item => new AudioEntry(item.Word, item.Clip!,
+                item.Word.Dataset is "Nouns" or "Verbs" or "Adjectives" ? item.Word.Dataset : "Words & expressions"))
+            .OrderBy(entry => Array.IndexOf(Categories, entry.Category))
+            .ThenBy(entry => entry.Word.SourceId)
+            .ThenBy(entry => entry.Word.Dataset, StringComparer.Ordinal)
+            .ToList();
+        Filter();
+    }
+
+    private void SelectCategory(string category)
+    {
+        selectedCategory = category;
+        Filter();
+    }
+
+    private void Filter()
+    {
+        var categoryEntries = entries.Where(entry => selectedCategory == "All" || entry.Category == selectedCategory).ToList();
+        categoryHasAudio = categoryEntries.Count > 0;
+        string prefix = search.Trim();
+        filtered = categoryEntries.Where(entry => prefix.Length == 0
+            || entry.Word.Japanese.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+            || entry.Word.Kana.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+            || entry.Word.English.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    private sealed record AudioEntry(VocabularyEntry Word, StudyAudioClip Clip, string Category);
+}

@@ -658,3 +658,62 @@ retry/chunk behavior and the no-progress-write boundary on both hosts.
 ### Cleanup
 
 Restore disposable progress and remove any temporary manifest/payload fixture.
+
+## STUDY-013 — Explore all exported word audio
+
+### Purpose
+
+Protect catalog-wide read-only audio browsing, category order, prefix search,
+responsive native players and playback cleanup in the shared web/Android UI.
+
+### Preconditions
+
+- A disposable catalog with reviewed matching exports across Nouns, Verbs,
+  Adjectives and at least two supporting vocabulary datasets. Include overlapping
+  numeric source IDs, unsaved words, MP3 and Opus recordings, and a missing/stale
+  export. Record the initial progress bytes or snapshot.
+- For prefix search, include English values **Hello**, **help**, **hep**, **test**,
+  plus identifiable Japanese and kana prefixes. Include enough clips to scroll.
+- On Android, install a package containing these exports and disable networking.
+
+### Steps
+
+1. Follow **Explore audio** from main navigation. Inspect the Word/Audio table,
+   category labels and default **All** selection. Compare visible order to source
+   IDs across the four groups, scrolling to the last clip.
+2. Select each category. Search for `he`, `HEL`, `test`, then distinctive Japanese
+   and kana prefixes. Change category while a search is present. Search for an
+   interior substring such as `llo`, then clear the search and enter spaces only.
+3. Select a category without audio and repeat an unmatched search. In a separate
+   disposable setup without exports, open All and search again.
+4. Play MP3 and Opus using the native controls; seek, pause and replay. While a
+   clip plays, hide its row with search/category selection, scroll it out of the
+   virtualized list, and navigate away. Return and play another clip.
+5. At 320 px width, inspect complete category labels, both columns, native player
+   usability and page overflow. Check keyboard focus and screen-reader labels.
+6. On Android offline, repeat playback through speaker/headphones. Background and
+   resume the app, rotate, use native Back, and reopen the page; check that removed
+   players stop and that no abandoned clip restarts. Compare saved progress.
+
+### Expected result
+
+- All includes current matching exports from the whole catalog, including unsaved
+  words. Missing/stale exports are absent. Repeated numeric IDs remain distinct by
+  dataset. Order is Nouns, Verbs, Adjectives, Words & expressions, ascending source
+  ID within each group and deterministic dataset order for ties.
+- Exactly one category is selected. Search retains its value on category changes
+  and filters that category by a trimmed, case-insensitive prefix of the complete
+  Japanese, kana or English text. `he` finds Hello/help/hep; `HEL` finds Hello/help;
+  `llo` does not find Hello. Blank or whitespace restores the category's rows.
+- Empty All says **No audio.**; an empty category says **No audio for this category.**;
+  an unmatched search in a category with audio says **No matching audio.**
+- Each row's first column shows Japanese, kana, English and category. The second
+  contains only native audio controls, with failure feedback if needed. Controls
+  play real audio and remain usable on a narrow screen without page overflow.
+- Filtering, virtualization disposal and navigation stop removed players. Progress
+  and rehearsal data remain unchanged. Android packaged playback works offline;
+  sound quality and native lifecycle require device observation.
+
+### Cleanup
+
+Discard only the disposable installation/catalog and restore its progress snapshot.

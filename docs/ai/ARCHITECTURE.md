@@ -130,6 +130,14 @@ copies payloads into private `Catalog/Audio`, then replaces the manifest. New
 exports are available on Android after rebuilding and installing the package.
 Neither host launches Audio Studio at runtime.
 
+The shared `/explore/audio` route browses all matching reviewed exports independently
+of saved study lists. Its exclusive category filter follows Nouns, Verbs,
+Adjectives and Words & expressions; All groups them in that order, then sorts by
+original numeric ID within each group (dataset breaks ties). Japanese, kana and
+English use case-insensitive prefix search. Virtualized rows read only mounted
+clips into native audio players; removing a row stops playback and releases its
+source. Browsing never writes study progress.
+
 ### Standalone audio generation and export
 
 1. Audio Studio reads all twelve source vocabulary catalogs into composite
