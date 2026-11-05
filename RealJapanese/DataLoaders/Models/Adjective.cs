@@ -71,7 +71,7 @@ public record Adjective : Conjugatabel
         {
             AdjectiveType.I or AdjectiveType.IRREGULAR => conjugationType switch
             {
-                ConjugationType.PresentAffirmative => adjectiveType == AdjectiveType.I ? I_PresentAffirmativeEnding,
+                ConjugationType.PresentAffirmative => I_PresentAffirmativeEnding,
                 ConjugationType.PresentNegative => I_PresentNegativeEnding,
                 ConjugationType.PastAffirmative => I_PastAffirmativeEnding,
                 ConjugationType.PastNegative => I_PastNegativeEnding,
