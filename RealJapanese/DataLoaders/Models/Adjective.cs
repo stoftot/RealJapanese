@@ -115,7 +115,7 @@ public record Adjective : Conjugatabel
     #region Short forms
     private const string Short_I_PresentNegativeEnding = "くない";
     private const string Short_I_PastAffirmativeEnding = "かった";
-    private const string Short_I_PastNegativeEnding = "なかった";
+    private const string Short_I_PastNegativeEnding = "くなかった";
 
     private const string Short_NA_PresentAffirmativeEnding = "だ";
     private const string Short_NA_PresentNegativeEnding = "じゃない";

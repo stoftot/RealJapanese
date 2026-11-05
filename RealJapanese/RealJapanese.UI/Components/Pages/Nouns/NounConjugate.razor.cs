@@ -17,11 +17,11 @@ public class NounConjugateBase : SingleAnwserBase
 
         foreach (var conjugationType in Enum.GetValues<Conjugatabel.ConjugationType>())
         {
-            questions.Add(new()
-            {
-                Question = "Noun - " + conjugationType.ToDisplayString() + " - polite",
-                Answer = noun.Conjugate(Conjugatabel.ToConjugate.Kana, conjugationType).ToRomaji()
-            });
+            // questions.Add(new()
+            // {
+            //     Question = "Noun - " + conjugationType.ToDisplayString() + " - polite",
+            //     Answer = noun.Conjugate(Conjugatabel.ToConjugate.Kana, conjugationType).ToRomaji()
+            // });
             questions.Add(new()
             {
                 Question = "Noun - " + conjugationType.ToDisplayString() + " - short",
@@ -29,11 +29,11 @@ public class NounConjugateBase : SingleAnwserBase
             });
         }
 
-        questions.Add(new()
-        {
-            Question = "Noun - te form",
-            Answer = noun.TeForm(Conjugatabel.ToConjugate.Kana).ToRomaji()
-        });
+        // questions.Add(new()
+        // {
+        //     Question = "Noun - te form",
+        //     Answer = noun.TeForm(Conjugatabel.ToConjugate.Kana).ToRomaji()
+        // });
 
         OrginalQuestions = questions;
         UpdateQuestions();

@@ -15,32 +15,32 @@ public class ConjugationsAndFormsBase : SingleAnwserBase
     {
         var questions = new List<QuestionAnswerDto>();
         
-        // // conjugation
-        // foreach (var ending in Verb.possibleEndings)
-        // {
-        //     foreach (var conjugationType in Enum.GetValues<Conjugatabel.ConjugationType>())
-        //     {
-        //         questions.Add(new()
-        //         {
-        //             Question = ending.Kana + " - " + conjugationType.ToDisplayString(),
-        //             Answer = ending.Conjugate(Conjugatabel.ToConjugate.Kana, conjugationType).ToRomaji()
-        //         });
-        //     }
-        // }
-        
-        //te form
-        foreach (var ending in Verb.allPossibleEndings)
+        // conjugation
+        foreach (var ending in Verb.possibleEndings)
         {
-            foreach (var verbForm in Enum.GetValues<Verb.VerbForm>())
+            foreach (var conjugationType in Enum.GetValues<Conjugatabel.ConjugationType>())
             {
-                if(verbForm == Verb.VerbForm.TA)continue;
-                questions.Add(new ()
+                questions.Add(new()
                 {
-                    Question = (ending.Type == "ru"?"(ru)":"") + ending.Kana + " - " + verbForm + " form",
-                    Answer = ending.Form(Conjugatabel.ToConjugate.Kana, verbForm).ToRomaji()
+                    Question = ending.Kana + " - " + conjugationType.ToDisplayString(),
+                    Answer = ending.Conjugate(Conjugatabel.ToConjugate.Kana, conjugationType).ToRomaji()
                 });
             }
         }
+        
+        // //te form
+        // foreach (var ending in Verb.allPossibleEndings)
+        // {
+        //     foreach (var verbForm in Enum.GetValues<Verb.VerbForm>())
+        //     {
+        //         if(verbForm == Verb.VerbForm.TA)continue;
+        //         questions.Add(new ()
+        //         {
+        //             Question = (ending.Type == "ru"?"(ru)":"") + ending.Kana + " - " + verbForm + " form",
+        //             Answer = ending.Form(Conjugatabel.ToConjugate.Kana, verbForm).ToRomaji()
+        //         });
+        //     }
+        // }
         // //
         // //action/change form
         // foreach (var ending in Verb.possibleEndings)
