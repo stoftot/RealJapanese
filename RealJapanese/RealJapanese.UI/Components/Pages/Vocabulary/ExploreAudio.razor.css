@@ -1,7 +1,7 @@
 .explore-audio {
     display: flex;
     flex-direction: column;
-    height: calc(100dvh - 1.75rem - 100px - env(safe-area-inset-bottom, 0px));
+    height: calc(100dvh - var(--audio-top-space, 1.75rem) - var(--audio-bottom-gap, 50px) - var(--audio-navigation-space, 0px) - env(safe-area-inset-bottom, 0px));
     min-height: 360px;
     max-width: 1100px;
     margin: 0 auto;
@@ -82,7 +82,8 @@
 
 @media (max-width: 640.98px) {
     .explore-audio {
-        height: calc(100dvh - 1rem - 100px - env(safe-area-inset-bottom, 0px));
+        --audio-top-space: 1rem;
+        --audio-navigation-space: 4.4rem;
     }
 }
 

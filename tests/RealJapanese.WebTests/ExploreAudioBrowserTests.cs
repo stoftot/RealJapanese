@@ -98,7 +98,18 @@ public sealed class ExploreAudioBrowserTests : BrowserTest
         Assert.InRange((await Page.Locator(".explore-audio-scroll").BoundingBoxAsync())!.Height - initialListHeight, 199, 201);
         await Page.SetViewportSizeAsync(1280, 1100);
         await AssertBottomGapAsync();
+        // Exercise the exact Android host stylesheet without claiming native WebView evidence.
+        var mobileStyles = await Page.AddStyleTagAsync(new() { Content = File.ReadAllText(Path.Combine(
+            TestWorkspace.RepositoryRoot, "RealJapanese", "RealJapanese.Mobile", "wwwroot", "mobile.css")) });
+        await AssertBottomGapAsync(0);
         await Page.SetViewportSizeAsync(320, 900);
+        await AssertBottomGapAsync(0);
+        await Page.EvaluateAsync("document.documentElement.classList.add('android-keyboard-open')");
+        await AssertBottomGapAsync(0);
+        await Page.EvaluateAsync("document.documentElement.classList.remove('android-keyboard-open')");
+        await AssertBottomGapAsync(0);
+        await mobileStyles.EvaluateAsync("element => element.remove()");
+        await AssertBottomGapAsync();
         Assert.InRange(await Rows.CountAsync(), 1, 39);
         Assert.True(await Page.EvaluateAsync<bool>("() => document.documentElement.scrollWidth <= innerWidth"));
         Assert.True(await Rows.EvaluateAllAsync<bool>("""
@@ -197,12 +208,15 @@ public sealed class ExploreAudioBrowserTests : BrowserTest
         await Page.WaitForFunctionAsync("window.previousAudio.paused && !window.previousAudio.hasAttribute('src')");
     }
 
-    private async Task AssertBottomGapAsync()
+    private async Task AssertBottomGapAsync(double expectedGap = 50)
     {
         var table = Page.GetByRole(AriaRole.Table, new() { Name = "Word audio" });
         await Expect(table).ToBeVisibleAsync();
         var bounds = (await table.BoundingBoxAsync())!;
-        Assert.InRange(Page.ViewportSize!.Height - bounds.Y - bounds.Height, 99, 101);
+        var navigationSpace = await Page.EvaluateAsync<double>("""
+            () => innerWidth <= 640.98 ? document.querySelector('.sidebar').getBoundingClientRect().height : 0
+            """);
+        Assert.InRange(Page.ViewportSize!.Height - bounds.Y - bounds.Height - navigationSpace, expectedGap - 1, expectedGap + 1);
     }
 
     private void Seed(Clip[] clips)

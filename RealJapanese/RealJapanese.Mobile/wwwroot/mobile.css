@@ -1,4 +1,24 @@
+.page .explore-audio {
+    --audio-bottom-gap: 0px;
+}
+
+.page .content:has(> .explore-audio) {
+    padding-bottom: 0;
+}
+
 @media (max-width: 640.98px) {
+    .page .content:has(> .explore-audio) {
+        padding-bottom: calc(4.4rem + env(safe-area-inset-bottom));
+    }
+
+    html.android-keyboard-open .page .explore-audio {
+        --audio-navigation-space: 0px;
+    }
+
+    html.android-keyboard-open .page .content:has(> .explore-audio) {
+        padding-bottom: 0;
+    }
+
     html.android-keyboard-open .page .sidebar {
         display: none;
     }

@@ -691,9 +691,10 @@ responsive native players and playback cleanup in the shared web/Android UI.
    virtualized list, and navigate away. Return and play another clip.
 5. At 320 px width, inspect complete category labels, both columns, native player
    usability and page overflow. Resize phone and desktop viewports: the list
-   should fill the remaining height with about 100 px below it (plus any safe-area
-   inset), while very short screens remain scrollable. Check keyboard focus and
-   screen-reader labels.
+   should fill the remaining height, leaving 50 px above the bottom edge or bottom
+   navigation on web. Android leaves no extra gap above navigation (or the bottom
+   edge when navigation is hidden), respecting safe-area insets. Very short screens
+   remain scrollable. Check keyboard focus and screen-reader labels.
 6. On Android offline, repeat playback through speaker/headphones. Background and
    resume the app, rotate, use native Back, and reopen the page; check that removed
    players stop and that no abandoned clip restarts. Compare saved progress.
