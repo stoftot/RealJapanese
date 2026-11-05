@@ -38,7 +38,8 @@ public record Adjective : Conjugatabel
         new (){ Japanese = "いい", Kana = "いい", Type = "irregular", English = "NAN" }
     }.AsReadOnly();
     
-    private string StemI(string str) => str[..^1];
+    private string StemI(string str, ConjugationType conjugationType) => 
+        conjugationType == ConjugationType.PresentAffirmative ? str : str[..^1];
 
     private string StemIrregular(string str, ConjugationType conjugationType) =>
         conjugationType == ConjugationType.PresentAffirmative ? str : str[..^2] + "よ";
@@ -53,7 +54,7 @@ public record Adjective : Conjugatabel
 
         return CateGoryAsAdjectiveType() switch
         {
-            AdjectiveType.I => StemI(str),
+            AdjectiveType.I => StemI(str, conjugationType),
             AdjectiveType.NA => str,
             AdjectiveType.IRREGULAR => StemIrregular(str, conjugationType),
         };
@@ -70,7 +71,7 @@ public record Adjective : Conjugatabel
         {
             AdjectiveType.I or AdjectiveType.IRREGULAR => conjugationType switch
             {
-                ConjugationType.PresentAffirmative => I_PresentAffirmativeEnding,
+                ConjugationType.PresentAffirmative => adjectiveType == AdjectiveType.I ? I_PresentAffirmativeEnding,
                 ConjugationType.PresentNegative => I_PresentNegativeEnding,
                 ConjugationType.PastAffirmative => I_PastAffirmativeEnding,
                 ConjugationType.PastNegative => I_PastNegativeEnding,
