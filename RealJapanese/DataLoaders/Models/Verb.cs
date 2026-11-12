@@ -148,7 +148,9 @@ public record Verb : Conjugatabel
         {
             case VerbType.U:
             {
+                
                 var (firstPart, lastChar) = str.LastChar();
+                if (this.Japanese == "行く") return firstPart + uForm("う",form);
                 return firstPart + uForm(lastChar, form);
             }
             case VerbType.RU:
