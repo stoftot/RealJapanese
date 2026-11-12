@@ -17,14 +17,14 @@ public class NounConjugateBase : SingleAnwserBase
 
         foreach (var conjugationType in Enum.GetValues<Conjugatabel.ConjugationType>())
         {
-            // questions.Add(new()
-            // {
-            //     Question = "Noun - " + conjugationType.ToDisplayString() + " - polite",
-            //     Answer = noun.Conjugate(Conjugatabel.ToConjugate.Kana, conjugationType).ToRomaji()
-            // });
             questions.Add(new()
             {
-                Question = "Noun - " + conjugationType.ToDisplayString() + " - short",
+                Question = conjugationType.ToDisplayString() + " - polite",
+                Answer = noun.Conjugate(Conjugatabel.ToConjugate.Kana, conjugationType).ToRomaji()
+            });
+            questions.Add(new()
+            {
+                Question = conjugationType.ToDisplayString() + " - short",
                 Answer = noun.ShortForm(Conjugatabel.ToConjugate.Kana, conjugationType).ToRomaji()
             });
         }
