@@ -19,8 +19,7 @@ public record Adjective : Conjugatabel
             throw new ArgumentException($"Unknown adjective type: {Type}");
         return adjectiveType;
     }
-
-    #region conjugation
+    
     private const string I_PresentAffirmativeEnding = "です";
     private const string I_PresentNegativeEnding = "くないです";
     private const string I_PastAffirmativeEnding = "かったです";
@@ -38,6 +37,7 @@ public record Adjective : Conjugatabel
         new (){ Japanese = "いい", Kana = "いい", Type = "irregular", English = "NAN" }
     }.AsReadOnly();
     
+    #region Conjugate
     private string StemI(string str, ConjugationType conjugationType) => 
         conjugationType == ConjugationType.PresentAffirmative ? str : str[..^1];
 
